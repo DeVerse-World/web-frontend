@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Component } from "react";
 import {Navbar, Nav, NavDropdown, Form, Button, FormControl} from 'react-bootstrap';
 import {IconButton} from '@material-ui/core';
+import MetamaskBox from "./MetamaskBox";
 import TelegramIcon from '@material-ui/icons/Telegram';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Styles.css';
@@ -35,6 +36,9 @@ function NavbarComp(props) {
             </Nav>
             <Nav className="ml-auto">
               <Button target="_blank" className="mr-2" href="https://www.alturanft.app/">Launch App</Button>
+            </Nav>
+            <Nav>
+              <MetamaskBox />
             </Nav>
           </Navbar.Collapse>
       </div>
