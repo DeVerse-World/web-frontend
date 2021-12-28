@@ -11,6 +11,16 @@ function MetamaskBox() {
     // && current_wallet != null) {
     const authMetamaskWrapper = async () => {
       const web3 = new ethers.providers.Web3Provider(window.ethereum);
+      // TODO: Validate jwt token in another flow instead
+      const dbUser = await getOrCreateWallet(account);
+      if (dbUser.nonce) {
+        const signature = await web3
+          .getSigner()
+          .signMessage(`I am signing my one-time nonce: ${dbUser.nonce}`);
+        await authMetamask(account, signature);
+
+        localStorage.setItem("wallet_address", account);
+      }
     };
     authMetamaskWrapper();
     return (

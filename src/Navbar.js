@@ -37,9 +37,7 @@ function NavbarComp(props) {
             <Nav className="ml-auto">
               <Button target="_blank" className="mr-2" href="https://www.alturanft.app/">Launch App</Button>
             </Nav>
-            <Nav>
-              <MetamaskBox />
-            </Nav>
+            <MetamaskBox />
           </Navbar.Collapse>
       </div>
     </Navbar>
