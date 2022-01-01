@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import { useMetaMask } from "metamask-react";
 import React from "react";
-import { getOrCreateWallet, authMetamask } from "./api/wallet";
+import { getOrCreateWallet, authMetamask, authLoginLink } from "./api/wallet";
 
 
 function MetamaskBox() {
@@ -17,7 +17,10 @@ function MetamaskBox() {
         const signature = await web3
           .getSigner()
           .signMessage(`I am signing my one-time nonce: ${dbUser.nonce}`);
-        await authMetamask(account, signature);
+        // await authMetamask(account, signature);
+        // if (localStorage.getItem("session_key")) {
+        await authLoginLink(localStorage.getItem("session_key"), account, signature)
+        // }
 
         localStorage.setItem("wallet_address", account);
       }
