@@ -35,12 +35,12 @@ function Home(props) {
   });
 
   useEffect(() => {
-    fetchPrice()
-    const timeoutID = window.setTimeout(() => {
-      setTimerText(calcTime());
-    }, 1000);
+    // fetchPrice()
+    // const timeoutID = window.setTimeout(() => {
+    //   setTimerText(calcTime());
+    // }, 1000);
 
-    return () => window.clearTimeout(timeoutID );
+    // return () => window.clearTimeout(timeoutID );
   })
 
   function calcTime(){
