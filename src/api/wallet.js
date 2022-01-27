@@ -1,11 +1,12 @@
 import axios from "../axios";
 
-export const getOrCreateWallet = async (wallet_address) => {
+export const getOrCreateWallet = async (session_key, wallet_address) => {
     const response = await axios({
         method: "post",
         url: `/wallet/getOrCreate`,
         data: {
             address: wallet_address, 
+            session_key: session_key
         },
         withCredentials: true
     });

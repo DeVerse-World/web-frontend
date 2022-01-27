@@ -12,7 +12,7 @@ function MetamaskBox() {
     const authMetamaskWrapper = async () => {
       const web3 = new ethers.providers.Web3Provider(window.ethereum);
       // TODO: Validate jwt token in another flow instead
-      const dbUser = await getOrCreateWallet(account);
+      const dbUser = await getOrCreateWallet(localStorage.getItem("session_key"), account);
       if (dbUser.nonce) {
         const signature = await web3
           .getSigner()
