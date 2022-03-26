@@ -2,10 +2,13 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
+import Link from 'next/link'
+import { Label } from 'semantic-ui-react'
 
 import {
   nftaddress, nftmarketaddress
 } from '../../config'
+import MarketplaceNavbar from '../../components/MarketplaceNavbar'
 
 import NFT from '../../../smart-contracts/artifacts/contracts/NFT.sol/NFT.json'
 import Market from '../../../smart-contracts/artifacts/contracts/Market.sol/NFTMarket.json'
@@ -37,10 +40,12 @@ export default function Home() {
         itemId: i.itemId.toNumber(),
         seller: i.seller,
         owner: i.owner,
-        image: meta.data.image,
+        fileUrl: meta.data.fileUrl,
+        assetType: meta.data.assetType,
         name: meta.data.name,
         description: meta.data.description,
       }
+      console.log(item)
       return item
     }))
     setNfts(items)
@@ -63,17 +68,21 @@ export default function Home() {
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="px-20 py-10 text-3xl">No items in marketplace</h1>)
   return (
     <div className="flex justify-center">
+      <MarketplaceNavbar />
       <div className="px-4" style={{ maxWidth: '1600px' }}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
             nfts.map((nft, i) => (
               <div key={i} className="border shadow rounded-xl overflow-hidden">
-                <img src={nft.image} />
+                <img src={nft.fileUrl} />
                 <div className="p-4">
                   <p style={{ height: '64px' }} className="text-2xl font-semibold">{nft.name}</p>
                   <div style={{ height: '70px', overflow: 'hidden' }}>
                     <p className="text-gray-400">{nft.description}</p>
                   </div>
+                  <Label as='a' color='blue'>
+                    <Label.Detail> {nft.assetType} </Label.Detail>
+                  </Label>
                 </div>
                 <div className="p-4 bg-black">
                   <p className="text-2xl mb-4 font-bold text-white">{nft.price} ETH</p>

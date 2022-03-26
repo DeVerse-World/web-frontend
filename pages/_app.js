@@ -13,20 +13,34 @@ import React, { useEffect } from "react";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Link from 'next/link'
 import { MetaMaskProvider } from "metamask-react";
+import { transitions, positions, Provider as AlertProvider } from 'react-alert'
+import AlertTemplate from 'react-alert-template-basic'
+
+// optional configuration
+const options = {
+  // you can also just use 'bottom center'
+  position: positions.TOP_CENTER,
+  timeout: 10000,
+  // offset: '30px',
+  // you can also just use 'scale'
+  transition: transitions.SCALE
+}
 
 function Marketplace({ Component, pageProps }) {
   return (
-    <MetaMaskProvider>
-    <div>
-      <nav className="border-b p-6">
-        <Banner/>
-        <Navbar/>
-        <div className="flex mt-4">
-        </div>
-      </nav>
-      <Component {...pageProps} />
-    </div>
-    </MetaMaskProvider>
+    <AlertProvider template={AlertTemplate} {...options}>
+      <MetaMaskProvider>
+      <div>
+        <nav className="border-b p-6">
+          <Banner/>
+          <Navbar/>
+          <div className="flex mt-4">
+          </div>
+        </nav>
+        <Component {...pageProps} />
+      </div>
+      </MetaMaskProvider>
+    </AlertProvider>
   )
 }
 

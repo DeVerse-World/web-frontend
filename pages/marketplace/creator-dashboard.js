@@ -2,10 +2,14 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
+import Link from 'next/link'
+import { Label } from 'semantic-ui-react'
 
 import {
   nftmarketaddress, nftaddress
 } from '../../config'
+
+import MarketplaceNavbar from '../../components/MarketplaceNavbar'
 
 import Market from '../../../smart-contracts/artifacts/contracts/Market.sol/NFTMarket.json'
 import NFT from '../../../smart-contracts/artifacts/contracts/NFT.sol/NFT.json'
@@ -32,6 +36,8 @@ export default function CreatorDashboard() {
     
     const items = await Promise.all(data.map(async i => {
       const tokenUri = await tokenContract.tokenURI(i.tokenId)
+      console.log(tokenUri)
+      console.log("HERE")
       const meta = await axios.get(tokenUri)
       let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
       let item = {
@@ -40,7 +46,8 @@ export default function CreatorDashboard() {
         seller: i.seller,
         owner: i.owner,
         sold: i.sold,
-        image: meta.data.image,
+        fileUrl: meta.data.fileUrl,
+        assetType: meta.data.assetType,
       }
       return item
     }))
@@ -53,13 +60,14 @@ export default function CreatorDashboard() {
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets created</h1>)
   return (
     <div>
+      <MarketplaceNavbar />
       <div className="p-4">
         <h2 className="text-2xl py-2">Items Created</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
             nfts.map((nft, i) => (
               <div key={i} className="border shadow rounded-xl overflow-hidden">
-                <img src={nft.image} className="rounded" />
+                <img src={nft.fileUrl} className="rounded" />
                 <div className="p-4 bg-black">
                   <p className="text-2xl font-bold text-white">Price - {nft.price} Eth</p>
                 </div>
@@ -77,8 +85,11 @@ export default function CreatorDashboard() {
                 {
                   sold.map((nft, i) => (
                     <div key={i} className="border shadow rounded-xl overflow-hidden">
-                      <img src={nft.image} className="rounded" />
+                      <img src={nft.fileUrl} className="rounded" />
                       <div className="p-4 bg-black">
+                        <Label as='a' color='blue'>
+                          <Label.Detail> {nft.assetType} </Label.Detail>
+                        </Label>
                         <p className="text-2xl font-bold text-white">Price - {nft.price} Eth</p>
                       </div>
                     </div>
