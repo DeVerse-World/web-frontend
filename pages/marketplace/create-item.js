@@ -3,6 +3,7 @@ import { ethers } from 'ethers'
 import { create as ipfsHttpClient } from 'ipfs-http-client'
 import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
+import Link from 'next/link'
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
@@ -79,6 +80,21 @@ export default function CreateItem() {
 
   return (
     <div className="flex justify-center">
+      <Link href="/marketplace/creator-dashboard">
+        <a className="mr-6 text-pink-500">
+          Dashboard
+        </a>
+      </Link>
+      <Link href="/marketplace/my-assets">
+        <a className="mr-6 text-pink-500">
+          My NFTs
+        </a>
+      </Link>
+      <Link href="/marketplace/create-item">
+        <a className="mr-6 text-pink-500">
+          Sell NFT
+        </a>
+      </Link>
       <div className="w-1/2 flex flex-col pb-12">
         <input 
           placeholder="Asset Name"

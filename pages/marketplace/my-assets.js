@@ -2,6 +2,7 @@ import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
+import Link from 'next/link'
 
 import {
   nftmarketaddress, nftaddress
@@ -49,6 +50,21 @@ export default function MyAssets() {
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets owned</h1>)
   return (
     <div className="flex justify-center">
+      <Link href="/marketplace/creator-dashboard">
+        <a className="mr-6 text-pink-500">
+          Dashboard
+        </a>
+      </Link>
+      <Link href="/marketplace/my-assets">
+        <a className="mr-6 text-pink-500">
+          My NFTs
+        </a>
+      </Link>
+      <Link href="/marketplace/create-item">
+        <a className="mr-6 text-pink-500">
+          Sell NFT
+        </a>
+      </Link>
       <div className="p-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
