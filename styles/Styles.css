@@ -1,0 +1,166 @@
+*{
+  font-family: "Inter";
+  scroll-behavior: smooth;
+}
+
+.header {
+  min-height: 100vh;
+}
+
+.header, .navbar, .heading, .details-title{
+  background: linear-gradient(to right, #00d1ff, #ed1eff);
+}
+
+.title{
+  font-weight: 900;
+  font-size: 6.3rem;
+  line-height: 95%;
+  letter-spacing: 0.5%;
+}
+
+.nav-link{
+  color: white !important;
+  font-weight: 600;
+}
+
+.navbar-brand{
+  color: white !important;
+  margin-right: 3rem;
+}
+
+.welcome-to-aux{
+  font-size: 1.09rem;
+  font-weight: 600;
+}
+
+.heading{
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 800;
+  font-size: 6rem;
+}
+
+.secondary-text{
+  font-weight: 400;
+  letter-spacing: 1.4px;
+  font-size: 1.4rem;
+}
+
+hr {
+  background: linear-gradient(to right, #00d1ff, #ed1eff);
+  height: 10px;
+}
+
+.details-title{
+  font-weight: 700;
+  font-size: 4rem;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.1rem;
+}
+
+.team-images{
+  border: 3px solid black;
+}
+
+@media only screen and (max-width: 600px) {
+  .title{
+    font-weight: 900;
+    font-size: 3.5rem;
+    line-height: 95%;
+    letter-spacing: 0.5%;
+  }
+
+  .heading{
+    font-size: 3rem;
+  }
+
+  .details-title{
+    font-size: 2.5rem;
+  }
+
+  .navbar-deverse-title{
+    display: none;
+  }
+
+  .header-spacing{
+    display: none;
+  }
+
+  .details{
+    text-align: left!important;
+  }
+}
+
+.compare table {
+	 background-color: #fff;
+	 border-radius: 5px;
+	 overflow: hidden;
+	 box-shadow: 0 13px 21px -5px rgba(0, 0, 0, 0.05);
+	 border: 1px solid #eee;
+	 font-size: 18px;
+	 table-layout: fixed;
+}
+ .compare table .bg-red {
+	 background-color: #ff715b;
+}
+ .compare table .bg-green {
+	 background-color: #48cfad;
+}
+ .compare table .bg-blue {
+	 background-color: #0197f6;
+}
+ .compare table tr > td, .compare table tr > th {
+	 padding-top: 25px;
+	 padding-bottom: 25px;
+	 text-align: center;
+}
+ .compare table th[scope="row"] {
+	 font-size: 20px;
+	 color: #393c45;
+	 font-weight: normal;
+	 background-color: #f9f9f9;
+	 border: 1px solid #eee;
+	 text-align: left;
+	 padding-left: 45px;
+}
+ .compare table tr.condition {
+	 color: #fff;
+	 font-size: 20px;
+}
+ .compare table tr.colors span {
+	 height: 20px;
+	 width: 20px;
+	 display: inline-block;
+	 margin-right: 5px;
+	 border-radius: 100%;
+}
+ .compare table thead th {
+	 font-size: 20px;
+	 color: #393c45;
+	 font-weight: normal;
+}
+ .compare .thead-default th {
+	 background-color: #fff;
+}
+
+.dot {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.pie{
+  height: 75%;
+}
+
+.btn-primary, .btn-danger{
+  font-weight: 600;
+}
+
+.banner-text{
+ margin: 0px;
+ vertical-align: middle;
+ padding: 19px;
+}
