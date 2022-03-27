@@ -7,6 +7,7 @@ import Link from 'next/link'
 import {
   nftaddress, nftmarketaddress
 } from '../../config'
+import MarketplaceNavbar from '../../components/MarketplaceNavbar'
 
 import NFT from '../../../smart-contracts/artifacts/contracts/NFT.sol/NFT.json'
 import Market from '../../../smart-contracts/artifacts/contracts/Market.sol/NFTMarket.json'
@@ -64,21 +65,7 @@ export default function Home() {
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="px-20 py-10 text-3xl">No items in marketplace</h1>)
   return (
     <div className="flex justify-center">
-      <Link href="/marketplace/creator-dashboard">
-        <a className="mr-6 text-pink-500">
-          Dashboard
-        </a>
-      </Link>
-      <Link href="/marketplace/my-assets">
-        <a className="mr-6 text-pink-500">
-          My NFTs
-        </a>
-      </Link>
-      <Link href="/marketplace/create-item">
-        <a className="mr-6 text-pink-500">
-          Sell NFT
-        </a>
-      </Link>
+      <MarketplaceNavbar />
       <div className="px-4" style={{ maxWidth: '1600px' }}>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {

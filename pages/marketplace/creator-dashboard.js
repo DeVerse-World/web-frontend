@@ -8,6 +8,8 @@ import {
   nftmarketaddress, nftaddress
 } from '../../config'
 
+import MarketplaceNavbar from '../../components/MarketplaceNavbar'
+
 import Market from '../../../smart-contracts/artifacts/contracts/Market.sol/NFTMarket.json'
 import NFT from '../../../smart-contracts/artifacts/contracts/NFT.sol/NFT.json'
 
@@ -54,21 +56,7 @@ export default function CreatorDashboard() {
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets created</h1>)
   return (
     <div>
-      <Link href="/marketplace/creator-dashboard">
-        <a className="mr-6 text-pink-500">
-          Dashboard
-        </a>
-      </Link>
-      <Link href="/marketplace/my-assets">
-        <a className="mr-6 text-pink-500">
-          My NFTs
-        </a>
-      </Link>
-      <Link href="/marketplace/create-item">
-        <a className="mr-6 text-pink-500">
-          Sell NFT
-        </a>
-      </Link>
+      <MarketplaceNavbar />
       <div className="p-4">
         <h2 className="text-2xl py-2">Items Created</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">

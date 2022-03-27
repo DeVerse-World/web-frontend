@@ -6,6 +6,7 @@ import Web3Modal from 'web3modal'
 import Link from 'next/link'
 import Popup from 'reactjs-popup';
 import { useAlert } from 'react-alert'
+import MarketplaceNavbar from '../../components/MarketplaceNavbar'
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
@@ -15,6 +16,7 @@ import {
 
 import NFT from '../../../smart-contracts/artifacts/contracts/NFT.sol/NFT.json'
 import Market from '../../../smart-contracts/artifacts/contracts/Market.sol/NFTMarket.json'
+import Marketplace from '../_app'
 
 export default function CreateItem() {
   const [fileUrl, setFileUrl] = useState(null)
@@ -85,21 +87,9 @@ export default function CreateItem() {
 
   return (
     <div className="flex justify-center">
-      <Link href="/marketplace/creator-dashboard">
-        <a className="mr-6 text-pink-500">
-          Dashboard
-        </a>
-      </Link>
-      <Link href="/marketplace/my-assets">
-        <a className="mr-6 text-pink-500">
-          My NFTs
-        </a>
-      </Link>
-      <Link href="/marketplace/create-item">
-        <a className="mr-6 text-pink-500">
-          Sell NFT
-        </a>
-      </Link>
+      <div>
+        <MarketplaceNavbar />
+      </div>
       <div className="w-1/2 flex flex-col pb-12">
         <input 
           placeholder="Asset Name"
