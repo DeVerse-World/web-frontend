@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Web3Modal from "web3modal"
 import Link from 'next/link'
+import { Label } from 'semantic-ui-react'
 
 import {
   nftmarketaddress, nftaddress
 } from '../../config'
+import MarketplaceNavbar from '../../components/MarketplaceNavbar'
 
 import Market from '../../../smart-contracts/artifacts/contracts/Market.sol/NFTMarket.json'
 import NFT from '../../../smart-contracts/artifacts/contracts/NFT.sol/NFT.json'
@@ -40,7 +42,8 @@ export default function MyAssets() {
         tokenId: i.tokenId.toNumber(),
         seller: i.seller,
         owner: i.owner,
-        image: meta.data.image,
+        fileUrl: meta.data.fileUrl,
+        assetType: meta.data.assetType,
       }
       return item
     }))
@@ -50,28 +53,18 @@ export default function MyAssets() {
   if (loadingState === 'loaded' && !nfts.length) return (<h1 className="py-10 px-20 text-3xl">No assets owned</h1>)
   return (
     <div className="flex justify-center">
-      <Link href="/marketplace/creator-dashboard">
-        <a className="mr-6 text-pink-500">
-          Dashboard
-        </a>
-      </Link>
-      <Link href="/marketplace/my-assets">
-        <a className="mr-6 text-pink-500">
-          My NFTs
-        </a>
-      </Link>
-      <Link href="/marketplace/create-item">
-        <a className="mr-6 text-pink-500">
-          Sell NFT
-        </a>
-      </Link>
+      <MarketplaceNavbar />
       <div className="p-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
           {
             nfts.map((nft, i) => (
               <div key={i} className="border shadow rounded-xl overflow-hidden">
-                <img src={nft.image} className="rounded" />
+                <img src={nft.fileUrl} className="rounded" />
+
                 <div className="p-4 bg-black">
+                <Label as='a' color='blue'>
+                    <Label.Detail> {nft.assetType} </Label.Detail>
+                </Label>
                   <p className="text-2xl font-bold text-white">Price - {nft.price} Eth</p>
                 </div>
               </div>

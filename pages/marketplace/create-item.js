@@ -4,6 +4,9 @@ import { create as ipfsHttpClient } from 'ipfs-http-client'
 import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
 import Link from 'next/link'
+import Popup from 'reactjs-popup';
+import { useAlert } from 'react-alert'
+import MarketplaceNavbar from '../../components/MarketplaceNavbar'
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
@@ -13,11 +16,14 @@ import {
 
 import NFT from '../../../smart-contracts/artifacts/contracts/NFT.sol/NFT.json'
 import Market from '../../../smart-contracts/artifacts/contracts/Market.sol/NFTMarket.json'
+import Marketplace from '../_app'
 
 export default function CreateItem() {
   const [fileUrl, setFileUrl] = useState(null)
-  const [formInput, updateFormInput] = useState({ price: '', name: '', description: '' })
+  const [fileName, setFileName] = useState(null)
+  const [formInput, updateFormInput] = useState({ price: '', name: '', description: '', assetType: '' })
   const router = useRouter()
+  const alert = useAlert()
 
   async function onChange(e) {
     const file = e.target.files[0]
@@ -30,21 +36,23 @@ export default function CreateItem() {
       )
       const url = `https://ipfs.infura.io/ipfs/${added.path}`
       setFileUrl(url)
+      setFileName(file.name)
     } catch (error) {
       console.log('Error uploading file: ', error)
     }  
   }
   async function createMarket() {
-    const { name, description, price } = formInput
-    if (!name || !description || !price || !fileUrl) return
+    const { name, description, price, assetType } = formInput
+    if (!name || !description || !price || !assetType || !fileUrl) return
     /* first, upload to IPFS */
     const data = JSON.stringify({
-      name, description, image: fileUrl
+      name, description, assetType, fileUrl: fileUrl, fileName: fileName
     })
     try {
       const added = await client.add(data)
       const url = `https://ipfs.infura.io/ipfs/${added.path}`
       console.log(url)
+      alert.show(`file ipfs ${url}`)
       /* after file is uploaded to IPFS, pass the URL to save it on Polygon */
       createSale(url)
     } catch (error) {
@@ -75,26 +83,14 @@ export default function CreateItem() {
 
     transaction = await contract.createMarketItem(nftaddress, tokenId, price, { value: listingPrice })
     await transaction.wait()
-    router.push('/')
+    router.push('/marketplace')
   }
 
   return (
     <div className="flex justify-center">
-      <Link href="/marketplace/creator-dashboard">
-        <a className="mr-6 text-pink-500">
-          Dashboard
-        </a>
-      </Link>
-      <Link href="/marketplace/my-assets">
-        <a className="mr-6 text-pink-500">
-          My NFTs
-        </a>
-      </Link>
-      <Link href="/marketplace/create-item">
-        <a className="mr-6 text-pink-500">
-          Sell NFT
-        </a>
-      </Link>
+      <div>
+        <MarketplaceNavbar />
+      </div>
       <div className="w-1/2 flex flex-col pb-12">
         <input 
           placeholder="Asset Name"
@@ -111,6 +107,19 @@ export default function CreateItem() {
           className="mt-2 border rounded p-4"
           onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
         />
+        <input
+          placeholder="Asset Type"
+          type="dropdown"
+          onChange={e => updateFormInput({ ...formInput, assetType: e.target.value })}
+          list="assetTypes"
+        />
+          <datalist id="assetTypes">
+            <option value="2dImg">2D Image</option>
+            <option value="race">Character Race</option>
+            <option value="skin">Character Skin</option>
+            <option value="gameplay">New Gameplay mode</option>
+            <option value="bot">New Bot Logic</option>
+          </datalist>
         <input
           type="file"
           name="Asset"
