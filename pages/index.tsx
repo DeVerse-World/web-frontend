@@ -33,45 +33,45 @@ function Home(props) {
     // return () => window.clearTimeout(timeoutID );
   })
 
-  function calcTime(){
-    const total = Date.parse('May 15 2021 GMT+4') - Date.parse(new Date());
-    const seconds = Math.floor( (total/1000) % 60 );
-    const minutes = Math.floor( (total/1000/60) % 60 );
-    const hours = Math.floor( (total/(1000*60*60)) % 24 );
-    const days = Math.floor( total/(1000*60*60*24) );
+  function calcTime() {
+    const total = Date.parse('May 15 2021 GMT+4') - Date.parse((new Date()).toString());
+    const seconds = Math.floor((total / 1000) % 60);
+    const minutes = Math.floor((total / 1000 / 60) % 60);
+    const hours = Math.floor((total / (1000 * 60 * 60)) % 24);
+    const days = Math.floor(total / (1000 * 60 * 60 * 24));
     return days + ":" + hours + ":" + minutes + ":" + seconds
   }
 
-  function fetchPrice(){
+  function fetchPrice() {
     axios.get("/api/info")
-    .then(res => {
-      setTotalSupply(String(res.data.totalCoins).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
-      setCirculatingSupply(String(res.data.circulatingCoins).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
-      setPrice(priceFormatter.format(res.data.price))
-      setMcap(marketCapFormatter.format(res.data.marketCap))
-      setHolders(`${String(res.data.holders).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`)
-    })
+      .then(res => {
+        setTotalSupply(String(res.data.totalCoins).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+        setCirculatingSupply(String(res.data.circulatingCoins).replace(/\B(?=(\d{3})+(?!\d))/g, ","))
+        setPrice(priceFormatter.format(res.data.price))
+        setMcap(marketCapFormatter.format(res.data.marketCap))
+        setHolders(`${String(res.data.holders).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`)
+      })
   }
 
   return (
     <>
-    <Header/>
-    <div style={{marginBottom: "100px"}}></div>
-    <TokenInfo timerText={timerText} holders={holders} price={price} mcap={mcap}/>
-    <div style={{marginBottom: "70px"}}></div>
+      <Header />
+      <div style={{ marginBottom: "100px" }}></div>
+      <TokenInfo timerText={timerText} holders={holders} price={price} mcap={mcap} />
+      <div style={{ marginBottom: "70px" }}></div>
 
-    {/* <Details/> */}
-    {/* <hr id="team"  style={{marginBottom: "200px", marginTop: "200px"}}/>
+      {/* <Details/> */}
+      {/* <hr id="team"  style={{marginBottom: "200px", marginTop: "200px"}}/>
     <Team/> */}
-    {/* <hr id="roadmap" style={{marginBottom: "200px", marginTop: "200px"}}/>
+      {/* <hr id="roadmap" style={{marginBottom: "200px", marginTop: "200px"}}/>
     <Timeline /> */}
-    {/* <hr id="token" style={{marginBottom: "200px", marginTop: "200px"}}/>
+      {/* <hr id="token" style={{marginBottom: "200px", marginTop: "200px"}}/>
     <Token holders={holders} totalSupply={totalSupply} circulatingSupply={circulatingSupply} price={price} mcap={mcap}/>
     <hr id="partners" style={{marginBottom: "200px", marginTop: "200px"}}/>
     <Partners /> */}
-    <hr id="contact" style={{marginBottom: "200px", marginTop: "200px"}}/>
-    <Contact />
-    <div style={{marginBottom: "200px"}}></div>
+      <hr id="contact" style={{ marginBottom: "200px", marginTop: "200px" }} />
+      <Contact />
+      <div style={{ marginBottom: "200px" }}></div>
     </>
   );
 }
