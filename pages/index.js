@@ -1,18 +1,8 @@
 // import '../components/App.css';
 import Header from '../components/Header';
-import NavbarComp from '../components/Navbar';
-import Details from '../components/Details'
-import React, { useState, useEffect, Component } from "react";
-import Web3 from 'web3';
+import React, { useState, useEffect } from "react";
 import axios from "axios"
-import Querystring from "query-string"
-import { useParams } from "react-router";
-import Team from '../components/Team'
 import Contact from '../components/Contact'
-import Timeline from '../components/Timeline'
-import EnjCompare from '../components/EnjCompare'
-import Token from '../components/Token'
-import Partners from '../components/Partners'
 import TokenInfo from '../components/TokenInfo'
 
 function Home(props) {
