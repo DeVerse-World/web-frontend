@@ -4,7 +4,7 @@ import '../styles/App.css';
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Banner from '../components/Banner'
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 import { MetaMaskProvider } from "metamask-react";
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
@@ -24,7 +24,7 @@ function Marketplace({ Component, pageProps }) {
   return (
     <AlertProvider template={AlertTemplate} {...options}>
       <MetaMaskProvider>
-        <nav className="border-b p-6">
+        <nav className="border-b">
           <Banner />
           <Navbar />
           <div className="flex mt-4">

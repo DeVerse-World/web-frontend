@@ -1,7 +1,7 @@
 import { ethers } from "ethers";
 import { useMetaMask } from "metamask-react";
 import React from "react";
-import WalletService from "../api/wallet_service";
+import WalletService from "../data/services/wallet_service";
 
 function MetamaskBox() {
   const { status, connect, account } = useMetaMask();
