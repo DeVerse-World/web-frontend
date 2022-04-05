@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Component } from "react";
 import { Navbar, Nav, NavDropdown, Form, Button, FormControl } from 'react-bootstrap';
 import { IconButton } from '@material-ui/core';
-import MetamaskBox from "./MetamaskBox";
+import AccountMenu from "./AccountMenu";
 import TelegramIcon from '@material-ui/icons/Telegram';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
@@ -33,15 +33,15 @@ function NavbarComp(props) {
             <Nav.Link className="mr-3" rel="No-Refresh" href="/marketplace" >Marketplace</Nav.Link>
             {/* <Nav.Link className="mr-3 whitepaper-link" target="_blank" href="https://drive.google.com/file/d/1xjCoKdDAsmS2lvAcNglszxhu3l15lajb/view?usp=sharing">White Paper</Nav.Link> */}
             {/* <Nav.Link className="mr-3" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLScnhw-EYb3Kfn6pNdVU-efPzouh7Sugy_70YD5Yosuyd1vY1g/viewform">Apply</Nav.Link> */}
-            <Nav.Link className="mr-3" rel="No-Refresh" href="/account" >Profile</Nav.Link>
           </Nav>
-          <Nav className="ml-auto">
-            {/* <Button target="_blank" className="mr-2" href="https://www.deversenft.app/">Launch App</Button> */}
-            <MetamaskBox />
-          </Nav>
+
           {/* <Nav className="ml-auto"> */}
           {/* </Nav> */}
         </Navbar.Collapse>
+        <Nav className="ml-auto">
+          {/* <Button target="_blank" className="mr-2" href="https://www.deversenft.app/">Launch App</Button> */}
+          <AccountMenu />
+        </Nav>
       </div>
     </Navbar>
   );
