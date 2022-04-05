@@ -1,7 +1,9 @@
+import { ethers } from "ethers";
 import axios from "../api/axios";
 import { DataFilter } from "../enum/data_filter";
 import { TimeFilter } from "../enum/time_filter";
 import { StatisticLog } from "../model/profile_info";
+import StorageService from "./storage_service";
 
 class WalletService {
     async getOrCreateWallet(session_key: string, wallet_address: string) {
@@ -15,6 +17,21 @@ class WalletService {
             withCredentials: true
         });
         return response.data;
+    }
+
+    async connectToMetamask(metamaskAccount: string) {
+        const web3 = new ethers.providers.Web3Provider(window.ethereum);
+        const dbUser = await this.getOrCreateWallet(StorageService.getMetamaskSessionKey(), metamaskAccount);
+        if (dbUser.nonce) {
+            const signature = await web3
+                .getSigner()
+                .signMessage(`I am signing my one-time nonce: ${dbUser.nonce}`);
+            // await authMetamask(account, signature);
+            // if (localStorage.getItem("session_key")) {
+            await this.authLoginLink(StorageService.getMetamaskSessionKey(), metamaskAccount, signature)
+            // }
+            StorageService.saveWalletAddress(metamaskAccount);
+        }
     }
 
     async authMetamask(wallet_address: string, signature: string) {
@@ -76,7 +93,7 @@ class WalletService {
             default:
                 break;
         }
-        
+
         return data;
     }
 }
