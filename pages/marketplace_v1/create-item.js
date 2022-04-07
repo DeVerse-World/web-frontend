@@ -57,7 +57,7 @@ export default function CreateItem() {
       createSale(url)
     } catch (error) {
       console.log('Error uploading file: ', error)
-    }  
+    }
   }
 
   async function createSale(url) {
@@ -76,14 +76,14 @@ export default function CreateItem() {
 
     const price = ethers.utils.parseUnits(formInput.price, 'ether')
   
-    /* then list the item for sale on the marketplace */
+    /* then list the item for sale on the marketplace_v1 */
     contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
     let listingPrice = await contract.getListingPrice()
     listingPrice = listingPrice.toString()
 
     transaction = await contract.createMarketItem(nftaddress, tokenId, price, { value: listingPrice })
     await transaction.wait()
-    router.push('/marketplace')
+    router.push('/marketplace_v1')
   }
 
   return (

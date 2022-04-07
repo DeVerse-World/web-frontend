@@ -11,14 +11,14 @@ import { SiDiscord, SiTiktok } from 'react-icons/si';
 function Header(props) {
   return (
     <>
-    <section class="header py-5 text-white">
+    <section className="header py-5 text-white">
       <div className="header-spacing"><br/></div>
-        <div class="container-fluid py-4">
-          <div class="row">
-            <div class="col-lg-8 mx-auto text-center">
-              <h6 class="mb-4 welcome-to-aux">WELCOME TO DEVERSE</h6>
-              <h1 class="title">A Decentralized <br/> Sandbox Metaverse</h1>
-              <p class="mt-5 lead mb-5 secondary-text">  </p>
+        <div className="container-fluid py-4">
+          <div className="row">
+            <div className="col-lg-8 mx-auto text-center">
+              <h6 className="mb-4 welcome-to-aux">Welcome to DeVerse</h6>
+              <h1 className="title">A Sandbox <br/> <b>(De)</b>centralized Meta<b>(Verse)</b></h1>
+              <p className="mt-5 lead mb-5 secondary-text">  </p>
               <div>
                 <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="" color="white">
                    <TelegramIcon/>
