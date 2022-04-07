@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import axios from 'axios'
-import Querystring from "query-string"
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -37,7 +36,7 @@ function Contact(props) {
       return setOpen(true)
     }
 
-    axios.post("/api/contact", Querystring.stringify({ name: name, email: email, message: message }))
+    axios.post("/api/contact", { name: name, email: email, message: message })
       .then(res => {
         setName("")
         setEmail("")

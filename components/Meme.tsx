@@ -33,13 +33,13 @@ function Meme(props) {
             <li>
               <a target="_blank" href="https://www.reddit.com/r/deverseNFT/" >Create a meme and post it to our subreddit </a>
             </li>
-            <IconButton style={{fontSize: "2rem"}} target="_blank" href="https://t.me/deversenft" color="white">
+            <IconButton style={{fontSize: "2rem"}} target="_blank" href="https://t.me/deversenft" >
                <TelegramIcon/>
             </IconButton>
-            <IconButton style={{fontSize: "2rem"}} target="_blank" href="https://twitter.com/deverse_nft" color="white">
+            <IconButton style={{fontSize: "2rem"}} target="_blank" href="https://twitter.com/deverse_nft" >
                <TwitterIcon/>
             </IconButton>
-            <IconButton style={{fontSize: "2rem"}} target="_blank" href="https://www.reddit.com/r/deverseNFT/" color="white">
+            <IconButton style={{fontSize: "2rem"}} target="_blank" href="https://www.reddit.com/r/deverseNFT/" >
                <RedditIcon/>
             </IconButton>
             <br/>

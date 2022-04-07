@@ -20,31 +20,31 @@ function Header(props) {
               <h1 className="title">A Sandbox <br/> <b>(De)</b>centralized Meta<b>(Verse)</b></h1>
               <p className="mt-5 lead mb-5 secondary-text">  </p>
               <div>
-                <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="" color="white">
+                <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="" >
                    <TelegramIcon/>
                 </IconButton>
 
-                <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="" color="white">
+                <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="" >
                    <TwitterIcon/>
                 </IconButton>
 
-                <IconButton style={{color: "white"}} target="_blank" href="" color="white">
+                <IconButton style={{color: "white"}} target="_blank" href="" >
                   <SiDiscord style={{padding: "0.15rem"}}/>
                 </IconButton>
 
-                <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="" color="white">
+                <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="" >
                    <RedditIcon/>
                 </IconButton>
 
-                <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="" color="white">
+                <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="" >
                    <InstagramIcon/>
                 </IconButton>
 
-                <IconButton style={{color: "white"}} target="_blank" href="" color="white">
+                <IconButton style={{color: "white"}} target="_blank" href="" >
                   <SiTiktok style={{padding: "0.15rem"}}/>
                 </IconButton>
 
-                <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="https://github.com/Plutus-Gaming-NFTs-Reimagined" color="white">
+                <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="https://github.com/Plutus-Gaming-NFTs-Reimagined" >
                    <GitHubIcon/>
                 </IconButton>
                 <br/>

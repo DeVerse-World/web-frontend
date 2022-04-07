@@ -39,31 +39,31 @@ function Footer(props) {
                   Copyright © deverse 2021
                 </div>
                 <div className="col-lg-6 col-12 my-auto">
-                  <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="https://t.me/deversenft" color="white">
+                  <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="https://t.me/deversenft">
                      <TelegramIcon/>
                   </IconButton>
 
-                  <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="https://twitter.com/deverse_nft" color="white">
+                  <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="https://twitter.com/deverse_nft">
                      <TwitterIcon/>
                   </IconButton>
 
-                  <IconButton style={{color: "white"}} target="_blank" href="https://discord.gg/cHW6SDMsEZ" color="white">
+                  <IconButton style={{color: "white"}} target="_blank" href="https://discord.gg/cHW6SDMsEZ">
                     <SiDiscord style={{padding: "0.15rem"}}/>
                   </IconButton>
 
-                  <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="https://www.reddit.com/r/deverseNFT/" color="white">
+                  <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="https://www.reddit.com/r/deverseNFT/" >
                      <RedditIcon/>
                   </IconButton>
 
-                  <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="https://www.instagram.com/deverse.nft/" color="white">
+                  <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="https://www.instagram.com/deverse.nft/" >
                      <InstagramIcon/>
                   </IconButton>
 
-                  <IconButton style={{color: "white"}} target="_blank" href="https://www.tiktok.com/@deverse_nft" color="white">
+                  <IconButton style={{color: "white"}} target="_blank" href="https://www.tiktok.com/@deverse_nft" >
                     <SiTiktok style={{padding: "0.15rem"}}/>
                   </IconButton>
 
-                  <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="https://github.com/Plutus-Gaming-NFTs-Reimagined" color="white">
+                  <IconButton style={{color: "white", fontSize: "2rem"}} target="_blank" href="https://github.com/Plutus-Gaming-NFTs-Reimagined" >
                      <GitHubIcon/>
                   </IconButton>
                 </div>
