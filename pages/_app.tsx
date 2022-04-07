@@ -1,14 +1,14 @@
 import '../styles/globals.css'
 import '../styles/Styles.css';
-import '../styles/App.css';
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import Banner from '../components/Banner'
+import Footer from '../components/common/Footer'
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 import { MetaMaskProvider } from "metamask-react";
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
+import ScrollToTopButton from '../components/common/ScrollToTopButton';
+import { IconButton } from '@material-ui/core';
+import ArrowUpward from '@material-ui/icons/ArrowUpward';
 
 // optional configuration
 const options = {
@@ -24,12 +24,7 @@ function Marketplace({ Component, pageProps }) {
   return (
     <AlertProvider template={AlertTemplate} {...options}>
       <MetaMaskProvider>
-        <nav className="border-b">
-          <Banner />
-          <Navbar />
-          <div className="flex mt-4">
-          </div>
-        </nav>
+        <ScrollToTopButton />
         <Component {...pageProps} />
         <Footer />
       </MetaMaskProvider>
