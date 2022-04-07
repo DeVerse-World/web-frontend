@@ -46,37 +46,37 @@ function Token(props) {
             />
           <div className="text-center">
             <div className="p-3" style={{display: "inline-block"}}>
-              <span style={{backgroundColor: "#F44336"}} class="dot"></span>
+              <span style={{backgroundColor: "#F44336"}} className="dot"></span>
               <br/>
               <p style={{display: "inline-block"}}>Team (10%)</p>
             </div>
             <div className="p-3" style={{display: "inline-block"}}>
-              <span style={{backgroundColor: "#607D8B"}} class="dot"></span>
+              <span style={{backgroundColor: "#607D8B"}} className="dot"></span>
               <br/>
               <p style={{display: "inline-block"}}>Marketing (10%)</p>
             </div>
             <div className="p-3" style={{display: "inline-block"}}>
-              <span style={{backgroundColor: "#2196F3"}} class="dot"></span>
+              <span style={{backgroundColor: "#2196F3"}} className="dot"></span>
               <br/>
               <p style={{display: "inline-block"}}>Operation & Dev (15%)</p>
             </div>
             <div className="p-3" style={{display: "inline-block"}}>
-              <span style={{backgroundColor: "#9727b0"}} class="dot"></span>
+              <span style={{backgroundColor: "#9727b0"}} className="dot"></span>
               <br/>
               <p style={{display: "inline-block"}}>Reserve & Advisory (10%)</p>
             </div>
             <div className="p-3" style={{display: "inline-block"}}>
-              <span style={{backgroundColor: "#009688"}} class="dot"></span>
+              <span style={{backgroundColor: "#009688"}} className="dot"></span>
               <br/>
               <p style={{display: "inline-block"}}>IDO (30%)</p>
             </div>
             <div className="p-3" style={{display: "inline-block"}}>
-              <span style={{backgroundColor: "#FFC107"}} class="dot"></span>
+              <span style={{backgroundColor: "#FFC107"}} className="dot"></span>
               <br/>
               <p style={{display: "inline-block"}}>Private (10%)</p>
             </div>
             <div className="p-3" style={{display: "inline-block"}}>
-              <span style={{backgroundColor: "#33c9dc"}} class="dot"></span>
+              <span style={{backgroundColor: "#33c9dc"}} className="dot"></span>
               <br/>
               <p style={{display: "inline-block"}}>Liquidity (15%)</p>
             </div>

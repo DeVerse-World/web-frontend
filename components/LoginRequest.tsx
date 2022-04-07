@@ -1,4 +1,4 @@
-import MetamaskBox from "./MetamaskBox";
+import AccountMenu from "./AccountMenu";
 
 function LoginRequest(props) {
     console.log("Login Request Session Key")
