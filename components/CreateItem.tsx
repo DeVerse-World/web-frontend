@@ -65,7 +65,7 @@ export default function CreateItem() {
     let tokenId = value.toNumber()
     const price = ethers.utils.parseUnits(formInput.price, 'ether')
 
-    /* then list the item for sale on the marketplace */
+    /* then list the item for sale on the marketplace_v1 */
     contract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
     let listingPrice = await contract.getListingPrice()
     listingPrice = listingPrice.toString()
