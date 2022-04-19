@@ -32,8 +32,7 @@ function AccountMenu() {
         break;
       case "connected":
         setBoxContent(account);
-        //TODO: enable this after server online
-        // WalletService.connectToMetamask(account);
+        WalletService.connectToMetamask(account);
         break;
       default:
         break;
