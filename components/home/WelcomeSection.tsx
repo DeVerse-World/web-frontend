@@ -6,7 +6,7 @@ function WelcomeSection(props) {
         <h1 className="title uppercase" style={{
           fontWeight: 900,
           fontSize: "4.5rem",
-          textShadow: "0 0 10px #FF0000, 0 0 10px #0000FF",
+          textShadow: "-5px -5px 5px #FF0000, 5px 5px 5px #0000FF",
           // fontFamily: "Poppins,sans-serif"
         }} >A Sandbox (De)centralized Meta(Verse)</h1>
       </div>

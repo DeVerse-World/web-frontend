@@ -1,5 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap');
 body * {
-    font-family: "Roboto";
+    font-family: 'Bakbak One', cursive;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -28,6 +29,7 @@ code {
 }
 
 .heading {
+    font-family: sans-serif;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 800;

@@ -4,9 +4,9 @@ import React, { useState, useEffect } from "react";
 
 function IntroSection(props) {
   return (
-    <section className="flex flex-col p-4">
+    <section className="flex flex-col p-4 ">
       <div className="row text-center">
-        <h6 className="mb-4 text-6xl font-bold">What is Deverse?</h6>
+        <h6 className="mb-4 text-6xl font-bold uppercase">What is Deverse?</h6>
         <h1 className="">Deverse is something, place holder here</h1>
       </div>
       <div className="m-auto">

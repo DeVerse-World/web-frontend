@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Image, Modal } from "react-bootstrap";
+import { FeatureStatus } from "../../data/enum/feature_status";
+
 
 function ProductSection(props) {
     const renderProductList = () => {
@@ -7,49 +9,49 @@ function ProductSection(props) {
             {
                 icon: "product-ad",
                 name: "ads",
-                status: "Active",
+                status: FeatureStatus.IN_PROGRESS,
                 description: "This is description about Ad service This is description about Ad service This is description about Ad service This is description about Ad service This is description about Ad service"
             },
             {
                 icon: "product-dao",
                 name: "dao",
-                status: "Active",
+                status: FeatureStatus.PENDING,
                 description: "This is description about Ad service"
             },
             {
                 icon: "product-decentralised-graphic-sharing",
-                name: "Decentralised Graphic Sharing",
-                status: "Active",
+                name: "Dec Graphic Sharing",
+                status: FeatureStatus.PENDING,
                 description: "This is description about Ad service n about Ad s"
             },
             {
                 icon: "product-decentralised-subworld-hosting",
-                name: "Decentralised subworld hosting",
-                status: "Active",
+                name: "Dec subworld hosting",
+                status: FeatureStatus.PLANNING,
                 description: "This is description about Ad service n about Ad s"
             },
             {
                 icon: "product-integrity-validation",
                 name: "integrity validation",
-                status: "Active",
+                status: FeatureStatus.IN_PROGRESS,
                 description: "This is description about Ad service"
             },
             {
                 icon: "product-quest-creator-tool",
                 name: "quest creator tool",
-                status: "in progress",
+                status: FeatureStatus.PENDING,
                 description: "This is description about Ad service"
             },
             {
                 icon: "product-sdk",
                 name: "sdk",
-                status: "Active",
+                status: FeatureStatus.IN_PROGRESS,
                 description: "This is description about Ad service"
             },
             {
                 icon: "product-smart-nft",
                 name: "smart NFT",
-                status: "In Progress",
+                status: FeatureStatus.PLANNING,
                 description: "This is description about Ad service"
             },
         ];
@@ -80,7 +82,7 @@ type ProductionSectionData = {
     icon: any;
     name: string;
     description: string;
-    status: string;
+    status: FeatureStatus;
 }
 
 
@@ -91,21 +93,58 @@ function ProductSectionItem(props: ProductionSectionData) {
         setShowDescription(true);
     }
 
+    const getStatus = (status: FeatureStatus) => {
+        switch (status) {
+            case FeatureStatus.IN_PROGRESS:
+                return "In Progress";
+            case FeatureStatus.PENDING:
+                return "Pending";
+            default:
+                return "Planning";
+        }
+    }
+
+    const getStatusColor = (status: FeatureStatus): React.CSSProperties => {
+        let statusColorStyle: React.CSSProperties = {};
+        switch (status) {
+            case FeatureStatus.IN_PROGRESS:
+                statusColorStyle.color = 'green'
+                break;
+            case FeatureStatus.PENDING:
+                statusColorStyle.color = 'red'
+                break;
+            default:
+                statusColorStyle.color = 'yellow'
+                break;
+        }
+        return statusColorStyle;
+    }
+
     return (
-        <div key={props.name} className="p-4 w-[300px] relative cursor-default">
-            <Image src={`/images/${props.icon}.png`}
-                className="cursor-pointer"
+        <div key={props.name} className="p-4 max-w-[350px] relative cursor-default">
+            <Image
+                className="m-auto"
+                src={`/images/${props.icon}.png`}
                 width={300} height={300}
-                onClick={onShowDescription}
             />
-            <h2 className="border-double border-4 border-sky-500 capitalize cursor-pointer"
-                onClick={onShowDescription}>{props.name}</h2>
-            <h6 className="uppercase">{props.status}</h6>
+            <div className="border-double border-4 border-sky-500 
+            bg-gradient-to-b from-violet-600 to-blue-700 uppercase cursor-pointer h-16
+            flex flex-col justify-center"
+                style={{
+                    borderRadius: "25px"
+                }}
+                onClick={onShowDescription}>
+                <span className="text-lg">{props.name}</span>
+            </div>
+
+            <h6 className="uppercase mt-4" style={getStatusColor(props.status)}>{getStatus(props.status)}</h6>
             <Modal centered show={showDescription} onHide={() => setShowDescription(false)}>
                 {/* <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>{props.name}</Modal.Title>
                 </Modal.Header> */}
-                <Modal.Body className="bg-sky-500">{props.description}</Modal.Body>
+                <Modal.Body className="bg-gradient-to-b from-violet-600 to-blue-700 text-white">
+                    <span>{props.description}</span>
+                </Modal.Body>
                 {/* <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
