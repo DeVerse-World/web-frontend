@@ -12,11 +12,11 @@ import { SiDiscord, SiTiktok } from 'react-icons/si';
 
 function Footer(props) {
   return (
-    <section className="bg-gray-800">
-      <div style={{ backgroundColor: "#dc3545", height: "60px", color: "white", textAlign: "center" }} className="banner text-center">
+    <section className="bg-gray-600">
+      {/* <div style={{ backgroundColor: "#dc3545", height: "60px", color: "white", textAlign: "center" }} className="banner text-center">
         <p className="banner-text"><strong><a style={{ color: "white", textDecoration: "none" }} target="_blank" href="https://www.instagram.com/deverse.nft/">Follow our official Instgram account 🚀</a></strong></p>
-      </div>
-
+      </div> */}
+      <div className="h-1 w-full bg-neutral-300"></div>
       <div className="flex flex-col h-auto" style={{
         textAlign: "center",
         left: "0",
@@ -66,7 +66,7 @@ function Footer(props) {
             <GitHubIcon />
           </IconButton>
         </div>
-        <div className="h-1 w-full bg-neutral-300 mt-8"></div>
+
         <div className="mt-8 mb-8">
           Copyright © deverse 2021
         </div>

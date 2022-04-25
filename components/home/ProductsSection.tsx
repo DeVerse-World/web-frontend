@@ -93,17 +93,6 @@ function ProductSectionItem(props: ProductionSectionData) {
         setShowDescription(true);
     }
 
-    const getStatus = (status: FeatureStatus) => {
-        switch (status) {
-            case FeatureStatus.IN_PROGRESS:
-                return "In Progress";
-            case FeatureStatus.PENDING:
-                return "Pending";
-            default:
-                return "Planning";
-        }
-    }
-
     const getStatusColor = (status: FeatureStatus): React.CSSProperties => {
         let statusColorStyle: React.CSSProperties = {};
         switch (status) {
@@ -127,22 +116,19 @@ function ProductSectionItem(props: ProductionSectionData) {
                 src={`/images/${props.icon}.png`}
                 width={300} height={300}
             />
-            <div className="border-double border-4 border-sky-500 
-            bg-gradient-to-b from-violet-600 to-blue-700 uppercase cursor-pointer h-16
-            flex flex-col justify-center"
-                style={{
-                    borderRadius: "25px"
-                }}
+            <div className="rounded-md bg-gradient-to-r from-blue-700 to-violet-500 
+                uppercase cursor-pointer h-16
+                flex flex-col justify-center"
                 onClick={onShowDescription}>
                 <span className="text-lg">{props.name}</span>
             </div>
 
-            <h6 className="uppercase mt-4" style={getStatusColor(props.status)}>{getStatus(props.status)}</h6>
+            <h6 className="uppercase mt-4" style={getStatusColor(props.status)}>{props.status}</h6>
             <Modal centered show={showDescription} onHide={() => setShowDescription(false)}>
                 {/* <Modal.Header closeButton>
                     <Modal.Title>{props.name}</Modal.Title>
                 </Modal.Header> */}
-                <Modal.Body className="bg-gradient-to-b from-violet-600 to-blue-700 text-white">
+                <Modal.Body className="bg-gradient-to-b from-red-400 to-red-700 text-white">
                     <span>{props.description}</span>
                 </Modal.Body>
                 {/* <Modal.Footer>

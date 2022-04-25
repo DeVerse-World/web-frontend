@@ -1,3 +1,5 @@
 export enum FeatureStatus {
-    IN_PROGRESS, PLANNING, PENDING
+    IN_PROGRESS = "In progress",
+    PLANNING = "Planning",
+    PENDING = "Pending"
 }
