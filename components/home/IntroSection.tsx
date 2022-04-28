@@ -13,7 +13,7 @@ function IntroSection(props) {
         <iframe width="880"
           height="515"
           className="rounded-[12px]"
-          src="https://www.youtube.com/embed/jnl_2Uui68k"
+          src="https://www.youtube.com/embed/RwZhxUfv4q0"
           title="Deverse Demo"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen />

@@ -8,7 +8,7 @@ Environment variables: Change them in next.config.js
 
 # Using gltf components
 To generate react component from .gltf file
-`npx gltfjsx path-to-file.gltf`
+`npx gltfjsx public/3d/path-to-file.gltf`
 Then move that file to components/gltf
 2 options:
 - Load the file by copy paste the content of the generated file to the corresponding page.

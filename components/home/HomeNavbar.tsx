@@ -21,8 +21,9 @@ function HomeNavbar(props) {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link href="/#roadmap">Roadmap</Nav.Link>
-          <Nav.Link href="/#token">Tokenomics</Nav.Link>
+          <Nav.Link href="/showcase">Showcase</Nav.Link>
+          {/* <Nav.Link href="/#roadmap">Roadmap</Nav.Link>
+          <Nav.Link href="/#token">Tokenomics</Nav.Link> */}
           <Nav.Link rel="No-Refresh" href="/marketplace" >Marketplace</Nav.Link>
         </Nav>
         <Nav ><AccountMenu /></Nav>
