@@ -10,8 +10,8 @@ import {
 } from '../../config'
 import MarketplaceNavbar from '../../components/MarketplaceNavbar'
 
-import Market from '../../../smart-contracts/artifacts/contracts/Market.sol/NFTMarket.json'
-import NFT from '../../../smart-contracts/artifacts/contracts/NFT.sol/NFT.json'
+import Market from '../../../smart-contracts/artifacts/contracts/v1/Market.sol/NFTMarket.json'
+import NFT from '../../../smart-contracts/artifacts/contracts/v1/NFT.sol/NFT.json'
 
 export default function MyAssets() {
   const [nfts, setNfts] = useState([])

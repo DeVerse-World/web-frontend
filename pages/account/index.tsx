@@ -6,6 +6,7 @@ import { TimeFilter } from "../../data/enum/time_filter";
 import { DataFilter } from "../../data/enum/data_filter";
 import WalletService from "../../data/services/wallet_service";
 import { timestampToLabel } from "../../utils/time_util";
+import HomeNavbar from "../../components/home/HomeNavbar";
 
 ChartJS.register(
     CategoryScale,
@@ -74,6 +75,7 @@ export default function Account() {
 
     return (
         <div>
+            <HomeNavbar/>
             <div className="flex flex-col bg-blue m-16 p-4 border-2 rounded-sm border-black">
                 <b>$DVRS</b>
                 <h2>123 Coins</h2>
