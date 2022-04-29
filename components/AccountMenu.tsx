@@ -48,7 +48,7 @@ function AccountMenu() {
   if (status == "connected") {
     element = (
       <NavDropdown title={account.substring(0, 10)}
-        id="collasible-nav-dropdown"
+        id="account-dropdown"
         show={showDropdown}
         onMouseEnter={() => setShowDropdown(true)}
         onMouseLeave={() => setShowDropdown(false)}
