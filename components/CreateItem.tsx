@@ -8,8 +8,8 @@ import {
   nftaddress, nftmarketaddress
 } from '../config'
 
-import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
-import Market from '../artifacts/contracts/Market.sol/NFTMarket.json'
+import NFT from '../artifacts/contracts/v1/NFT.sol/NFT.json'
+import Market from '../artifacts/contracts/v1/Market.sol/NFTMarket.json'
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
 
