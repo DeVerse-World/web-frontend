@@ -4,10 +4,9 @@ import React, { useState, useEffect } from "react";
 
 function IntroSection(props) {
   return (
-    <section className="flex flex-col p-4 ">
+    <section className="flex flex-col p-4 bg-gray-700">
       <div className="row text-center">
-        <h6 className="mb-4 text-6xl font-bold uppercase"></h6>
-        <h1 className="">Deverse is a sandbox metaverse for Unlimited Life </h1>
+        <h1 className="text-white">Deverse is a sandbox metaverse for Unlimited Life </h1>
       </div>
       <div className="m-auto">
         <iframe width="880"

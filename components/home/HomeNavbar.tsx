@@ -26,7 +26,7 @@ function HomeNavbar(props) {
           <Nav.Link href="/#token">Tokenomics</Nav.Link> */}
           {/*<Nav.Link rel="No-Refresh" href="/marketplace" >Marketplace</Nav.Link>*/}
           {/* <NavLink to={{pathname: "https://docs.deverse.world"}} target="_blank" >Docs</NavLink>*/}
-            <a href="https://docs.deverse.world" target="_blank"> Documentation </a>
+          <Nav.Link href="https://docs.deverse.world" target="_blank">Documentation</Nav.Link>
         </Nav>
         <Nav ><AccountMenu /></Nav>
       </Navbar.Collapse>
