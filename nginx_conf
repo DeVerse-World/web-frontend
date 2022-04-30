@@ -9,7 +9,7 @@ server {
         # Serve any static assets with NGINX
     
         location /_next/static {
-            alias /root/repos/prod/landing-page/.next/static;
+            alias /root/repos/prod/landing-page/build/static;
             add_header Cache-Control "public, max-age=3600, immutable";
         }
 
