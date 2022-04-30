@@ -11,8 +11,8 @@ import {
 
 import MarketplaceNavbar from '../../components/MarketplaceNavbar'
 
-import Market from '../../../smart-contracts/artifacts/contracts/Market.sol/NFTMarket.json'
-import NFT from '../../../smart-contracts/artifacts/contracts/NFT.sol/NFT.json'
+import Market from '../../../smart-contracts/artifacts/contracts/v1/Market.sol/NFTMarket.json'
+import NFT from '../../../smart-contracts/artifacts/contracts/v1/NFT.sol/NFT.json'
 
 export default function CreatorDashboard() {
   const [nfts, setNfts] = useState([])

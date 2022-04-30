@@ -12,8 +12,8 @@ import {
   nftaddress, nftmarketaddress
 } from '../../config'
 
-import NFT from '../../../smart-contracts/artifacts/contracts/NFT.sol/NFT.json'
-import Market from '../../../smart-contracts/artifacts/contracts/Market.sol/NFTMarket.json'
+import NFT from '../../../smart-contracts/artifacts/contracts/v1/NFT.sol/NFT.json'
+import Market from '../../../smart-contracts/artifacts/contracts/v1/Market.sol/NFTMarket.json'
 import Marketplace from '../_app'
 
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
