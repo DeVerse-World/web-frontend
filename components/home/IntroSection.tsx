@@ -1,24 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-
+const iframeWrapper: React.CSSProperties = {
+  position: "relative",
+  paddingBottom: "56.25%",
+  height: 0,
+}
 
 function IntroSection(props) {
   return (
-    <section className="flex flex-col p-4 bg-gray-700">
-      <div className="row text-center">
-        <h1 className="text-white">Deverse is a sandbox metaverse for Unlimited Life </h1>
-      </div>
-      <div className="m-auto">
-        <iframe width="880"
-          height="515"
-          className="rounded-[12px]"
+    <section >
+        <div style={iframeWrapper}>
+        <iframe
+          className="rounded-[12px] w-[75%] h-[75%] m-auto absolute inset-0"
           src="https://www.youtube.com/embed/qEdULCHiAZE"
           title="Deverse Demo"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen />
-
-      </div>
-
+        </div>
     </section>
   );
 }

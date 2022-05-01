@@ -3,10 +3,10 @@ import ArrowUpward from '@material-ui/icons/ArrowUpward';
 
 function ScrollToTopButton(props) {
     return (
-        <IconButton className="z-10" onClick={() => {
+        <IconButton className="z-10 deverse-gradient" onClick={() => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }} style={{
-            background: "#0197f6",
+            
             color: "white",
             position: "fixed",
             bottom: 16,

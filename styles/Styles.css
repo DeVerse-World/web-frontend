@@ -1,36 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap');
+@import url('https://fonts.cdnfonts.com/css/sofia-pro');
+@import url('https://fonts.cdnfonts.com/css/akira-expanded');
 body * {
-    font-family: 'Bakbak One', cursive;
+    font-family: 'Sofia Pro', sans-serif;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-
-/* body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-} */
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}
-
-.nav-link {
-    color: white !important;
-    font-weight: 600;
-}
-
-.navbar-brand {
-    color: white !important;
-    margin-right: 3rem;
-}
-
 .heading {
-    font-family: sans-serif;
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 800;
     font-size: 6rem;
@@ -42,8 +21,13 @@ code {
     font-size: 1.4rem;
 }
 
-hr {
-    height: 10px;
+.deverse-dialog div {
+    border-radius: 12px !important;
+}
+
+.deverse-title {
+    font-size: 3.5rem;
+    font-family: 'Akira Expanded', sans-serif;
 }
 
 .details-title {
@@ -54,14 +38,25 @@ hr {
     margin-bottom: 1.1rem;
 }
 
-.team-images {
-    border: 3px solid black;
+.deverse-background {
+    background-image: radial-gradient(closest-side, rgb(22, 74, 124), rgba(2, 11, 64, 0.7)), url(/images/bg-highlight.png);
+}
+
+.deverse-gradient {
+    background-image: linear-gradient(to bottom, rgb(97 198 208), rgb(64 175 217));
+}
+
+.deverse-gradient-text {
+    background: -webkit-linear-gradient(-86deg, rgb(65, 117, 230), rgb(18, 54, 173));
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 3px transparent;
+    color: rgb(237, 238, 238);
 }
 
 @media only screen and (max-width: 600px) {
-    .title {
+    .deverse-title {
         font-weight: 900;
-        font-size: 3.5rem;
+        font-size: 1.7rem;
         line-height: 95%;
         letter-spacing: 0.5%;
     }
@@ -71,12 +66,16 @@ hr {
     .details-title {
         font-size: 2.5rem;
     }
-    .header-spacing {
-        display: none;
-    }
     .details {
         text-align: left!important;
     }
+}
+
+
+/* Special case */
+
+.deverse-text-border {
+    /* text-shadow: 1px 1px 0 #FFFFFF */
 }
 
 .compare table {
