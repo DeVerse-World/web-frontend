@@ -49,9 +49,9 @@ function TeamMembersSection(props) {
         </div>
 
         <div className="col-lg-3 col-md-6 p-3 col-12">
-          <img className="team-images mb-3" style={{ width: "100%" }} src="/images/wang.png" />
+          <img className="mb-3" style={{ width: "100%" }} src="/images/wang.png" />
           <h3>LongHong Wang</h3>
-          <h5 style={{ fontWeight: "400", color: "#ABABAB" }}>Blockchain Developer</h5>
+          <h5 style={{ fontWeight: 400, color: "#ABABAB" }}>Blockchain Developer</h5>
           <p style={{ fontSize: "0.9rem" }}><span style={{ color: "#ABABAB" }}>
             LongHong Wang is an experienced senior blockchain developer and software engineer with over 7 years of experience. He is the Lead Developer at <a target="_blank" href="https://chonker.finance/">Chnoker.finance,</a> a developer at Elixer-Swap and at Infraex development.
           </span> </p>
@@ -64,9 +64,9 @@ function TeamMembersSection(props) {
         </div>
 
         <div className="col-lg-3 col-md-6 p-3 col-12">
-          <img className="team-images mb-3" style={{ width: "100%" }} src="/images/andrew.png" />
+          <img className="mb-3" style={{ width: "100%" }} src="/images/andrew.png" />
           <h3>Andrew</h3>
-          <h5 style={{ fontWeight: "400", color: "#ABABAB" }}>Graphic designer</h5>
+          <h5 style={{ fontWeight: 400, color: "#ABABAB" }}>Graphic designer</h5>
           <p style={{ fontSize: "0.9rem" }}><span style={{ color: "#ABABAB" }}>
             Andrew Evanyshyn has over 5 years of experiance in graphic design and is a professioanl in Photoshop, Illustrator, and InDesign.
           </span> </p>

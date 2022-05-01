@@ -88,9 +88,31 @@ type ProductionSectionData = {
 
 function ProductSectionItem(props: ProductionSectionData) {
     const [showDescription, setShowDescription] = useState(false);
-
+    const [btnStyle, setButtonStyle] = useState<React.CSSProperties>({
+        backgroundColor: "rgb(29 78 216)",
+        backgroundImage: "linear-gradient(to right, rgb(29 78 216) ,rgb(139 92 246))"
+    })
     const onShowDescription = (e) => {
         setShowDescription(true);
+    }
+
+    const toggleHover = (isHover: boolean) => {
+        if (!isHover) {
+            setButtonStyle(
+                {
+                    backgroundColor: "rgb(29 78 216)",
+                    backgroundImage: "linear-gradient(to right, rgb(29 78 216) ,rgb(139 92 246))"
+                }
+            )
+        } else {
+            setButtonStyle(
+                {
+                    backgroundColor: "red",
+                    backgroundImage: "linear-gradient(to right, red ,rgb(250 204 21))"
+                }
+            )
+        }
+
     }
 
     const getStatusColor = (status: FeatureStatus): React.CSSProperties => {
@@ -116,9 +138,16 @@ function ProductSectionItem(props: ProductionSectionData) {
                 src={`/images/${props.icon}.png`}
                 width={300} height={300}
             />
-            <div className="rounded-md bg-gradient-to-r from-blue-700 to-violet-500 
+            <div className="rounded-md
                 uppercase cursor-pointer h-16
                 flex flex-col justify-center"
+                style={btnStyle}
+                onMouseEnter={(e) => {
+                    toggleHover(true)
+                }}
+                onMouseLeave={(e) => {
+                    toggleHover(false)
+                }}
                 onClick={onShowDescription}>
                 <span className="text-lg">{props.name}</span>
             </div>

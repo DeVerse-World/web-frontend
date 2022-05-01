@@ -7,8 +7,7 @@ import { MetaMaskProvider } from "metamask-react";
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
 import ScrollToTopButton from '../components/common/ScrollToTopButton';
-import { IconButton } from '@material-ui/core';
-import ArrowUpward from '@material-ui/icons/ArrowUpward';
+import Head from 'next/head'
 
 // optional configuration
 const options = {
@@ -24,6 +23,9 @@ function Marketplace({ Component, pageProps }) {
   return (
     <AlertProvider template={AlertTemplate} {...options}>
       <MetaMaskProvider>
+        <Head>
+        <title>Deverse</title>
+        </Head>
         <ScrollToTopButton />
         <Component {...pageProps} />
         <Footer />
