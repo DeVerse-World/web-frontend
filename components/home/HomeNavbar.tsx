@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 {/* <Button target="_blank" className="mr-2" href="https://www.deversenft.app/">Launch App</Button> */ }
 function HomeNavbar(props) {
   return (
-    <Navbar className="p-4 bg-gray-800 drop-shadow-sm bg-opacity-90" sticky="top" expand="lg">
+    <Navbar className="p-4 bg-gray-900 drop-shadow-sm bg-opacity-90" sticky="top" expand="lg">
 
       <Navbar.Brand href="/">
         <Image

@@ -1,4 +1,5 @@
-@import url('http://fonts.cdnfonts.com/css/sofia-pro');
+@import url('https://fonts.cdnfonts.com/css/sofia-pro');
+@import url('https://fonts.cdnfonts.com/css/akira-expanded');
 body * {
     font-family: 'Sofia Pro', sans-serif;
     scroll-behavior: smooth;
@@ -17,7 +18,6 @@ body * {
 }
 
 .heading {
-    font-family: sans-serif;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 800;
@@ -31,8 +31,9 @@ body * {
 }
 
 .title {
-    font-weight: 800;
-    font-size: 4rem;
+    font-size: 3.5rem;
+    font-family: 'Akira Expanded', sans-serif;
+    text-shadow: -1.5px -1.5px 7px #FF0000, 1.5px 1.5px 7px #0000FF
 }
 
 .details-title {
@@ -46,7 +47,7 @@ body * {
 @media only screen and (max-width: 600px) {
     .title {
         font-weight: 900;
-        font-size: 2.5rem;
+        font-size: 1.7rem;
         line-height: 95%;
         letter-spacing: 0.5%;
     }
