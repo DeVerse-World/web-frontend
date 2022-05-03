@@ -14,13 +14,12 @@ function HomeNavbar(props) {
           height={30}
           className="d-inline-block align-top mr-2"
           alt="Deverse logo" />
-
-        Deverse
+        DEVERSE
       </Navbar.Brand>
 
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
+      <Navbar.Collapse id="basic-navbar-nav" >
+        <Nav className="ms-auto">
           {/*<Nav.Link href="/showcase">Showcase</Nav.Link>*/}
           {/* <Nav.Link href="/#roadmap">Roadmap</Nav.Link>
           <Nav.Link href="/#token">Tokenomics</Nav.Link> */}
