@@ -7,18 +7,9 @@ body * {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.nav-link {
-    color: white !important;
-    font-weight: 600;
-}
-
-.navbar-brand {
-    color: white !important;
-    margin-right: 3rem;
-}
-
 .heading {
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 800;
     font-size: 6rem;
@@ -30,10 +21,13 @@ body * {
     font-size: 1.4rem;
 }
 
-.title {
+.deverse-dialog div {
+    border-radius: 12px !important;
+}
+
+.deverse-title {
     font-size: 3.5rem;
     font-family: 'Akira Expanded', sans-serif;
-    text-shadow: -1.5px -1.5px 7px #FF0000, 1.5px 1.5px 7px #0000FF
 }
 
 .details-title {
@@ -44,8 +38,23 @@ body * {
     margin-bottom: 1.1rem;
 }
 
+.deverse-background {
+    background-image: radial-gradient(closest-side, rgb(22, 74, 124), rgba(2, 11, 64, 0.7)), url(/images/bg-highlight.png);
+}
+
+.deverse-gradient {
+    background-image: linear-gradient(to bottom, rgb(97 198 208), rgb(64 175 217));
+}
+
+.deverse-gradient-text {
+    background: -webkit-linear-gradient(-86deg, rgb(65, 117, 230), rgb(18, 54, 173));
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 3px transparent;
+    color: rgb(237, 238, 238);
+}
+
 @media only screen and (max-width: 600px) {
-    .title {
+    .deverse-title {
         font-weight: 900;
         font-size: 1.7rem;
         line-height: 95%;
@@ -57,12 +66,16 @@ body * {
     .details-title {
         font-size: 2.5rem;
     }
-    .header-spacing {
-        display: none;
-    }
     .details {
         text-align: left!important;
     }
+}
+
+
+/* Special case */
+
+.deverse-text-border {
+    /* text-shadow: 1px 1px 0 #FFFFFF */
 }
 
 .compare table {

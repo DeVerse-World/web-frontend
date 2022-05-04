@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const iframeWrapper : React.CSSProperties = {
+const iframeWrapper: React.CSSProperties = {
   position: "relative",
   paddingBottom: "56.25%",
   height: 0,
@@ -9,15 +9,20 @@ const iframeWrapper : React.CSSProperties = {
 function IntroSection(props) {
 
   return (
-    <section className="pt-4 bg-gradient-to-b from-black to-gray-700">
-      <div className="m-auto" style={iframeWrapper}>
+    <section className="h-[800px] py-8" >
+
+
+        {/* <div className="m-auto" style={iframeWrapper}> */}
         <iframe
-          className="rounded-[12px] absolute top-0 left-0 bottom-0 right-0 mx-auto w-[90%] h-[90%]" 
+          className="rounded-[12px] w-[75vw] h-[650px] m-auto"
           src="https://www.youtube.com/embed/qEdULCHiAZE"
           title="Deverse Demo"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen />
-      </div>
+        {/* </div> */}
+
+
+      
     </section>
   );
 }
