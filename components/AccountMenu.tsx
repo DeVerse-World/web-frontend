@@ -40,14 +40,14 @@ function AccountMenu() {
   }, [status])
 
   let element = (
-    <Button onClick={connect}>
+    <Button onClick={connect} className="deverse-gradient">
       {boxContent}
     </Button>
   );
 
   if (status == "connected") {
     element = (
-      <NavDropdown title={account.substring(0, 10)}
+      <NavDropdown title={account.substring(0, 10)} className="deverse-gradient"
         id="account-dropdown"
         show={showDropdown}
         onMouseEnter={() => setShowDropdown(true)}

@@ -63,8 +63,8 @@ function ProductSection(props) {
     }
 
     return (
-        <section className="bg-gray-800 p-4 text-white text-center">
-            <div className="text-6xl font-bold uppercase">
+        <section className="p-4 text-white text-center ">
+            <div className="text-6xl font-bold uppercase deverse-gradient deverse-gradient-text deverse-title">
                 Our products
             </div>
             <div className="flex flex-row flex-wrap justify-center">
@@ -90,7 +90,7 @@ function ProductSectionItem(props: ProductionSectionData) {
     const [showDescription, setShowDescription] = useState(false);
     const [btnStyle, setButtonStyle] = useState<React.CSSProperties>({
         backgroundColor: "rgb(29 78 216)",
-        backgroundImage: "linear-gradient(to right, rgb(29 78 216) ,rgb(139 92 246))"
+        backgroundImage: "linear-gradient(to bottom, rgb(97 198 208) ,rgb(64 175 217)"
     })
     const onShowDescription = (e) => {
         setShowDescription(true);
@@ -101,14 +101,14 @@ function ProductSectionItem(props: ProductionSectionData) {
             setButtonStyle(
                 {
                     backgroundColor: "rgb(29 78 216)",
-                    backgroundImage: "linear-gradient(to right, rgb(29 78 216) ,rgb(139 92 246))"
+                    backgroundImage: "linear-gradient(to bottom, rgb(97 198 208) ,rgb(64 175 217))"
                 }
             )
         } else {
             setButtonStyle(
                 {
-                    backgroundColor: "red",
-                    backgroundImage: "linear-gradient(to right, red ,rgb(250 204 21))"
+                    backgroundColor: "rgb(29 78 216)",
+                    backgroundImage: "linear-gradient(to bottom, rgb(127 198 208) ,rgb(94 175 217))"
                 }
             )
         }
@@ -153,11 +153,16 @@ function ProductSectionItem(props: ProductionSectionData) {
             </div>
 
             <h6 className="uppercase mt-4" style={getStatusColor(props.status)}>{props.status}</h6>
-            <Modal centered show={showDescription} onHide={() => setShowDescription(false)}>
+            <Modal centered show={showDescription} onHide={() => setShowDescription(false)} dialogClassName="deverse-dialog">
                 {/* <Modal.Header closeButton>
                     <Modal.Title>{props.name}</Modal.Title>
                 </Modal.Header> */}
-                <Modal.Body className="bg-gradient-to-b from-red-400 to-red-700 text-white">
+                <Modal.Body className="text-white text-lg"
+                    style={{
+                        backgroundColor: "rgb(97 198 208)",
+                        backgroundImage: "linear-gradient(to bottom, rgb(97 198 208) ,rgb(64 175 217))",
+                        
+                    }}>
                     <span>{props.description}</span>
                 </Modal.Body>
                 {/* <Modal.Footer>
