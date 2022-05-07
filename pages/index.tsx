@@ -14,12 +14,12 @@ function Home(props) {
   // const [timerText, setTimerText] = useState(calcTime());
 
   // useEffect(() => {
-    // fetchPrice()
-    // const timeoutID = window.setTimeout(() => {
-    //   setTimerText(calcTime());
-    // }, 1000);
+  // fetchPrice()
+  // const timeoutID = window.setTimeout(() => {
+  //   setTimerText(calcTime());
+  // }, 1000);
 
-    // return () => window.clearTimeout(timeoutID );
+  // return () => window.clearTimeout(timeoutID );
   // })
 
   // function calcTime() {
@@ -37,9 +37,12 @@ function Home(props) {
     <>
       <HomeNavbar />
       <WelcomeSection />
-      <IntroSection />
-      <HighlightFeatureSection />
-      <ProductSection />
+      <div className='deverse-background'>
+        <IntroSection />
+        <HighlightFeatureSection />
+        <ProductSection />
+      </div>
+
 
       {/* <TokenInfo timerText={timerText} holders={holders} price={price} mcap={mcap} /> */}
 
