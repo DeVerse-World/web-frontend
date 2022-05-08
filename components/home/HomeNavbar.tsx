@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 {/* <Button target="_blank" className="mr-2" href="https://www.deversenft.app/">Launch App</Button> */ }
 function HomeNavbar(props) {
   return (
-    <Navbar className="px-4 bg-[#18181b] drop-shadow-sm bg-opacity-70" fixed="top" expand="lg" variant="dark">
+    <Navbar className="px-4 bg-gray-800 drop-shadow-sm" sticky="top" expand="lg" variant="dark">
       <Navbar.Brand href="/" >
           <Image
             src={"/images/logo.png"}
@@ -28,10 +28,10 @@ function HomeNavbar(props) {
           {/* <Nav.Link href="/#roadmap">Roadmap</Nav.Link>
           <Nav.Link href="/#token">Tokenomics</Nav.Link> */}
           {/*<Nav.Link rel="No-Refresh" href="/marketplace" >Marketplace</Nav.Link>*/}
-          {/* <NavLink to={{pathname: "https://docs.deverse.world"}} target="_blank" >Docs</NavLink>*/}
+          {/* <Nav.Link className="text-white" href="/marketplace" >Marketplace</Nav.Link> */}
           <Nav.Link className="text-white" href="https://docs.deverse.world" target="_blank">Documentation</Nav.Link>
         </Nav>
-        <Nav ><AccountMenu /></Nav>
+        {/* <Nav ><AccountMenu /></Nav> */}
       </Navbar.Collapse>
     </Navbar >
   );

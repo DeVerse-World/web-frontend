@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Image, Modal } from "react-bootstrap";
+import { Image, Modal, Tooltip } from "react-bootstrap";
 import { FeatureStatus } from "../../data/enum/feature_status";
 
 
@@ -10,49 +10,49 @@ function ProductSection(props) {
                 icon: "product-ad",
                 name: "ads",
                 status: FeatureStatus.PENDING,
-                description: "An advertisement platform with ads placement in different subworld settings. Use a dynamic mechanism to determine ads pricing based on traffic and popularity, similar to ads system in existing social media platforms."
+                description: "Game as an advertisement platform, utilizing a similar ads system from exisiting social media platforms to determine pricing."
             },
             {
                 icon: "product-dao",
                 name: "dao",
                 status: FeatureStatus.IN_PROGRESS,
-                description: "Using the fungible tokens, users can stake in the protocol & vote on important system decisions, dev grants, etc."
+                description: "Be part of the system & vote on important decisions, dev grants, etc."
             },
             {
                 icon: "product-decentralised-graphic-sharing",
                 name: "UE5 + Graphic Sharing",
                 status: FeatureStatus.PENDING,
-                description: "We are using Unreal Engine 5 to leverage newest technology to provide a super realistic graphics. However, it requires strong GPU power on the user's side, which can be a highly costly up-front purchase. With UE Pixel Streaming technology, we enable a decentralized marketplace where user owning strong GPU can share this computing resource with others, earning a token in return."
+                description: "With Unreal Engine 5 and Pixel Streaming, we leverage the newest game technology to provide the best experience possible and enable a decentralized marketplace where powerful machine owners can share their computing resources in return for token rewards."
             },
             {
                 icon: "product-decentralised-subworld-hosting",
                 name: "Dec subworld hosting",
                 status: FeatureStatus.IN_PROGRESS,
-                description: "Provide a desktop management app and a discovery service for anyone to host a sub-world instance. This can lead to theoretically-infinite scale of the server power, as well as true decentralized computing layer of the metaverse."
+                description: "Users can manage and host their interconnected verses using our in-built custom management app, expanding infinitely the decentralized metaverse."
             },
             {
                 icon: "product-integrity-validation",
                 name: "integrity validation",
                 status: FeatureStatus.PENDING,
-                description: "We validate the integrity of a new asset through two mechanisms. Firstly, we capture a bunch of transformation sequences audited in our SDK/ Editor pipeline before the asset is minted. With proper visualization of the sequence and a good AI model for outputting the \"innovative\" score of the asset, end-user can determine the actual innovation score of the NFT before deciding to purchase. Secondly, we maintain a Prediction Market mechanism, where moderators will score a minted asset and later double checked by another moderator. There will be token incentive/ penalty depending on the consensus of the scores between different moderators."
+                description: " Using editor action sequence recorder and AI, we can approximately calculateinnovation score of the NFT. Along with a Prediction Market mechanism, we will provide the the best possible assessments of the NFT for end-users."
             },
             {
                 icon: "product-quest-creator-tool",
                 name: "quest creator tool",
                 status: FeatureStatus.PLANNING,
-                description: "Let user design in-game quests with various existing templates. At the start we will bootstrap certain quest templates, while delegating this ability back to the community in longer-term."
+                description: "A custom editor tool that let users design their campaigns/quests. Use various existing templates or build from scratch."
             },
             {
                 icon: "product-sdk",
                 name: "sdk",
                 status: FeatureStatus.IN_PROGRESS,
-                description: "Let user design & introduce new characters/ skins/ gameplays/ races/ subworlds/ etc, by leveraging the plugginable item architecture feature of Unreal Engine 5. We build a custom UE Editor for maximum integration/ interaction with blockchain, and a runtime plugin to mount NFT assets in game."
+                description: "Deverse SDK, powered by Unreal Engine 5, let users design & introduce skins/races/verses/gameplays/etc and mint them as NFT with ease."
             },
             {
                 icon: "product-smart-nft",
                 name: "smart NFT",
                 status: FeatureStatus.IN_PROGRESS,
-                description: " Support both non-fungible & semi-fungible tokens, enabling renting and hierarchical fee sharing structure of NFTs. Besides, we introduce a new concept called liquidity-backed insurance, where fees at each transfer are accumulated to provide a guaranteed buy-back scheme with minimum price for the asset, which in turns improve the asset liquidity."
+                description: "Support non-fungible & semi-fungible tokens, enabling renting and hierarchical fee sharing structure of NFTs. We also introduce liquidity-backed insurance, where transfer fees are accumulated to provide a guaranteed buy-back scheme at minimum price of an asset, which improves the asset liquidity."
             },
         ];
         return (
@@ -115,29 +115,40 @@ function ProductSectionItem(props: ProductionSectionData) {
 
     }
 
-    const getStatusColor = (status: FeatureStatus): React.CSSProperties => {
-        let statusColorStyle: React.CSSProperties = {};
+    const getStatusIcon = (status: FeatureStatus): string => {
         switch (status) {
             case FeatureStatus.IN_PROGRESS:
-                statusColorStyle.color = 'green'
+                return "/images/ic-inprogress.png";
                 break;
             case FeatureStatus.PENDING:
-                statusColorStyle.color = 'red'
+                return "/images/ic-pending.png";
                 break;
             default:
-                statusColorStyle.color = 'yellow'
+                return "/images/ic-planning.png";
                 break;
         }
-        return statusColorStyle;
     }
 
     return (
         <div key={props.name} className="p-4 max-w-[350px] relative cursor-default">
-            <Image
-                className="m-auto"
-                src={`/images/${props.icon}.png`}
-                width={300} height={300}
-            />
+            <div style={{
+                position: "relative"
+            }}>
+                <span style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0
+                }}>
+                    <Tooltip title={props.status} style={{ position: "absolute", width: 36, height: 36 }}></Tooltip>
+                    <Image src={getStatusIcon(props.status)}
+                        width={36} height={36} />
+                </span>
+                <Image
+                    className="m-auto"
+                    src={`/images/${props.icon}.png`}
+                    width={300} height={300}
+                />
+            </div>
             <div className="rounded-md
                 uppercase cursor-pointer h-16
                 flex flex-col justify-center"
@@ -149,10 +160,10 @@ function ProductSectionItem(props: ProductionSectionData) {
                     toggleHover(false)
                 }}
                 onClick={onShowDescription}>
-                <span className="text-lg">{props.name}</span>
+                <span className="text-lg font-black" >{props.name}</span>
             </div>
 
-            <h6 className="uppercase mt-4" style={getStatusColor(props.status)}>{props.status}</h6>
+
             <Modal centered show={showDescription} onHide={() => setShowDescription(false)} dialogClassName="deverse-dialog">
                 {/* <Modal.Header closeButton>
                     <Modal.Title>{props.name}</Modal.Title>
@@ -161,7 +172,7 @@ function ProductSectionItem(props: ProductionSectionData) {
                     style={{
                         backgroundColor: "rgb(97 198 208)",
                         backgroundImage: "linear-gradient(to bottom, rgb(97 198 208) ,rgb(64 175 217))",
-                        
+
                     }}>
                     <span>{props.description}</span>
                 </Modal.Body>
