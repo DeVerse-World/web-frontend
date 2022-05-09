@@ -3,7 +3,7 @@ import { Carousel, Image } from "react-bootstrap";
 function renderShowcaseItem(src: String) {
   return (
     <Carousel.Item>
-      <div className="flex flex-col justify-between deverse-fade-bottom" style={{
+      <div className="flex flex-col justify-between" style={{
         background: `url('${src}')`,
         height: "100vh",
         backgroundSize: "cover",
@@ -17,14 +17,14 @@ function renderShowcaseItem(src: String) {
 
 function WelcomeSection(props) {
   return (
-    <section className="bg-black " style={{
+    <section className="" style={{
       position: "relative",
       minHeight: "500px",
       height: "100vh"
     }}>
       <Carousel interval={10000}>
         <Carousel.Item>
-          <div className="bg-[url('/images/02.png')] bg-cover bg-center h-[100vh] flex flex-col justify-between deverse-fade-bottom">
+          <div className="bg-[url('/images/02.png')] bg-cover bg-center h-[100vh] flex flex-col justify-between">
             <div className=" mx-auto text-center">
               <h6 className="mt-24 text-xl font-bold deverse-gradient-text" >WELCOME TO DEVERSE</h6>
               <h1 className="mt-4 deverse-title uppercase deverse-gradient-text ">A Sandbox (De)centralized Meta(Verse)</h1>

@@ -36,8 +36,9 @@ function Home(props) {
   return (
     <>
       <HomeNavbar />
-      <WelcomeSection />
+      
       <div className='deverse-background'>
+      <WelcomeSection />
         <IntroSection />
         <HighlightFeatureSection />
         <ProductSection />
