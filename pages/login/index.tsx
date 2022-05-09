@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import StorageService from "../../data/services/storage_service";
 import HomeNavbar from "../../components/home/HomeNavbar";
 import { useMetaMask } from "metamask-react";
+import WalletService from "../../data/services/wallet_service";
 
 export default function LoginLink(props) {
     const router = useRouter();
@@ -14,7 +15,7 @@ export default function LoginLink(props) {
                 connect();
                 break;
             case 'connected':
-                //TODO: redirect or something?
+                WalletService.connectToMetamask(account);
                 break;
             default:
                 break;

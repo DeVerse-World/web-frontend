@@ -31,7 +31,7 @@ function HomeNavbar(props) {
           {/* <Nav.Link className="text-white" href="/marketplace" >Marketplace</Nav.Link> */}
           <Nav.Link className="text-white" href="https://docs.deverse.world" target="_blank">Documentation</Nav.Link>
         </Nav>
-        {/* <Nav ><AccountMenu /></Nav> */}
+         <Nav ><AccountMenu /></Nav>
       </Navbar.Collapse>
     </Navbar >
   );

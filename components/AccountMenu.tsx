@@ -47,20 +47,19 @@ function AccountMenu() {
 
   if (status == "connected") {
     element = (
-      <NavDropdown title={account.substring(0, 10)} className="deverse-gradient"
+      <NavDropdown title={account.substring(0, 5) + ".." + account.slice(-5)} className="deverse-gradient"
         id="account-dropdown"
-        show={showDropdown}
-        onMouseEnter={() => setShowDropdown(true)}
-        onMouseLeave={() => setShowDropdown(false)}
+        // show={showDropdown}
+        // onMouseEnter={() => setShowDropdown(true)}
+        // onMouseLeave={() => setShowDropdown(false)}
       >
-        <NavDropdown.Item onClick={openAccountDashboard}>Dashboard</NavDropdown.Item>
-        <NavDropdown.Item onClick={onLogout}>Logout</NavDropdown.Item>
+        {/*<NavDropdown.Item onClick={openAccountDashboard}>Dashboard</NavDropdown.Item>*/}
+        {/*<NavDropdown.Item onClick={onLogout}>Logout</NavDropdown.Item>*/}
       </NavDropdown>
     )
   }
 
   return element;
 }
-
 
 export default AccountMenu;

@@ -34,7 +34,7 @@ function ProductSection(props) {
                 icon: "product-integrity-validation",
                 name: "integrity validation",
                 status: FeatureStatus.PENDING,
-                description: " Using editor action sequence recorder and AI, we can approximately calculateinnovation score of the NFT. Along with a Prediction Market mechanism, we will provide the the best possible assessments of the NFT for end-users."
+                description: " Using editor action sequence recorder and AI, we can approximately calculate innovation score of the NFT. Along with a Prediction Market mechanism, we will provide the the best possible assessments of the NFT for end-users."
             },
             {
                 icon: "product-quest-creator-tool",

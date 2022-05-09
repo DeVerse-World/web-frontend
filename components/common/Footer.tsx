@@ -21,7 +21,7 @@ function Footer(props) {
         <div className="flex flex-row flex-wrap justify-center pt-8 px-4">
           <h1 className="pr-2">Contact us:</h1>
           <div className="flex flex-row justify-center items-center">
-            <IconButton style={{ color: "white", fontSize: "1.5rem" }} href="mailto:nam.nguyen@cosugames.com" target="_blank">
+            <IconButton style={{ color: "white", fontSize: "1.5rem" }} href="mailto:info@cosugames.com" target="_blank">
               <MailIcon fontSize="inherit" />
             </IconButton>
             <IconButton style={{ color: "white", fontSize: "2rem" }} target="_blank" href="https://t.me/DeverseWorld">
