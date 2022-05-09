@@ -21,6 +21,22 @@ export default function LoginLink(props) {
         }
     }, [status])
 
+    const getMsg = () => {
+        let text = "Authenticated";
+        switch (status) {
+            case 'notConnected':
+                text = "Click on Connect Wallet above"
+                break;
+            case 'connected':
+                text = "Authenticated"
+                break;
+            default:
+                text = "Processing...";
+                break;
+        }
+        return text;
+    }
+
     useEffect(() => {
         if ('key' in router.query) {
             StorageService.setMetamaskSessionKey(router.query.key.toString())
@@ -30,7 +46,7 @@ export default function LoginLink(props) {
         <>
             <HomeNavbar />
             <div className='deverse-background h-[90vh] text-white text-center'>
-                Click on Connect Wallet above
+                {getMsg()}
 
             </div>
         </>
