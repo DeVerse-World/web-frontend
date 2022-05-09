@@ -141,7 +141,7 @@ function ProductSectionItem(props: ProductionSectionData) {
                 }}>
                     <Tooltip title={props.status} style={{ position: "absolute", width: 36, height: 36 }}></Tooltip>
                     <Image src={getStatusIcon(props.status)}
-                        width={36} height={36} />
+                        width={44} height={44} />
                 </span>
                 <Image
                     className="m-auto"
