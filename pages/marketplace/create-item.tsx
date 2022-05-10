@@ -7,8 +7,9 @@ import MarketplaceNavbar from '../../components/MarketplaceNavbar'
 import AssetService from "../../data/services/asset_service";
 import CIDTool from 'cid-tool';
 import BaseService from "../../data/services/base_service";
-import ApiStrategy = BaseService.ApiStrategy;
 import React, { useEffect, useState } from "react";
+
+import ApiStrategy = BaseService.ApiStrategy;
 
 // @ts-ignore
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')

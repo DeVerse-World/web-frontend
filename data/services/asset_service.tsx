@@ -2,7 +2,7 @@ import {Asset} from "../model/asset";
 import BaseService from "./base_service";
 import {ethers} from "ethers";
 import {assetAddress} from "../../config";
-import AssetABI from '../../../smart-contracts/artifacts/contracts/v2/Asset.sol/Asset.json'
+import AssetABI from '../../smart-contracts/artifacts/contracts/v2/Asset.sol/Asset.json'
 import axios from 'axios'
 import Web3Modal from "web3modal";
 
