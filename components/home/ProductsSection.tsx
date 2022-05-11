@@ -7,49 +7,49 @@ function ProductSection(props) {
     const renderProductList = () => {
         const items: ProductionSectionData[] = [
             {
-                icon: "product-ad",
+                icon: "product-ad.png",
                 name: "ads",
                 status: FeatureStatus.PENDING,
                 description: "Game as an advertisement platform, utilizing a similar ads system from exisiting social media platforms to determine pricing."
             },
             {
-                icon: "product-dao",
+                icon: "product-dao.png",
                 name: "dao",
                 status: FeatureStatus.IN_PROGRESS,
                 description: "Be part of the system & vote on important decisions, dev grants, etc."
             },
             {
-                icon: "product-decentralised-graphic-sharing",
+                icon: "product-decentralised-graphic-sharing.png",
                 name: "UE5 + Graphic Sharing",
                 status: FeatureStatus.PENDING,
                 description: "With Unreal Engine 5 and Pixel Streaming, we leverage the newest game technology to provide the best experience possible and enable a decentralized marketplace where powerful machine owners can share their computing resources in return for token rewards."
             },
             {
-                icon: "product-decentralised-subworld-hosting",
+                icon: "product-decentralised-subworld-hosting.png",
                 name: "Dec subworld hosting",
                 status: FeatureStatus.IN_PROGRESS,
                 description: "Users can manage and host their interconnected verses using our in-built custom management app, expanding infinitely the decentralized metaverse."
             },
             {
-                icon: "product-integrity-validation",
+                icon: "product-integrity-validation.png",
                 name: "integrity validation",
                 status: FeatureStatus.PENDING,
                 description: " Using editor action sequence recorder and AI, we can approximately calculate innovation score of the NFT. Along with a Prediction Market mechanism, we will provide the the best possible assessments of the NFT for end-users."
             },
             {
-                icon: "product-quest-creator-tool",
+                icon: "product-quest-creator-tool.png",
                 name: "quest creator tool",
                 status: FeatureStatus.PLANNING,
                 description: "A custom editor tool that let users design their campaigns/quests. Use various existing templates or build from scratch."
             },
             {
-                icon: "product-sdk",
+                icon: "product-sdk.png",
                 name: "sdk",
                 status: FeatureStatus.IN_PROGRESS,
                 description: "Deverse SDK, powered by Unreal Engine 5, let users design & introduce skins/races/verses/gameplays/etc and mint them as NFT with ease."
             },
             {
-                icon: "product-smart-nft",
+                icon: "product-smart-nft.png",
                 name: "smart NFT",
                 status: FeatureStatus.IN_PROGRESS,
                 description: "Support non-fungible & semi-fungible tokens, enabling renting and hierarchical fee sharing structure of NFTs. We also introduce liquidity-backed insurance, where transfer fees are accumulated to provide a guaranteed buy-back scheme at minimum price of an asset, which improves the asset liquidity."
@@ -145,7 +145,7 @@ function ProductSectionItem(props: ProductionSectionData) {
                 </span>
                 <Image
                     className="m-auto"
-                    src={`/images/${props.icon}.png`}
+                    src={`/images/${props.icon}`}
                     width={300} height={300}
                 />
             </div>
