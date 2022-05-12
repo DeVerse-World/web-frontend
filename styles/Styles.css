@@ -30,7 +30,7 @@ body * {
     font-family: 'Akira Expanded', sans-serif;
 }
 
-.details-title {
+.deverse-title-secondary {
     font-weight: 700;
     font-size: 4rem;
     -webkit-background-clip: text;
@@ -43,7 +43,12 @@ body * {
 }
 
 .deverse-gradient {
+    background-color: rgb(97 198 208);
     background-image: linear-gradient(to bottom, rgb(97 198 208), rgb(64 175 217));
+}
+
+.deverse-gradient:hover {
+    background-image: linear-gradient(to bottom, rgb(127 198 208), rgb(94 175 217));
 }
 
 .deverse-gradient-text {
@@ -63,7 +68,7 @@ body * {
     .heading {
         font-size: 3rem;
     }
-    .details-title {
+    .deverse-title-secondary {
         font-size: 2.5rem;
     }
     .details {
