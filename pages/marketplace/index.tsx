@@ -1,50 +1,44 @@
-import MarketplaceNavbar from "../../components/MarketplaceNavbar";
-import {Label} from "semantic-ui-react";
-import {useEffect, useState} from "react";
-import AssetService from "../../data/services/asset_service";
+import { useEffect, useState } from "react";
 import BaseService from "../../data/services/base_service";
-import ApiStrategy = BaseService.ApiStrategy;
+import HomeNavbar from "../../components/home/HomeNavbar";
+import { Button } from "react-bootstrap";
+import MarketList from "../../components/asset/MarketList";
+import CreateNftAssetSection from "../../components/asset/CreateNftAssetSection";
+
+enum MarketplaceTab {
+    MARKET, MINT_NFT
+}
 
 export default function Marketplace() {
-    const [nfts, setNfts] = useState([])
-    const [loadingState, setLoadingState] = useState('not-loaded')
-    useEffect(() => {
-        loadNFTs()
-    }, [])
+    const [visibleTab, setVisibleTab] = useState<MarketplaceTab>(MarketplaceTab.MINT_NFT);
 
-    async function loadNFTs() {
-        const assets = await AssetService.getAll(ApiStrategy.REST)
-        setNfts(assets);
-        setLoadingState('loaded');
+    const renderTabContent = () => {
+        let content = null;
+        switch (visibleTab) {
+            case MarketplaceTab.MINT_NFT:
+                content = (<CreateNftAssetSection />)
+                break;
+
+            default:
+                content = (<MarketList />)
+                break;
+        }
+        return content;
     }
 
     return (
-        <div className="flex justify-center">
-            <MarketplaceNavbar />
-            <div className="px-4" style={{ maxWidth: '1600px' }}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-                    {
-                        nfts.map((nft, i) => (
-                            <div key={i} className="border shadow rounded-xl overflow-hidden">
-                                <img src={nft.fileUri} />
-                                <div className="p-4">
-                                    <p style={{ height: '64px' }} className="text-2xl font-semibold">{nft.name}</p>
-                                    <div style={{ height: '70px', overflow: 'hidden' }}>
-                                        <p className="text-gray-400">{nft.description}</p>
-                                    </div>
-                                    <Label as='a' color='blue'>
-                                        <Label.Detail> {nft.assetType} </Label.Detail>
-                                    </Label>
-                                </div>
-                                <div className="p-4 bg-black">
-                                    <p className="text-2xl mb-4 font-bold text-white">No Price</p>
-                                    {/*<button className="w-full bg-pink-500 text-white font-bold py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>*/}
-                                </div>
-                            </div>
-                        ))
-                    }
+        <>
+            <HomeNavbar />
+            <div className='deverse-background flex flex-column justify-center items-center'>
+                <div className="flex flex-row justify-center text-white mt-8">
+                    <h2 className="deverse-gradient rounded mx-8 p-2 cursor-pointer"
+                        onClick={() => setVisibleTab(MarketplaceTab.MARKET)}>Markets</h2>
+                    <h2 className="deverse-gradient rounded mx-8 p-2 cursor-pointer"
+                        onClick={() => setVisibleTab(MarketplaceTab.MINT_NFT)}>Mint NFT</h2>
                 </div>
+                {renderTabContent()}
             </div>
-        </div>
+        </>
+
     )
 }

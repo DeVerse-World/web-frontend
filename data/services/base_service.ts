@@ -8,6 +8,7 @@ export class BaseService {
         if (process.env.RPC_URL) {
             this.rpcEndpoint = process.env.RPC_URL
         }
+        console.log("base service rpc endpoint " + this.rpcEndpoint);
         this.provider = new ethers.providers.JsonRpcProvider(this.rpcEndpoint)
     }
 }

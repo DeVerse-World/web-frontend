@@ -2,7 +2,7 @@ import {Asset} from "../model/asset";
 import BaseService from "./base_service";
 import {ethers} from "ethers";
 import {assetAddress} from "../../config";
-import AssetABI from '../../../smart-contracts/artifacts/contracts/v2/Asset.sol/Asset.json'
+import AssetABI from '../../smart-contracts/artifacts/contracts/v2/Asset.sol/Asset.json'
 import axios from 'axios'
 import Web3Modal from "web3modal";
 
@@ -57,7 +57,7 @@ class AssetService extends BaseService {
         const signer = await provider.getSigner()
         console.log(signer);
 
-        let assetContract = new ethers.Contract("0x5FbDB2315678afecb367f032d93F642f64180aa3", AssetABI.abi, signer)
+        let assetContract = new ethers.Contract(assetAddress, AssetABI.abi, signer)
         const creator = await signer.getAddress();
         const packId = 1;
         const hash = ipfsHashString;
