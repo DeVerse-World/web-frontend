@@ -14,9 +14,7 @@ import { Button, Dropdown, DropdownButton, FormControl, InputGroup } from 'react
 // @ts-ignore
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0') //TODO: move this into service class
 
-const inputStyle = {
-
-}
+// 2dImg, race, skin, gameplay, bot
 
 export default function CreateNftAssetSection() {
     const [fileUri, setfileUri] = useState(null)
@@ -78,7 +76,7 @@ export default function CreateNftAssetSection() {
 
     return (
         <div className="flex justify-center text-white my-8">
-            <div className="flex flex-col space-y-2 min-w-[600px]">
+            <div className="flex flex-col space-y-2 min-w-[300px] w-[40vw]">
                 <InputGroup>
                     <FormControl
                         placeholder="Asset Name"
@@ -97,6 +95,7 @@ export default function CreateNftAssetSection() {
                     <FormControl
                         placeholder="Price"
                         aria-label="Price"
+                        inputMode='numeric'
                         onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
                     />
                     <InputGroup.Text className='deverse-gradient text-white'>ETH</InputGroup.Text>
@@ -104,6 +103,7 @@ export default function CreateNftAssetSection() {
                 <InputGroup>
                     <FormControl
                         placeholder="Number of supply"
+                        inputMode='numeric'
                         aria-label="Supply"
                         onChange={e => updateFormInput({ ...formInput, supply: e.target.value })}
                     />
@@ -112,21 +112,25 @@ export default function CreateNftAssetSection() {
                     <FormControl
                         placeholder="Asset Type"
                         aria-label="Asset Type"
+                        value={formInput.assetType}
                         onChange={e => updateFormInput({ ...formInput, assetType: e.target.value })}
                     />
                     <DropdownButton
-                        variant='outline-light'
-                        className='deverse-gradient'
+                        variant='outline-primary'
+                        // className='deverse-gradient'
+                        style={{
+                            backgroundImage: "linear-gradient(to bottom, rgb(97 198 208), rgb(64 175 217))"
+                        }}
                         title="Choose"
                         onSelect={(e: string) => {
                             updateFormInput({ ...formInput, assetType: e })
                         }}
                     >
-                        <Dropdown.Item eventKey="2dImg" >2D Image</Dropdown.Item>
-                        <Dropdown.Item eventKey="race">Character Race</Dropdown.Item>
-                        <Dropdown.Item eventKey="skin">Character Skin</Dropdown.Item>
-                        <Dropdown.Item eventKey="gameplay">New Gameplay mode</Dropdown.Item>
-                        <Dropdown.Item eventKey="bot">New Bot Logic</Dropdown.Item>
+                        <Dropdown.Item eventKey="2D Image" >2D Image</Dropdown.Item>
+                        <Dropdown.Item eventKey="Character Race">Character Race</Dropdown.Item>
+                        <Dropdown.Item eventKey="Character Skin">Character Skin</Dropdown.Item>
+                        <Dropdown.Item eventKey="New Gameplay mode">New Gameplay mode</Dropdown.Item>
+                        <Dropdown.Item eventKey="New Bot Logic">New Bot Logic</Dropdown.Item>
                     </DropdownButton>
                 </InputGroup>
                 <InputGroup>
@@ -136,9 +140,10 @@ export default function CreateNftAssetSection() {
                         disabled={true}
                         value={fileUri}
                     />
-                    <Button onClick={e => {
-                        uploadFileRef.current.click();
-                    }}>Choose File</Button>
+                    <Button className='deverse-gradient'
+                        onClick={e => {
+                            uploadFileRef.current.click();
+                        }}>Choose File</Button>
                 </InputGroup>
                 <input
                     ref={uploadFileRef}
