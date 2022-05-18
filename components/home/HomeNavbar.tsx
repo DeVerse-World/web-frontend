@@ -28,7 +28,7 @@ function HomeNavbar(props) {
           {/* <Nav.Link href="/#roadmap">Roadmap</Nav.Link>
           <Nav.Link href="/#token">Tokenomics</Nav.Link> */}
           {/*<Nav.Link rel="No-Refresh" href="/marketplace" >Marketplace</Nav.Link>*/}
-          <Nav.Link className="text-white" href="/marketplace" >Marketplace</Nav.Link>
+          <Nav.Link className="text-white" href="/marketplace?tab=listing" >Marketplace</Nav.Link>
           <Nav.Link className="text-white" href="https://docs.deverse.world" target="_blank">Documentation</Nav.Link>
         </Nav>
         <Nav ><AccountMenu /></Nav>

@@ -1,29 +1,49 @@
 import { useEffect, useState } from "react";
-import BaseService from "../../data/services/base_service";
 import HomeNavbar from "../../components/home/HomeNavbar";
 import { Button } from "react-bootstrap";
 import MarketList from "../../components/asset/MarketList";
 import CreateNftAssetSection from "../../components/asset/CreateNftAssetSection";
+import { MiniTabButton } from "../../components/MiniTabButton";
+import { useRouter } from "next/router";
 
 enum MarketplaceTab {
-    MARKET, MINT_NFT
+    LISTING = "listing",
+    MINT_NFT = "mint"
 }
 
 export default function Marketplace() {
-    const [visibleTab, setVisibleTab] = useState<MarketplaceTab>(MarketplaceTab.MINT_NFT);
+    const [visibleTab, setVisibleTab] = useState<MarketplaceTab>(MarketplaceTab.LISTING);
+    const [fileUri, setFileUri] = useState(null);
+    const router = useRouter();
 
-    const renderTabContent = () => {
-        let content = null;
-        switch (visibleTab) {
-            case MarketplaceTab.MINT_NFT:
-                content = (<CreateNftAssetSection />)
-                break;
-
-            default:
-                content = (<MarketList />)
-                break;
+    useEffect(() => {
+        if (!router.isReady) return;
+        let query = router.query;
+        if (!query['tab']) {
+            onSelectTab(MarketplaceTab.LISTING)
+        } else if (query['tab'] == MarketplaceTab.MINT_NFT) {
+            setVisibleTab(MarketplaceTab.MINT_NFT)
         }
-        return content;
+        if (query['fileUri']) {
+            setFileUri(`https://ipfs.infura.io/ipfs/${query['fileUri']}`);
+        }
+    }, [router.isReady]);
+
+    // useEffect(() => {
+    // }, [visibleTab])
+
+    const onSelectTab = (tab: MarketplaceTab) => {
+        router.push({
+            pathname: router.pathname,
+            query: {
+                tab: tab
+            }
+        }, undefined, { shallow: true });
+        setVisibleTab(tab);
+    }
+
+    const isTabSelected = (tab: MarketplaceTab) => {
+        return visibleTab == tab;
     }
 
     return (
@@ -31,12 +51,21 @@ export default function Marketplace() {
             <HomeNavbar />
             <div className='deverse-background flex flex-column justify-center items-center'>
                 <div className="flex flex-row justify-center text-white mt-8">
-                    <h2 className="deverse-gradient rounded mx-8 p-2 cursor-pointer"
-                        onClick={() => setVisibleTab(MarketplaceTab.MARKET)}>Markets</h2>
-                    <h2 className="deverse-gradient rounded mx-8 p-2 cursor-pointer"
-                        onClick={() => setVisibleTab(MarketplaceTab.MINT_NFT)}>Mint NFT</h2>
+                    <MiniTabButton title="Listing"
+                        isSelected={isTabSelected(MarketplaceTab.LISTING)}
+                        onClick={() => onSelectTab(MarketplaceTab.LISTING)} />
+                    <MiniTabButton title="Mint NFT"
+                        isSelected={isTabSelected(MarketplaceTab.MINT_NFT)}
+                        onClick={() => onSelectTab(MarketplaceTab.MINT_NFT)} />
                 </div>
-                {renderTabContent()}
+                <MarketList isSelected={isTabSelected(MarketplaceTab.LISTING)} />
+                <CreateNftAssetSection
+                    fileUri={fileUri}
+                    isSelected={isTabSelected(MarketplaceTab.MINT_NFT)}
+                    onNftCreated={() => {
+                        onSelectTab(MarketplaceTab.LISTING)
+                    }}
+                />
             </div>
         </>
 

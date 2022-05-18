@@ -1,168 +1,265 @@
-import { ethers } from 'ethers'
-import { useRouter } from 'next/router'
-import Web3Modal from 'web3modal'
-import { useAlert } from 'react-alert'
-import MarketplaceMenu from './MarketplaceMenu'
 import AssetService from "../../data/services/asset_service";
-import CIDTool from 'cid-tool';
-import BaseService from "../../data/services/base_service";
-import ApiStrategy = BaseService.ApiStrategy;
-import React, { useEffect, useRef, useState } from "react";
-import { Button, Dropdown, DropdownButton, FormControl, InputGroup } from 'react-bootstrap'
-import Ipfs_service from "../../data/services/ipfs_service";
+import React, { HTMLAttributes, useEffect, useRef, useState } from "react";
+import { Button, ButtonGroup, Dropdown, DropdownButton, Form, FormControl, Image, InputGroup, Modal, ProgressBar } from 'react-bootstrap'
+import { NFTAsset } from "../../data/model/nft_asset";
+import { AssetType } from '../../data/enum/asset_type';
 
 // 2dImg, race, skin, gameplay, bot
 
-export default function CreateNftAssetSection() {
-    const [fileUri, setfileUri] = useState(null)
-    const [fileName, setFileName] = useState(null)
-    const [formInput, updateFormInput] = useState({ price: '', name: '', description: '', assetType: '', supply: '1' })
-    const uploadFileRef = useRef(null);
-    const router = useRouter();
-    useEffect(() => {
-        if ('fileUri' in router.query) {
-            setfileUri(`https://ipfs.infura.io/ipfs/${router.query['fileUri']}`);
-        }
-    })
+type CreateNftAssetSectionProps = {
+    isSelected?: boolean;
+    fileUri?: string;
+    onNftCreated: () => void;
+}
 
-    const alert = useAlert()
+export default function CreateNftAssetSection(props: CreateNftAssetSectionProps) {
+    const [assetName, setAssetName] = useState('');
+    const [assetDescription, setAssetDescription] = useState('');
+    const [assetType, setAssetType] = useState<AssetType>(undefined);
+    const [assetSupply, setAssetSupply] = useState<number>(0);
+    const [uploadProgress, setUploadProgress] = useState(-1);
+    const [fileAssetUri, setfileAssetUri] = useState(props.fileUri);
+    const [file2dUri, setfile2dUri] = useState("")
+    const [file3dUri, setfile3dUri] = useState("")
+    const [assetOnlinePath, setAssetOnlinePath] = useState('');
+    const [formValidated, setFormValidated] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const uploadFileAssetRef = useRef(null);
+    const uploadFile2dRef = useRef(null);
+    const uploadFile3dRef = useRef(null);
+
+    useEffect(() => {
+        if (uploadProgress >= 100)
+            setUploadProgress(-1);
+    }, [uploadProgress])
+
+    const setAssetTypeAndProcess = (assetType) => {
+        if (assetType == AssetType.IMAGE_2D) {
+
+        }
+        setAssetType(assetType)
+    }
 
     const onUploadAsset = async (e) => {
-        const file = e.target.files[0]
+        const file: File = e.target.files[0];
         try {
-            const added = await Ipfs_service._client.add(
-                file,
-                {
-                    progress: (prog) => console.log(`received: ${prog}`)
-                }
-            )
-            const url = `https://ipfs.infura.io/ipfs/${added.path}`
-            setfileUri(url)
-            setFileName(file.name)
+            setUploadProgress(0);
+            let uploadPath = await AssetService.uploadAsset(file, setUploadProgress);
+            switch(e.target.name) {
+                case "2dUpload":
+                    setfile2dUri(uploadPath);
+                    break;
+                case "3dUpload":
+                    setfile3dUri(uploadPath);
+                    break;
+                case "assetUpload":
+                    setfileAssetUri(uploadPath);
+                    break;
+                default:
+                    break;
+            }
+        } catch (error) {
+            console.log('Error uploading file: ', error);
+            setUploadProgress(-1);
+        }
+    }
+
+    const createItem = async (event) => {
+        setShowModal(true);
+        setFormValidated(true);
+        event.preventDefault();
+        if (!(assetName && assetType && assetSupply > 0 && fileAssetUri)) {
+            return;
+        }
+        let data: NFTAsset = {
+            name: assetName,
+            description: assetDescription,
+            supply: assetSupply,
+            assetType: assetType,
+            fileAssetUri: fileAssetUri,
+            file2dUri: file2dUri,
+            file3dUri: file3dUri,
+        };
+        try {
+            const addedPath = await AssetService.createAsset(data);
+            setAssetOnlinePath(addedPath);
+            // console.log(`file ipfs ${addedPath}`)
         } catch (error) {
             console.log('Error uploading file: ', error)
         }
     }
 
-    // Qm: CIDv0
-    // bafy: CIDv1
-    // f017...: bytes32 or base16 encoding
-    // https://stackoverflow.com/questions/66927626/how-to-store-ipfs-hash-on-ethereum-blockchain-using-smart-contracts
-    // # https://github.com/multiformats/js-cid-tool
-    // const added = await client.add(data, { cidVersion: 1 })
-    const createItem = async () => {
-        const { name, description, price, assetType, supply } = formInput
-        if (!name || !description || !price || !assetType || !fileUri || !supply) return
-        /* first, upload to IPFS */
-        const data = JSON.stringify({
-            name, description, assetType, supply, fileUri: fileUri, fileName: fileName
-        })
-        try {
-            const added = await Ipfs_service._client.add(data)
-            const url = `https://ipfs.infura.io/ipfs/${added.path}`
-            let ipfsHashString = '0x' + CIDTool.format(CIDTool.base32(added.path), { base: 'base16' }).toString().slice(9)
-            alert.show(`file ipfs ${url}`)
-            /* after file is uploaded to IPFS, pass the URL to save it on Polygon */
-            /* next, create the item */
-            await AssetService.mint(ApiStrategy.REST, ipfsHashString, supply)
-            alert.show(`Successfully minted`)
-            // router.push('/marketplace')
-        } catch (error) {
-            console.log('Error uploading file: ', error)
-        }
+    const resetForm = () => {
+        setShowModal(false);
+        setFormValidated(false);
+        setAssetName('');
+        setAssetDescription('');
+        setAssetType(null);
+        setAssetSupply(0);
+        setfile2dUri('');
+        setfile3dUri('');
+        setAssetOnlinePath('');
+    }
+
+    const renderUploadProgress = () => {
+        if (uploadProgress < 0 || uploadProgress > 100)
+            return null;
+        return (<ProgressBar className='w-[80%]' now={uploadProgress} label={`${uploadProgress}%`} />)
     }
 
     // @ts-ignore
     // @ts-ignore
     // @ts-ignore
-    return (
-        <div className="flex justify-center text-white my-8">
-            <div className="flex flex-col space-y-2 min-w-[300px] w-[40vw]">
+    // @ts-ignore
+    // @ts-ignore
+    return !props.isSelected ? null : (
+        <div className="flex justify-center">
+            <Form className="flex flex-col items-center text-white my-8 space-y-2 min-w-[300px] w-[40vw]"
+                validated={formValidated}
+                onSubmit={createItem}>
                 <InputGroup>
-                    <FormControl
-                        placeholder="Asset Name"
+                    <FormControl required={true}
+                        placeholder="(*)Asset Name"
                         aria-label="Asset Name"
-                        onChange={e => updateFormInput({ ...formInput, name: e.target.value })}
+                        value={assetName}
+                        onChange={e => setAssetName(e.target.value)}
                     />
                 </InputGroup>
                 <InputGroup>
                     <FormControl className='h-[100px]'
                         placeholder="Description"
                         aria-label="Description"
-                        onChange={e => updateFormInput({ ...formInput, description: e.target.value })}
+                        value={assetDescription}
+                        onChange={e => setAssetDescription(e.target.value)}
                     />
                 </InputGroup>
                 <InputGroup>
-                    <FormControl
-                        placeholder="Price"
-                        aria-label="Price"
-                        inputMode='numeric'
-                        onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
-                    />
-                    <InputGroup.Text className='deverse-gradient text-white'>ETH</InputGroup.Text>
-                </InputGroup>
-                <InputGroup>
-                    <FormControl
-                        placeholder="Number of supply"
+                    <FormControl required={true}
+                        type='number'
+                        placeholder="(*)Number of supply (between 1 and 999)"
                         inputMode='numeric'
                         aria-label="Supply"
-                        onChange={e => updateFormInput({ ...formInput, supply: e.target.value })}
+                        value={assetSupply != 0 ? assetSupply : ''}
+                        onChange={e => setAssetSupply(e.target.value)}
                     />
                 </InputGroup>
                 <InputGroup>
-                    <FormControl
-                        placeholder="Asset Type"
+                    <FormControl required={true}
+                        placeholder="(*)Asset Type"
                         aria-label="Asset Type"
-                        value={formInput.assetType}
-                        onChange={e => updateFormInput({ ...formInput, assetType: e.target.value })}
+                        contentEditable={false}
+                        disabled={true}
+                        value={assetType ? assetType : ''}
                     />
-                    <DropdownButton
-                        variant='outline-primary'
-                        // className='deverse-gradient'
-                        style={{
+                    <Dropdown as={ButtonGroup}>
+                        <Dropdown.Toggle id="dropdown-custom-2" style={{
                             backgroundImage: "linear-gradient(to bottom, rgb(97 198 208), rgb(64 175 217))"
-                        }}
-                        title="Choose"
-                        onSelect={(e: string) => {
-                            updateFormInput({ ...formInput, assetType: e })
-                        }}
-                    >
-                        <Dropdown.Item eventKey="2D Image" >2D Image</Dropdown.Item>
-                        <Dropdown.Item eventKey="Character Race">Character Race</Dropdown.Item>
-                        <Dropdown.Item eventKey="Character Skin">Character Skin</Dropdown.Item>
-                        <Dropdown.Item eventKey="New Gameplay mode">New Gameplay mode</Dropdown.Item>
-                        <Dropdown.Item eventKey="New Bot Logic">New Bot Logic</Dropdown.Item>
-                    </DropdownButton>
+                        }} />
+                        <Dropdown.Menu className="super-colors">
+                            <Dropdown.Item onClick={(e) => setAssetType(AssetType.IMAGE_2D)}>2D Image</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => setAssetType(AssetType.RACE)}>Character Race</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => setAssetType(AssetType.SKIN)}>Character Skin</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => setAssetType(AssetType.GAME_MODE)}>New Gameplay mode</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => setAssetType(AssetType.BOT_LOGIC)}>New Bot Logic</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </InputGroup>
                 <InputGroup>
                     <FormControl
-                        placeholder="Asset URL"
-                        aria-label="Asset URL"
+                        placeholder="(*) Asset URL (e.g .png/ .pak)"
+                        aria-label="Asset URL (e.g .png/ .pak)"
                         disabled={true}
-                        value={fileUri}
+                        value={fileAssetUri || ""}
                     />
                     <Button className='deverse-gradient'
                         onClick={e => {
-                            uploadFileRef.current.click();
+                            uploadFileAssetRef.current.click();
                         }}>Choose File</Button>
                 </InputGroup>
+                { (assetType != AssetType.IMAGE_2D) && <InputGroup>
+                    <FormControl
+                        placeholder="Asset 2D URL (e.g .png)"
+                        aria-label="Asset 2D URL (e.g .png)"
+                        disabled={true}
+                        value={file2dUri || ""}
+                    />
+                    <Button className='deverse-gradient'
+                            onClick={e => {
+                                uploadFile2dRef.current.click();
+                            }}>Choose File</Button>
+                </InputGroup> }
+                { (assetType != AssetType.IMAGE_2D) && <InputGroup>
+                    <FormControl
+                        placeholder="Asset 3D URL (e.g .gltf)"
+                        aria-label="Asset 3D URL (e.g .gltf)"
+                        disabled={true}
+                        value={file3dUri || ""}
+                    />
+                    <Button className='deverse-gradient'
+                            onClick={e => {
+                                uploadFile3dRef.current.click();
+                            }}>Choose File</Button>
+                </InputGroup> }
+                {renderUploadProgress()}
                 <input
-                    ref={uploadFileRef}
+                    ref={uploadFileAssetRef}
                     hidden={true}
                     type="file"
-                    name="Asset"
+                    name="assetUpload"
                     onChange={onUploadAsset}
                 />
                 {
-                    fileUri && (
-                        <img className="rounded mt-4" width="350" src={fileUri} />
+                    (assetType == AssetType.IMAGE_2D) && fileAssetUri && (
+                        <Image className="rounded mt-4 max-w-[80vw]" width={250} height={250} src={fileAssetUri} />
                     )
                 }
-                <button className="font-bold mx-auto deverse-gradient rounded-[16px] p-4"
+                <input
+                    ref={uploadFile2dRef}
+                    hidden={true}
+                    type="file"
+                    name="2dUpload"
+                    onChange={onUploadAsset}
+                />
+                {
+                    (assetType != AssetType.IMAGE_2D) && file2dUri && (
+                        <Image className="rounded mt-4 max-w-[80vw]" width={250} height={250} src={file2dUri} />
+                    )
+                }
+                <input
+                    ref={uploadFile3dRef}
+                    hidden={true}
+                    type="file"
+                    name="3dUpload"
+                    onChange={onUploadAsset}
+                />
+                {
+                }
+                <Button type="submit" className="font-bold deverse-gradient rounded-[16px] py-3 px-8"
                     onClick={createItem} >
                     Create Digital Asset
-                </button>
-            </div>
+                </Button>
+            </Form>
+            <Modal centered show={showModal}
+                onHide={() => {
+                    resetForm();
+                    props.onNftCreated();
+                }}
+                contentClassName="deverse-gradient" dialogClassName="deverse-dialog">
+                <Modal.Body className="text-white text-lg">
+                    <span>Mint successfully. <a href={assetOnlinePath}>{assetOnlinePath}</a></span>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button style={{
+                        background: "linear-gradient(to bottom, rgb(65, 117, 230), rgb(18, 54, 173))",
+                        width: 80
+                    }} onClick={() => {
+                        resetForm();
+                        props.onNftCreated();
+                    }} >
+                        Ok
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

@@ -1,13 +1,20 @@
-import {Asset} from "../model/asset";
 import BaseService from "./base_service";
-import {ethers} from "ethers";
-import {assetAddress} from "../../config";
+import { Contract, ethers } from "ethers";
+import { assetAddress } from "../../config";
+import { create as ipfsHttpClient } from 'ipfs-http-client'
 import AssetABI from '../../smart-contracts/artifacts/contracts/v2/Asset.sol/Asset.json'
 import axios from 'axios'
 import Web3Modal from "web3modal";
+import { NFTAsset } from "../model/nft_asset";
+import CIDTool from 'cid-tool';
+import ApiStrategy = BaseService.ApiStrategy;
 
 class AssetService extends BaseService {
-    assetContract = null
+    _uriPrefix = 'https://ipfs.infura.io/ipfs/';
+    // @ts-ignore
+    _ipfsClient = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
+
+    assetContract: Contract = null
     transferSingleEventFilter = null
 
     constructor() {
@@ -16,24 +23,56 @@ class AssetService extends BaseService {
         this.transferSingleEventFilter = this.assetContract.filters.TransferSingle()
     }
 
-    async getAll(apiStrategy: BaseService.ApiStrategy): Promise<Asset[]> {
-        let data: Asset[] = [];
+
+    async uploadAsset(file: File, onProgress: (number) => void): Promise<string> {
+        let res = await this._ipfsClient.add(
+            file,
+            {
+                progress: (progress, path) => { onProgress(Math.round((progress / file.size) * 100)) }
+            }
+        )
+        return `${this._uriPrefix}${res.path}`;
+    }
+
+    // Qm: CIDv0
+    // bafy: CIDv1
+    // f017...: bytes32 or base16 encoding
+    // https://stackoverflow.com/questions/66927626/how-to-store-ipfs-hash-on-ethereum-blockchain-using-smart-contracts
+    // # https://github.com/multiformats/js-cid-tool
+    // const added = await client.add(data, { cidVersion: 1 })
+    async createAsset(asset: NFTAsset): Promise<string> {
+        const data = JSON.stringify(asset);
+        let res = await this._ipfsClient.add(data);
+        // https://ipfs.infura.io/ipfs/QmYMaUm2nRb5xPYSSuWmEJjP4zS5zkPqQng2Pt9oNEjUdH
+        /* after file is uploaded to IPFS, pass the URL to save it on Polygon */
+        const url = `${this._uriPrefix}${res.path}`;
+        console.log(url)
+        let ipfsHashString = '0x' + CIDTool.format(CIDTool.base32(res.path), { base: 'base16' }).toString().slice(9);
+        /* next, create the item */
+        this.mint(ApiStrategy.REST, ipfsHashString, asset.supply);
+        return res.path;
+    }
+
+    async getAll(apiStrategy: BaseService.ApiStrategy): Promise<NFTAsset[]> {
+        let data: NFTAsset[] = [];
 
         switch (apiStrategy) {
             case BaseService.ApiStrategy.REST:
                 console.log("getAll");
                 let id = 1
                 let transferEvents = await this.assetContract.queryFilter(this.transferSingleEventFilter)
-                for (let i = 0; i < transferEvents.length; i ++) {
+                for (let i = 0; i < transferEvents.length; i++) {
                     let [_, from, to, id, supply] = transferEvents[i].args;
                     if (from == 0) { // from mint event
                         const tokenUri = await this.assetContract.uri2(id)
                         const tokenFullUri = `https://bafybei${tokenUri}.ipfs.infura-ipfs.io`
                         const meta = await axios.get(tokenFullUri)
+                        console.log(meta.data);
                         data.push({
                             tokenUri: tokenFullUri,
                             supply: meta.data.supply, name: meta.data.name, description: meta.data.description,
-                            assetType: meta.data.assetType, fileUri: meta.data.fileUrl,
+                            assetType: meta.data.assetType, fileAssetUri: meta.data.fileAssetUri,
+                            file2dUri: meta.data.file2dUri, file3dUri: meta.data.file3dUri,
                         })
                     }
                 }
@@ -45,17 +84,14 @@ class AssetService extends BaseService {
                 throw new Error("Unrecognized api ")
                 break;
         }
-        console.log(data);
         return data;
     }
 
     async mint(apiStrategy: BaseService.ApiStrategy, ipfsHashString, supply) {
-
         const web3Modal = new Web3Modal()
         const connection = await web3Modal.connect()
         const provider = new ethers.providers.Web3Provider(connection)
         const signer = await provider.getSigner()
-        console.log(signer);
 
         let assetContract = new ethers.Contract(assetAddress, AssetABI.abi, signer)
         const creator = await signer.getAddress();
@@ -64,7 +100,6 @@ class AssetService extends BaseService {
         const rarity = 0;
         const owner = await signer.getAddress();
         const data = '0x';
-        console.log("HERE");
         switch (apiStrategy) {
             case BaseService.ApiStrategy.REST:
                 let transaction = await assetContract.mint(creator, packId, hash, supply, rarity, owner, data, 0);

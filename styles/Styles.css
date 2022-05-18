@@ -25,6 +25,14 @@ body * {
     border-radius: 12px !important;
 }
 
+.modal-header {
+    border-bottom: 0 none;
+}
+
+.modal-footer {
+    border-top: 0 none;
+}
+
 .deverse-title {
     font-size: 3.5rem;
     font-family: 'Akira Expanded', sans-serif;
