@@ -4,9 +4,9 @@ export type NFTAsset = {
     tokenUri?: string;
     supply: number;
     name: string;
-    description: string;
+    description?: string;
     fileAssetUri: string;
-    file2dUri: string;
-    file3dUri: string;
+    file2dUri?: string;
+    file3dUri?: string;
     assetType: AssetType;
 }

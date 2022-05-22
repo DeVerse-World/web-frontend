@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import HomeNavbar from "../../components/home/HomeNavbar";
 import { Button } from "react-bootstrap";
-import MarketList from "../../components/asset/MarketList";
+
 import CreateNftAssetSection from "../../components/asset/CreateNftAssetSection";
 import { MiniTabButton } from "../../components/MiniTabButton";
 import { useRouter } from "next/router";
+import { MarketList } from "../../components/asset/MarketList";
 
 enum MarketplaceTab {
     LISTING = "listing",
@@ -14,6 +15,7 @@ enum MarketplaceTab {
 export default function Marketplace() {
     const [visibleTab, setVisibleTab] = useState<MarketplaceTab>(MarketplaceTab.LISTING);
     const [fileUri, setFileUri] = useState(null);
+    const marketListingRef = useRef();
     const router = useRouter();
 
     useEffect(() => {
@@ -58,12 +60,14 @@ export default function Marketplace() {
                         isSelected={isTabSelected(MarketplaceTab.MINT_NFT)}
                         onClick={() => onSelectTab(MarketplaceTab.MINT_NFT)} />
                 </div>
-                <MarketList isSelected={isTabSelected(MarketplaceTab.LISTING)} />
+                <MarketList ref={marketListingRef}
+                 isSelected={isTabSelected(MarketplaceTab.LISTING)} />
                 <CreateNftAssetSection
                     fileUri={fileUri}
                     isSelected={isTabSelected(MarketplaceTab.MINT_NFT)}
                     onNftCreated={(fileUri: string) => {
-                        onSelectTab(MarketplaceTab.LISTING)
+                        marketListingRef.current?.loadData(fileUri);
+                        onSelectTab(MarketplaceTab.LISTING);
                     }}
                 />
             </div>

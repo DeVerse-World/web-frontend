@@ -1,8 +1,9 @@
 import AssetService from "../../data/services/asset_service";
-import React, { HTMLAttributes, useEffect, useRef, useState } from "react";
+import React, { HTMLAttributes, useContext, useEffect, useRef, useState } from "react";
 import { Button, ButtonGroup, Dropdown, DropdownButton, Form, FormControl, Image, InputGroup, Modal, ProgressBar } from 'react-bootstrap'
 import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from '../../data/enum/asset_type';
+import { AppContext, ViewState } from "../contexts/app_context";
 
 // 2dImg, race, skin, gameplay, bot
 
@@ -13,6 +14,8 @@ type CreateNftAssetSectionProps = {
 }
 
 export default function CreateNftAssetSection(props: CreateNftAssetSectionProps) {
+    const { setViewState } = useContext(AppContext);
+
     const [assetName, setAssetName] = useState('');
     const [assetDescription, setAssetDescription] = useState('');
     const [assetType, setAssetType] = useState<AssetType>(undefined);
@@ -32,13 +35,6 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
         if (uploadProgress >= 100)
             setUploadProgress(-1);
     }, [uploadProgress])
-
-    const setAssetTypeAndProcess = (assetType) => {
-        if (assetType == AssetType.IMAGE_2D) {
-
-        }
-        setAssetType(assetType)
-    }
 
     const onUploadAsset = async (e) => {
         const file: File = e.target.files[0];
@@ -65,7 +61,6 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
     }
 
     const createItem = async (event) => {
-        setShowModal(true);
         setFormValidated(true);
         event.preventDefault();
         if (!(assetName && assetType && assetSupply > 0 && fileAssetUri)) {
@@ -81,11 +76,14 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
             file3dUri: file3dUri,
         };
         try {
+            setViewState(ViewState.LOADING);
             const addedPath = await AssetService.createAsset(data);
             setAssetOnlinePath(addedPath);
-            // console.log(`file ipfs ${addedPath}`)
+            setShowModal(true);
+            setViewState(ViewState.SUCCESS);
         } catch (error) {
             console.log('Error uploading file: ', error)
+            setViewState(ViewState.ERROR);
         }
     }
 
@@ -96,6 +94,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
         setAssetDescription('');
         setAssetType(null);
         setAssetSupply(0);
+        setfileAssetUri('');
         setfile2dUri('');
         setfile3dUri('');
         setAssetOnlinePath('');
@@ -112,14 +111,14 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
     // @ts-ignore
     // @ts-ignore
     // @ts-ignore
-    return !props.isSelected ? null : (
+    return props.isSelected && (
         <div className="flex justify-center">
             <Form className="flex flex-col items-center text-white my-8 space-y-2 min-w-[300px] w-[40vw]"
                 validated={formValidated}
                 onSubmit={createItem}>
                 <InputGroup>
                     <FormControl required={true}
-                        placeholder="(*)Asset Name"
+                        placeholder="Asset Name (*)"
                         aria-label="Asset Name"
                         value={assetName}
                         onChange={e => setAssetName(e.target.value)}
@@ -136,7 +135,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                 <InputGroup>
                     <FormControl required={true}
                         type='number'
-                        placeholder="(*)Number of supply (between 1 and 999)"
+                        placeholder="Number of supply (between 1 and 999) (*)"
                         inputMode='numeric'
                         aria-label="Supply"
                         value={assetSupply != 0 ? assetSupply : ''}
@@ -145,10 +144,9 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                 </InputGroup>
                 <InputGroup>
                     <FormControl required={true}
-                        placeholder="(*)Asset Type"
+                        placeholder="Asset Type (*)"
                         aria-label="Asset Type"
                         contentEditable={false}
-                        disabled={true}
                         value={assetType ? assetType : ''}
                     />
                     <Dropdown as={ButtonGroup}>
@@ -166,9 +164,10 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                 </InputGroup>
                 <InputGroup>
                     <FormControl
-                        placeholder="(*) Asset URL (e.g .png/ .pak)"
+                        required
+                        placeholder="Asset URL (e.g .png/ .pak) (*)"
                         aria-label="Asset URL (e.g .png/ .pak)"
-                        disabled={true}
+                        contentEditable={false}
                         value={fileAssetUri || ""}
                     />
                     <Button className='deverse-gradient'

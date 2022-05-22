@@ -53,7 +53,7 @@ class AssetService extends BaseService {
         console.log(url)
         let ipfsHashString = '0x' + CIDTool.format(CIDTool.base32(res.path), { base: 'base16' }).toString().slice(9);
         /* next, create the item */
-        this.mint(ApiStrategy.REST, ipfsHashString, asset.supply);
+        await this.mint(ApiStrategy.REST, ipfsHashString, asset.supply);
         return res.path;
     }
 
