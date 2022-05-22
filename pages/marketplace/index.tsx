@@ -62,7 +62,7 @@ export default function Marketplace() {
                 <CreateNftAssetSection
                     fileUri={fileUri}
                     isSelected={isTabSelected(MarketplaceTab.MINT_NFT)}
-                    onNftCreated={() => {
+                    onNftCreated={(fileUri: string) => {
                         onSelectTab(MarketplaceTab.LISTING)
                     }}
                 />

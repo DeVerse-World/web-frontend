@@ -9,7 +9,7 @@ import { AssetType } from '../../data/enum/asset_type';
 type CreateNftAssetSectionProps = {
     isSelected?: boolean;
     fileUri?: string;
-    onNftCreated: () => void;
+    onNftCreated: (assetUri: string) => void;
 }
 
 export default function CreateNftAssetSection(props: CreateNftAssetSectionProps) {
@@ -45,7 +45,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
         try {
             setUploadProgress(0);
             let uploadPath = await AssetService.uploadAsset(file, setUploadProgress);
-            switch(e.target.name) {
+            switch (e.target.name) {
                 case "2dUpload":
                     setfile2dUri(uploadPath);
                     break;
@@ -176,7 +176,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                             uploadFileAssetRef.current.click();
                         }}>Choose File</Button>
                 </InputGroup>
-                { (assetType != AssetType.IMAGE_2D) && <InputGroup>
+                {(assetType != AssetType.IMAGE_2D) && <InputGroup>
                     <FormControl
                         placeholder="Asset 2D URL (e.g .png)"
                         aria-label="Asset 2D URL (e.g .png)"
@@ -184,11 +184,11 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                         value={file2dUri || ""}
                     />
                     <Button className='deverse-gradient'
-                            onClick={e => {
-                                uploadFile2dRef.current.click();
-                            }}>Choose File</Button>
-                </InputGroup> }
-                { (assetType != AssetType.IMAGE_2D) && <InputGroup>
+                        onClick={e => {
+                            uploadFile2dRef.current.click();
+                        }}>Choose File</Button>
+                </InputGroup>}
+                {(assetType != AssetType.IMAGE_2D) && <InputGroup>
                     <FormControl
                         placeholder="Asset 3D URL (e.g .gltf)"
                         aria-label="Asset 3D URL (e.g .gltf)"
@@ -196,13 +196,14 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                         value={file3dUri || ""}
                     />
                     <Button className='deverse-gradient'
-                            onClick={e => {
-                                uploadFile3dRef.current.click();
-                            }}>Choose File</Button>
-                </InputGroup> }
+                        onClick={e => {
+                            uploadFile3dRef.current.click();
+                        }}>Choose File</Button>
+                </InputGroup>}
                 {renderUploadProgress()}
                 <input
                     ref={uploadFileAssetRef}
+                    accept=".png,.pak,.jpg,.jpeg"
                     hidden={true}
                     type="file"
                     name="assetUpload"
@@ -216,6 +217,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                 <input
                     ref={uploadFile2dRef}
                     hidden={true}
+                    accept=".png,.jpg,.jpeg"
                     type="file"
                     name="2dUpload"
                     onChange={onUploadAsset}
@@ -228,6 +230,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                 <input
                     ref={uploadFile3dRef}
                     hidden={true}
+                    accept=".gltf"
                     type="file"
                     name="3dUpload"
                     onChange={onUploadAsset}
@@ -241,20 +244,22 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
             </Form>
             <Modal centered show={showModal}
                 onHide={() => {
+                    props.onNftCreated(assetOnlinePath);
                     resetForm();
-                    props.onNftCreated();
+
                 }}
                 contentClassName="deverse-gradient" dialogClassName="deverse-dialog">
-                <Modal.Body className="text-white text-lg">
-                    <span>Mint successfully. <a href={assetOnlinePath}>{assetOnlinePath}</a></span>
+                <Modal.Body className="text-white text-lg break-words">
+                    Mint successfully!<br />
+                    Asset generated at: <a target="_blank" href={AssetService.getFullAssetUrl(assetOnlinePath)}>{AssetService.getFullAssetUrl(assetOnlinePath)}</a>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button style={{
                         background: "linear-gradient(to bottom, rgb(65, 117, 230), rgb(18, 54, 173))",
                         width: 80
                     }} onClick={() => {
+                        props.onNftCreated(assetOnlinePath);
                         resetForm();
-                        props.onNftCreated();
                     }} >
                         Ok
                     </Button>

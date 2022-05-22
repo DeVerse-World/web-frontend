@@ -1,15 +1,45 @@
-import {useContext, useEffect, useState} from "react"
-import {Label} from 'semantic-ui-react'
-
+import { useContext, useEffect, useState } from "react"
+import { Label } from 'semantic-ui-react'
 import AssetService from "../../data/services/asset_service";
 import BaseService from "../../data/services/base_service";
-import {AppContext, ViewState} from "../contexts/app_context";
-import {NFTAsset} from "../../data/model/nft_asset";
-import {AssetType} from "../../data/enum/asset_type";
+import { AppContext, ViewState } from "../contexts/app_context";
+import { NFTAsset } from "../../data/model/nft_asset";
+import { AssetType } from "../../data/enum/asset_type";
 import ApiStrategy = BaseService.ApiStrategy;
+import { Image } from "react-bootstrap";
 
 type MarketListProps = {
     isSelected?: boolean;
+
+}
+
+function NftItem(nft: NFTAsset, index: number) {
+
+    const get2dImage = (nft: NFTAsset) => {
+        if (nft.assetType == AssetType.IMAGE_2D) {
+            return nft.fileAssetUri
+        }
+        return nft.file2dUri
+    }
+
+    return (
+        <div key={index} className="border shadow rounded-xl text-white overflow-hidden">
+            <div className="w-[250px] h-[250px] flex justify-center">
+                <Image className="m-auto" src={get2dImage(nft)} />
+            </div>
+
+            <div className="p-4">
+                <p className="text-2xl font-semibold ">{nft.name}</p>
+                <div>
+                    <p className="text-gray-400">{nft.description}</p>
+                </div>
+                <Label color='black'>
+                    <Label.Detail>{nft.assetType}</Label.Detail>
+                    <Label.Detail><a href={nft.file3dUri} target="_blank">Download</a></Label.Detail>
+                </Label>
+            </div>
+        </div>
+    )
 }
 
 export default function MarketList(props: MarketListProps) {
@@ -26,35 +56,11 @@ export default function MarketList(props: MarketListProps) {
         setViewState(ViewState.SUCCESS)
     }
 
-    function get2dImage(nft: NFTAsset) {
-        if (nft.assetType == AssetType.IMAGE_2D) {
-            return nft.fileAssetUri
-        }
-        return nft.file2dUri
-    }
-
     return !props.isSelected ? null : (
-        <div className="px-4 min-h-[60vh]" >
+        <div className="p-4 min-h-[60vh]" >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
                 {
-                    nfts.map((nft, i) => (
-                        <div key={i} className="border shadow rounded-xl overflow-hidden">
-                            <img src={get2dImage(nft)} />
-                            <div className="p-4">
-                                <p style={{ height: '64px' }} className="text-2xl font-semibold">{nft.name}</p>
-                                <div style={{ height: '70px', overflow: 'hidden' }}>
-                                    <p className="text-gray-400">{nft.description}</p>
-                                </div>
-                                <Label as='a' color='black'>
-                                    <Label.Detail> {nft.assetType} </Label.Detail>
-                                </Label>
-                                {
-                                    nft.file3dUri // TODO: Link to showcase if file3dUri exists
-                                }
-                            </div>
-
-                        </div>
-                    ))
+                    nfts.map((nft, i) => NftItem(nft, i))
                 }
             </div>
         </div>

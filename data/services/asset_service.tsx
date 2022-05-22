@@ -24,6 +24,10 @@ class AssetService extends BaseService {
     }
 
 
+    getFullAssetUrl(path: string) {
+        return `${this._uriPrefix}${path}`;
+    }
+
     async uploadAsset(file: File, onProgress: (number) => void): Promise<string> {
         let res = await this._ipfsClient.add(
             file,
