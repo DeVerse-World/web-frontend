@@ -72,11 +72,13 @@ class AssetService extends BaseService {
                         const tokenFullUri = `https://bafybei${tokenUri}.ipfs.infura-ipfs.io`
                         const meta = await axios.get(tokenFullUri)
                         console.log(meta.data);
+                        console.log(tokenFullUri);
                         data.push({
                             tokenUri: tokenFullUri,
                             supply: meta.data.supply, name: meta.data.name, description: meta.data.description,
                             assetType: meta.data.assetType, fileAssetUri: meta.data.fileAssetUri,
                             file2dUri: meta.data.file2dUri, file3dUri: meta.data.file3dUri,
+                            fileAssetName: meta.data.fileAssetName,
                         })
                     }
                 }

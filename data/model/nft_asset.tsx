@@ -6,6 +6,7 @@ export type NFTAsset = {
     name: string;
     description?: string;
     fileAssetUri: string;
+    fileAssetName: string;
     file2dUri?: string;
     file3dUri?: string;
     assetType: AssetType;
