@@ -9,6 +9,7 @@ import ScrollToTopButton from '../components/common/ScrollToTopButton';
 import Head from 'next/head'
 import { AppContextProvider } from '../components/contexts/app_context';
 import LoadingScreen from '../components/LoadingScreen';
+import { SSRProvider } from 'react-bootstrap';
 
 // optional configuration
 const options = {
@@ -23,17 +24,19 @@ const options = {
 function DeverseApp({ Component, pageProps }) {
   return (
     <AlertProvider template={AlertTemplate} {...options}>
-      <AppContextProvider>
-        <MetaMaskProvider>
-          <Head>
-            <title>Deverse</title>
-          </Head>
-          <LoadingScreen/>
-          <ScrollToTopButton />
-          <Component {...pageProps} />
-          <Footer />
-        </MetaMaskProvider>
-      </AppContextProvider>
+      <SSRProvider>
+        <AppContextProvider>
+          <MetaMaskProvider>
+            <Head>
+              <title>Deverse</title>
+            </Head>
+            <LoadingScreen />
+            <ScrollToTopButton />
+            <Component {...pageProps} />
+            <Footer />
+          </MetaMaskProvider>
+        </AppContextProvider>
+      </SSRProvider>
     </AlertProvider>
   )
 }
