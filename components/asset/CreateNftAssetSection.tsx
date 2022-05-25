@@ -10,7 +10,7 @@ import { AppContext, ViewState } from "../contexts/app_context";
 type CreateNftAssetSectionProps = {
     isSelected?: boolean;
     fileUri?: string;
-    onNftCreated: (assetUri: string) => void;
+    onNftCreated: (createdType: AssetType, assetUri: string) => void;
 }
 
 export default function CreateNftAssetSection(props: CreateNftAssetSectionProps) {
@@ -150,7 +150,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                     <FormControl required={true}
                         placeholder="Asset Type (*)"
                         aria-label="Asset Type"
-                        contentEditable={false}
+                        readOnly
                         value={assetType ? assetType : ''}
                     />
                     <Dropdown as={ButtonGroup}>
@@ -171,7 +171,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                         required
                         placeholder="Asset URL (e.g .png/ .pak) (*)"
                         aria-label="Asset URL (e.g .png/ .pak)"
-                        contentEditable={false}
+                        readOnly
                         value={fileAssetUri || ""}
                     />
                     <Button className='deverse-gradient'
@@ -183,7 +183,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                     <FormControl
                         placeholder="Asset 2D URL (e.g .png)"
                         aria-label="Asset 2D URL (e.g .png)"
-                        disabled={true}
+                        readOnly
                         value={file2dUri || ""}
                     />
                     <Button className='deverse-gradient'
@@ -195,8 +195,9 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                     <FormControl
                         placeholder="Asset 3D URL (e.g .gltf)"
                         aria-label="Asset 3D URL (e.g .gltf)"
-                        disabled={true}
+                        readOnly
                         value={file3dUri || ""}
+                        
                     />
                     <Button className='deverse-gradient'
                         onClick={e => {
@@ -247,9 +248,8 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
             </Form>
             <Modal centered show={showModal}
                 onHide={() => {
-                    props.onNftCreated(assetOnlinePath);
+                    props.onNftCreated(assetType, assetOnlinePath);
                     resetForm();
-
                 }}
                 contentClassName="deverse-gradient" dialogClassName="deverse-dialog">
                 <Modal.Body className="text-white text-lg break-words">

@@ -21,12 +21,50 @@ body * {
     font-size: 1.4rem;
 }
 
+
+/** React bootstrap specific styles*/
+
+
+/* Modal*/
+
+.modal-footer {
+    border-top: none !important;
+}
+
 .deverse-dialog div {
     border-radius: 12px !important;
 }
 
-.modal-footer {
+
+/* Tab */
+
+.nav-tabs {
+    /* border-top: none !important;
+    border-left: none !important;
+    border-right: none !important; */
+    border-bottom: none !important;
+}
+
+.nav-item .nav-link {
+    color: white !important;
     border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    margin-right: 8px;
+}
+
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+    background-color: transparent !important;
+    border-bottom: 2px solid rgb(97 198 208) !important;
+    font-weight: 800;
+}
+
+.nav-tabs .nav-link:hover {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 2px solid rgb(97 198 208) !important;
 }
 
 .deverse-title {
@@ -46,6 +84,10 @@ body * {
     background-image: radial-gradient(closest-side, rgb(22, 74, 124), rgba(2, 11, 64, 0.7)), url(/images/bg-highlight.png);
 }
 
+.deverse-border {
+    border: 2px solid rgb(97 198 208)
+}
+
 .deverse-gradient {
     background-color: rgb(97 198 208);
     background-image: linear-gradient(to bottom, rgb(97 198 208), rgb(64 175 217));
@@ -62,30 +104,8 @@ body * {
     color: rgb(237, 238, 238);
 }
 
-@media only screen and (max-width: 600px) {
-    .deverse-title {
-        font-weight: 900;
-        font-size: 1.7rem;
-        line-height: 95%;
-        letter-spacing: 0.5%;
-    }
-    .heading {
-        font-size: 3rem;
-    }
-    .deverse-title-secondary {
-        font-size: 2.5rem;
-    }
-    .details {
-        text-align: left!important;
-    }
-}
-
 
 /* Special case */
-
-.deverse-text-border {
-    /* text-shadow: 1px 1px 0 #FFFFFF */
-}
 
 .compare table {
     background-color: #fff;
@@ -178,6 +198,24 @@ body * {
 .App-logo {
     height: 40vmin;
     pointer-events: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .deverse-title {
+        font-weight: 900;
+        font-size: 1.7rem;
+        line-height: 95%;
+        letter-spacing: 0.5%;
+    }
+    .heading {
+        font-size: 3rem;
+    }
+    .deverse-title-secondary {
+        font-size: 2.5rem;
+    }
+    .details {
+        text-align: left!important;
+    }
 }
 
 @media (prefers-reduced-motion: no-preference) {
