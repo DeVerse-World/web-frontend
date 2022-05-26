@@ -8,7 +8,6 @@ import { AppContext, ViewState } from "../contexts/app_context";
 // 2dImg, race, skin, gameplay, bot
 
 type CreateNftAssetSectionProps = {
-    isSelected?: boolean;
     fileUri?: string;
     onNftCreated: (createdType: AssetType, assetUri: string) => void;
 }
@@ -110,16 +109,13 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
         return (<ProgressBar className='w-[80%]' now={uploadProgress} label={`${uploadProgress}%`} />)
     }
 
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
-    // @ts-ignore
-    return props.isSelected && (
+    return (
         <div className="flex justify-center">
+
             <Form className="flex flex-col items-center text-white my-8 space-y-2 min-w-[300px] w-[40vw]"
                 validated={formValidated}
                 onSubmit={createItem}>
+                <h2>Create your own NFT</h2>
                 <InputGroup>
                     <FormControl required={true}
                         placeholder="Asset Name (*)"
@@ -197,7 +193,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                         aria-label="Asset 3D URL (e.g .gltf)"
                         readOnly
                         value={file3dUri || ""}
-                        
+
                     />
                     <Button className='deverse-gradient'
                         onClick={e => {

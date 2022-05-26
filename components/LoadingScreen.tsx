@@ -18,14 +18,16 @@ const LoadingScreen: React.FC<LoadingProps> = (props) => {
             right: 0,
             bottom: 0,
             flexGrow: 1,
-            backgroundColor: 'grey',
+            backgroundColor: 'rgba(0,0,0,0.5)',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            zIndex: 99,
-            opacity: 0.5
+            zIndex: 99
         }}>
-            <Spinner animation="border">
+            <Spinner animation="border" variant="light" style={{
+                width:'70px',
+                height:'70px'
+            }}>
                 
             </Spinner>
         </div>

@@ -62,26 +62,14 @@ class AssetService extends BaseService {
 
         switch (apiStrategy) {
             case BaseService.ApiStrategy.REST:
-                console.log("getAll");
-                let id = 1
-                let transferEvents = await this.assetContract.queryFilter(this.transferSingleEventFilter)
+                let transferEvents = await this.assetContract.queryFilter(this.transferSingleEventFilter);
+                let parallelJobs: Promise<Promise<NFTAsset>>[] = [];
                 for (let i = 0; i < transferEvents.length; i++) {
-                    let [_, from, to, id, supply] = transferEvents[i].args;
-                    if (from == 0) { // from mint event
-                        const tokenUri = await this.assetContract.uri2(id)
-                        const tokenFullUri = `https://bafybei${tokenUri}.ipfs.infura-ipfs.io`
-                        const meta = await axios.get(tokenFullUri)
-                        console.log(meta.data);
-                        console.log(tokenFullUri);
-                        data.push({
-                            tokenUri: tokenFullUri,
-                            supply: meta.data.supply, name: meta.data.name, description: meta.data.description,
-                            assetType: meta.data.assetType, fileAssetUri: meta.data.fileAssetUri,
-                            file2dUri: meta.data.file2dUri, file3dUri: meta.data.file3dUri,
-                            fileAssetName: meta.data.fileAssetName,
-                        })
-                    }
+                    parallelJobs.push(new Promise<Promise<NFTAsset>>(async (resolve) => {
+                        resolve(this._fetchAssetFromEther(transferEvents[i]));
+                    }));
                 }
+                data = await Promise.all(parallelJobs)
                 break;
             case BaseService.ApiStrategy.GraphQl:
                 throw new Error("Graphql not supported here")
@@ -91,6 +79,25 @@ class AssetService extends BaseService {
                 break;
         }
         return data;
+    }
+
+    async _fetchAssetFromEther(data: ethers.Event): Promise<NFTAsset> {
+        let [_, from, to, id, supply] = data.args;
+        if (from == 0) { // from mint event
+            const tokenUri = await this.assetContract.uri2(id)
+            const tokenFullUri = `https://bafybei${tokenUri}.ipfs.infura-ipfs.io`
+            const meta = await axios.get(tokenFullUri)
+            // console.log(meta.data);
+            // console.log(tokenFullUri);
+            return ({
+                tokenUri: tokenFullUri,
+                supply: meta.data.supply, name: meta.data.name, description: meta.data.description,
+                assetType: meta.data.assetType, fileAssetUri: meta.data.fileAssetUri,
+                file2dUri: meta.data.file2dUri, file3dUri: meta.data.file3dUri,
+                fileAssetName: meta.data.fileAssetName,
+            })
+        }
+        return null;
     }
 
     async mint(apiStrategy: BaseService.ApiStrategy, ipfsHashString, supply) {
