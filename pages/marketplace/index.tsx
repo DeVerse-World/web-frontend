@@ -1,50 +1,121 @@
-import MarketplaceNavbar from "../../components/MarketplaceNavbar";
-import {Label} from "semantic-ui-react";
-import {useEffect, useState} from "react";
-import AssetService from "../../data/services/asset_service";
+import { useContext, useEffect, useRef, useState } from "react";
+import HomeNavbar from "../../components/home/HomeNavbar";
+import { Dropdown, Nav, NavDropdown, NavItem, Row, Tab, Tabs } from "react-bootstrap";
 import BaseService from "../../data/services/base_service";
 import ApiStrategy = BaseService.ApiStrategy;
+import CreateNftAssetSection from "../../components/asset/CreateNftAssetSection";
+import { useRouter } from "next/router";
+import NFTList from "../../components/asset/NFTList";
+import AssetService from "../../data/services/asset_service";
+import { NFTAsset } from "../../data/model/nft_asset";
+import { AssetType } from "../../data/enum/asset_type";
+import { AppContext, ViewState } from "../../components/contexts/app_context";
+
+enum MarketplaceTab {
+    LISTING = "listing",
+    TWO_D_IMAGE = "2d-image",
+    RACE = "character-race",
+    SKIN = "character-skin",
+    GAME_MODE = "game-mode",
+    BOT_LOGIC = "bot-logic",
+    MINT_NFT = "mint"
+}
 
 export default function Marketplace() {
-    const [nfts, setNfts] = useState([])
-    const [loadingState, setLoadingState] = useState('not-loaded')
+    const { setViewState } = useContext(AppContext);
+    const [nfts, setNfts] = useState<NFTAsset[]>([]);
+    const [visibleTab, setVisibleTab] = useState<string>(MarketplaceTab.LISTING);
+    const [fileUri, setFileUri] = useState(null);
+    const router = useRouter();
+
     useEffect(() => {
-        loadNFTs()
+        loadNFTs(null)
     }, [])
 
-    async function loadNFTs() {
-        const assets = await AssetService.getAll(ApiStrategy.REST)
+    const loadNFTs = async (query: string) => {
+        setViewState(ViewState.LOADING)
+        const assets = await AssetService.getAll(ApiStrategy.REST);
         setNfts(assets);
-        setLoadingState('loaded');
+        setViewState(ViewState.SUCCESS)
+    }
+
+    useEffect(() => {
+        if (!router.isReady) return;
+        let query = router.query;
+        if (!query['tab']) {
+            onSelectTab(MarketplaceTab.LISTING)
+        } else if (query['tab'] == MarketplaceTab.MINT_NFT) {
+            setVisibleTab(MarketplaceTab.MINT_NFT)
+        }
+        if (query['fileUri']) {
+            setFileUri(`https://ipfs.infura.io/ipfs/${query['fileUri']}`);
+        }
+    }, [router.isReady]);
+
+    const onSelectTab = (tab: MarketplaceTab) => {
+        router.push({
+            pathname: router.pathname,
+            query: {
+                tab: tab
+            }
+        }, undefined, { shallow: true });
+        setVisibleTab(tab);
     }
 
     return (
-        <div className="flex justify-center">
-            <MarketplaceNavbar />
-            <div className="px-4" style={{ maxWidth: '1600px' }}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
-                    {
-                        nfts.map((nft, i) => (
-                            <div key={i} className="border shadow rounded-xl overflow-hidden">
-                                <img src={nft.fileUri} />
-                                <div className="p-4">
-                                    <p style={{ height: '64px' }} className="text-2xl font-semibold">{nft.name}</p>
-                                    <div style={{ height: '70px', overflow: 'hidden' }}>
-                                        <p className="text-gray-400">{nft.description}</p>
-                                    </div>
-                                    <Label as='a' color='blue'>
-                                        <Label.Detail> {nft.assetType} </Label.Detail>
-                                    </Label>
-                                </div>
-                                <div className="p-4 bg-black">
-                                    <p className="text-2xl mb-4 font-bold text-white">No Price</p>
-                                    {/*<button className="w-full bg-pink-500 text-white font-bold py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>*/}
-                                </div>
-                            </div>
-                        ))
-                    }
-                </div>
+        <>
+            <HomeNavbar />
+            <div className='deverse-background flex flex-column justify-center items-center'>
+                <Tab.Container id="tabs-with-dropdown" defaultActiveKey={MarketplaceTab.LISTING} >
+                    <Nav className="w-[95%] cursor-pointer text-xl" activeKey={visibleTab}
+                        onSelect={(e: MarketplaceTab) => {
+                            onSelectTab(e);
+                        }}>
+                        <NavDropdown id="nav-dropdown-within-tab" title="Listing" menuVariant="dark"  color="black">
+                            <Dropdown.Item active={visibleTab == MarketplaceTab.LISTING} eventKey={MarketplaceTab.LISTING}>All</Dropdown.Item>
+                            <Dropdown.Item active={visibleTab == MarketplaceTab.TWO_D_IMAGE} eventKey={MarketplaceTab.TWO_D_IMAGE}>2D Image</Dropdown.Item>
+                            <Dropdown.Item active={visibleTab == MarketplaceTab.SKIN} eventKey={MarketplaceTab.SKIN}>Character Skin</Dropdown.Item>
+                            <Dropdown.Item active={visibleTab == MarketplaceTab.RACE} eventKey={MarketplaceTab.RACE}>Character Race</Dropdown.Item>
+                            <Dropdown.Item active={visibleTab == MarketplaceTab.GAME_MODE} eventKey={MarketplaceTab.GAME_MODE}>Game Mode</Dropdown.Item>
+                            <Dropdown.Item active={visibleTab == MarketplaceTab.BOT_LOGIC} eventKey={MarketplaceTab.BOT_LOGIC}>Bot Logic</Dropdown.Item>
+                        </NavDropdown>
+                        <Nav.Item>
+                            <Nav.Link eventKey={MarketplaceTab.MINT_NFT}>Mint NFT</Nav.Link>
+                        </Nav.Item>
+                    </Nav>
+                    <Tab.Content className="min-h-[70vh]">
+                        <Tab.Pane active={visibleTab == MarketplaceTab.LISTING} eventKey={MarketplaceTab.LISTING}>
+                            <NFTList data={nfts} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey={MarketplaceTab.TWO_D_IMAGE}>
+                            <NFTList data={nfts.filter(e => e.assetType == AssetType.IMAGE_2D)} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey={MarketplaceTab.SKIN}>
+                            <NFTList data={nfts.filter(e => e.assetType == AssetType.SKIN)} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey={MarketplaceTab.RACE}>
+                            <NFTList data={nfts.filter(e => e.assetType == AssetType.RACE)} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey={MarketplaceTab.GAME_MODE}>
+                            <NFTList data={nfts.filter(e => e.assetType == AssetType.GAME_MODE)} />
+                        </Tab.Pane>
+                        <Tab.Pane eventKey={MarketplaceTab.BOT_LOGIC}>
+                            <NFTList data={nfts.filter(e => e.assetType == AssetType.BOT_LOGIC)} />
+                        </Tab.Pane>
+                        <Tab.Pane active={visibleTab == MarketplaceTab.MINT_NFT} eventKey={MarketplaceTab.MINT_NFT}>
+                            <CreateNftAssetSection
+                                fileUri={fileUri}
+                                onNftCreated={(assetType: AssetType, fileUri: string) => {
+                                    //TODO: should we reload everything?
+                                    loadNFTs(null);
+                                    onSelectTab(MarketplaceTab.LISTING);
+                                }}
+                            />
+                        </Tab.Pane>
+                    </Tab.Content>
+                </Tab.Container>
             </div>
-        </div>
+        </>
+
     )
 }

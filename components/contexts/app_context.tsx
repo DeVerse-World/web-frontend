@@ -1,26 +1,31 @@
 import React, { useState } from "react";
-import { User } from "../../data/model/user";
 
 export type AppDataContext = {
-    user?: User,
-    setUser: (User) => void,
+    // user?: User,
+    // setUser: (User) => void,
+    viewState: ViewState,
+    setViewState: (ViewState) => void
+}
+
+export enum ViewState {
+    IDLE,
+    LOADING,
+    SUCCESS,
+    ERROR
 }
 
 const AppContext = React.createContext<AppDataContext>({
-    user: null,
-    setUser: null,
+    viewState: ViewState.IDLE,
+    setViewState: () => { }
 })
 
 const AppContextProvider = (props) => {
-    const [user, setUser] = useState(null);
+    const [viewState, setViewState] = useState(ViewState.IDLE);
 
     return (
         <AppContext.Provider
-            value={{
-                user: user,
-                setUser: setUser
-            }}>
-            {props.children}
+        value={{ viewState, setViewState }}>
+        {props.children}
         </AppContext.Provider>
     )
 }

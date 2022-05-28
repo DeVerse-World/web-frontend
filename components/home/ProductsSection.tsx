@@ -88,31 +88,8 @@ type ProductionSectionData = {
 
 function ProductSectionItem(props: ProductionSectionData) {
     const [showDescription, setShowDescription] = useState(false);
-    const [btnStyle, setButtonStyle] = useState<React.CSSProperties>({
-        backgroundColor: "rgb(29 78 216)",
-        backgroundImage: "linear-gradient(to bottom, rgb(97 198 208) ,rgb(64 175 217)"
-    })
     const onShowDescription = (e) => {
         setShowDescription(true);
-    }
-
-    const toggleHover = (isHover: boolean) => {
-        if (!isHover) {
-            setButtonStyle(
-                {
-                    backgroundColor: "rgb(29 78 216)",
-                    backgroundImage: "linear-gradient(to bottom, rgb(97 198 208) ,rgb(64 175 217))"
-                }
-            )
-        } else {
-            setButtonStyle(
-                {
-                    backgroundColor: "rgb(29 78 216)",
-                    backgroundImage: "linear-gradient(to bottom, rgb(127 198 208) ,rgb(94 175 217))"
-                }
-            )
-        }
-
     }
 
     const getStatusIcon = (status: FeatureStatus): string => {
@@ -149,16 +126,9 @@ function ProductSectionItem(props: ProductionSectionData) {
                     width={300} height={300}
                 />
             </div>
-            <div className="rounded-md
+            <div className="rounded-md deverse-gradient
                 uppercase cursor-pointer h-16
                 flex flex-col justify-center"
-                style={btnStyle}
-                onMouseEnter={(e) => {
-                    toggleHover(true)
-                }}
-                onMouseLeave={(e) => {
-                    toggleHover(false)
-                }}
                 onClick={onShowDescription}>
                 <span className="text-lg font-black" >{props.name}</span>
             </div>
@@ -168,12 +138,7 @@ function ProductSectionItem(props: ProductionSectionData) {
                 {/* <Modal.Header closeButton>
                     <Modal.Title>{props.name}</Modal.Title>
                 </Modal.Header> */}
-                <Modal.Body className="text-white text-lg"
-                    style={{
-                        backgroundColor: "rgb(97 198 208)",
-                        backgroundImage: "linear-gradient(to bottom, rgb(97 198 208) ,rgb(64 175 217))",
-
-                    }}>
+                <Modal.Body className="text-white text-lg deverse-gradient">
                     <span>{props.description}</span>
                 </Modal.Body>
                 {/* <Modal.Footer>
