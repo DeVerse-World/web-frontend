@@ -1,13 +1,15 @@
 import '../styles/globals.css'
 import '../styles/Styles.css';
 import Footer from '../components/common/Footer'
-// import 'bootstrap/dist/css/bootstrap.min.css';
-import React from "react";
+import React, { useContext } from "react";
 import { MetaMaskProvider } from "metamask-react";
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'
 import ScrollToTopButton from '../components/common/ScrollToTopButton';
 import Head from 'next/head'
+import { AppContextProvider } from '../components/contexts/app_context';
+import LoadingScreen from '../components/LoadingScreen';
+import { SSRProvider } from 'react-bootstrap';
 
 // optional configuration
 const options = {
@@ -19,19 +21,24 @@ const options = {
   transition: transitions.SCALE
 }
 
-function Marketplace({ Component, pageProps }) {
+function DeverseApp({ Component, pageProps }) {
   return (
     <AlertProvider template={AlertTemplate} {...options}>
-      <MetaMaskProvider>
-        <Head>
-        <title>Deverse</title>
-        </Head>
-        <ScrollToTopButton />
-        <Component {...pageProps} />
-        <Footer />
-      </MetaMaskProvider>
+      <SSRProvider>
+        <AppContextProvider>
+          <MetaMaskProvider>
+            <Head>
+              <title>Deverse</title>
+            </Head>
+            <LoadingScreen />
+            <ScrollToTopButton />
+            <Component {...pageProps} />
+            <Footer />
+          </MetaMaskProvider>
+        </AppContextProvider>
+      </SSRProvider>
     </AlertProvider>
   )
 }
 
-export default Marketplace
+export default DeverseApp

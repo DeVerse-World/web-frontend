@@ -21,8 +21,33 @@ body * {
     font-size: 1.4rem;
 }
 
+
+/** React bootstrap specific styles*/
+
+
+/* Modal*/
+
+.modal-footer {
+    border-top: none !important;
+}
+
 .deverse-dialog div {
     border-radius: 12px !important;
+}
+
+
+/* Tab */
+
+.dropdown-toggle::after {
+    vertical-align: .1em !important;
+}
+
+.nav-item a {
+    color: #ffffff !important;
+}
+
+a.dropdown-item {
+    color: #ffffff
 }
 
 .deverse-title {
@@ -30,7 +55,7 @@ body * {
     font-family: 'Akira Expanded', sans-serif;
 }
 
-.details-title {
+.deverse-title-secondary {
     font-weight: 700;
     font-size: 4rem;
     -webkit-background-clip: text;
@@ -42,8 +67,17 @@ body * {
     background-image: radial-gradient(closest-side, rgb(22, 74, 124), rgba(2, 11, 64, 0.7)), url(/images/bg-highlight.png);
 }
 
+.deverse-border {
+    border: 2px solid rgb(97 198 208)
+}
+
 .deverse-gradient {
+    background-color: rgb(97 198 208);
     background-image: linear-gradient(to bottom, rgb(97 198 208), rgb(64 175 217));
+}
+
+.deverse-gradient:hover {
+    background-image: linear-gradient(to bottom, rgb(127 198 208), rgb(94 175 217));
 }
 
 .deverse-gradient-text {
@@ -53,30 +87,8 @@ body * {
     color: rgb(237, 238, 238);
 }
 
-@media only screen and (max-width: 600px) {
-    .deverse-title {
-        font-weight: 900;
-        font-size: 1.7rem;
-        line-height: 95%;
-        letter-spacing: 0.5%;
-    }
-    .heading {
-        font-size: 3rem;
-    }
-    .details-title {
-        font-size: 2.5rem;
-    }
-    .details {
-        text-align: left!important;
-    }
-}
-
 
 /* Special case */
-
-.deverse-text-border {
-    /* text-shadow: 1px 1px 0 #FFFFFF */
-}
 
 .compare table {
     background-color: #fff;
@@ -169,6 +181,24 @@ body * {
 .App-logo {
     height: 40vmin;
     pointer-events: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .deverse-title {
+        font-weight: 900;
+        font-size: 1.7rem;
+        line-height: 95%;
+        letter-spacing: 0.5%;
+    }
+    .heading {
+        font-size: 3rem;
+    }
+    .deverse-title-secondary {
+        font-size: 2.5rem;
+    }
+    .details {
+        text-align: left!important;
+    }
 }
 
 @media (prefers-reduced-motion: no-preference) {
