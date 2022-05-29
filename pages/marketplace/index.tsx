@@ -73,7 +73,7 @@ export default function Marketplace() {
     return (
         <>
             <HomeNavbar />
-            <div className='deverse-background flex flex-column justify-center items-center'>
+            <div className='deverse-background flex flex-column justify-center items-center min-h-[90vh]'>
                 <Tab.Container id="tabs-with-dropdown" defaultActiveKey={MarketplaceTab.LISTING} >
                     <Nav className="w-[95%] cursor-pointer text-xl" activeKey={visibleTab}
                         onSelect={(e: MarketplaceTab) => {
