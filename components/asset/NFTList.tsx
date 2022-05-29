@@ -28,9 +28,11 @@ export default function NFTList(props: NFTListProps) {
                 }}>{nft.name}</p>
                 <div className="flex flex-row px-4">
                     <div>
-                        <p className="text-gray-400" style={{
-                            cursor: "pointer"
-                        }} onClick={() => props.onOpen(nft)}>Show Detail</p>
+                        <h5 style={{
+                            cursor: "pointer",
+                            color: "rgb(97 198 208)",
+                            fontWeight: 800
+                        }} onClick={() => props.onOpen(nft)}>Show Detail</h5>
                         <p>{nft.assetType}</p>
                     </div>
                     <div className="grow flex flex-row justify-end">
