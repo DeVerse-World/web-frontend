@@ -1,7 +1,7 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
 import '../styles/Styles.css';
 import Footer from '../components/common/Footer'
-import React, { useContext } from "react";
+import React from "react";
 import { MetaMaskProvider } from "metamask-react";
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
 import AlertTemplate from 'react-alert-template-basic'

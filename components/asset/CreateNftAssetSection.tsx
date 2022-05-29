@@ -150,10 +150,10 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                         value={assetType ? assetType : ''}
                     />
                     <Dropdown as={ButtonGroup}>
-                        <Dropdown.Toggle id="dropdown-custom-2" style={{
+                        <Dropdown.Toggle id="dropdown-custom-2"  style={{
                             backgroundImage: "linear-gradient(to bottom, rgb(97 198 208), rgb(64 175 217))"
                         }} />
-                        <Dropdown.Menu className="super-colors">
+                        <Dropdown.Menu variant="dark">
                             <Dropdown.Item onClick={(e) => setAssetType(AssetType.IMAGE_2D)}>2D Image</Dropdown.Item>
                             <Dropdown.Item onClick={(e) => setAssetType(AssetType.RACE)}>Character Race</Dropdown.Item>
                             <Dropdown.Item onClick={(e) => setAssetType(AssetType.SKIN)}>Character Skin</Dropdown.Item>

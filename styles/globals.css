@@ -1,4 +1,224 @@
 /* ./styles/globals.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+body * {
+    font-family: 'Sofia Pro', sans-serif;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.heading {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    font-size: 6rem;
+}
+
+.secondary-text {
+    font-weight: 400;
+    letter-spacing: 1.4px;
+    font-size: 1.4rem;
+}
+
+
+/** React bootstrap specific styles*/
+
+
+/* Modal*/
+
+.modal-header {
+    border-bottom: none !important;
+}
+
+.modal-footer {
+    border-top: none !important;
+}
+
+.deverse-dialog div {
+    border-radius: 12px !important;
+}
+
+
+/* Tab */
+
+.dropdown-toggle::after {
+    vertical-align: .1em !important;
+}
+
+.nav-item a {
+    color: #ffffff !important;
+}
+
+a.dropdown-item {
+    color: #ffffff
+}
+
+.deverse-title {
+    font-size: 3.5rem;
+    font-family: 'Akira Expanded', sans-serif;
+}
+
+.deverse-title-secondary {
+    font-weight: 700;
+    font-size: 4rem;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.1rem;
+}
+
+.deverse-background {
+    background-image: radial-gradient(closest-side, rgb(22, 74, 124), rgba(2, 11, 64, 0.7)), url(/images/bg-highlight.png);
+}
+
+.deverse-border {
+    border: 2px solid rgb(97 198 208)
+}
+
+.deverse-gradient {
+    background-color: rgb(97 198 208);
+    background-image: linear-gradient(to bottom, rgb(97 198 208), rgb(64 175 217));
+}
+
+.deverse-gradient:hover {
+    background-image: linear-gradient(to bottom, rgb(127 198 208), rgb(94 175 217));
+}
+
+.deverse-gradient-text {
+    background: -webkit-linear-gradient(-86deg, rgb(65, 117, 230), rgb(18, 54, 173));
+    -webkit-background-clip: text;
+    -webkit-text-stroke: 3px transparent;
+    color: rgb(237, 238, 238);
+}
+
+
+/* Special case */
+
+.compare table {
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 13px 21px -5px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+    font-size: 18px;
+    table-layout: fixed;
+}
+
+.compare table .bg-red {
+    background-color: #ff715b;
+}
+
+.compare table .bg-green {
+    background-color: #48cfad;
+}
+
+.compare table .bg-blue {
+    background-color: #0197f6;
+}
+
+.compare table tr>td,
+.compare table tr>th {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+}
+
+.compare table th[scope="row"] {
+    font-size: 20px;
+    color: #393c45;
+    font-weight: normal;
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    text-align: left;
+    padding-left: 45px;
+}
+
+.compare table tr.condition {
+    color: #fff;
+    font-size: 20px;
+}
+
+.compare table tr.colors span {
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    margin-right: 5px;
+    border-radius: 100%;
+}
+
+.compare table thead th {
+    font-size: 20px;
+    color: #393c45;
+    font-weight: normal;
+}
+
+.compare .thead-default th {
+    background-color: #fff;
+}
+
+.dot {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.pie {
+    height: 75%;
+}
+
+.btn-primary,
+.btn-danger {
+    font-weight: 600;
+}
+
+.banner-text {
+    margin: 0px;
+    vertical-align: middle;
+    padding: 19px;
+}
+
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .deverse-title {
+        font-weight: 900;
+        font-size: 1.7rem;
+        line-height: 95%;
+        letter-spacing: 0.5%;
+    }
+    .heading {
+        font-size: 3rem;
+    }
+    .deverse-title-secondary {
+        font-size: 2.5rem;
+    }
+    .details {
+        text-align: left!important;
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

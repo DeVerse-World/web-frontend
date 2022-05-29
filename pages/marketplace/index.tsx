@@ -10,6 +10,7 @@ import AssetService from "../../data/services/asset_service";
 import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from "../../data/enum/asset_type";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
+import NFTDetailCard from "../../components/asset/NFTDetailCard";
 
 enum MarketplaceTab {
     LISTING = "listing",
@@ -24,6 +25,8 @@ enum MarketplaceTab {
 export default function Marketplace() {
     const { setViewState } = useContext(AppContext);
     const [nfts, setNfts] = useState<NFTAsset[]>([]);
+    const [selectedAsset, setSelectedAsset] = useState<NFTAsset>(null);
+    const [showDetail, setShowDetail] = useState<boolean>(false);
     const [visibleTab, setVisibleTab] = useState<string>(MarketplaceTab.LISTING);
     const [fileUri, setFileUri] = useState(null);
     const router = useRouter();
@@ -62,6 +65,11 @@ export default function Marketplace() {
         setVisibleTab(tab);
     }
 
+    const onOpenNFTDescription = (data: NFTAsset) => {
+        setSelectedAsset(data);
+        setShowDetail(true);
+    }
+
     return (
         <>
             <HomeNavbar />
@@ -85,22 +93,22 @@ export default function Marketplace() {
                     </Nav>
                     <Tab.Content className="min-h-[70vh]">
                         <Tab.Pane active={visibleTab == MarketplaceTab.LISTING} eventKey={MarketplaceTab.LISTING}>
-                            <NFTList data={nfts} />
+                            <NFTList data={nfts} onOpen={onOpenNFTDescription} />
                         </Tab.Pane>
                         <Tab.Pane eventKey={MarketplaceTab.TWO_D_IMAGE}>
-                            <NFTList data={nfts.filter(e => e.assetType == AssetType.IMAGE_2D)} />
+                            <NFTList data={nfts.filter(e => e.assetType == AssetType.IMAGE_2D)} onOpen={onOpenNFTDescription}/>
                         </Tab.Pane>
                         <Tab.Pane eventKey={MarketplaceTab.SKIN}>
-                            <NFTList data={nfts.filter(e => e.assetType == AssetType.SKIN)} />
+                            <NFTList data={nfts.filter(e => e.assetType == AssetType.SKIN)} onOpen={onOpenNFTDescription}/>
                         </Tab.Pane>
                         <Tab.Pane eventKey={MarketplaceTab.RACE}>
-                            <NFTList data={nfts.filter(e => e.assetType == AssetType.RACE)} />
+                            <NFTList data={nfts.filter(e => e.assetType == AssetType.RACE)} onOpen={onOpenNFTDescription}/>
                         </Tab.Pane>
                         <Tab.Pane eventKey={MarketplaceTab.GAME_MODE}>
-                            <NFTList data={nfts.filter(e => e.assetType == AssetType.GAME_MODE)} />
+                            <NFTList data={nfts.filter(e => e.assetType == AssetType.GAME_MODE)} onOpen={onOpenNFTDescription}/>
                         </Tab.Pane>
                         <Tab.Pane eventKey={MarketplaceTab.BOT_LOGIC}>
-                            <NFTList data={nfts.filter(e => e.assetType == AssetType.BOT_LOGIC)} />
+                            <NFTList data={nfts.filter(e => e.assetType == AssetType.BOT_LOGIC)} onOpen={onOpenNFTDescription}/>
                         </Tab.Pane>
                         <Tab.Pane active={visibleTab == MarketplaceTab.MINT_NFT} eventKey={MarketplaceTab.MINT_NFT}>
                             <CreateNftAssetSection
@@ -114,6 +122,7 @@ export default function Marketplace() {
                         </Tab.Pane>
                     </Tab.Content>
                 </Tab.Container>
+                <NFTDetailCard data={selectedAsset} show={showDetail} onHide={() => setShowDetail(false)}/>
             </div>
         </>
 
