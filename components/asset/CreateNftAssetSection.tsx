@@ -42,7 +42,6 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
             setUploadProgress(0);
             let uploadPath = await AssetService.uploadAsset(file, setUploadProgress);
             console.log(file);
-            setfileAssetName(file.name);
             switch (e.target.name) {
                 case "2dUpload":
                     setfile2dUri(uploadPath);
@@ -51,6 +50,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                     setfile3dUri(uploadPath);
                     break;
                 case "assetUpload":
+                    setfileAssetName(file.name);
                     setfileAssetUri(uploadPath);
                     break;
                 default:
