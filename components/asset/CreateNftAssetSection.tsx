@@ -22,6 +22,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
     const [uploadProgress, setUploadProgress] = useState(-1);
     const [fileAssetUri, setfileAssetUri] = useState(props.fileUri);
     const [fileAssetName, setfileAssetName] = useState("");
+    const [fileAssetUriFromCentralized, setfileAssetUriFromCentralized] = useState("");
     const [file2dUri, setfile2dUri] = useState("")
     const [file3dUri, setfile3dUri] = useState("")
     const [assetOnlinePath, setAssetOnlinePath] = useState('');
@@ -53,6 +54,9 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                     setfileAssetName(file.name);
                     setfileAssetUri(uploadPath);
                     break;
+                case "assetCentralizedUpload":
+                    setfileAssetUriFromCentralized(uploadPath);
+                    break;
                 default:
                     break;
             }
@@ -75,6 +79,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
             assetType: assetType,
             fileAssetUri: fileAssetUri,
             fileAssetName: fileAssetName,
+            fileAssetUriFromCentralized: fileAssetUriFromCentralized,
             file2dUri: file2dUri,
             file3dUri: file3dUri,
         };
@@ -161,6 +166,13 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                             <Dropdown.Item onClick={(e) => setAssetType(AssetType.BOT_LOGIC)}>New Bot Logic</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
+                </InputGroup>
+                <InputGroup>
+                    <FormControl placeholder="Asset Centralized Storage Link"
+                                 aria-label="Asset Centralized Storage Link"
+                                 value={fileAssetUriFromCentralized}
+                                 onChange={e => setfileAssetUriFromCentralized(e.target.value)}
+                    />
                 </InputGroup>
                 <InputGroup>
                     <FormControl
