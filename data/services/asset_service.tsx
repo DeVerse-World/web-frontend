@@ -87,8 +87,9 @@ class AssetService extends BaseService {
             const tokenUri = await this.assetContract.uri2(id)
             const tokenFullUri = `https://bafybei${tokenUri}.ipfs.infura-ipfs.io`
             const meta = await axios.get(tokenFullUri)
-            // console.log(meta.data);
-            // console.log(tokenFullUri);
+            if (meta == null || meta.data == null) {
+                return null
+            }
             return ({
                 tokenUri: tokenFullUri,
                 supply: meta.data.supply, name: meta.data.name, description: meta.data.description,
