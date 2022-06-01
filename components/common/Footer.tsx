@@ -32,7 +32,7 @@ function Footer(props) {
               <TwitterIcon />
             </IconButton>
 
-            <IconButton style={{ color: "white", fontSize: "1.5rem" }} target="_blank" href="https://discord.gg/MSN7P6jq">
+            <IconButton style={{ color: "white", fontSize: "1.5rem" }} target="_blank" href="https://discord.gg/z6qRJN9PAp">
               <SiDiscord style={{ padding: "0.15rem" }} />
             </IconButton>
 
