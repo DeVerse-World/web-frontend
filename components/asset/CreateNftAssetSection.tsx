@@ -4,6 +4,7 @@ import { Button, ButtonGroup, Dropdown, DropdownButton, Form, FormControl, Image
 import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from '../../data/enum/asset_type';
 import { AppContext, ViewState } from "../contexts/app_context";
+import {bool} from "prop-types";
 
 // 2dImg, race, skin, gameplay, bot
 
@@ -69,6 +70,11 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
     const createItem = async (event) => {
         setFormValidated(true);
         event.preventDefault();
+        const isValidName = await validateName();
+        if (!isValidName) {
+            alert("invalid name, either locked or used by others")
+            return;
+        }
         if (!(assetName && assetType && assetSupply > 0 && fileAssetUri)) {
             return;
         }
@@ -93,6 +99,16 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
             console.log('Error uploading file: ', error)
             setViewState(ViewState.ERROR);
         }
+    }
+
+    const validateName = async () => {
+        const checkNameRes = await AssetService.checkName(assetName);
+        console.log(checkNameRes.status);
+        console.log(checkNameRes.data);
+        if (checkNameRes.status == 200 && checkNameRes.data["data"]["exist"] == false) {
+            return true;
+        }
+        return false;
     }
 
     const resetForm = () => {
