@@ -85,7 +85,6 @@
     },
     "devDependencies": {
         "autoprefixer": "^10.4.2",
-        "gltfjsx": "^4.6.3",
         "postcss": "^8.4.7",
         "tailwindcss": "^3.0.23"
     }
