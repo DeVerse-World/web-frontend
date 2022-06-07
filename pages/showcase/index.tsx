@@ -1,13 +1,19 @@
-import React, { Suspense, useEffect, useRef, useState } from 'react'
-import { Canvas, useFrame } from '@react-three/fiber'
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react'
 import HomeNavbar from '../../components/home/HomeNavbar'
-import { OrbitControls, TransformControls } from '@react-three/drei'
-import ModelPreviewService from "../../data/services/3d_model_service";
-import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader'
 import ModelViewer from '../../components/ModelViewer';
 
 function Showcase() {
-  const [model, setModel] = useState<GLTF>(null);
+  const [modelPath, setModelPath] = useState<string>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!router.isReady) return;
+    let query = router.query;
+    if (query['model']) {
+      setModelPath(`/3d/${query['model']}.glb`);
+    }
+  }, [router.isReady])
 
   return (
     <>
@@ -16,7 +22,7 @@ function Showcase() {
         <h1>Models</h1>
       </div>
       <div className='flex flex-row justify-center '>
-        {<ModelViewer filePath='/3d/cleric_idle_equipped.glb' />}
+        {modelPath && <ModelViewer filePath={modelPath} />}
       </div>
     </>
 
