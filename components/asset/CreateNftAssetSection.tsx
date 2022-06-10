@@ -18,7 +18,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
 
     const [assetName, setAssetName] = useState('');
     const [assetDescription, setAssetDescription] = useState('');
-    const [assetType, setAssetType] = useState<AssetType>(undefined);
+    const [assetType, setAssetType] = useState<AssetType>(AssetType.IMAGE_2D);
     const [assetSupply, setAssetSupply] = useState<number>(0);
     const [uploadProgress, setUploadProgress] = useState(-1);
     const [fileAssetUri, setfileAssetUri] = useState(props.fileUri);
@@ -116,7 +116,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
         setFormValidated(false);
         setAssetName('');
         setAssetDescription('');
-        setAssetType(null);
+        setAssetType(AssetType.IMAGE_2D);
         setAssetSupply(0);
         setfileAssetUri('');
         setfile2dUri('');
@@ -146,7 +146,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                     />
                 </InputGroup>
                 <InputGroup>
-                    <FormControl className='h-[100px]'
+                    <FormControl as="textarea" className='h-[80px]'
                         placeholder="Description"
                         aria-label="Description"
                         value={assetDescription}
@@ -171,7 +171,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                         value={assetType ? assetType : ''}
                     />
                     <Dropdown as={ButtonGroup}>
-                        <Dropdown.Toggle id="dropdown-custom-2"  style={{
+                        <Dropdown.Toggle id="dropdown-custom-2" style={{
                             backgroundImage: "linear-gradient(to bottom, rgb(97 198 208), rgb(64 175 217))"
                         }} />
                         <Dropdown.Menu variant="dark">
@@ -185,17 +185,17 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                 </InputGroup>
                 <InputGroup>
                     <FormControl placeholder="Asset Centralized Storage Link"
-                                 aria-label="Asset Centralized Storage Link"
-                                 value={fileAssetUriFromCentralized}
-                                 onChange={e => setfileAssetUriFromCentralized(e.target.value)}
+                        aria-label="Asset Centralized Storage Link"
+                        value={fileAssetUriFromCentralized}
+                        onChange={e => setfileAssetUriFromCentralized(e.target.value)}
                     />
                 </InputGroup>
                 <InputGroup>
                     <FormControl
+                        className="pointer-events-none"
                         required
                         placeholder="Asset URL (e.g .png/ .pak) (*)"
                         aria-label="Asset URL (e.g .png/ .pak)"
-                        readOnly
                         value={fileAssetUri || ""}
                     />
                     <Button className='deverse-gradient'
@@ -205,9 +205,9 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                 </InputGroup>
                 {(assetType != AssetType.IMAGE_2D) && <InputGroup>
                     <FormControl
+                        className="pointer-events-none"
                         placeholder="Asset 2D URL (e.g .png)"
                         aria-label="Asset 2D URL (e.g .png)"
-                        readOnly
                         value={file2dUri || ""}
                     />
                     <Button className='deverse-gradient'
@@ -217,11 +217,11 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                 </InputGroup>}
                 {(assetType != AssetType.IMAGE_2D) && <InputGroup>
                     <FormControl
-                        placeholder="Asset 3D URL (e.g .gltf)"
+                        className="pointer-events-none"
+                        required
+                        placeholder="Asset 3D URL (e.g .glb)"
                         aria-label="Asset 3D URL (e.g .gltf)"
-                        readOnly
                         value={file3dUri || ""}
-
                     />
                     <Button className='deverse-gradient'
                         onClick={e => {
@@ -258,7 +258,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                 <input
                     ref={uploadFile3dRef}
                     hidden={true}
-                    accept=".gltf"
+                    accept=".glb"
                     type="file"
                     name="3dUpload"
                     onChange={onUploadAsset}

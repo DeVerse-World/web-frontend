@@ -14,6 +14,20 @@ export default function NFTList(props: NFTListProps) {
         return nft.file2dUri;
     }
 
+    const renderPreview = (nft: NFTAsset) => {
+        if (!nft.file3dUri) {
+            return null;
+        }
+        
+        let previewLink = `showcase?model=${nft.file3dUri.substring(nft.file3dUri.lastIndexOf('/') + 1)}`;
+        // let link = `showcase?model=${}`;
+        return (
+            <a className="no-underline font-bold" style={{
+                color: "rgb(97 198 208)"
+            }} href={previewLink} target="_blank">Preview</a>
+        )
+    }
+
     const renderNFTItem = (nft: NFTAsset, index: number) => {
         return (
             <div key={index} className="deverse-border w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white"
@@ -34,6 +48,7 @@ export default function NFTList(props: NFTListProps) {
                             fontWeight: 800
                         }} onClick={() => props.onOpen(nft)}>Show Detail</h5>
                         <p>{nft.assetType}</p>
+                        {renderPreview(nft)}
                     </div>
                     <div className="grow flex flex-row justify-end">
                         <a title={nft.name} href={nft.fileAssetUri} target="_blank">

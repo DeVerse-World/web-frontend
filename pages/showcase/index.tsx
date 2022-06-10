@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import HomeNavbar from '../../components/home/HomeNavbar'
 import ModelViewer from '../../components/ModelViewer';
+import AssetService from "../../data/services/asset_service";
 
 function Showcase() {
   const [modelPath, setModelPath] = useState<string>(null);
@@ -11,7 +12,7 @@ function Showcase() {
     if (!router.isReady) return;
     let query = router.query;
     if (query['model']) {
-      setModelPath(`/3d/${query['model']}.glb`);
+      setModelPath(AssetService.getFullAssetUrl(query['model'] as string));
     }
   }, [router.isReady])
 
