@@ -13,6 +13,7 @@ import {
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
 // @ts-ignore
 import Market from '../artifacts/contracts/Market.sol/NFTMarket.json'
+import AssetService from '../data/services/asset_service'
 
 // @ts-ignore
 const client = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0')
@@ -31,7 +32,7 @@ export default function CreateItem() {
           progress: (prog) => console.log(`received: ${prog}`)
         }
       )
-      const url = `https://ipfs.infura.io/ipfs/${added.path}`
+      const url = AssetService.getFullAssetUrl(added.path);
       setFileUrl(url)
     } catch (error) {
       console.log('Error uploading file: ', error)

@@ -38,8 +38,7 @@ export default function Marketplace() {
     const loadNFTs = async (query: string) => {
         setViewState(ViewState.LOADING)
         let assets = await AssetService.getAll(ApiStrategy.REST);
-        assets = assets.filter(function(asset) {return asset != null;})
-        setNfts(assets);
+        setNfts(assets.filter((asset) => asset != null));
         setViewState(ViewState.SUCCESS)
     }
 
@@ -52,7 +51,7 @@ export default function Marketplace() {
             setVisibleTab(MarketplaceTab.MINT_NFT)
         }
         if (query['fileUri']) {
-            setFileUri(`https://ipfs.infura.io/ipfs/${query['fileUri']}`);
+            setFileUri(AssetService.getFullAssetUrl(query['fileUri'] as string));
         }
     }, [router.isReady]);
 
