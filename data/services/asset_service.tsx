@@ -3,11 +3,12 @@ import { Contract, ethers } from "ethers";
 import { assetAddress } from "../../config";
 import { create as ipfsHttpClient } from 'ipfs-http-client'
 import AssetABI from '../../smart-contracts/artifacts/contracts/v2/Asset.sol/Asset.json'
-import axios from 'axios'
+import axios from "../api/axios";
 import Web3Modal from "web3modal";
 import { NFTAsset } from "../model/nft_asset";
 import CIDTool from 'cid-tool';
 import ApiStrategy = BaseService.ApiStrategy;
+import {Event} from "@ethersproject/contracts";
 
 class AssetService extends BaseService {
     _uriPrefix = 'https://ipfs.infura.io/ipfs/';
@@ -22,7 +23,6 @@ class AssetService extends BaseService {
         this.assetContract = new ethers.Contract(assetAddress, AssetABI.abi, this.provider)
         this.transferSingleEventFilter = this.assetContract.filters.TransferSingle()
     }
-
 
     getFullAssetUrl(path: string) {
         return `${this._uriPrefix}${path}`;
@@ -45,16 +45,50 @@ class AssetService extends BaseService {
     // # https://github.com/multiformats/js-cid-tool
     // const added = await client.add(data, { cidVersion: 1 })
     async createAsset(asset: NFTAsset): Promise<string> {
-        const data = JSON.stringify(asset);
+        const data = JSON.stringify(asset)
         let res = await this._ipfsClient.add(data);
         // https://ipfs.infura.io/ipfs/QmYMaUm2nRb5xPYSSuWmEJjP4zS5zkPqQng2Pt9oNEjUdH
         /* after file is uploaded to IPFS, pass the URL to save it on Polygon */
         const url = `${this._uriPrefix}${res.path}`;
-        console.log(url)
         let ipfsHashString = '0x' + CIDTool.format(CIDTool.base32(res.path), { base: 'base16' }).toString().slice(9);
         /* next, create the item */
-        await this.mint(ApiStrategy.REST, ipfsHashString, asset.supply);
+        const tokenId = await this.mint(ApiStrategy.REST, ipfsHashString, asset.supply);
+        this.notifyMinted(asset, tokenId)
         return res.path;
+    }
+
+    async mint(apiStrategy: BaseService.ApiStrategy, ipfsHashString, supply) {
+        const web3Modal = new Web3Modal()
+        const connection = await web3Modal.connect()
+        const provider = new ethers.providers.Web3Provider(connection)
+        const signer = await provider.getSigner()
+
+        let assetContract = new ethers.Contract(assetAddress, AssetABI.abi, signer)
+        const creator = await signer.getAddress();
+        const packId = 1;
+        const hash = ipfsHashString;
+        const rarity = 0;
+        const owner = await signer.getAddress();
+        const data = '0x';
+        switch (apiStrategy) {
+            case BaseService.ApiStrategy.REST:
+                let transaction = await assetContract.mint(creator, packId, hash, supply, rarity, owner, data, 0);
+                let receipt = await transaction.wait()
+                const event = receipt?.events?.filter(
+                    (event: Event) => event.event === 'TransferSingle'
+                )[0];
+                if (!event) {
+                    throw new Error('no TransferSingle event after mint single');
+                }
+                return BigInt(event.args?.id._hex).toString();
+                break;
+            case BaseService.ApiStrategy.GraphQl:
+                throw new Error("Graphql not supported here")
+                break;
+            default:
+                throw new Error("Unrecognized api ")
+                break;
+        }
     }
 
     async getAll(apiStrategy: BaseService.ApiStrategy): Promise<NFTAsset[]> {
@@ -90,6 +124,8 @@ class AssetService extends BaseService {
             if (meta == null || meta.data == null) {
                 return null
             }
+            console.log("meta");
+            console.log(meta.data)
             return ({
                 tokenUri: tokenFullUri,
                 supply: meta.data.supply, name: meta.data.name, description: meta.data.description,
@@ -101,31 +137,27 @@ class AssetService extends BaseService {
         return null;
     }
 
-    async mint(apiStrategy: BaseService.ApiStrategy, ipfsHashString, supply) {
-        const web3Modal = new Web3Modal()
-        const connection = await web3Modal.connect()
-        const provider = new ethers.providers.Web3Provider(connection)
-        const signer = await provider.getSigner()
+    async checkName(name: string) {
+        const response = await axios({
+            method: "get",
+            url: `/nft/checkName?name=${name}`,
+        });
+        return response;
+    }
 
-        let assetContract = new ethers.Contract(assetAddress, AssetABI.abi, signer)
-        const creator = await signer.getAddress();
-        const packId = 1;
-        const hash = ipfsHashString;
-        const rarity = 0;
-        const owner = await signer.getAddress();
-        const data = '0x';
-        switch (apiStrategy) {
-            case BaseService.ApiStrategy.REST:
-                let transaction = await assetContract.mint(creator, packId, hash, supply, rarity, owner, data, 0);
-                await transaction.wait()
-                break;
-            case BaseService.ApiStrategy.GraphQl:
-                throw new Error("Graphql not supported here")
-                break;
-            default:
-                throw new Error("Unrecognized api ")
-                break;
-        }
+    async notifyMinted(asset: NFTAsset, tokenId) {
+        await axios({
+            method: "post",
+            url: `/nft/notifyMinted`,
+            data: {
+                minted_nft: {
+                    token_address: assetAddress, token_id: tokenId.toString(), name: asset.name, description: asset.description,
+                    supply: parseInt(asset.supply.toString()), file_asset_uri: asset.fileAssetUri, file_asset_name: asset.fileAssetName,
+                    file_asset_uri_from_centralized: asset.fileAssetUriFromCentralized, file_2d_uri: asset.file2dUri,
+                    file_3d_uri: asset.file3dUri, asset_type: asset.assetType,
+                }
+            },
+        });
     }
 }
 
