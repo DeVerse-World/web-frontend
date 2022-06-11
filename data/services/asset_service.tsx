@@ -1,14 +1,16 @@
 import BaseService from "./base_service";
-import { Contract, ethers } from "ethers";
-import { assetAddress } from "../../config";
-import { create as ipfsHttpClient } from 'ipfs-http-client'
+import {Contract, ethers} from "ethers";
+import {assetAddress} from "../../config";
+import {create as ipfsHttpClient} from 'ipfs-http-client'
+import CID from 'cids';
 import AssetABI from '../../smart-contracts/artifacts/contracts/v2/Asset.sol/Asset.json'
 import axios from "../api/axios";
 import Web3Modal from "web3modal";
-import { NFTAsset } from "../model/nft_asset";
+import {NFTAsset} from "../model/nft_asset";
 import CIDTool from 'cid-tool';
-import ApiStrategy = BaseService.ApiStrategy;
 import {Event} from "@ethersproject/contracts";
+import {AssetType} from "../enum/asset_type";
+import ApiStrategy = BaseService.ApiStrategy;
 
 class AssetService extends BaseService {
     _uriPrefix = 'https://ipfs.infura.io/ipfs/';
@@ -44,7 +46,10 @@ class AssetService extends BaseService {
     // https://stackoverflow.com/questions/66927626/how-to-store-ipfs-hash-on-ethereum-blockchain-using-smart-contracts
     // # https://github.com/multiformats/js-cid-tool
     // const added = await client.add(data, { cidVersion: 1 })
-    async createAsset(asset: NFTAsset): Promise<string> {
+    async createAsset(preAsset: NFTAsset): Promise<string> {
+        console.log("ABOUT to create");
+        const asset = await this._enrichOpenseaFields(preAsset);
+        console.log(asset);
         const data = JSON.stringify(asset)
         let res = await this._ipfsClient.add(data);
         // https://ipfs.infura.io/ipfs/QmYMaUm2nRb5xPYSSuWmEJjP4zS5zkPqQng2Pt9oNEjUdH
@@ -55,6 +60,27 @@ class AssetService extends BaseService {
         const tokenId = await this.mint(ApiStrategy.REST, ipfsHashString, asset.supply);
         this.notifyMinted(asset, tokenId)
         return res.path;
+    }
+
+    async _enrichOpenseaFields(asset: NFTAsset): Promise<NFTAsset> {
+        console.log("Enrich Opensea Field");
+        asset.animation_url = asset.file3dUri;
+        if (asset.assetType == AssetType.IMAGE_2D) {
+            asset.image = asset.fileAssetUri;
+        } else {
+            asset.image = asset.file2dUri;
+        }
+        asset.image = await this._cidFullV0ToFullV1Base32(asset.image);
+        if (asset.animation_url != "") {
+            asset.animation_url = await this._cidFullV0ToFullV1Base32(asset.animation_url);
+        }
+        return asset;
+    }
+
+    async _cidFullV0ToFullV1Base32(fullV0: string): Promise<string> {
+        let CIDv0 = fullV0.replace("https://ipfs.infura.io/ipfs/", "");
+        let CIDv1 = new CID(CIDv0).toV1().toString('base32');
+        return `https://${CIDv1}.ipfs.infura-ipfs.io/`;
     }
 
     async mint(apiStrategy: BaseService.ApiStrategy, ipfsHashString, supply) {
@@ -118,14 +144,13 @@ class AssetService extends BaseService {
     async _fetchAssetFromEther(data: ethers.Event): Promise<NFTAsset> {
         let [_, from, to, id, supply] = data.args;
         if (from == 0) { // from mint event
-            const tokenUri = await this.assetContract.uri2(id)
-            const tokenFullUri = `https://bafybei${tokenUri}.ipfs.infura-ipfs.io`
+            // const tokenUri = await this.assetContract.uri2(id)
+            // const tokenFullUri = `https://bafybei${tokenUri}.ipfs.infura-ipfs.io`
+            const tokenFullUri = await this.assetContract.uri(id)
             const meta = await axios.get(tokenFullUri)
             if (meta == null || meta.data == null) {
                 return null
             }
-            console.log("meta");
-            console.log(meta.data)
             return ({
                 tokenUri: tokenFullUri,
                 supply: meta.data.supply, name: meta.data.name, description: meta.data.description,

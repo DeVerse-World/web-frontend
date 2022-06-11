@@ -11,4 +11,6 @@ export type NFTAsset = {
     file2dUri?: string;
     file3dUri?: string;
     assetType: AssetType;
+    image?: string;
+    animation_url?: string;
 }
