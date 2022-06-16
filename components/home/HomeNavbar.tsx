@@ -5,19 +5,17 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 {/* <Button target="_blank" className="mr-2" href="https://www.deversenft.app/">Launch App</Button> */ }
 function HomeNavbar(props) {
   return (
-    <Navbar className="px-4 bg-gray-800 drop-shadow-sm" sticky="top" expand="lg" variant="dark">
+    <Navbar className="px-4 bg-black drop-shadow-sm" sticky="top" expand="lg" variant="dark" style={{
+      borderBottom: "1px solid white"
+    }}>
       <Navbar.Brand href="/" >
         <Image
           src={"/images/logo.png"}
-          width={50}
-          height={30}
-          className="d-inline-block align-top mr-2"
+          className="d-inline-block  mr-2"
           alt="Deverse logo" />
         <Image
           src={"/images/logo-text.png"}
-          width={120}
-          height={150}
-          className="d-inline-block align-top mr-2"
+          className="d-inline-block"
           alt="Deverse logo" />
       </Navbar.Brand>
 
