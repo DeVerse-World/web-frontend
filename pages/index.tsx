@@ -1,6 +1,5 @@
 import IntroSection from '../components/home/IntroSection';
 import React, { useState, useEffect } from "react";
-import HomeNavbar from '../components/home/HomeNavbar'
 import ProductSection from '../components/home/ProductsSection';
 import WelcomeSection from '../components/home/WelcomeSection';
 import HighlightFeatureSection from '../components/home/HighlightFeaturesSection';
@@ -35,8 +34,6 @@ function Home(props) {
 
   return (
     <>
-      <HomeNavbar />
-
       <div className='deverse-background'>
         <WelcomeSection />
         <IntroSection />

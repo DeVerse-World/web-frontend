@@ -1,9 +1,10 @@
 import React from "react";
 import { Navbar, Nav, Image, NavLink } from 'react-bootstrap';
 import AccountMenu from "../AccountMenu";
-import 'bootstrap/dist/css/bootstrap.min.css';
-{/* <Button target="_blank" className="mr-2" href="https://www.deversenft.app/">Launch App</Button> */ }
-function HomeNavbar(props) {
+import { withRouter } from "next/router";
+import { WithRouterProps } from "next/dist/client/with-router";
+
+function Homebar(props: WithRouterProps) {
   return (
     <Navbar className="px-4 bg-black drop-shadow-sm h-[60px]" sticky="top" expand="lg" variant="dark" style={{
       borderBottom: "1px solid rgb(71 85 105)",
@@ -22,18 +23,19 @@ function HomeNavbar(props) {
 
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse >
-        <Nav className="ms-auto">
+        <Nav className="ms-auto bg-black">
           {/*<Nav.Link href="/showcase">Showcase</Nav.Link>*/}
           {/* <Nav.Link href="/#roadmap">Roadmap</Nav.Link>
           <Nav.Link href="/#token">Tokenomics</Nav.Link> */}
           {/*<Nav.Link rel="No-Refresh" href="/marketplace" >Marketplace</Nav.Link>*/}
           {/* <Nav.Link className="text-white" href="/marketplace?tab=listing" >Marketplace</Nav.Link> */}
           <Nav.Link className="text-white" href="https://docs.deverse.world" target="_blank">Documentation</Nav.Link>
+          <AccountMenu />
         </Nav>
-        <Nav ><AccountMenu /></Nav>
       </Navbar.Collapse>
     </Navbar >
   );
 }
 
+const HomeNavbar = withRouter(Homebar);
 export default HomeNavbar;

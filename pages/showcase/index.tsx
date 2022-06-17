@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
-import HomeNavbar from '../../components/home/HomeNavbar'
 import ModelViewer from '../../components/ModelViewer';
 import AssetService from "../../data/services/asset_service";
 
@@ -18,7 +17,6 @@ function Showcase() {
 
   return (
     <>
-      <HomeNavbar />
       <div className='text-center'>
         <h1>Models</h1>
       </div>

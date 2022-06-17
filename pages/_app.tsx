@@ -10,6 +10,7 @@ import Head from 'next/head'
 import { AppContextProvider } from '../components/contexts/app_context';
 import LoadingScreen from '../components/LoadingScreen';
 import { SSRProvider } from 'react-bootstrap';
+import HomeNavbar from '../components/common/HomeNavbar';
 
 // optional configuration
 const options = {
@@ -32,6 +33,7 @@ function DeverseApp({ Component, pageProps }) {
             </Head>
             <LoadingScreen />
             <ScrollToTopButton />
+            <HomeNavbar/>
             <Component {...pageProps} />
             <Footer />
           </MetaMaskProvider>

@@ -1,5 +1,4 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import HomeNavbar from "../../components/home/HomeNavbar";
 import { Dropdown, Nav, NavDropdown, NavItem, Row, Tab, Tabs } from "react-bootstrap";
 import BaseService from "../../data/services/base_service";
 import ApiStrategy = BaseService.ApiStrategy;
@@ -72,7 +71,6 @@ export default function Marketplace() {
 
     return (
         <>
-            <HomeNavbar />
             <div className='deverse-background flex flex-column items-center min-h-[90vh]'>
                 <Tab.Container id="tabs-with-dropdown" defaultActiveKey={MarketplaceTab.LISTING} >
                     <Nav className="w-[95%] cursor-pointer text-xl" activeKey={visibleTab}
