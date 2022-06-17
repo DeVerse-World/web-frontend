@@ -5,8 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 {/* <Button target="_blank" className="mr-2" href="https://www.deversenft.app/">Launch App</Button> */ }
 function HomeNavbar(props) {
   return (
-    <Navbar className="px-4 bg-black drop-shadow-sm" sticky="top" expand="lg" variant="dark" style={{
-      borderBottom: "1px solid white"
+    <Navbar className="px-4 bg-black drop-shadow-sm h-[60px]" sticky="top" expand="lg" variant="dark" style={{
+      borderBottom: "1px solid rgb(71 85 105)",
+      height: 60
     }}>
       <Navbar.Brand href="/" >
         <Image
@@ -26,7 +27,7 @@ function HomeNavbar(props) {
           {/* <Nav.Link href="/#roadmap">Roadmap</Nav.Link>
           <Nav.Link href="/#token">Tokenomics</Nav.Link> */}
           {/*<Nav.Link rel="No-Refresh" href="/marketplace" >Marketplace</Nav.Link>*/}
-          <Nav.Link className="text-white" href="/marketplace?tab=listing" >Marketplace</Nav.Link>
+          {/* <Nav.Link className="text-white" href="/marketplace?tab=listing" >Marketplace</Nav.Link> */}
           <Nav.Link className="text-white" href="https://docs.deverse.world" target="_blank">Documentation</Nav.Link>
         </Nav>
         <Nav ><AccountMenu /></Nav>
