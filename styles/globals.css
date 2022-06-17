@@ -170,27 +170,17 @@ a.dropdown-item {
     height: 75%;
 }
 
-.btn-primary,
-.btn-danger {
-    font-weight: 600;
-}
-
-.banner-text {
-    margin: 0px;
-    vertical-align: middle;
-    padding: 19px;
-}
-
-.App {
-    text-align: center;
-}
-
 .App-logo {
     height: 40vmin;
     pointer-events: none;
 }
 
-@media only screen and (max-width: 600px) {
+iframe.rpo {
+    width: 1280px;
+    height: 800px;
+}
+
+@media only screen and (max-width: 800px) {
     .deverse-title {
         font-weight: 900;
         font-size: 1.7rem;
@@ -203,8 +193,10 @@ a.dropdown-item {
     .deverse-title-secondary {
         font-size: 2.5rem;
     }
-    .details {
-        text-align: left!important;
+    iframe.rpo {
+        width: 100vw;
+        min-height: 50vh;
+        height: 70vh;
     }
 }
 

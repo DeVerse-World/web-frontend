@@ -19,8 +19,7 @@ export default function NFTList(props: NFTListProps) {
             return null;
         }
         
-        let previewLink = `showcase?model=${nft.file3dUri.substring(nft.file3dUri.lastIndexOf('/') + 1)}`;
-        // let link = `showcase?model=${}`;
+        let previewLink = `asset-preview?model=${nft.file3dUri.substring(nft.file3dUri.lastIndexOf('/') + 1)}`;
         return (
             <a className="no-underline font-bold" style={{
                 color: "rgb(97 198 208)"

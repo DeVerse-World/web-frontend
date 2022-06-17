@@ -24,7 +24,6 @@ function Homebar(props: WithRouterProps) {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse >
         <Nav className="ms-auto bg-black">
-          {/*<Nav.Link href="/showcase">Showcase</Nav.Link>*/}
           {/* <Nav.Link href="/#roadmap">Roadmap</Nav.Link>
           <Nav.Link href="/#token">Tokenomics</Nav.Link> */}
           {/*<Nav.Link rel="No-Refresh" href="/marketplace" >Marketplace</Nav.Link>*/}
