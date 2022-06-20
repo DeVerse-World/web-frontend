@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import ProductSection from '../components/home/ProductsSection';
 import WelcomeSection from '../components/home/WelcomeSection';
 import HighlightFeatureSection from '../components/home/HighlightFeaturesSection';
+import Footer from '../components/common/Footer';
 
 function Home(props) {
   // const [totalSupply, setTotalSupply] = useState("--")
@@ -33,30 +34,13 @@ function Home(props) {
 
 
   return (
-    <>
       <div className='deverse-background'>
         <WelcomeSection />
         <IntroSection />
         <HighlightFeatureSection />
         <ProductSection />
+        <Footer />
       </div>
-
-
-      {/* <TokenInfo timerText={timerText} holders={holders} price={price} mcap={mcap} /> */}
-
-      {/* <Details/> */}
-      {/* <hr id="team"  style={{marginBottom: "200px", marginTop: "200px"}}/>
-    <Team/> */}
-      {/* <hr id="roadmap" style={{marginBottom: "200px", marginTop: "200px"}}/>
-    <Timeline /> */}
-      {/* <hr id="token" style={{marginBottom: "200px", marginTop: "200px"}}/>
-    <Token holders={holders} totalSupply={totalSupply} circulatingSupply={circulatingSupply} price={price} mcap={mcap}/>
-    <hr id="partners" style={{marginBottom: "200px", marginTop: "200px"}}/>
-    <Partners /> */}
-      {/* <TeamMembersSection /> */}
-      {/* <hr id="contact" style={{ marginBottom: "200px", marginTop: "200px" }} /> */}
-      {/* <div style={{ marginBottom: "200px" }}></div> */}
-    </>
   );
 }
 

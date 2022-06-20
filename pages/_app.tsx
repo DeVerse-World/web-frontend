@@ -1,6 +1,6 @@
 import '../styles/globals.css';
 import '../styles/Styles.css';
-import Footer from '../components/common/Footer'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 import { MetaMaskProvider } from "metamask-react";
 import { transitions, positions, Provider as AlertProvider } from 'react-alert'
@@ -11,6 +11,7 @@ import { AppContextProvider } from '../components/contexts/app_context';
 import LoadingScreen from '../components/LoadingScreen';
 import { SSRProvider } from 'react-bootstrap';
 import HomeNavbar from '../components/common/HomeNavbar';
+import Sidebar from '../components/Sidebar';
 
 // optional configuration
 const options = {
@@ -32,10 +33,18 @@ function DeverseApp({ Component, pageProps }) {
               <title>Deverse</title>
             </Head>
             <LoadingScreen />
-            <ScrollToTopButton />
-            <HomeNavbar/>
-            <Component {...pageProps} />
-            <Footer />
+            {/* <ScrollToTopButton /> */}
+            <HomeNavbar />
+            <div className='flex flex-row'>
+              <Sidebar />
+              <section style={{
+                overflow: 'overlay',
+                maxHeight: 'calc(100vh - 60px)',
+                width: "100%"
+              }}>
+                <Component {...pageProps} />
+              </section>
+            </div>
           </MetaMaskProvider>
         </AppContextProvider>
       </SSRProvider>
