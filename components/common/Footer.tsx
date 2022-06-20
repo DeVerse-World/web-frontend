@@ -12,7 +12,7 @@ import { SiDiscord, SiTiktok } from 'react-icons/si';
 
 function Footer(props) {
   return (
-    <div className="flex flex-col h-auto bg-[url('/images/bg-highlight.png')]" style={{
+    <div className="flex flex-col bg-[url('/images/bg-highlight.png')]" style={{
       borderTop: "1px solid rgb(71 85 105)",
       textAlign: "center",
       color: "white",

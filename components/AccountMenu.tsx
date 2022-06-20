@@ -25,10 +25,10 @@ function AccountMenu() {
         setBoxContent("Metamask unavailable");
         break;
       case "notConnected":
-        setBoxContent("Connect to Metamask");
+        setBoxContent("Connect");
         break;
       case "connecting":
-        setBoxContent("Connecting to Metamask");
+        setBoxContent("Connecting");
         break;
       case "connected":
         setBoxContent(account);
