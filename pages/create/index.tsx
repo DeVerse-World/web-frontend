@@ -9,7 +9,7 @@ function Create() {
             return;
         }
         let glbUri = e.data;
-        console.log(e);
+        console.log(glbUri);
     }
 
     useEffect(() => {
