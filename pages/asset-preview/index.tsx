@@ -39,7 +39,7 @@ function AssetPreviewScreen(props: WithRouterProps) {
     return (
         <>
             <section className='flex flex-col justify-center align-middle'>
-                <iframe hidden={!isRPOVisible} allow="camera *; microphone *" className='rpo' src='https://deverse.readyplayer.me/avatar?frameApi'></iframe>
+                {/* <iframe hidden={!isRPOVisible} allow="camera *; microphone *" className='rpo' src='https://deverse.readyplayer.me/avatar?frameApi'></iframe> */}
                 {modelPath && <ModelViewer filePath={modelPath} />}
                 <Footer/>
             </section>

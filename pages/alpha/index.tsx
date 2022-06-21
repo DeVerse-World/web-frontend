@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { Nav, Tab } from "react-bootstrap";
 import { AiFillWindows } from "react-icons/ai";
+import Footer from "../../components/common/Footer";
 function Alpha() {
     const router = useRouter();
 
@@ -30,7 +31,7 @@ function Alpha() {
                 </Nav>
                 <Tab.Content className="min-h-[70vh]">
                     <Tab.Pane eventKey={"Info"}>
-                        
+
                     </Tab.Pane>
                     <Tab.Pane eventKey={"Verse"}>
 
@@ -59,6 +60,7 @@ function Alpha() {
                     </Tab.Pane> */}
                 </Tab.Content>
             </Tab.Container>
+            <Footer />
         </section>
     );
 }
