@@ -24,7 +24,9 @@ function Alpha() {
                     <Nav.Item>
                         <Nav.Link eventKey={"Verse"}>Verses</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item className="flex flex-row items-center text-white rounded-3xl py-2 px-4 bg-deverse-gradient" >
+                    <Nav.Item className="flex flex-row items-center text-white rounded-3xl py-2 px-4 bg-deverse-gradient" onClick={() => {
+                        window.open("https://drive.google.com/file/d/1va5Nyvzbz0PfheMk2Ma10JVuN4rsGliH/view", "_blank")
+                    }} >
                         <span className="me-2">Download</span>
                         <AiFillWindows fontSize="1.5rem" />
                     </Nav.Item>
