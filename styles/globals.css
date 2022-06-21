@@ -50,6 +50,10 @@ body * {
 }
 
 .nav-item a {
+    background: #0197f6;
+}
+
+.nav-item a {
     color: #ffffff !important;
 }
 
@@ -70,7 +74,7 @@ a.dropdown-item {
     margin-bottom: 1.1rem;
 }
 
-.deverse-background {
+.bg-deverse {
     background-image: radial-gradient(closest-side, rgb(22, 74, 124), rgba(2, 11, 64, 0.7)), url(/images/bg-highlight.png);
 }
 
@@ -78,16 +82,16 @@ a.dropdown-item {
     border: 2px solid rgb(97 198 208)
 }
 
-.deverse-gradient {
+.bg-deverse-gradient {
     background-color: rgb(97 198 208);
     background-image: linear-gradient(to bottom, rgb(97 198 208), rgb(64 175 217));
 }
 
-.deverse-gradient:hover {
+.bg-deverse-gradient:hover {
     background-image: linear-gradient(to bottom, rgb(127 198 208), rgb(94 175 217));
 }
 
-.deverse-gradient-text {
+.txt-deverse-gradient {
     background: -webkit-linear-gradient(-86deg, rgb(65, 117, 230), rgb(18, 54, 173));
     -webkit-background-clip: text;
     -webkit-text-stroke: 3px transparent;

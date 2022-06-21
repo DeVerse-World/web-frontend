@@ -34,7 +34,7 @@ function Home(props) {
 
 
   return (
-      <div className='deverse-background'>
+      <div className='bg-deverse'>
         <WelcomeSection />
         <IntroSection />
         <HighlightFeatureSection />

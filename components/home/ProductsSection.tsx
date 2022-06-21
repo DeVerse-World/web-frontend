@@ -64,7 +64,7 @@ function ProductSection(props) {
 
     return (
         <section className="p-4 text-white text-center ">
-            <div className="text-6xl font-bold uppercase deverse-gradient deverse-gradient-text deverse-title">
+            <div className="text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title">
                 Our products
             </div>
             <div className="flex flex-row flex-wrap justify-center">
@@ -126,7 +126,7 @@ function ProductSectionItem(props: ProductionSectionData) {
                     width={300} height={300}
                 />
             </div>
-            <div className="rounded-md deverse-gradient
+            <div className="rounded-md bg-deverse-gradient
                 uppercase cursor-pointer h-16
                 flex flex-col justify-center"
                 onClick={onShowDescription}>
@@ -138,7 +138,7 @@ function ProductSectionItem(props: ProductionSectionData) {
                 {/* <Modal.Header closeButton>
                     <Modal.Title>{props.name}</Modal.Title>
                 </Modal.Header> */}
-                <Modal.Body className="text-white text-lg deverse-gradient">
+                <Modal.Body className="text-white text-lg bg-deverse-gradient">
                     <span>{props.description}</span>
                 </Modal.Body>
                 {/* <Modal.Footer>

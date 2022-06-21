@@ -130,7 +130,7 @@ export default function MintNFT() {
 
     return (
         <section className="flex flex-col">
-            <div className="flex justify-center deverse-background min-h-[80vh]">
+            <div className="flex justify-center bg-deverse min-h-[80vh]">
                 <Form className="flex flex-col items-center text-white my-8 space-y-2 min-w-[300px] w-[40vw]"
                     validated={formValidated}
                     onSubmit={createItem}>
@@ -196,7 +196,7 @@ export default function MintNFT() {
                             aria-label="Asset URL (e.g .png/ .pak)"
                             value={fileAssetUri || ""}
                         />
-                        <Button className='deverse-gradient'
+                        <Button className='bg-deverse-gradient'
                             onClick={e => {
                                 uploadFileAssetRef.current.click();
                             }}>Choose File</Button>
@@ -208,7 +208,7 @@ export default function MintNFT() {
                             aria-label="Asset 2D URL (e.g .png)"
                             value={file2dUri || ""}
                         />
-                        <Button className='deverse-gradient'
+                        <Button className='bg-deverse-gradient'
                             onClick={e => {
                                 uploadFile2dRef.current.click();
                             }}>Choose File</Button>
@@ -221,7 +221,7 @@ export default function MintNFT() {
                             aria-label="Asset 3D URL (e.g .gltf)"
                             value={file3dUri || ""}
                         />
-                        <Button className='deverse-gradient'
+                        <Button className='bg-deverse-gradient'
                             onClick={e => {
                                 uploadFile3dRef.current.click();
                             }}>Choose File</Button>
@@ -263,7 +263,7 @@ export default function MintNFT() {
                     />
                     {
                     }
-                    <Button type="submit" className="font-bold deverse-gradient rounded-[16px] py-3 px-8"
+                    <Button type="submit" className="font-bold bg-deverse-gradient rounded-[16px] py-3 px-8"
                         onClick={createItem} >
                         Create Digital Asset
                     </Button>
@@ -278,7 +278,7 @@ export default function MintNFT() {
                         });
                         // props.onNftCreated(assetType, assetOnlinePath);
                     }}
-                    contentClassName="deverse-gradient" dialogClassName="deverse-dialog">
+                    contentClassName="bg-deverse-gradient" dialogClassName="deverse-dialog">
                     <Modal.Body className="text-white text-lg break-words">
                         Mint successfully!<br />
                         Asset generated at: <Link href={AssetService.getFullAssetUrl(assetOnlinePath)}>{AssetService.getFullAssetUrl(assetOnlinePath)}</Link>

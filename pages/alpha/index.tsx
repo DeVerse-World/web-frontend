@@ -1,11 +1,66 @@
 import { useRouter } from "next/router";
-
+import { Nav, Tab } from "react-bootstrap";
+import { AiFillWindows } from "react-icons/ai";
 function Alpha() {
     const router = useRouter();
 
-    return (<div>
-        <button onClick={() => router.push('/mint-nft')}>Test</button>
-    </div>)
+    return (
+        <section className='bg-deverse h-[100%]'>
+            {/* <button onClick={() => router.push('/mint-nft')}>Test</button> */}
+            <Tab.Container id="tabs-with-dropdown" defaultActiveKey={"Info"} >
+                <Nav className="w-[95%] cursor-pointer text-xl  align-middle" activeKey={"Info"} >
+                    <Nav.Item >
+                        <Nav.Link eventKey={"Info"}>Info</Nav.Link>
+                    </Nav.Item>
+                    {/* <NavDropdown id="nav-dropdown-within-tab" title="Listing" menuVariant="dark" color="black">
+                        <Dropdown.Item active={visibleTab == MarketplaceTab.LISTING} eventKey={MarketplaceTab.LISTING}>All</Dropdown.Item>
+                        <Dropdown.Item active={visibleTab == MarketplaceTab.TWO_D_IMAGE} eventKey={MarketplaceTab.TWO_D_IMAGE}>2D Image</Dropdown.Item>
+                        <Dropdown.Item active={visibleTab == MarketplaceTab.SKIN} eventKey={MarketplaceTab.SKIN}>Character Skin</Dropdown.Item>
+                        <Dropdown.Item active={visibleTab == MarketplaceTab.RACE} eventKey={MarketplaceTab.RACE}>Character Race</Dropdown.Item>
+                        <Dropdown.Item active={visibleTab == MarketplaceTab.GAME_MODE} eventKey={MarketplaceTab.GAME_MODE}>Game Mode</Dropdown.Item>
+                        <Dropdown.Item active={visibleTab == MarketplaceTab.BOT_LOGIC} eventKey={MarketplaceTab.BOT_LOGIC}>Bot Logic</Dropdown.Item>
+                    </NavDropdown> */}
+                    <Nav.Item>
+                        <Nav.Link eventKey={"Verse"}>Verses</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className="flex flex-row items-center text-white rounded-3xl py-2 px-4 bg-deverse-gradient" >
+                        <span className="me-2">Download</span>
+                        <AiFillWindows fontSize="1.5rem" />
+                    </Nav.Item>
+                </Nav>
+                <Tab.Content className="min-h-[70vh]">
+                    <Tab.Pane eventKey={"Info"}>
+                        
+                    </Tab.Pane>
+                    <Tab.Pane eventKey={"Verse"}>
+
+                    </Tab.Pane>
+                    {/* <Tab.Pane eventKey={MarketplaceTab.SKIN}>
+                        <NFTList data={nfts.filter(e => e.assetType == AssetType.SKIN)} onOpen={onOpenNFTDescription} />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey={MarketplaceTab.RACE}>
+                        <NFTList data={nfts.filter(e => e.assetType == AssetType.RACE)} onOpen={onOpenNFTDescription} />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey={MarketplaceTab.GAME_MODE}>
+                        <NFTList data={nfts.filter(e => e.assetType == AssetType.GAME_MODE)} onOpen={onOpenNFTDescription} />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey={MarketplaceTab.BOT_LOGIC}>
+                        <NFTList data={nfts.filter(e => e.assetType == AssetType.BOT_LOGIC)} onOpen={onOpenNFTDescription} />
+                    </Tab.Pane>
+                    <Tab.Pane active={visibleTab == MarketplaceTab.MINT_NFT} eventKey={MarketplaceTab.MINT_NFT}>
+                        <CreateNftAssetSection
+                            fileUri={fileUri}
+                            onNftCreated={(assetType: AssetType, fileUri: string) => {
+                                //TODO: should we reload everything?
+                                loadNFTs(null);
+                                onSelectTab(MarketplaceTab.LISTING);
+                            }}
+                        />
+                    </Tab.Pane> */}
+                </Tab.Content>
+            </Tab.Container>
+        </section>
+    );
 }
 
 export default Alpha;

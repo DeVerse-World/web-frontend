@@ -29,7 +29,7 @@ export default function NFTList(props: NFTListProps) {
 
     const renderNFTItem = (nft: NFTAsset, index: number) => {
         return (
-            <div key={index} className="deverse-border w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white"
+            <div key={index} className="deverse-border w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white m-2"
             >
                 <div className="flex justify-center h-[225px] p-4 ">
                     <img src={get2dImage(nft)} />
@@ -61,7 +61,7 @@ export default function NFTList(props: NFTListProps) {
     }
 
     return (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4 min-h-[60vh]">
+        <div className="flex flex-row flex-wrap">
             {
                 props.data.map(renderNFTItem)
             }

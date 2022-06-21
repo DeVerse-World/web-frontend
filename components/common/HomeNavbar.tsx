@@ -42,14 +42,14 @@ function Homebar(props: WithRouterProps) {
 
   const renderAccount = () => {
     let element = (
-      <button onClick={connect} className="text-white p-2 rounded-md deverse-gradient h-[40px]">
+      <button onClick={connect} className="text-white p-2 rounded-md bg-deverse-gradient h-[40px]">
         {boxContent}
       </button>
     );
 
     if (status == "connected") {
       element = (
-        <NavDropdown title={account.substring(0, 5) + ".." + account.slice(-5)} className="deverse-gradient"
+        <NavDropdown title={account.substring(0, 5) + ".." + account.slice(-5)} className="bg-deverse-gradient"
           id="account-dropdown"
           menuVariant="dark"
         // show={showDropdown}

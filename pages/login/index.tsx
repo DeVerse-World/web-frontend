@@ -44,7 +44,7 @@ export default function LoginLink(props) {
     }, [router])
     return (
         <>
-            <div className='deverse-background h-[90vh] text-white text-center'>
+            <div className='bg-deverse h-[90vh] text-white text-center'>
                 {getMsg()}
 
             </div>
