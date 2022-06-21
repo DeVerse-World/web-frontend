@@ -20,7 +20,7 @@ function Create() {
     }, [])
 
     return (
-        <section className='bg-deverse h-[100%]'>
+        <section className='bg-deverse min-h-[90vh]'>
             {/* <button onClick={() => router.push('/mint-nft')}>Test</button> */}
             <Tab.Container id="tabs-with-dropdown" defaultActiveKey={"Avatar"} >
                 <Nav className="w-[95%] cursor-pointer text-xl  align-middle" activeKey={"Avatar"} >
@@ -42,9 +42,11 @@ function Create() {
                         <Nav.Link eventKey={"UE SDK"}>UE SDK</Nav.Link>
                     </Nav.Item>
                 </Nav>
-                <Tab.Content className="min-h-[70vh]">
+                <Tab.Content >
                     <Tab.Pane eventKey={"Avatar"}>
-                        <iframe allow="camera *; microphone *" className='rpo' src='https://deverse.readyplayer.me/avatar?frameApi'></iframe>
+                        <iframe allow="camera *; microphone *" 
+                        className='rpo' 
+                        src='https://deverse.readyplayer.me/avatar?frameApi'></iframe>
                     </Tab.Pane>
                     <Tab.Pane eventKey={"In-game Editor"}>
 
