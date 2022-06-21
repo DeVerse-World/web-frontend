@@ -32,7 +32,7 @@ function AccountMenu() {
         break;
       case "connected":
         setBoxContent(account);
-        WalletService.connectToMetamask(account);
+        // WalletService.connectToMetamask(account);
         break;
       default:
         break;
@@ -49,12 +49,12 @@ function AccountMenu() {
     element = (
       <NavDropdown title={account.substring(0, 5) + ".." + account.slice(-5)} className="deverse-gradient"
         id="account-dropdown"
-        // show={showDropdown}
+        show={showDropdown}
         // onMouseEnter={() => setShowDropdown(true)}
         // onMouseLeave={() => setShowDropdown(false)}
       >
         {/*<NavDropdown.Item onClick={openAccountDashboard}>Dashboard</NavDropdown.Item>*/}
-        {/*<NavDropdown.Item onClick={onLogout}>Logout</NavDropdown.Item>*/}
+        <NavDropdown.Item onClick={onLogout}>Logout</NavDropdown.Item>
       </NavDropdown>
     )
   }

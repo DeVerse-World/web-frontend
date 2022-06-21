@@ -33,13 +33,14 @@ export default function Marketplace() {
 
 
     useEffect(() => {
-        // loadNFTs(null)
+        loadNFTs(null)
     }, [])
 
     const loadNFTs = async (query: string) => {
         setViewState(ViewState.LOADING)
         let assets = await AssetService.getAll(ApiStrategy.REST);
         setNfts(assets.filter((asset) => asset != null));
+        console.log(assets)
         setViewState(ViewState.SUCCESS)
     }
 
@@ -67,9 +68,27 @@ export default function Marketplace() {
     }
 
     const renderContent = () => {
-
+        let data = nfts;
+        console.log(visibleTab)
+        switch (visibleTab) {
+            case MarketplaceTab.TWO_D_IMAGE:
+                data = data.filter(e => e.assetType == AssetType.IMAGE_2D);
+                break;
+            case MarketplaceTab.SKIN:
+                data = data.filter(e => e.assetType == AssetType.SKIN);
+                break;
+            case MarketplaceTab.RACE:
+                data = data.filter(e => e.assetType == AssetType.RACE);
+                break;
+            case MarketplaceTab.BOT_LOGIC:
+                data = data.filter(e => e.assetType == AssetType.BOT_LOGIC);
+                break;
+            case MarketplaceTab.GAME_MODE:
+                data = data.filter(e => e.assetType == AssetType.GAME_MODE);
+                break;
+        }
         return (
-            <NFTList data={nfts} onOpen={onOpenNFTDescription} />
+            <NFTList data={data} onOpen={onOpenNFTDescription} />
         )
     }
 
@@ -82,7 +101,7 @@ export default function Marketplace() {
                     <Accordion.Header  >NFT Type</Accordion.Header>
                     <Accordion.Body className="flex flex-col bg-gray-900">
                         <ListingTabComponent label="All" isSelected={visibleTab == MarketplaceTab.All}
-                            onSelect={() =>  onSelectTab(MarketplaceTab.All)} />
+                            onSelect={() => onSelectTab(MarketplaceTab.All)} />
                         <ListingTabComponent label="2D Image" isSelected={visibleTab == MarketplaceTab.TWO_D_IMAGE}
                             onSelect={() => onSelectTab(MarketplaceTab.TWO_D_IMAGE)} />
                         <ListingTabComponent label="Character Skin" isSelected={visibleTab == MarketplaceTab.SKIN}

@@ -51,7 +51,7 @@ export default function NFTList(props: NFTListProps) {
                     </div>
                     <div className="grow flex flex-row justify-end">
                         <a title={nft.name} href={nft.fileAssetUri} target="_blank">
-                            <img title={"ic-download.png"} src={"/images/ic-download.png"} width={32} height={32} />
+                            <img title={"Download"} src={"/images/ic-download.png"} width={32} height={32} />
                         </a>
                     </div>
 

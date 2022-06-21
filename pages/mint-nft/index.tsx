@@ -11,6 +11,7 @@ import { AssetType } from "../../data/enum/asset_type";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import NFTDetailCard from "../../components/asset/NFTDetailCard";
 import Footer from "../../components/common/Footer";
+import Link from "next/link";
 
 export default function MintNFT() {
     const { setViewState } = useContext(AppContext);
@@ -78,11 +79,11 @@ export default function MintNFT() {
     const createItem = async (event) => {
         setFormValidated(true);
         event.preventDefault();
-        const isValidName = await validateName();
-        if (!isValidName) {
-            alert("invalid name, either locked or used by others")
-            return;
-        }
+        // const isValidName = await validateName();
+        // if (!isValidName) {
+        //     alert("invalid name, either locked or used by others")
+        //     return;
+        // }
         if (!(assetName && assetType && assetSupply > 0 && fileAssetUri)) {
             return;
         }
@@ -98,7 +99,7 @@ export default function MintNFT() {
             file3dUri: file3dUri,
         };
         try {
-            setViewState(ViewState.LOADING);
+            setViewState(ViewState.LOADING);       
             const addedPath = await AssetService.createAsset(data);
             setAssetOnlinePath(addedPath);
             setShowModal(true);
@@ -280,7 +281,7 @@ export default function MintNFT() {
                     contentClassName="deverse-gradient" dialogClassName="deverse-dialog">
                     <Modal.Body className="text-white text-lg break-words">
                         Mint successfully!<br />
-                        Asset generated at: <a target="_blank" href={AssetService.getFullAssetUrl(assetOnlinePath)}>{AssetService.getFullAssetUrl(assetOnlinePath)}</a>
+                        Asset generated at: <Link href={AssetService.getFullAssetUrl(assetOnlinePath)}>{AssetService.getFullAssetUrl(assetOnlinePath)}</Link>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button style={{

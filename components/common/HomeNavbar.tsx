@@ -5,15 +5,12 @@ import { withRouter } from "next/router";
 import { WithRouterProps } from "next/dist/client/with-router";
 import wallet_service from "../../data/services/wallet_service";
 import { useMetaMask } from "metamask-react";
+import Link from "next/link";
 
 function Homebar(props: WithRouterProps) {
   const { status, connect, account } = useMetaMask();
   const [boxContent, setBoxContent] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
-
-  const onLogout = () => {
-    alert('not yet implemented')
-  }
 
   const openAccountDashboard = () => {
     window.location.href = "/account";
@@ -54,12 +51,12 @@ function Homebar(props: WithRouterProps) {
       element = (
         <NavDropdown title={account.substring(0, 5) + ".." + account.slice(-5)} className="deverse-gradient"
           id="account-dropdown"
+          menuVariant="dark"
         // show={showDropdown}
         // onMouseEnter={() => setShowDropdown(true)}
         // onMouseLeave={() => setShowDropdown(false)}
         >
-          {/*<NavDropdown.Item onClick={openAccountDashboard}>Dashboard</NavDropdown.Item>*/}
-          {/*<NavDropdown.Item onClick={onLogout}>Logout</NavDropdown.Item>*/}
+          {/* <NavDropdown.Item onClick={openAccountDashboard}>Dashboard</NavDropdown.Item> */}
         </NavDropdown>
       )
     }
@@ -76,18 +73,20 @@ function Homebar(props: WithRouterProps) {
       height: 60,
       borderBottom: "1px solid rgb(71 85 105)",
     }}>
+      <Link href="/" >
+        <span className="flex flex-row cursor-pointer">
+          <Image
+            src={"/images/logo.png"}
+            className="w-[40px] h-[40px]"
+            alt="Deverse logo" />
+          <Image
+            src={"/images/logo-text.png"}
+            className="h-[40px] mx-2"
+            alt="Deverse text logo" />
+        </span>
+      </Link>
       <span className="flex flex-row">
-        <Image
-          src={"/images/logo.png"}
-          className="w-[40px] h-[40px]"
-          alt="Deverse logo" />
-        <Image
-          src={"/images/logo-text.png"}
-          className="h-[40px] mx-2"
-          alt="Deverse text logo" />
-      </span>
-      <span className="flex flex-row">
-        <Nav.Link className="text-white" href="https://docs.deverse.world" target="_blank">Documentation</Nav.Link>
+        {/* <Nav.Link className="text-white" href="https://docs.deverse.world" target="_blank">Documentation</Nav.Link> */}
         {renderAccount()}
       </span>
 

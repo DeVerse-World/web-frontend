@@ -5,6 +5,7 @@ import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from '../../data/enum/asset_type';
 import { AppContext, ViewState } from "../contexts/app_context";
 import {bool} from "prop-types";
+import Link from "next/link";
 
 // 2dImg, race, skin, gameplay, bot
 
@@ -278,7 +279,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                 contentClassName="deverse-gradient" dialogClassName="deverse-dialog">
                 <Modal.Body className="text-white text-lg break-words">
                     Mint successfully!<br />
-                    Asset generated at: <a target="_blank" href={AssetService.getFullAssetUrl(assetOnlinePath)}>{AssetService.getFullAssetUrl(assetOnlinePath)}</a>
+                    Asset generated at: <Link href={AssetService.getFullAssetUrl(assetOnlinePath)}>{AssetService.getFullAssetUrl(assetOnlinePath)}</Link>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button style={{

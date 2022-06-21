@@ -39,6 +39,7 @@ function DeverseApp({ Component, pageProps }) {
               <Sidebar />
               <section style={{
                 overflow: 'overlay',
+                height: 'calc(100vh - 60px)',
                 maxHeight: 'calc(100vh - 60px)',
                 width: "100%"
               }}>
