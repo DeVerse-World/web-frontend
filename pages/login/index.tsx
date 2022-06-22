@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 import StorageService from "../../data/services/storage_service";
-import HomeNavbar from "../../components/home/HomeNavbar";
 import { useMetaMask } from "metamask-react";
 import WalletService from "../../data/services/wallet_service";
 
@@ -45,8 +44,7 @@ export default function LoginLink(props) {
     }, [router])
     return (
         <>
-            <HomeNavbar />
-            <div className='deverse-background h-[90vh] text-white text-center'>
+            <div className='bg-deverse h-[90vh] text-white text-center'>
                 {getMsg()}
 
             </div>

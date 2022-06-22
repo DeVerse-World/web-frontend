@@ -17,12 +17,11 @@ class AssetService extends BaseService {
     // @ts-ignore
     _ipfsClient = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
 
-    assetContract: Contract = null
+    assetContract: Contract = new ethers.Contract(assetAddress, AssetABI.abi, this.provider);
     transferSingleEventFilter = null
 
     constructor() {
         super()
-        this.assetContract = new ethers.Contract(assetAddress, AssetABI.abi, this.provider)
         this.transferSingleEventFilter = this.assetContract.filters.TransferSingle()
     }
 
@@ -171,7 +170,7 @@ class AssetService extends BaseService {
     }
 
     async notifyMinted(asset: NFTAsset, tokenId) {
-        await axios({
+        axios({
             method: "post",
             url: `/nft/notifyMinted`,
             data: {

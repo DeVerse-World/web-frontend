@@ -26,8 +26,8 @@ function WelcomeSection(props) {
         <Carousel.Item>
           <div className="bg-[url('/images/02.png')] bg-cover bg-center h-[100vh] flex flex-col justify-between">
             <div className=" mx-auto text-center">
-              <h6 className="mt-24 text-xl font-bold deverse-gradient-text" >WELCOME TO DEVERSE</h6>
-              <h1 className="mt-4 deverse-title uppercase deverse-gradient-text ">A Sandbox (De)centralized Meta(Verse)</h1>
+              <h6 className="mt-24 text-xl font-bold txt-deverse-gradient" >WELCOME TO DEVERSE</h6>
+              <h1 className="mt-4 deverse-title uppercase txt-deverse-gradient ">A Sandbox (De)centralized Meta(Verse)</h1>
             </div>
           </div>
         </Carousel.Item>

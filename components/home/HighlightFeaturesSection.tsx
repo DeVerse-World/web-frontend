@@ -9,7 +9,7 @@ function HighlightFeatureSection(props) {
                 // backgroundImage: "radial-gradient(closest-side, rgb(22, 74, 124), rgba(39, 141, 202,0.8))",
                 // backgroundBlendMode: "overlay"
             }}>
-                {/* <div className="deverse-title mx-auto text-center text-6xl py-8 uppercase max-w-[700px] deverse-gradient deverse-gradient-text">
+                {/* <div className="deverse-title mx-auto text-center text-6xl py-8 uppercase max-w-[700px] bg-deverse-gradient txt-deverse-gradient">
                 What can you do in Deverse?
             </div> */}
                 {/* <div className="flex flex-row items-center justify-center py-4 bg-gradient-to-b from-blue-800/75 to-blue-400/75"> */}

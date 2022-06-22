@@ -25,14 +25,14 @@ function AccountMenu() {
         setBoxContent("Metamask unavailable");
         break;
       case "notConnected":
-        setBoxContent("Connect to Metamask");
+        setBoxContent("Connect");
         break;
       case "connecting":
-        setBoxContent("Connecting to Metamask");
+        setBoxContent("Connecting");
         break;
       case "connected":
         setBoxContent(account);
-        WalletService.connectToMetamask(account);
+        // WalletService.connectToMetamask(account);
         break;
       default:
         break;
@@ -40,21 +40,21 @@ function AccountMenu() {
   }, [status])
 
   let element = (
-    <Button onClick={connect} className="deverse-gradient">
+    <Button onClick={connect} className="bg-deverse-gradient">
       {boxContent}
     </Button>
   );
 
   if (status == "connected") {
     element = (
-      <NavDropdown title={account.substring(0, 5) + ".." + account.slice(-5)} className="deverse-gradient"
+      <NavDropdown title={account.substring(0, 5) + ".." + account.slice(-5)} className="bg-deverse-gradient"
         id="account-dropdown"
-        // show={showDropdown}
+        show={showDropdown}
         // onMouseEnter={() => setShowDropdown(true)}
         // onMouseLeave={() => setShowDropdown(false)}
       >
         {/*<NavDropdown.Item onClick={openAccountDashboard}>Dashboard</NavDropdown.Item>*/}
-        {/*<NavDropdown.Item onClick={onLogout}>Logout</NavDropdown.Item>*/}
+        <NavDropdown.Item onClick={onLogout}>Logout</NavDropdown.Item>
       </NavDropdown>
     )
   }

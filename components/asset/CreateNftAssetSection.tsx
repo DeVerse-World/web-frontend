@@ -5,6 +5,7 @@ import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from '../../data/enum/asset_type';
 import { AppContext, ViewState } from "../contexts/app_context";
 import {bool} from "prop-types";
+import Link from "next/link";
 
 // 2dImg, race, skin, gameplay, bot
 
@@ -198,7 +199,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                         aria-label="Asset URL (e.g .png/ .pak)"
                         value={fileAssetUri || ""}
                     />
-                    <Button className='deverse-gradient'
+                    <Button className='bg-deverse-gradient'
                         onClick={e => {
                             uploadFileAssetRef.current.click();
                         }}>Choose File</Button>
@@ -210,7 +211,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                         aria-label="Asset 2D URL (e.g .png)"
                         value={file2dUri || ""}
                     />
-                    <Button className='deverse-gradient'
+                    <Button className='bg-deverse-gradient'
                         onClick={e => {
                             uploadFile2dRef.current.click();
                         }}>Choose File</Button>
@@ -223,7 +224,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                         aria-label="Asset 3D URL (e.g .gltf)"
                         value={file3dUri || ""}
                     />
-                    <Button className='deverse-gradient'
+                    <Button className='bg-deverse-gradient'
                         onClick={e => {
                             uploadFile3dRef.current.click();
                         }}>Choose File</Button>
@@ -265,7 +266,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                 />
                 {
                 }
-                <Button type="submit" className="font-bold deverse-gradient rounded-[16px] py-3 px-8"
+                <Button type="submit" className="font-bold bg-deverse-gradient rounded-[16px] py-3 px-8"
                     onClick={createItem} >
                     Create Digital Asset
                 </Button>
@@ -275,10 +276,10 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                     props.onNftCreated(assetType, assetOnlinePath);
                     resetForm();
                 }}
-                contentClassName="deverse-gradient" dialogClassName="deverse-dialog">
+                contentClassName="bg-deverse-gradient" dialogClassName="deverse-dialog">
                 <Modal.Body className="text-white text-lg break-words">
                     Mint successfully!<br />
-                    Asset generated at: <a target="_blank" href={AssetService.getFullAssetUrl(assetOnlinePath)}>{AssetService.getFullAssetUrl(assetOnlinePath)}</a>
+                    Asset generated at: <Link href={AssetService.getFullAssetUrl(assetOnlinePath)}>{AssetService.getFullAssetUrl(assetOnlinePath)}</Link>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button style={{

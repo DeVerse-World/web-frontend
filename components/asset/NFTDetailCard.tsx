@@ -19,7 +19,7 @@ export default function NFTDetailCard(props: NFTDetailCardProps) {
     }
 
     return (
-        <Modal centered {...props} contentClassName="deverse-gradient text-white" dialogClassName="deverse-dialog">
+        <Modal centered {...props} contentClassName="bg-deverse-gradient text-white" dialogClassName="deverse-dialog">
             {/* <Modal.Header >
                 <Modal.Title>{props.data?.name}</Modal.Title>
             </Modal.Header> */}
