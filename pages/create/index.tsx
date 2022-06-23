@@ -29,13 +29,15 @@ function Create() {
     }, [])
 
     return (
-        <section>
+        <section className="flex flex-col justify-between min-h-[100vh]">
             {/* <button onClick={() => router.push('/mint-nft')}>Test</button> */}
-            <Tab.Container id="tabs-with-dropdown" >
-                <Nav className="flex flex-row justify-evenly  cursor-pointer text-xl bg-black align-middle py-2 px-8"
-                    activeKey={CreateTab.AVATAR}
+
+            <Tab.Container id="tabs-with-dropdown" defaultActiveKey={CreateTab.AVATAR}>
+                <Nav className="flex flex-row justify-evenly cursor-pointer text-xl bg-black align-middle py-2 px-8"
+
+                    activeKey={selectedTab}
                     onSelect={setSelectedTab}>
-                    <Nav.Item style={selectedTab == CreateTab.AVATAR ? selectedTabStyle : {}}>
+                    <Nav.Item className="" style={selectedTab == CreateTab.AVATAR ? selectedTabStyle : {}}>
                         <Nav.Link eventKey={CreateTab.AVATAR}>Avatar</Nav.Link>
                     </Nav.Item>
                     {/* <NavDropdown id="nav-dropdown-within-tab" title="Listing" menuVariant="dark" color="black">
@@ -53,9 +55,10 @@ function Create() {
                         <Nav.Link eventKey={CreateTab.UE_SDK}>Unreal Engine SDK</Nav.Link>
                     </Nav.Item>
                 </Nav>
-                <Tab.Content className='min-h-[90vh]'>
+                <Tab.Content className="grow">
                     <Tab.Pane eventKey={CreateTab.AVATAR}>
                         <iframe allow="camera *; microphone *"
+                            
                             className='rpo'
                             src='https://deverse.readyplayer.me/avatar?frameApi'></iframe>
                     </Tab.Pane>

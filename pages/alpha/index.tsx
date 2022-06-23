@@ -18,13 +18,12 @@ function Alpha() {
     const [selectedTab, setSelectedTab] = useState(AlphaTab.INFO)
 
     return (
-        <section className='h-[100%]'>
+        <section className='flex flex-col justify-between min-h-[100vh]'>
             {/* <button onClick={() => router.push('/mint-nft')}>Test</button> */}
-            <Tab.Container id="tabs-with-dropdown"  >
+            <Tab.Container id="tabs-with-dropdown" defaultActiveKey={AlphaTab.INFO} >
                 <Nav className="flex flex-row justify-between  cursor-pointer text-xl bg-black align-middle py-2 px-8"
                     activeKey={selectedTab}
                     onSelect={setSelectedTab} >
-
                     <span className="flex flex-row grow justify-evenly " >
                         <Nav.Item className="grow text-center max-w-[150px]" style={selectedTab == AlphaTab.INFO ? selectedTabStyle : {}}>
                             <Nav.Link eventKey={AlphaTab.INFO}>Info</Nav.Link>
@@ -50,7 +49,7 @@ function Alpha() {
                     </Nav.Item>
 
                 </Nav>
-                <Tab.Content className="min-h-[90vh]">
+                <Tab.Content className="grow">
                     <Tab.Pane eventKey={AlphaTab.INFO}>
 
                     </Tab.Pane>
