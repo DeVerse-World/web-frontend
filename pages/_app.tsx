@@ -35,7 +35,7 @@ function DeverseApp({ Component, pageProps }) {
             <LoadingScreen />
             {/* <ScrollToTopButton /> */}
             <HomeNavbar />
-            <div className='flex flex-row'>
+            <div className='flex flex-row bg-deverse '>
               <Sidebar />
               <section style={{
                 overflow: 'overlay',
