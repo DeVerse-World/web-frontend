@@ -81,7 +81,7 @@ function Homebar(props: WithRouterProps) {
             alt="Deverse logo" />
           <Image
             src={"/images/logo-text.png"}
-            className="h-[40px] mx-2"
+            className="h-[40px] mx-2 deverse-logo"
             alt="Deverse text logo" />
         </span>
       </Link>

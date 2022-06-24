@@ -1,8 +1,17 @@
-import { useEffect } from "react";
+import { CSSProperties, useEffect, useState } from "react";
 import { Nav, Tab } from "react-bootstrap";
 import Footer from "../../components/common/Footer";
 
+enum CreateTab {
+    AVATAR, IG_EDITOR, UE_SDK
+}
+
+const selectedTabStyle: CSSProperties = {
+    borderBottom: '2px solid blue'
+}
+
 function Create() {
+    const [selectedTab, setSelectedTab] = useState(CreateTab.AVATAR)
 
     const handleIFrameEvent = (e: MessageEvent) => {
         if (!e.origin.includes('readyplayer.me')) {
@@ -20,12 +29,16 @@ function Create() {
     }, [])
 
     return (
-        <section className='bg-deverse min-h-[90vh]'>
+        <section className="flex flex-col justify-between min-h-[100vh]">
             {/* <button onClick={() => router.push('/mint-nft')}>Test</button> */}
-            <Tab.Container id="tabs-with-dropdown" defaultActiveKey={"Avatar"} >
-                <Nav className="w-[95%] cursor-pointer text-xl  align-middle" activeKey={"Avatar"} >
-                    <Nav.Item >
-                        <Nav.Link eventKey={"Avatar"}>Avatar</Nav.Link>
+
+            <Tab.Container id="tabs-with-dropdown" defaultActiveKey={CreateTab.AVATAR}>
+                <Nav className="flex flex-row justify-evenly cursor-pointer text-xl bg-black align-middle py-2 px-8"
+
+                    activeKey={selectedTab}
+                    onSelect={setSelectedTab}>
+                    <Nav.Item className="" style={selectedTab == CreateTab.AVATAR ? selectedTabStyle : {}}>
+                        <Nav.Link eventKey={CreateTab.AVATAR}>Avatar</Nav.Link>
                     </Nav.Item>
                     {/* <NavDropdown id="nav-dropdown-within-tab" title="Listing" menuVariant="dark" color="black">
                     <Dropdown.Item active={visibleTab == MarketplaceTab.LISTING} eventKey={MarketplaceTab.LISTING}>All</Dropdown.Item>
@@ -35,20 +48,21 @@ function Create() {
                     <Dropdown.Item active={visibleTab == MarketplaceTab.GAME_MODE} eventKey={MarketplaceTab.GAME_MODE}>Game Mode</Dropdown.Item>
                     <Dropdown.Item active={visibleTab == MarketplaceTab.BOT_LOGIC} eventKey={MarketplaceTab.BOT_LOGIC}>Bot Logic</Dropdown.Item>
                 </NavDropdown> */}
-                    <Nav.Item>
-                        <Nav.Link eventKey={"In-game Editor"}>In-game Editor</Nav.Link>
+                    <Nav.Item style={selectedTab == CreateTab.IG_EDITOR ? selectedTabStyle : {}}>
+                        <Nav.Link eventKey={CreateTab.IG_EDITOR}>In-game Editor</Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link eventKey={"UE SDK"}>UE SDK</Nav.Link>
+                    <Nav.Item style={selectedTab == CreateTab.UE_SDK ? selectedTabStyle : {}}>
+                        <Nav.Link eventKey={CreateTab.UE_SDK}>Unreal Engine SDK</Nav.Link>
                     </Nav.Item>
                 </Nav>
-                <Tab.Content >
-                    <Tab.Pane eventKey={"Avatar"}>
-                        <iframe allow="camera *; microphone *" 
-                        className='rpo' 
-                        src='https://deverse.readyplayer.me/avatar?frameApi'></iframe>
+                <Tab.Content className="grow">
+                    <Tab.Pane eventKey={CreateTab.AVATAR}>
+                        <iframe allow="camera *; microphone *"
+                            
+                            className='rpo'
+                            src='https://deverse.readyplayer.me/avatar?frameApi'></iframe>
                     </Tab.Pane>
-                    <Tab.Pane eventKey={"In-game Editor"}>
+                    <Tab.Pane eventKey={CreateTab.IG_EDITOR}>
 
                     </Tab.Pane>
                     {/* <Tab.Pane eventKey={MarketplaceTab.SKIN}>
@@ -75,7 +89,7 @@ function Create() {
                 </Tab.Pane> */}
                 </Tab.Content>
             </Tab.Container>
-            <Footer/>
+            <Footer />
         </section>
     )
 }
