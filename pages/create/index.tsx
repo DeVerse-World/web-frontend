@@ -34,7 +34,6 @@ function Create() {
 
             <Tab.Container id="tabs-with-dropdown" defaultActiveKey={CreateTab.AVATAR}>
                 <Nav className="flex flex-row justify-evenly cursor-pointer text-xl bg-black align-middle py-2 px-8"
-
                     activeKey={selectedTab}
                     onSelect={setSelectedTab}>
                     <Nav.Item className="" style={selectedTab == CreateTab.AVATAR ? selectedTabStyle : {}}>
@@ -55,15 +54,21 @@ function Create() {
                         <Nav.Link eventKey={CreateTab.UE_SDK}>Unreal Engine SDK</Nav.Link>
                     </Nav.Item>
                 </Nav>
-                <Tab.Content className="grow">
-                    <Tab.Pane eventKey={CreateTab.AVATAR}>
+                <Tab.Content className="grow flex">
+                    <Tab.Pane eventKey={CreateTab.AVATAR} className="grow">
                         <iframe allow="camera *; microphone *"
-                            
                             className='rpo'
-                            src='https://deverse.readyplayer.me/avatar?frameApi'></iframe>
+                            src='https://deverse.readyplayer.me/avatar?frameApi' />
                     </Tab.Pane>
-                    <Tab.Pane eventKey={CreateTab.IG_EDITOR}>
-
+                    <Tab.Pane eventKey={CreateTab.IG_EDITOR} className="grow">
+                        <div className="flex justify-center items-center text-white p-4" >
+                            <h1 >Coming soon</h1>
+                        </div>
+                    </Tab.Pane>
+                    <Tab.Pane eventKey={CreateTab.UE_SDK} className="grow">
+                    <div className="flex justify-center items-center text-white p-4" >
+                            <h1 >Coming soon</h1>
+                        </div>
                     </Tab.Pane>
                     {/* <Tab.Pane eventKey={MarketplaceTab.SKIN}>
                     <NFTList data={nfts.filter(e => e.assetType == AssetType.SKIN)} onOpen={onOpenNFTDescription} />

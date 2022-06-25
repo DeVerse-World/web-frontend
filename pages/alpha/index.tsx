@@ -28,7 +28,7 @@ function Alpha() {
                         <Nav.Item className="grow text-center max-w-[150px]" style={selectedTab == AlphaTab.INFO ? selectedTabStyle : {}}>
                             <Nav.Link eventKey={AlphaTab.INFO}>Info</Nav.Link>
                         </Nav.Item>
-                        
+
                         {/* <NavDropdown id="nav-dropdown-within-tab" title="Listing" menuVariant="dark" color="black">
                         <Dropdown.Item active={visibleTab == MarketplaceTab.LISTING} eventKey={MarketplaceTab.LISTING}>All</Dropdown.Item>
                         <Dropdown.Item active={visibleTab == MarketplaceTab.TWO_D_IMAGE} eventKey={MarketplaceTab.TWO_D_IMAGE}>2D Image</Dropdown.Item>
@@ -49,12 +49,16 @@ function Alpha() {
                     </Nav.Item>
 
                 </Nav>
-                <Tab.Content className="grow">
-                    <Tab.Pane eventKey={AlphaTab.INFO}>
-
+                <Tab.Content className="grow flex">
+                    <Tab.Pane eventKey={AlphaTab.INFO} className="grow">
+                        <div className="flex justify-center items-center text-white p-4" >
+                            <h1 >Coming soon</h1>
+                        </div>
                     </Tab.Pane>
-                    <Tab.Pane eventKey={AlphaTab.VERSE}>
-
+                    <Tab.Pane eventKey={AlphaTab.VERSE} className="grow">
+                        <div className="flex justify-center items-center text-white p-4" >
+                            <h1 >Coming soon</h1>
+                        </div>
                     </Tab.Pane>
                     {/* <Tab.Pane eventKey={MarketplaceTab.SKIN}>
                         <NFTList data={nfts.filter(e => e.assetType == AssetType.SKIN)} onOpen={onOpenNFTDescription} />
