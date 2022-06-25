@@ -55,12 +55,12 @@ function Create() {
                         <Nav.Link eventKey={CreateTab.UE_SDK}>Unreal Engine SDK</Nav.Link>
                     </Nav.Item>
                 </Nav>
-                <Tab.Content className="grow">
-                    <Tab.Pane eventKey={CreateTab.AVATAR}>
+                <Tab.Content className="grow flex">
+                    <Tab.Pane eventKey={CreateTab.AVATAR} className="grow">
                         <iframe allow="camera *; microphone *"
                             
                             className='rpo'
-                            src='https://deverse.readyplayer.me/avatar?frameApi'></iframe>
+                            src='https://deverse.readyplayer.me/avatar?frameApi'/>
                     </Tab.Pane>
                     <Tab.Pane eventKey={CreateTab.IG_EDITOR}>
 
