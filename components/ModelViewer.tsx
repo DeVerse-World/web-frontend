@@ -3,7 +3,7 @@ import { TransformControls, OrbitControls } from '@react-three/drei'
 import { Canvas, GroupProps, useFrame } from "@react-three/fiber";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import ModelPreviewService from "../data/services/3d_model_service";
-import { AnimationMixer } from "three";
+import { AnimationMixer, Event } from "three";
 
 interface ModelViewerProps extends GroupProps {
   filePath: string;
@@ -15,17 +15,26 @@ interface ModelObjectProps extends GroupProps {
 
 export default function ModelViewer(props: ModelViewerProps) {
   const [model, setModel] = useState<GLTF>(null);
-
+  const [loadProgress, setLoadProgress] = useState(100);
   useEffect(() => {
     ModelPreviewService.load(props.filePath, (gltf) => {
       setModel(gltf);
+    }, (e) => {
+      setLoadProgress(e);
     })
   }, [])
 
+  const onChangeControl = (e: Event) => {
+    console.log(e)
+  }
 
   return model && (
-    <Canvas className='border-4 rounded-lg m-4' style={{ height: '50vh', width: '80vh' }}>
-      <Suspense fallback={null}>
+    <Canvas >
+      <Suspense fallback={
+        <div>
+          <h1>Loading {loadProgress}%</h1>
+        </div>
+      }>
         <TransformControls showX={false} showY={false} showZ={false}>
           <ModelObject filePath={props.filePath} {...props} gltf={model} />
         </TransformControls>
@@ -41,7 +50,7 @@ export default function ModelViewer(props: ModelViewerProps) {
   );
 }
 
-
+//TODO: add default animation to rotate horizontally continously
 function ModelObject(props: ModelObjectProps) {
 
   let animationMixer: AnimationMixer = new AnimationMixer(props.gltf.scene);
