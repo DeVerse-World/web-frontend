@@ -53,7 +53,6 @@ function DeverseApp({ Component, pageProps }) {
               <section style={{
                 overflow: 'overlay',
                 height: 'calc(100vh - 60px)',
-                maxHeight: 'calc(100vh - 60px)',
                 width: "100%"
               }}>
                 <Component {...pageProps} />
