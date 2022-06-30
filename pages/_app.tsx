@@ -12,6 +12,7 @@ import LoadingScreen from '../components/LoadingScreen';
 import { SSRProvider } from 'react-bootstrap';
 import HomeNavbar from '../components/common/HomeNavbar';
 import Sidebar from '../components/Sidebar';
+import Script from 'next/script';
 
 // optional configuration
 const options = {
@@ -29,6 +30,18 @@ function DeverseApp({ Component, pageProps }) {
       <SSRProvider>
         <AppContextProvider>
           <MetaMaskProvider>
+            <Script strategy="lazyOnload" src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`} />
+
+            <Script strategy="lazyOnload">
+              {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${process.env.GOOGLE_ANALYTICS}', {
+        page_path: window.location.pathname,
+        });
+    `}
+            </Script>
             <Head>
               <title>Deverse</title>
             </Head>
@@ -40,7 +53,6 @@ function DeverseApp({ Component, pageProps }) {
               <section style={{
                 overflow: 'overlay',
                 height: 'calc(100vh - 60px)',
-                maxHeight: 'calc(100vh - 60px)',
                 width: "100%"
               }}>
                 <Component {...pageProps} />

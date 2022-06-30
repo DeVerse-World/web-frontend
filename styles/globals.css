@@ -45,18 +45,6 @@ body * {
 
 /* Tab */
 
-.dropdown-toggle::after {
-    vertical-align: .1em !important;
-}
-
-.nav-item a {
-    color: #ffffff !important;
-}
-
-a.dropdown-item {
-    color: #ffffff
-}
-
 .deverse-title {
     font-size: 3.5rem;
     font-family: 'Akira Expanded', sans-serif;
@@ -93,6 +81,11 @@ a.dropdown-item {
     -webkit-text-stroke: 3px transparent;
     color: rgb(237, 238, 238);
 }
+
+
+/* Sidebar */
+
+@media only screen and (max-width: 600px) {}
 
 
 /* Special case */
@@ -164,10 +157,6 @@ a.dropdown-item {
     width: 50px;
     border-radius: 50%;
     display: inline-block;
-}
-
-.pie {
-    height: 75%;
 }
 
 .App-logo {

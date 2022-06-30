@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Navbar, Nav, Image, NavLink, Button, NavDropdown } from 'react-bootstrap';
 import AccountMenu from "../AccountMenu";
+import { GiHamburgerMenu } from "react-icons/gi";
 import { withRouter } from "next/router";
 import { WithRouterProps } from "next/dist/client/with-router";
 import wallet_service from "../../data/services/wallet_service";
 import { useMetaMask } from "metamask-react";
 import Link from "next/link";
+import { AppContext } from "../contexts/app_context";
+import { AiFillWindows } from "react-icons/ai";
 
 function Homebar(props: WithRouterProps) {
+  const { setIsMobileSidebarVisible, isMobileSidebarVisible } = useContext(AppContext);
   const { status, connect, account } = useMetaMask();
   const [boxContent, setBoxContent] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -73,6 +77,7 @@ function Homebar(props: WithRouterProps) {
       height: 60,
       borderBottom: "1px solid rgb(71 85 105)",
     }}>
+
       <Link href="/" >
         <span className="flex flex-row cursor-pointer">
           <Image
@@ -85,7 +90,14 @@ function Homebar(props: WithRouterProps) {
             alt="Deverse text logo" />
         </span>
       </Link>
+      {/* <GiHamburgerMenu className="w-[40px] h-[40px]" onClick={() => setIsMobileSidebarVisible(!isMobileSidebarVisible)} /> */}
       <span className="flex flex-row">
+        <Nav.Item className="flex flex-row mx-2 items-center text-white rounded-3xl py-2 px-4 bg-deverse-gradient" onClick={() => {
+          window.open("https://drive.google.com/file/d/1va5Nyvzbz0PfheMk2Ma10JVuN4rsGliH/view", "_blank")
+        }} >
+          <span className="me-2">Download</span>
+          <AiFillWindows fontSize="1.5rem" />
+        </Nav.Item>
         {/* <Nav.Link className="text-white" href="https://docs.deverse.world" target="_blank">Documentation</Nav.Link> */}
         {renderAccount()}
       </span>

@@ -1,31 +1,35 @@
 import { WithRouterProps } from "next/dist/client/with-router";
 import { withRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { AiFillShopping, AiFillHome, AiOutlineGlobal, AiFillPlusCircle } from 'react-icons/ai';
 import { GiMining } from 'react-icons/gi';
+import { SiCmake } from 'react-icons/si';
 import { FaGamepad, FaInfoCircle } from 'react-icons/fa';
 import Link from "next/link";
+import { AppContext } from "./contexts/app_context";
 
 function SidebarComponent(props: WithRouterProps) {
-
-    const [selectedPath, setSelectedPath] = useState('');
+    const { isMobileSidebarVisible } = useContext(AppContext);
 
     useEffect(() => {
-        setSelectedPath(props.router.pathname);
-    }, [props.router.pathname])
+        console.log(isMobileSidebarVisible)
+        if (isMobileSidebarVisible) {
+            
+        }
+    },[isMobileSidebarVisible]);
 
     return (
-        <Nav className="bg-black max-h-[calc(100vh - 60px)] w-[80px] flex flex-col p-1">
-            <SidebarItem href="/" isSelected={selectedPath == "/"} label="Home"
+        <Nav id="deverse-sidebar" className="bg-black max-h-[calc(100vh - 60px)] w-[80px] flex-col p-1 " >
+            <SidebarItem href="/" isSelected={props.router.pathname == "/"} label="Home"
                 icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
-            <SidebarItem href="/alpha" isSelected={selectedPath == "/alpha"} label="Alpha"
+            <SidebarItem href="/alpha" isSelected={props.router.pathname == "/alpha"} label="Alpha"
                 icon={<FaGamepad fontSize="1.5rem" color='rgb(97 198 208)' />} />
-            <SidebarItem href="/marketplace" isSelected={selectedPath == "/marketplace"} label="MARKET"
+            <SidebarItem href="/marketplace" isSelected={props.router.pathname == "/marketplace"} label="MARKET"
                 icon={<AiFillShopping fontSize="1.5rem" color='rgb(97 198 208)' />} />
-            <SidebarItem href="/create" label="Create" isSelected={selectedPath == "/create"}
-                icon={<FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />} />
-            <SidebarItem href="/mint-nft" isSelected={selectedPath == "/mint-nft"} label="Mint"
+            <SidebarItem href="/create" label="Create" isSelected={props.router.pathname == "/create"}
+                icon={<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />} />
+            <SidebarItem href="/mint-nft" isSelected={props.router.pathname == "/mint-nft"} label="Mint"
                 icon={<GiMining fontSize="1.5rem" color='rgb(97 198 208)' />} />
 
             <SidebarItem href="https://docs.deverse.world" label="Docs" isSelected={false} openNewTab={true}

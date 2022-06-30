@@ -41,12 +41,12 @@ function Alpha() {
                             <Nav.Link eventKey={AlphaTab.VERSE}>Verses</Nav.Link>
                         </Nav.Item>
                     </span>
-                    <Nav.Item className="flex flex-row items-center text-white rounded-3xl py-2 px-4 bg-deverse-gradient" onClick={() => {
+                    {/* <Nav.Item className="flex flex-row items-center text-white rounded-3xl py-2 px-4 bg-deverse-gradient" onClick={() => {
                         window.open("https://drive.google.com/file/d/1va5Nyvzbz0PfheMk2Ma10JVuN4rsGliH/view", "_blank")
                     }} >
                         <span className="me-2">Download</span>
                         <AiFillWindows fontSize="1.5rem" />
-                    </Nav.Item>
+                    </Nav.Item> */}
 
                 </Nav>
                 <Tab.Content className="grow flex">
