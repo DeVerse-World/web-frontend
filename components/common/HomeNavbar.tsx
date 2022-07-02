@@ -92,12 +92,12 @@ function Homebar(props: WithRouterProps) {
       </Link>
       {/* <GiHamburgerMenu className="w-[40px] h-[40px]" onClick={() => setIsMobileSidebarVisible(!isMobileSidebarVisible)} /> */}
       <span className="flex flex-row">
-        <Nav.Item className="flex flex-row mx-2 items-center text-white rounded-md py-2 px-4 bg-deverse-gradient" onClick={() => {
+        {/* <Nav.Item className="flex flex-row mx-2 items-center text-white rounded-md py-2 px-4 bg-deverse-gradient" onClick={() => {
           window.open("https://drive.google.com/file/d/1va5Nyvzbz0PfheMk2Ma10JVuN4rsGliH/view", "_blank")
         }} >
           <span className="me-2">Download</span>
           <AiFillWindows fontSize="1.5rem" />
-        </Nav.Item>
+        </Nav.Item> */}
         {/* <Nav.Link className="text-white" href="https://docs.deverse.world" target="_blank">Documentation</Nav.Link> */}
         {renderAccount()}
       </span>
