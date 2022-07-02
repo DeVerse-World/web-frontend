@@ -7,7 +7,7 @@ enum CreateTab {
 }
 
 const selectedTabStyle: CSSProperties = {
-    borderBottom: '2px solid blue'
+    borderBottom: '2px solid white'
 }
 
 function Create() {
@@ -37,7 +37,7 @@ function Create() {
                     activeKey={selectedTab}
                     onSelect={setSelectedTab}>
                     <Nav.Item className="" style={selectedTab == CreateTab.AVATAR ? selectedTabStyle : {}}>
-                        <Nav.Link eventKey={CreateTab.AVATAR}>Avatar</Nav.Link>
+                        <Nav.Link className="text-white" eventKey={CreateTab.AVATAR}>Avatar</Nav.Link>
                     </Nav.Item>
                     {/* <NavDropdown id="nav-dropdown-within-tab" title="Listing" menuVariant="dark" color="black">
                     <Dropdown.Item active={visibleTab == MarketplaceTab.LISTING} eventKey={MarketplaceTab.LISTING}>All</Dropdown.Item>
@@ -48,10 +48,10 @@ function Create() {
                     <Dropdown.Item active={visibleTab == MarketplaceTab.BOT_LOGIC} eventKey={MarketplaceTab.BOT_LOGIC}>Bot Logic</Dropdown.Item>
                 </NavDropdown> */}
                     <Nav.Item style={selectedTab == CreateTab.IG_EDITOR ? selectedTabStyle : {}}>
-                        <Nav.Link eventKey={CreateTab.IG_EDITOR}>In-game Editor</Nav.Link>
+                        <Nav.Link className="text-white" eventKey={CreateTab.IG_EDITOR}>In-game Editor</Nav.Link>
                     </Nav.Item>
                     <Nav.Item style={selectedTab == CreateTab.UE_SDK ? selectedTabStyle : {}}>
-                        <Nav.Link eventKey={CreateTab.UE_SDK}>Unreal Engine SDK</Nav.Link>
+                        <Nav.Link className="text-white" eventKey={CreateTab.UE_SDK}>Unreal Engine SDK</Nav.Link>
                     </Nav.Item>
                 </Nav>
                 <Tab.Content className="grow flex">

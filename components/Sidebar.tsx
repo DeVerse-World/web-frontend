@@ -13,7 +13,6 @@ function SidebarComponent(props: WithRouterProps) {
     const { isMobileSidebarVisible } = useContext(AppContext);
 
     useEffect(() => {
-        console.log(isMobileSidebarVisible)
         if (isMobileSidebarVisible) {
             
         }

@@ -12,7 +12,8 @@ import LoadingScreen from '../components/LoadingScreen';
 import { SSRProvider } from 'react-bootstrap';
 import HomeNavbar from '../components/common/HomeNavbar';
 import Sidebar from '../components/Sidebar';
-import Script from 'next/script';
+import GoogleTagManager from '../components/analytics/GoogleTagManager';
+import GTMHeader from '../components/analytics/GTMHeader';
 
 // optional configuration
 const options = {
@@ -30,21 +31,26 @@ function DeverseApp({ Component, pageProps }) {
       <SSRProvider>
         <AppContextProvider>
           <MetaMaskProvider>
-            <Script strategy="lazyOnload" src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`} />
+            {/* <Script strategy="lazyOnload" src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
 
             <Script strategy="lazyOnload">
               {`
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '${process.env.GOOGLE_ANALYTICS}', {
+        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
         page_path: window.location.pathname,
         });
     `}
-            </Script>
+            </Script> */}
+
             <Head>
               <title>Deverse</title>
             </Head>
+            <GoogleTagManager tagId={process.env.NEXT_PUBLIC_GTM}/>
+            <noscript>
+              <GTMHeader tagId={process.env.NEXT_PUBLIC_GTM}/>
+            </noscript>
             <LoadingScreen />
             {/* <ScrollToTopButton /> */}
             <HomeNavbar />

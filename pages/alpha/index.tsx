@@ -9,7 +9,7 @@ enum AlphaTab {
 }
 
 const selectedTabStyle: CSSProperties = {
-    borderBottom: '2px solid blue'
+    borderBottom: '2px solid white'
 }
 
 function Alpha() {
@@ -25,8 +25,8 @@ function Alpha() {
                     activeKey={selectedTab}
                     onSelect={setSelectedTab} >
                     <span className="flex flex-row grow justify-evenly " >
-                        <Nav.Item className="grow text-center max-w-[150px]" style={selectedTab == AlphaTab.INFO ? selectedTabStyle : {}}>
-                            <Nav.Link eventKey={AlphaTab.INFO}>Info</Nav.Link>
+                        <Nav.Item className="grow text-center max-w-[150px] " style={selectedTab == AlphaTab.INFO ? selectedTabStyle : {}}>
+                            <Nav.Link className="text-white" eventKey={AlphaTab.INFO}>Info</Nav.Link>
                         </Nav.Item>
 
                         {/* <NavDropdown id="nav-dropdown-within-tab" title="Listing" menuVariant="dark" color="black">
@@ -38,7 +38,7 @@ function Alpha() {
                         <Dropdown.Item active={visibleTab == MarketplaceTab.BOT_LOGIC} eventKey={MarketplaceTab.BOT_LOGIC}>Bot Logic</Dropdown.Item>
                     </NavDropdown> */}
                         <Nav.Item className="grow text-center max-w-[150px]" style={selectedTab == AlphaTab.VERSE ? selectedTabStyle : {}}>
-                            <Nav.Link eventKey={AlphaTab.VERSE}>Verses</Nav.Link>
+                            <Nav.Link className="text-white" eventKey={AlphaTab.VERSE}>Verses</Nav.Link>
                         </Nav.Item>
                     </span>
                     {/* <Nav.Item className="flex flex-row items-center text-white rounded-3xl py-2 px-4 bg-deverse-gradient" onClick={() => {
