@@ -8,7 +8,7 @@ import wallet_service from "../../data/services/wallet_service";
 import { useMetaMask } from "metamask-react";
 import Link from "next/link";
 import { AppContext } from "../contexts/app_context";
-import { AiFillWindows } from "react-icons/ai";
+import { IoMdClose } from "react-icons/io";
 
 function Homebar(props: WithRouterProps) {
   const { setIsMobileSidebarVisible, isMobileSidebarVisible } = useContext(AppContext);
@@ -69,7 +69,7 @@ function Homebar(props: WithRouterProps) {
   }
 
   return (
-    <div className="flex flex-row items-center justify-between px-8 bg-black drop-shadow-sm" style={{
+    <section id="section-nav-bar" className="flex flex-row items-center justify-between px-8 bg-black drop-shadow-sm" style={{
       position: "sticky",
       // width: "100vw",
       top: 0,
@@ -77,7 +77,11 @@ function Homebar(props: WithRouterProps) {
       height: 60,
       borderBottom: "1px solid rgb(71 85 105)",
     }}>
-
+      <span id="btn-toggle-sidebar" className="md:hidden" onClick={() => setIsMobileSidebarVisible(!isMobileSidebarVisible)} >
+        {isMobileSidebarVisible
+          ? <IoMdClose className="w-[40px] h-[40px]" fontSize="3.5rem" color="rgb(97 198 208)" />
+          : <GiHamburgerMenu className="w-[40px] h-[40px]" fontSize="0.5rem" color="rgb(97 198 208)" />}
+      </span>
       <Link href="/" >
         <span className="flex flex-row cursor-pointer">
           <Image
@@ -86,11 +90,12 @@ function Homebar(props: WithRouterProps) {
             alt="Deverse logo" />
           <Image
             src={"/images/logo-text.png"}
-            className="h-[40px] mx-2 deverse-logo"
+            className="h-[40px] mx-2 hidden sm:block"
             alt="Deverse text logo" />
         </span>
       </Link>
-      {/* <GiHamburgerMenu className="w-[40px] h-[40px]" onClick={() => setIsMobileSidebarVisible(!isMobileSidebarVisible)} /> */}
+
+
       <span className="flex flex-row">
         {/* <Nav.Item className="flex flex-row mx-2 items-center text-white rounded-md py-2 px-4 bg-deverse-gradient" onClick={() => {
           window.open("https://drive.google.com/file/d/1va5Nyvzbz0PfheMk2Ma10JVuN4rsGliH/view", "_blank")
@@ -102,7 +107,7 @@ function Homebar(props: WithRouterProps) {
         {renderAccount()}
       </span>
 
-    </div>
+    </section>
   )
 
   return (
