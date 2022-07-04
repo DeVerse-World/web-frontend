@@ -5,35 +5,35 @@ import { MdEmail } from 'react-icons/Md';
 
 function Footer(props) {
   return (
-    <div className="flex flex-col bg-[url('/images/bg-highlight.png')]" style={{
-      borderTop: "1px solid rgb(71 85 105)",
-      textAlign: "center",
-      color: "white",
-    }}>
-      <section className="flex flex-row flex-wrap justify-center pt-8 px-4">
+    <section id="section-footer"
+      className="flex flex-col bg-[url('/images/bg-highlight.png')] text-center text-white"
+      style={{
+        borderTop: "1px solid rgb(71 85 105)",
+      }}>
+      <div className="flex flex-row flex-wrap justify-center pt-8 px-4">
         <h1 className="pr-2">Contact us:</h1>
         <div className="flex flex-row justify-center items-center">
-          <a title="email" target="_blank" href="mailto:info@cosugames.com" >
+          <a id="contact-email" title="email" target="_blank" href="mailto:info@cosugames.com" >
             <MdEmail className="mx-2" color="white" fontSize="1.5rem" />
           </a>
-          <a title="telegram" target="_blank" href="https://t.me/DeverseWorld" >
+          <a id="contact-telegram" title="telegram" target="_blank" href="https://t.me/DeverseWorld" >
             <FaTelegramPlane className="mx-2" color="white" fontSize="1.5rem" />
           </a>
-          <a target="_blank" href="https://twitter.com/DeverseWorld">
-            <AiOutlineTwitter className="mx-2" color="white" fontSize="1.5rem"  />
+          <a id="contact-twitter" title="twitter" target="_blank" href="https://twitter.com/DeverseWorld">
+            <AiOutlineTwitter className="mx-2" color="white" fontSize="1.5rem" />
           </a>
-          <a target="_blank" href="https://discord.gg/z6qRJN9PAp">
+          <a id="contact-discord" title="discord" target="_blank" href="https://discord.gg/z6qRJN9PAp">
             <FaDiscord className="mx-2" color="white" fontSize="1.5rem" />
           </a>
-          <a target="_blank" href="https://www.facebook.com/DeverseWorld/" >
+          <a id="contact-facebook" title="facebook" target="_blank" href="https://www.facebook.com/DeverseWorld/" >
             <AiFillFacebook className="mx-2" color="white" fontSize="1.5rem" />
           </a>
         </div>
-      </section>
-      <section className="my-8">
+      </div>
+      <div className="my-8">
         Copyright © Deverse 2021
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
 

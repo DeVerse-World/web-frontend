@@ -63,7 +63,7 @@ function ProductSection(props) {
     }
 
     return (
-        <section className="p-4 text-white text-center ">
+        <section id="section-products" className="p-4 text-white text-center ">
             <div className="text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title">
                 Our products
             </div>

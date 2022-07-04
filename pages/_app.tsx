@@ -14,7 +14,9 @@ import HomeNavbar from '../components/common/HomeNavbar';
 import Sidebar from '../components/Sidebar';
 import GoogleTagManager from '../components/analytics/GoogleTagManager';
 import GTMHeader from '../components/analytics/GTMHeader';
-
+import { Router } from 'next/router';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 // optional configuration
 const options = {
   // you can also just use 'bottom center'
@@ -24,6 +26,11 @@ const options = {
   // you can also just use 'scale'
   transition: transitions.SCALE
 }
+
+// Add Loading indicator when change route
+Router.events.on('routeChangeStart', () => NProgress.start()); 
+Router.events.on('routeChangeComplete', () => NProgress.done()); 
+Router.events.on('routeChangeError', () => NProgress.done());  
 
 function DeverseApp({ Component, pageProps }) {
   return (
@@ -56,13 +63,13 @@ function DeverseApp({ Component, pageProps }) {
             <HomeNavbar />
             <div className='flex flex-row bg-deverse '>
               <Sidebar />
-              <section style={{
+              <div style={{
                 overflow: 'overlay',
                 height: 'calc(100vh - 60px)',
                 width: "100%"
               }}>
                 <Component {...pageProps} />
-              </section>
+              </div>
             </div>
           </MetaMaskProvider>
         </AppContextProvider>
