@@ -34,13 +34,13 @@ function Home(props) {
 
 
   return (
-      <div className='bg-deverse'>
+      <>
         <WelcomeSection />
         <IntroSection />
         <HighlightFeatureSection />
         <ProductSection />
         <Footer />
-      </div>
+      </>
   );
 }
 

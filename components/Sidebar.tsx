@@ -8,18 +8,21 @@ import { SiCmake } from 'react-icons/si';
 import { FaGamepad, FaInfoCircle } from 'react-icons/fa';
 import Link from "next/link";
 import { AppContext } from "./contexts/app_context";
+import { zeroPad } from "ethers/lib/utils";
 
 function SidebarComponent(props: WithRouterProps) {
     const { isMobileSidebarVisible } = useContext(AppContext);
-
-    useEffect(() => {
-        if (isMobileSidebarVisible) {
-            
-        }
-    },[isMobileSidebarVisible]);
-
+    
     return (
-        <Nav id="deverse-sidebar" className="bg-black max-h-[calc(100vh - 60px)] w-[80px] flex-col p-1 " >
+        <Nav id="deverse-sidebar"
+            style={{
+                background: 'black',
+                maxHeight: 'calc(100vh - 60px)',
+                width: '80px',
+                flexDirection: 'column',
+                padding: '1px'
+            }}
+            className={isMobileSidebarVisible ? "active" : ""}>
             <SidebarItem href="/" isSelected={props.router.pathname == "/"} label="Home"
                 icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
             <SidebarItem href="/alpha" isSelected={props.router.pathname == "/alpha"} label="Alpha"

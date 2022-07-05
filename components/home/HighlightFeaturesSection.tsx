@@ -4,7 +4,7 @@ import { Image } from "react-bootstrap";
 function HighlightFeatureSection(props) {
     return (
         // <div className="flex flex-row items-center justify-center bg-gradient-to-r from-blue-800 to-blue-400 p-4">
-        <section className="text-white ">
+        <section id="section-highlight" className="text-white ">
             <div style={{
                 // backgroundImage: "radial-gradient(closest-side, rgb(22, 74, 124), rgba(39, 141, 202,0.8))",
                 // backgroundBlendMode: "overlay"
