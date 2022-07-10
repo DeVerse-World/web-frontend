@@ -4,7 +4,7 @@ module.exports = {
     env: {
         REACT_APP_SERVER_HOST: "localhost:8080",
         REACT_APP_SERVER_PROTOCOL: "http",
-        RPC_URL: "https://eth-rinkeby.alchemyapi.io/v2/dUWuuh70k7YsZXH4aoBoqkk8b_eB8Vyd",
+        RPC_URL: "https://polygon-mumbai.g.alchemy.com/v2/jA5_H_DQkGlOS4hChUOtyiBO3M1ckUVQ",
     },
    typescript: {ignoreBuildErrors: true,ignoreDuringBuilds: true,},
 }
