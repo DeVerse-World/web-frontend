@@ -1,3 +1,6 @@
 [submodule "smart-contracts"]
 	path = smart-contracts
 	url = git@github.com:DeVerse-World/smart-contracts.git
+[submodule "conf"]
+	path = conf
+	url = git@github.com:DeVerse-World/conf.git
