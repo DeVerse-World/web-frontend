@@ -38,7 +38,7 @@ export default function Marketplace() {
 
     const loadNFTs = async (query: string) => {
         setViewState(ViewState.LOADING)
-        let assets = await AssetService.getAll(ApiStrategy.REST);
+        let assets = await AssetService.getAll(ApiStrategy.GraphQl);
         setNfts(assets.filter((asset) => asset != null));
         console.log(assets)
         setViewState(ViewState.SUCCESS)

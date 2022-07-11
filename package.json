@@ -1,5 +1,5 @@
 {
-    "name": "auxillium",
+    "name": "deverse",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
@@ -46,6 +46,7 @@
         "react-icons": "^4.4.0",
         "react-minimal-pie-chart": "^8.2.0",
         "react-pdf": "^5.2.0",
+        "react-query": "^3.39.1",
         "react-router": "^6.3.0",
         "react-router-dom": "^6.3.0",
         "react-scripts": "5.0.0",
