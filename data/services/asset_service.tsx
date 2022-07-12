@@ -124,9 +124,9 @@ class AssetService extends BaseService {
         switch (apiStrategy) {
             case BaseService.ApiStrategy.REST:
                 let transferEvents = await this.assetContract.queryFilter(this.transferSingleEventFilter);
-                for (let i = 0; i < transferEvents.length; i++) {
+                transferEvents.forEach((transferEvent) => {
                     parallelJobs.push(new Promise<Promise<NFTAsset>>(async (resolve, reject) => {
-                        let [_, from, to, id, supply] = transferEvents[i].args;
+                        let [_, from, to, id, supply] = transferEvent.args;
                         if (from == 0) { // from mint event
                             // const tokenUri = await this.assetContract.uri2(id)
                             // const tokenFullUri = `https://bafybei${tokenUri}.ipfs.infura-ipfs.io`
@@ -136,7 +136,7 @@ class AssetService extends BaseService {
                             reject('this is not from mint event')
                         }
                     }));
-                }
+                })
                 data = await Promise.all(parallelJobs)
                 break;
             case BaseService.ApiStrategy.GraphQl:
@@ -194,7 +194,7 @@ class AssetService extends BaseService {
             data: {
                 minted_nft: {
                     token_address: assetAddress, token_id: tokenId, name: asset.name, description: asset.description,
-                    supply: parseInt(asset.supply.toString()), file_asset_uri: asset.fileAssetUri, file_asset_name: asset.fileAssetName,
+                    supply: asset.supply, file_asset_uri: asset.fileAssetUri, file_asset_name: asset.fileAssetName,
                     file_asset_uri_from_centralized: asset.fileAssetUriFromCentralized, file_2d_uri: asset.file2dUri,
                     file_3d_uri: asset.file3dUri, asset_type: asset.assetType,
                 }
