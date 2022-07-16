@@ -131,10 +131,10 @@ export default function Marketplace() {
                 </Accordion>
             </Sidebar>
 
-            <section className='main-content bg-deverse flex flex-col text-white' style={{
-                minHeight: "calc(100vh - 60px)"
-            }}>
-                <div className='flex flex-row '>
+            <section className='main-content bg-deverse flex flex-col text-white' >
+                <div className='flex flex-row ' style={{
+                    minHeight: "calc(100vh - 60px)"
+                }}>
                     {renderContent()}
                     <NFTDetailCard data={selectedAsset} show={showDetail} onHide={() => setShowDetail(false)} />
                 </div>
