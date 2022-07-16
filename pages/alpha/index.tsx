@@ -4,6 +4,7 @@ import { Nav, Tab } from "react-bootstrap";
 import { AiFillWindows } from "react-icons/ai";
 import Footer from "../../components/common/Footer";
 import DownloadDemoButton from "../../components/DownloadDemoButton";
+import Sidebar from "../../components/Sidebar";
 
 enum AlphaTab {
     INFO, VERSE
@@ -19,7 +20,9 @@ function Alpha() {
     const [selectedTab, setSelectedTab] = useState(AlphaTab.INFO)
 
     return (
-        <section className='flex flex-col justify-between min-h-[100vh]'>
+        <div className='flex flex-row bg-deverse '>
+        <Sidebar />
+        <section className='main-content flex flex-col justify-between min-h-[100vh]'>
             {/* <button onClick={() => router.push('/mint-nft')}>Test</button> */}
             <Tab.Container id="tabs-with-dropdown" defaultActiveKey={AlphaTab.INFO} >
                 <span className="flex flex-row justify-between bg-black">
@@ -55,6 +58,8 @@ function Alpha() {
             </Tab.Container>
             <Footer />
         </section>
+        </div>
+
     );
 }
 

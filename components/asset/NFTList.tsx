@@ -1,7 +1,9 @@
 import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from "../../data/enum/asset_type";
+import Paginator from "../Paginator";
 type NFTListProps = {
     data: NFTAsset[];
+    totalCount: number;
     assetType?: AssetType;
     onOpen: (NFTAsset) => void;
 }
@@ -18,7 +20,7 @@ export default function NFTList(props: NFTListProps) {
         if (!nft.file3dUri) {
             return null;
         }
-        
+
         let previewLink = `asset-preview?model=${nft.file3dUri.substring(nft.file3dUri.lastIndexOf('/') + 1)}`;
         return (
             <a className="no-underline font-bold" style={{
@@ -61,10 +63,14 @@ export default function NFTList(props: NFTListProps) {
     }
 
     return (
-        <div className="flex flex-row flex-wrap">
-            {
-                props.data.map(renderNFTItem)
-            }
-        </div>
+        <section id="nft-list" className="flex flex-col p-2 items-center">
+            <div className="flex flex-row flex-wrap justify-center mb-4">
+                {
+                    props.data.map(renderNFTItem)
+                }
+
+            </div>
+            <Paginator currentPage={1} totalPage={4} />
+        </section>
     )
 }

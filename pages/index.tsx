@@ -4,6 +4,7 @@ import ProductSection from '../components/home/ProductsSection';
 import WelcomeSection from '../components/home/WelcomeSection';
 import HighlightFeatureSection from '../components/home/HighlightFeaturesSection';
 import Footer from '../components/common/Footer';
+import Sidebar from '../components/Sidebar';
 
 function Home(props) {
   // const [totalSupply, setTotalSupply] = useState("--")
@@ -34,13 +35,16 @@ function Home(props) {
 
 
   return (
-      <>
-        <WelcomeSection />
-        <IntroSection />
-        <HighlightFeatureSection />
-        <ProductSection />
-        <Footer />
-      </>
+      <div className='flex flex-row bg-deverse '>
+        <Sidebar />
+        <div className='main-content'>
+          <WelcomeSection />
+          <IntroSection />
+          <HighlightFeatureSection />
+          <ProductSection />
+          <Footer />
+        </div>
+      </div>
   );
 }
 

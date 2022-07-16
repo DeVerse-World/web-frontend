@@ -86,7 +86,7 @@ body * {
 /* Sidebar */
 
 @media only screen and (max-width: 600px) {
-    #deverse-sidebar {
+    /* #deverse-sidebar {
         display: none;
     }
     #deverse-sidebar.active {
@@ -94,11 +94,47 @@ body * {
         position: absolute;
         z-index: 10;
         height: 100vh;
+    } */
+    #deverse-sidebar {
+        overflow: hidden;
+        z-index: 1;
+        width: 0;
+        position: fixed;
+        transition: 0.3s;
+    }
+    #deverse-sidebar.active {
+        width: 100%;
     }
 }
 
 
+/* Content */
+
+.main-content {
+    overflow: overlay;
+    height: calc(100vh - 60px);
+    width: 100%;
+}
+
+
 /* Special case */
+
+.paginator {
+    border-radius: 50%;
+    background: rgb(0, 0, 0, 0.4);
+    width: 2rem;
+    line-height: 2rem;
+    margin-left: 2;
+    border: white 0.5px solid;
+}
+
+.paginator:hover {
+    background: rgb(97, 198, 208, 0.7);
+}
+
+.paginator.active {
+    background: rgb(97 198 208);
+}
 
 .compare table {
     background-color: #fff;

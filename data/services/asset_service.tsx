@@ -141,12 +141,7 @@ class AssetService extends BaseService {
                 break;
             case BaseService.ApiStrategy.GraphQl:
                 const query = `{
-                    alls(first:10 offset:${page * 10})
-                    { 
-                        id 
-                        numAssets 
-                    }
-                    assetTokens(first:10 offset:${page * 10}) {
+                    assetTokens {
                         id
                         tokenURI
                         supply
@@ -170,6 +165,9 @@ class AssetService extends BaseService {
             default:
                 throw new Error("Unrecognized api ")
                 break;
+        }
+        for (let i =0; i< 10; i++) {
+            data.push(data);
         }
         return data;
     }

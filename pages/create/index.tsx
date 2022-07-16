@@ -1,6 +1,7 @@
 import { CSSProperties, useEffect, useState } from "react";
 import { Nav, Tab } from "react-bootstrap";
 import Footer from "../../components/common/Footer";
+import Sidebar from "../../components/Sidebar";
 
 enum CreateTab {
     AVATAR, IG_EDITOR, UE_SDK
@@ -29,7 +30,9 @@ function Create() {
     }, [])
 
     return (
-        <section className="flex flex-col justify-between min-h-[100vh]">
+        <div className='flex flex-row bg-deverse '>
+        <Sidebar />
+        <section className="main-content flex flex-col justify-between min-h-[100vh]">
             {/* <button onClick={() => router.push('/mint-nft')}>Test</button> */}
 
             <Tab.Container id="tabs-with-dropdown" defaultActiveKey={CreateTab.AVATAR}>
@@ -96,6 +99,7 @@ function Create() {
             </Tab.Container>
             <Footer />
         </section>
+        </div>
     )
 }
 

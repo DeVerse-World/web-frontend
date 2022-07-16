@@ -1,5 +1,4 @@
-import { WithRouterProps } from "next/dist/client/with-router";
-import { withRouter } from "next/router";
+import { useRouter, withRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { AiFillShopping, AiFillHome, AiOutlineGlobal, AiFillPlusCircle } from 'react-icons/ai';
@@ -10,33 +9,47 @@ import Link from "next/link";
 import { AppContext } from "./contexts/app_context";
 import { zeroPad } from "ethers/lib/utils";
 
-function SidebarComponent(props: WithRouterProps) {
-    const { isMobileSidebarVisible } = useContext(AppContext);
-    
+function Sidebar(props) {
+    const router = useRouter();
+    const { setIsMobileSidebarVisible, isMobileSidebarVisible } = useContext(AppContext);
+    const [currentRoute, setCurrentRoute] = useState("/");
+    useEffect(() => {
+        if (!router.isReady)
+            return;
+        setCurrentRoute(router.pathname);
+        setIsMobileSidebarVisible(false);
+    }, [router.pathname])
+
     return (
         <Nav id="deverse-sidebar"
             style={{
                 background: 'black',
                 maxHeight: 'calc(100vh - 60px)',
-                width: '80px',
-                flexDirection: 'column',
-                padding: '1px'
+                height: 'calc(100vh - 60px)',
+                padding: '1px',
+                zIndex:10
             }}
             className={isMobileSidebarVisible ? "active" : ""}>
-            <SidebarItem href="/" isSelected={props.router.pathname == "/"} label="Home"
-                icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
-            <SidebarItem href="/alpha" isSelected={props.router.pathname == "/alpha"} label="Alpha"
-                icon={<FaGamepad fontSize="1.5rem" color='rgb(97 198 208)' />} />
-            <SidebarItem href="/marketplace" isSelected={props.router.pathname == "/marketplace"} label="MARKET"
-                icon={<AiFillShopping fontSize="1.5rem" color='rgb(97 198 208)' />} />
-            <SidebarItem href="/create" label="Create" isSelected={props.router.pathname == "/create"}
-                icon={<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />} />
-            <SidebarItem href="/mint-nft" isSelected={props.router.pathname == "/mint-nft"} label="Mint"
-                icon={<GiMining fontSize="1.5rem" color='rgb(97 198 208)' />} />
+            <div className="flex flex-row h-[100%]">
+                <div className="flex flex-col">
+                    <SidebarItem href="/" isSelected={currentRoute == "/"} label="Home"
+                        icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
+                    <SidebarItem href="/alpha" isSelected={currentRoute == "/alpha"} label="Alpha"
+                        icon={<FaGamepad fontSize="1.5rem" color='rgb(97 198 208)' />} />
+                    <SidebarItem href="/marketplace" isSelected={currentRoute == "/marketplace"} label="MARKET"
+                        icon={<AiFillShopping fontSize="1.5rem" color='rgb(97 198 208)' />} />
+                    <SidebarItem href="/create" label="Create" isSelected={currentRoute == "/create"}
+                        icon={<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />} />
+                    <SidebarItem href="/mint-nft" isSelected={currentRoute == "/mint-nft"} label="Mint"
+                        icon={<GiMining fontSize="1.5rem" color='rgb(97 198 208)' />} />
 
-            <SidebarItem href="https://docs.deverse.world" label="Docs" isSelected={false} openNewTab={true}
-                icon={<FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />} />
+                    <SidebarItem href="https://docs.deverse.world" label="Docs" isSelected={false} openNewTab={true}
+                        icon={<FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />} />
+                </div>
+                {props.children}
+            </div>
             {/* <SidebarItem href="/hosting" isSelected={selectedPath == "/hosting"} label="Hosting" icon={<AiOutlineGlobal />} /> */}
+
         </Nav>
     )
 }
@@ -88,5 +101,4 @@ function SidebarItem(props: SidebarItemProps) {
     )
 }
 
-const Sidebar = withRouter(SidebarComponent);
 export default Sidebar;
