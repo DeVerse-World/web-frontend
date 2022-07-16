@@ -13,6 +13,7 @@ import NFTDetailCard from "../../components/asset/NFTDetailCard";
 import Accordion from 'react-bootstrap/Accordion';
 import ListingTabComponent from "./ListingTab";
 import Sidebar from "../../components/Sidebar";
+import Footer from "../../components/common/Footer";
 
 enum MarketplaceTab {
     All = "all",
@@ -87,15 +88,23 @@ export default function Marketplace() {
                 data = data.filter(e => e.assetType == AssetType.GAME_MODE);
                 break;
         }
+        if (data.length == 0) {
+            return (
+                <div className="h-[80vh] w-[100%] flex justify-center">
+                    <h1 className="  m-auto">Nothing to show</h1>
+                </div>
+
+            )
+        }
         return (
-            <NFTList data={data.slice(0,4)} onOpen={onOpenNFTDescription} totalCount={data.length}/>
+            <NFTList data={data} onOpen={onOpenNFTDescription} totalCount={data.length} />
         )
     }
 
     return (
         <div className='flex flex-row bg-deverse '>
             <Sidebar >
-                <Accordion defaultActiveKey="nft_type" className="w-[200px] bg-gray-900">
+                <Accordion defaultActiveKey="nft_type" className="w-[200px] bg-black text-white">
                     <Accordion.Item eventKey="nft_type">
                         <Accordion.Header  >NFT Type</Accordion.Header>
                         <Accordion.Body className="flex flex-col bg-gray-900">
@@ -122,15 +131,18 @@ export default function Marketplace() {
                 </Accordion>
             </Sidebar>
 
-            <section className='main-content bg-deverse flex flex-row text-white' style={{
+            <section className='main-content bg-deverse flex flex-col text-white' style={{
                 minHeight: "calc(100vh - 60px)"
             }}>
-
-                <div>
+                <div className='flex flex-row '>
                     {renderContent()}
                     <NFTDetailCard data={selectedAsset} show={showDetail} onHide={() => setShowDetail(false)} />
                 </div>
+
+
+                <Footer />
             </section>
+
         </div>
     )
 }

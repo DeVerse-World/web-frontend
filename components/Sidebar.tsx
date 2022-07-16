@@ -70,7 +70,7 @@ function SidebarItem(props: SidebarItemProps) {
         if (props.openNewTab) {
             return (
                 <Nav.Link className={bg} href={props.href} target="_blank">
-                    <div className="flex flex-col items-center py-2">
+                    <div className="flex flex-col items-center py-2 ">
                         {props.icon}
                         <span className={label}>
                             {props.label.toUpperCase()}
@@ -82,7 +82,7 @@ function SidebarItem(props: SidebarItemProps) {
         }
         return (
             <Link href={props.href}>
-                <div className="flex flex-col items-center py-2 cursor-pointer" >
+                <div className="flex flex-col items-center py-2 " >
                     {props.icon}
                     <span className={label}>
                         {props.label.toUpperCase()}
@@ -93,7 +93,7 @@ function SidebarItem(props: SidebarItemProps) {
     }
 
     return (
-        <Nav.Item className="w-[100%]">
+        <Nav.Item className="w-[100%] cursor-pointer">
             <Nav.Item className={bg} >
                 {renderBody()}
             </Nav.Item>

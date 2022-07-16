@@ -166,9 +166,9 @@ class AssetService extends BaseService {
                 throw new Error("Unrecognized api ")
                 break;
         }
-        for (let i =0; i< 10; i++) {
-            data.push(data);
-        }
+        // for (let i =0; i< 20; i++) {
+        //     data.push(data);
+        // }
         return data;
     }
 

@@ -28,22 +28,24 @@ function PaginatorButton(props: PaginatorButtonProps) {
 type PaginatorProps = {
     currentPage: number;
     totalPage: number;
+    onChangePage: (number) => void;
 }
 
 function Paginator(props: PaginatorProps) {
     const [currentPage, setCurrentPage] = useState(1);
 
     const onPageChange = (target: EventTarget) => {
-        console.log(target)
         let newPage = target.value;
-        console.log(newPage)
-        if (newPage == "-2") {
-            setCurrentPage(1)
-        } else if (newPage == "-1") {
-            setCurrentPage(props.totalPage)
-        } else {
-            setCurrentPage(newPage)
+        if (!newPage) {
+            return;
         }
+        if (newPage == "-2") {
+            newPage = 1;
+        } else if (newPage == "-1") {
+            newPage = props.totalPage
+        }
+        setCurrentPage(newPage)
+        props.onChangePage(newPage)
     }
 
     // < 1 2 3 ... >
@@ -59,7 +61,7 @@ function Paginator(props: PaginatorProps) {
 
         elements.push(<PaginatorButton key={'<'} value={'<'} />)
 
-        if (currentPage > 3) {
+        if (currentPage >= 3 && props.totalPage > 3) {
             elements.push(<PaginatorButton key={'...less'} value={'...'} />)
         }
 
@@ -67,12 +69,14 @@ function Paginator(props: PaginatorProps) {
             let numb = currentPage + i - 2;
             if (currentPage == 1) {
                 numb++;
+            } else if (currentPage == props.totalPage) {
+                numb--;
             }
             if (numb > 0 && numb <= props.totalPage) {
                 elements.push(<PaginatorButton key={numb} value={numb} active={currentPage == numb} />)
             }
         }
-        if (currentPage < props.totalPage -1 && props.totalPage > 3) {
+        if (currentPage < props.totalPage - 1 && props.totalPage > 3) {
             elements.push(<PaginatorButton key={'...more'} value={'...'} />)
         }
         elements.push(<PaginatorButton key={'>'} value={'>'} />)
