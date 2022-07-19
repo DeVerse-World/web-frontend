@@ -1,5 +1,6 @@
 import { Carousel, Image } from "react-bootstrap";
-import { AiFillWindows } from "react-icons/ai";
+import DownloadDemoButton from "../DownloadDemoButton";
+
 
 function renderShowcaseItem(src: String) {
   return (
@@ -27,14 +28,7 @@ function WelcomeSection(props) {
               <h1 className="mt-4 deverse-title uppercase txt-deverse-gradient ">A Sandbox (De)centralized Meta(Verse)</h1>
 
             </div>
-            <button id="btn-download-app"
-              className="flex flex-row text-lg items-center cursor-pointer text-white rounded-md py-2 px-12 bg-deverse-gradient"
-              onClick={() => {
-                window.open("https://drive.google.com/file/d/1va5Nyvzbz0PfheMk2Ma10JVuN4rsGliH/view", "_blank")
-              }} >
-              <span className="me-2">Download</span>
-              <AiFillWindows fontSize="2rem" />
-            </button>
+            <DownloadDemoButton/>
           </div>
         </Carousel.Item>
         {renderShowcaseItem('/images/01.png')}

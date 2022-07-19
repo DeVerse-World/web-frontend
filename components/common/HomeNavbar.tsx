@@ -46,7 +46,7 @@ function Homebar(props: WithRouterProps) {
 
   const renderAccount = () => {
     let element = (
-      <button onClick={connect} className="text-white p-2 rounded-md bg-deverse-gradient h-[40px]">
+      <button onClick={connect} className="text-white p-2 rounded-md bg-deverse-gradient text-sm h-[35px] md:h-[40px]">
         {boxContent}
       </button>
     );
@@ -69,7 +69,7 @@ function Homebar(props: WithRouterProps) {
   }
 
   return (
-    <section id="section-nav-bar" className="flex flex-row items-center justify-between px-8 bg-black drop-shadow-sm" style={{
+    <section id="section-nav-bar" className="flex flex-row items-center justify-between px-4 bg-black drop-shadow-sm" style={{
       position: "sticky",
       // width: "100vw",
       top: 0,
@@ -86,11 +86,11 @@ function Homebar(props: WithRouterProps) {
         <span className="flex flex-row cursor-pointer">
           <Image
             src={"/images/logo.png"}
-            className="w-[40px] h-[40px]"
+            className="w-[40px] h-[40px] hidden sm:block"
             alt="Deverse logo" />
           <Image
             src={"/images/logo-text.png"}
-            className="h-[40px] mx-2 hidden sm:block"
+            className="h-[40px] mx-2"
             alt="Deverse text logo" />
         </span>
       </Link>

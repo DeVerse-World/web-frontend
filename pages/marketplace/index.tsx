@@ -12,6 +12,8 @@ import { AppContext, ViewState } from "../../components/contexts/app_context";
 import NFTDetailCard from "../../components/asset/NFTDetailCard";
 import Accordion from 'react-bootstrap/Accordion';
 import ListingTabComponent from "./ListingTab";
+import Sidebar from "../../components/Sidebar";
+import Footer from "../../components/common/Footer";
 
 enum MarketplaceTab {
     All = "all",
@@ -38,7 +40,7 @@ export default function Marketplace() {
 
     const loadNFTs = async (query: string) => {
         setViewState(ViewState.LOADING)
-        let assets = await AssetService.getAll(ApiStrategy.REST);
+        let assets = await AssetService.getAll(ApiStrategy.GraphQl);
         setNfts(assets.filter((asset) => asset != null));
         console.log(assets)
         setViewState(ViewState.SUCCESS)
@@ -69,7 +71,6 @@ export default function Marketplace() {
 
     const renderContent = () => {
         let data = nfts;
-        console.log(visibleTab)
         switch (visibleTab) {
             case MarketplaceTab.TWO_D_IMAGE:
                 data = data.filter(e => e.assetType == AssetType.IMAGE_2D);
@@ -87,45 +88,61 @@ export default function Marketplace() {
                 data = data.filter(e => e.assetType == AssetType.GAME_MODE);
                 break;
         }
+        if (data.length == 0) {
+            return (
+                <div className="h-[80vh] w-[100%] flex justify-center">
+                    <h1 className="  m-auto">Nothing to show</h1>
+                </div>
+
+            )
+        }
         return (
-            <NFTList data={data} onOpen={onOpenNFTDescription} />
+            <NFTList data={data} onOpen={onOpenNFTDescription} totalCount={data.length} />
         )
     }
 
     return (
-        <section className='bg-deverse flex flex-row text-white' style={{
-            minHeight: "calc(100vh - 60px)"
-        }}>
-            <Accordion defaultActiveKey="nft_type" className="w-[200px] min-h-[100%] bg-gray-900">
-                <Accordion.Item eventKey="nft_type">
-                    <Accordion.Header  >NFT Type</Accordion.Header>
-                    <Accordion.Body className="flex flex-col bg-gray-900">
-                        <ListingTabComponent label="All" isSelected={visibleTab == MarketplaceTab.All}
-                            onSelect={() => onSelectTab(MarketplaceTab.All)} />
-                        <ListingTabComponent label="2D Image" isSelected={visibleTab == MarketplaceTab.TWO_D_IMAGE}
-                            onSelect={() => onSelectTab(MarketplaceTab.TWO_D_IMAGE)} />
-                        <ListingTabComponent label="Character Skin" isSelected={visibleTab == MarketplaceTab.SKIN}
-                            onSelect={() => onSelectTab(MarketplaceTab.SKIN)} />
-                        <ListingTabComponent label="Character Race" isSelected={visibleTab == MarketplaceTab.RACE}
-                            onSelect={() => onSelectTab(MarketplaceTab.RACE)} />
-                        <ListingTabComponent label="Game Mode" isSelected={visibleTab == MarketplaceTab.GAME_MODE}
-                            onSelect={() => onSelectTab(MarketplaceTab.GAME_MODE)} />
-                        <ListingTabComponent label="Bot Logic" isSelected={visibleTab == MarketplaceTab.BOT_LOGIC}
-                            onSelect={() => onSelectTab(MarketplaceTab.BOT_LOGIC)} />
-                    </Accordion.Body>
-                </Accordion.Item>
-                <Accordion.Item eventKey="nft_collection">
-                    <Accordion.Header>Collection</Accordion.Header>
-                    <Accordion.Body className="flex flex-col bg-gray-900">
-                        To be Announced
-                    </Accordion.Body>
-                </Accordion.Item>
-            </Accordion>
-            <div>
-                {renderContent()}
-                <NFTDetailCard data={selectedAsset} show={showDetail} onHide={() => setShowDetail(false)} />
-            </div>
-        </section>
+        <div className='flex flex-row bg-deverse '>
+            <Sidebar >
+                <Accordion defaultActiveKey="nft_type" className="w-[200px] bg-black text-white">
+                    <Accordion.Item eventKey="nft_type">
+                        <Accordion.Header  >NFT Type</Accordion.Header>
+                        <Accordion.Body className="flex flex-col bg-gray-900">
+                            <ListingTabComponent label="All" isSelected={visibleTab == MarketplaceTab.All}
+                                onSelect={() => onSelectTab(MarketplaceTab.All)} />
+                            <ListingTabComponent label="2D Image" isSelected={visibleTab == MarketplaceTab.TWO_D_IMAGE}
+                                onSelect={() => onSelectTab(MarketplaceTab.TWO_D_IMAGE)} />
+                            <ListingTabComponent label="Character Skin" isSelected={visibleTab == MarketplaceTab.SKIN}
+                                onSelect={() => onSelectTab(MarketplaceTab.SKIN)} />
+                            <ListingTabComponent label="Character Race" isSelected={visibleTab == MarketplaceTab.RACE}
+                                onSelect={() => onSelectTab(MarketplaceTab.RACE)} />
+                            <ListingTabComponent label="Game Mode" isSelected={visibleTab == MarketplaceTab.GAME_MODE}
+                                onSelect={() => onSelectTab(MarketplaceTab.GAME_MODE)} />
+                            <ListingTabComponent label="Bot Logic" isSelected={visibleTab == MarketplaceTab.BOT_LOGIC}
+                                onSelect={() => onSelectTab(MarketplaceTab.BOT_LOGIC)} />
+                        </Accordion.Body>
+                    </Accordion.Item>
+                    <Accordion.Item eventKey="nft_collection">
+                        <Accordion.Header>Collection</Accordion.Header>
+                        <Accordion.Body className="flex flex-col bg-gray-900">
+                            To be Announced
+                        </Accordion.Body>
+                    </Accordion.Item>
+                </Accordion>
+            </Sidebar>
 
+            <section className='main-content bg-deverse flex flex-col text-white' >
+                <div className='flex flex-row ' style={{
+                    minHeight: "calc(100vh - 60px)"
+                }}>
+                    {renderContent()}
+                    <NFTDetailCard data={selectedAsset} show={showDetail} onHide={() => setShowDetail(false)} />
+                </div>
+
+
+                <Footer />
+            </section>
+
+        </div>
     )
 }

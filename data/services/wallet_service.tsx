@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import axios from "../api/axios";
+import axios from "../api/deverse";
 import { DataFilter } from "../enum/data_filter";
 import { TimeFilter } from "../enum/time_filter";
 import { StatisticLog } from "../model/profile_info";

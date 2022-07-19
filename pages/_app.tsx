@@ -61,16 +61,7 @@ function DeverseApp({ Component, pageProps }) {
             <LoadingScreen />
             {/* <ScrollToTopButton /> */}
             <HomeNavbar />
-            <div className='flex flex-row bg-deverse '>
-              <Sidebar />
-              <div style={{
-                overflow: 'overlay',
-                height: 'calc(100vh - 60px)',
-                width: "100%"
-              }}>
-                <Component {...pageProps} />
-              </div>
-            </div>
+            <Component {...pageProps} />
           </MetaMaskProvider>
         </AppContextProvider>
       </SSRProvider>

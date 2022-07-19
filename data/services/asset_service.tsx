@@ -1,16 +1,18 @@
 import BaseService from "./base_service";
-import {Contract, ethers} from "ethers";
-import {assetAddress} from "../../config";
-import {create as ipfsHttpClient} from 'ipfs-http-client'
+import { Contract, ethers } from "ethers";
+import { assetAddress } from "../../config";
+import { create as ipfsHttpClient } from 'ipfs-http-client'
 import CID from 'cids';
 import AssetABI from '../../smart-contracts/artifacts/contracts/v2/Asset.sol/Asset.json'
-import axios from "../api/axios";
+import deverseClient from "../api/deverse";
+import graphClient from "../api/graphql";
 import Web3Modal from "web3modal";
-import {NFTAsset} from "../model/nft_asset";
+import { NFTAsset } from "../model/nft_asset";
 import CIDTool from 'cid-tool';
-import {Event} from "@ethersproject/contracts";
-import {AssetType} from "../enum/asset_type";
+import { Event } from "@ethersproject/contracts";
+import { AssetType } from "../enum/asset_type";
 import ApiStrategy = BaseService.ApiStrategy;
+import { DeverseGraphResponse } from "../model/graph_response";
 
 class AssetService extends BaseService {
     _uriPrefix = 'https://ipfs.infura.io/ipfs/';
@@ -116,67 +118,81 @@ class AssetService extends BaseService {
         }
     }
 
-    async getAll(apiStrategy: BaseService.ApiStrategy): Promise<NFTAsset[]> {
+    async getAll(apiStrategy: BaseService.ApiStrategy, page: number = 1, filter: any = null): Promise<NFTAsset[]> {
         let data: NFTAsset[] = [];
-
+        let parallelJobs: Promise<Promise<NFTAsset>>[] = [];
         switch (apiStrategy) {
             case BaseService.ApiStrategy.REST:
                 let transferEvents = await this.assetContract.queryFilter(this.transferSingleEventFilter);
-                let parallelJobs: Promise<Promise<NFTAsset>>[] = [];
-                for (let i = 0; i < transferEvents.length; i++) {
-                    parallelJobs.push(new Promise<Promise<NFTAsset>>(async (resolve) => {
-                        resolve(this._fetchAssetFromEther(transferEvents[i]));
+                transferEvents.forEach((transferEvent) => {
+                    parallelJobs.push(new Promise<Promise<NFTAsset>>(async (resolve, reject) => {
+                        let [_, from, to, id, supply] = transferEvent.args;
+                        if (from == 0) { // from mint event
+                            // const tokenUri = await this.assetContract.uri2(id)
+                            // const tokenFullUri = `https://bafybei${tokenUri}.ipfs.infura-ipfs.io`
+                            let tokenFullUri = await this.assetContract.uri(id)
+                            resolve(this._getAssetFromEther(tokenFullUri));
+                        } else {
+                            reject('this is not from mint event')
+                        }
                     }));
-                }
+                })
                 data = await Promise.all(parallelJobs)
                 break;
             case BaseService.ApiStrategy.GraphQl:
-                throw new Error("Graphql not supported here")
+                const query = `{
+                    assetTokens {
+                        id
+                        tokenURI
+                        supply
+                        isNFT
+                    }
+                }`;
+                const graphRes = await graphClient.request<DeverseGraphResponse>({
+                    method: 'post',
+                    data: {
+                        query,
+                    }
+                })
+                let assetTokens = graphRes.data.data.assetTokens;
+                assetTokens.forEach((token) => {
+                    parallelJobs.push(new Promise<Promise<NFTAsset>>(async (resolve, reject) => {
+                        resolve(this._getAssetFromEther(token.tokenURI));
+                    }));
+                })
+                data = await Promise.all(parallelJobs)
                 break;
             default:
                 throw new Error("Unrecognized api ")
                 break;
         }
+        // for (let i =0; i< 20; i++) {
+        //     data.push(data);
+        // }
         return data;
     }
 
-    async _fetchAssetFromEther(data: ethers.Event): Promise<NFTAsset> {
-        let [_, from, to, id, supply] = data.args;
-        if (from == 0) { // from mint event
-            // const tokenUri = await this.assetContract.uri2(id)
-            // const tokenFullUri = `https://bafybei${tokenUri}.ipfs.infura-ipfs.io`
-            const tokenFullUri = await this.assetContract.uri(id)
-            const meta = await axios.get(tokenFullUri)
-            if (meta == null || meta.data == null) {
-                return null
-            }
-            return ({
-                tokenUri: tokenFullUri,
-                supply: meta.data.supply, name: meta.data.name, description: meta.data.description,
-                assetType: meta.data.assetType, fileAssetUri: meta.data.fileAssetUri,
-                file2dUri: meta.data.file2dUri, file3dUri: meta.data.file3dUri,
-                fileAssetName: meta.data.fileAssetName,
-            })
-        }
-        return null;
+    async _getAssetFromEther(tokenFullUri: string): Promise<NFTAsset> {
+        let response = await deverseClient.get<NFTAsset>(tokenFullUri);
+        return response.data;
     }
 
     async checkName(name: string) {
-        const response = await axios({
+        const response = await deverseClient({
             method: "get",
             url: `/nft/checkName?name=${name}`,
         });
         return response;
     }
 
-    async notifyMinted(asset: NFTAsset, tokenId) {
-        axios({
+    notifyMinted(asset: NFTAsset, tokenId: string) {
+        deverseClient({
             method: "post",
             url: `/nft/notifyMinted`,
             data: {
                 minted_nft: {
-                    token_address: assetAddress, token_id: tokenId.toString(), name: asset.name, description: asset.description,
-                    supply: parseInt(asset.supply.toString()), file_asset_uri: asset.fileAssetUri, file_asset_name: asset.fileAssetName,
+                    token_address: assetAddress, token_id: tokenId, name: asset.name, description: asset.description,
+                    supply: asset.supply, file_asset_uri: asset.fileAssetUri, file_asset_name: asset.fileAssetName,
                     file_asset_uri_from_centralized: asset.fileAssetUriFromCentralized, file_2d_uri: asset.file2dUri,
                     file_3d_uri: asset.file3dUri, asset_type: asset.assetType,
                 }
