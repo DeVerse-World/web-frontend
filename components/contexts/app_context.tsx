@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { User } from "../../data/model/user";
 
 export type AppDataContext = {
     // user?: User,
@@ -17,6 +18,8 @@ export enum ViewState {
 }
 
 const AppContext = React.createContext<AppDataContext>({
+    // user: null,
+    // setUser: () => {},
     viewState: ViewState.IDLE,
     setViewState: () => { },
     isMobileSidebarVisible: false,
@@ -29,7 +32,9 @@ const AppContextProvider = (props) => {
 
     return (
         <AppContext.Provider
-            value={{ viewState, setViewState, isMobileSidebarVisible, setIsMobileSidebarVisible }}>
+            value={{ viewState, setViewState, 
+            isMobileSidebarVisible, setIsMobileSidebarVisible,
+             }}>
             {props.children}
         </AppContext.Provider>
     )

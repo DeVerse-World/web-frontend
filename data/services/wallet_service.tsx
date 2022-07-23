@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import axios from "../api/deverse";
+import deverseClient from "../api/deverse_client";
 import { DataFilter } from "../enum/data_filter";
 import { TimeFilter } from "../enum/time_filter";
 import { StatisticLog } from "../model/profile_info";
@@ -7,35 +7,29 @@ import StorageService from "./storage_service";
 
 class WalletService {
     async getOrCreateWallet(session_key: string, wallet_address: string) {
-        const response = await axios({
-            method: "post",
-            url: `/wallet/getOrCreate`,
-            data: {
-                address: wallet_address,
-                session_key: session_key
-            },
-            withCredentials: true
-        });
-        return response.data;
+        return deverseClient.post('/wallet/getOrCreate', {
+            address: wallet_address,
+            session_key: session_key
+        })
     }
 
     async connectToMetamask(metamaskAccount: string) {
         const web3 = new ethers.providers.Web3Provider(window.ethereum);
         const dbUser = await this.getOrCreateWallet(StorageService.getMetamaskSessionKey(), metamaskAccount);
-        if (dbUser.nonce) {
+        if (dbUser.data.nonce) {
             const signature = await web3
                 .getSigner()
-                .signMessage(`I am signing my one-time nonce: ${dbUser.nonce}`);
+                .signMessage(`I am signing my one-time nonce: ${dbUser.data.nonce}`);
             // await authMetamask(account, signature);
             // if (localStorage.getItem("session_key")) {
-            await this.authLoginLink(StorageService.getMetamaskSessionKey(), metamaskAccount, signature)
+            this.authLoginLink(StorageService.getMetamaskSessionKey(), metamaskAccount, signature)
             // }
             StorageService.saveWalletAddress(metamaskAccount);
         }
     }
 
     async authMetamask(wallet_address: string, signature: string) {
-        const response = await axios({
+        const response = await deverseClient({
             method: "post",
             url: `/wallet/auth`,
             data: {
@@ -48,7 +42,7 @@ class WalletService {
     }
 
     async authLoginLink(session_key, wallet_address, signature) {
-        const response = await axios({
+        const response = await deverseClient({
             method: "post",
             url: `/wallet/authLoginLink`,
             data: {

@@ -4,8 +4,8 @@ import { assetAddress } from "../../config";
 import { create as ipfsHttpClient } from 'ipfs-http-client'
 import CID from 'cids';
 import AssetABI from '../../smart-contracts/artifacts/contracts/v2/Asset.sol/Asset.json'
-import deverseClient from "../api/deverse";
-import graphClient from "../api/graphql";
+import deverseClient from "../api/deverse_client";
+import graphClient from "../api/graphql_client";
 import Web3Modal from "web3modal";
 import { NFTAsset } from "../model/nft_asset";
 import CIDTool from 'cid-tool';
