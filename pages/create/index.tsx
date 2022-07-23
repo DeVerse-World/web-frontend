@@ -2,6 +2,7 @@ import { CSSProperties, useEffect, useState } from "react";
 import { Nav, Tab } from "react-bootstrap";
 import Footer from "../../components/common/Footer";
 import Sidebar from "../../components/Sidebar";
+import avatar_service from "../../data/services/avatar_service";
 
 enum CreateTab {
     AVATAR, IG_EDITOR, UE_SDK
@@ -19,7 +20,7 @@ function Create() {
             return;
         }
         let glbUri = e.data;
-        console.log(glbUri);
+        avatar_service.createAvatar(glbUri);
     }
 
     useEffect(() => {
@@ -32,7 +33,7 @@ function Create() {
     return (
         <div className='flex flex-row bg-deverse '>
         <Sidebar />
-        <section className="main-content flex flex-col justify-between min-h-[100vh]">
+        <section className="main-content flex flex-col justify-between ">
             {/* <button onClick={() => router.push('/mint-nft')}>Test</button> */}
 
             <Tab.Container id="tabs-with-dropdown" defaultActiveKey={CreateTab.AVATAR}>
