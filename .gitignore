@@ -10,6 +10,7 @@
 /coverage
 config.js
 next.config.js
+nginx_conf
 
 # production
 /build
