@@ -14,15 +14,9 @@ import Accordion from 'react-bootstrap/Accordion';
 import ListingTabComponent from "./ListingTab";
 import Sidebar from "../../components/Sidebar";
 import Footer from "../../components/common/Footer";
+import { MarketplaceTab } from "./marketplace_tab";
 
-enum MarketplaceTab {
-    All = "all",
-    TWO_D_IMAGE = "2d-image",
-    RACE = "character-race",
-    SKIN = "character-skin",
-    GAME_MODE = "game-mode",
-    BOT_LOGIC = "bot-logic",
-}
+
 
 export default function Marketplace() {
     const router = useRouter();
@@ -108,18 +102,18 @@ export default function Marketplace() {
                     <Accordion.Item eventKey="nft_type">
                         <Accordion.Header  >NFT Type</Accordion.Header>
                         <Accordion.Body className="flex flex-col bg-gray-900">
-                            <ListingTabComponent label="All" isSelected={visibleTab == MarketplaceTab.All}
-                                onSelect={() => onSelectTab(MarketplaceTab.All)} />
-                            <ListingTabComponent label="2D Image" isSelected={visibleTab == MarketplaceTab.TWO_D_IMAGE}
-                                onSelect={() => onSelectTab(MarketplaceTab.TWO_D_IMAGE)} />
-                            <ListingTabComponent label="Character Skin" isSelected={visibleTab == MarketplaceTab.SKIN}
-                                onSelect={() => onSelectTab(MarketplaceTab.SKIN)} />
-                            <ListingTabComponent label="Character Race" isSelected={visibleTab == MarketplaceTab.RACE}
-                                onSelect={() => onSelectTab(MarketplaceTab.RACE)} />
-                            <ListingTabComponent label="Game Mode" isSelected={visibleTab == MarketplaceTab.GAME_MODE}
-                                onSelect={() => onSelectTab(MarketplaceTab.GAME_MODE)} />
-                            <ListingTabComponent label="Bot Logic" isSelected={visibleTab == MarketplaceTab.BOT_LOGIC}
-                                onSelect={() => onSelectTab(MarketplaceTab.BOT_LOGIC)} />
+                            <ListingTabComponent label="All"
+                                tab={MarketplaceTab.All} isSelected={visibleTab} onSelect={onSelectTab} />
+                            <ListingTabComponent label="2D Image"
+                                tab={MarketplaceTab.TWO_D_IMAGE} isSelected={visibleTab} onSelect={onSelectTab} />
+                            <ListingTabComponent label="Character Skin"
+                                tab={MarketplaceTab.SKIN} isSelected={visibleTab} onSelect={onSelectTab} />
+                            <ListingTabComponent label="Character Race"
+                                tab={MarketplaceTab.RACE} isSelected={visibleTab} onSelect={onSelectTab} />
+                            <ListingTabComponent label="Game Mode"
+                                tab={MarketplaceTab.GAME_MODE} isSelected={visibleTab} onSelect={onSelectTab} />
+                            <ListingTabComponent label="Bot Logic"
+                                tab={MarketplaceTab.BOT_LOGIC} isSelected={visibleTab} onSelect={onSelectTab} />
                         </Accordion.Body>
                     </Accordion.Item>
                     <Accordion.Item eventKey="nft_collection">
