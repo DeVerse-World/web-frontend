@@ -5,7 +5,6 @@ function EmailSignin() {
     const [formValidated, setFormValidated] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [passwordSecond, setPasswordSecond] = useState('');
 
     const onCreateEmail = () => {
 
@@ -15,7 +14,7 @@ function EmailSignin() {
         <Form className="flex flex-col items-center text-white my-8 space-y-2 min-w-[150px] w-[30vw]"
             validated={formValidated}
             onSubmit={onCreateEmail}>
-            <h2>Sign up</h2>
+            <h2>Sign in</h2>
             <InputGroup>
                 <FormControl id="input-email" required={true}
                     placeholder="Email (*)"
