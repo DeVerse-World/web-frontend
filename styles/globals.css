@@ -111,8 +111,8 @@ body * {
 /* Content */
 
 .main-content {
-    overflow: overlay;
-    min-height: calc(100vh - 60px);
+    overflow: auto;
+    /* min-height: calc(100vh - 60px); */
     height: calc(100vh - 60px);
     width: 100%;
 }

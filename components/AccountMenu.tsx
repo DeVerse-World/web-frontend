@@ -63,7 +63,7 @@ function AccountMenu() {
       <button onClick={onClickMenu} className="text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-[30px] md:h-[35px]">
         Login
       </button>
-      <LoginModal show={showLogin} onHide={() => setShowLogin(false)} fullscreen/>
+      {showLogin && <LoginModal show={true} onHide={() => setShowLogin(false)} fullscreen/>}
     </>
 
   );
