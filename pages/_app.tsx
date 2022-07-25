@@ -17,6 +17,7 @@ import GTMHeader from '../components/analytics/GTMHeader';
 import { Router } from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
+import LoginModal from '../components/login/LoginModal';
 // optional configuration
 const options = {
   // you can also just use 'bottom center'

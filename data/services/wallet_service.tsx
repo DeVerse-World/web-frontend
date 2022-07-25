@@ -15,17 +15,20 @@ class WalletService {
 
     async connectToMetamask(metamaskAccount: string) {
         const web3 = new ethers.providers.Web3Provider(window.ethereum);
-        const dbUser = await this.getOrCreateWallet(StorageService.getMetamaskSessionKey(), metamaskAccount);
-        if (dbUser.data.nonce) {
-            const signature = await web3
-                .getSigner()
-                .signMessage(`I am signing my one-time nonce: ${dbUser.data.nonce}`);
-            // await authMetamask(account, signature);
-            // if (localStorage.getItem("session_key")) {
-            this.authLoginLink(StorageService.getMetamaskSessionKey(), metamaskAccount, signature)
-            // }
-            StorageService.saveWalletAddress(metamaskAccount);
-        }
+        this.getOrCreateWallet(StorageService.getMetamaskSessionKey(), metamaskAccount).then(dbUser => {
+            if (dbUser.data.nonce) {
+                web3.getSigner().signMessage(`I am signing my one-time nonce: ${dbUser.data.nonce}`).then(signature => {
+                    this.authLoginLink(StorageService.getMetamaskSessionKey(), metamaskAccount, signature)
+                });
+                // await authMetamask(account, signature);
+                // if (localStorage.getItem("session_key")) {
+                
+                // }
+                StorageService.saveWalletAddress(metamaskAccount);
+            }
+        }).catch(e => {
+            console.log(e)
+        });
     }
 
     async authMetamask(wallet_address: string, signature: string) {
