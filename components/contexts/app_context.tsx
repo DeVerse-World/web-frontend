@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { User } from "../../data/model/user";
-
+import StorageService from "../../data/services/storage_service"
 export type AppDataContext = {
-    // user?: User,
-    // setUser: (User) => void,
+    user?: User,
+    setUser: (User) => void,
     viewState: ViewState,
     setViewState: (ViewState) => void,
     isMobileSidebarVisible: boolean,
@@ -18,8 +18,8 @@ export enum ViewState {
 }
 
 const AppContext = React.createContext<AppDataContext>({
-    // user: null,
-    // setUser: () => {},
+    user: null,
+    setUser: () => { },
     viewState: ViewState.IDLE,
     setViewState: () => { },
     isMobileSidebarVisible: false,
@@ -27,14 +27,27 @@ const AppContext = React.createContext<AppDataContext>({
 })
 
 const AppContextProvider = (props) => {
+    const [user, setUser] = useState<User>(null);
     const [viewState, setViewState] = useState(ViewState.IDLE);
     const [isMobileSidebarVisible, setIsMobileSidebarVisible] = useState(false);
 
+    useEffect(() => {
+        let user = StorageService.getUser();
+        if (user != null) {
+            setUser(user);
+        }
+    }, [])
+
+    useEffect(() => {
+        StorageService.saveUser(user);
+    }, [user])
+
     return (
         <AppContext.Provider
-            value={{ viewState, setViewState, 
-            isMobileSidebarVisible, setIsMobileSidebarVisible,
-             }}>
+            value={{
+                user, setUser, viewState, setViewState,
+                isMobileSidebarVisible, setIsMobileSidebarVisible,
+            }}>
             {props.children}
         </AppContext.Provider>
     )

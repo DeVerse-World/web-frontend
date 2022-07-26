@@ -1,17 +1,20 @@
 import { useMetaMask } from "metamask-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Modal, ModalProps } from "react-bootstrap";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdEmail } from 'react-icons/Md';
 import EmailSignin from "./EmailLogin";
 import EmailSignup from "./EmailSignup";
-import GoogleLogin, { GoogleLoginResponse } from 'react-google-login';
+import GoogleLogin, { GoogleLoginResponse, GoogleLogout } from 'react-google-login';
+import { AppContext } from "../contexts/app_context";
+import { User, UserType } from "../../data/model/user";
 
 enum AuthAction {
     Home, Email_Signup, Email_Signin
 }
 
 function LoginModal(props: ModalProps) {
+    const { user, setUser } = useContext(AppContext);
     const [currentAction, setCurrentAction] = useState<AuthAction>(AuthAction.Home);
     const { status, connect, account } = useMetaMask();
 
@@ -21,13 +24,26 @@ function LoginModal(props: ModalProps) {
     }
 
     const onGoogleLogin = (event: GoogleLoginResponse) => {
-        console.log(event)
+        let profile = event.getBasicProfile();
+        let user : User = {
+            id: profile.getId(),
+            name: profile.getName(),
+            avatar: profile.getImageUrl(),
+            dob: 'abc',
+            email: profile.getEmail(),
+            userType: UserType.GOOGLE
+        };
+        setUser(user);
         props.onHide();
     }
 
     const onGoogleFailure = (error) => {
         console.log(error)
         props.onHide();
+    }
+
+    const onGoogleLogout = () => {
+        console.log('logged out')
     }
 
     const renderContent = () => {
@@ -56,22 +72,19 @@ function LoginModal(props: ModalProps) {
                             <img title="metamask" src="/images/metamask.webp" />
                             Metamask
                         </button>
-                        {/* <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2"
-                            onClick={() => console.log(process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID)}>
-                            <img title="metamask" src="/images/google.webp" />
-                            Google
-                        </button> */}
                         <GoogleLogin
                             clientId={process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID}
-                            render={(props) => {
-                                return (<button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2"
-                                    onClick={() => console.log(process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID)}>
+                            render={(loginProps) => {
+                                return (<button onClick={loginProps.onClick}
+                                    className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2">
                                     <img title="metamask" src="/images/google.webp" />
                                     Google
                                 </button>)
                             }}
+                            buttonText="abc"
                             onSuccess={onGoogleLogin}
                             onFailure={onGoogleFailure}
+                        // isSignedIn={true}
                         />
                         {/* <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                             onClick={() => setCurrentAction(AuthAction.Email_Signin)}>

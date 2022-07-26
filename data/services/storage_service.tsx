@@ -1,3 +1,5 @@
+import { User } from "../model/user";
+
 class StorageService {
 
     getMetamaskSessionKey(): string {
@@ -10,6 +12,22 @@ class StorageService {
 
     saveWalletAddress(address: string) {
         localStorage.setItem("wallet_address", address);
+    }
+
+    saveUser(user?: User) {
+        if (user == null) {
+            localStorage.setItem("user", '')
+        } else {
+            localStorage.setItem("user", JSON.stringify(user));
+        }
+    }
+
+    getUser(): User | null {
+        let user = localStorage.getItem("user");
+        if (user?.length == 0 || !user) {
+            return null;
+        }
+        return JSON.parse(user);
     }
 }
 

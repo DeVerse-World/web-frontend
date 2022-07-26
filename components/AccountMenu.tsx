@@ -1,12 +1,14 @@
 import { useMetaMask } from "metamask-react";
-import React, { useEffect, useState } from "react";
-import { Button, NavDropdown } from "react-bootstrap";
-import wallet_service from "../data/services/wallet_service";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Image, NavDropdown } from "react-bootstrap";
+import { GoogleLogout } from "react-google-login";
 import WalletService from "../data/services/wallet_service";
+import { AppContext } from "./contexts/app_context";
 import LoginModal from "./login/LoginModal";
 
 function AccountMenu() {
   const { status, connect, account } = useMetaMask();
+  const { user, setUser } = useContext(AppContext);
   const [boxContent, setBoxContent] = useState("");
   const [showLogin, setShowLogin] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -31,7 +33,7 @@ function AccountMenu() {
         break;
       case "connected":
         setBoxContent(account);
-        wallet_service.connectToMetamask(account);
+        WalletService.connectToMetamask(account);
         break;
       default:
         break;
@@ -58,12 +60,36 @@ function AccountMenu() {
   //   )
   // }
 
+  let renderAccountButton = () => {
+    if (user == null) {
+      return (
+        <button onClick={onClickMenu} className="text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-[30px] md:h-[35px]">
+          Login
+        </button>
+      )
+    }
+    return (
+      <div className="text-white mr-24">
+        <div>
+          <Image src={user.avatar} width={56} height={56} roundedCircle />
+        </div>
+        <div className="absolute flex flex-col gap-2 w-[120px] bg-gray-700 p-2 items-start">
+          <h5>Welcome {user.name}</h5>
+          <button>Dashboard</button>
+          <GoogleLogout
+            clientId={process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID}
+            buttonText={'Logout'}
+            onLogoutSuccess={() => setUser(null)}
+          />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
-      <button onClick={onClickMenu} className="text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-[30px] md:h-[35px]">
-        Login
-      </button>
-      {showLogin && <LoginModal show={true} onHide={() => setShowLogin(false)} fullscreen/>}
+      {renderAccountButton()}
+      {showLogin && <LoginModal show={true} onHide={() => setShowLogin(false)} fullscreen />}
     </>
 
   );
