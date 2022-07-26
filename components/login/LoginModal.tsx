@@ -5,6 +5,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { MdEmail } from 'react-icons/Md';
 import EmailSignin from "./EmailLogin";
 import EmailSignup from "./EmailSignup";
+import GoogleLogin, { GoogleLoginResponse } from 'react-google-login';
 
 enum AuthAction {
     Home, Email_Signup, Email_Signin
@@ -16,6 +17,16 @@ function LoginModal(props: ModalProps) {
 
     const onMetamaskConnect = () => {
         connect();
+        props.onHide();
+    }
+
+    const onGoogleLogin = (event: GoogleLoginResponse) => {
+        console.log(event)
+        props.onHide();
+    }
+
+    const onGoogleFailure = (error) => {
+        console.log(error)
         props.onHide();
     }
 
@@ -45,15 +56,28 @@ function LoginModal(props: ModalProps) {
                             <img title="metamask" src="/images/metamask.webp" />
                             Metamask
                         </button>
-                        <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2">
+                        {/* <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2"
+                            onClick={() => console.log(process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID)}>
                             <img title="metamask" src="/images/google.webp" />
                             Google
-                        </button>
-                        <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
+                        </button> */}
+                        <GoogleLogin
+                            clientId={process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID}
+                            render={(props) => {
+                                return (<button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2"
+                                    onClick={() => console.log(process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID)}>
+                                    <img title="metamask" src="/images/google.webp" />
+                                    Google
+                                </button>)
+                            }}
+                            onSuccess={onGoogleLogin}
+                            onFailure={onGoogleFailure}
+                        />
+                        {/* <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                             onClick={() => setCurrentAction(AuthAction.Email_Signin)}>
                             <MdEmail size={30} />
                             Email
-                        </button>
+                        </button> */}
                         Or
                         <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                             onClick={() => setCurrentAction(AuthAction.Email_Signup)}>
