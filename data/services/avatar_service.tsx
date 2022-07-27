@@ -10,8 +10,10 @@ class AvatarService {
         }).then((value) => {
             //TODO: do something with avatar
             console.log(value.data.data.avatar)
+            window.alert("Successfully create/ update avatar in DB")
         }).catch((e) => {
             console.log(e);
+            window.alert("Fail to create avatar in DB " + e)
         })
     }
     getAvatar(walletAddress: string) {
