@@ -1,4 +1,5 @@
 import { useMetaMask } from "metamask-react";
+import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Image, NavDropdown } from "react-bootstrap";
 import { GoogleLogout } from "react-google-login";
@@ -75,7 +76,11 @@ function AccountMenu() {
         </div>
         <div className="absolute flex flex-col gap-2 w-[120px] bg-gray-700 p-2 items-start">
           <h5>Welcome {user.name}</h5>
-          <button>Dashboard</button>
+          <Link href="/account" >
+            <div className="cursor-pointer">
+              Dashboard
+            </div>
+          </Link>
           <GoogleLogout
             clientId={process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID}
             buttonText={'Logout'}
