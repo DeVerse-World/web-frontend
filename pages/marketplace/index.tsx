@@ -14,7 +14,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import ListingTabComponent from "./ListingTab";
 import Sidebar from "../../components/Sidebar";
 import Footer from "../../components/common/Footer";
-import { MarketplaceTab } from "./marketplace_tab";
+import { MarketplaceTab } from "../../components/marketplace_tab";
 
 
 
