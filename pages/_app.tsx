@@ -29,9 +29,9 @@ const options = {
 }
 
 // Add Loading indicator when change route
-Router.events.on('routeChangeStart', () => NProgress.start()); 
-Router.events.on('routeChangeComplete', () => NProgress.done()); 
-Router.events.on('routeChangeError', () => NProgress.done());  
+Router.events.on('routeChangeStart', () => NProgress.start());
+Router.events.on('routeChangeComplete', () => NProgress.done());
+Router.events.on('routeChangeError', () => NProgress.done());
 
 function DeverseApp({ Component, pageProps }) {
   return (
@@ -55,14 +55,16 @@ function DeverseApp({ Component, pageProps }) {
             <Head>
               <title>Deverse</title>
             </Head>
-            <GoogleTagManager tagId={process.env.NEXT_PUBLIC_GTM}/>
+            <GoogleTagManager tagId={process.env.NEXT_PUBLIC_GTM} />
             <noscript>
-              <GTMHeader tagId={process.env.NEXT_PUBLIC_GTM}/>
+              <GTMHeader tagId={process.env.NEXT_PUBLIC_GTM} />
             </noscript>
             <LoadingScreen />
             {/* <ScrollToTopButton /> */}
-            <HomeNavbar />
-            <Component {...pageProps} />
+            <div className='flex flex-col'>
+              <HomeNavbar />
+              <Component {...pageProps} />
+            </div>
           </MetaMaskProvider>
         </AppContextProvider>
       </SSRProvider>

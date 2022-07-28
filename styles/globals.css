@@ -111,15 +111,11 @@ body * {
 /* Content */
 
 #section-nav-bar {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 0;
-    z-index: 99;
     height: 60px;
     border-bottom: 1px solid rgb(71 85 105);
 }
 
-.main-content {
+#section-content {
     overflow: auto;
     /* min-height: calc(100vh - 60px); */
     height: calc(100vh - 60px);

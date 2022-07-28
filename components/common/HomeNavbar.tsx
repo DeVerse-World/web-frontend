@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Navbar, Nav, Image, NavLink, Button, NavDropdown } from 'react-bootstrap';
+import React, { useContext } from "react";
+import { Image } from 'react-bootstrap';
 import AccountMenu from "./AccountMenu";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { withRouter } from "next/router";
 import { WithRouterProps } from "next/dist/client/with-router";
-import WalletService from "../../data/services/WalletService";
-import { useMetaMask } from "metamask-react";
 import Link from "next/link";
 import { AppContext } from "../contexts/app_context";
 import { IoMdClose } from "react-icons/io";
@@ -21,14 +19,16 @@ function Homebar(props: WithRouterProps) {
           : <GiHamburgerMenu className="w-[40px] h-[40px]" fontSize="0.5rem" color="rgb(97 198 208)" />}
       </span>
       <Link href="/" >
-        <span className="flex flex-row cursor-pointer">
+        <span className="flex flex-row gap-2 cursor-pointer">
           <Image
             src={"/images/logo.png"}
-            className="w-[40px] h-[40px] hidden sm:block"
+            className="hidden sm:block"
+            height={40}
+            width={40}
             alt="Deverse logo" />
           <Image
             src={"/images/logo-text.png"}
-            className="h-[40px] mx-2"
+            height={40}
             alt="Deverse text logo" />
         </span>
       </Link>
