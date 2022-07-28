@@ -2,7 +2,7 @@ import { useMetaMask } from "metamask-react";
 import { useContext, useState } from "react";
 import { Modal, ModalProps } from "react-bootstrap";
 import { AiOutlineClose } from "react-icons/ai";
-import { MdEmail } from 'react-icons/Md';
+import { MdEmail } from 'react-icons/md';
 import EmailSignin from "./EmailLogin";
 import EmailSignup from "./EmailSignup";
 import GoogleLogin, { GoogleLoginResponse, GoogleLogout } from 'react-google-login';

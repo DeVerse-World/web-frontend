@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaTelegramPlane, FaDiscord } from 'react-icons/fa';
 import { AiOutlineTwitter, AiFillFacebook } from 'react-icons/ai';
-import { MdEmail } from 'react-icons/Md';
+import { MdEmail } from 'react-icons/md';
 
 function Footer(props) {
   return (
