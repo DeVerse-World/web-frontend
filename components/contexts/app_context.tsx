@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { User } from "../../data/model/user";
-import StorageService from "../../data/services/storage_service"
+import StorageService from "../../data/services/StorageService"
 export type AppDataContext = {
     user?: User,
     setUser: (User) => void,

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
-import StorageService from "../../data/services/storage_service";
+import StorageService from "../../data/services/StorageService";
 import { useMetaMask } from "metamask-react";
-import WalletService from "../../data/services/wallet_service";
+import WalletService from "../../data/services/WalletService";
 
 export default function LoginLink(props) {
     const router = useRouter();

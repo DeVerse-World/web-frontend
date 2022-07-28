@@ -1,4 +1,4 @@
-import BaseService from "./base_service";
+import BaseService from "./BaseService";
 import { Contract, ethers } from "ethers";
 import { assetAddress } from "../../config";
 import { create as ipfsHttpClient } from 'ipfs-http-client'

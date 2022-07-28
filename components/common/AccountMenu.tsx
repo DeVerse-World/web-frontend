@@ -1,13 +1,14 @@
 import { useMetaMask } from "metamask-react";
 import Link from "next/link";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Button, Image, NavDropdown } from "react-bootstrap";
 import { GoogleLogout } from "react-google-login";
-import WalletService from "../data/services/wallet_service";
-import { AppContext } from "./contexts/app_context";
-import LoginModal from "./login/LoginModal";
+import WalletService from "../../data/services/WalletService";
+import { AppContext } from "../contexts/app_context";
+import LoginModal from "../login/LoginModal";
 
 function AccountMenu() {
+  const menuRef = useRef(null);
   const { status, connect, account } = useMetaMask();
   const { user, setUser } = useContext(AppContext);
   const [boxContent, setBoxContent] = useState("");
@@ -74,7 +75,7 @@ function AccountMenu() {
         <div>
           <Image src={user.avatar} width={56} height={56} roundedCircle />
         </div>
-        <div className="absolute flex flex-col gap-2 w-[120px] bg-gray-700 p-2 items-start">
+        <div ref={menuRef} className="absolute flex flex-col gap-2 w-[120px] bg-gray-700 p-2 items-start">
           <h5>Welcome {user.name}</h5>
           <Link href="/account" >
             <div className="cursor-pointer">

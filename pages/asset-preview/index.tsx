@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { Card, Collapse } from 'react-bootstrap';
 import Footer from '../../components/common/Footer';
 import ModelViewer from '../../components/ModelViewer';
-import AssetService from "../../data/services/asset_service";
+import AssetService from "../../data/services/AssetService";
 import { IoIosArrowDown } from 'react-icons/io';
 import CollapsableInfoCard from './collapsable_info_card';
 
