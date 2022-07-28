@@ -33,7 +33,7 @@ function Create() {
     return (
         <div className='flex flex-row bg-deverse '>
         <Sidebar />
-        <section className="main-content flex flex-col justify-between ">
+        <section id='section-content' className="flex flex-col justify-between ">
             {/* <button onClick={() => router.push('/mint-nft')}>Test</button> */}
 
             <Tab.Container id="tabs-with-dropdown" defaultActiveKey={CreateTab.AVATAR}>

@@ -56,7 +56,7 @@ function LoginModal(props: ModalProps) {
 
     const onMetamaskConnect = () => {
         if (status == "unavailable") {
-            window.alert('Metamask is unavailable. Please install metamask extension to your browser')
+            window.alert('Metamask is unavailable. Please install/enable metamask extension in your browser and try again.')
             return;
         }
         connect();
