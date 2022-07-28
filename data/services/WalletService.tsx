@@ -3,7 +3,7 @@ import deverseClient from "../api/deverse_client";
 import { DataFilter } from "../enum/data_filter";
 import { TimeFilter } from "../enum/time_filter";
 import { StatisticLog } from "../model/profile_info";
-import StorageService from "./storage_service";
+import StorageService from "./StorageService";
 
 class WalletService {
     async getOrCreateWallet(session_key: string, wallet_address: string) {

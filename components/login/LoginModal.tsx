@@ -8,7 +8,7 @@ import EmailSignup from "./EmailSignup";
 import GoogleLogin, { GoogleLoginResponse, GoogleLogout } from 'react-google-login';
 import { AppContext } from "../contexts/app_context";
 import { User, UserType } from "../../data/model/user";
-import WalletService from "../../data/services/wallet_service";
+import WalletService from "../../data/services/WalletService";
 
 enum AuthAction {
     Home, Email_Signup, Email_Signin
@@ -36,11 +36,13 @@ function LoginModal(props: ModalProps) {
           case "connected":
             // setBoxContent(account);
             WalletService.connectToMetamask(account).then(value => {
+                if (!value) {
+                    return;
+                }
                 let user : User = {
                     id: account,
                     name: account,
                     avatar: '',
-                    dob: 'abc',
                     email: '',
                     userType: UserType.METAMASK
                 };
@@ -67,7 +69,6 @@ function LoginModal(props: ModalProps) {
             id: profile.getId(),
             name: profile.getName(),
             avatar: profile.getImageUrl(),
-            dob: 'abc',
             email: profile.getEmail(),
             userType: UserType.GOOGLE
         };

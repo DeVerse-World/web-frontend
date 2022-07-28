@@ -4,7 +4,7 @@ import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend } from 'chart.js';
 import { TimeFilter } from "../../data/enum/time_filter";
 import { DataFilter } from "../../data/enum/data_filter";
-import WalletService from "../../data/services/wallet_service";
+import WalletService from "../../data/services/WalletService";
 import { timestampToLabel } from "../../utils/time_util";
 
 ChartJS.register(

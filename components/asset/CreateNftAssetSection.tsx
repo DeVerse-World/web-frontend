@@ -1,4 +1,4 @@
-import AssetService from "../../data/services/asset_service";
+import AssetService from "../../data/services/AssetService";
 import React, { HTMLAttributes, useContext, useEffect, useRef, useState } from "react";
 import { Button, ButtonGroup, Dropdown, DropdownButton, Form, FormControl, Image, InputGroup, Modal, ProgressBar } from 'react-bootstrap'
 import { NFTAsset } from "../../data/model/nft_asset";

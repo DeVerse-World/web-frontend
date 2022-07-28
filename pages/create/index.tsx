@@ -2,7 +2,7 @@ import { CSSProperties, useEffect, useState } from "react";
 import { Nav, Tab } from "react-bootstrap";
 import Footer from "../../components/common/Footer";
 import Sidebar from "../../components/Sidebar";
-import avatar_service from "../../data/services/avatar_service";
+import avatar_service from "../../data/services/AvatarService";
 
 enum CreateTab {
     AVATAR, IG_EDITOR, UE_SDK
