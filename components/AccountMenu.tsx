@@ -81,11 +81,9 @@ function AccountMenu() {
               Dashboard
             </div>
           </Link>
-          <GoogleLogout
-            clientId={process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID}
-            buttonText={'Logout'}
-            onLogoutSuccess={() => setUser(null)}
-          />
+          <div className="cursor-pointer" onClick={() => setUser(null)}>
+            Logout
+          </div>
         </div>
       </div>
     );
