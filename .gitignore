@@ -11,6 +11,9 @@
 config.js
 next.config.js
 nginx_conf
+config_temp.js
+next_temp.config.js
+nginx_conf_temp
 
 # production
 /build
