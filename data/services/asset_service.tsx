@@ -181,6 +181,7 @@ class AssetService extends BaseService {
         const response = await deverseClient({
             method: "get",
             url: `/nft/checkName?name=${name}`,
+            withCredentials: true
         });
         return response;
     }
@@ -197,6 +198,7 @@ class AssetService extends BaseService {
                     file_3d_uri: asset.file3dUri, asset_type: asset.assetType,
                 }
             },
+            withCredentials: true
         });
     }
 }

@@ -6,7 +6,9 @@ class AvatarService {
         apiClient.post<Response<CreateAvatarResponse>>('avatar', {
             avatar: {
                 preprocess_url: rpmUrl
-            }
+            },
+        }, {
+            withCredentials: true
         }).then((value) => {
             //TODO: do something with avatar
             console.log(value.data.data.avatar)
@@ -24,7 +26,9 @@ class AvatarService {
     }
     deleteAvatar(avatarId: string) {
         apiClient.delete(
-            `avatar/${avatarId}`,
+            `avatar/${avatarId}`, {
+                withCredentials: true
+            }
         )
     }
 }
