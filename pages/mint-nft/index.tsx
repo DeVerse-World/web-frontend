@@ -133,7 +133,7 @@ export default function MintNFT() {
         <div className='flex flex-row bg-deverse '>
             <Sidebar />
             <section id='section-content' className="flex flex-col">
-                <div className="flex justify-center bg-deverse flex-grow">
+                <div className="flex justify-center flex-grow">
                     <Form className="flex flex-col items-center text-white my-8 space-y-2 min-w-[300px] w-[40vw]"
                         validated={formValidated}
                         onSubmit={createItem}>

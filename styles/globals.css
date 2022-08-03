@@ -154,7 +154,20 @@ body * {
     font-size: 1.25rem;
     line-height: 1.75rem;
     background: black;
+    /* max-width: 400px; */
+    gap: 4rem;
     padding: 0.25rem;
+}
+
+.tab-header {
+    flex-grow: 1;
+    text-align: center;
+    /* max-width: 150px; */
+    cursor: pointer;
+}
+
+.tab-header.active {
+    border-bottom: 2px solid white;
 }
 
 

@@ -3,6 +3,7 @@ import { CSSProperties, useState } from "react";
 import { Nav, Tab } from "react-bootstrap";
 import { AiFillWindows } from "react-icons/ai";
 import Footer from "../../components/common/Footer";
+import TabHeader from "../../components/common/TabHeader";
 import DownloadDemoButton from "../../components/DownloadDemoButton";
 import Sidebar from "../../components/Sidebar";
 
@@ -23,20 +24,12 @@ function Alpha() {
         <div className='flex flex-row bg-deverse '>
             <Sidebar />
             <section id='section-content' className='flex flex-col justify-between '>
-                {/* <button onClick={() => router.push('/mint-nft')}>Test</button> */}
-                <Tab.Container id="tabs-with-dropdown" defaultActiveKey={AlphaTab.INFO} >
+                <Tab.Container id="tabs-with-dropdown" activeKey={selectedTab} >
                     <span className="flex flex-row justify-between bg-black">
                         <Nav className="tab-bar flex-grow"
-                            activeKey={selectedTab}
                             onSelect={setSelectedTab} >
-                            <Nav.Item className="grow text-center max-w-[150px] " style={selectedTab == AlphaTab.INFO ? selectedTabStyle : {}}>
-                                <Nav.Link className="text-white" eventKey={AlphaTab.INFO}>Info</Nav.Link>
-                            </Nav.Item>
-
-                            <Nav.Item className="grow text-center max-w-[150px]" style={selectedTab == AlphaTab.VERSE ? selectedTabStyle : {}}>
-                                <Nav.Link className="text-white" eventKey={AlphaTab.VERSE}>Verses</Nav.Link>
-                            </Nav.Item>
-
+                            <TabHeader eventKey={AlphaTab.INFO} selectedTab={selectedTab} label="Info" />
+                            <TabHeader eventKey={AlphaTab.VERSE} selectedTab={selectedTab} label="Verses" />
                         </Nav>
                         <DownloadDemoButton />
                     </span>

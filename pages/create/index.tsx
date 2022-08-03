@@ -1,6 +1,7 @@
 import { CSSProperties, useEffect, useState } from "react";
 import { Nav, Tab } from "react-bootstrap";
 import Footer from "../../components/common/Footer";
+import TabHeader from "../../components/common/TabHeader";
 import Sidebar from "../../components/Sidebar";
 import avatar_service from "../../data/services/AvatarService";
 
@@ -34,21 +35,11 @@ function Create() {
         <div className='flex flex-row bg-deverse '>
         <Sidebar />
         <section id='section-content' className="flex flex-col justify-between ">
-            {/* <button onClick={() => router.push('/mint-nft')}>Test</button> */}
-
-            <Tab.Container id="tabs-with-dropdown" defaultActiveKey={CreateTab.AVATAR}>
-                <Nav className="tab-bar"
-                    activeKey={selectedTab}
-                    onSelect={setSelectedTab}>
-                    <Nav.Item style={selectedTab == CreateTab.AVATAR ? selectedTabStyle : {}}>
-                        <Nav.Link className="text-white cursor-pointer" eventKey={CreateTab.AVATAR}>Avatar</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item style={selectedTab == CreateTab.IG_EDITOR ? selectedTabStyle : {}}>
-                        <Nav.Link className="text-white cursor-pointer" eventKey={CreateTab.IG_EDITOR}>In-game Editor</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item style={selectedTab == CreateTab.UE_SDK ? selectedTabStyle : {}}>
-                        <Nav.Link className="text-white cursor-pointer" eventKey={CreateTab.UE_SDK}>Unreal Engine SDK</Nav.Link>
-                    </Nav.Item>
+            <Tab.Container id="tabs-with-dropdown" activeKey={selectedTab}>
+                <Nav className="tab-bar" onSelect={setSelectedTab}>
+                    <TabHeader eventKey={CreateTab.AVATAR} label="Avatar" selectedTab={selectedTab}/>
+                    <TabHeader eventKey={CreateTab.IG_EDITOR} label="In-game Editor" selectedTab={selectedTab}/>
+                    <TabHeader eventKey={CreateTab.UE_SDK} label="Unreal Engine SDK" selectedTab={selectedTab}/>
                 </Nav>
                 <Tab.Content className="grow flex">
                     <Tab.Pane eventKey={CreateTab.AVATAR} className="grow">

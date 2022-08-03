@@ -10,6 +10,8 @@ import Sidebar from "../../components/Sidebar";
 import Footer from "../../components/common/Footer";
 import { Nav, Tab } from "react-bootstrap";
 import ProfileTab from "./ProfileTab";
+import { AccountTab } from "../../data/enum/PageTabs";
+import TabHeader from "../../components/common/TabHeader";
 
 ChartJS.register(
     CategoryScale,
@@ -24,16 +26,12 @@ ChartJS.register(
 // X-axis: filter by day/week/month/year
 // y-axis: filter by activities, minute spent, staking balance, and more
 
-enum AccTab {
-    Profile, Avatar, Inventory, Settings
-}
-
 const selectedTabStyle: CSSProperties = {
     borderBottom: '2px solid white'
 }
 
 export default function Account() {
-    const [selectedTab, setSelectedTab] = useState(AccTab.Profile)
+    const [selectedTab, setSelectedTab] = useState(AccountTab.Profile)
     const [dataSet, setDataSet] = useState([]);
     const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.MONTH);
     const [dataFilter, setDataFilter] = useState<DataFilter>(DataFilter.STAKING_BALANCE);
@@ -89,44 +87,30 @@ export default function Account() {
         <div className='flex flex-row bg-deverse '>
             <Sidebar />
             <section id='section-content' className='flex flex-col justify-between '>
-                {/* <button onClick={() => router.push('/mint-nft')}>Test</button> */}
-                <Tab.Container id="tabs-with-dropdown" defaultActiveKey={AccTab.Profile} >
-
+                <Tab.Container id="tabs-with-dropdown" activeKey={selectedTab} >
                     <Nav className="tab-bar"
-                        activeKey={selectedTab}
                         onSelect={setSelectedTab} >
-                        <Nav.Item className="grow text-center max-w-[150px] cursor-pointer" style={selectedTab == AccTab.Profile ? selectedTabStyle : {}}>
-                            <Nav.Link className="text-white " eventKey={AccTab.Profile}>Profile</Nav.Link>
-                        </Nav.Item>
-
-                        <Nav.Item className="grow text-center max-w-[150px] cursor-pointer" style={selectedTab == AccTab.Inventory ? selectedTabStyle : {}}>
-                            <Nav.Link className="text-white" eventKey={AccTab.Inventory}>Inventory</Nav.Link>
-                        </Nav.Item>
-
-                        <Nav.Item className="grow text-center max-w-[150px] cursor-pointer" style={selectedTab == AccTab.Avatar ? selectedTabStyle : {}}>
-                            <Nav.Link className="text-white" eventKey={AccTab.Avatar}>Avatar</Nav.Link>
-                        </Nav.Item>
-
-                        <Nav.Item className="grow text-center max-w-[150px] cursor-pointer" style={selectedTab == AccTab.Settings ? selectedTabStyle : {}}>
-                            <Nav.Link className="text-white" eventKey={AccTab.Settings}>Settings</Nav.Link>
-                        </Nav.Item>
+                        <TabHeader eventKey={AccountTab.Profile} selectedTab={selectedTab} label="Profile"/>
+                        <TabHeader eventKey={AccountTab.Inventory} selectedTab={selectedTab} label="Inventory"/>
+                        <TabHeader eventKey={AccountTab.Avatar} selectedTab={selectedTab} label="Avatar"/>
+                        <TabHeader eventKey={AccountTab.Settings} selectedTab={selectedTab} label="Settings"/>
                     </Nav>
 
                     <Tab.Content className="grow flex">
-                        <Tab.Pane eventKey={AccTab.Profile} className="grow">
+                        <Tab.Pane eventKey={AccountTab.Profile} className="grow">
                             <ProfileTab />
                         </Tab.Pane>
-                        <Tab.Pane eventKey={AccTab.Inventory} className="grow">
+                        <Tab.Pane eventKey={AccountTab.Inventory} className="grow">
                             <div className="flex justify-center items-center text-white p-4" >
                                 <h1 >Coming soon</h1>
                             </div>
                         </Tab.Pane>
-                        <Tab.Pane eventKey={AccTab.Avatar} className="grow">
+                        <Tab.Pane eventKey={AccountTab.Avatar} className="grow">
                             <div className="flex justify-center items-center text-white p-4" >
                                 <h1 >Coming soon</h1>
                             </div>
                         </Tab.Pane>
-                        <Tab.Pane eventKey={AccTab.Settings} className="grow">
+                        <Tab.Pane eventKey={AccountTab.Settings} className="grow">
                             <div className="flex justify-center items-center text-white p-4" >
                                 <h1 >Coming soon</h1>
                             </div>

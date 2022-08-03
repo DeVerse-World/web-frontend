@@ -27,10 +27,13 @@ function ProfileTab(props) {
             </section>
             <section id="wallet-section" className="w-[80%]">
                 <header>
-                    <h3>My Wallet</h3>
+                    <h3>Your Collection</h3>
                 </header>
-                <div>
-
+                <div className="flex flex-row gap-2 justify-between py-4">
+                    <div className="bg-dv w-[150px] h-[230px] cursor-pointer">2D Images</div>
+                    <div className="bg-dv w-[150px] h-[230px] cursor-pointer">Avatar</div>
+                    <div className="bg-dv w-[150px] h-[230px] cursor-pointer">Inventory</div>
+                    <div className="bg-dv w-[150px] h-[230px] cursor-pointer">Avatar</div>
                 </div>
             </section>
         </div>
