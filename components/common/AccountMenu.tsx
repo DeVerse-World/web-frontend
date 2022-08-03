@@ -1,6 +1,6 @@
 import { useMetaMask } from "metamask-react";
 import Link from "next/link";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Button, Image, NavDropdown } from "react-bootstrap";
 import { GoogleLogout } from "react-google-login";
 import WalletService from "../../data/services/WalletService";
@@ -8,14 +8,17 @@ import { AppContext } from "../contexts/app_context";
 import LoginModal from "../login/LoginModal";
 
 function AccountMenu() {
-  const menuRef = useRef(null);
   const { status, connect, account } = useMetaMask();
   const { user, setUser } = useContext(AppContext);
   const [boxContent, setBoxContent] = useState("");
   const [showLogin, setShowLogin] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const onClickMenu = (e) => {
+  const onToggleMenu = (e) => {
+    setShowDropdown(!showDropdown);
+  }
+
+  const onClickLogin = (e) => {
     setShowLogin(true)
   }
 
@@ -42,6 +45,8 @@ function AccountMenu() {
     }
   }, [status])
 
+  
+
   // let element = (
   //   <button onClick={connect} className="text-white p-2 rounded-md bg-deverse-gradient text-sm h-[35px] md:h-[40px]">
   //     {boxContent}
@@ -65,17 +70,17 @@ function AccountMenu() {
   let renderAccountButton = () => {
     if (user == null) {
       return (
-        <button onClick={onClickMenu} className="text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-[30px] md:h-[35px]">
+        <button onClick={onClickLogin} className="text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-[30px] md:h-[35px]">
           Login
         </button>
       )
     }
     return (
       <div className="text-white mr-24">
-        <div>
-          <Image src={user.avatar} width={56} height={56} roundedCircle />
-        </div>
-        <div ref={menuRef} className="absolute flex flex-col gap-2 w-[120px] bg-gray-700 p-2 items-start">
+
+        <Image className="cursor-pointer" src={user.avatar} width={56} height={56} roundedCircle onClick={onToggleMenu}/>
+
+        <div id='account-dropdown' className={showDropdown ? "active" : null}>
           <h5>Welcome {user.name}</h5>
           <Link href="/account" >
             <div className="cursor-pointer">

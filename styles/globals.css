@@ -85,19 +85,25 @@ body * {
 
 /* Sidebar */
 
+#deverse-sidebar {
+    color: rgba(253, 253, 253, 0.37);
+    background: black;
+    max-height: calc(100vh - 60px);
+    height: calc(100vh - 60px);
+    padding: 1px;
+    z-index: 10;
+}
+
+#deverse-sidebar .active {
+    color: white;
+    border-radius: 1rem;
+    background-color: slategray;
+}
+
 @media only screen and (max-width: 600px) {
-    /* #deverse-sidebar {
-        display: none;
-    }
-    #deverse-sidebar.active {
-        display: block;
-        position: absolute;
-        z-index: 10;
-        height: 100vh;
-    } */
     #deverse-sidebar {
         overflow: hidden;
-        z-index: 1;
+        z-index: 99;
         width: 0;
         position: fixed;
         transition: 0.3s;
@@ -113,6 +119,23 @@ body * {
 #section-nav-bar {
     height: 60px;
     border-bottom: 1px solid rgb(71 85 105);
+    z-index: 99;
+}
+
+#account-dropdown {
+    position: absolute;
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    align-items: flex-start;
+    --tw-bg-opacity: 1;
+    background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+
+#account-dropdown.active {
+    visibility: visible;
 }
 
 #section-content {
@@ -120,6 +143,18 @@ body * {
     /* min-height: calc(100vh - 60px); */
     height: calc(100vh - 60px);
     width: 100%;
+}
+
+
+/* "flex flex-row justify-evenly text-xl bg-black  py-2 px-8 overflow-x-scroll" */
+
+.tab-bar {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    background: black;
+    padding: 0.25rem;
 }
 
 

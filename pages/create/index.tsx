@@ -37,25 +37,17 @@ function Create() {
             {/* <button onClick={() => router.push('/mint-nft')}>Test</button> */}
 
             <Tab.Container id="tabs-with-dropdown" defaultActiveKey={CreateTab.AVATAR}>
-                <Nav className="flex flex-row justify-evenly cursor-pointer text-xl bg-black align-middle py-2 px-8"
+                <Nav className="tab-bar"
                     activeKey={selectedTab}
                     onSelect={setSelectedTab}>
-                    <Nav.Item className="" style={selectedTab == CreateTab.AVATAR ? selectedTabStyle : {}}>
-                        <Nav.Link className="text-white" eventKey={CreateTab.AVATAR}>Avatar</Nav.Link>
+                    <Nav.Item style={selectedTab == CreateTab.AVATAR ? selectedTabStyle : {}}>
+                        <Nav.Link className="text-white cursor-pointer" eventKey={CreateTab.AVATAR}>Avatar</Nav.Link>
                     </Nav.Item>
-                    {/* <NavDropdown id="nav-dropdown-within-tab" title="Listing" menuVariant="dark" color="black">
-                    <Dropdown.Item active={visibleTab == MarketplaceTab.LISTING} eventKey={MarketplaceTab.LISTING}>All</Dropdown.Item>
-                    <Dropdown.Item active={visibleTab == MarketplaceTab.TWO_D_IMAGE} eventKey={MarketplaceTab.TWO_D_IMAGE}>2D Image</Dropdown.Item>
-                    <Dropdown.Item active={visibleTab == MarketplaceTab.SKIN} eventKey={MarketplaceTab.SKIN}>Character Skin</Dropdown.Item>
-                    <Dropdown.Item active={visibleTab == MarketplaceTab.RACE} eventKey={MarketplaceTab.RACE}>Character Race</Dropdown.Item>
-                    <Dropdown.Item active={visibleTab == MarketplaceTab.GAME_MODE} eventKey={MarketplaceTab.GAME_MODE}>Game Mode</Dropdown.Item>
-                    <Dropdown.Item active={visibleTab == MarketplaceTab.BOT_LOGIC} eventKey={MarketplaceTab.BOT_LOGIC}>Bot Logic</Dropdown.Item>
-                </NavDropdown> */}
                     <Nav.Item style={selectedTab == CreateTab.IG_EDITOR ? selectedTabStyle : {}}>
-                        <Nav.Link className="text-white" eventKey={CreateTab.IG_EDITOR}>In-game Editor</Nav.Link>
+                        <Nav.Link className="text-white cursor-pointer" eventKey={CreateTab.IG_EDITOR}>In-game Editor</Nav.Link>
                     </Nav.Item>
                     <Nav.Item style={selectedTab == CreateTab.UE_SDK ? selectedTabStyle : {}}>
-                        <Nav.Link className="text-white" eventKey={CreateTab.UE_SDK}>Unreal Engine SDK</Nav.Link>
+                        <Nav.Link className="text-white cursor-pointer" eventKey={CreateTab.UE_SDK}>Unreal Engine SDK</Nav.Link>
                     </Nav.Item>
                 </Nav>
                 <Tab.Content className="grow flex">
