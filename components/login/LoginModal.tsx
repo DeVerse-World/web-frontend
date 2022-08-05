@@ -1,5 +1,5 @@
 import { useMetaMask } from "metamask-react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Modal, ModalProps } from "react-bootstrap";
 import { AiOutlineClose } from "react-icons/ai";
 import { MdEmail } from 'react-icons/md';
@@ -8,17 +8,57 @@ import EmailSignup from "./EmailSignup";
 import GoogleLogin, { GoogleLoginResponse, GoogleLogout } from 'react-google-login';
 import { AppContext } from "../contexts/app_context";
 import { User, UserType } from "../../data/model/user";
+import WalletService from "../../data/services/WalletService";
 
 enum AuthAction {
     Home, Email_Signup, Email_Signin
 }
 
 function LoginModal(props: ModalProps) {
-    const { user, setUser } = useContext(AppContext);
+    const { setUser } = useContext(AppContext);
     const [currentAction, setCurrentAction] = useState<AuthAction>(AuthAction.Home);
     const { status, connect, account } = useMetaMask();
 
+    useEffect(() => {
+        switch (status) {
+          case "initializing":
+            // setBoxContent("Syncing");
+            break;
+          case "unavailable":
+            // setBoxContent("Metamask unavailable");
+            break;
+          case "notConnected":
+            // setBoxContent("Connect to Metamask");
+            break;
+          case "connecting":
+            // setBoxContent("Connecting");
+            break;
+          case "connected":
+            // setBoxContent(account);
+            WalletService.connectToMetamask(account).then(value => {
+                if (!value) {
+                    return;
+                }
+                let user : User = {
+                    id: account,
+                    name: account,
+                    avatar: '',
+                    email: '',
+                    userType: UserType.METAMASK
+                };
+                setUser(user);
+            });
+            break;
+          default:
+            break;
+        }
+      }, [status])
+
     const onMetamaskConnect = () => {
+        if (status == "unavailable") {
+            window.alert('Metamask is unavailable. Please install/enable metamask extension in your browser and try again.')
+            return;
+        }
         connect();
         props.onHide();
     }
@@ -29,7 +69,6 @@ function LoginModal(props: ModalProps) {
             id: profile.getId(),
             name: profile.getName(),
             avatar: profile.getImageUrl(),
-            dob: 'abc',
             email: profile.getEmail(),
             userType: UserType.GOOGLE
         };

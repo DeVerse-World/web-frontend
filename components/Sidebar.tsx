@@ -21,15 +21,7 @@ function Sidebar(props) {
     }, [router.pathname])
 
     return (
-        <Nav id="deverse-sidebar"
-            style={{
-                background: 'black',
-                maxHeight: 'calc(100vh - 60px)',
-                height: 'calc(100vh - 60px)',
-                padding: '1px',
-                zIndex:10
-            }}
-            className={isMobileSidebarVisible ? "active" : ""}>
+        <Nav id="deverse-sidebar" className={isMobileSidebarVisible ? "active" : null}>
             <div className="flex flex-row h-[100%]">
                 <div className="flex flex-col">
                     <SidebarItem href="/" isSelected={currentRoute == "/"} label="Home"
@@ -63,16 +55,15 @@ type SidebarItemProps = {
 }
 
 function SidebarItem(props: SidebarItemProps) {
-    const bg = props.isSelected ? "bg-gray-700 rounded-2xl" : ""
-    const label = props.isSelected ? "text-white" : "text-gray-500"
+    const isActive = props.isSelected ? "active" : null
 
     const renderBody = () => {
         if (props.openNewTab) {
             return (
-                <Nav.Link className={bg} href={props.href} target="_blank">
-                    <div className="flex flex-col items-center py-2 ">
+                <Nav.Link href={props.href} target="_blank">
+                    <div className="flex flex-col items-center py-2">
                         {props.icon}
-                        <span className={label}>
+                        <span>
                             {props.label.toUpperCase()}
                         </span>
                     </div>
@@ -84,7 +75,7 @@ function SidebarItem(props: SidebarItemProps) {
             <Link href={props.href}>
                 <div className="flex flex-col items-center py-2 " >
                     {props.icon}
-                    <span className={label}>
+                    <span>
                         {props.label.toUpperCase()}
                     </span>
                 </div>
@@ -94,7 +85,7 @@ function SidebarItem(props: SidebarItemProps) {
 
     return (
         <Nav.Item className="w-[100%] cursor-pointer">
-            <Nav.Item className={bg} >
+            <Nav.Item className={isActive} >
                 {renderBody()}
             </Nav.Item>
         </Nav.Item>

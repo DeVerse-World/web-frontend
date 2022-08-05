@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { Button, ButtonGroup, Dropdown, Form, FormControl, Image, InputGroup, Modal, Nav, NavDropdown, NavItem, ProgressBar, Row, Tab, Tabs } from "react-bootstrap";
-import BaseService from "../../data/services/base_service";
+import BaseService from "../../data/services/BaseService";
 import ApiStrategy = BaseService.ApiStrategy;
 import CreateNftAssetSection from "../../components/asset/CreateNftAssetSection";
 import { useRouter } from "next/router";
 import NFTList from "../../components/asset/NFTList";
-import AssetService from "../../data/services/asset_service";
+import AssetService from "../../data/services/AssetService";
 import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from "../../data/enum/asset_type";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
@@ -132,8 +132,8 @@ export default function MintNFT() {
     return (
         <div className='flex flex-row bg-deverse '>
             <Sidebar />
-            <section id="section-mint-nft-form" className="main-content flex flex-col">
-                <div className="flex justify-center bg-deverse flex-grow">
+            <section id='section-content' className="flex flex-col">
+                <div className="flex justify-center flex-grow">
                     <Form className="flex flex-col items-center text-white my-8 space-y-2 min-w-[300px] w-[40vw]"
                         validated={formValidated}
                         onSubmit={createItem}>

@@ -2,7 +2,7 @@ import React, { Suspense, useEffect, useState } from "react";
 import { TransformControls, OrbitControls } from '@react-three/drei'
 import { Canvas, GroupProps, useFrame } from "@react-three/fiber";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
-import ModelPreviewService from "../data/services/3d_model_service";
+import ModelPreviewService from "../data/services/ModelRenderService";
 import { AnimationMixer, Event } from "three";
 
 interface ModelViewerProps extends GroupProps {

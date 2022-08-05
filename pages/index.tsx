@@ -35,9 +35,9 @@ function Home(props) {
 
 
   return (
-      <div className='flex flex-row bg-deverse '>
+      <div className='flex flex-row bg-deverse'>
         <Sidebar />
-        <div className='main-content'>
+        <div id='section-content'>
           <WelcomeSection />
           <IntroSection />
           <HighlightFeatureSection />
