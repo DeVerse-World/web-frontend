@@ -14,3 +14,6 @@ Then move that file to components/gltf
 - Load the file by copy paste the content of the generated file to the corresponding page. (not preferred)
 - Rename the export function of the generated file, and use that component as react component directly.
 *Caution: make sure to edit "useGLTF.prelogit ad" and "useGLTF" of the generated file to refer to the correct path of.gltf file
+
+# Reference:
+https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/

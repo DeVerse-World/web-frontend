@@ -9,10 +9,6 @@ enum CreateTab {
     AVATAR, IG_EDITOR, UE_SDK
 }
 
-const selectedTabStyle: CSSProperties = {
-    borderBottom: '2px solid white'
-}
-
 function Create() {
     const [selectedTab, setSelectedTab] = useState(CreateTab.AVATAR)
 
@@ -20,8 +16,9 @@ function Create() {
         if (!e.origin.includes('readyplayer.me')) {
             return;
         }
-        let glbUri = e.data;
-        avatar_service.createAvatar(glbUri);
+        if (e.data.includes('.glb')) {
+            avatar_service.createAvatar(e.data);
+        }
     }
 
     useEffect(() => {
