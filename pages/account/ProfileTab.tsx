@@ -1,9 +1,14 @@
 import Image from "next/image";
 import { useContext } from "react";
 import { AppContext } from "../../components/contexts/app_context";
+import { AccountTab } from "../../data/enum/PageTabs";
 import AvatarContainer from "./AvatarContainer";
 
-function ProfileTab(props) {
+type Props = {
+    onSwitchTab: (AccountTab) => void
+}
+
+function ProfileTab(props: Props) {
     const { user } = useContext(AppContext);
     return (
         <div className="flex flex-col items-center text-white">
@@ -30,10 +35,10 @@ function ProfileTab(props) {
                     <h3>Your Collection</h3>
                 </header>
                 <div className="flex flex-row gap-2 justify-between py-4">
-                    <div className="bg-dv w-[150px] h-[230px] cursor-pointer">2D Images</div>
-                    <div className="bg-dv w-[150px] h-[230px] cursor-pointer">Avatar</div>
-                    <div className="bg-dv w-[150px] h-[230px] cursor-pointer">Inventory</div>
-                    <div className="bg-dv w-[150px] h-[230px] cursor-pointer">Avatar</div>
+                    <div className="bg-dv w-[150px] h-[230px] cursor-pointer" onClick={() => props.onSwitchTab(AccountTab.Avatar)}>Avatar</div>
+                    <div className="bg-dv w-[150px] h-[230px] cursor-pointer" onClick={() => props.onSwitchTab(AccountTab.Inventory)}>2D Images</div>
+                    <div className="bg-dv w-[150px] h-[230px] cursor-pointer" onClick={() => props.onSwitchTab(AccountTab.Inventory)}>Inventory</div>
+                    {/* <div className="bg-dv w-[150px] h-[230px] cursor-pointer">Avatar</div> */}
                 </div>
             </section>
         </div>

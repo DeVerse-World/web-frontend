@@ -4,7 +4,8 @@ export type User = {
     name: string;
     // dob: string;
     email?: string;
-    userType: UserType
+    userType: UserType;
+    walletAddress?: string;
 }
 
 export enum UserType {

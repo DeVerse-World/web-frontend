@@ -12,6 +12,7 @@ import { Nav, Tab } from "react-bootstrap";
 import ProfileTab from "./ProfileTab";
 import { AccountTab } from "../../data/enum/PageTabs";
 import TabHeader from "../../components/common/TabHeader";
+import AccountSetting from "./AccountSettings";
 
 ChartJS.register(
     CategoryScale,
@@ -26,12 +27,8 @@ ChartJS.register(
 // X-axis: filter by day/week/month/year
 // y-axis: filter by activities, minute spent, staking balance, and more
 
-const selectedTabStyle: CSSProperties = {
-    borderBottom: '2px solid white'
-}
-
 export default function Account() {
-    const [selectedTab, setSelectedTab] = useState(AccountTab.Profile)
+    const [selectedTab, setSelectedTab] = useState<AccountTab>(AccountTab.Profile)
     const [dataSet, setDataSet] = useState([]);
     const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.MONTH);
     const [dataFilter, setDataFilter] = useState<DataFilter>(DataFilter.STAKING_BALANCE);
@@ -40,10 +37,8 @@ export default function Account() {
     // const today = new Date();
 
     useEffect(() => {
-
         displayData();
     }, [timeFilter, dataFilter]);
-
 
     const displayData = async () => {
 
@@ -90,15 +85,15 @@ export default function Account() {
                 <Tab.Container id="tabs-with-dropdown" activeKey={selectedTab} >
                     <Nav className="tab-bar"
                         onSelect={setSelectedTab} >
-                        <TabHeader eventKey={AccountTab.Profile} selectedTab={selectedTab} label="Profile"/>
-                        <TabHeader eventKey={AccountTab.Inventory} selectedTab={selectedTab} label="Inventory"/>
-                        <TabHeader eventKey={AccountTab.Avatar} selectedTab={selectedTab} label="Avatar"/>
-                        <TabHeader eventKey={AccountTab.Settings} selectedTab={selectedTab} label="Settings"/>
+                        <TabHeader eventKey={AccountTab.Profile} selectedTab={selectedTab} label="Profile" />
+                        <TabHeader eventKey={AccountTab.Inventory} selectedTab={selectedTab} label="Inventory" />
+                        <TabHeader eventKey={AccountTab.Avatar} selectedTab={selectedTab} label="Avatar" />
+                        <TabHeader eventKey={AccountTab.Settings} selectedTab={selectedTab} label="Settings" />
                     </Nav>
 
                     <Tab.Content className="grow flex">
                         <Tab.Pane eventKey={AccountTab.Profile} className="grow">
-                            <ProfileTab />
+                            <ProfileTab onSwitchTab={setSelectedTab} />
                         </Tab.Pane>
                         <Tab.Pane eventKey={AccountTab.Inventory} className="grow">
                             <div className="flex justify-center items-center text-white p-4" >
@@ -111,9 +106,7 @@ export default function Account() {
                             </div>
                         </Tab.Pane>
                         <Tab.Pane eventKey={AccountTab.Settings} className="grow">
-                            <div className="flex justify-center items-center text-white p-4" >
-                                <h1 >Coming soon</h1>
-                            </div>
+                            <AccountSetting />
                         </Tab.Pane>
                     </Tab.Content>
 
