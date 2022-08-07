@@ -1,5 +1,5 @@
 import { useRouter, withRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { ReactNode, useContext, useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { AiFillShopping, AiFillHome, AiOutlineGlobal, AiFillPlusCircle } from 'react-icons/ai';
 import { GiMining } from 'react-icons/gi';
@@ -9,7 +9,11 @@ import Link from "next/link";
 import { AppContext } from "./contexts/app_context";
 import { zeroPad } from "ethers/lib/utils";
 
-function Sidebar(props) {
+type SidebarProps = {
+    children: ReactNode
+}
+
+function Sidebar(props: SidebarProps) {
     const router = useRouter();
     const { setIsMobileSidebarVisible, isMobileSidebarVisible } = useContext(AppContext);
     const [currentRoute, setCurrentRoute] = useState("/");

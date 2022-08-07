@@ -5,10 +5,11 @@ import { AiOutlineClose } from "react-icons/ai";
 import { MdEmail } from 'react-icons/md';
 import EmailSignin from "./EmailLogin";
 import EmailSignup from "./EmailSignup";
-import GoogleLogin, { GoogleLoginResponse, GoogleLogout } from 'react-google-login';
 import { AppContext } from "../contexts/app_context";
 import { User, UserType } from "../../data/model/user";
 import WalletService from "../../data/services/WalletService";
+import { CredentialResponse, GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import AuthService from "../../data/services/AuthService";
 
 enum AuthAction {
     Home, Email_Signup, Email_Signin
@@ -21,38 +22,38 @@ function LoginModal(props: ModalProps) {
 
     useEffect(() => {
         switch (status) {
-          case "initializing":
-            // setBoxContent("Syncing");
-            break;
-          case "unavailable":
-            // setBoxContent("Metamask unavailable");
-            break;
-          case "notConnected":
-            // setBoxContent("Connect to Metamask");
-            break;
-          case "connecting":
-            // setBoxContent("Connecting");
-            break;
-          case "connected":
-            // setBoxContent(account);
-            WalletService.connectToMetamask(account).then(value => {
-                if (!value) {
-                    return;
-                }
-                let user : User = {
-                    id: account,
-                    name: account,
-                    avatar: '',
-                    email: '',
-                    userType: UserType.METAMASK
-                };
-                setUser(user);
-            });
-            break;
-          default:
-            break;
+            case "initializing":
+                // setBoxContent("Syncing");
+                break;
+            case "unavailable":
+                // setBoxContent("Metamask unavailable");
+                break;
+            case "notConnected":
+                // setBoxContent("Connect to Metamask");
+                break;
+            case "connecting":
+                // setBoxContent("Connecting");
+                break;
+            case "connected":
+                // setBoxContent(account);
+                WalletService.connectToMetamask(account).then(value => {
+                    if (!value) {
+                        return;
+                    }
+                    let user: User = {
+                        id: account,
+                        name: account,
+                        avatar: '',
+                        email: '',
+                        userType: UserType.METAMASK
+                    };
+                    setUser(user);
+                });
+                break;
+            default:
+                break;
         }
-      }, [status])
+    }, [status])
 
     const onMetamaskConnect = () => {
         if (status == "unavailable") {
@@ -63,21 +64,32 @@ function LoginModal(props: ModalProps) {
         props.onHide();
     }
 
-    const onGoogleLogin = (event: GoogleLoginResponse) => {
-        let profile = event.getBasicProfile();
-        let user : User = {
-            id: profile.getId(),
-            name: profile.getName(),
-            avatar: profile.getImageUrl(),
-            email: profile.getEmail(),
-            userType: UserType.GOOGLE
-        };
+    const googleLogin = useGoogleLogin({
+        onSuccess: tokenResponse => {
+            console.log(tokenResponse)
+        },
+        onError: errorResponse => {
+            console.log(errorResponse.error_description)
+        }
+    });
+
+    const googleSecondaryLogin = useGoogleLogin({
+        flow: 'auth-code',
+        onSuccess: codeResponse => {
+            console.log(codeResponse)
+        },
+        onError: errorResponse => {
+            console.log(errorResponse)
+        }
+    })
+
+    const onGoogleLogin = (event: CredentialResponse) => {
+        let user = AuthService.onGoogleLogin(event.credential);
         setUser(user);
         props.onHide();
     }
 
-    const onGoogleFailure = (error) => {
-        console.log(error)
+    const onGoogleFailure = () => {
         props.onHide();
     }
 
@@ -111,20 +123,12 @@ function LoginModal(props: ModalProps) {
                             <img title="metamask" src="/images/metamask.webp" />
                             Metamask
                         </button>
-                        <GoogleLogin
-                            clientId={process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID}
-                            render={(loginProps) => {
-                                return (<button onClick={loginProps.onClick}
-                                    className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2">
-                                    <img title="metamask" src="/images/google.webp" />
-                                    Google
-                                </button>)
-                            }}
-                            buttonText="abc"
-                            onSuccess={onGoogleLogin}
-                            onFailure={onGoogleFailure}
-                        // isSignedIn={true}
-                        />
+                        {/* <button onClick={(e) => googleSecondaryLogin()}
+                            className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2">
+                            <img title="metamask" src="/images/google.webp" />
+                            Google
+                        </button> */}
+                        <GoogleLogin width={300} onSuccess={onGoogleLogin} onError={onGoogleFailure} />
                         {/* <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                             onClick={() => setCurrentAction(AuthAction.Email_Signin)}>
                             <MdEmail size={30} />
