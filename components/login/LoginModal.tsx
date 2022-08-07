@@ -123,11 +123,11 @@ function LoginModal(props: ModalProps) {
                             <img title="metamask" src="/images/metamask.webp" />
                             Metamask
                         </button>
-                        <button onClick={(e) => googleSecondaryLogin()}
+                        {/* <button onClick={(e) => googleSecondaryLogin()}
                             className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2">
                             <img title="metamask" src="/images/google.webp" />
                             Google
-                        </button>
+                        </button> */}
                         <GoogleLogin width={300} onSuccess={onGoogleLogin} onError={onGoogleFailure} />
                         {/* <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                             onClick={() => setCurrentAction(AuthAction.Email_Signin)}>
