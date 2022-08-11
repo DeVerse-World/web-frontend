@@ -3,11 +3,12 @@ import deverseClient from "../api/deverse_client";
 import { DataFilter } from "../enum/data_filter";
 import { TimeFilter } from "../enum/time_filter";
 import { StatisticLog } from "../model/profile_info";
+import { WalletCreationResponse } from "../model/WalletCreationResponse";
 import StorageService from "./StorageService";
 
 class WalletService {
     async getOrCreateWallet(session_key: string, wallet_address: string) {
-        return deverseClient.post('/user/getOrCreate', {
+        return deverseClient.post<WalletCreationResponse>('/user/getOrCreate', {
             login_mode: "METAMASK",
             wallet_address: wallet_address,
             session_key: session_key
@@ -18,16 +19,16 @@ class WalletService {
 
     async connectToMetamask(metamaskAccount: string) : Promise<any> {
         const web3 = new ethers.providers.Web3Provider(window.ethereum);
-        let dbUser = await this.getOrCreateWallet(StorageService.getMetamaskSessionKey(), metamaskAccount);
-        if (dbUser.data.nonce) {
-            let signature = await web3.getSigner().signMessage(`I am signing my one-time nonce: ${dbUser.data.nonce}`)
+        let res = await this.getOrCreateWallet(StorageService.getMetamaskSessionKey(), metamaskAccount);
+        if (res.data.wallet_nonce) {
+            let signature = await web3.getSigner().signMessage(`I am signing my one-time nonce: ${res.data.wallet_nonce}`)
             this.authLoginLink(StorageService.getMetamaskSessionKey(), metamaskAccount, signature)
             // await authMetamask(account, signature);
             // if (localStorage.getItem("session_key")) {
             
             // }
             StorageService.saveWalletAddress(metamaskAccount);
-            return dbUser.data;
+            return res.data;
         } else {
             return null
         }
