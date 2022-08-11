@@ -17,16 +17,12 @@ class WalletService {
         })
     }
 
-    async connectToMetamask(metamaskAccount: string) : Promise<any> {
+    async connectToMetamask(metamaskAccount: string): Promise<any> {
         const web3 = new ethers.providers.Web3Provider(window.ethereum);
         let res = await this.getOrCreateWallet(StorageService.getMetamaskSessionKey(), metamaskAccount);
         if (res.data.wallet_nonce) {
             let signature = await web3.getSigner().signMessage(`I am signing my one-time nonce: ${res.data.wallet_nonce}`)
             this.authLoginLink(StorageService.getMetamaskSessionKey(), metamaskAccount, signature)
-            // await authMetamask(account, signature);
-            // if (localStorage.getItem("session_key")) {
-            
-            // }
             StorageService.saveWalletAddress(metamaskAccount);
             return res.data;
         } else {
@@ -34,33 +30,18 @@ class WalletService {
         }
     }
 
-    async authMetamask(wallet_address: string, signature: string) {
-        const response = await deverseClient({
-            method: "post",
-            url: `/user/auth`,
-            data: {
-                login_mode: "METAMASK",
-                wallet_address: wallet_address,
-                wallet_signature: signature,
-            },
+    authLoginLink(session_key, wallet_address, signature) {
+        deverseClient.post(`/user/authLoginLink`, {
+            login_mode: "METAMASK",
+            session_key: session_key,
+            wallet_address: wallet_address,
+            wallet_signature: signature
+        }, {
             withCredentials: true
-        });
-        return response.data;
-    }
-
-    async authLoginLink(session_key, wallet_address, signature) {
-        const response = await deverseClient({
-            method: "post",
-            url: `/user/authLoginLink`,
-            data: {
-                login_mode: "METAMASK",
-                session_key: session_key,
-                wallet_address: wallet_address,
-                wallet_signature: signature
-            },
-            withCredentials: true
-        });
-        return response.data;
+        }
+        ).then(response => {
+            console.log(response.data)
+        })
     }
 
     async getStats(dataType: DataFilter, timeType: TimeFilter): Promise<StatisticLog[]> {
