@@ -4,7 +4,7 @@ import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend } from 'chart.js';
 import { TimeFilter } from "../../data/enum/time_filter";
 import { DataFilter } from "../../data/enum/data_filter";
-import WalletService from "../../data/services/WalletService";
+import AccountService from "../../data/services/AccountService";
 import { timestampToLabel } from "../../utils/time_util";
 import Sidebar from "../../components/Sidebar";
 import Footer from "../../components/common/Footer";
@@ -42,7 +42,7 @@ export default function Account() {
 
     const displayData = async () => {
 
-        let res = await WalletService.getStats(dataFilter, timeFilter);
+        let res = await AccountService.getStats(dataFilter, timeFilter);
         let convertedData = res.map(item => ({
             y: item.count,
             x: timestampToLabel(item.timestamp, timeFilter)

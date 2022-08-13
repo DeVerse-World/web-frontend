@@ -21,7 +21,7 @@ function AccountSetting() {
                     <FormControl id="input-user-email"
                         placeholder="Email"
                         aria-label="Email"
-                        value={user?.email}
+                        value={user?.social_email}
                         readOnly
                     />
                 </InputGroup>
@@ -30,7 +30,7 @@ function AccountSetting() {
                     <FormControl id="input-user-wallet"
                         placeholder=""
                         aria-label=""
-                        value={user?.walletAddress}
+                        value={user?.wallet_address}
                         readOnly
                     />
                 </InputGroup>

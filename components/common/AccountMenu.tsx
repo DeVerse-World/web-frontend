@@ -2,10 +2,9 @@ import { useMetaMask } from "metamask-react";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { Button, Image, NavDropdown } from "react-bootstrap";
-import { GoogleLogout } from "react-google-login";
-import WalletService from "../../data/services/WalletService";
 import { AppContext } from "../contexts/app_context";
 import LoginModal from "../login/LoginModal";
+import AuthService from "../../data/services/AuthService";
 
 function AccountMenu() {
   const { status, connect, account } = useMetaMask();
@@ -13,6 +12,7 @@ function AccountMenu() {
   const [boxContent, setBoxContent] = useState("");
   const [showLogin, setShowLogin] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [currentRoute, setCurrentRoute] = useState("/");
 
   const onToggleMenu = (e) => {
     setShowDropdown(!showDropdown);
@@ -20,6 +20,18 @@ function AccountMenu() {
 
   const onClickLogin = (e) => {
     setShowLogin(true)
+  }
+
+  const onClickLogout = (e) => {
+    AuthService.logout().then(res => {
+      if (!res) {
+        window.alert("Fail to logout")
+        return
+      }
+      window.alert("Succeed to logout")
+      setShowLogin(false);
+      setUser(null)
+    })
   }
 
   useEffect(() => {
@@ -38,14 +50,12 @@ function AccountMenu() {
         break;
       case "connected":
         setBoxContent(account);
-        WalletService.connectToMetamask(account);
+        AuthService.connectToMetamask(account, null);
         break;
       default:
         break;
     }
   }, [status])
-
-  
 
   // let element = (
   //   <button onClick={connect} className="text-white p-2 rounded-md bg-deverse-gradient text-sm h-[35px] md:h-[40px]">
@@ -84,10 +94,10 @@ function AccountMenu() {
           <h5>Welcome {user.name}</h5>
           <Link href="/account" >
             <div className="cursor-pointer">
-              Dashboard
+              Profile
             </div>
           </Link>
-          <div className="cursor-pointer" onClick={() => setUser(null)}>
+          <div className="cursor-pointer" onClick={onClickLogout}>
             Logout
           </div>
         </div>
@@ -98,7 +108,7 @@ function AccountMenu() {
   return (
     <>
       {renderAccountButton()}
-      {showLogin && <LoginModal show={true} onHide={() => setShowLogin(false)} fullscreen />}
+      {showLogin && <LoginModal show={true} onHide={() => setShowLogin(false)} isAddMetamaskOnly={false} isAddGoogleOnly={false} fullscreen />}
     </>
 
   );

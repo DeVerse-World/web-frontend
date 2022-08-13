@@ -2,11 +2,11 @@ import { User } from "../model/user";
 
 class StorageService {
 
-    getMetamaskSessionKey(): string {
+    getSessionKey(): string {
         return localStorage.getItem("session_key");
     }
 
-    setMetamaskSessionKey(session_key: string) {
+    setSessionKey(session_key: string) {
         localStorage.setItem("session_key", session_key);
     }
 

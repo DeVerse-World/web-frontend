@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { useContext } from "react";
+import React, {useContext, useState} from "react";
 import { AppContext } from "../../components/contexts/app_context";
 import { AccountTab } from "../../data/enum/PageTabs";
 import AvatarContainer from "./AvatarContainer";
+import LoginModal from "../../components/login/LoginModal";
 
 type Props = {
     onSwitchTab: (AccountTab) => void
@@ -10,6 +11,8 @@ type Props = {
 
 function ProfileTab(props: Props) {
     const { user } = useContext(AppContext);
+    const [showAddMetamask, setShowAddMetamask] = useState(false);
+    const [showAddGoogle, setShowAddGoogle] = useState(false);
     return (
         <div className="flex flex-col items-center text-white">
             <section id='cover-picture' className="h-[300px] overflow-hidden flex items-center">
@@ -25,8 +28,13 @@ function ProfileTab(props: Props) {
                         bottom: '50%'
                     }} />
                     <div>
-                        <h1>{user?.name}</h1>
-                        <h5 className="text-deverse">{user?.email}</h5>
+                        <h1>Name: {user?.name}</h1>
+                        <h5 className="text-deverse">Google Mail: {user?.social_email}</h5>
+                        {user?.social_email == "" ? <button onClick={() => setShowAddGoogle(true)}>Link Google Mail</button> : ""}
+                        {showAddGoogle && <LoginModal show={true} onHide={() => setShowAddGoogle(false)} isAddMetamaskOnly={false} isAddGoogleOnly={true} fullscreen />}
+                        <h5 className="text-deverse">Wallet Address: {user?.wallet_address}</h5>
+                        {user?.wallet_address == "" ? <button onClick={() => setShowAddMetamask(true)}>Link Metamask</button> : ""}
+                        {showAddMetamask && <LoginModal show={true} onHide={() => setShowAddMetamask(false)} isAddMetamaskOnly={true} isAddGoogleOnly={false} fullscreen />}
                     </div>
                 </div>
             </section>

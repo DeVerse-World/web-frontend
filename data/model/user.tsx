@@ -1,15 +1,17 @@
 export type User = {
-    id: string;
-    avatar?: string;
+    created_at: string;
+    custom_email: string;
+    id: number;
     name: string;
-    // dob: string;
-    email?: string;
-    userType: UserType;
-    walletAddress?: string;
+    social_email: string;
+    updated_at: string;
+    wallet_address: string;
+    wallet_nonce: string;
 }
 
 export type GoogleUser = {
     email: string;
+    token_id: string;
     email_verified: boolean;
     family_name: string;
     given_name: string;
