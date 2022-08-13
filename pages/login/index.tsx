@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 import StorageService from "../../data/services/StorageService";
 import { useMetaMask } from "metamask-react";
-import WalletService from "../../data/services/WalletService";
+import AuthService from "../../data/services/AuthService";
 
 export default function LoginLink(props) {
     const router = useRouter();
@@ -14,7 +14,7 @@ export default function LoginLink(props) {
                 connect();
                 break;
             case 'connected':
-                WalletService.connectToMetamask(account);
+                AuthService.connectToMetamask(account, null);
                 break;
             default:
                 break;
@@ -39,7 +39,7 @@ export default function LoginLink(props) {
 
     useEffect(() => {
         if ('key' in router.query) {
-            StorageService.setMetamaskSessionKey(router.query.key.toString())
+            StorageService.setSessionKey(router.query.key.toString())
         }
     }, [router])
     return (

@@ -3,12 +3,12 @@ import deverseClient from "../api/deverse_client";
 import { DataFilter } from "../enum/data_filter";
 import { TimeFilter } from "../enum/time_filter";
 import { StatisticLog } from "../model/profile_info";
-import { WalletCreationResponse } from "../model/WalletCreationResponse";
+import { CreateAvatarResponse, GetAvatarResponse, GetAccountResponse, Response } from "../model/response";
 import StorageService from "./StorageService";
 
-class WalletService {
-    async getOrCreateWallet(session_key: string, wallet_address: string) {
-        return deverseClient.post<WalletCreationResponse>('/user/getOrCreate', {
+class AccountService {
+    async getOrCreateByWallet(session_key: string, wallet_address: string) {
+        return deverseClient.post<Response<GetAccountResponse>>('/user/getOrCreate', {
             login_mode: "METAMASK",
             wallet_address: wallet_address,
             session_key: session_key
@@ -17,30 +17,32 @@ class WalletService {
         })
     }
 
-    async connectToMetamask(metamaskAccount: string): Promise<any> {
-        const web3 = new ethers.providers.Web3Provider(window.ethereum);
-        let res = await this.getOrCreateWallet(StorageService.getMetamaskSessionKey(), metamaskAccount);
-        if (res.data.wallet_nonce) {
-            let signature = await web3.getSigner().signMessage(`I am signing my one-time nonce: ${res.data.wallet_nonce}`)
-            this.authLoginLink(StorageService.getMetamaskSessionKey(), metamaskAccount, signature)
-            StorageService.saveWalletAddress(metamaskAccount);
-            return res.data;
-        } else {
-            return null
-        }
-    }
-
-    authLoginLink(session_key, wallet_address, signature) {
-        deverseClient.post(`/user/authLoginLink`, {
-            login_mode: "METAMASK",
-            session_key: session_key,
-            wallet_address: wallet_address,
-            wallet_signature: signature
+    async getOrCreateByGoogleMail(session_key: string, google_email: string, google_token: string) {
+        return deverseClient.post<Response<GetAccountResponse>>('/user/getOrCreate', {
+            login_mode: "GOOGLE",
+            google_email: google_email,
+            google_token: google_token,
+            session_key: session_key
         }, {
             withCredentials: true
-        }
-        ).then(response => {
-            console.log(response.data)
+        })
+    }
+
+    // Will reject if there was another wallet tied to this user before
+    async addUserModelWithWallet(user_id: number, wallet_address: string) {
+        return deverseClient.put<Response<GetAccountResponse>>(`/user/${user_id}`, {
+            wallet_address: wallet_address,
+        }, {
+            withCredentials: true
+        })
+    }
+
+    // Will reject if there was another google mail tied to this user before
+    async addUserModelWithGoogleMail(user_id: number, google_email: string) {
+        return deverseClient.put<Response<GetAccountResponse>>(`/user/${user_id}`, {
+            google_email: google_email,
+        }, {
+            withCredentials: true
         })
     }
 
@@ -81,4 +83,4 @@ class WalletService {
     }
 }
 
-export default new WalletService();
+export default new AccountService();

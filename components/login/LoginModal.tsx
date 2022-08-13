@@ -6,17 +6,18 @@ import { MdEmail } from 'react-icons/md';
 import EmailSignin from "./EmailLogin";
 import EmailSignup from "./EmailSignup";
 import { AppContext } from "../contexts/app_context";
-import { User, UserType } from "../../data/model/user";
-import WalletService from "../../data/services/WalletService";
+import {GoogleUser, User, UserType} from "../../data/model/user";
 import { CredentialResponse, GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import AuthService from "../../data/services/AuthService";
+import AccountService from "../../data/services/AccountService";
+import jwt_decode from "jwt-decode";
 
 enum AuthAction {
     Home, Email_Signup, Email_Signin
 }
 
-function LoginModal(props: ModalProps) {
-    const { setUser } = useContext(AppContext);
+function LoginModal(props) {
+    const { user, setUser } = useContext(AppContext);
     const [currentAction, setCurrentAction] = useState<AuthAction>(AuthAction.Home);
     const { status, connect, account } = useMetaMask();
 
@@ -36,18 +37,17 @@ function LoginModal(props: ModalProps) {
                 break;
             case "connected":
                 // setBoxContent(account);
-                WalletService.connectToMetamask(account).then(value => {
-                    if (!value) {
+                AuthService.connectToMetamask(account, user).then(res => {
+                    if (!res) {
+                        window.alert("some error while creating metamask info")
                         return;
                     }
-                    let user: User = {
-                        id: account,
-                        name: account,
-                        avatar: '',
-                        email: '',
-                        userType: UserType.METAMASK
-                    };
-                    setUser(user);
+                    if (res.error) {
+                        window.alert(res.error);
+                        return;
+                    }
+                    setUser(res.data.user);
+                    props.onHide();
                 });
                 break;
             default:
@@ -61,6 +61,28 @@ function LoginModal(props: ModalProps) {
             return;
         }
         connect();
+        // props.onHide();
+    }
+
+    const onGoogleLogin = (event: CredentialResponse) => {
+        AuthService.connectToGoogleMail(event.credential, user).then(res => {
+            console.log(res);
+            let googleUser = jwt_decode<GoogleUser>(event.credential);
+            if (!res) {
+                window.alert("some error while creating google mail info")
+                return;
+            }
+            if (res.error) {
+                window.alert(res.error);
+                return;
+            }
+            window.alert("HERE");
+            setUser(res.data.user);
+            props.onHide();
+        });
+    }
+
+    const onGoogleFailure = () => {
         props.onHide();
     }
 
@@ -82,16 +104,6 @@ function LoginModal(props: ModalProps) {
             console.log(errorResponse)
         }
     })
-
-    const onGoogleLogin = (event: CredentialResponse) => {
-        let user = AuthService.onGoogleLogin(event.credential);
-        setUser(user);
-        props.onHide();
-    }
-
-    const onGoogleFailure = () => {
-        props.onHide();
-    }
 
     const onGoogleLogout = () => {
         console.log('logged out')
@@ -118,28 +130,28 @@ function LoginModal(props: ModalProps) {
                 element = (
                     <div className="flex flex-col items-center justify-center h-full">
                         <h1>Log in or Create an account</h1>
-                        <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
+                        {!props.isAddGoogleOnly && <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                             onClick={onMetamaskConnect}>
                             <img title="metamask" src="/images/metamask.webp" />
                             Metamask
-                        </button>
+                        </button>}
                         {/* <button onClick={(e) => googleSecondaryLogin()}
                             className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2">
                             <img title="metamask" src="/images/google.webp" />
                             Google
                         </button> */}
-                        <GoogleLogin width={300} onSuccess={onGoogleLogin} onError={onGoogleFailure} />
+                        {!props.isAddMetamaskOnly && <GoogleLogin width={300} onSuccess={onGoogleLogin} onError={onGoogleFailure} />}
                         {/* <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                             onClick={() => setCurrentAction(AuthAction.Email_Signin)}>
                             <MdEmail size={30} />
                             Email
                         </button> */}
                         Or
-                        <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
-                            onClick={() => setCurrentAction(AuthAction.Email_Signup)}>
-                            <MdEmail size={30} />
-                            Signup with email
-                        </button>
+                        {/*<button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"*/}
+                        {/*    onClick={() => setCurrentAction(AuthAction.Email_Signup)}>*/}
+                        {/*    <MdEmail size={30} />*/}
+                        {/*    Signup with email*/}
+                        {/*</button>*/}
                     </div>
                 )
                 break;
