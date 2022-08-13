@@ -76,7 +76,6 @@ function LoginModal(props) {
                 window.alert(res.error);
                 return;
             }
-            window.alert("HERE");
             setUser(res.data.user);
             props.onHide();
         });
