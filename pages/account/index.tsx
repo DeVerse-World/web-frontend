@@ -88,7 +88,6 @@ export default function Account() {
                         <TabHeader eventKey={AccountTab.Profile} selectedTab={selectedTab} label="Profile" />
                         <TabHeader eventKey={AccountTab.Inventory} selectedTab={selectedTab} label="Inventory" />
                         <TabHeader eventKey={AccountTab.Avatar} selectedTab={selectedTab} label="Avatar" />
-                        <TabHeader eventKey={AccountTab.Settings} selectedTab={selectedTab} label="Settings" />
                     </Nav>
 
                     <Tab.Content className="grow flex">
@@ -104,9 +103,6 @@ export default function Account() {
                             <div className="flex justify-center items-center text-white p-4" >
                                 <h1 >Coming soon</h1>
                             </div>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey={AccountTab.Settings} className="grow">
-                            <AccountSetting />
                         </Tab.Pane>
                     </Tab.Content>
 

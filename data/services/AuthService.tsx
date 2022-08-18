@@ -7,7 +7,7 @@ import deverseClient from "../api/deverse_client";
 import {Response, GetAccountResponse} from "../model/response";
 
 class AuthService {
-    async connectToGoogleMail(credential: string, user): Promise<any> {
+    async connectToGoogleMail(credential: string, user: User): Promise<any> {
         let googleUser = jwt_decode<GoogleUser>(credential);
         if (!user) {
             let res = await AccountService.getOrCreateByGoogleMail(StorageService.getSessionKey(), googleUser.email, credential)
