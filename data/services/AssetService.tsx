@@ -13,6 +13,7 @@ import { Event } from "@ethersproject/contracts";
 import { AssetType } from "../enum/asset_type";
 import ApiStrategy = BaseService.ApiStrategy;
 import { DeverseGraphResponse } from "../model/graph_response";
+import { Failure, Result, Success } from "../model/Result";
 
 class AssetService extends BaseService {
     _uriPrefix = 'https://ipfs.infura.io/ipfs/';
@@ -184,6 +185,45 @@ class AssetService extends BaseService {
             withCredentials: true
         });
         return response;
+    }
+
+    async fetchUserAssets(walletAddress: string): Promise<Result<NFTAsset[]>> {
+        const query = `{
+            owners(where: {id: "${walletAddress}"}) {
+                id
+                numAssets
+                timestamp
+                assetTokens {
+                    id
+                    token{
+                        id
+                        supply
+                        isNFT
+                        tokenURI
+                    }
+                }
+            }
+        }`;
+        let res = await graphClient.post<DeverseGraphResponse>('', {
+            query
+        });
+        if (res.status != 200) {
+            return new Failure(new Error(res.statusText));
+        }
+        let owners = res.data.data.owners;
+        if (owners[0] != null) {
+            let assets = owners[0].assetTokens.map(o => {
+                let asset: NFTAsset = {
+                    id: o.id,
+                    tokenURI: o.token.tokenURI,
+                    supply: o.token.supply
+                }
+                return asset;
+            });
+            return new Success(assets);
+
+        }
+        return new Success([]);
     }
 
     notifyMinted(asset: NFTAsset, tokenId: string) {

@@ -1,15 +1,10 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Button, ButtonGroup, Dropdown, Form, FormControl, Image, InputGroup, Modal, Nav, NavDropdown, NavItem, ProgressBar, Row, Tab, Tabs } from "react-bootstrap";
-import BaseService from "../../data/services/BaseService";
-import ApiStrategy = BaseService.ApiStrategy;
-import CreateNftAssetSection from "../../components/asset/CreateNftAssetSection";
+import { Button, ButtonGroup, Dropdown, Form, FormControl, Image, InputGroup, Modal, ProgressBar } from "react-bootstrap";
 import { useRouter } from "next/router";
-import NFTList from "../../components/asset/NFTList";
 import AssetService from "../../data/services/AssetService";
 import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from "../../data/enum/asset_type";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
-import NFTDetailCard from "../../components/asset/NFTDetailCard";
 import Footer from "../../components/common/Footer";
 import Link from "next/link";
 import Sidebar from "../../components/Sidebar";
