@@ -21,12 +21,12 @@ class AssetService extends BaseService {
     _ipfsClient = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
 
     assetContract: Contract = new ethers.Contract(assetAddress, AssetABI.abi, this.provider);
-    transferSingleEventFilter = null
+    transferSingleEventFilter : ethers.EventFilter = this.assetContract.filters.TransferSingle();
 
-    constructor() {
-        super()
-        this.transferSingleEventFilter = this.assetContract.filters.TransferSingle()
-    }
+    // constructor() {
+    //     super()
+    //     this.transferSingleEventFilter = this.assetContract.filters.TransferSingle()
+    // }
 
     getFullAssetUrl(path: string) {
         return `${this._uriPrefix}${path}`;

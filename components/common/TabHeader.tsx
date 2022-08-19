@@ -1,20 +1,26 @@
-import { Nav } from "react-bootstrap";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { ReactNode } from "react";
 
 type Props = {
-    label: string;
-    eventKey: any;
-    selectedTab: any;
+    children: ReactNode,
+    href: string,
+    className?: string
 }
 
 function TabHeader(props: Props) {
+    const router = useRouter();
+
     let className = "tab-header";
-    if (props.selectedTab == props.eventKey) {
+    if (router.pathname == props.href) {
         className += " active";
     }
     return (
-        <Nav.Item className={className}>
-            <Nav.Link className="text-white" eventKey={props.eventKey}>{props.label}</Nav.Link>
-        </Nav.Item>
+        <Link href={props.href} scroll={false} >
+            <span className={className}>
+                {props.children}
+            </span>
+        </Link>
     )
 }
 

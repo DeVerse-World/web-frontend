@@ -8,4 +8,15 @@ module.exports = {
         RPC_URL: "https://polygon-mumbai.g.alchemy.com/v2/jA5_H_DQkGlOS4hChUOtyiBO3M1ckUVQ",
     },
     typescript: { ignoreBuildErrors: true, ignoreDuringBuilds: true, },
+    // async redirects() {
+    //     return [{
+    //         source: '/alpha',
+    //         destination: '/alpha/info',
+    //         permanent: true
+    //     }, {
+    //         source: '/create',
+    //         destination: '/create/avatar',
+    //         permanent: true
+    //     }]
+    // }
 }

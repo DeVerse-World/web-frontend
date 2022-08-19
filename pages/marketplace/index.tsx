@@ -15,10 +15,11 @@ import ListingTabComponent from "./ListingTab";
 import Sidebar from "../../components/Sidebar";
 import Footer from "../../components/common/Footer";
 import { MarketplaceTab } from "../../components/marketplace_tab";
+import BaseLayout from "../../components/common/BaseLayout";
 
 
 
-export default function Marketplace() {
+function Marketplace() {
     const router = useRouter();
     const { setViewState } = useContext(AppContext);
 
@@ -87,10 +88,7 @@ export default function Marketplace() {
         }
         if (data.length == 0) {
             return (
-                <div className="h-[80vh] w-[100%] flex justify-center">
-                    <h1 className="  m-auto">Nothing to show</h1>
-                </div>
-
+                <h1 className="  m-auto">Nothing to show</h1>
             )
         }
         return (
@@ -129,17 +127,20 @@ export default function Marketplace() {
             </Sidebar>
 
             <section id='section-content' className='bg-deverse flex flex-col text-white' >
-                <div className='flex flex-row ' style={{
-                    minHeight: "calc(100vh - 60px)"
-                }}>
+                <div className='flex flex-row grow'>
                     {renderContent()}
                     <NFTDetailCard data={selectedAsset} show={showDetail} onHide={() => setShowDetail(false)} />
                 </div>
-
-
                 <Footer />
             </section>
-
         </div>
     )
 }
+
+Marketplace.getLayout = page => (
+    <BaseLayout>
+        {page}
+    </BaseLayout>
+);
+
+export default Marketplace;

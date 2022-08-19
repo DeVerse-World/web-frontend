@@ -5,6 +5,7 @@ import WelcomeSection from '../components/home/WelcomeSection';
 import HighlightFeatureSection from '../components/home/HighlightFeaturesSection';
 import Footer from '../components/common/Footer';
 import Sidebar from '../components/Sidebar';
+import { getCommonLayout } from '../components/common/CommonLayout';
 
 function Home(props) {
   // const [totalSupply, setTotalSupply] = useState("--")
@@ -35,16 +36,13 @@ function Home(props) {
 
 
   return (
-      <div className='flex flex-row bg-deverse'>
-        <Sidebar />
-        <div id='section-content'>
-          <WelcomeSection />
-          <IntroSection />
-          <HighlightFeatureSection />
-          <ProductSection />
-          <Footer />
-        </div>
-      </div>
+    <div id='section-content'>
+      <WelcomeSection />
+      <IntroSection />
+      <HighlightFeatureSection />
+      <ProductSection />
+      <Footer />
+    </div>
   );
 }
 

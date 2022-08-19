@@ -28,7 +28,7 @@ function WelcomeSection(props) {
               <h1 className="mt-4 deverse-title uppercase txt-deverse-gradient ">A Sandbox (De)centralized Meta(Verse)</h1>
 
             </div>
-            <DownloadDemoButton/>
+            <DownloadDemoButton className="h-12"/>
           </div>
         </Carousel.Item>
         {renderShowcaseItem('/images/01.png')}

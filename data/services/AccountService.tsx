@@ -47,7 +47,7 @@ class AccountService {
         })
     }
 
-    async getUserInfo(): Promise<Result< GetUserProfileResponse>> {
+    async getUserInfo(): Promise<Result<GetUserProfileResponse>> {
         let response = await deverseClient.get<Response<GetUserProfileResponse>>(`/user/profile`, {
             withCredentials: true
         });
