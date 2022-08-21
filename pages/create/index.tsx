@@ -1,7 +1,26 @@
+import { useEffect } from "react";
+import AvatarService from "../../data/services/AvatarService";
 import { getCreateLayout } from "./CreateLayout";
 
 
 function Avatar() {
+
+    const handleRPMEvent = (e: MessageEvent) => {
+        if (!e.origin.includes('readyplayer.me')) {
+            return;
+        }
+        if (e.data.includes('.glb')) {
+            AvatarService.createAvatar(e.data)
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('message', handleRPMEvent);
+        return () => {
+            window.removeEventListener('keydown', handleRPMEvent);
+        }
+    }, [])
+
     return (
         <iframe allow="camera *; microphone *"
             className='rpo'

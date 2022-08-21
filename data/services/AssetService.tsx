@@ -189,7 +189,7 @@ class AssetService extends BaseService {
 
     async fetchUserAssets(walletAddress: string): Promise<Result<NFTAsset[]>> {
         const query = `{
-            owners(where: {id: "${walletAddress}"}) {
+            owners(where: {id: "${walletAddress.toLocaleLowerCase()}"}) {
                 id
                 numAssets
                 timestamp

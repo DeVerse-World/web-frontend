@@ -24,10 +24,7 @@ function Marketplace() {
     const { setViewState } = useContext(AppContext);
 
     const [nfts, setNfts] = useState<NFTAsset[]>([]);
-    const [selectedAsset, setSelectedAsset] = useState<NFTAsset>(null);
-    const [showDetail, setShowDetail] = useState<boolean>(false);
     const [visibleTab, setVisibleTab] = useState<MarketplaceTab>(MarketplaceTab.All);
-
 
     useEffect(() => {
         loadNFTs(null)
@@ -62,11 +59,6 @@ function Marketplace() {
         setVisibleTab(tab);
     }
 
-    const onOpenNFTDescription = (data: NFTAsset) => {
-        setSelectedAsset(data);
-        setShowDetail(true);
-    }
-
     const renderContent = () => {
         let data = nfts;
         switch (visibleTab) {
@@ -92,7 +84,7 @@ function Marketplace() {
             )
         }
         return (
-            <NFTList data={data} onOpen={onOpenNFTDescription} totalCount={data.length} />
+            <NFTList data={data}  />
         )
     }
 
@@ -129,7 +121,6 @@ function Marketplace() {
             <section id='section-content' className='bg-deverse flex flex-col text-white' >
                 <div className='flex flex-row grow'>
                     {renderContent()}
-                    <NFTDetailCard data={selectedAsset} show={showDetail} onHide={() => setShowDetail(false)} />
                 </div>
                 <Footer />
             </section>

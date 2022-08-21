@@ -31,7 +31,8 @@ function Account() {
     const [showAddMetamask, setShowAddMetamask] = useState(false);
     const [showAddGoogle, setShowAddGoogle] = useState(false);
     const [avatarCount, setAvatarCount] = useState(0);
-    const [imageCount, setImageCount] = useState(0);
+    const [eventCount, setEventCount] = useState(0);
+    const [subworldTemplateCount, setSubworldTemplateCount] = useState(0);
     const [inventoryCount, setInventoryCount] = useState(0);
 
     useEffect(() => {
@@ -41,16 +42,15 @@ function Account() {
         AccountService.getUserInfo().then(e => {
             if (e.isSuccess && e.value) {
                 setAvatarCount(e.value.avatars.length);
-                setImageCount(e.value.avatars.length);
-                setInventoryCount(e.value.avatars.length);
-                console.log(e.value);
+                setEventCount(e.value.created_events.length);
+                setSubworldTemplateCount(e.value.created_deriv_subworld_templates.length + e.value.created_root_subworld_templates.length);
             }
         })
-        // if (user.wallet_address != null) {
-        //     AssetService.fetchUserAssets(user.wallet_address).then(e => {
-        //         console.log(e.value);
-        //     })
-        // }
+        if (user.wallet_address != null) {
+            AssetService.fetchUserAssets(user.wallet_address).then(e => {
+                setInventoryCount(e.value.length);
+            })
+        }
     }, [user]);
 
 
@@ -93,10 +93,17 @@ function Account() {
                             </div>
                         </Link>
                         <Link href="/account/inventory">
+                            <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center text-center" >
+                                <RiImageFill size={120}/>
+                                <h3>Subworld Templates</h3>
+                                <span>x{subworldTemplateCount}</span>
+                            </div>
+                        </Link>
+                        <Link href="/account/inventory">
                             <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
                                 <RiImageFill size={120}/>
-                                <h3>Images</h3>
-                                <span>x{imageCount}</span>
+                                <h3>Events</h3>
+                                <span>x{eventCount}</span>
                             </div>
                         </Link>
                         <Link href="/account/inventory">

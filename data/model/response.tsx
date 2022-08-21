@@ -12,7 +12,7 @@ export class GetAvatarResponse {
     avatars: Avatar[]
 }
 
-export class CreateAvatarResponse {
+export class AvatarResponse {
     avatar: Avatar
 }
 
@@ -22,7 +22,7 @@ export type GetAccountResponse = Readonly<{
 }>
 
 export type GetUserProfileResponse = Readonly<{
-    avatars: any[],
+    avatars: Avatar[],
     created_deriv_subworld_templates: SubworldTemplate[],
     created_events: any[],
     created_root_subworld_templates: SubworldTemplate[],

@@ -7,27 +7,13 @@ import ModelViewer from '../../components/ModelViewer';
 import AssetService from "../../data/services/AssetService";
 import { IoIosArrowDown } from 'react-icons/io';
 import CollapsableInfoCard from './collapsable_info_card';
+import { Avatar } from '../../data/model/avatar';
+import AvatarService from '../../data/services/AvatarService';
 
 function AssetPreviewScreen(props: WithRouterProps) {
+    const [avatar, setAvatar] = useState<Avatar>(null);
     const [modelPath, setModelPath] = useState<string>(null);
 
-    const handleIFrameEvent = (e: MessageEvent) => {
-        if (!e.origin.includes('readyplayer.me')) {
-            return;
-        }
-        let glbUri = e.data;
-        console.log(e);
-        setModelPath(glbUri);
-    }
-
-    useEffect(() => {
-        setModelPath('https://d1a370nemizbjq.cloudfront.net/38661c86-1829-4fc5-b327-56e13f8727f7.glb')
-        window.addEventListener('message', handleIFrameEvent);
-        return () => {
-            window.removeEventListener('keydown', handleIFrameEvent);
-        };
-
-    }, [])
 
     useEffect(() => {
         if (!props.router.isReady) return;
@@ -35,6 +21,11 @@ function AssetPreviewScreen(props: WithRouterProps) {
 
         if (query['model']) {
             setModelPath(AssetService.getFullAssetUrl(query['model'] as string));
+        } else if (query['avatarId'] && !isNaN(parseInt(query['avatarId'] as string))) {
+            AvatarService.getAvatar(parseInt(query['avatarId'] as string)).then(value => {
+                setAvatar(value);
+                setModelPath(value.preprocess_url)
+            });
         }
     }, [props.router.isReady])
 

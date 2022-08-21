@@ -3,7 +3,7 @@ import deverseClient from "../api/deverse_client";
 import { DataFilter } from "../enum/data_filter";
 import { TimeFilter } from "../enum/time_filter";
 import { StatisticLog } from "../model/profile_info";
-import { CreateAvatarResponse, GetAvatarResponse, GetAccountResponse, Response, GetUserProfileResponse } from "../model/response";
+import { AvatarResponse, GetAvatarResponse, GetAccountResponse, Response, GetUserProfileResponse } from "../model/response";
 import { Failure, Result, Success } from "../model/Result";
 import StorageService from "./StorageService";
 

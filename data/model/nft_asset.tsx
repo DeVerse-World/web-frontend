@@ -14,4 +14,5 @@ export type NFTAsset = {
     assetType?: AssetType;
     image?: string;
     animation_url?: string;
+    deletable?: boolean;
 }
