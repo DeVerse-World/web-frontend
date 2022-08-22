@@ -1,32 +1,54 @@
 import { useEffect, useState } from "react";
 import NFTList from "../../components/asset/NFTList";
 import BaseLayout from "../../components/common/BaseLayout";
-import { getCommonLayout } from "../../components/common/CommonLayout";
 import Footer from "../../components/common/Footer";
-import HomeNavbar from "../../components/common/HomeNavbar";
 import TabHeader from "../../components/common/TabHeader";
 import Sidebar from "../../components/Sidebar";
 import { AssetType } from "../../data/enum/asset_type";
-import { Avatar } from "../../data/model/avatar";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AccountService from "../../data/services/AccountService";
 
-function Content() {
-    const [data, setData] = useState<Avatar[]>([]);
+function Layout(){
     const [nfts, setNfts] = useState<NFTAsset[]>([]);
     useEffect(() => {
         AccountService.getUserInfo().then(e => {
             if (e.isSuccess && e.value) {
-                setData(e.value.avatars);
-                setNfts(e.value.avatars.map(item => {
+                let data : NFTAsset[]= [];
+                e.value.created_events.forEach(event => {
+
+                })
+                e.value.created_root_subworld_templates.forEach(template => {
                     let asset: NFTAsset = {
-                        id: item.id.toString(),
-                        file3dUri: item.preprocess_url,
+                        id: template.id.toString(),
+                        name: template.display_name,
+                        description: template.display_name,
+                        image: template.thumbnail_centralized_uri,
+                        fileAssetUriFromCentralized: template.thumbnail_centralized_uri,
+                        file2dUri: template.thumbnail_centralized_uri,
+                        fileAssetUri: template.level_ipfs_uri,
+                        file3dUri: template.level_ipfs_uri,
                         deletable: true,
-                        assetType: AssetType.AVATAR
+                        assetType: AssetType.ROOT_SUBWORLD_TEMPLATE
                     }
-                    return asset;
-                }))
+                    data.push(asset);
+                })
+                e.value.created_deriv_subworld_templates.forEach(template => {
+                    let asset: NFTAsset = {
+                        id: template.id.toString(),
+                        name: template.display_name,
+                        description: template.display_name,
+                        image: template.thumbnail_centralized_uri,
+                        fileAssetUriFromCentralized: template.thumbnail_centralized_uri,
+                        file2dUri: template.thumbnail_centralized_uri,
+                        fileAssetUri: template.level_ipfs_uri,
+                        file3dUri: template.level_ipfs_uri,
+                        rootId: template.parent_subworld_template_id.toString(),
+                        deletable: true,
+                        assetType: AssetType.DERIV_SUBWORLD_TEMPLATE
+                    }
+                    data.push(asset);
+                })
+                setNfts(data);
             }
         })
     }, [])
@@ -49,7 +71,7 @@ function Content() {
     )
 }
 
-Content.getLayout = page => (
+Layout.getLayout = page => (
     <BaseLayout>
         <div className='flex flex-row bg-deverse '>
             <Sidebar />
@@ -71,4 +93,4 @@ Content.getLayout = page => (
     </BaseLayout>
 )
 
-export default Content;
+export default Layout;

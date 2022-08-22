@@ -92,14 +92,14 @@ function Account() {
                                 <span>x{avatarCount}</span>
                             </div>
                         </Link>
-                        <Link href="/account/inventory">
+                        <Link href="/account/misc">
                             <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center text-center" >
                                 <RiImageFill size={120}/>
                                 <h3>Subworld Templates</h3>
                                 <span>x{subworldTemplateCount}</span>
                             </div>
                         </Link>
-                        <Link href="/account/inventory">
+                        <Link href="/account/misc">
                             <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
                                 <RiImageFill size={120}/>
                                 <h3>Events</h3>
@@ -136,6 +136,7 @@ Account.getLayout = page => (
                         <TabHeader href="/account">Info</TabHeader>
                         <TabHeader href="/account/avatar">Avatar</TabHeader>
                         <TabHeader href="/account/inventory">Inventory</TabHeader>
+                        <TabHeader href="/account/misc">Events/Templates</TabHeader>
                     </span>
                 </span>
                 <div className="grow">

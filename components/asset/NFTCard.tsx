@@ -4,6 +4,7 @@ import { BsFillTrashFill } from "react-icons/bs";
 import { AssetType } from "../../data/enum/asset_type";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AvatarService from "../../data/services/AvatarService";
+import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 import NFTDetailCard from "./NFTDetailCard";
 
 type Props = {
@@ -23,13 +24,35 @@ function NFTCard(props: Props) {
     }
 
     const onDeleteAsset = () => {
-        AvatarService.deleteAvatar(props.data.id).then(res => {
-            console.log(res.data)
-            console.log(res.error);
-            props.onDeleted(props.data)
-        }).finally(() => {
-            setIsDeleting(false);
-        })
+        switch (props.data.assetType) {
+            case AssetType.AVATAR:
+                AvatarService.deleteAvatar(props.data.id).then(res => {
+                    console.log(res.data)
+                    console.log(res.error);
+                    props.onDeleted(props.data)
+                }).finally(() => {
+                    setIsDeleting(false);
+                })
+                break;
+            case AssetType.ROOT_SUBWORLD_TEMPLATE:
+                SubWorldTemplateService.deleteRootTemplate(props.data.id).then(res => {
+                    console.log(res)
+                    props.onDeleted(props.data)
+                }).finally(() => {
+                    setIsDeleting(false);
+                })
+                break;
+            case AssetType.DERIV_SUBWORLD_TEMPLATE:
+                SubWorldTemplateService.deleteDerivTemplate(props.data.rootId, props.data.id).then(res => {
+                    console.log(res)
+                    props.onDeleted(props.data)
+                }).finally(() => {
+                    setIsDeleting(false);
+                })
+                break;
+            default:
+                break;
+        }
     }
 
     const renderPreview = () => {

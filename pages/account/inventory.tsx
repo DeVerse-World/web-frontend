@@ -47,6 +47,7 @@ Inventory.getLayout = page => (
                         <TabHeader href="/account">Info</TabHeader>
                         <TabHeader href="/account/avatar">Avatar</TabHeader>
                         <TabHeader href="/account/inventory">Inventory</TabHeader>
+                        <TabHeader href="/account/misc">Events/Templates</TabHeader>
                     </span>
                 </span>
                 <div className="grow">
