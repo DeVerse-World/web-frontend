@@ -8,14 +8,20 @@ import { AssetType } from "../../data/enum/asset_type";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AccountService from "../../data/services/AccountService";
 
-function Layout(){
+function Layout() {
     const [nfts, setNfts] = useState<NFTAsset[]>([]);
     useEffect(() => {
         AccountService.getUserInfo().then(e => {
             if (e.isSuccess && e.value) {
-                let data : NFTAsset[]= [];
+                let data: NFTAsset[] = [];
                 e.value.created_events.forEach(event => {
-
+                    let asset: NFTAsset = {
+                        id: event.id.toString(),
+                        name: event.name,
+                        description: event.stage,
+                        assetType: AssetType.EVENTS
+                    }
+                    data.push(asset);
                 })
                 e.value.created_root_subworld_templates.forEach(template => {
                     let asset: NFTAsset = {

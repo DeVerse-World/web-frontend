@@ -1,6 +1,7 @@
 import { Avatar } from "./avatar";
+import { Event } from "./Event";
 import { SubworldTemplate } from "./SubworldTemplate";
-import {User} from "./user";
+import { User } from "./user";
 
 export class Response<T> {
     message: string;
@@ -24,7 +25,7 @@ export type GetAccountResponse = Readonly<{
 export type GetUserProfileResponse = Readonly<{
     avatars: Avatar[],
     created_deriv_subworld_templates: SubworldTemplate[],
-    created_events: any[],
+    created_events: Event[],
     created_root_subworld_templates: SubworldTemplate[],
     user: User
 }>
