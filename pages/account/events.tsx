@@ -1,33 +1,26 @@
 import { useEffect, useState } from "react";
 import NFTList from "../../components/asset/NFTList";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
-import BaseLayout from "../../components/common/BaseLayout";
-import { getCommonLayout } from "../../components/common/CommonLayout";
-import Footer from "../../components/common/Footer";
-import HomeNavbar from "../../components/common/HomeNavbar";
-import TabHeader from "../../components/common/TabHeader";
-import Sidebar from "../../components/Sidebar";
 import { AssetType } from "../../data/enum/asset_type";
-import { Avatar } from "../../data/model/avatar";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AccountService from "../../data/services/AccountService";
 
-function Content() {
-    const [data, setData] = useState<Avatar[]>([]);
+function Layout() {
     const [nfts, setNfts] = useState<NFTAsset[]>([]);
     useEffect(() => {
         AccountService.getUserInfo().then(e => {
             if (e.isSuccess && e.value) {
-                setData(e.value.avatars);
-                setNfts(e.value.avatars.map(item => {
+                let data: NFTAsset[] = [];
+                e.value.created_events.forEach(event => {
                     let asset: NFTAsset = {
-                        id: item.id.toString(),
-                        file3dUri: item.preprocess_url,
-                        deletable: true,
-                        assetType: AssetType.AVATAR
+                        id: event.id.toString(),
+                        name: event.name,
+                        description: event.stage,
+                        assetType: AssetType.EVENTS
                     }
-                    return asset;
-                }))
+                    data.push(asset);
+                })
+                setNfts(data);
             }
         })
     }, [])
@@ -50,6 +43,6 @@ function Content() {
     )
 }
 
-Content.getLayout = getAccountWrapperLayout;
+Layout.getLayout = getAccountWrapperLayout;
 
-export default Content;
+export default Layout;

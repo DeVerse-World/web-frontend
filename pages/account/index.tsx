@@ -13,6 +13,7 @@ import { GiDoubleFaceMask } from "react-icons/gi";
 import {RiImageFill} from "react-icons/ri";
 import { MdOutlineInventory2} from "react-icons/md";
 import Link from "next/link";
+import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 // ChartJS.register(
 //     CategoryScale,
 //     LinearScale,
@@ -92,14 +93,14 @@ function Account() {
                                 <span>x{avatarCount}</span>
                             </div>
                         </Link>
-                        <Link href="/account/misc">
+                        <Link href="/account/templates">
                             <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center text-center" >
                                 <RiImageFill size={120}/>
                                 <h3>Subworld Templates</h3>
                                 <span>x{subworldTemplateCount}</span>
                             </div>
                         </Link>
-                        <Link href="/account/misc">
+                        <Link href="/account/events">
                             <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
                                 <RiImageFill size={120}/>
                                 <h3>Events</h3>
@@ -125,28 +126,7 @@ function Account() {
     );
 }
 
-Account.getLayout = page => (
-    <div className='flex flex-col'>
-        <HomeNavbar />
-        <div className='flex flex-row bg-deverse '>
-            <Sidebar />
-            <section id='section-content' className='flex flex-col justify-between '>
-                <span className="flex flex-row justify-between bg-black">
-                    <span className="tab-bar flex-grow" >
-                        <TabHeader href="/account">Info</TabHeader>
-                        <TabHeader href="/account/avatar">Avatar</TabHeader>
-                        <TabHeader href="/account/inventory">Inventory</TabHeader>
-                        <TabHeader href="/account/misc">Events/Templates</TabHeader>
-                    </span>
-                </span>
-                <div className="grow">
-                    {page}
-                </div>
-                <Footer />
-            </section>
-        </div>
-    </div>
-)
+Account.getLayout = getAccountWrapperLayout;
 
 export default Account;
 

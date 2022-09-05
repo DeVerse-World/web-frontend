@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import NFTDetailCard from "../../components/asset/NFTDetailCard";
 import NFTList from "../../components/asset/NFTList";
+import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import BaseLayout from "../../components/common/BaseLayout";
 import { getCommonLayout } from "../../components/common/CommonLayout";
 import Footer from "../../components/common/Footer";
@@ -37,26 +38,6 @@ function Inventory() {
     )
 }
 
-Inventory.getLayout = page => (
-    <BaseLayout>
-        <div className='flex flex-row bg-deverse '>
-            <Sidebar />
-            <section id='section-content' className='flex flex-col justify-between '>
-                <span className="flex flex-row justify-between bg-black">
-                    <span className="tab-bar flex-grow" >
-                        <TabHeader href="/account">Info</TabHeader>
-                        <TabHeader href="/account/avatar">Avatar</TabHeader>
-                        <TabHeader href="/account/inventory">Inventory</TabHeader>
-                        <TabHeader href="/account/misc">Events/Templates</TabHeader>
-                    </span>
-                </span>
-                <div className="grow">
-                    {page}
-                </div>
-                <Footer />
-            </section>
-        </div>
-    </BaseLayout>
-)
+Inventory.getLayout = getAccountWrapperLayout;
 
 export default Inventory;
