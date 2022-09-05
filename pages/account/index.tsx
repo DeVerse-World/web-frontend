@@ -1,14 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 // import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend } from 'chart.js';
 import AccountService from "../../data/services/AccountService";
-import Sidebar from "../../components/Sidebar";
-import Footer from "../../components/common/Footer";
-import TabHeader from "../../components/common/TabHeader";
 import AssetService from "../../data/services/AssetService";
 import { AppContext } from "../../components/contexts/app_context";
 import AvatarContainer from "./AvatarContainer";
 import LoginModal from "../../components/login/LoginModal";
-import HomeNavbar from "../../components/common/HomeNavbar";
 import { GiDoubleFaceMask } from "react-icons/gi";
 import {RiImageFill} from "react-icons/ri";
 import { MdOutlineInventory2} from "react-icons/md";
