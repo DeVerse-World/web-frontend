@@ -1,3 +1,3 @@
 export enum AccountTab {
-    Profile, Avatar, Inventory, Settings
+    Profile, Avatar, Inventory
 }

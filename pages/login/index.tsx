@@ -3,52 +3,47 @@ import { useRouter } from 'next/router'
 import StorageService from "../../data/services/StorageService";
 import { useMetaMask } from "metamask-react";
 import AuthService from "../../data/services/AuthService";
+import Footer from "../../components/common/Footer";
+import Sidebar from "../../components/Sidebar";
 
 export default function LoginLink(props) {
     const router = useRouter();
     const { status, connect, account } = useMetaMask();
-
+    const [connectionStatus, setConnectionStatus] = useState('Processing...');
     useEffect(() => {
+        if (!router.isReady)
+            return;
         switch (status) {
             case 'notConnected':
-                connect();
+                if ('key' in router.query) {
+                    connect();
+                    setConnectionStatus('Processing...');
+                } else {
+                    setConnectionStatus('Please provide a login key');
+                }
                 break;
             case 'connected':
+                setConnectionStatus("Authenticated");
                 AuthService.connectToMetamask(account, null);
                 break;
             default:
                 break;
         }
-    }, [status])
-
-    const getMsg = () => {
-        let text = "Authenticated";
-        switch (status) {
-            case 'notConnected':
-                text = "Click on Connect Wallet above"
-                break;
-            case 'connected':
-                text = "Authenticated"
-                break;
-            default:
-                text = "Processing...";
-                break;
-        }
-        return text;
-    }
+    }, [status, router.isReady])
 
     useEffect(() => {
         if ('key' in router.query) {
             StorageService.setSessionKey(router.query.key.toString())
         }
-    }, [router])
+    }, [router.query])
     return (
-        <>
-            <div className='bg-deverse h-[90vh] text-white text-center'>
-                {getMsg()}
-
-            </div>
-        </>
-
+        <div className='flex flex-row bg-deverse '>
+            <section id='section-content' className='flex flex-col text-white justify-between '>
+                <div className="text-center m-auto">
+                    <h1>{connectionStatus}</h1>
+                </div>
+                <Footer />
+            </section>
+        </div>
     )
 }

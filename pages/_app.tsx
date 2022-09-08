@@ -16,6 +16,7 @@ import { Router } from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import CommonLayout from '../components/common/CommonLayout';
 
 // optional configuration
 const options = {
@@ -33,8 +34,8 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 function DeverseApp({ Component, pageProps }) {
-
-
+  // This means it will either use the wrapper of the Component's layout declaration, or wrap it inside sitelayout (general)
+  const getLayout = Component.getLayout || (page => <CommonLayout children={page} />)
   return (
     <AlertProvider template={AlertTemplate} {...options}>
       <SSRProvider>
@@ -50,25 +51,8 @@ function DeverseApp({ Component, pageProps }) {
               </noscript>
               <LoadingScreen />
               {/* <ScrollToTopButton /> */}
-              <div className='flex flex-col'>
-                <HomeNavbar />
-                <Component {...pageProps} />
-              </div>
+              {getLayout(<Component {...pageProps} />)}
             </GoogleOAuthProvider>
-            {/* <Script strategy="lazyOnload" src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`} />
-
-            <Script strategy="lazyOnload">
-              {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
-        page_path: window.location.pathname,
-        });
-    `}
-            </Script> */}
-
-
           </MetaMaskProvider>
         </AppContextProvider>
       </SSRProvider>

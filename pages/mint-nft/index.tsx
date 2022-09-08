@@ -1,21 +1,16 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Button, ButtonGroup, Dropdown, Form, FormControl, Image, InputGroup, Modal, Nav, NavDropdown, NavItem, ProgressBar, Row, Tab, Tabs } from "react-bootstrap";
-import BaseService from "../../data/services/BaseService";
-import ApiStrategy = BaseService.ApiStrategy;
-import CreateNftAssetSection from "../../components/asset/CreateNftAssetSection";
+import { Button, ButtonGroup, Dropdown, Form, FormControl, Image, InputGroup, Modal, ProgressBar } from "react-bootstrap";
 import { useRouter } from "next/router";
-import NFTList from "../../components/asset/NFTList";
 import AssetService from "../../data/services/AssetService";
 import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from "../../data/enum/asset_type";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
-import NFTDetailCard from "../../components/asset/NFTDetailCard";
 import Footer from "../../components/common/Footer";
 import Link from "next/link";
 import Sidebar from "../../components/Sidebar";
 
 export default function MintNFT() {
-    const { setViewState } = useContext(AppContext);
+    const { user, setViewState } = useContext(AppContext);
     const router = useRouter();
 
     const [assetName, setAssetName] = useState('');
@@ -130,9 +125,9 @@ export default function MintNFT() {
 
 
     return (
-        <div className='flex flex-row bg-deverse '>
-            <Sidebar />
-            <section id='section-content' className="flex flex-col">
+        <section id='section-content' className="flex flex-col">
+            {user ?
+                <div>Please login first</div> :
                 <div className="flex justify-center flex-grow">
                     <Form className="flex flex-col items-center text-white my-8 space-y-2 min-w-[300px] w-[40vw]"
                         validated={formValidated}
@@ -313,9 +308,8 @@ export default function MintNFT() {
                         </Modal.Footer>
                     </Modal>
                 </div>
-                <Footer />
-            </section>
-        </div>
-
+            }
+            <Footer />
+        </section>
     )
 }

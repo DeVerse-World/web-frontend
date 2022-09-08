@@ -6,7 +6,7 @@ import { MdEmail } from 'react-icons/md';
 import EmailSignin from "./EmailLogin";
 import EmailSignup from "./EmailSignup";
 import { AppContext } from "../contexts/app_context";
-import {GoogleUser, User, UserType} from "../../data/model/user";
+import { GoogleUser, User, UserType } from "../../data/model/user";
 import { CredentialResponse, GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import AuthService from "../../data/services/AuthService";
 import AccountService from "../../data/services/AccountService";
@@ -16,11 +16,16 @@ enum AuthAction {
     Home, Email_Signup, Email_Signin
 }
 
-function LoginModal(props) {
+type Props = {
+    isAddGoogleOnly: boolean;
+    isAddMetamaskOnly: boolean;
+} & ModalProps;
+
+function LoginModal(props: Props) {
     const { user, setUser } = useContext(AppContext);
     const [currentAction, setCurrentAction] = useState<AuthAction>(AuthAction.Home);
     const { status, connect, account } = useMetaMask();
-
+    const { isAddGoogleOnly, isAddMetamaskOnly, ...modalProps } = props;
     useEffect(() => {
         switch (status) {
             case "initializing":
@@ -47,7 +52,7 @@ function LoginModal(props) {
                         return;
                     }
                     setUser(res.data.user);
-                    props.onHide();
+                    modalProps.onHide();
                 });
                 break;
             default:
@@ -61,7 +66,6 @@ function LoginModal(props) {
             return;
         }
         connect();
-        // props.onHide();
     }
 
     const onGoogleLogin = (event: CredentialResponse) => {
@@ -77,12 +81,12 @@ function LoginModal(props) {
                 return;
             }
             setUser(res.data.user);
-            props.onHide();
+            modalProps.onHide();
         });
     }
 
     const onGoogleFailure = () => {
-        props.onHide();
+        modalProps.onHide();
     }
 
     const googleLogin = useGoogleLogin({
@@ -129,7 +133,7 @@ function LoginModal(props) {
                 element = (
                     <div className="flex flex-col items-center justify-center h-full">
                         <h1>Log in or Create an account</h1>
-                        {!props.isAddGoogleOnly && <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
+                        {!isAddGoogleOnly && <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                             onClick={onMetamaskConnect}>
                             <img title="metamask" src="/images/metamask.webp" />
                             Metamask
@@ -139,7 +143,7 @@ function LoginModal(props) {
                             <img title="metamask" src="/images/google.webp" />
                             Google
                         </button> */}
-                        {!props.isAddMetamaskOnly && <GoogleLogin width={300} onSuccess={onGoogleLogin} onError={onGoogleFailure} />}
+                        {!isAddMetamaskOnly && <GoogleLogin width='300' onSuccess={onGoogleLogin} onError={onGoogleFailure} />}
                         {/* <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                             onClick={() => setCurrentAction(AuthAction.Email_Signin)}>
                             <MdEmail size={30} />
@@ -159,10 +163,9 @@ function LoginModal(props) {
     }
 
     return (
-        <Modal {...props} >
+        <Modal {...modalProps} >
             <Modal.Body className='bg-black text-white '>
-                <AiOutlineClose className="absolute top-5 right-5 cursor-pointer" size={40} onClick={() => props.onHide()} />
-                {/* <button className="absolute top-5 right-5" onClick={() => props.onHide()}></button> */}
+                <AiOutlineClose className="absolute top-5 right-5 cursor-pointer" size={40} onClick={() => modalProps.onHide()} />
                 {renderContent()}
             </Modal.Body>
         </Modal>

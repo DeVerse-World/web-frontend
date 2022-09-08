@@ -3,5 +3,9 @@ export enum AssetType {
     RACE = "Character Race",
     SKIN = "Character Skin",
     GAME_MODE = "New Gameplay mode",
-    BOT_LOGIC = "New Bot Logic"
+    BOT_LOGIC = "New Bot Logic",
+    AVATAR = "Avatar",
+    ROOT_SUBWORLD_TEMPLATE = "Root templates",
+    DERIV_SUBWORLD_TEMPLATE = "Deriv templates",
+    EVENTS = "Events"
 }

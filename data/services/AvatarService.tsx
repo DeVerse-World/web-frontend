@@ -1,9 +1,10 @@
 import apiClient from "../api/deverse_client";
-import { CreateAvatarResponse, GetAvatarResponse, Response } from "../model/response";
+import { Avatar } from "../model/avatar";
+import { AvatarResponse, GetAvatarResponse, Response } from "../model/response";
 
 class AvatarService {
     createAvatar(rpmUrl: string) {
-        apiClient.post<Response<CreateAvatarResponse>>('avatar', {
+        apiClient.post<Response<AvatarResponse>>('avatar', {
             avatar: {
                 preprocess_url: rpmUrl
             },
@@ -18,18 +19,25 @@ class AvatarService {
             window.alert("Fail to create avatar in DB " + e)
         })
     }
-    getAvatar(walletAddress: string) {
+    getAvatars(walletAddress: string) {
         apiClient.get<Response<GetAvatarResponse>>(`wallet/getAvatars/${walletAddress}`).then(e => {
             //TODO: 
             console.log(e.data.data.avatars)
         })
     }
-    deleteAvatar(avatarId: string) {
-        apiClient.delete(
+
+    async getAvatar(avatarId: number) : Promise<Avatar> {
+        let res = await apiClient.get<Response<AvatarResponse>>(`avatar/${avatarId}`);
+        return res.data.data.avatar;
+    }
+
+    async deleteAvatar(avatarId: string) : Promise<Response<any>> {
+        let res = await apiClient.delete<Response<any>>(
             `avatar/${avatarId}`, {
                 withCredentials: true
             }
         )
+        return res.data;
     }
 }
 

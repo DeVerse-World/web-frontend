@@ -1,7 +1,7 @@
-import { getAlphaLayout } from "./AlphaLayout";
+import { getCreateLayout } from "./CreateLayout";
 
 
-function Info() {
+function UESdk() {
     return (
         <div className="flex justify-center items-center text-white p-4" >
             <h1 >Coming soon</h1>
@@ -9,6 +9,6 @@ function Info() {
     )
 }
 
-Info.getLayout = getAlphaLayout
+UESdk.getLayout = getCreateLayout
 
-export default Info;
+export default UESdk;

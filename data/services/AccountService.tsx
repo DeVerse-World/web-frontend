@@ -3,7 +3,8 @@ import deverseClient from "../api/deverse_client";
 import { DataFilter } from "../enum/data_filter";
 import { TimeFilter } from "../enum/time_filter";
 import { StatisticLog } from "../model/profile_info";
-import { CreateAvatarResponse, GetAvatarResponse, GetAccountResponse, Response } from "../model/response";
+import { AvatarResponse, GetAvatarResponse, GetAccountResponse, Response, GetUserProfileResponse } from "../model/response";
+import { Failure, Result, Success } from "../model/Result";
 import StorageService from "./StorageService";
 
 class AccountService {
@@ -44,6 +45,25 @@ class AccountService {
         }, {
             withCredentials: true
         })
+    }
+
+    async getUserInfo(): Promise<Result<GetUserProfileResponse>> {
+        let response = await deverseClient.get<Response<GetUserProfileResponse>>(`/user/profile`, {
+            withCredentials: true
+        });
+        if (response.status != 200) {
+            return new Failure(new Error(response.statusText));
+        }
+        return new Success(response.data.data);
+    }
+
+    // TODO: add more fields
+    async updateUser(name: string) {
+        return deverseClient.post<Response<GetAccountResponse>>(`/user/profile`, {
+            name
+        }, {
+            withCredentials: true
+        });
     }
 
     async getStats(dataType: DataFilter, timeType: TimeFilter): Promise<StatisticLog[]> {

@@ -88,7 +88,7 @@ function AccountMenu() {
     return (
       <div className="text-white mr-24">
 
-        <Image className="cursor-pointer" src={user.avatar} width={56} height={56} roundedCircle onClick={onToggleMenu}/>
+        <Image className="cursor-pointer" src={user?.avatar || "/images/placeholder.png"} width={40} height={40} roundedCircle onClick={onToggleMenu}/>
 
         <div id='account-dropdown' className={showDropdown ? "active" : null}>
           <h5>Welcome {user.name}</h5>

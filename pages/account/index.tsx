@@ -1,149 +1,130 @@
-import React, { CSSProperties, useEffect, useState } from "react";
-import Button from 'react-bootstrap/Button';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend } from 'chart.js';
-import { TimeFilter } from "../../data/enum/time_filter";
-import { DataFilter } from "../../data/enum/data_filter";
+import React, { useContext, useEffect, useState } from "react";
+// import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend } from 'chart.js';
 import AccountService from "../../data/services/AccountService";
-import { timestampToLabel } from "../../utils/time_util";
-import Sidebar from "../../components/Sidebar";
-import Footer from "../../components/common/Footer";
-import { Nav, Tab } from "react-bootstrap";
-import ProfileTab from "./ProfileTab";
-import { AccountTab } from "../../data/enum/PageTabs";
-import TabHeader from "../../components/common/TabHeader";
-import AccountSetting from "./AccountSettings";
-
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-);
+import AssetService from "../../data/services/AssetService";
+import { AppContext } from "../../components/contexts/app_context";
+import AvatarContainer from "./AvatarContainer";
+import LoginModal from "../../components/login/LoginModal";
+import { GiDoubleFaceMask } from "react-icons/gi";
+import {RiImageFill} from "react-icons/ri";
+import { MdOutlineInventory2} from "react-icons/md";
+import Link from "next/link";
+import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
+// ChartJS.register(
+//     CategoryScale,
+//     LinearScale,
+//     PointElement,
+//     LineElement,
+//     Title,
+//     Tooltip,
+//     Legend
+// );
 
 // X-axis: filter by day/week/month/year
 // y-axis: filter by activities, minute spent, staking balance, and more
 
-export default function Account() {
-    const [selectedTab, setSelectedTab] = useState<AccountTab>(AccountTab.Profile)
-    const [dataSet, setDataSet] = useState([]);
-    const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.MONTH);
-    const [dataFilter, setDataFilter] = useState<DataFilter>(DataFilter.STAKING_BALANCE);
-    const [yLabels, setYLabel] = useState([]);
-
-    // const today = new Date();
+function Account() {
+    const { user } = useContext(AppContext);
+    const [showAddMetamask, setShowAddMetamask] = useState(false);
+    const [showAddGoogle, setShowAddGoogle] = useState(false);
+    const [avatarCount, setAvatarCount] = useState(0);
+    const [eventCount, setEventCount] = useState(0);
+    const [subworldTemplateCount, setSubworldTemplateCount] = useState(0);
+    const [inventoryCount, setInventoryCount] = useState(0);
 
     useEffect(() => {
-        displayData();
-    }, [timeFilter, dataFilter]);
-
-    const displayData = async () => {
-
-        let res = await AccountService.getStats(dataFilter, timeFilter);
-        let convertedData = res.map(item => ({
-            y: item.count,
-            x: timestampToLabel(item.timestamp, timeFilter)
-        }));
-
-        const data = [
-            {
-                data: convertedData,
-                borderColor: '#FF0000',
-                backgroundColor: '#FF0000',
+        if (user == null) {
+            return;
+        }
+        AccountService.getUserInfo().then(e => {
+            if (e.isSuccess && e.value) {
+                setAvatarCount(e.value.avatars.length);
+                setEventCount(e.value.created_events.length);
+                setSubworldTemplateCount(e.value.created_deriv_subworld_templates.length + e.value.created_root_subworld_templates.length);
             }
-        ];
-        setDataSet(data);
+        })
+        if (user.wallet_address != null) {
+            AssetService.fetchUserAssets(user.wallet_address).then(e => {
+                setInventoryCount(e.value.length);
+            })
+        }
+    }, [user]);
+
+
+    const renderMainContent = () => {
+        return (
+            <div className="flex flex-col items-center text-white">
+                <section id='cover-picture' className="h-[300px] overflow-hidden flex items-center">
+                    <img title="cover-image" src="images/01.png" />
+                </section>
+                <section id="avatar-section" className="flex flex-row w-[80%]">
+                    <div className="flex flex-row gap-4">
+                        <AvatarContainer style={{
+                            position: 'relative',
+                            borderRadius: '50%',
+                            borderWidth: '7px',
+                            borderColor: 'red',
+                            bottom: '50%'
+                        }} />
+                        <div>
+                            <h1>Name: {user?.name}</h1>
+                            <h5 className="text-deverse">Google Mail: {user?.social_email}</h5>
+                            {user?.social_email == "" ? <button onClick={() => setShowAddGoogle(true)}>Link Google Mail</button> : ""}
+                            {showAddGoogle && <LoginModal show={true} onHide={() => setShowAddGoogle(false)} isAddMetamaskOnly={false} isAddGoogleOnly={true} fullscreen />}
+                            <h5 className="text-deverse">Wallet Address: {user?.wallet_address}</h5>
+                            {user?.wallet_address == "" ? <button onClick={() => setShowAddMetamask(true)}>Link Metamask</button> : ""}
+                            {showAddMetamask && <LoginModal show={true} onHide={() => setShowAddMetamask(false)} isAddMetamaskOnly={true} isAddGoogleOnly={false} fullscreen />}
+                        </div>
+                    </div>
+                </section>
+                <section id="wallet-section" className="w-[80%]">
+                    <header>
+                        <h3>Your Collection</h3>
+                    </header>
+                    <div className="flex flex-row gap-2 justify-between py-4">
+                        <Link href="/account/avatar">
+                            <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
+                                <GiDoubleFaceMask size={120}/>
+                                <h3>Avatar</h3>
+                                <span>x{avatarCount}</span>
+                            </div>
+                        </Link>
+                        <Link href="/account/templates">
+                            <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center text-center" >
+                                <RiImageFill size={120}/>
+                                <h3>Subworld Templates</h3>
+                                <span>x{subworldTemplateCount}</span>
+                            </div>
+                        </Link>
+                        <Link href="/account/events">
+                            <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
+                                <RiImageFill size={120}/>
+                                <h3>Events</h3>
+                                <span>x{eventCount}</span>
+                            </div>
+                        </Link>
+                        <Link href="/account/inventory">
+                            <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
+                                <MdOutlineInventory2 size={120}/>
+                                <h3>Inventory</h3>
+                                <span>x{inventoryCount}</span>
+                            </div>
+                        </Link>
+                    </div>
+                </section>  
+            </div>
+        );
     }
 
-    // useEffect(() => {
-    //     displayData();
-    // }, []);
-
-    useEffect(() => {
-        switch (timeFilter) {
-            case TimeFilter.DAY:
-
-                break;
-            case TimeFilter.WEEK:
-
-                break;
-            case TimeFilter.MONTH:
-                setYLabel(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
-                break;
-            default:
-                break;
-        }
-    }, [timeFilter])
-
     return (
-        <div className='flex flex-row bg-deverse '>
-            <Sidebar />
-            <section id='section-content' className='flex flex-col justify-between '>
-                <Tab.Container id="tabs-with-dropdown" activeKey={selectedTab} >
-                    <Nav className="tab-bar"
-                        onSelect={setSelectedTab} >
-                        <TabHeader eventKey={AccountTab.Profile} selectedTab={selectedTab} label="Profile" />
-                        <TabHeader eventKey={AccountTab.Inventory} selectedTab={selectedTab} label="Inventory" />
-                        <TabHeader eventKey={AccountTab.Avatar} selectedTab={selectedTab} label="Avatar" />
-                        <TabHeader eventKey={AccountTab.Settings} selectedTab={selectedTab} label="Settings" />
-                    </Nav>
+        user ? renderMainContent() :
+            <div className="text-center text-white m-auto"><h1>Please Login first</h1></div>
+    );
+}
 
-                    <Tab.Content className="grow flex">
-                        <Tab.Pane eventKey={AccountTab.Profile} className="grow">
-                            <ProfileTab onSwitchTab={setSelectedTab} />
-                        </Tab.Pane>
-                        <Tab.Pane eventKey={AccountTab.Inventory} className="grow">
-                            <div className="flex justify-center items-center text-white p-4" >
-                                <h1 >Coming soon</h1>
-                            </div>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey={AccountTab.Avatar} className="grow">
-                            <div className="flex justify-center items-center text-white p-4" >
-                                <h1 >Coming soon</h1>
-                            </div>
-                        </Tab.Pane>
-                        <Tab.Pane eventKey={AccountTab.Settings} className="grow">
-                            <AccountSetting />
-                        </Tab.Pane>
-                    </Tab.Content>
+Account.getLayout = getAccountWrapperLayout;
 
-                </Tab.Container>
-                <Footer />
-            </section>
-        </div>
-        // <div>
-        //     <div className="flex flex-col bg-blue m-16 p-4 border-2 rounded-sm border-black">
-        //         <b>$DVRS</b>
-        //         <h2>123 Coins</h2>
-        //         <div className="flex flex-row item-center justify-end">
-        //             <Button className="btn btn-primary w-32 mx-2">Buy</Button>
-        //             <Button className="btn btn-primary w-32 mx-2">Swap</Button>
-        //         </div>
-        //     </div>
-        //     <div className="flex flex-col bg-blue m-16 ">
-        //         {/* <div>
-        //             <Form.Select aria-label="Default select example">
-        //                 <option>Open this select menu</option>
-        //                 <option value="1">One</option>
-        //                 <option value="2">Two</option>
-        //                 <option value="3">Three</option>
-        //             </Form.Select>
-        //         </div> */}
-
-        //         <select className="w-40 mb-8"
-        //             name="dataFilter"
-        //             defaultValue={DataFilter.STAKING_BALANCE}
-        //             onChange={(e) => {
-        //                 setDataFilter(e.currentTarget.value as DataFilter);
-        //             }}>
-        //             <option value={DataFilter.ACTIVITIES}>{DataFilter.ACTIVITIES}</option>
-        //             <option value={DataFilter.STAKING_BALANCE}>{DataFilter.STAKING_BALANCE}</option>
-        //             <option value={DataFilter.TIME_SPENT}>{DataFilter.TIME_SPENT}</option>
-        //         </select>
-
+export default Account;
 
         //         <Line className="p-8 border-2 rounded-sm border-black" options={{
         //             responsive: true,
@@ -163,6 +144,50 @@ export default function Account() {
         //                 datasets: dataSet
         //             }} />
         //     </div>
-        // </div>
-    );
-}
+        
+    // useEffect(() => {
+    //     switch (timeFilter) {
+    //         case TimeFilter.DAY:
+
+    //             break;
+    //         case TimeFilter.WEEK:
+
+    //             break;
+    //         case TimeFilter.MONTH:
+    //             setYLabel(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }, [timeFilter])
+
+
+       // const today = new Date();
+
+    // useEffect(() => {
+    //     displayData();
+    // }, [timeFilter, dataFilter]);
+
+    // const displayData = async () => {
+
+    //     let res = await AccountService.getStats(dataFilter, timeFilter);
+    //     let convertedData = res.map(item => ({
+    //         y: item.count,
+    //         x: timestampToLabel(item.timestamp, timeFilter)
+    //     }));
+
+    //     const data = [
+    //         {
+    //             data: convertedData,
+    //             borderColor: '#FF0000',
+    //             backgroundColor: '#FF0000',
+    //         }
+    //     ];
+    //     setDataSet(data);
+    // }
+
+    // const [selectedTab, setSelectedTab] = useState<AccountTab>(AccountTab.Profile)
+    // const [dataSet, setDataSet] = useState([]);
+    // const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.MONTH);
+    // const [yLabels, setYLabel] = useState([]);
+    // const [dataFilter, setDataFilter] = useState<DataFilter>(DataFilter.STAKING_BALANCE);
