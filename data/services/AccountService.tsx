@@ -5,9 +5,9 @@ import { TimeFilter } from "../enum/time_filter";
 import { StatisticLog } from "../model/profile_info";
 import { AvatarResponse, GetAvatarResponse, GetAccountResponse, Response, GetUserProfileResponse } from "../model/response";
 import { Failure, Result, Success } from "../model/Result";
-import StorageService from "./StorageService";
+import { BaseService } from "./BaseService";
 
-class AccountService {
+class AccountService extends BaseService {
     async getOrCreateByWallet(session_key: string, wallet_address: string) {
         return deverseClient.post<Response<GetAccountResponse>>('user/getOrCreate', {
             login_mode: "METAMASK",
@@ -51,10 +51,7 @@ class AccountService {
         let response = await deverseClient.get<Response<GetUserProfileResponse>>(`user/profile`, {
             withCredentials: true
         });
-        if (response.status != 200) {
-            return new Failure(new Error(response.statusText));
-        }
-        return new Success(response.data.data);
+        return this.parseResponse<GetUserProfileResponse>(response);
     }
 
     // TODO: add more fields

@@ -10,16 +10,12 @@ function Layout() {
     useEffect(() => {
         AccountService.getUserInfo().then(e => {
             if (e.isSuccess && e.value) {
-                let data: NFTAsset[] = [];
-                e.value.created_events.forEach(event => {
-                    let asset: NFTAsset = {
-                        id: event.id.toString(),
-                        name: event.name,
-                        description: event.stage,
-                        assetType: AssetType.EVENTS
-                    }
-                    data.push(asset);
-                })
+                const data = e.value.created_events.map<NFTAsset>(e => ({
+                    id: e.id.toString(),
+                    name: e.name,
+                    description: e.stage,
+                    assetType: AssetType.EVENTS
+                }))
                 setNfts(data);
             }
         })

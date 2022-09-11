@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import NFTList from "../../components/asset/NFTList";
 import Footer from "../../components/common/Footer";
+import { AssetType } from "../../data/enum/asset_type";
 import { NFTAsset } from "../../data/model/nft_asset";
 import EventsService from "../../data/services/EventsService";
 
@@ -9,22 +10,16 @@ function EventsPage() {
 
     useEffect(() => {
         EventsService.fetchEvents().then(res => {
-            console.log(res.data.events)
+            if (res.isSuccess()) {
+                const data = res.value.events.map<NFTAsset>(e => ({
+                    id: e.id.toString(),
+                    name: e.name,
+                    description: e.stage,
+                    assetType: AssetType.EVENTS
+                }))
+                setNfts(data);
+            }
         })
-        // AccountService.getUserInfo().then(e => {
-        //     if (e.isSuccess && e.value) {
-        //         setData(e.value.avatars);
-        //         setNfts(e.value.avatars.map(item => {
-        //             let asset: NFTAsset = {
-        //                 id: item.id.toString(),
-        //                 file3dUri: item.preprocess_url,
-        //                 deletable: true,
-        //                 assetType: AssetType.AVATAR
-        //             }
-        //             return asset;
-        //         }))
-        //     }
-        // })
     }, [])
 
     return (

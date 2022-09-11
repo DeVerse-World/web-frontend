@@ -1,11 +1,12 @@
 import deverseClient from "../api/deverse_client";
 import { EventResponse, Response } from "../model/response";
 import { Result } from "../model/Result";
+import { BaseService } from "./BaseService";
 
-class EventsService {
+class EventsService extends BaseService {
   async fetchEvents(): Promise<Result<EventResponse>> {
-    let res = await deverseClient.get<Response<EventResponse>>('event');
-    return res.data;
+    let response = await deverseClient.get<Response<EventResponse>>('event');
+    return this.parseResponse<EventResponse>(response);
   }
 }
 
