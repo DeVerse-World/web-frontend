@@ -4,9 +4,11 @@ import { Nav } from "react-bootstrap";
 import { AiFillShopping, AiFillHome } from 'react-icons/ai';
 import { GiMining } from 'react-icons/gi';
 import { SiCmake } from 'react-icons/si';
+import { BiWorld } from 'react-icons/bi';
 import { FaGamepad, FaInfoCircle } from 'react-icons/fa';
 import Link from "next/link";
 import { AppContext } from "./contexts/app_context";
+import { BsCalendarEventFill } from "react-icons/bs";
 
 type SidebarProps = {
     children?: ReactNode
@@ -47,6 +49,8 @@ function Sidebar(props: SidebarProps) {
                 <div className="flex flex-col">
                     {renderItem("Home", "/", <AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />)}
                     {renderItem("Alpha", "/alpha", <FaGamepad fontSize="1.5rem" color='rgb(97 198 208)' />)}
+                    {renderItem("Subworlds", "/subworlds", <BiWorld fontSize="1.5rem" color='rgb(97 198 208)' />)}
+                    {renderItem("Events", "/events", <BsCalendarEventFill fontSize="1.5rem" color='rgb(97 198 208)' />)}
                     {renderItem("Market", "/marketplace", <AiFillShopping fontSize="1.5rem" color='rgb(97 198 208)' />)}
                     {renderItem("Create", "/create", <SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />)}
                     {renderItem("Mint", "/mint-nft", <GiMining fontSize="1.5rem" color='rgb(97 198 208)' />)}

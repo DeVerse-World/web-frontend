@@ -9,7 +9,7 @@ import StorageService from "./StorageService";
 
 class AccountService {
     async getOrCreateByWallet(session_key: string, wallet_address: string) {
-        return deverseClient.post<Response<GetAccountResponse>>('/user/getOrCreate', {
+        return deverseClient.post<Response<GetAccountResponse>>('user/getOrCreate', {
             login_mode: "METAMASK",
             wallet_address: wallet_address,
             session_key: session_key
@@ -19,7 +19,7 @@ class AccountService {
     }
 
     async getOrCreateByGoogleMail(session_key: string, google_email: string, google_token: string) {
-        return deverseClient.post<Response<GetAccountResponse>>('/user/getOrCreate', {
+        return deverseClient.post<Response<GetAccountResponse>>('user/getOrCreate', {
             login_mode: "GOOGLE",
             google_email: google_email,
             google_token: google_token,
@@ -31,7 +31,7 @@ class AccountService {
 
     // Will reject if there was another wallet tied to this user before
     async addUserModelWithWallet(user_id: number, wallet_address: string) {
-        return deverseClient.put<Response<GetAccountResponse>>(`/user/${user_id}`, {
+        return deverseClient.put<Response<GetAccountResponse>>(`user/${user_id}`, {
             wallet_address: wallet_address,
         }, {
             withCredentials: true
@@ -40,7 +40,7 @@ class AccountService {
 
     // Will reject if there was another google mail tied to this user before
     async addUserModelWithGoogleMail(user_id: number, google_email: string) {
-        return deverseClient.put<Response<GetAccountResponse>>(`/user/${user_id}`, {
+        return deverseClient.put<Response<GetAccountResponse>>(`user/${user_id}`, {
             google_email: google_email,
         }, {
             withCredentials: true
@@ -48,7 +48,7 @@ class AccountService {
     }
 
     async getUserInfo(): Promise<Result<GetUserProfileResponse>> {
-        let response = await deverseClient.get<Response<GetUserProfileResponse>>(`/user/profile`, {
+        let response = await deverseClient.get<Response<GetUserProfileResponse>>(`user/profile`, {
             withCredentials: true
         });
         if (response.status != 200) {
@@ -59,7 +59,7 @@ class AccountService {
 
     // TODO: add more fields
     async updateUser(name: string) {
-        return deverseClient.post<Response<GetAccountResponse>>(`/user/profile`, {
+        return deverseClient.post<Response<GetAccountResponse>>(`user/profile`, {
             name
         }, {
             withCredentials: true

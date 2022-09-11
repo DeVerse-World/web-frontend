@@ -29,3 +29,7 @@ export type GetUserProfileResponse = Readonly<{
     created_root_subworld_templates: SubworldTemplate[],
     user: User
 }>
+
+export type EventResponse = {
+    events: Event[]
+}
