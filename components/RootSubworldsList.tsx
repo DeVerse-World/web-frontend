@@ -53,11 +53,11 @@ function SubworldCard(props: CardProps) {
             }}>{props.data.name}</p>
             <div className="flex flex-row px-4">
                 <div>
-                    {/* <h5 style={{
+                    <h5 style={{
                         cursor: "pointer",
                         color: "rgb(97 198 208)",
                         fontWeight: 800
-                    }} onClick={() => setShowDetail(true)}>Show Detail</h5> */}
+                    }}>Browse Templates</h5>
                     <p>{props.data.assetType}</p>
                     {props.data.supply > 0 && <h5>Supply: {props.data.supply}</h5>}
                 </div>
