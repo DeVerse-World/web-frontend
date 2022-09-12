@@ -3,6 +3,8 @@ import { AssetType } from "../../data/enum/asset_type";
 import Paginator from "../Paginator";
 import { useState } from "react";
 import NFTCard from "./NFTCard";
+const itemPerPage = 5;
+
 type NFTListProps = {
     data: NFTAsset[];
     assetType?: AssetType;
@@ -10,7 +12,6 @@ type NFTListProps = {
 }
 
 export default function NFTList(props: NFTListProps) {
-    const [itemPerPage, setItemPerPage] = useState(5);
     const [currentPage, setCurrentPage] = useState(1);
 
     return (
