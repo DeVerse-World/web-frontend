@@ -32,8 +32,6 @@ function Homebar(props: WithRouterProps) {
             alt="Deverse text logo" />
         </span>
       </Link>
-
-
       <div className="flex flex-row">
         <AccountMenu/>
       </div>
