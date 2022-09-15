@@ -21,7 +21,7 @@ const AccountWrapperLayout = (props: Props) => (
                         <TabHeader href="/account/avatar">Avatar</TabHeader>
                         <TabHeader href="/account/inventory">Inventory</TabHeader>
                         <TabHeader href="/account/events">Events</TabHeader>
-                        <TabHeader href="/account/templates">Templates</TabHeader>
+                        <TabHeader href="/account/templates">Subworlds</TabHeader>
                     </span>
                 </span>
                 <div className="grow">

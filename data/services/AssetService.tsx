@@ -1,4 +1,3 @@
-import BaseService from "./BaseService";
 import { Contract, ethers } from "ethers";
 import { assetAddress } from "../../config";
 import { create as ipfsHttpClient } from 'ipfs-http-client'
@@ -11,17 +10,17 @@ import { NFTAsset } from "../model/nft_asset";
 import CIDTool from 'cid-tool';
 import { Event } from "@ethersproject/contracts";
 import { AssetType } from "../enum/asset_type";
-import ApiStrategy = BaseService.ApiStrategy;
 import { DeverseGraphResponse } from "../model/graph_response";
 import { Failure, Result, Success } from "../model/Result";
+import { ApiStrategy } from "./ApiStrategy";
+import { BaseService } from "./BaseService";
 
 class AssetService extends BaseService {
     _uriPrefix = 'https://ipfs.infura.io/ipfs/';
     // @ts-ignore
     _ipfsClient = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
-
-    assetContract: Contract = new ethers.Contract(assetAddress, AssetABI.abi, this.provider);
-    transferSingleEventFilter : ethers.EventFilter = this.assetContract.filters.TransferSingle();
+    assetContract: Contract = new ethers.Contract(assetAddress, AssetABI.abi, new ethers.providers.JsonRpcProvider(process.env.RPC_URL));
+    transferSingleEventFilter: ethers.EventFilter = this.assetContract.filters.TransferSingle();
 
     // constructor() {
     //     super()
@@ -85,7 +84,7 @@ class AssetService extends BaseService {
         return `https://${CIDv1}.ipfs.infura-ipfs.io/`;
     }
 
-    async mint(apiStrategy: BaseService.ApiStrategy, ipfsHashString, supply) {
+    async mint(apiStrategy: ApiStrategy, ipfsHashString, supply) {
         const web3Modal = new Web3Modal()
         const connection = await web3Modal.connect()
         const provider = new ethers.providers.Web3Provider(connection)
@@ -99,7 +98,7 @@ class AssetService extends BaseService {
         const owner = await signer.getAddress();
         const data = '0x';
         switch (apiStrategy) {
-            case BaseService.ApiStrategy.REST:
+            case ApiStrategy.REST:
                 let transaction = await assetContract.mint(creator, packId, hash, supply, rarity, owner, data, 0);
                 let receipt = await transaction.wait()
                 const event = receipt?.events?.filter(
@@ -110,7 +109,7 @@ class AssetService extends BaseService {
                 }
                 return BigInt(event.args?.id._hex).toString();
                 break;
-            case BaseService.ApiStrategy.GraphQl:
+            case ApiStrategy.GraphQl:
                 throw new Error("Graphql not supported here")
                 break;
             default:
@@ -119,11 +118,11 @@ class AssetService extends BaseService {
         }
     }
 
-    async getAll(apiStrategy: BaseService.ApiStrategy, page: number = 1, filter: any = null): Promise<NFTAsset[]> {
+    async getAll(apiStrategy: ApiStrategy, page: number = 1, filter: any = null): Promise<NFTAsset[]> {
         let data: NFTAsset[] = [];
         let parallelJobs: Promise<Promise<NFTAsset>>[] = [];
         switch (apiStrategy) {
-            case BaseService.ApiStrategy.REST:
+            case ApiStrategy.REST:
                 let transferEvents = await this.assetContract.queryFilter(this.transferSingleEventFilter);
                 transferEvents.forEach((transferEvent) => {
                     parallelJobs.push(new Promise<Promise<NFTAsset>>(async (resolve, reject) => {
@@ -140,7 +139,7 @@ class AssetService extends BaseService {
                 })
                 data = await Promise.all(parallelJobs)
                 break;
-            case BaseService.ApiStrategy.GraphQl:
+            case ApiStrategy.GraphQl:
                 const query = `{
                     assetTokens {
                         id

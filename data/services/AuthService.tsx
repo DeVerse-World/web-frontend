@@ -28,7 +28,7 @@ class AuthService {
     }
 
     async authLoginLinkForGoogleMail(session_key: string, google_email: string, google_token: string) {
-        const res = await deverseClient.post<Response<GetAccountResponse>>(`/user/authLoginLink`, {
+        const res = await deverseClient.post<Response<GetAccountResponse>>(`user/authLoginLink`, {
                 login_mode: "GOOGLE",
                 session_key: session_key,
                 google_token: google_token,
@@ -67,7 +67,7 @@ class AuthService {
     }
 
     async authLoginLinkForMetamask(session_key, wallet_address, signature) {
-        const res = await deverseClient.post<Response<GetAccountResponse>>(`/user/authLoginLink`, {
+        const res = await deverseClient.post<Response<GetAccountResponse>>(`user/authLoginLink`, {
                 login_mode: "METAMASK",
                 session_key: session_key,
                 wallet_address: wallet_address,
@@ -83,7 +83,7 @@ class AuthService {
     }
 
     async logout() {
-        const res = await deverseClient.post(`/user/logout`, {}, {
+        const res = await deverseClient.post(`user/logout`, {}, {
                 withCredentials: true
             }
         )

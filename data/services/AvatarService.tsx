@@ -1,10 +1,10 @@
-import apiClient from "../api/deverse_client";
+import deverseClient from "../api/deverse_client";
 import { Avatar } from "../model/avatar";
 import { AvatarResponse, GetAvatarResponse, Response } from "../model/response";
 
 class AvatarService {
     createAvatar(rpmUrl: string) {
-        apiClient.post<Response<AvatarResponse>>('avatar', {
+        deverseClient.post<Response<AvatarResponse>>('avatar', {
             avatar: {
                 preprocess_url: rpmUrl
             },
@@ -20,19 +20,19 @@ class AvatarService {
         })
     }
     getAvatars(walletAddress: string) {
-        apiClient.get<Response<GetAvatarResponse>>(`wallet/getAvatars/${walletAddress}`).then(e => {
+        deverseClient.get<Response<GetAvatarResponse>>(`wallet/getAvatars/${walletAddress}`).then(e => {
             //TODO: 
             console.log(e.data.data.avatars)
         })
     }
 
     async getAvatar(avatarId: number) : Promise<Avatar> {
-        let res = await apiClient.get<Response<AvatarResponse>>(`avatar/${avatarId}`);
+        let res = await deverseClient.get<Response<AvatarResponse>>(`avatar/${avatarId}`);
         return res.data.data.avatar;
     }
 
     async deleteAvatar(avatarId: string) : Promise<Response<any>> {
-        let res = await apiClient.delete<Response<any>>(
+        let res = await deverseClient.delete<Response<any>>(
             `avatar/${avatarId}`, {
                 withCredentials: true
             }

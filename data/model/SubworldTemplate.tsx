@@ -5,9 +5,15 @@ export type SubworldTemplate = {
     level_ipfs_uri: string,
     level_centralized_uri: string,
     thumbnail_centralized_uri: string,
-    derivative_uri: string
-    parent_subworld_template_id: number,
     creator_id: number,
     created_at: string,
     updated_at: string
 }
+
+export type DerivSubworldTemplates = {
+    parent_subworld_template_id: number,
+} & SubworldTemplate
+
+export type RootSubworldTemplates = {
+    derivative_uri: string
+} & SubworldTemplate
