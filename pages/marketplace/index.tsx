@@ -37,6 +37,7 @@ function Marketplace() {
             console.log(assets)
             setViewState(ViewState.SUCCESS)
         }).catch(e => {
+            console.log(e)
             setViewState(ViewState.ERROR)
         });
     }
