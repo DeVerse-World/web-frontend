@@ -25,10 +25,13 @@ function SidebarItem(props: ItemProps) {
     const [activeClass, setActiveClass] = useState("");
     const path = props.href.split('/').filter(v => v.length > 0)[0];
     useEffect(() => {
+        if (!router.isReady) return
         if ((path == undefined && router.pathname == "/") || (router.isReady && router.pathname.includes(path) && path.length > 0)) {
             setActiveClass("active");
+        } else {
+            setActiveClass("");
         }
-    },[router.isReady])
+    },[router.isReady, router.pathname])
     
     return (
         <div className="w-[100%] cursor-pointer">
