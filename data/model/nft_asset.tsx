@@ -16,5 +16,7 @@ export type NFTAsset = {
     animation_url?: string;
 
     deletable?: boolean;
+    onlineOpenable?: boolean;
+    offlineOpenable?: boolean;
     rootId?: string;
 }

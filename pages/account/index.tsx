@@ -89,11 +89,11 @@ function Account() {
                                 <span>x{avatarCount}</span>
                             </div>
                         </Link>
-                        <Link href="/account/templates">
-                            <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center text-center" >
-                                <RiImageFill size={120}/>
-                                <h3>Subworld Templates</h3>
-                                <span>x{subworldTemplateCount}</span>
+                        <Link href="/account/inventory">
+                            <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
+                                <MdOutlineInventory2 size={120}/>
+                                <h3>Inventory</h3>
+                                <span>x{inventoryCount}</span>
                             </div>
                         </Link>
                         <Link href="/account/events">
@@ -103,11 +103,11 @@ function Account() {
                                 <span>x{eventCount}</span>
                             </div>
                         </Link>
-                        <Link href="/account/inventory">
-                            <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
-                                <MdOutlineInventory2 size={120}/>
-                                <h3>Inventory</h3>
-                                <span>x{inventoryCount}</span>
+                        <Link href="/account/templates">
+                            <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center text-center" >
+                                <RiImageFill size={120}/>
+                                <h3>Subworld Templates</h3>
+                                <span>x{subworldTemplateCount}</span>
                             </div>
                         </Link>
                     </div>

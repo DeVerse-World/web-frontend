@@ -24,7 +24,9 @@ function SubworldsPage() {
                     file2dUri: e.thumbnail_centralized_uri,
                     fileAssetUri: e.level_ipfs_uri,
                     file3dUri: e.level_ipfs_uri,
-                    assetType: AssetType.ROOT_SUBWORLD_TEMPLATE
+                    assetType: AssetType.ROOT_SUBWORLD_TEMPLATE,
+                    onlineOpenable: true,
+                    offlineOpenable: true
                 }))
                 setRootTemplates(data);
             }
@@ -48,7 +50,9 @@ function SubworldsPage() {
                     file2dUri: e.thumbnail_centralized_uri,
                     fileAssetUri: e.level_ipfs_uri,
                     file3dUri: e.level_ipfs_uri,
-                    assetType: AssetType.DERIV_SUBWORLD_TEMPLATE
+                    assetType: AssetType.DERIV_SUBWORLD_TEMPLATE,
+                    onlineOpenable: true,
+                    offlineOpenable: true
                 }))
                 setDerivTemplates(data);
             }

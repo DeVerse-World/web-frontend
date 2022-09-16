@@ -13,6 +13,12 @@ type Props = {
     onDeleted: (NFTAsset) => void
 }
 
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 function NFTCard(props: Props) {
     const [showDetail, setShowDetail] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -53,6 +59,33 @@ function NFTCard(props: Props) {
             default:
                 break;
         }
+    }
+
+    const onOpenGame = (gameMode) => {
+        var appPath = `deverseworld://?template_id=${props.data.id}&mode=${gameMode}`
+        window.open(appPath)
+    }
+
+    const renderOnlineOpen = () => {
+        if (!props.data.onlineOpenable) {
+            return null;
+        }
+        return (
+            <a className="no-underline font-bold" style={{
+                color: "rgb(97 198 208)"
+            }} onClick={() => onOpenGame("ONLINE")}>Online Mode</a>
+        )
+    }
+
+    const renderOfflineOpen = () => {
+        if (!props.data.offlineOpenable) {
+            return null;
+        }
+        return (
+            <a className="no-underline font-bold" style={{
+                color: "rgb(97 198 208)"
+            }} onClick={() => onOpenGame("OFFLINE")}>Offline Mode</a>
+        )
     }
 
     const renderPreview = () => {
@@ -108,6 +141,8 @@ function NFTCard(props: Props) {
                         <img title={"Download"} src={"/images/ic-download.png"} width={32} height={32} />
                     </a>
                     {renderDelete()}
+                    {renderOnlineOpen()}
+                    {renderOfflineOpen()}
                 </div>
             </div>
             {showDetail && <NFTDetailCard data={props.data} show={true} onHide={() => setShowDetail(false)} />}
