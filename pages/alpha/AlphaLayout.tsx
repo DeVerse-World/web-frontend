@@ -14,7 +14,7 @@ const AlphaLayout = (props: Props) => (
             <span className="flex flex-row justify-between bg-black">
                 <span className="tab-bar flex-grow" >
                     <TabHeader href="/alpha">Info</TabHeader>
-                    <TabHeader href="/alpha/verse">Verse</TabHeader>
+                    {/*<TabHeader href="/alpha/verse">Verse</TabHeader>*/}
                 </span>
                 <DownloadDemoButton className="h-10" />
             </span>
