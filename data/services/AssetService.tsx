@@ -16,7 +16,11 @@ import { ApiStrategy } from "./ApiStrategy";
 import { BaseService } from "./BaseService";
 
 class AssetService extends BaseService {
-    _uriPrefix = 'https://ipfs.infura.io/ipfs/';
+    _oldUriPrefix = 'https://ipfs.infura.io/ipfs/'
+    _uriPrefix = 'https://ipfs.io/ipfs/';
+
+    // @ts-ignore
+    _oldIpfsClient = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
     // @ts-ignore
     _ipfsClient = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
     assetContract: Contract = new ethers.Contract(assetAddress, AssetABI.abi, new ethers.providers.JsonRpcProvider(process.env.RPC_URL));
@@ -32,6 +36,8 @@ class AssetService extends BaseService {
     }
 
     async uploadAsset(file: File, onProgress: (number) => void): Promise<string> {
+        console.log("FILE\n")
+        console.log(file);
         let res = await this._ipfsClient.add(
             file,
             {
@@ -174,6 +180,10 @@ class AssetService extends BaseService {
 
     async _getAssetFromEther(tokenFullUri: string): Promise<NFTAsset> {
         let response = await deverseClient.get<NFTAsset>(tokenFullUri);
+        let asset = response.data;
+        asset.fileAssetUri = asset.fileAssetUri.replace(this._oldUriPrefix, this._uriPrefix)
+        asset.file2dUri = asset.file2dUri.replace(this._oldUriPrefix, this._uriPrefix)
+        asset.file3dUri = asset.file3dUri.replace(this._oldUriPrefix, this._uriPrefix)
         return response.data;
     }
 
