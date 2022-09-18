@@ -31,7 +31,7 @@ function Footer(props) {
         </div>
       </div>
       <div className="my-8">
-        Copyright © Deverse 2021
+        Copyright © DeverseWorld
       </div>
     </section>
   );

@@ -71,7 +71,7 @@ function NFTCard(props: Props) {
             return null;
         }
         return (
-            <a className="no-underline font-bold" style={{
+            <a className="no-underline text-md" style={{
                 color: "rgb(97 198 208)"
             }} onClick={() => onOpenGame("ONLINE")}>Online Mode</a>
         )
@@ -82,7 +82,7 @@ function NFTCard(props: Props) {
             return null;
         }
         return (
-            <a className="no-underline font-bold" style={{
+            <a className="no-underline text-md" style={{
                 color: "rgb(97 198 208)"
             }} onClick={() => onOpenGame("OFFLINE")}>Offline Mode</a>
         )
@@ -137,9 +137,11 @@ function NFTCard(props: Props) {
                     {props.data.supply > 0 && <h5>Supply: {props.data.supply}</h5>}
                 </div>
                 <div className="grow flex flex-col items-center gap-4">
-                    <a title={props.data.name} href={props.data.fileAssetUri} target="_blank">
-                        <img title={"Download"} src={"/images/ic-download.png"} width={32} height={32} />
-                    </a>
+                    {props.data.fileAssetUri &&
+                        <a title={props.data.name} href={props.data.fileAssetUri} target="_blank">
+                            <img title={"Download"} src={"/images/ic-download.png"} width={32} height={32} />
+                        </a>
+                        }
                     {renderDelete()}
                     {renderOnlineOpen()}
                     {renderOfflineOpen()}
