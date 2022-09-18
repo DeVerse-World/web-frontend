@@ -66,9 +66,9 @@ function Account() {
                             borderColor: 'red',
                             bottom: '50%'
                         }} />
-                        <div>
-                            <h1>Name: {user?.name}</h1>
-                            <h5 className="text-deverse">Google Mail: {user?.social_email}</h5>
+                        <div className="py-2">
+                            {/* <h1>Name: {user?.name}</h1> */}
+                            <h5 className="text-deverse"><span className="">Google Mail:</span> {user?.social_email}</h5>
                             {user?.social_email == "" ? <button onClick={() => setShowAddGoogle(true)}>Link Google Mail</button> : ""}
                             {showAddGoogle && <LoginModal show={true} onHide={() => setShowAddGoogle(false)} isAddMetamaskOnly={false} isAddGoogleOnly={true} fullscreen />}
                             <h5 className="text-deverse">Wallet Address: {user?.wallet_address}</h5>

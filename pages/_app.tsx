@@ -43,7 +43,7 @@ function DeverseApp({ Component, pageProps }) {
           <MetaMaskProvider>
             <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID}>
               <Head>
-                <title>DeverseWorld</title>
+                <title>Deverse World</title>
               </Head>
               <GoogleTagManager tagId={process.env.NEXT_PUBLIC_GTM} />
               <noscript>

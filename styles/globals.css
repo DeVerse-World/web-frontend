@@ -126,7 +126,9 @@ body * {
     position: absolute;
     visibility: hidden;
     display: flex;
+    border-radius: 0.5rem;
     flex-direction: column;
+    right: 1%;
     gap: 0.5rem;
     padding: 1rem;
     align-items: flex-start;
