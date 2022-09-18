@@ -126,8 +126,8 @@ export default function MintNFT() {
 
     return (
         <section id='section-content' className="flex flex-col">
-            {user ?
-                <div>Please login first</div> :
+            {!user ?
+                <div className=" flex-grow text-center text-white flex justify-center  flex-col"><h1>Please login first</h1></div> :
                 <div className="flex justify-center flex-grow">
                     <Form className="flex flex-col items-center text-white my-8 space-y-2 min-w-[300px] w-[40vw]"
                         validated={formValidated}

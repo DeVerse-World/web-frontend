@@ -18,8 +18,8 @@ const AccountWrapperLayout = (props: Props) => (
                 <span className="flex flex-row justify-between bg-black">
                     <span className="tab-bar flex-grow" >
                         <TabHeader href="/account">Info</TabHeader>
-                        <TabHeader href="/account/avatar">Avatar</TabHeader>
-                        <TabHeader href="/account/inventory">Inventory</TabHeader>
+                        <TabHeader href="/account/avatar">Avatars</TabHeader>
+                        {/* <TabHeader href="/account/inventory">Inventory</TabHeader> */}
                         <TabHeader href="/account/events">Events</TabHeader>
                         <TabHeader href="/account/templates">Subworlds</TabHeader>
                     </span>

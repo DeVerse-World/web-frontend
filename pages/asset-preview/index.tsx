@@ -1,5 +1,5 @@
 import { WithRouterProps } from 'next/dist/client/with-router';
-import { withRouter } from 'next/router';
+import { useRouter, withRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
 import { Card, Collapse } from 'react-bootstrap';
 import Footer from '../../components/common/Footer';
@@ -11,35 +11,41 @@ import { Avatar } from '../../data/model/avatar';
 import AvatarService from '../../data/services/AvatarService';
 
 function AssetPreviewScreen(props: WithRouterProps) {
+    const router = useRouter();
     const [avatar, setAvatar] = useState<Avatar>(null);
     const [modelPath, setModelPath] = useState<string>(null);
 
 
     useEffect(() => {
-        if (!props.router.isReady) return;
-        let query = props.router.query;
+        if (!router.isReady) return;
+        let query = router.query;
 
         if (query['model']) {
-            setModelPath(AssetService.getFullAssetUrl(query['model'] as string));
+            setModelPath(AssetService.getFullAssetUrl(`${query['model'] as string}`));
         } else if (query['avatarId'] && !isNaN(parseInt(query['avatarId'] as string))) {
             AvatarService.getAvatar(parseInt(query['avatarId'] as string)).then(value => {
                 setAvatar(value);
                 setModelPath(value.preprocess_url)
             });
         }
-    }, [props.router.isReady])
+    }, [router.isReady])
 
     return (
-        <section id="deverse-asset-preview flex flex-col">
+        <section id="section-content" className='flex flex-col gap-4'>
+            <div className='m-auto my-4'>
+                {
+                    modelPath &&
+                    <div className='border-4 rounded-lg bg-white md:w-[600px] md:h-[500px] w-[350px] '>
+                        <ModelViewer filePath={modelPath} />
+                    </div>
+                }
+            </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 '>
+
+
+            {/* <div className='grid grid-cols-1 md:grid-cols-2 '>
                 <div className='flex flex-col align-middle p-8'>
-                    {
-                        modelPath &&
-                        <div className='border-4 rounded-lg bg-white min-h-[500px]'>
-                            <ModelViewer filePath={modelPath} />
-                        </div>
-                    }
+
 
                     <CollapsableInfoCard title='Description' body={
                         <div>
@@ -103,10 +109,9 @@ function AssetPreviewScreen(props: WithRouterProps) {
                         Description
                     </div>
                 } />
-            </div>
+            </div> */}
             <Footer />
         </section>
     )
 }
-const AssetPreview = withRouter(AssetPreviewScreen);
-export default AssetPreview;
+export default AssetPreviewScreen;

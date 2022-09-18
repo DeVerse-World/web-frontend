@@ -38,7 +38,7 @@ function SidebarItem(props: ItemProps) {
             <Link href={props.href} >
                 <div className={`flex flex-col items-center py-2 ${activeClass}`} >
                     {props.icon}
-                    <span>
+                    <span className="text-sm">
                         {props.label.toUpperCase()}
                     </span>
                 </div>
@@ -59,10 +59,10 @@ function Sidebar(props: SidebarProps) {
     return (
         <Nav id="deverse-sidebar" className={isMobileSidebarVisible ? "active" : null}>
             <div className="flex flex-row h-[100%]">
-                <div className="flex flex-col">
+                <div className="flex flex-col px-1">
                     <SidebarItem label="Home" href="/" icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Alpha" href="/alpha" icon={<FaGamepad fontSize="1.5rem" color='rgb(97 198 208)' />} />
-                    <SidebarItem label="Subworlds" href="/subworlds" icon={<BiWorld fontSize="1.5rem" color='rgb(97 198 208)' />} />
+                    <SidebarItem label="Worlds" href="/subworlds" icon={<BiWorld fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Events" href="/events" icon={<BsCalendarEventFill fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Market" href="/marketplace" icon={<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Create" href="/create" icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />

@@ -14,6 +14,7 @@ import { DeverseGraphResponse } from "../model/graph_response";
 import { Failure, Result, Success } from "../model/Result";
 import { ApiStrategy } from "./ApiStrategy";
 import { BaseService } from "./BaseService";
+import { Response } from "../model/response";
 
 class AssetService extends BaseService {
     _oldUriPrefix = 'https://ipfs.infura.io/ipfs/'
@@ -126,18 +127,24 @@ class AssetService extends BaseService {
 
     async getAll(apiStrategy: ApiStrategy, page: number = 1, filter: any = null): Promise<NFTAsset[]> {
         let data: NFTAsset[] = [];
-        let parallelJobs: Promise<Promise<NFTAsset>>[] = [];
+        let parallelJobs: Promise<NFTAsset>[] = [];
         switch (apiStrategy) {
             case ApiStrategy.REST:
                 let transferEvents = await this.assetContract.queryFilter(this.transferSingleEventFilter);
                 transferEvents.forEach((transferEvent) => {
-                    parallelJobs.push(new Promise<Promise<NFTAsset>>(async (resolve, reject) => {
+                    parallelJobs.push(new Promise<NFTAsset>(async (resolve, reject) => {
                         let [_, from, to, id, supply] = transferEvent.args;
                         if (from == 0) { // from mint event
                             // const tokenUri = await this.assetContract.uri2(id)
                             // const tokenFullUri = `https://bafybei${tokenUri}.ipfs.infura-ipfs.io`
                             let tokenFullUri = await this.assetContract.uri(id)
-                            resolve(this._getAssetFromEther(tokenFullUri));
+                            this._getAssetFromEther(tokenFullUri).then(res => {
+                                if (res.isFailure()) {
+                                    reject(res.error)
+                                } else {
+                                    resolve(res.getValue())
+                                }
+                            })
                         } else {
                             reject('this is not from mint event')
                         }
@@ -162,8 +169,14 @@ class AssetService extends BaseService {
                 })
                 let assetTokens = graphRes.data.data.assetTokens;
                 assetTokens.forEach((token) => {
-                    parallelJobs.push(new Promise<Promise<NFTAsset>>(async (resolve, reject) => {
-                        resolve(this._getAssetFromEther(token.tokenURI));
+                    parallelJobs.push(new Promise<NFTAsset>(async (resolve, reject) => {
+                        this._getAssetFromEther(token.tokenURI).then(res => {
+                            if (res.isFailure()) {
+                                reject(res.error)
+                            } else {
+                                resolve(res.getValue())
+                            }
+                        })
                     }));
                 })
                 data = await Promise.all(parallelJobs)
@@ -178,13 +191,16 @@ class AssetService extends BaseService {
         return data;
     }
 
-    async _getAssetFromEther(tokenFullUri: string): Promise<NFTAsset> {
-        let response = await deverseClient.get<NFTAsset>(tokenFullUri);
-        let asset = response.data;
+    async _getAssetFromEther(tokenFullUri: string): Promise<Result<NFTAsset>> {
+        const response = await deverseClient.get<NFTAsset>(tokenFullUri);
+        if (response.status != 200) {
+            return new Failure(new Error(response.statusText));
+        }
+        const asset = response.data;
         asset.fileAssetUri = asset.fileAssetUri.replace(this._oldUriPrefix, this._uriPrefix)
         asset.file2dUri = asset.file2dUri.replace(this._oldUriPrefix, this._uriPrefix)
         asset.file3dUri = asset.file3dUri.replace(this._oldUriPrefix, this._uriPrefix)
-        return response.data;
+        return new Success(asset);
     }
 
     async checkName(name: string) {

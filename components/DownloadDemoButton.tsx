@@ -2,7 +2,7 @@ import { CSSProperties } from "react";
 import { AiFillWindows } from "react-icons/ai";
 
 type Props = {
-    className: string
+    className?: string
 }
 
 function DownloadDemoButton(props: Props) {

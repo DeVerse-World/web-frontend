@@ -66,9 +66,9 @@ function Account() {
                             borderColor: 'red',
                             bottom: '50%'
                         }} />
-                        <div>
-                            <h1>Name: {user?.name}</h1>
-                            <h5 className="text-deverse">Google Mail: {user?.social_email}</h5>
+                        <div className="py-2">
+                            {/* <h1>Name: {user?.name}</h1> */}
+                            <h5 className="text-deverse"><span className="">Google Mail:</span> {user?.social_email}</h5>
                             {user?.social_email == "" ? <button onClick={() => setShowAddGoogle(true)}>Link Google Mail</button> : ""}
                             {showAddGoogle && <LoginModal show={true} onHide={() => setShowAddGoogle(false)} isAddMetamaskOnly={false} isAddGoogleOnly={true} fullscreen />}
                             <h5 className="text-deverse">Wallet Address: {user?.wallet_address}</h5>
@@ -85,17 +85,17 @@ function Account() {
                         <Link href="/account/avatar">
                             <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
                                 <GiDoubleFaceMask size={120}/>
-                                <h3>Avatar</h3>
+                                <h3>Avatars</h3>
                                 <span>x{avatarCount}</span>
                             </div>
                         </Link>
-                        <Link href="/account/inventory">
+                        {/* <Link href="/account/inventory">
                             <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
                                 <MdOutlineInventory2 size={120}/>
                                 <h3>Inventory</h3>
                                 <span>x{inventoryCount}</span>
                             </div>
-                        </Link>
+                        </Link> */}
                         <Link href="/account/events">
                             <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
                                 <RiImageFill size={120}/>

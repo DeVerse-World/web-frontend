@@ -19,6 +19,18 @@ class AvatarService {
             window.alert("Fail to create avatar in DB " + e)
         })
     }
+
+    async get2DAvatarRPM(glbPath: string): Promise<any> {
+        let res = await deverseClient.post('render', {
+            model: glbPath,
+            scene: "fullbody-portrait-v1",
+            armature: "ArmatureTargetMale",
+        }, {
+            baseURL: 'https://render.readyplayer.me'
+        });
+        return res.data.renders[0];
+    }
+
     getAvatars(walletAddress: string) {
         deverseClient.get<Response<GetAvatarResponse>>(`wallet/getAvatars/${walletAddress}`).then(e => {
             //TODO: 
@@ -26,16 +38,16 @@ class AvatarService {
         })
     }
 
-    async getAvatar(avatarId: number) : Promise<Avatar> {
+    async getAvatar(avatarId: number): Promise<Avatar> {
         let res = await deverseClient.get<Response<AvatarResponse>>(`avatar/${avatarId}`);
         return res.data.data.avatar;
     }
 
-    async deleteAvatar(avatarId: string) : Promise<Response<any>> {
+    async deleteAvatar(avatarId: string): Promise<Response<any>> {
         let res = await deverseClient.delete<Response<any>>(
             `avatar/${avatarId}`, {
-                withCredentials: true
-            }
+            withCredentials: true
+        }
         )
         return res.data;
     }

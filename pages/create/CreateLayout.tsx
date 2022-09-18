@@ -13,7 +13,7 @@ const CreateLayout = (props: Props) => (
             <span className="tab-bar" >
                 <TabHeader href="/create">Avatar</TabHeader>
                 <TabHeader href="/create/ig-editor">Ingame Editor</TabHeader>
-                <TabHeader href="/create/ue-sdk">UE SDK</TabHeader>
+                <TabHeader href="/create/ue-sdk">Unreal Engine SDK</TabHeader>
             </span>
             {props.children}
             <Footer />

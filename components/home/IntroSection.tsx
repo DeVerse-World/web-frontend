@@ -9,14 +9,14 @@ const iframeWrapper: React.CSSProperties = {
 function IntroSection(props) {
   return (
     <section id="section-demo-video">
-        <div style={iframeWrapper}>
+      <div style={iframeWrapper}>
         <iframe
           className="rounded-[12px] w-[75%] h-[75%] m-auto absolute inset-0"
-          src="https://www.youtube.com/embed/qEdULCHiAZE"
-          title="Deverse Demo"
+          src="https://www.youtube.com/embed/oEdmbP0Oa6E"
+          title="Deverse World Demo"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen />
-        </div>
+      </div>
     </section>
   );
 }

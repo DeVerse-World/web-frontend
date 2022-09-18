@@ -149,7 +149,7 @@ function LoginModal(props: Props) {
                             <MdEmail size={30} />
                             Email
                         </button> */}
-                        Or
+                        {/* Or */}
                         {/*<button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"*/}
                         {/*    onClick={() => setCurrentAction(AuthAction.Email_Signup)}>*/}
                         {/*    <MdEmail size={30} />*/}
