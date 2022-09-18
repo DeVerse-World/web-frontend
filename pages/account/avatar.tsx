@@ -11,15 +11,16 @@ import { AssetType } from "../../data/enum/asset_type";
 import { Avatar } from "../../data/model/avatar";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AccountService from "../../data/services/AccountService";
+import AvatarService from "../../data/services/AvatarService";
 
 function Content() {
     const [data, setData] = useState<Avatar[]>([]);
     const [nfts, setNfts] = useState<NFTAsset[]>([]);
     useEffect(() => {
-        AccountService.getUserInfo().then(e => {
+        AccountService.getUserInfo().then(async e => {
             if (e.isSuccess && e.value) {
                 setData(e.value.avatars);
-                setNfts(e.value.avatars.map(item => {
+                let convertedData = e.value.avatars.map(item => {
                     let asset: NFTAsset = {
                         id: item.id.toString(),
                         file3dUri: item.preprocess_url,
@@ -27,7 +28,20 @@ function Content() {
                         assetType: AssetType.AVATAR
                     }
                     return asset;
-                }))
+                })
+                const fetchJobs: Promise<any>[] = [];
+                convertedData.forEach(e => {
+                    if (e.file3dUri.includes('.glb')) {
+                        fetchJobs.push(AvatarService.get2DAvatarRPM(e.file3dUri))
+                    }
+                })
+                Promise.allSettled(fetchJobs).then(images => {
+                    convertedData.forEach((e, i) => {
+                        e.file2dUri = images[i].value
+                    })
+                    setNfts(convertedData)
+                })
+
             }
         })
     }, [])
