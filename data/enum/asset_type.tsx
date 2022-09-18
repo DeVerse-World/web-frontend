@@ -5,7 +5,7 @@ export enum AssetType {
     GAME_MODE = "New Gameplay mode",
     BOT_LOGIC = "New Bot Logic",
     AVATAR = "Avatar",
-    ROOT_SUBWORLD_TEMPLATE = "Root templates",
-    DERIV_SUBWORLD_TEMPLATE = "Deriv templates",
+    ROOT_SUBWORLD_TEMPLATE = "Root template",
+    DERIV_SUBWORLD_TEMPLATE = "Deriv template",
     EVENTS = "Events"
 }

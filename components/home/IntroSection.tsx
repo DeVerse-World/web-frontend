@@ -12,7 +12,7 @@ function IntroSection(props) {
       <div style={iframeWrapper}>
         <iframe
           className="rounded-[12px] w-[75%] h-[75%] m-auto absolute inset-0"
-          src="https://www.youtube.com/embed/XvNs768Ovdc"
+          src="https://www.youtube.com/embed/oEdmbP0Oa6E"
           title="Deverse World Demo"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen />

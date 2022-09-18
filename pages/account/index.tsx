@@ -85,17 +85,17 @@ function Account() {
                         <Link href="/account/avatar">
                             <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
                                 <GiDoubleFaceMask size={120}/>
-                                <h3>Avatar</h3>
+                                <h3>Avatars</h3>
                                 <span>x{avatarCount}</span>
                             </div>
                         </Link>
-                        <Link href="/account/inventory">
+                        {/* <Link href="/account/inventory">
                             <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
                                 <MdOutlineInventory2 size={120}/>
                                 <h3>Inventory</h3>
                                 <span>x{inventoryCount}</span>
                             </div>
-                        </Link>
+                        </Link> */}
                         <Link href="/account/events">
                             <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
                                 <RiImageFill size={120}/>
