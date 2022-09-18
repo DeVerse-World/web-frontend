@@ -116,7 +116,7 @@ function NFTCard(props: Props) {
     }
 
     return (
-        <div className="deverse-border w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white m-2">
+        <div className="deverse-border w-[250px] h-[450px] bg-black/[.4] rounded-xl text-white m-2">
             <div className="flex justify-center h-[225px] p-4 ">
                 <img src={get2dImage(props.data) || "/images/placeholder.png"} />
             </div>

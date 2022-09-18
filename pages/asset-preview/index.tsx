@@ -21,7 +21,7 @@ function AssetPreviewScreen(props: WithRouterProps) {
         let query = router.query;
 
         if (query['model']) {
-            setModelPath(AssetService.getFullAssetUrl(query['model'] as string));
+            setModelPath(AssetService.getFullAssetUrl(`${query['model'] as string}`));
         } else if (query['avatarId'] && !isNaN(parseInt(query['avatarId'] as string))) {
             AvatarService.getAvatar(parseInt(query['avatarId'] as string)).then(value => {
                 setAvatar(value);
