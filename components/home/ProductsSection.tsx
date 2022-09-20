@@ -46,7 +46,7 @@ function ProductSection(props) {
                 icon: "product-sdk.png",
                 name: "sdk",
                 status: FeatureStatus.IN_PROGRESS,
-                description: "Deverse SDK, powered by Unreal Engine 5, let users design & introduce skins/races/verses/gameplays/etc and mint them as NFT with ease."
+                description: "Deverse SDK, powered by Unreal Engine 5, let users design & introduce avatars/races/verses/gameplays/etc and mint them as NFT with ease."
             },
             {
                 icon: "product-smart-nft.png",

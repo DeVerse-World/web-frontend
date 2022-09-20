@@ -5,4 +5,5 @@ export enum MarketplaceTab {
     AVATAR = "character-avatar",
     GAME_MODE = "game-mode",
     BOT_LOGIC = "bot-logic",
+    WORLDS = "worlds"
 }

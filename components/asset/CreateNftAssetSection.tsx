@@ -178,7 +178,7 @@ export default function CreateNftAssetSection(props: CreateNftAssetSectionProps)
                         <Dropdown.Menu variant="dark">
                             <Dropdown.Item onClick={(e) => setAssetType(AssetType.IMAGE_2D)}>2D Image</Dropdown.Item>
                             <Dropdown.Item onClick={(e) => setAssetType(AssetType.RACE)}>Character Race</Dropdown.Item>
-                            <Dropdown.Item onClick={(e) => setAssetType(AssetType.AVATAR)}>Character Skin</Dropdown.Item>
+                            <Dropdown.Item onClick={(e) => setAssetType(AssetType.AVATAR)}>Character Avatar</Dropdown.Item>
                             <Dropdown.Item onClick={(e) => setAssetType(AssetType.GAME_MODE)}>New Gameplay mode</Dropdown.Item>
                             <Dropdown.Item onClick={(e) => setAssetType(AssetType.BOT_LOGIC)}>New Bot Logic</Dropdown.Item>
                         </Dropdown.Menu>

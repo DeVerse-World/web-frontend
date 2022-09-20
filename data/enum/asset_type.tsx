@@ -1,7 +1,7 @@
 export enum AssetType {
     IMAGE_2D = "2D Image",
     RACE = "Character Race",
-    AVATAR = "Character Skin",
+    AVATAR = "Character Avatar",
     GAME_MODE = "New Gameplay mode",
     BOT_LOGIC = "New Bot Logic",
     AVATAR = "Avatar",
