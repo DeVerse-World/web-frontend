@@ -1,15 +1,30 @@
+import Link from "next/link";
 import { useState } from "react";
-import { NFTAsset } from "../data/model/nft_asset";
-import Paginator from "./Paginator";
+import Paginator from "../Paginator";
 
 const itemPerPage = 5;
 
-type Props = {
-    data: NFTAsset[];
-    onSelect?: (NFTAsset) => void;
+export type RootTemplateViewModel = {
+    id?: string;
+    tokenURI?: string;
+    name?: string;
+    description?: string;
+    fileAssetUri?: string;
+    fileAssetName?: string;
+    fileAssetUriFromCentralized?: string;
+    file2dUri?: string;
+    file3dUri?: string;
+    image?: string;
+    animation_url?: string;
+
+    deletable?: boolean;
 }
 
-function RootSubworldList(props: Props) {
+type ListProps = {
+    data: RootTemplateViewModel[];
+}
+
+function RootSubworldList(props: ListProps) {
     const [currentPage, setCurrentPage] = useState(1);
 
     return (
@@ -17,9 +32,8 @@ function RootSubworldList(props: Props) {
             <div className="flex flex-row flex-wrap justify-center">
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item, index) =>
-                        <SubworldCard key={index} data={item} onSelect={() => props.onSelect(item)} />)
+                        <RootTemplateCard key={index} data={item} />)
                 }
-
             </div>
             <div className="flex flex-row gap-2">
                 <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
@@ -29,22 +43,14 @@ function RootSubworldList(props: Props) {
 }
 
 type CardProps = {
-    data: NFTAsset;
-    onSelect?: () => void;
+    data: RootTemplateViewModel;
 }
 
-function SubworldCard(props: CardProps) {
-    const [showDetail, setShowDetail] = useState(false);
-
-    const get2dImage = (nft: NFTAsset) => {
-        return nft.file2dUri;
-    }
-
+function RootTemplateCard(props: CardProps) {
     return (
-        <div className="deverse-border w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white m-2 cursor-pointer"
-            onClick={props.onSelect}>
+        <div className="deverse-border w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white m-2">
             <div className="flex justify-center h-[225px] p-4 ">
-                <img src={get2dImage(props.data) || "/images/placeholder.png"} />
+                <img src={props.data.file2dUri || "/images/placeholder.png"} />
             </div>
             <p className="px-4 text-2xl font-semibold" style={{
                 whiteSpace: "nowrap",
@@ -53,13 +59,13 @@ function SubworldCard(props: CardProps) {
             }}>{props.data.name}</p>
             <div className="flex flex-row px-4">
                 <div>
-                    <h5 style={{
-                        cursor: "pointer",
-                        color: "rgb(97 198 208)",
-                        fontWeight: 800
-                    }}>Browse Templates</h5>
-                    <p>{props.data.assetType}</p>
-                    {props.data.supply > 0 && <h5>Supply: {props.data.supply}</h5>}
+                    <Link href={`/subworlds/${props.data.id}`}>
+                        <h5 style={{
+                            cursor: "pointer",
+                            color: "rgb(97 198 208)",
+                            fontWeight: 800
+                        }}>Browse Templates</h5>
+                    </Link>
                 </div>
                 {/* <div className="grow flex flex-col items-center gap-4">
                     <a title={props.data.name} href={props.data.fileAssetUri} target="_blank">

@@ -1,14 +1,14 @@
-import { AssetType } from "../enum/asset_type";
 
-export type AssetView = {
+export type DerivTemplateViewModel = {
     id?: string;
     tokenURI?: string;
-    supply?: number;
     name?: string;
     description?: string;
     fileAssetUri?: string;
-    assetType?: AssetType;
-
+    fileAssetName?: string;
+    fileAssetUriFromCentralized?: string;
+    file2dUri?: string;
+    file3dUri?: string;
     image?: string;
     animation_url?: string;
 
@@ -17,3 +17,4 @@ export type AssetView = {
     offlineOpenable?: boolean;
     rootId?: string;
 }
+

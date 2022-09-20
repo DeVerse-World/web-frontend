@@ -1,48 +1,45 @@
-import { useEffect, useState } from "react";
-import NFTList from "../../components/asset/NFTList";
+import { useContext, useEffect, useState } from "react";
+import AvatarList, { AvatarViewModel } from "../../components/asset/AvatarList";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
-import BaseLayout from "../../components/common/BaseLayout";
-import { getCommonLayout } from "../../components/common/CommonLayout";
-import Footer from "../../components/common/Footer";
-import HomeNavbar from "../../components/common/HomeNavbar";
-import TabHeader from "../../components/common/TabHeader";
-import Sidebar from "../../components/Sidebar";
-import { AssetType } from "../../data/enum/asset_type";
-import { Avatar } from "../../data/model/avatar";
+import { AppContext, ViewState } from "../../components/contexts/app_context";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AccountService from "../../data/services/AccountService";
 import AvatarService from "../../data/services/AvatarService";
 
 function Content() {
-    const [data, setData] = useState<Avatar[]>([]);
-    const [nfts, setNfts] = useState<NFTAsset[]>([]);
+    const { setViewState } = useContext(AppContext);
+    const [nfts, setNfts] = useState<AvatarViewModel[]>([]);
     useEffect(() => {
-        AccountService.getUserInfo().then(async e => {
+        setViewState(ViewState.LOADING);
+        AccountService.getUserInfo().then(e => {
             if (e.isSuccess && e.value) {
-                setData(e.value.avatars);
                 let convertedData = e.value.avatars.map(item => {
-                    let asset: NFTAsset = {
+                    let asset: AvatarViewModel = {
                         id: item.id.toString(),
-                        file3dUri: item.preprocess_url,
+                        modelUri: item.preprocess_url,
+                        image: item.postprocess_url,
                         deletable: true,
-                        assetType: AssetType.AVATAR
                     }
                     return asset;
                 })
                 const fetchJobs: Promise<any>[] = [];
                 convertedData.forEach(e => {
-                    if (e.file3dUri.includes('.glb')) {
-                        fetchJobs.push(AvatarService.get2DAvatarRPM(e.file3dUri))
+                    if (e.modelUri.includes('.glb')) {
+                        fetchJobs.push(AvatarService.get2DAvatarRPM(e.modelUri))
                     }
                 })
                 Promise.allSettled(fetchJobs).then(images => {
                     convertedData.forEach((e, i) => {
-                        e.file2dUri = images[i].value
+                        e.image = images[i].value
                     })
                     setNfts(convertedData)
+                }).finally(() => {
+                    setViewState(ViewState.SUCCESS)
                 })
-
             }
+        }).catch((e) => {
+            console.log(e)
+            setViewState(ViewState.ERROR)
         })
     }, [])
 
@@ -58,7 +55,7 @@ function Content() {
     return (
         <div className="flex flex-col relativejustify-center items-center text-white p-4" >
             <div className="flex flex-row gap-2">
-                <NFTList data={nfts} onDeleted={deleteItem} />
+                <AvatarList data={nfts} onDeleted={deleteItem} />
             </div>
         </div>
     )
