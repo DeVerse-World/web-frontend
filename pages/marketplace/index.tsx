@@ -66,8 +66,8 @@ function Marketplace() {
             case MarketplaceTab.TWO_D_IMAGE:
                 data = data.filter(e => e.assetType == AssetType.IMAGE_2D);
                 break;
-            case MarketplaceTab.SKIN:
-                data = data.filter(e => e.assetType == AssetType.SKIN);
+            case MarketplaceTab.AVATAR:
+                data = data.filter(e => e.assetType == AssetType.AVATAR);
                 break;
             case MarketplaceTab.RACE:
                 data = data.filter(e => e.assetType == AssetType.RACE);
@@ -101,7 +101,7 @@ function Marketplace() {
                             <ListingTabComponent label="2D Image"
                                 tab={MarketplaceTab.TWO_D_IMAGE} isSelected={visibleTab} onSelect={onSelectTab} />
                             <ListingTabComponent label="Character Skin"
-                                tab={MarketplaceTab.SKIN} isSelected={visibleTab} onSelect={onSelectTab} />
+                                tab={MarketplaceTab.AVATAR} isSelected={visibleTab} onSelect={onSelectTab} />
                             <ListingTabComponent label="Character Race"
                                 tab={MarketplaceTab.RACE} isSelected={visibleTab} onSelect={onSelectTab} />
                             <ListingTabComponent label="Game Mode"
