@@ -195,9 +195,7 @@ export default function MintNFT() {
                         <InputGroup>
                             <FormControl
                                 id="input-nft-asset-url"
-                                className="pointer-events-none"
                                 required
-                                readOnly
                                 placeholder="Asset URL (e.g .png/ .pak) (*)"
                                 aria-label="Asset URL (e.g .png/ .pak)"
                                 value={fileAssetUri || ""}
