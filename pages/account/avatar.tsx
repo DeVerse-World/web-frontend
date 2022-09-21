@@ -16,26 +16,31 @@ function Content() {
                 let convertedData = e.value.avatars.map(item => {
                     let asset: AvatarViewModel = {
                         id: item.id.toString(),
+                        supply: 5,
+                        maxSupply: 15,
+                        name: `Avatar #${item.id}`, 
                         modelUri: item.preprocess_url,
                         image: item.postprocess_url,
                         deletable: true,
                     }
                     return asset;
                 })
-                const fetchJobs: Promise<any>[] = [];
-                convertedData.forEach(e => {
-                    if (e.modelUri.includes('.glb')) {
-                        fetchJobs.push(AvatarService.get2DAvatarRPM(e.modelUri))
-                    }
-                })
-                Promise.allSettled(fetchJobs).then(images => {
-                    convertedData.forEach((e, i) => {
-                        e.image = images[i].value
-                    })
-                    setNfts(convertedData)
-                }).finally(() => {
-                    setViewState(ViewState.SUCCESS)
-                })
+                setNfts(convertedData)
+                setViewState(ViewState.SUCCESS)
+                // const fetchJobs: Promise<any>[] = [];
+                // convertedData.forEach(e => {
+                //     if (e.modelUri.includes('.glb')) {
+                //         fetchJobs.push(AvatarService.get2DAvatarRPM(e.modelUri))
+                //     }
+                // })
+                // Promise.allSettled(fetchJobs).then(images => {
+                //     convertedData.forEach((e, i) => {
+                //         e.image = images[i].value
+                //     })
+                //     setNfts(convertedData)
+                // }).finally(() => {
+                //     setViewState(ViewState.SUCCESS)
+                // })
             }
         }).catch((e) => {
             console.log(e)

@@ -1,5 +1,5 @@
 import deverseClient from "../api/deverse_client";
-import { Response, RootSubworldTemplateResponse } from "../model/response";
+import { Response, RootSubworldTemplateResponse, RootSubworldTemplatesResponse } from "../model/response";
 import { BaseService } from "./BaseService";
 
 class SubWorldTemplateService extends BaseService {
@@ -7,13 +7,18 @@ class SubWorldTemplateService extends BaseService {
 
     }
 
+    async fetchRootTemplate(id: string) {
+        let res = await deverseClient.get<Response<RootSubworldTemplateResponse>>(`subworld/template/${id}`);
+        return this.parseResponse(res);
+    }
+
     async fetchRootTemplates() {
-        let res = await deverseClient.get<Response<RootSubworldTemplateResponse>>('subworld/root_template');
+        let res = await deverseClient.get<Response<RootSubworldTemplatesResponse>>('subworld/root_template');
         return this.parseResponse(res);
     }
 
     async fetchDerivTemplates(rootId: string) {
-        let res = await deverseClient.get<Response<RootSubworldTemplateResponse>>(`subworld/root_template/${rootId}/deriv`);
+        let res = await deverseClient.get<Response<RootSubworldTemplatesResponse>>(`subworld/root_template/${rootId}/deriv`);
         return this.parseResponse(res);
     }
 

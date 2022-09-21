@@ -49,8 +49,8 @@ export type EventViewModel = {
 export function EventCard(props: EventCardProps) {
     return (
         <div className="nft-card h-[400px] w-[500px] flex flex-col">
-            <div className="h-[225px] flex flex-row justify-center rounded-3xl overflow-hidden">
-                <img src={props.data.image || "/images/placeholder.png"} />
+            <div className="h-[225px] flex flex-row justify-center rounded-xl overflow-hidden">
+                <img src={props.data.image || "/images/event-placeholder.jpg"} className="w-[100%]"/>
             </div>
             <div className="flex flex-col flex-grow p-4">
                 <span className="text-blue-300">Last updated: {props.data.lastUpdate}</span>
@@ -61,7 +61,7 @@ export function EventCard(props: EventCardProps) {
                 }}>{props.data.name}</span>
                 <div className="flex flex-row justify-between flex-grow items-end">
                     <span className="text-white">Author: {props.data.author}</span>
-                    <button className="w-[120px] h-[40px] bg-green-500 rounded-3xl flex flex-row justify-center items-center hover:bg-green-300"><BsPlayFill /></button>
+                    <button className="w-[120px] h-[40px]  rounded-3xl flex flex-row justify-center items-center deverse-play-btn"><BsPlayFill /></button>
                 </div>
             </div>
         </div>

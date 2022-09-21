@@ -34,8 +34,12 @@ export type EventResponse = {
     events: Event[]
 }
 
-export type RootSubworldTemplateResponse = {
+export type RootSubworldTemplatesResponse = {
     subworld_templates: RootSubworldTemplates[];
+}
+
+export type RootSubworldTemplateResponse = {
+    subworld_template: RootSubworldTemplates;
 }
 
 export type DerivSubworldTemplateResponse = {

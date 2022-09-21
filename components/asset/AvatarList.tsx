@@ -2,7 +2,9 @@ import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from "../../data/enum/asset_type";
 import Paginator from "../Paginator";
 import { useState } from "react";
-import NFTCard from "./NFTCard";
+import StarRatings from 'react-star-ratings';
+import Link from "next/link";
+import { FaEthereum } from "react-icons/fa";
 const itemPerPage = 5;
 
 type AvatarListProps = {
@@ -37,70 +39,47 @@ export type AvatarViewModel = {
     id?: string;
     tokenURI?: string;
     supply?: number;
+    maxSupply?: number;
     name?: string;
     description?: string;
     image?: string;
     modelUri?: string;
-    
+
     deletable?: boolean;
 }
 
 export function AvatarCard(props: AvatarCardProps) {
     return (
-        <div className="nft-card w-[250px] h-[450px]  m-2">
-            <div className="flex justify-center h-[225px] p-4 ">
-                <img src={props.data.image || "/images/placeholder.png"} />
-            </div>
-            <p className="px-4 text-2xl font-semibold" style={{
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis"
-            }}>{props.data.name}</p>
-            <div className="flex flex-row px-4">
-                <div>
-                    <a className="no-underline font-bold" style={{
-                        color: "rgb(97 198 208)"
-                    }} href={`/asset-preview?avatarId=${props.data.id}`} target="_blank">Preview</a>
-                    {props.data.supply > 0 && <h5>Supply: {props.data.supply}</h5>}
+        <Link href={`/asset-preview?avatarId=${props.data.id}`}>
+            <div className="nft-card nft-card-hover w-[250px] h-[350px]  m-2">
+                <div className="flex justify-center h-[225px] p-4 ">
+                    <img src={props.data.image || "/images/color-image-placeholder.jpg"} />
                 </div>
-                <div className="grow flex flex-col items-center gap-4">
-                    {/* {props.data.fileAssetUri &&
-                        <a title={props.data.name} href={props.data.fileAssetUri} target="_blank">
-                            <img title={"Download"} src={"/images/ic-download.png"} width={32} height={32} />
-                        </a>
-                    } */}
-                    {/* {renderDelete()}
-                    {renderOnlineOpen()}
-                    {renderOfflineOpen()} */}
+                <div className="flex flex-row pl-4">
+                    <div className="flex-grow flex flex-col">
+                        <span className="text-2xl font-semibold text-blue-300" style={{
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis"
+                        }}>{props.data.name}</span>
+                        <span>{props.data.supply || 0}{props.data.maxSupply && `/${props.data.maxSupply}`}</span>
+                        <div >
+                            <StarRatings
+                                rating={5}
+                                starRatedColor="yellow"
+                                starDimension="20px"
+                                starSpacing="1px"
+                                // changeRating={this.changeRating}
+                                numberOfStars={5}
+                                name='rating' />
+                        </div>
+                    </div>
+                    <div className="flex flex-col justify-center pe-4">
+                        <span className="flex flex-row items-center">150 <FaEthereum /></span>
+                    </div>
                 </div>
+
             </div>
-            {/* {showDetail && <NFTDetailCard data={props.data} show={true} onHide={() => setShowDetail(false)} />}
-            {isDeleting &&
-                <Modal centered show={true}
-                    onHide={() => {
-                        setIsDeleting(false);
-                    }}
-                    contentClassName="bg-deverse-gradient" dialogClassName="deverse-dialog">
-                    <Modal.Body className="text-white text-lg break-words">
-                        U sure want to delete this avatar?
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button style={{
-                            background: "linear-gradient(to bottom, #ff715b, #d6290f)",
-                            width: 80
-                        }} onClick={() => {
-                            setIsDeleting(false);
-                        }}>
-                            Cancel
-                        </Button>
-                        <Button style={{
-                            background: "linear-gradient(to bottom, rgb(65, 117, 230), rgb(18, 54, 173))",
-                            width: 80
-                        }} onClick={onDeleteAsset} >
-                            Ok
-                        </Button>
-                    </Modal.Footer>
-                </Modal>} */}
-        </div>
+        </Link>
     )
 }

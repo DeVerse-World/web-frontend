@@ -22,6 +22,7 @@ export default function ModelViewer(props: ModelViewerProps) {
     }, (e) => {
       setLoadProgress(e);
     })
+    //TODO: add cleanup function to avoid memory leak
   }, [])
 
   const onChangeControl = (e: Event) => {

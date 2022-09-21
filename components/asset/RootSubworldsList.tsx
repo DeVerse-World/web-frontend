@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { useState } from "react";
+import { BsPlayFill } from "react-icons/bs";
 import Paginator from "../Paginator";
+import PlayModal from "./PlayModal";
+import StarRatings from 'react-star-ratings';
+import { FaEthereum } from "react-icons/fa";
 
 const itemPerPage = 5;
 
@@ -18,6 +22,8 @@ export type RootTemplateViewModel = {
     animation_url?: string;
 
     deletable?: boolean;
+    onlineOpenable?: boolean;
+    offlineOpenable?: boolean;
 }
 
 type ListProps = {
@@ -47,32 +53,41 @@ type CardProps = {
 }
 
 function RootTemplateCard(props: CardProps) {
+    const [showPlayModal, setShowPlayModal] = useState(false);
+
     return (
         <div className="deverse-border w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white m-2">
             <div className="flex justify-center h-[225px] p-4 ">
                 <img src={props.data.file2dUri || "/images/placeholder.png"} />
             </div>
-            <p className="px-4 text-2xl font-semibold" style={{
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis"
-            }}>{props.data.name}</p>
-            <div className="flex flex-row px-4">
+            <p className="px-4 text-2xl font-semibold h-12">{props.data.name}</p>
+            <div className="px-4 flex flex-row items-center">
+                150 <FaEthereum />
+            </div>
+            <div className="px-4 py-1">
+                <StarRatings
+                    rating={5}
+                    starRatedColor="yellow"
+                    starDimension="20px"
+                    starSpacing="1px"
+                    // changeRating={this.changeRating}
+                    numberOfStars={5}
+                    name='rating' />
+            </div>
+            <div className="flex flex-row px-4 justify-between">
                 <div>
                     <Link href={`/subworlds/${props.data.id}`}>
                         <h5 style={{
                             cursor: "pointer",
                             color: "rgb(97 198 208)",
                             fontWeight: 800
-                        }}>Browse Templates</h5>
+                        }}>Details</h5>
                     </Link>
                 </div>
-                {/* <div className="grow flex flex-col items-center gap-4">
-                    <a title={props.data.name} href={props.data.fileAssetUri} target="_blank">
-                        <img title={"Download"} src={"/images/ic-download.png"} width={32} height={32} />
-                    </a>
-                </div> */}
+                <button className="deverse-play-btn w-16 flex flex-row justify-center rounded-2xl items-center" onClick={() => setShowPlayModal(true)}><BsPlayFill /></button>
             </div>
+            {showPlayModal && <PlayModal onClose={() => setShowPlayModal(false)} />}
+
         </div>
     )
 }
