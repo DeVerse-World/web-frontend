@@ -10,10 +10,10 @@ export type SubworldTemplate = {
     updated_at: string
 }
 
-export type DerivSubworldTemplates = {
+export type DerivSubworldTemplate = {
     parent_subworld_template_id: number,
 } & SubworldTemplate
 
-export type RootSubworldTemplates = {
+export type RootSubworldTemplate = {
     derivative_uri: string
 } & SubworldTemplate
