@@ -41,6 +41,8 @@ export default function DC() {
             derivTemplate.thumbnail_centralized_uri, derivTemplate.parent_subworld_template_id.toString()).then(res => {
                 if (res.isSuccess()) {
                     alert(`Deriv Template created successfully with id: ${res.value?.subworld_template?.id}`)
+                } else {
+                    console.log(res.error)
                 }
             }).catch(e => {
                 console.log(e)
@@ -49,8 +51,8 @@ export default function DC() {
 
     if (user == null) {
         return (
-            <div>
-                Login first please
+            <div className="text-white">
+                <h1>Login first please</h1>
             </div>
         )
     }
@@ -103,7 +105,7 @@ export default function DC() {
             </Form>
             <Form className="flex flex-col items-center text-white my-8 space-y-2 min-w-[300px] w-[40vw]"
                 // validated={formValidated}
-                onSubmit={onCreateRootTemplate}>
+                onSubmit={onCreateDerivTemplate}>
                 <h2>Create Deriv Template</h2>
                 <InputGroup>
                     <FormControl id="1" required

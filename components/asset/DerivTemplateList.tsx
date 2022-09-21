@@ -1,15 +1,13 @@
-import Link from "next/link";
 import { useState } from "react";
-import { BsPlayFill } from "react-icons/bs";
-import Paginator from "../Paginator";
-import PlayModal from "./PlayModal";
-import StarRatings from 'react-star-ratings';
 import { FaEthereum } from "react-icons/fa";
+import Paginator from "../Paginator";
+import StarRatings from 'react-star-ratings';
+import PlayModal from "./PlayModal";
+import { BsFillPeopleFill, BsPlayFill } from "react-icons/bs";
+import { TbWorld } from "react-icons/tb";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 
-const itemPerPage = 5;
-
-export type RootTemplateViewModel = {
+export type DerivTemplateViewModel = {
     id?: string;
     tokenURI?: string;
     name?: string;
@@ -25,22 +23,25 @@ export type RootTemplateViewModel = {
     deletable?: boolean;
     onlineOpenable?: boolean;
     offlineOpenable?: boolean;
+    rootId?: string;
 }
 
 type ListProps = {
-    data: RootTemplateViewModel[];
+    data: DerivTemplateViewModel[];
     alignStart?: boolean;
 }
 
-function RootSubworldList(props: ListProps) {
+const itemPerPage = 5;
+
+function DerivSubworldList(props: ListProps) {
     const [currentPage, setCurrentPage] = useState(1);
 
     return (
-        <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-full">
+        <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
             <div className={`flex flex-row flex-wrap ${props.alignStart ? "w-full" : "justify-center"}`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item, index) =>
-                        <RootTemplateCard key={index} data={item} />)
+                        <DerivTemplateCard key={index} data={item} />)
                 }
             </div>
             <div className="flex flex-row gap-2">
@@ -51,18 +52,18 @@ function RootSubworldList(props: ListProps) {
 }
 
 type CardProps = {
-    data: RootTemplateViewModel;
+    data: DerivTemplateViewModel;
 }
 
-function RootTemplateCard(props: CardProps) {
+function DerivTemplateCard(props: CardProps) {
     const [showPlayModal, setShowPlayModal] = useState(false);
     const onDelete = () => { //TODO: to be enabled
-        SubWorldTemplateService.deleteRootTemplate(props.data.id).then(res => {
-            console.log(res)
-            // props.onDeleted(props.data)
-        }).finally(() => {
-            // setIsDeleting(false);
-        })
+        // SubWorldTemplateService.deleteDerivTemplate(props.data.rootId, props.data.id).then(res => {
+        //     console.log(res)
+        //     props.onDeleted(props.data)
+        // }).finally(() => {
+        //     setIsDeleting(false);
+        // })
     }
     return (
         <div className="deverse-border w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white m-2">
@@ -70,6 +71,10 @@ function RootTemplateCard(props: CardProps) {
                 <img src={props.data.file2dUri || "/images/placeholder.png"} />
             </div>
             <p className="px-4 text-2xl font-semibold h-12">{props.data.name}</p>
+            <div className=" px-4 flex flex-row gap-1 items-center text-lg">
+                15<TbWorld className="mr-4" />
+                35/500<BsFillPeopleFill />
+            </div>
             <div className="px-4 flex flex-row items-center">
                 150 <FaEthereum />
             </div>
@@ -83,13 +88,6 @@ function RootTemplateCard(props: CardProps) {
                         // changeRating={this.changeRating}
                         numberOfStars={5}
                         name='rating' />
-                    <Link href={`/subworlds/${props.data.id}`}>
-                        <h5 style={{
-                            cursor: "pointer",
-                            color: "rgb(97 198 208)",
-                            fontWeight: 800
-                        }}>Details</h5>
-                    </Link>
                 </div>
                 <button className="deverse-play-btn w-16 h-8 flex flex-row justify-center rounded-2xl items-center" onClick={() => setShowPlayModal(true)}><BsPlayFill /></button>
             </div>
@@ -99,4 +97,4 @@ function RootTemplateCard(props: CardProps) {
     )
 }
 
-export default RootSubworldList;
+export default DerivSubworldList;

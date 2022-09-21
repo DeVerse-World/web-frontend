@@ -5,6 +5,7 @@ import { useState } from "react";
 import StarRatings from 'react-star-ratings';
 import Link from "next/link";
 import { FaEthereum } from "react-icons/fa";
+import AvatarService from "../../data/services/AvatarService";
 const itemPerPage = 5;
 
 type AvatarListProps = {
@@ -49,6 +50,14 @@ export type AvatarViewModel = {
 }
 
 export function AvatarCard(props: AvatarCardProps) {
+    const onDelete = () => {
+        AvatarService.deleteAvatar(props.data.id).then(res => {
+            // props.onDeleted(props.data)
+        }).finally(() => {
+            // setIsDeleting(false);
+        })
+    }
+
     return (
         <Link href={`/asset-preview?avatarId=${props.data.id}`}>
             <div className="nft-card nft-card-hover w-[250px] h-[350px]  m-2">

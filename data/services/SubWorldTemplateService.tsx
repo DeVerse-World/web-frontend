@@ -54,7 +54,7 @@ class SubWorldTemplateService extends BaseService {
                 file_name: fileName,
                 display_name: displayName,
                 thumbnail_centralized_uri: thumbnailUri || "",
-                derivative_uri: ""
+                derivative_uri: "google.com"
             }
         }, {
             withCredentials: true
