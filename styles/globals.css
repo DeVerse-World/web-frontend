@@ -40,6 +40,8 @@ body * {
 
 .deverse-dialog div {
     border-radius: 12px !important;
+    width: fit-content;
+    margin: auto;
 }
 
 

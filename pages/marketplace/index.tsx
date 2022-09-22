@@ -103,9 +103,9 @@ function Marketplace() {
                                 tab={MarketplaceTab.TWO_D_IMAGE} isSelected={visibleTab} onSelect={onSelectTab} />
                             <ListingTabComponent label="Avatar"
                                 tab={MarketplaceTab.AVATAR} isSelected={visibleTab} onSelect={onSelectTab} />
-                            <ListingTabComponent label="Race"
+                            <ListingTabComponent label="Race" isDisable
                                 tab={MarketplaceTab.RACE} isSelected={visibleTab} onSelect={onSelectTab} />
-                            <ListingTabComponent label="Gameplay"
+                            <ListingTabComponent label="Gameplay" isDisable
                                 tab={MarketplaceTab.GAME_MODE} isSelected={visibleTab} onSelect={onSelectTab} />
                             <ListingTabComponent label="Item" isDisable
                                 tab={MarketplaceTab.BOT_LOGIC} isSelected={visibleTab} onSelect={onSelectTab} />

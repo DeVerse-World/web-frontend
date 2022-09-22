@@ -66,7 +66,7 @@ function DerivTemplateCard(props: CardProps) {
         // })
     }
     return (
-        <div className="deverse-border w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white m-2">
+        <div className="w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white m-2">
             <div className="flex justify-center h-[225px] p-4 ">
                 <img src={props.data.file2dUri || "/images/placeholder.png"} />
             </div>
@@ -89,7 +89,13 @@ function DerivTemplateCard(props: CardProps) {
                         numberOfStars={5}
                         name='rating' />
                 </div>
-                <button className="deverse-play-btn w-16 h-8 flex flex-row justify-center rounded-2xl items-center" onClick={() => setShowPlayModal(true)}><BsPlayFill /></button>
+                <button className="deverse-play-btn w-10 h-10 flex flex-row justify-center rounded-3xl items-center"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setShowPlayModal(true);
+                    }}>
+                    <BsPlayFill />
+                </button>
             </div>
             {showPlayModal && <PlayModal templateId={props.data.id} onClose={() => setShowPlayModal(false)} />}
 

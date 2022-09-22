@@ -1,6 +1,6 @@
 import { useRouter } from "next/router"
 import { useContext, useEffect, useState } from "react";
-import { BsFillPeopleFill, BsFillPersonFill } from "react-icons/bs";
+import { BsFillPeopleFill, BsFillPersonFill, BsPlayFill } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
 import { TbWorld } from "react-icons/tb";
 import NFTList from "../../components/asset/NFTList";
@@ -77,7 +77,8 @@ export default function Deriv() {
                             <div className="flex justify-center h-[350px] w-[350px]">
                                 <img src={rootTemplate.file2dUri || "/images/color-image-placeholder.png"} />
                             </div>
-                            <button className="w-[120px] h-[40px] rounded-3xl my-4 flex flex-row justify-center items-center text-white deverse-play-btn font-bold" onClick={() => setShowPlayModal(true)}>Play</button>
+                            <button className="w-[120px] h-[40px] rounded-3xl my-4 flex flex-row justify-center items-center text-white deverse-play-btn font-bold" onClick={() => setShowPlayModal(true)}>
+                                <BsPlayFill /></button>
                         </div>
 
                         <div className="text-slate-400">
@@ -98,7 +99,6 @@ export default function Deriv() {
                             <DerivSubworldList data={derivTemplates} />
                         </div>
                     </div>
-
                 }
             </div>
             {showPlayModal && <PlayModal templateId={rootid.toString()} onClose={() => setShowPlayModal(false)} />}
