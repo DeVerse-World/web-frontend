@@ -81,7 +81,7 @@ export default function Deriv() {
                                 <BsPlayFill /></button>
                         </div>
 
-                        <div className="text-slate-400">
+                        <div className="text-slate-400 max-w-[400px]">
                             <div className="flex flex-col gap-2 px-4">
                                 <h3 className="text-blue-200 text-3xl font-bold">{rootTemplate.name}</h3>
                                 <div className="flex flex-row gap-1 items-center text-lg">
