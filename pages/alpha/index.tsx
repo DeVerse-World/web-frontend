@@ -24,7 +24,8 @@ function Info() {
                     stage: e.stage,
                     participants: e.max_num_participants
                 }))
-                setOngoingEvents(data);
+                if (data.length > 0)
+                    setOngoingEvents([data[0]]);
             }
         })
     }, [])
@@ -44,9 +45,7 @@ function Info() {
                     </Canvas>
                 </div>
             </div>
-            <div className="h-[600px] overflow-y-scroll">
-                <EventList data={ongoingEvents} />
-            </div>
+            <EventList data={ongoingEvents} />
         </div>
     )
 }

@@ -18,27 +18,42 @@ import BaseLayout from "../../components/common/BaseLayout";
 import { ApiStrategy } from "../../data/services/ApiStrategy";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import FilterHeader from "../../components/FilterHeader";
+import AvatarList, { AvatarViewModel } from "../../components/asset/AvatarList";
 
 
 
 function Marketplace() {
     const router = useRouter();
     const { setViewState } = useContext(AppContext);
-
+    const [images, setImages] = useState<AvatarViewModel[]>([]);
     const [nfts, setNfts] = useState<NFTAsset[]>([]);
     const [visibleTab, setVisibleTab] = useState<MarketplaceTab>(MarketplaceTab.All);
 
     useEffect(() => {
-        // loadNFTs(null)
+        loadNFTs(null)
     }, [])
 
     const loadNFTs = async (query: string) => {
         setViewState(ViewState.LOADING)
         AssetService.getAll(ApiStrategy.GraphQl).then(assets => {
+            const avatars = assets.filter(e => e.assetType == AssetType.IMAGE_2D);
+            console.log(avatars)
+            let convertedData = avatars.map<AvatarViewModel>(item => ({
+                id: item.id?.toString(),
+                supply: item.supply,
+                maxSupply: 9999,
+                name: item.name,
+                modelUri: item.image,
+                image: item.fileAssetUri,
+                deletable: true,
+            }))
+            setImages(convertedData)
             setNfts(assets.filter((asset) => asset != null));
             setViewState(ViewState.SUCCESS)
         }).catch(e => {
             console.log(e)
+            setViewState(ViewState.ERROR)
+        }).finally(() => {
             setViewState(ViewState.ERROR)
         });
     }
@@ -116,9 +131,13 @@ function Marketplace() {
             </Sidebar>
 
             <section id='section-content' className='bg-deverse flex flex-col text-white' >
-                <div className='flex flex-row grow'>
-                    {renderContent()}
+                <div className=" p-4">
+                    <span className="text-blue-300 text-3xl font-bold pl-4">Images</span>
+                    <AvatarList alignStart data={images}/>
                 </div>
+                {/* <div className='flex flex-row grow'>
+                    {renderContent()}
+                </div> */}
                 <Footer />
             </section>
         </div>

@@ -6,18 +6,19 @@ import StarRatings from 'react-star-ratings';
 import Link from "next/link";
 import { FaEthereum } from "react-icons/fa";
 import AvatarService from "../../data/services/AvatarService";
-const itemPerPage = 5;
+const itemPerPage = 4;
 
 type AvatarListProps = {
     data: AvatarViewModel[];
-    onDeleted?: (AvatarViewModel) => void
+    onDeleted?: (AvatarViewModel) => void;
+    alignStart?: boolean;
 }
 
 export default function AvatarList(props: AvatarListProps) {
     const [currentPage, setCurrentPage] = useState(1);
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
-            <div className="flex flex-row flex-wrap justify-center">
+            <div className={`flex flex-row flex-wrap ${props.alignStart ? "w-full" : "justify-center"}`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item: AvatarViewModel, index: number) =>
                         <AvatarCard key={index} data={item} />
@@ -58,19 +59,19 @@ export function AvatarCard(props: AvatarCardProps) {
         })
     }
 
-    return (
-        <Link href={`/asset-preview?avatarId=${props.data.id}`}>
-            <div className="nft-card nft-card-hover w-[250px] h-[350px]  m-2">
+    const renderContent = () => {
+        return (
+            <div className="nft-card nft-card-hover w-[250px] h-[400px]  m-2">
                 <div className="flex justify-center h-[225px] p-4 ">
                     <img src={props.data.image || "/images/color-image-placeholder.jpg"} />
                 </div>
-                <div className="flex flex-row pl-4">
-                    <div className="flex-grow flex flex-col">
-                        <span className="text-2xl font-semibold text-blue-300" style={{
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis"
-                        }}>{props.data.name}</span>
+                <span className="text-2xl px-4 font-semibold text-blue-300" style={{
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis"
+                }}>{props.data.name}</span>
+                <div className="flex flex-row justify-between px-4">
+                    <div className="flex flex-col">
                         <span>{props.data.supply || 0}{props.data.maxSupply && `/${props.data.maxSupply}`}</span>
                         <div >
                             <StarRatings
@@ -83,12 +84,21 @@ export function AvatarCard(props: AvatarCardProps) {
                                 name='rating' />
                         </div>
                     </div>
-                    <div className="flex flex-col justify-center pe-4">
+                    <div className="flex flex-col justify-center ">
                         <span className="flex flex-row items-center">150 <FaEthereum /></span>
                     </div>
                 </div>
 
             </div>
+        )
+    }
+
+    if (!props.data.id) {
+        return renderContent()
+    }
+    return (
+        <Link href={`/asset-preview?avatarId=${props.data.id}`}>
+            {renderContent()}
         </Link>
     )
 }

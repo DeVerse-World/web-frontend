@@ -72,8 +72,8 @@ function DerivTemplateCard(props: CardProps) {
             </div>
             <p className="px-4 text-2xl font-semibold h-12">{props.data.name}</p>
             <div className=" px-4 flex flex-row gap-1 items-center text-lg">
-                15<TbWorld className="mr-4" />
-                35/500<BsFillPeopleFill />
+                <TbWorld />15
+                <BsFillPeopleFill className="ml-4" />35/500
             </div>
             <div className="px-4 flex flex-row items-center">
                 150 <FaEthereum />
@@ -89,7 +89,7 @@ function DerivTemplateCard(props: CardProps) {
                         numberOfStars={5}
                         name='rating' />
                 </div>
-                <button className="deverse-play-btn w-10 h-10 flex flex-row justify-center rounded-3xl items-center"
+                <button className="w-[60px] h-[25px] text-white rounded-3xl flex flex-row justify-center items-center deverse-play-btn"
                     onClick={(e) => {
                         e.stopPropagation();
                         setShowPlayModal(true);

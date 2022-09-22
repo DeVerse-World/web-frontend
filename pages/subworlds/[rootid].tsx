@@ -72,7 +72,7 @@ export default function Deriv() {
                     router.back();
                 }}><IoIosArrowBack />Back</button>
                 {!rootTemplate ? null :
-                    <div className="flex flex-row gap-2">
+                    <div className="flex flex-row gap-2 flex-wrap">
                         <div className="flex flex-col items-center">
                             <div className="flex justify-center h-[350px] w-[350px]">
                                 <img src={rootTemplate.file2dUri || "/images/color-image-placeholder.png"} />
@@ -83,20 +83,20 @@ export default function Deriv() {
 
                         <div className="text-slate-400">
                             <div className="flex flex-col gap-2 px-4">
-                                <h3 className="text-blue-200">{rootTemplate.name}</h3>
+                                <h3 className="text-blue-200 text-3xl font-bold">{rootTemplate.name}</h3>
                                 <div className="flex flex-row gap-1 items-center text-lg">
-                                    15<TbWorld className="mr-4" />
-                                    35/500<BsFillPeopleFill />
+                                    <TbWorld  />15
+                                    <BsFillPeopleFill className="ml-4"/>35/500
                                 </div>
                                 <div>
                                     <h5 className="text-blue-200">Description</h5>
-                                    <p>A very long description will eb placed here</p>
+                                    <p>Không còn nhiều cảnh xếp hàng dài trước các cửa hàng thời trang xa xỉ, ăn ở nhà hàng sang trọng dịp cuối tuần và du lịch các đảo nhiệt đớ</p>
                                 </div>
                                 <div className="text-blue-200">
                                     Connected worlds: {derivTemplates?.length}
                                 </div>
                             </div>
-                            <DerivSubworldList data={derivTemplates} />
+                            <DerivSubworldList alignStart data={derivTemplates} />
                         </div>
                     </div>
                 }

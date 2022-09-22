@@ -87,7 +87,8 @@ function RootTemplateCard(props: CardProps) {
                                 numberOfStars={5}
                                 name='rating' />
                         </div>
-                        <button className="deverse-play-btn w-10 h-10 flex flex-row justify-center rounded-3xl items-center"
+                        
+                        <button className="w-[60px] h-[25px] text-white rounded-3xl flex flex-row justify-center items-center deverse-play-btn"
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setShowPlayModal(true);

@@ -25,6 +25,7 @@ function AssetPreviewScreen(props: WithRouterProps) {
         let query = router.query;
 
         if (query['model']) {
+            // console.log(AssetService.getFullAssetUrl(`${query['model'] as string}`))
             setModelPath(AssetService.getFullAssetUrl(`${query['model'] as string}`));
         } else if (query['avatarId'] && !isNaN(parseInt(query['avatarId'] as string))) {
             AvatarService.getAvatar(parseInt(query['avatarId'] as string)).then(value => {
@@ -62,7 +63,7 @@ function AssetPreviewScreen(props: WithRouterProps) {
                     <div className='text-3xl'>Avatar Name</div>
                     <div>0/10</div>
                     <div className='mt-8 flex flex-row justify-between'>
-                        DeverseWorld
+                        Deverse World
                         <div aria-label='abc' style={{
                             whiteSpace: "nowrap",
                             overflow: "hidden",
