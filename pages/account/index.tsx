@@ -10,6 +10,7 @@ import {RiImageFill} from "react-icons/ri";
 import { MdOutlineInventory2} from "react-icons/md";
 import Link from "next/link";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
+import { formatWalletAddress } from "../../utils/wallet_util";
 // ChartJS.register(
 //     CategoryScale,
 //     LinearScale,
@@ -62,18 +63,17 @@ function Account() {
                         <AvatarContainer style={{
                             position: 'relative',
                             borderRadius: '50%',
-                            borderWidth: '7px',
-                            borderColor: 'red',
+                            borderWidth: '2px',
                             bottom: '50%'
                         }} />
                         <div className="py-2">
-                            {/* <h1>Name: {user?.name}</h1> */}
-                            <h5 className="text-deverse"><span className="">Google Mail:</span> {user?.social_email}</h5>
-                            {user?.social_email == "" ? <button onClick={() => setShowAddGoogle(true)}>Link Google Mail</button> : ""}
+                            {user?.name || <h1>{user?.name}</h1>} 
+                            <h5 className="text-deverse">{formatWalletAddress(user?.wallet_address)}</h5>
+                            <h5 className="text-deverse">{user?.social_email}</h5>
+                            {/* {user?.social_email == "" ? <button onClick={() => setShowAddGoogle(true)}>Link Google Mail</button> : ""}
                             {showAddGoogle && <LoginModal show={true} onHide={() => setShowAddGoogle(false)} isAddMetamaskOnly={false} isAddGoogleOnly={true} fullscreen />}
-                            <h5 className="text-deverse">Wallet Address: {user?.wallet_address}</h5>
                             {user?.wallet_address == "" ? <button onClick={() => setShowAddMetamask(true)}>Link Metamask</button> : ""}
-                            {showAddMetamask && <LoginModal show={true} onHide={() => setShowAddMetamask(false)} isAddMetamaskOnly={true} isAddGoogleOnly={false} fullscreen />}
+                            {showAddMetamask && <LoginModal show={true} onHide={() => setShowAddMetamask(false)} isAddMetamaskOnly={true} isAddGoogleOnly={false} fullscreen />} */}
                         </div>
                     </div>
                 </section>

@@ -10,6 +10,9 @@ import CollapsableInfoCard from './collapsable_info_card';
 import { Avatar } from '../../data/model/avatar';
 import AvatarService from '../../data/services/AvatarService';
 import { FaEthereum } from 'react-icons/fa';
+import { formatWalletAddress } from '../../utils/wallet_util';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
 
 function AssetPreviewScreen(props: WithRouterProps) {
     const router = useRouter();
@@ -30,7 +33,7 @@ function AssetPreviewScreen(props: WithRouterProps) {
             });
         }
         const mockWallet = "0x4Fc5Ea43E74B2b20b37F905B7D7f87FA2A5362Dd";
-        setCreatorAddress(`${mockWallet.substring(0, 7)}...${mockWallet.substring(mockWallet.length - 5, mockWallet.length - 1)}`)
+        setCreatorAddress(formatWalletAddress(mockWallet))
 
     }, [router.isReady])
 
@@ -41,7 +44,16 @@ function AssetPreviewScreen(props: WithRouterProps) {
                     {
                         modelPath &&
                         <div className='rounded-2xl border-4 bg-white md:w-[300px] md:h-[400px] w-[350px] '>
-                            <ModelViewer filePath={modelPath} />
+                            <Canvas >
+                                <ModelViewer filePath={modelPath} position={[0, -1, 0]}/>
+                                <ambientLight intensity={0.5} />
+                                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+                                <spotLight position={[-10, -10, 0]} angle={0.55} penumbra={1} />
+                                <pointLight position={[-10, -10, -10]} />
+                                <OrbitControls makeDefault zoomSpeed={2} />
+                                {/* <OrbitControls minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} /> */}
+                                {/* <PresentationControls speed={1.5} global zoom={0.7} polar={[-0.1, Math.PI / 4]}></PresentationControls> */}
+                            </Canvas>
                         </div>
                     }
                     <button className="w-[120px] h-[40px] rounded-3xl flex flex-row justify-center items-center text-white deverse-play-btn font-bold">BUY</button>

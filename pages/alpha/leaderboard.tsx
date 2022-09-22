@@ -1,7 +1,7 @@
 import { getAlphaLayout } from "./AlphaLayout";
 
 
-function Verse() {
+function Leaderboard() {
     return (
         <div className="flex justify-center items-center text-white p-4" >
             <h1 >Coming soon</h1>
@@ -9,6 +9,6 @@ function Verse() {
     )
 }
 
-Verse.getLayout = getAlphaLayout
+Leaderboard.getLayout = getAlphaLayout
 
-export default Verse;
+export default Leaderboard;

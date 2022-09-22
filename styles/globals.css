@@ -199,6 +199,8 @@ body * {
 
 .tab-header.active {
     border-bottom: 2px solid white;
+    background-color: rgb(97 198 208);
+    border-radius: 1rem;
 }
 
 

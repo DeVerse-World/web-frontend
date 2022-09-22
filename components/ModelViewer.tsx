@@ -30,24 +30,15 @@ export default function ModelViewer(props: ModelViewerProps) {
   }
 
   return model && (
-    <Canvas >
-      <Suspense fallback={
-        <div>
-          <h1>Loading {loadProgress}%</h1>
-        </div>
-      }>
-        <TransformControls showX={false} showY={false} showZ={false}>
-          <ModelObject filePath={props.filePath} {...props} gltf={model} />
-        </TransformControls>
-      </Suspense>
-      <ambientLight intensity={0.5} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-      <spotLight position={[-10, -10, 0]} angle={0.55} penumbra={1} />
-      <pointLight position={[-10, -10, -10]} />
-      <OrbitControls makeDefault zoomSpeed={2}/>
-      {/* <OrbitControls minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} /> */}
-      {/* <PresentationControls speed={1.5} global zoom={0.7} polar={[-0.1, Math.PI / 4]}></PresentationControls> */}
-    </Canvas>
+    <Suspense fallback={
+      <div>
+        <h1>Loading {loadProgress}%</h1>
+      </div>
+    }>
+      <TransformControls showX={false} showY={false} showZ={false}>
+        <ModelObject filePath={props.filePath} {...props} gltf={model} />
+      </TransformControls>
+    </Suspense>
   );
 }
 
