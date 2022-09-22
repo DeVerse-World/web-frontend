@@ -22,8 +22,19 @@ class AssetService extends BaseService {
 
     // @ts-ignore
     _oldIpfsClient = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
+    // TODO: Move these to secret
+    projectId = "2EtZ9gieTPDmpdUQqSrPZYkdu10";
+    projectSecret = "6010cb3d400ae981f10e2c40491a6aad";
+    infuraAuth = "Basic " + Buffer.from(this.projectId + ":" + this.projectSecret).toString("base64");
     // @ts-ignore
-    _ipfsClient = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
+    _ipfsClient = ipfsHttpClient({
+        host: "ipfs.infura.io",
+        port: 5001,
+        protocol: "https",
+        headers: {
+            authorization: this.infuraAuth,
+        },
+    });
     assetContract: Contract = new ethers.Contract(assetAddress, AssetABI.abi, new ethers.providers.JsonRpcProvider(process.env.RPC_URL));
     transferSingleEventFilter: ethers.EventFilter = this.assetContract.filters.TransferSingle();
 
@@ -45,6 +56,7 @@ class AssetService extends BaseService {
                 progress: (progress, path) => { onProgress(Math.round((progress / file.size) * 100)) }
             }
         )
+        console.log(res.path);
         return `${this._uriPrefix}${res.path}`;
     }
 
@@ -72,12 +84,14 @@ class AssetService extends BaseService {
 
     async _enrichOpenseaFields(asset: NFTAsset): Promise<NFTAsset> {
         console.log("Enrich Opensea Field");
+        console.log(asset)
         asset.animation_url = asset.file3dUri;
         if (asset.assetType == AssetType.IMAGE_2D) {
             asset.image = asset.fileAssetUri;
         } else {
             asset.image = asset.file2dUri;
         }
+        console.log(asset)
         asset.image = await this._cidFullV0ToFullV1Base32(asset.image);
         if (asset.animation_url != "") {
             asset.animation_url = await this._cidFullV0ToFullV1Base32(asset.animation_url);
@@ -86,7 +100,7 @@ class AssetService extends BaseService {
     }
 
     async _cidFullV0ToFullV1Base32(fullV0: string): Promise<string> {
-        let CIDv0 = fullV0.replace("https://ipfs.infura.io/ipfs/", "");
+        let CIDv0 = fullV0.replace(this._uriPrefix, "");
         let CIDv1 = new CID(CIDv0).toV1().toString('base32');
         return `https://${CIDv1}.ipfs.infura-ipfs.io/`;
     }

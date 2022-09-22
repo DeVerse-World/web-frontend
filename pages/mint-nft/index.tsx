@@ -83,6 +83,7 @@ export default function MintNFT() {
         if (!(assetName && assetType && assetSupply > 0 && fileAssetUri)) {
             return;
         }
+        console.log("File Asset URI " + fileAssetUri);
         let data: NFTAsset = {
             name: assetName,
             description: assetDescription,
