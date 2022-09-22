@@ -1,39 +1,46 @@
-import { useEffect, useState } from "react";
-import NFTList from "../../components/asset/NFTList";
+import { useContext, useEffect, useState } from "react";
+import EventList, { EventViewModel } from "../../components/asset/EventList";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
-import { AssetType } from "../../data/enum/asset_type";
-import { NFTAsset } from "../../data/model/nft_asset";
+import { AppContext, ViewState } from "../../components/contexts/app_context";
 import AccountService from "../../data/services/AccountService";
+import { getTimeString } from "../../utils/time_util";
 
 function Layout() {
-    const [nfts, setNfts] = useState<NFTAsset[]>([]);
+    const {setViewState} = useContext(AppContext);
+    const [nfts, setNfts] = useState<EventViewModel[]>([]);
     useEffect(() => {
-        AccountService.getUserInfo().then(e => {
-            if (e.isSuccess && e.value) {
-                const data = e.value.created_events.map<NFTAsset>(e => ({
+        setViewState(ViewState.LOADING);
+        AccountService.getUserInfo().then(res => {
+            if (res.isSuccess()) {
+                const data = res.value.created_events.map<EventViewModel>(e => ({
                     id: e.id.toString(),
                     name: e.name,
-                    description: e.stage,
-                    assetType: AssetType.EVENTS
+                    description: "Description of event",
+                    eventConfigUri: e.event_config_uri,
+                    lastUpdate: getTimeString(new Date(e.updated_at)),
+                    stage: e.stage,
+                    participants: e.max_num_participants
                 }))
                 setNfts(data);
             }
+        }).finally(() => {
+            setViewState(ViewState.SUCCESS);
         })
     }, [])
 
-    const deleteItem = (asset: NFTAsset) => {
-        let deletedIndex = nfts.indexOf(asset);
-        if (deletedIndex > -1) {
-            let clonedData = [...nfts];
-            clonedData.splice(deletedIndex, 1);
-            setNfts(clonedData);
-        }
-    }
+    // const deleteItem = (asset: NFTAsset) => {
+    //     let deletedIndex = nfts.indexOf(asset);
+    //     if (deletedIndex > -1) {
+    //         let clonedData = [...nfts];
+    //         clonedData.splice(deletedIndex, 1);
+    //         setNfts(clonedData);
+    //     }
+    // }
 
     return (
         <div className="flex flex-col relativejustify-center items-center text-white p-4" >
             <div className="flex flex-row gap-2">
-                <NFTList data={nfts} onDeleted={deleteItem} />
+                <EventList data={nfts} />
             </div>
         </div>
     )

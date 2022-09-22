@@ -2,7 +2,19 @@ import { TimeFilter } from "../data/enum/time_filter";
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-export default function getTimeString(date: Date) {
+export function getDateString(date: Date) {
+    let month = (date.getMonth() + 1).toString();
+    if (month.length == 1) {
+        month = `0${month}`
+    }
+    let day = date.getDate().toString();
+    if (day.length == 1) {
+        day = `0${day}`
+    }
+    return `${month}\/${day}\/${date.getFullYear()}`;
+}
+
+export function getTimeString(date: Date) {
     // let minute = date.getMinutes();
     // if (minute.toString().length == 1) {
     //     minute = `0${minute}`

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+import DerivSubworldList, { DerivTemplateViewModel } from "../../components/asset/DerivTemplateList";
 import NFTList from "../../components/asset/NFTList";
+import RootSubworldList, { RootTemplateViewModel } from "../../components/asset/RootSubworldsList";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import BaseLayout from "../../components/common/BaseLayout";
 import Footer from "../../components/common/Footer";
@@ -10,60 +12,64 @@ import { NFTAsset } from "../../data/model/nft_asset";
 import AccountService from "../../data/services/AccountService";
 
 function Layout() {
-    const [nfts, setNfts] = useState<NFTAsset[]>([]);
+    const [rootTemplates, setRootTemplates] = useState<NFTAsset[]>([]);
+    const [derivTemplates, setDerivTemplates] = useState<NFTAsset[]>([]);
+
     useEffect(() => {
-        AccountService.getUserInfo().then(e => {
-            if (e.isSuccess && e.value) {
-                let data: NFTAsset[] = [];
-                e.value.created_root_subworld_templates.forEach(template => {
-                    let asset: NFTAsset = {
-                        id: template.id.toString(),
-                        name: template.display_name,
-                        description: template.display_name,
-                        image: template.thumbnail_centralized_uri,
-                        fileAssetUriFromCentralized: template.thumbnail_centralized_uri,
-                        file2dUri: template.thumbnail_centralized_uri,
-                        fileAssetUri: template.level_ipfs_uri,
-                        file3dUri: template.level_ipfs_uri,
-                        deletable: true,
-                        assetType: AssetType.ROOT_SUBWORLD_TEMPLATE
-                    }
-                    data.push(asset);
-                })
-                e.value.created_deriv_subworld_templates.forEach(template => {
-                    let asset: NFTAsset = {
-                        id: template.id.toString(),
-                        name: template.display_name,
-                        description: template.display_name,
-                        image: template.thumbnail_centralized_uri,
-                        fileAssetUriFromCentralized: template.thumbnail_centralized_uri,
-                        file2dUri: template.thumbnail_centralized_uri,
-                        fileAssetUri: template.level_ipfs_uri,
-                        file3dUri: template.level_ipfs_uri,
-                        rootId: template.parent_subworld_template_id.toString(),
-                        deletable: true,
-                        assetType: AssetType.DERIV_SUBWORLD_TEMPLATE
-                    }
-                    data.push(asset);
-                })
-                setNfts(data);
+        AccountService.getUserInfo().then(res => {
+            if (res.isSuccess && res.value) {
+                const roots = res.value.created_root_subworld_templates.map<RootTemplateViewModel>(e => ({
+                    id: e.id.toString(),
+                    name: e.display_name,
+                    description: e.display_name,
+                    image: e.thumbnail_centralized_uri,
+                    fileAssetUriFromCentralized: e.thumbnail_centralized_uri,
+                    file2dUri: e.thumbnail_centralized_uri,
+                    fileAssetUri: e.level_ipfs_uri,
+                    file3dUri: e.level_ipfs_uri,
+                    deletable: true,
+                    onlineOpenable: true,
+                    offlineOpenable: true
+                }))
+                setRootTemplates(roots);
+
+                const derivs = res.value.created_deriv_subworld_templates.map<DerivTemplateViewModel>(e => ({
+                    id: e.id.toString(),
+                    name: e.display_name,
+                    description: e.display_name,
+                    image: e.thumbnail_centralized_uri,
+                    rootId: e.parent_subworld_template_id.toString(),
+                    fileAssetUriFromCentralized: e.thumbnail_centralized_uri,
+                    file2dUri: e.thumbnail_centralized_uri,
+                    fileAssetUri: e.level_ipfs_uri,
+                    file3dUri: e.level_ipfs_uri,
+                    deletable: true,
+                    onlineOpenable: true,
+                    offlineOpenable: true
+                }))
+                setDerivTemplates(derivs);
             }
         })
     }, [])
 
     const deleteItem = (asset: NFTAsset) => {
-        let deletedIndex = nfts.indexOf(asset);
+        let deletedIndex = rootTemplates.indexOf(asset);
         if (deletedIndex > -1) {
-            let clonedData = [...nfts];
+            let clonedData = [...rootTemplates];
             clonedData.splice(deletedIndex, 1);
-            setNfts(clonedData);
+            setRootTemplates(clonedData);
         }
     }
 
     return (
-        <div className="flex flex-col relativejustify-center items-center text-white p-4" >
-            <div className="flex flex-row gap-2">
-                <NFTList data={nfts} onDeleted={deleteItem} />
+        <div className="flex flex-col relative justify-center text-white p-4" >
+            <div >
+                <h3>Root</h3>
+                <RootSubworldList data={rootTemplates} alignStart />
+            </div>
+            <div>
+                <h3>Deriv</h3>
+                <DerivSubworldList data={derivTemplates} alignStart />
             </div>
         </div>
     )
