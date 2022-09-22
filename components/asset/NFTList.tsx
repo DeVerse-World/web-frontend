@@ -13,7 +13,6 @@ type NFTListProps = {
 
 export default function NFTList(props: NFTListProps) {
     const [currentPage, setCurrentPage] = useState(1);
-
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
             <div className="flex flex-row flex-wrap justify-center">

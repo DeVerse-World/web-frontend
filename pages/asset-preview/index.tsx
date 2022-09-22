@@ -9,12 +9,13 @@ import { IoIosArrowDown } from 'react-icons/io';
 import CollapsableInfoCard from './collapsable_info_card';
 import { Avatar } from '../../data/model/avatar';
 import AvatarService from '../../data/services/AvatarService';
+import { FaEthereum } from 'react-icons/fa';
 
 function AssetPreviewScreen(props: WithRouterProps) {
     const router = useRouter();
     const [avatar, setAvatar] = useState<Avatar>(null);
     const [modelPath, setModelPath] = useState<string>(null);
-
+    const [creatorAddress, setCreatorAddress] = useState<string>();
 
     useEffect(() => {
         if (!router.isReady) return;
@@ -28,17 +29,51 @@ function AssetPreviewScreen(props: WithRouterProps) {
                 setModelPath(value.preprocess_url)
             });
         }
+        const mockWallet = "0x4Fc5Ea43E74B2b20b37F905B7D7f87FA2A5362Dd";
+        setCreatorAddress(`${mockWallet.substring(0, 7)}...${mockWallet.substring(mockWallet.length - 5, mockWallet.length - 1)}`)
+
     }, [router.isReady])
 
     return (
         <section id="section-content" className='flex flex-col gap-4'>
-            <div className='m-auto my-4'>
-                {
-                    modelPath &&
-                    <div className='border-4 rounded-lg bg-white md:w-[600px] md:h-[500px] w-[350px] '>
-                        <ModelViewer filePath={modelPath} />
+            <div className='m-auto my-4 flex-grow flex flex-row gap-4'>
+                <div className='flex flex-col items-center gap-4'>
+                    {
+                        modelPath &&
+                        <div className='rounded-2xl border-4 bg-white md:w-[300px] md:h-[400px] w-[350px] '>
+                            <ModelViewer filePath={modelPath} />
+                        </div>
+                    }
+                    <button className="w-[120px] h-[40px] rounded-3xl flex flex-row justify-center items-center text-white deverse-play-btn font-bold">BUY</button>
+                </div>
+                <div className='flex flex-col text-blue-300 w-[300px]'>
+                    <div className='text-3xl'>Avatar Name</div>
+                    <div>0/10</div>
+                    <div className='mt-8 flex flex-row justify-between'>
+                        DeverseWorld
+                        <div aria-label='abc' style={{
+                            whiteSpace: "nowrap",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis"
+                        }}>{creatorAddress}</div>
                     </div>
-                }
+
+                    <span className='w-full border-b-2 border-white'></span>
+                    <div >
+                        <div className='flex flex-row justify-between text-white'>
+                            <span>Price</span>
+                            <span className='flex-row flex items-center'>150 <FaEthereum /></span>
+                        </div>
+                        <div className='flex flex-row justify-between text-white'>
+                            <span>Type</span>
+                            <span>Companion</span>
+                        </div>
+                    </div>
+                    <div className='mt-8'>
+                        <span className='text-3xl'>Description</span>
+                        <p className='text-white '>A long description will go here A long description will go here A long description will go here A long description will go here</p>
+                    </div>
+                </div>
             </div>
 
 

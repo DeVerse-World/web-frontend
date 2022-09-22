@@ -1,6 +1,6 @@
 import { Avatar } from "./avatar";
 import { Event } from "./Event";
-import { DerivSubworldTemplates, RootSubworldTemplates, SubworldTemplate } from "./SubworldTemplate";
+import { DerivSubworldTemplate, RootSubworldTemplate } from "./SubworldTemplate";
 import { User } from "./user";
 
 export class Response<T> {
@@ -24,9 +24,9 @@ export type GetAccountResponse = Readonly<{
 
 export type GetUserProfileResponse = Readonly<{
     avatars: Avatar[],
-    created_deriv_subworld_templates: DerivSubworldTemplates[],
+    created_deriv_subworld_templates: DerivSubworldTemplate[],
     created_events: Event[],
-    created_root_subworld_templates: RootSubworldTemplates[],
+    created_root_subworld_templates: RootSubworldTemplate[],
     user: User
 }>
 
@@ -34,10 +34,14 @@ export type EventResponse = {
     events: Event[]
 }
 
+export type RootSubworldTemplatesResponse = {
+    subworld_templates: RootSubworldTemplate[];
+}
+
 export type RootSubworldTemplateResponse = {
-    subworld_templates: RootSubworldTemplates[];
+    subworld_template: RootSubworldTemplate;
 }
 
 export type DerivSubworldTemplateResponse = {
-    subworld_templates: DerivSubworldTemplates[];
+    subworld_templates: DerivSubworldTemplate[];
 }

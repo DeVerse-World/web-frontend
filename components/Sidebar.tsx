@@ -26,7 +26,7 @@ function SidebarItem(props: ItemProps) {
     const path = props.href.split('/').filter(v => v.length > 0)[0];
     useEffect(() => {
         if (!router.isReady) return
-        if ((path == undefined && router.pathname == "/") || (router.isReady && router.pathname.includes(path) && path.length > 0)) {
+        if ((path == undefined && router.pathname == "/") || (router.isReady && router.pathname.startsWith(`/${path}`) && path.length > 0)) {
             setActiveClass("active");
         } else {
             setActiveClass("");
@@ -67,14 +67,14 @@ function Sidebar(props: SidebarProps) {
                     <SidebarItem label="Market" href="/marketplace" icon={<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Create" href="/create" icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Mint" href="/mint-nft" icon={<GiMining fontSize="1.5rem" color='rgb(97 198 208)' />} />
-                    <Nav.Link href="https://docs.deverse.world" target="_blank">
-                        <div className="flex flex-col items-center py-2">
+                    <a href="https://docs.deverse.world" target="_blank" className="text-gray-600  no-underline">
+                        <div className="flex flex-col items-center py-2 ">
                             <FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />
-                            <span>
+                            <span className="text-sm">
                                 DOCS
                             </span>
                         </div>
-                    </Nav.Link>
+                    </a>
                 </div>
                 {props.children}
             </div>

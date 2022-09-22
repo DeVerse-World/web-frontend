@@ -1,5 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { Dropdown, Nav, NavDropdown, NavItem, Row, Tab, Tabs } from "react-bootstrap";
+import { AccordionContext, Dropdown, Nav, NavDropdown, NavItem, Row, Tab, Tabs, useAccordionButton } from "react-bootstrap";
 import BaseService from "../../data/services/BaseService";
 import CreateNftAssetSection from "../../components/asset/CreateNftAssetSection";
 import { useRouter } from "next/router";
@@ -16,6 +16,8 @@ import Footer from "../../components/common/Footer";
 import { MarketplaceTab } from "../../components/marketplace_tab";
 import BaseLayout from "../../components/common/BaseLayout";
 import { ApiStrategy } from "../../data/services/ApiStrategy";
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import FilterHeader from "../../components/FilterHeader";
 
 
 
@@ -27,14 +29,13 @@ function Marketplace() {
     const [visibleTab, setVisibleTab] = useState<MarketplaceTab>(MarketplaceTab.All);
 
     useEffect(() => {
-        loadNFTs(null)
+        // loadNFTs(null)
     }, [])
 
     const loadNFTs = async (query: string) => {
         setViewState(ViewState.LOADING)
         AssetService.getAll(ApiStrategy.GraphQl).then(assets => {
             setNfts(assets.filter((asset) => asset != null));
-            console.log(assets)
             setViewState(ViewState.SUCCESS)
         }).catch(e => {
             console.log(e)
@@ -66,8 +67,8 @@ function Marketplace() {
             case MarketplaceTab.TWO_D_IMAGE:
                 data = data.filter(e => e.assetType == AssetType.IMAGE_2D);
                 break;
-            case MarketplaceTab.SKIN:
-                data = data.filter(e => e.assetType == AssetType.SKIN);
+            case MarketplaceTab.AVATAR:
+                data = data.filter(e => e.assetType == AssetType.AVATAR);
                 break;
             case MarketplaceTab.RACE:
                 data = data.filter(e => e.assetType == AssetType.RACE);
@@ -85,37 +86,32 @@ function Marketplace() {
             )
         }
         return (
-            <NFTList data={data}  />
+            <NFTList data={data} />
         )
     }
 
     return (
         <div className='flex flex-row bg-deverse '>
             <Sidebar >
-                <Accordion defaultActiveKey="nft_type" className="w-[200px] bg-black text-white">
-                    <Accordion.Item eventKey="nft_type">
-                        <Accordion.Header  >NFT Type</Accordion.Header>
-                        <Accordion.Body className="flex flex-col bg-gray-900">
+                <Accordion defaultActiveKey="nft_type" className="w-[150px] h-[100%] text-white" flush>
+                    <FilterHeader eventKey="nft_type" label={'Categories'} />
+                    <Accordion.Collapse eventKey="nft_type">
+                        <div className="flex flex-col bg-gray-800 px-3 py-2 ">
                             <ListingTabComponent label="All"
                                 tab={MarketplaceTab.All} isSelected={visibleTab} onSelect={onSelectTab} />
-                            <ListingTabComponent label="2D Image"
+                            <ListingTabComponent label="Image"
                                 tab={MarketplaceTab.TWO_D_IMAGE} isSelected={visibleTab} onSelect={onSelectTab} />
-                            <ListingTabComponent label="Character Skin"
-                                tab={MarketplaceTab.SKIN} isSelected={visibleTab} onSelect={onSelectTab} />
-                            <ListingTabComponent label="Character Race"
+                            <ListingTabComponent label="Avatar"
+                                tab={MarketplaceTab.AVATAR} isSelected={visibleTab} onSelect={onSelectTab} />
+                            <ListingTabComponent label="Race"
                                 tab={MarketplaceTab.RACE} isSelected={visibleTab} onSelect={onSelectTab} />
-                            <ListingTabComponent label="Game Mode"
+                            <ListingTabComponent label="Gameplay"
                                 tab={MarketplaceTab.GAME_MODE} isSelected={visibleTab} onSelect={onSelectTab} />
-                            <ListingTabComponent label="Bot Logic"
+                            <ListingTabComponent label="Item" isDisable
                                 tab={MarketplaceTab.BOT_LOGIC} isSelected={visibleTab} onSelect={onSelectTab} />
-                        </Accordion.Body>
-                    </Accordion.Item>
-                    <Accordion.Item eventKey="nft_collection">
-                        <Accordion.Header>Collection</Accordion.Header>
-                        <Accordion.Body className="flex flex-col bg-gray-900">
-                            To be Announced
-                        </Accordion.Body>
-                    </Accordion.Item>
+                            <ListingTabComponent label="World" isDisable
+                                tab={MarketplaceTab.BOT_LOGIC} isSelected={visibleTab} onSelect={onSelectTab} /></div>
+                    </Accordion.Collapse>
                 </Accordion>
             </Sidebar>
 
