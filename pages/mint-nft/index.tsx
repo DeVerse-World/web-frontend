@@ -29,6 +29,7 @@ export default function MintNFT() {
     const uploadFileAssetRef = useRef(null);
     const uploadFile2dRef = useRef(null);
     const uploadFile3dRef = useRef(null);
+    const [tempInput, setTempInput] = useState('');
 
     useEffect(() => {
         if (!router.isReady) return;
@@ -199,8 +200,17 @@ export default function MintNFT() {
                                 required
                                 placeholder="Asset URL (e.g .png/ .pak) (*)"
                                 aria-label="Asset URL (e.g .png/ .pak)"
-                                value={fileAssetUri || ""}
-                                onChange={e => setfileAssetUri(e.target.value)}
+                                value={fileAssetUri || tempInput}
+                                onBlur={(e) => {
+                                    setfileAssetUri(e.target.value)
+                                    setTempInput('')
+                                }}
+                                onChange={e => {
+                                    if (fileAssetUri) {
+                                        setfileAssetUri(null)
+                                    }
+                                    setTempInput(e.target.value)
+                                } }
                             />
                             <Button className='bg-deverse-gradient'
                                 onClick={e => {
@@ -275,8 +285,7 @@ export default function MintNFT() {
                         />
                         <Button id="btn-mint-nft"
                             type="submit"
-                            className="font-bold bg-deverse-gradient rounded-[16px] py-2"
-                            onClick={createItem} >
+                            className="font-bold bg-deverse-gradient rounded-[16px] py-2">
                             Create Digital Asset
                         </Button>
                     </Form>
