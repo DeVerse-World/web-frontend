@@ -12,58 +12,64 @@ import { AppContext, ViewState } from "../../components/contexts/app_context";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 
 export async function getServerSideProps(context) {
-    const rootid  = context.params.rootid;
+    const rootid = context.params.rootid;
     // Fetch data from external API
-    const rootRes = await SubWorldTemplateService.fetchRootTemplate(rootid.toString());
-    let rootTemplate: RootTemplateViewModel;
-    if (rootRes.isSuccess()) {
-        rootTemplate = {
-            id: rootRes.value.subworld_template.id.toString(),
-            name: rootRes.value.subworld_template.display_name,
-            description: rootRes.value.subworld_template.display_name,
-            image: rootRes.value.subworld_template.thumbnail_centralized_uri,
-            fileAssetUriFromCentralized: rootRes.value.subworld_template.thumbnail_centralized_uri,
-            file2dUri: rootRes.value.subworld_template.thumbnail_centralized_uri,
-            fileAssetUri: rootRes.value.subworld_template.level_ipfs_uri,
-            file3dUri: rootRes.value.subworld_template.level_ipfs_uri,
-            onlineOpenable: true,
-            offlineOpenable: true
-        }
-    }
-    let derivTemplates = [];
 
-    const derivRes = await SubWorldTemplateService.fetchDerivTemplates(rootid.toString());
-    if (derivRes.isSuccess()) {
-        derivTemplates = derivRes.value.subworld_templates.map<DerivTemplateViewModel>(e => ({
-            id: e.id.toString(),
-            name: e.display_name,
-            description: e.display_name,
-            image: e.thumbnail_centralized_uri,
-            rootId: rootid.toString(),
-            fileAssetUriFromCentralized: e.thumbnail_centralized_uri,
-            file2dUri: e.thumbnail_centralized_uri,
-            fileAssetUri: e.level_ipfs_uri,
-            file3dUri: e.level_ipfs_uri,
-            onlineOpenable: true,
-            offlineOpenable: true
-        }))
-    }
     // Pass data to the page via props
     return {
         props: {
-            rootId: rootid,
-            rootTemplate: rootTemplate,
-            derivTemplates: derivTemplates
+            rootId: rootid
         }
     }
 }
 
-export default function Deriv({ rootId, rootTemplate, derivTemplates}) {
+export default function Deriv({ rootId }) {
     const { setViewState } = useContext(AppContext);
     const [showPlayModal, setShowPlayModal] = useState(false);
     const router = useRouter();
-    // const [rootTemplate, setRootTemplate] = useState<RootTemplateViewModel>();
-    // const [derivTemplates, setDerivTemplates] = useState<DerivTemplateViewModel[]>([]);
+    const [rootTemplate, setRootTemplate] = useState<RootTemplateViewModel>();
+    const [derivTemplates, setDerivTemplates] = useState<DerivTemplateViewModel[]>([]);
+    useEffect(() => {
+        setViewState(ViewState.LOADING);
+        SubWorldTemplateService.fetchRootTemplate(rootId).then(rootRes => {
+            if (rootRes.isSuccess()) {
+                setRootTemplate({
+                    id: rootRes.value.subworld_template.id.toString(),
+                    name: rootRes.value.subworld_template.display_name,
+                    description: rootRes.value.subworld_template.display_name,
+                    image: rootRes.value.subworld_template.thumbnail_centralized_uri,
+                    fileAssetUriFromCentralized: rootRes.value.subworld_template.thumbnail_centralized_uri,
+                    file2dUri: rootRes.value.subworld_template.thumbnail_centralized_uri,
+                    fileAssetUri: rootRes.value.subworld_template.level_ipfs_uri,
+                    file3dUri: rootRes.value.subworld_template.level_ipfs_uri,
+                    onlineOpenable: true,
+                    offlineOpenable: true
+                })
+            }
+        }).finally(() => {
+            setViewState(ViewState.SUCCESS)
+        });
+
+        SubWorldTemplateService.fetchDerivTemplates(rootId).then(derivRes => {
+            if (derivRes.isSuccess()) {
+                setDerivTemplates(derivRes.value.subworld_templates.map<DerivTemplateViewModel>(e => ({
+                    id: e.id.toString(),
+                    name: e.display_name,
+                    description: e.display_name,
+                    image: e.thumbnail_centralized_uri,
+                    rootId: rootId.toString(),
+                    fileAssetUriFromCentralized: e.thumbnail_centralized_uri,
+                    file2dUri: e.thumbnail_centralized_uri,
+                    fileAssetUri: e.level_ipfs_uri,
+                    file3dUri: e.level_ipfs_uri,
+                    onlineOpenable: true,
+                    offlineOpenable: true
+                })))
+            }
+        }).finally(() => {
+            setViewState(ViewState.SUCCESS)
+        });
+    }, [])
 
     return (
         <section id='section-content' className="flex flex-col">

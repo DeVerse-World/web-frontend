@@ -130,8 +130,8 @@ function Marketplace() {
                 </Accordion>
             </Sidebar>
 
-            <section id='section-content' className='bg-deverse flex flex-col text-white' >
-                <div className=" p-4">
+            <section id='section-content' className='bg-deverse flex flex-col text-white ' >
+                <div className="flex-grow p-4">
                     <span className="text-blue-300 text-3xl font-bold pl-4">Images</span>
                     <AvatarList alignStart data={images}/>
                 </div>
