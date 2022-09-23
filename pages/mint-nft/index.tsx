@@ -200,6 +200,7 @@ export default function MintNFT() {
                                 placeholder="Asset URL (e.g .png/ .pak) (*)"
                                 aria-label="Asset URL (e.g .png/ .pak)"
                                 value={fileAssetUri || ""}
+                                onChange={e => setfileAssetUri(e.target.value)}
                             />
                             <Button className='bg-deverse-gradient'
                                 onClick={e => {
@@ -244,7 +245,11 @@ export default function MintNFT() {
                         />
                         {
                             (assetType == AssetType.IMAGE_2D) && fileAssetUri && (
-                                <Image className="rounded mt-4 max-w-[80vw]" width={250} height={250} src={fileAssetUri} />
+                                <Image className="rounded mt-4 max-w-[80vw]" 
+                                width={250} 
+                                height={250} 
+                                src={fileAssetUri}
+                                alt="Image"/>
                             )
                         }
                         <input
