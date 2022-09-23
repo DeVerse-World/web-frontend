@@ -1,5 +1,5 @@
 import { CSSProperties, useContext, useEffect, useState } from "react";
-import { AppContext } from "../../components/contexts/app_context";
+import { AppContext } from "./contexts/app_context";
 
 type Props = {
     style: CSSProperties

@@ -1,11 +1,9 @@
 import IntroSection from '../components/home/IntroSection';
-import React, { useState, useEffect } from "react";
+import React, {  } from "react";
 import ProductSection from '../components/home/ProductsSection';
 import WelcomeSection from '../components/home/WelcomeSection';
 import HighlightFeatureSection from '../components/home/HighlightFeaturesSection';
 import Footer from '../components/common/Footer';
-import Sidebar from '../components/Sidebar';
-import { getCommonLayout } from '../components/common/CommonLayout';
 
 function Home(props) {
   // const [totalSupply, setTotalSupply] = useState("--")

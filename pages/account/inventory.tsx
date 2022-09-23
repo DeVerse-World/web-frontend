@@ -1,14 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import NFTDetailCard from "../../components/asset/NFTDetailCard";
 import NFTList from "../../components/asset/NFTList";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
-import BaseLayout from "../../components/common/BaseLayout";
-import { getCommonLayout } from "../../components/common/CommonLayout";
-import Footer from "../../components/common/Footer";
-import HomeNavbar from "../../components/common/HomeNavbar";
-import TabHeader from "../../components/common/TabHeader";
 import { AppContext } from "../../components/contexts/app_context";
-import Sidebar from "../../components/Sidebar";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AssetService from "../../data/services/AssetService";
 

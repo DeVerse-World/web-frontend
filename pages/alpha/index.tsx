@@ -5,7 +5,7 @@ import EventList, { EventCard, EventViewModel } from "../../components/asset/Eve
 import ModelViewer from "../../components/ModelViewer";
 import EventsService from "../../data/services/EventsService";
 import { getTimeString } from "../../utils/time_util";
-import { getAlphaLayout } from "./AlphaLayout";
+import { getAlphaLayout } from "../../components/AlphaLayout";
 
 
 function Info() {

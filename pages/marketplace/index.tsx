@@ -6,7 +6,7 @@ import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from "../../data/enum/asset_type";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import Accordion from 'react-bootstrap/Accordion';
-import ListingTabComponent from "./ListingTab";
+import ListingTabComponent from "../../data/services/ListingTab";
 import Sidebar from "../../components/Sidebar";
 import Footer from "../../components/common/Footer";
 import { MarketplaceTab } from "../../components/marketplace_tab";
@@ -75,19 +75,19 @@ function Marketplace() {
         let data = nfts;
         switch (visibleTab) {
             case MarketplaceTab.TWO_D_IMAGE:
-                data = data.filter(e => e.assetType == AssetType.IMAGE_2D);
+                data = data.filter(e => e.assetType === AssetType.IMAGE_2D);
                 break;
             case MarketplaceTab.AVATAR:
-                data = data.filter(e => e.assetType == AssetType.AVATAR);
+                data = data.filter(e => e.assetType === AssetType.AVATAR);
                 break;
             case MarketplaceTab.RACE:
-                data = data.filter(e => e.assetType == AssetType.RACE);
+                data = data.filter(e => e.assetType === AssetType.RACE);
                 break;
             case MarketplaceTab.BOT_LOGIC:
-                data = data.filter(e => e.assetType == AssetType.BOT_LOGIC);
+                data = data.filter(e => e.assetType === AssetType.BOT_LOGIC);
                 break;
             case MarketplaceTab.GAME_MODE:
-                data = data.filter(e => e.assetType == AssetType.GAME_MODE);
+                data = data.filter(e => e.assetType === AssetType.GAME_MODE);
                 break;
         }
         if (data.length == 0) {

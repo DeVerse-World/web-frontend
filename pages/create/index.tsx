@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import AvatarService from "../../data/services/AvatarService";
-import { getCreateLayout } from "./CreateLayout";
+import { getCreateLayout } from "../../data/services/CreateLayout";
 
 
 function Avatar() {
@@ -23,6 +23,7 @@ function Avatar() {
 
     return (
         <iframe allow="camera *; microphone *"
+            title="Ready Player Me"
             className='rpo'
             src='https://deverse.readyplayer.me/avatar?frameApi' />
     )

@@ -11,9 +11,9 @@ function PaginatorButton(props: PaginatorButtonProps) {
         className += "active";
     }
     let innerValue = props.value;
-    if (props.value == '<') {
+    if (props.value === '<') {
         innerValue = '-2';
-    } else if (props.value == '>') {
+    } else if (props.value === '>') {
         innerValue = '-1';
     }
     return (
@@ -39,9 +39,9 @@ function Paginator(props: PaginatorProps) {
         if (!newPage) {
             return;
         }
-        if (newPage == "-2") {
+        if (newPage === "-2") {
             newPage = 1;
-        } else if (newPage == "-1") {
+        } else if (newPage === "-1") {
             newPage = props.totalPage
         }
         setCurrentPage(newPage)
@@ -67,13 +67,13 @@ function Paginator(props: PaginatorProps) {
 
         for (let i = 1; i <= 3; i++) {
             let numb = currentPage + i - 2;
-            if (currentPage == 1) {
+            if (currentPage === 1) {
                 numb++;
-            } else if (currentPage == props.totalPage) {
+            } else if (currentPage === props.totalPage) {
                 numb--;
             }
             if (numb > 0 && numb <= props.totalPage) {
-                elements.push(<PaginatorButton key={numb} value={numb} active={currentPage == numb} />)
+                elements.push(<PaginatorButton key={numb} value={numb} active={currentPage === numb} />)
             }
         }
         if (currentPage < props.totalPage - 1 && props.totalPage > 3) {

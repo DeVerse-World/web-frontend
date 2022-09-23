@@ -1,4 +1,4 @@
-import { getAlphaLayout } from "./AlphaLayout";
+import { getAlphaLayout } from "../../components/AlphaLayout";
 
 
 function Leaderboard() {

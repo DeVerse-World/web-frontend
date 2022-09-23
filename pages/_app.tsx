@@ -9,7 +9,6 @@ import Head from 'next/head'
 import { AppContextProvider } from '../components/contexts/app_context';
 import LoadingScreen from '../components/LoadingScreen';
 import { SSRProvider } from 'react-bootstrap';
-import HomeNavbar from '../components/common/HomeNavbar';
 import GoogleTagManager from '../components/analytics/GoogleTagManager';
 import GTMHeader from '../components/analytics/GTMHeader';
 import { Router } from 'next/router';

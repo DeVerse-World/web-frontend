@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React, {useContext, useState} from "react";
-import { AppContext } from "../../components/contexts/app_context";
-import { AccountTab } from "../../data/enum/PageTabs";
+import { AppContext } from "./contexts/app_context";
+import { AccountTab } from "../data/enum/PageTabs";
 import AvatarContainer from "./AvatarContainer";
-import LoginModal from "../../components/login/LoginModal";
+import LoginModal from "./login/LoginModal";
 
 type Props = {
     onSwitchTab: (AccountTab) => void
