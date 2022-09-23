@@ -16,9 +16,6 @@ function Footer(props) {
           <a id="contact-email" title="email" target="_blank" href="mailto:info@cosugames.com" >
             <MdEmail className="mx-2" color="white" fontSize="1.5rem" />
           </a>
-          <a id="contact-telegram" title="telegram" target="_blank" href="https://t.me/DeverseWorld" >
-            <FaTelegramPlane className="mx-2" color="white" fontSize="1.5rem" />
-          </a>
           <a id="contact-twitter" title="twitter" target="_blank" href="https://twitter.com/DeverseWorld">
             <AiOutlineTwitter className="mx-2" color="white" fontSize="1.5rem" />
           </a>
