@@ -1,14 +1,10 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { AccordionContext, Dropdown, Nav, NavDropdown, NavItem, Row, Tab, Tabs, useAccordionButton } from "react-bootstrap";
-import BaseService from "../../data/services/BaseService";
-import CreateNftAssetSection from "../../components/asset/CreateNftAssetSection";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import NFTList from "../../components/asset/NFTList";
 import AssetService from "../../data/services/AssetService";
 import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from "../../data/enum/asset_type";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
-import NFTDetailCard from "../../components/asset/NFTDetailCard";
 import Accordion from 'react-bootstrap/Accordion';
 import ListingTabComponent from "./ListingTab";
 import Sidebar from "../../components/Sidebar";
@@ -16,7 +12,6 @@ import Footer from "../../components/common/Footer";
 import { MarketplaceTab } from "../../components/marketplace_tab";
 import BaseLayout from "../../components/common/BaseLayout";
 import { ApiStrategy } from "../../data/services/ApiStrategy";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import FilterHeader from "../../components/FilterHeader";
 import AvatarList, { AvatarViewModel } from "../../components/asset/AvatarList";
 
