@@ -88,10 +88,15 @@ body * {
     z-index: 10;
 }
 
-#deverse-sidebar .active {
+.deverse-sidebar-item.active {
     color: white;
     border-radius: 1rem;
     background-color: slategray;
+}
+
+.deverse-sidebar-item:hover {
+    background-color: rgb(112, 38, 197);
+    border-radius: 1rem;
 }
 
 @media only screen and (max-width: 600px) {
