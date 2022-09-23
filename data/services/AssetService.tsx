@@ -193,7 +193,14 @@ class AssetService extends BaseService {
                         })
                     }));
                 })
-                data = await Promise.all(parallelJobs)
+                console.log(`waiting for ${parallelJobs.length} jobs`)
+                const res = await Promise.allSettled(parallelJobs)
+                res.forEach(assetRes => {
+                    if (assetRes.status == "fulfilled") {
+                        data.push(assetRes.value)
+                    }
+                })
+                 
                 break;
             default:
                 throw new Error("Unrecognized api ")

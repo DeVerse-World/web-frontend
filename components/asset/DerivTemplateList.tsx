@@ -66,14 +66,14 @@ function DerivTemplateCard(props: CardProps) {
         // })
     }
     return (
-        <div className="deverse-border w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white m-2">
+        <div className="w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white m-2">
             <div className="flex justify-center h-[225px] p-4 ">
                 <img src={props.data.file2dUri || "/images/placeholder.png"} />
             </div>
             <p className="px-4 text-2xl font-semibold h-12">{props.data.name}</p>
             <div className=" px-4 flex flex-row gap-1 items-center text-lg">
-                15<TbWorld className="mr-4" />
-                35/500<BsFillPeopleFill />
+                <TbWorld />15
+                <BsFillPeopleFill className="ml-4" />35/500
             </div>
             <div className="px-4 flex flex-row items-center">
                 150 <FaEthereum />
@@ -89,7 +89,13 @@ function DerivTemplateCard(props: CardProps) {
                         numberOfStars={5}
                         name='rating' />
                 </div>
-                <button className="deverse-play-btn w-16 h-8 flex flex-row justify-center rounded-2xl items-center" onClick={() => setShowPlayModal(true)}><BsPlayFill /></button>
+                <button className="w-[60px] h-[25px] text-white rounded-3xl flex flex-row justify-center items-center deverse-play-btn"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setShowPlayModal(true);
+                    }}>
+                    <BsPlayFill />
+                </button>
             </div>
             {showPlayModal && <PlayModal templateId={props.data.id} onClose={() => setShowPlayModal(false)} />}
 

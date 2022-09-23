@@ -25,22 +25,22 @@ function Content() {
                     }
                     return asset;
                 })
-                // setNfts(convertedData)
-                // setViewState(ViewState.SUCCESS)
-                const fetchJobs: Promise<any>[] = [];
-                convertedData.forEach(e => {
-                    if (e.modelUri.includes('.glb')) {
-                        fetchJobs.push(AvatarService.get2DAvatarRPM(e.modelUri))
-                    }
-                })
-                Promise.allSettled(fetchJobs).then(images => {
-                    convertedData.forEach((e, i) => {
-                        e.image = images[i].value
-                    })
-                    setNfts(convertedData)
-                }).finally(() => {
-                    setViewState(ViewState.SUCCESS)
-                })
+                setNfts(convertedData)
+                setViewState(ViewState.SUCCESS)
+                // const fetchJobs: Promise<any>[] = [];
+                // convertedData.forEach(e => {
+                //     if (e.modelUri.includes('.glb')) {
+                //         fetchJobs.push(AvatarService.get2DAvatarRPM(e.modelUri))
+                //     }
+                // })
+                // Promise.allSettled(fetchJobs).then(images => {
+                //     convertedData.forEach((e, i) => {
+                //         e.image = images[i].value
+                //     })
+                //     setNfts(convertedData)
+                // }).finally(() => {
+                //     setViewState(ViewState.SUCCESS)
+                // })
             }
         }).catch((e) => {
             console.log(e)

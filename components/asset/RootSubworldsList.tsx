@@ -64,38 +64,44 @@ function RootTemplateCard(props: CardProps) {
             // setIsDeleting(false);
         })
     }
-    return (
-        <div className="deverse-border w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white m-2">
-            <div className="flex justify-center h-[225px] p-4 ">
-                <img src={props.data.file2dUri || "/images/placeholder.png"} />
-            </div>
-            <p className="px-4 text-2xl font-semibold h-12">{props.data.name}</p>
-            <div className="px-4 flex flex-row items-center">
-                150 <FaEthereum />
-            </div>
-            <div className="flex flex-row px-4 justify-between">
-                <div className="flex flex-col">
-                    <StarRatings
-                        rating={5}
-                        starRatedColor="yellow"
-                        starDimension="20px"
-                        starSpacing="1px"
-                        // changeRating={this.changeRating}
-                        numberOfStars={5}
-                        name='rating' />
-                    <Link href={`/subworlds/${props.data.id}`}>
-                        <h5 style={{
-                            cursor: "pointer",
-                            color: "rgb(97 198 208)",
-                            fontWeight: 800
-                        }}>Details</h5>
-                    </Link>
-                </div>
-                <button className="deverse-play-btn w-16 h-8 flex flex-row justify-center rounded-2xl items-center" onClick={() => setShowPlayModal(true)}><BsPlayFill /></button>
-            </div>
-            {showPlayModal && <PlayModal templateId={props.data.id} onClose={() => setShowPlayModal(false)} />}
 
-        </div>
+    return (
+        <>
+            <Link href={`/subworlds/${props.data.id}`}>
+                <div className="nft-card-hover w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white m-2">
+                    <div className="flex justify-center h-[225px] p-4 ">
+                        <img src={props.data.file2dUri || "/images/placeholder.png"} />
+                    </div>
+                    <p className="px-4 text-2xl font-semibold h-12">{props.data.name}</p>
+                    <div className="px-4 flex flex-row items-center">
+                        150 <FaEthereum />
+                    </div>
+                    <div className="flex flex-row px-4 justify-between">
+                        <div className="flex flex-col">
+                            <StarRatings
+                                rating={5}
+                                starRatedColor="yellow"
+                                starDimension="20px"
+                                starSpacing="1px"
+                                // changeRating={this.changeRating}
+                                numberOfStars={5}
+                                name='rating' />
+                        </div>
+                        
+                        <button className="w-[60px] h-[25px] text-white rounded-3xl flex flex-row justify-center items-center deverse-play-btn"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setShowPlayModal(true);
+                            }}>
+                            <BsPlayFill />
+                        </button>
+                    </div>
+
+                </div>
+            </Link >
+            {showPlayModal && <PlayModal templateId={props.data.id} onClose={() => setShowPlayModal(false)} />}
+        </>
+
     )
 }
 

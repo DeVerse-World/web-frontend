@@ -60,11 +60,11 @@ function EventsPage() {
                                 tab={MarketplaceTab.GALLERY} isSelected={visibleTab} onSelect={onSelectTab} />
                             <ListingTabComponent label="Giveaway"
                                 tab={MarketplaceTab.GIVEAWAY} isSelected={visibleTab} onSelect={onSelectTab} />
-                            <ListingTabComponent label="Showcase" 
+                            <ListingTabComponent label="Showcase"
                                 tab={MarketplaceTab.SHOWCASE} isSelected={visibleTab} onSelect={onSelectTab} />
-                            <ListingTabComponent label="Simulation" 
+                            <ListingTabComponent label="Simulation"
                                 tab={MarketplaceTab.SIMULATION} isSelected={visibleTab} onSelect={onSelectTab} />
-                            <ListingTabComponent label="Treasure Hunt" 
+                            <ListingTabComponent label="Treasure Hunt"
                                 tab={MarketplaceTab.TREASURE_HUNT} isSelected={visibleTab} onSelect={onSelectTab} />
                         </div>
                     </Accordion.Collapse>
@@ -72,9 +72,7 @@ function EventsPage() {
             </Sidebar>
 
             <section id='section-content' className='flex flex-col justify-between '>
-                <div className="flex flex-row gap-2">
-                    <EventList data={nfts} />
-                </div>
+                <EventList data={nfts} />
                 <Footer />
             </section>
         </div>

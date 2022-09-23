@@ -48,7 +48,7 @@ export type EventViewModel = {
 
 export function EventCard(props: EventCardProps) {
     return (
-        <div className="nft-card h-[400px] w-[500px] flex flex-col">
+        <div className="nft-card md:h-[400px] h-[250px] md:w-[500px] w-[350px] flex flex-col">
             <div className="h-[225px] flex flex-row justify-center rounded-xl overflow-hidden">
                 <img src={props.data.image || "/images/event-placeholder.jpg"} className="w-[100%]"/>
             </div>
@@ -60,8 +60,11 @@ export function EventCard(props: EventCardProps) {
                     textOverflow: "ellipsis"
                 }}>{props.data.name}</span>
                 <div className="flex flex-row justify-between flex-grow items-end">
-                    <span className="text-white">Author: {props.data.author}</span>
-                    <button className="w-[120px] h-[40px]  rounded-3xl flex flex-row justify-center items-center deverse-play-btn"><BsPlayFill /></button>
+                    <div className="text-white flex-row flex items-center gap-2">
+                        <img src="/images/logo.png"/>
+                        <span className="text-lg">{props.data.author || "Deverse World"} </span>
+                    </div>
+                    <button className="w-[120px] h-[40px] text-white rounded-3xl flex flex-row justify-center items-center deverse-play-btn"><BsPlayFill /></button>
                 </div>
             </div>
         </div>
