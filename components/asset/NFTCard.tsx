@@ -63,7 +63,8 @@ function NFTCard(props: Props) {
 
     const onOpenGame = (gameMode) => {
         var appPath = `deverseworld://?template_id=${props.data.id}&mode=${gameMode}`
-        window.open(appPath)
+        console.log('onOpenGame');
+        // window.open(appPath)
     }
 
     const renderOnlineOpen = () => {
