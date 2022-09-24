@@ -76,9 +76,6 @@ function EventsPage() {
                 <Footer />
             </section>
         </div>
-
-
-
     )
 }
 EventsPage.getLayout = page => (
