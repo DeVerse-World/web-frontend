@@ -23,3 +23,4 @@ const CreateLayout = (props: Props) => (
 
 export const getCreateLayout = page => <CreateLayout>{page}</CreateLayout>;
 
+export default CreateLayout;

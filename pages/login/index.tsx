@@ -37,13 +37,11 @@ export default function LoginLink(props) {
         }
     }, [router.query])
     return (
-        <div className='flex flex-row bg-deverse '>
-            <section id='section-content' className='flex flex-col text-white justify-between '>
-                <div className="text-center m-auto">
-                    <h1>{connectionStatus}</h1>
-                </div>
-                <Footer />
-            </section>
-        </div>
+        <section id='section-content' className='flex flex-col text-white justify-between '>
+            <div className="text-center m-auto">
+                <h1>{connectionStatus}</h1>
+            </div>
+            <Footer />
+        </section>
     )
 }

@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { FormControl, InputGroup } from "react-bootstrap";
-import { AppContext } from "../../components/contexts/app_context";
+import { AppContext } from "./contexts/app_context";
 
 function AccountSetting() {
     const { user } = useContext(AppContext);

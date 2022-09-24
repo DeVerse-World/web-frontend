@@ -1,16 +1,16 @@
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useEffect, useState } from "react";
-import EventList, { EventViewModel } from "../../components/asset/EventList";
+import EventList, { EventCard, EventViewModel } from "../../components/asset/EventList";
 import ModelViewer from "../../components/ModelViewer";
 import EventsService from "../../data/services/EventsService";
 import { getTimeString } from "../../utils/time_util";
-import { getAlphaLayout } from "./AlphaLayout";
+import { getAlphaLayout } from "../../components/AlphaLayout";
 
 
 function Info() {
     const [modelPath, setModelPath] = useState<string>(null);
-    const [ongoingEvents, setOngoingEvents] = useState<EventViewModel[]>([]);
+    const [ongoingEvent, setOngoingEvents] = useState<EventViewModel>();
 
     useEffect(() => {
         EventsService.fetchEvents().then(res => {
@@ -25,13 +25,13 @@ function Info() {
                     participants: e.max_num_participants
                 }))
                 if (data.length > 0)
-                    setOngoingEvents([data[0]]);
+                    setOngoingEvents(data[0]);
             }
         })
     }, [])
 
     return (
-        <div className="flex items-center text-white p-4" >
+        <div className="flex items-center flex-row justify-evenly text-white p-4" >
             <div className="flex flex-col items-center">
                 <button className="deverse-play-btn p-2 rounded-2xl">Change</button>
                 <div className='md:w-[300px] md:h-[600px] w-[350px] '>
@@ -45,7 +45,7 @@ function Info() {
                     </Canvas>
                 </div>
             </div>
-            <EventList data={ongoingEvents} />
+            {ongoingEvent && <EventCard key={0} data={ongoingEvent} />}  
         </div>
     )
 }

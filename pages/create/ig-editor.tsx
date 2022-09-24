@@ -1,5 +1,5 @@
 import DownloadDemoButton from "../../components/DownloadDemoButton";
-import { getCreateLayout } from "./CreateLayout";
+import { getCreateLayout } from "../../data/services/CreateLayout";
 
 
 function Editor() {

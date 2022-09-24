@@ -4,7 +4,6 @@ import { getAccountWrapperLayout } from "../../components/common/AccountWrapperL
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AccountService from "../../data/services/AccountService";
-import AvatarService from "../../data/services/AvatarService";
 
 function Content() {
     const { setViewState } = useContext(AppContext);
@@ -18,7 +17,7 @@ function Content() {
                         id: item.id.toString(),
                         supply: 5,
                         maxSupply: 15,
-                        name: `Avatar #${item.id}`, 
+                        name: `Avatar #${item.id}`,
                         modelUri: item.preprocess_url,
                         image: item.postprocess_url,
                         deletable: true,
@@ -26,7 +25,7 @@ function Content() {
                     return asset;
                 })
                 setNfts(convertedData)
-                setViewState(ViewState.SUCCESS)
+
                 // const fetchJobs: Promise<any>[] = [];
                 // convertedData.forEach(e => {
                 //     if (e.modelUri.includes('.glb')) {
@@ -45,6 +44,8 @@ function Content() {
         }).catch((e) => {
             console.log(e)
             setViewState(ViewState.ERROR)
+        }).finally(() => {
+            setViewState(ViewState.SUCCESS)
         })
     }, [])
 

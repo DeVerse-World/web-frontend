@@ -5,7 +5,6 @@ import StarRatings from 'react-star-ratings';
 import PlayModal from "./PlayModal";
 import { BsFillPeopleFill, BsPlayFill } from "react-icons/bs";
 import { TbWorld } from "react-icons/tb";
-import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 
 export type DerivTemplateViewModel = {
     id?: string;

@@ -193,7 +193,6 @@ class AssetService extends BaseService {
                         })
                     }));
                 })
-                console.log(`waiting for ${parallelJobs.length} jobs`)
                 const res = await Promise.allSettled(parallelJobs)
                 res.forEach(assetRes => {
                     if (assetRes.status == "fulfilled") {

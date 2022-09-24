@@ -1,4 +1,5 @@
 import customProtocolCheck from "custom-protocol-check";
+import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { BsPlayFill } from "react-icons/bs";
 
@@ -8,13 +9,15 @@ type Props = {
 }
 
 export default function PlayModal(props: Props) {
+    const [showDownload, setShowDownload] = useState(false);
+
     const openApp = (templateId, mode) => {
         if (templateId) {
             let appUrl = `deverseworld://?template_id=${props.templateId}&mode=${mode}`;
             customProtocolCheck(
                 appUrl,
                 () => {
-                    window.alert("Please download game")
+                    setShowDownload(true)
                 },
                 () => {
                     console.log("Custom protocol found and opened the file successfully.");
@@ -24,13 +27,26 @@ export default function PlayModal(props: Props) {
             window.alert("missing template id")
         }
     }
-    return (
-        <Modal centered show={true}
-            onHide={props.onClose}
-            contentClassName="bg-black" dialogClassName="deverse-dialog">
-            <Modal.Header >
-                <h3 className="text-white text-center">Launch Game Instance</h3>
-            </Modal.Header>
+
+    const renderBody = () => {
+        if (showDownload) {
+            return (
+                <Modal.Body className="text-white text-lg break-words flex flex-col gap-4 items-center">
+                    <h5 className="text-white text-center w-64">Please download game client to start your journey</h5>
+                    <button className="deverse-play-btn w-32 rounded-3xl" onClick={(e) => {
+                        alert('Add handler')
+                    }}>
+                        Download
+                    </button>
+                    <button className="bg-deverse-gradient rounded-3xl w-32" onClick={(e) => {
+                        setShowDownload(false)
+                    }}>
+                        Cancel
+                    </button>
+                </Modal.Body>
+            )
+        }
+        return (
             <Modal.Body className="text-white text-lg break-words flex flex-row gap-4 items-center">
                 <button className="deverse-play-btn w-32 rounded-3xl" onClick={(e) => {
                     e.stopPropagation();
@@ -40,11 +56,22 @@ export default function PlayModal(props: Props) {
                 </button>
                 <button className="deverse-play-btn w-32 rounded-3xl" onClick={(e) => {
                     e.stopPropagation();
-                   openApp(props.templateId, "ONLINE");
+                    openApp(props.templateId, "ONLINE");
                 }}>
                     Online
                 </button>
             </Modal.Body>
+        )
+    }
+
+    return (
+        <Modal centered show={true}
+            onHide={props.onClose}
+            contentClassName="bg-black" dialogClassName="deverse-dialog">
+            {!showDownload && <Modal.Header className="flex flex-row">
+                <h3 className="text-white text-center">Launch Game Instance</h3>
+            </Modal.Header>}
+            {renderBody()}
         </Modal>
     )
 }

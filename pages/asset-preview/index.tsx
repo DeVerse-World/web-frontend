@@ -1,12 +1,9 @@
 import { WithRouterProps } from 'next/dist/client/with-router';
-import { useRouter, withRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react'
-import { Card, Collapse } from 'react-bootstrap';
 import Footer from '../../components/common/Footer';
 import ModelViewer from '../../components/ModelViewer';
 import AssetService from "../../data/services/AssetService";
-import { IoIosArrowDown } from 'react-icons/io';
-import CollapsableInfoCard from './collapsable_info_card';
 import { Avatar } from '../../data/model/avatar';
 import AvatarService from '../../data/services/AvatarService';
 import { FaEthereum } from 'react-icons/fa';

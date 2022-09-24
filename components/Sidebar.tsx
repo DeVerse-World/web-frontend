@@ -31,20 +31,15 @@ function SidebarItem(props: ItemProps) {
         } else {
             setActiveClass("");
         }
-    },[router.isReady, router.pathname])
-    
-    return (
-        <div className="w-[100%] cursor-pointer">
-            <Link href={props.href} >
-                <div className={`flex flex-col items-center py-2 ${activeClass}`} >
-                    {props.icon}
-                    <span className="text-sm">
-                        {props.label.toUpperCase()}
-                    </span>
-                </div>
-            </Link>
-        </div>
+    }, [router.isReady, router.pathname])
 
+    return (
+        <Link href={props.href} >
+            <div className={`w-[100%] text-sm cursor-pointer deverse-sidebar-item flex flex-col items-center py-2 ${activeClass}`} >
+                {props.icon}
+                {props.label.toUpperCase()}
+            </div>
+        </Link>
     );
 }
 
@@ -68,7 +63,7 @@ function Sidebar(props: SidebarProps) {
                     <SidebarItem label="Create" href="/create" icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Mint" href="/mint-nft" icon={<GiMining fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <a href="https://docs.deverse.world" target="_blank" className="text-gray-600  no-underline">
-                        <div className="flex flex-col items-center py-2 ">
+                        <div className="flex flex-col items-center py-2 deverse-sidebar-item">
                             <FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />
                             <span className="text-sm">
                                 DOCS

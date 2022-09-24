@@ -1,22 +1,17 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { AccordionContext, Dropdown, Nav, NavDropdown, NavItem, Row, Tab, Tabs, useAccordionButton } from "react-bootstrap";
-import BaseService from "../../data/services/BaseService";
-import CreateNftAssetSection from "../../components/asset/CreateNftAssetSection";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import NFTList from "../../components/asset/NFTList";
 import AssetService from "../../data/services/AssetService";
 import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from "../../data/enum/asset_type";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
-import NFTDetailCard from "../../components/asset/NFTDetailCard";
 import Accordion from 'react-bootstrap/Accordion';
-import ListingTabComponent from "./ListingTab";
+import ListingTabComponent from "../../data/services/ListingTab";
 import Sidebar from "../../components/Sidebar";
 import Footer from "../../components/common/Footer";
 import { MarketplaceTab } from "../../components/marketplace_tab";
 import BaseLayout from "../../components/common/BaseLayout";
 import { ApiStrategy } from "../../data/services/ApiStrategy";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import FilterHeader from "../../components/FilterHeader";
 import AvatarList, { AvatarViewModel } from "../../components/asset/AvatarList";
 
@@ -80,19 +75,19 @@ function Marketplace() {
         let data = nfts;
         switch (visibleTab) {
             case MarketplaceTab.TWO_D_IMAGE:
-                data = data.filter(e => e.assetType == AssetType.IMAGE_2D);
+                data = data.filter(e => e.assetType === AssetType.IMAGE_2D);
                 break;
             case MarketplaceTab.AVATAR:
-                data = data.filter(e => e.assetType == AssetType.AVATAR);
+                data = data.filter(e => e.assetType === AssetType.AVATAR);
                 break;
             case MarketplaceTab.RACE:
-                data = data.filter(e => e.assetType == AssetType.RACE);
+                data = data.filter(e => e.assetType === AssetType.RACE);
                 break;
             case MarketplaceTab.BOT_LOGIC:
-                data = data.filter(e => e.assetType == AssetType.BOT_LOGIC);
+                data = data.filter(e => e.assetType === AssetType.BOT_LOGIC);
                 break;
             case MarketplaceTab.GAME_MODE:
-                data = data.filter(e => e.assetType == AssetType.GAME_MODE);
+                data = data.filter(e => e.assetType === AssetType.GAME_MODE);
                 break;
         }
         if (data.length == 0) {
@@ -130,8 +125,8 @@ function Marketplace() {
                 </Accordion>
             </Sidebar>
 
-            <section id='section-content' className='bg-deverse flex flex-col text-white' >
-                <div className=" p-4">
+            <section id='section-content' className='bg-deverse flex flex-col text-white ' >
+                <div className="flex-grow p-4">
                     <span className="text-blue-300 text-3xl font-bold pl-4">Images</span>
                     <AvatarList alignStart data={images}/>
                 </div>
