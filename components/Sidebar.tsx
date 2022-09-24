@@ -31,20 +31,15 @@ function SidebarItem(props: ItemProps) {
         } else {
             setActiveClass("");
         }
-    },[router.isReady, router.pathname])
-    
-    return (
-        <div className="w-[100%] cursor-pointer">
-            <Link href={props.href} >
-                <div className={`deverse-sidebar-item flex flex-col items-center py-2 ${activeClass}`} >
-                    {props.icon}
-                    <span className="text-sm">
-                        {props.label.toUpperCase()}
-                    </span>
-                </div>
-            </Link>
-        </div>
+    }, [router.isReady, router.pathname])
 
+    return (
+        <Link href={props.href} >
+            <div className={`w-[100%] text-sm cursor-pointer deverse-sidebar-item flex flex-col items-center py-2 ${activeClass}`} >
+                {props.icon}
+                {props.label.toUpperCase()}
+            </div>
+        </Link>
     );
 }
 
