@@ -99,7 +99,7 @@ export default function Deriv({ rootId }) {
                                     <p>Không còn nhiều cảnh xếp hàng dài trước các cửa hàng thời trang xa xỉ, ăn ở nhà hàng sang trọng dịp cuối tuần và du lịch các đảo nhiệt đớ</p>
                                 </div>
                                 <div className="text-blue-200">
-                                    Connected worlds: {derivTemplates?.length}
+                                    Connected worlds: {derivTemplates.length}
                                 </div>
                             </div>
                             <DerivSubworldList alignStart data={derivTemplates} />
