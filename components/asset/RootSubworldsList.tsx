@@ -39,7 +39,7 @@ function RootSubworldList(props: ListProps) {
 
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-full">
-            <div className={`flex flex-row flex-wrap gap-2 ${props.alignStart ? "w-full" : "justify-center"}`}>
+            <div className={`flex px-auto flex-row flex-wrap gap-2 ${props.alignStart ? "w-full" : "justify-center"}`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item, index) =>
                         <RootTemplateCard key={index} data={item} />)

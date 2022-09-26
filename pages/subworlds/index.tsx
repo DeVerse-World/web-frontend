@@ -57,14 +57,14 @@ function SubworldsPage() {
                         <div className="flex flex-col bg-gray-800 px-3 py-2 ">
                             <ListingTabComponent label="All"
                                 tab={MarketplaceTab.All} isSelected={visibleTab} onSelect={onSelectTab} />
-                            <ListingTabComponent label="Test"
-                                tab={MarketplaceTab.BATTLE} isSelected={visibleTab} onSelect={onSelectTab} />
+                            {/* <ListingTabComponent label="Test"
+                                tab={MarketplaceTab.BATTLE} isSelected={visibleTab} onSelect={onSelectTab} /> */}
                         </div>
                     </Accordion.Collapse>
                 </Accordion>
             </Sidebar>
             <section id='section-content' className='flex flex-col justify-between '>
-                <RootSubworldList data={rootTemplates} />
+                <RootSubworldList data={rootTemplates} alignStart/>
                 <Footer />
             </section >
         </div>
