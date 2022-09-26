@@ -9,6 +9,10 @@ import {RiImageFill} from "react-icons/ri";
 import Link from "next/link";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import { formatWalletAddress } from "../../utils/wallet_util";
+import AvatarList, { AvatarViewModel } from "../../components/asset/AvatarList";
+import EventList, { EventViewModel } from "../../components/asset/EventList";
+import RootSubworldList, { TemplateViewModel } from "../../components/asset/RootSubworldsList";
+import { getTimeString } from "../../utils/time_util";
 // ChartJS.register(
 //     CategoryScale,
 //     LinearScale,
@@ -26,10 +30,10 @@ function Account() {
     const { user } = useContext(AppContext);
     const [showAddMetamask, setShowAddMetamask] = useState(false);
     const [showAddGoogle, setShowAddGoogle] = useState(false);
-    const [avatarCount, setAvatarCount] = useState(0);
-    const [eventCount, setEventCount] = useState(0);
-    const [subworldTemplateCount, setSubworldTemplateCount] = useState(0);
-    const [inventoryCount, setInventoryCount] = useState(0);
+
+    const [avatars, setAvatars] = useState<AvatarViewModel[]>([]);
+    const [events, setEvents] = useState<EventViewModel[]>([]);
+    const [templates, setTemplates] = useState<TemplateViewModel[]>([]);
 
     useEffect(() => {
         if (user == null) {
@@ -37,16 +41,55 @@ function Account() {
         }
         AccountService.getUserInfo().then(e => {
             if (e.isSuccess && e.value) {
-                setAvatarCount(e.value.avatars.length);
-                setEventCount(e.value.created_events.length);
-                setSubworldTemplateCount(e.value.created_deriv_subworld_templates.length + e.value.created_root_subworld_templates.length);
+                setAvatars(e.value.avatars.map<AvatarViewModel>(item=> ({
+                    id: item.id?.toString(),
+                    supply: 9999,
+                    maxSupply: 9999,
+                    name: "Avatar #",
+                    modelUri: item.preprocess_url,
+                    image: item.postprocess_url,
+                }))) 
+                setEvents(e.value.created_events.map<EventViewModel>(e => ({
+                    id: e.id.toString(),
+                    name: e.name,
+                    description: "Description of event",
+                    eventConfigUri: e.event_config_uri,
+                    lastUpdate: getTimeString(new Date(e.updated_at)),
+                    stage: e.stage,
+                    participants: e.max_num_participants
+                })));
+                const roots = e.value.created_root_subworld_templates.map<TemplateViewModel>(e => ({
+                    id: e.id.toString(),
+                    name: e.display_name,
+                    description: e.display_name,
+                    image: e.thumbnail_centralized_uri,
+                    fileAssetUriFromCentralized: e.thumbnail_centralized_uri,
+                    file2dUri: e.thumbnail_centralized_uri,
+                    fileAssetUri: e.level_ipfs_uri,
+                    file3dUri: e.level_ipfs_uri,
+                    onlineOpenable: true,
+                    offlineOpenable: true
+                }))
+                const derivs = e.value.created_deriv_subworld_templates.map<TemplateViewModel>(e => ({
+                    id: e.id.toString(),
+                    name: e.display_name,
+                    description: e.display_name,
+                    image: e.thumbnail_centralized_uri,
+                    fileAssetUriFromCentralized: e.thumbnail_centralized_uri,
+                    file2dUri: e.thumbnail_centralized_uri,
+                    fileAssetUri: e.level_ipfs_uri,
+                    file3dUri: e.level_ipfs_uri,
+                    onlineOpenable: true,
+                    offlineOpenable: true
+                }))
+                setTemplates(roots.concat(derivs));
             }
         })
-        if (user.wallet_address != null) {
-            AssetService.fetchUserAssets(user.wallet_address).then(e => {
-                setInventoryCount(e.value.length);
-            })
-        }
+        // if (user.wallet_address != null) {
+        //     AssetService.fetchUserAssets(user.wallet_address).then(e => {
+        //         console.log(e.value);
+        //     })
+        // }
     }, [user]);
 
 
@@ -75,39 +118,35 @@ function Account() {
                         </div>
                     </div>
                 </section>
-                <section id="wallet-section" className="w-[80%]">
-                    <header>
-                        <h3>Your Collection</h3>
-                    </header>
-                    <div className="flex flex-row gap-2 justify-between py-4">
-                        <Link href="/account/avatar">
-                            <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
-                                <GiDoubleFaceMask size={120}/>
-                                <h3>Avatars</h3>
-                                <span>x{avatarCount}</span>
-                            </div>
-                        </Link>
-                        {/* <Link href="/account/inventory">
-                            <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
-                                <MdOutlineInventory2 size={120}/>
-                                <h3>Inventory</h3>
-                                <span>x{inventoryCount}</span>
-                            </div>
-                        </Link> */}
-                        <Link href="/account/events">
-                            <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center" >
-                                <RiImageFill size={120}/>
-                                <h3>Events</h3>
-                                <span>x{eventCount}</span>
-                            </div>
-                        </Link>
-                        <Link href="/account/templates">
-                            <div className="bg-gray-600 rounded-3xl w-[150px] h-[230px] cursor-pointer flex flex-col justify-center items-center text-center" >
-                                <RiImageFill size={120}/>
-                                <h3>Subworld Templates</h3>
-                                <span>x{subworldTemplateCount}</span>
-                            </div>
-                        </Link>
+                <section id="wallet-section" className="w-full px-4">
+                    <div className="p-4">
+                        <div className="flex flex-row justify-between">
+                            <h3 className="text-blue-300 text-3xl font-bold pl-4">Avatars ({avatars.length})</h3>
+                            <Link href="/account/avatar">
+                                <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
+                            </Link>
+                        </div>
+                        <AvatarList alignStart data={avatars}/>
+                    </div>
+
+                    <div className="p-4">
+                        <div className="flex flex-row justify-between">
+                            <h3 className="text-blue-300 text-3xl font-bold pl-4">Events ({events.length})</h3>
+                            <Link href="/account/events">
+                                <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
+                            </Link>
+                        </div>
+                        <EventList alignStart data={events}/>
+                    </div>
+
+                    <div className="p-4">
+                        <div className="flex flex-row justify-between">
+                            <h3 className="text-blue-300 text-3xl font-bold pl-4">Templates ({templates.length})</h3>
+                            <Link href="/account/templates">
+                                <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
+                            </Link>
+                        </div>
+                        <RootSubworldList alignStart data={templates}/>
                     </div>
                 </section>  
             </div>

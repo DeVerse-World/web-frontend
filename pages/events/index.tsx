@@ -29,7 +29,7 @@ function EventsPage() {
     useEffect(() => {
         EventsService.fetchEvents().then(res => {
             if (res.isSuccess()) {
-                const data = res.value.events.map<EventViewModel>(e => ({
+                setNfts(res.value.events.map<EventViewModel>(e => ({
                     id: e.id.toString(),
                     name: e.name,
                     description: "Description of event",
@@ -37,8 +37,7 @@ function EventsPage() {
                     lastUpdate: getTimeString(new Date(e.updated_at)),
                     stage: e.stage,
                     participants: e.max_num_participants
-                }))
-                setNfts(data);
+                })));
             }
         })
     }, [])

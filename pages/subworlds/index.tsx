@@ -30,7 +30,7 @@ function SubworldsPage() {
         setViewState(ViewState.LOADING)
         SubWorldTemplateService.fetchRootTemplates().then(res => {
             if (res.isSuccess()) {
-                const data = res.value.subworld_templates.map<RootTemplateViewModel>(e => ({
+                setRootTemplates(res.value.subworld_templates.map<RootTemplateViewModel>(e => ({
                     id: e.id.toString(),
                     name: e.display_name,
                     description: e.display_name,
@@ -41,8 +41,7 @@ function SubworldsPage() {
                     file3dUri: e.level_ipfs_uri,
                     onlineOpenable: true,
                     offlineOpenable: true
-                }))
-                setRootTemplates(data);
+                })));
             }
         }).finally(() => {
             setViewState(ViewState.SUCCESS)
@@ -58,14 +57,14 @@ function SubworldsPage() {
                         <div className="flex flex-col bg-gray-800 px-3 py-2 ">
                             <ListingTabComponent label="All"
                                 tab={MarketplaceTab.All} isSelected={visibleTab} onSelect={onSelectTab} />
-                            <ListingTabComponent label="Test"
-                                tab={MarketplaceTab.BATTLE} isSelected={visibleTab} onSelect={onSelectTab} />
+                            {/* <ListingTabComponent label="Test"
+                                tab={MarketplaceTab.BATTLE} isSelected={visibleTab} onSelect={onSelectTab} /> */}
                         </div>
                     </Accordion.Collapse>
                 </Accordion>
             </Sidebar>
             <section id='section-content' className='flex flex-col justify-between '>
-                <RootSubworldList data={rootTemplates} />
+                <RootSubworldList data={rootTemplates} alignStart/>
                 <Footer />
             </section >
         </div>

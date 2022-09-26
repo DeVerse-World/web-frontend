@@ -9,7 +9,7 @@ import SubWorldTemplateService from "../../data/services/SubWorldTemplateService
 
 const itemPerPage = 5;
 
-export type RootTemplateViewModel = {
+export type TemplateViewModel = {
     id?: string;
     tokenURI?: string;
     name?: string;
@@ -21,11 +21,13 @@ export type RootTemplateViewModel = {
     file3dUri?: string;
     image?: string;
     animation_url?: string;
-
-    deletable?: boolean;
     onlineOpenable?: boolean;
     offlineOpenable?: boolean;
 }
+
+export type RootTemplateViewModel = {
+    deletable?: boolean;
+} & TemplateViewModel
 
 type ListProps = {
     data: RootTemplateViewModel[];
@@ -37,15 +39,17 @@ function RootSubworldList(props: ListProps) {
 
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-full">
-            <div className={`flex flex-row flex-wrap ${props.alignStart ? "w-full" : "justify-center"}`}>
+            <div className={`flex px-auto flex-row flex-wrap gap-2 ${props.alignStart ? "w-full" : "justify-center"}`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item, index) =>
                         <RootTemplateCard key={index} data={item} />)
                 }
             </div>
-            <div className="flex flex-row gap-2">
-                <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
-            </div>
+            {props.data.length > itemPerPage &&
+                <div className="flex flex-row gap-2">
+                    <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
+                </div>
+            }
         </section>
     )
 }
@@ -87,7 +91,7 @@ function RootTemplateCard(props: CardProps) {
                                 numberOfStars={5}
                                 name='rating' />
                         </div>
-                        
+
                         <button className="w-[60px] h-[25px] text-white rounded-3xl flex flex-row justify-center items-center deverse-play-btn"
                             onClick={(e) => {
                                 e.stopPropagation();
