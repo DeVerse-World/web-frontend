@@ -5,13 +5,19 @@ import { getCreateLayout } from "../../data/services/CreateLayout";
 function Editor() {
     return (
         <div className="flex flex-col gap-4 items-center text-white p-4" >
-            <h1 className="text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title">Building games</h1>
-            <h3 className="text-center px-16 max-w-[800px]">Anyone can build 3D games for free. No coding required. Contribute to a vast metaverse, filled with amazing creations and experiences.</h3>
-            <DownloadDemoButton />
+            <h1 className="text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title">Build your dream world</h1>
+            <h3 className="text-center px-16 max-w-[800px]">Anyone can be a creator, own part of the metaverse now. No coding required, all you need is imagination.</h3>
+            <DownloadDemoButton className="h-12"/>
             <div className="flex flex-row gap-4 flex-wrap">
-                <HighlightCard title="Create for free" description="Create awesome 3D games for free using thousands of voxel models (NFTs) made by the community with VoxEdit." />
-                <HighlightCard title="Build and share" description="Create awesome 3D games for free using thousands of voxel models (NFTs) made by the community with VoxEdit." />
-                <HighlightCard title="No Coding needed" description="Create awesome 3D games for free using thousands of voxel models (NFTs) made by the community with VoxEdit." />
+                <HighlightCard img="/images/ig-editor-1.png"
+                    title="Free for all"
+                    description="Create awesome worlds, games, races using thousands of free assets made by the community" />
+                <HighlightCard img="/images/ig-editor-2.png"
+                    title="Share your creation"
+                    description="What can be better than having your friends or others players experience your world. Share to everyone with just a button click." />
+                <HighlightCard img="/images/ig-editor-3.png"
+                    title="No Coding needed"
+                    description="Easy to use, no coding required. It is simple and intuitive to modify the rules or attributes of your world." />
             </div>
             <SystemRequirement />
         </div>
@@ -26,10 +32,10 @@ type HighlightCardProps = {
 
 function HighlightCard(props: HighlightCardProps) {
     return (
-        <div className="deverse-border flex flex-col gap-4 items-center md:max-w-[32%] max-w-[450px] h-[450px] bg-black/[.4] rounded-xl text-white p-2">
+        <div className="flex flex-col gap-4 items-center md:max-w-[32%] max-w-[450px] h-[450px] bg-black/[.4] rounded-xl text-white p-4">
             <span className="text-3xl uppercase text-sky-400 font-bold text-center">{props.title}</span>
-            <span className="text-center">{props.description}</span>
-            <img height={200} width={200} src="/images/placeholder.png" />
+            <span className="text-center flex-grow">{props.description}</span>
+            <img height={400} width={400} src={ props.img || "/images/placeholder.png"} />
         </div>
     )
 }
@@ -40,7 +46,7 @@ function SystemRequirement() {
             <h1 className="text-3xl uppercase text-sky-400 font-bold text-center">System requirement</h1>
             <div className="flex flex-row items-center flex-wrap gap-4 ">
                 <div className="w-[45%] break-words">
-                    <h3 className="text-orange-400">MINIMUM</h3>
+                    <h3 className="text-green-600">Minimum</h3>
                     Requires a 64-bit processor and operating system<br />
                     OS: Windows 7 <br />
                     Processor: Dual Core 2GHz<br />
@@ -50,7 +56,7 @@ function SystemRequirement() {
                     Storage: 2 GB available space
                 </div>
                 <div className="w-[45%] break-words">
-                    <h3 className="text-orange-400">RECOMMEND</h3>
+                    <h3 className="text-green-600">Recommended</h3>
                     Requires a 64-bit processor and operating system<br />
                     OS: Windows 10<br />
                     Processor: Quad Core 3GHz<br />

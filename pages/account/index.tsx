@@ -121,7 +121,7 @@ function Account() {
                 <section id="wallet-section" className="w-full px-4">
                     <div className="p-4">
                         <div className="flex flex-row justify-between">
-                            <h3 className="text-blue-300 text-3xl font-bold pl-4">Avatars ({avatars?.length || 0})</h3>
+                            <h3 className="text-blue-300 text-3xl font-bold pl-4">Avatars ({avatars.length})</h3>
                             <Link href="/account/avatar">
                                 <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
                             </Link>
@@ -131,7 +131,7 @@ function Account() {
 
                     <div className="p-4">
                         <div className="flex flex-row justify-between">
-                            <h3 className="text-blue-300 text-3xl font-bold pl-4">Events ({events?.length || 0})</h3>
+                            <h3 className="text-blue-300 text-3xl font-bold pl-4">Events ({events.length})</h3>
                             <Link href="/account/events">
                                 <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
                             </Link>
@@ -141,7 +141,7 @@ function Account() {
 
                     <div className="p-4">
                         <div className="flex flex-row justify-between">
-                            <h3 className="text-blue-300 text-3xl font-bold pl-4">Templates ({templates?.length || 0})</h3>
+                            <h3 className="text-blue-300 text-3xl font-bold pl-4">Templates ({templates.length})</h3>
                             <Link href="/account/templates">
                                 <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
                             </Link>
