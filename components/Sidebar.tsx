@@ -62,7 +62,7 @@ function Sidebar(props: SidebarProps) {
                     <SidebarItem label="Market" href="/marketplace" icon={<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Create" href="/create" icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Mint" href="/mint-nft" icon={<GiMining fontSize="1.5rem" color='rgb(97 198 208)' />} />
-                    <a href="https://docs.deverse.world" target="_blank" className="text-gray-600  no-underline">
+                    <a href="https://docs.deverse.world" target="_blank" className="text-gray-600 hover:text-gray-600 no-underline">
                         <div className="flex flex-col items-center py-2 deverse-sidebar-item">
                             <FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />
                             <span className="text-sm">
