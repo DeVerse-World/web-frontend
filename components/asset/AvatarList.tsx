@@ -18,16 +18,18 @@ export default function AvatarList(props: AvatarListProps) {
     const [currentPage, setCurrentPage] = useState(1);
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
-            <div className={`flex flex-row flex-wrap ${props.alignStart ? "w-full" : "justify-center"}`}>
+            <div className={`flex flex-row flex-wrap gap-2 ${props.alignStart ? "w-full" : "justify-center"}`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item: AvatarViewModel, index: number) =>
                         <AvatarCard key={index} data={item} />
                     )
                 }
             </div>
-            <div className="flex flex-row gap-2">
-                <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
-            </div>
+            {props.data.length > itemPerPage &&
+                <div className="flex flex-row gap-2">
+                    <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
+                </div>
+            }
         </section>
     )
 }
@@ -61,7 +63,7 @@ export function AvatarCard(props: AvatarCardProps) {
 
     const renderContent = () => {
         return (
-            <div className="nft-card nft-card-hover w-[250px] h-[400px]  m-2">
+            <div className="nft-card nft-card-hover w-[250px] h-[400px]">
                 <div className="flex justify-center h-[225px] p-4 ">
                     <img src={props.data.image || "/images/color-image-placeholder.jpg"} />
                 </div>

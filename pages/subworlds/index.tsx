@@ -30,7 +30,7 @@ function SubworldsPage() {
         setViewState(ViewState.LOADING)
         SubWorldTemplateService.fetchRootTemplates().then(res => {
             if (res.isSuccess()) {
-                const data = res.value.subworld_templates.map<RootTemplateViewModel>(e => ({
+                setRootTemplates(res.value.subworld_templates.map<RootTemplateViewModel>(e => ({
                     id: e.id.toString(),
                     name: e.display_name,
                     description: e.display_name,
@@ -41,8 +41,7 @@ function SubworldsPage() {
                     file3dUri: e.level_ipfs_uri,
                     onlineOpenable: true,
                     offlineOpenable: true
-                }))
-                setRootTemplates(data);
+                })));
             }
         }).finally(() => {
             setViewState(ViewState.SUCCESS)

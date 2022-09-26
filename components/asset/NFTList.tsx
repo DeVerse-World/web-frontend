@@ -22,9 +22,11 @@ export default function NFTList(props: NFTListProps) {
                 }
 
             </div>
-            <div className="flex flex-row gap-2">
-                <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
-            </div>
+            {props.data.length > itemPerPage &&
+                <div className="flex flex-row gap-2">
+                    <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
+                </div>
+            }
         </section>
     )
 }

@@ -5,25 +5,12 @@ import StarRatings from 'react-star-ratings';
 import PlayModal from "./PlayModal";
 import { BsFillPeopleFill, BsPlayFill } from "react-icons/bs";
 import { TbWorld } from "react-icons/tb";
+import { TemplateViewModel } from "./RootSubworldsList";
 
 export type DerivTemplateViewModel = {
-    id?: string;
-    tokenURI?: string;
-    name?: string;
-    description?: string;
-    fileAssetUri?: string;
-    fileAssetName?: string;
-    fileAssetUriFromCentralized?: string;
-    file2dUri?: string;
-    file3dUri?: string;
-    image?: string;
-    animation_url?: string;
-
     deletable?: boolean;
-    onlineOpenable?: boolean;
-    offlineOpenable?: boolean;
     rootId?: string;
-}
+} & TemplateViewModel
 
 type ListProps = {
     data: DerivTemplateViewModel[];
@@ -37,15 +24,17 @@ function DerivSubworldList(props: ListProps) {
 
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
-            <div className={`flex flex-row flex-wrap ${props.alignStart ? "w-full" : "justify-center"}`}>
+            <div className={`flex flex-row flex-wrap gap-2 ${props.alignStart ? "w-full" : "justify-center"}`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item, index) =>
                         <DerivTemplateCard key={index} data={item} />)
                 }
             </div>
-            <div className="flex flex-row gap-2">
-                <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
-            </div>
+            {props.data.length > itemPerPage &&
+                <div className="flex flex-row gap-2">
+                    <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
+                </div>
+            }
         </section>
     )
 }

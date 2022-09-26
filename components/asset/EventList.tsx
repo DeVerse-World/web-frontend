@@ -4,7 +4,8 @@ import Paginator from "../Paginator";
 
 type EventListProps = {
     data: EventViewModel[];
-    onDeleted?: (EventViewModel) => void
+    onDeleted?: (EventViewModel) => void;
+    alignStart?: boolean;
 }
 const itemPerPage = 5;
 
@@ -13,16 +14,18 @@ export default function EventList(props: EventListProps) {
 
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
-            <div className="flex flex-row flex-wrap justify-center gap-4">
+            <div className={`flex flex-row flex-wrap gap-2 ${props.alignStart ? "w-full" : "justify-center"}`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item: EventViewModel, index: number) =>
                         <EventCard key={index} data={item} />
                     )
                 }
             </div>
-            <div className="flex flex-row gap-2">
-                <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
-            </div>
+            {props.data.length > itemPerPage &&
+                <div className="flex flex-row gap-2">
+                    <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
+                </div>
+            }
         </section>
     )
 }
@@ -50,7 +53,7 @@ export function EventCard(props: EventCardProps) {
     return (
         <div className="nft-card md:h-[400px] h-[250px] md:w-[500px] w-[350px] flex flex-col">
             <div className="h-[225px] flex flex-row justify-center rounded-xl overflow-hidden">
-                <img src={props.data.image || "/images/event-placeholder.jpg"} className="w-[100%]"/>
+                <img src={props.data.image || "/images/event-placeholder.jpg"} className="w-[100%]" />
             </div>
             <div className="flex flex-col flex-grow p-4">
                 <span className="text-blue-300">Last updated: {props.data.lastUpdate}</span>
@@ -61,7 +64,7 @@ export function EventCard(props: EventCardProps) {
                 }}>{props.data.name}</span>
                 <div className="flex flex-row justify-between flex-grow items-end">
                     <div className="text-white flex-row flex items-center gap-2">
-                        <img src="/images/logo.png"/>
+                        <img src="/images/logo.png" />
                         <span className="text-lg">{props.data.author || "Deverse World"} </span>
                     </div>
                     <button className="w-[120px] h-[40px] text-white rounded-3xl flex flex-row justify-center items-center deverse-play-btn"><BsPlayFill /></button>
