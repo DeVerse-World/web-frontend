@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 import StorageService from "../../data/services/StorageService";
 import { useMetaMask } from "metamask-react";
 import AuthService from "../../data/services/AuthService";
 import Footer from "../../components/common/Footer";
 import Sidebar from "../../components/Sidebar";
+import { AppContext } from "../../components/contexts/app_context";
 
 export async function getServerSideProps(context) {
     const loginKey = context.query.key;
@@ -19,16 +20,14 @@ export async function getServerSideProps(context) {
 }
 
 export default function LoginLink({ loginKey }) {
+    const { setUser } = useContext(AppContext);
     const { status, connect, account } = useMetaMask();
     const [connectionStatus, setConnectionStatus] = useState('Processing...');
     useEffect(() => {
         switch (status) {
             case 'notConnected':
                 if (loginKey) {
-                    StorageService.setSessionKey(loginKey)
-                    connect().then(res => {
-                        console.log(res)
-                    });
+                    connect();
                     setConnectionStatus('Processing...');
                 } else {
                     setConnectionStatus('Please provide a login key');
@@ -36,7 +35,11 @@ export default function LoginLink({ loginKey }) {
                 break;
             case 'connected':
                 setConnectionStatus("Authenticated");
-                AuthService.connectToMetamask(account, null);
+                AuthService.connectToMetamask(account, null, loginKey).then(res => {
+                    if (res.isSuccess()) {
+                        setUser(res.value.user)
+                    }
+                });
                 break;
             default:
                 break;

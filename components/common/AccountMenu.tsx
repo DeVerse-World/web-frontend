@@ -1,18 +1,16 @@
 import { useMetaMask } from "metamask-react";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Image, NavDropdown } from "react-bootstrap";
+import { Image } from "react-bootstrap";
 import { AppContext } from "../contexts/app_context";
 import LoginModal from "../login/LoginModal";
 import AuthService from "../../data/services/AuthService";
 
 function AccountMenu() {
-  const { status, connect, account } = useMetaMask();
+  const { status, account } = useMetaMask();
   const { user, setUser } = useContext(AppContext);
-  const [boxContent, setBoxContent] = useState("");
   const [showLogin, setShowLogin] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [currentRoute, setCurrentRoute] = useState("/");
 
   const onToggleMenu = (e) => {
     setShowDropdown(!showDropdown);
@@ -24,38 +22,15 @@ function AccountMenu() {
 
   const onClickLogout = (e) => {
     AuthService.logout().then(res => {
-      if (!res) {
-        window.alert("Fail to logout")
+      if (res.isFailure()) {
+        window.alert(res.error)
         return
       }
-      window.alert("Succeed to logout")
+      window.alert("Logout successfully")
       setShowLogin(false);
       setUser(null)
     })
   }
-
-  useEffect(() => {
-    switch (status) {
-      case "initializing":
-        setBoxContent("Syncing");
-        break;
-      case "unavailable":
-        setBoxContent("Metamask unavailable");
-        break;
-      case "notConnected":
-        setBoxContent("Connect to Metamask");
-        break;
-      case "connecting":
-        setBoxContent("Connecting");
-        break;
-      case "connected":
-        setBoxContent(account);
-        AuthService.connectToMetamask(account, null);
-        break;
-      default:
-        break;
-    }
-  }, [status])
 
   // let element = (
   //   <button onClick={connect} className="text-white p-2 rounded-md bg-deverse-gradient text-sm h-[35px] md:h-[40px]">
