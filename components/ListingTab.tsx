@@ -1,4 +1,4 @@
-import { MarketplaceTab } from "../../components/marketplace_tab";
+import { MarketplaceTab } from "./marketplace_tab";
 
 type ListingTabProps = {
     label: string,

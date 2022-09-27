@@ -9,7 +9,7 @@ import { MarketplaceTab } from "../../components/marketplace_tab";
 import Sidebar from "../../components/Sidebar";
 import EventsService from "../../data/services/EventsService";
 import { getTimeString } from "../../utils/time_util";
-import ListingTabComponent from "../../data/services/ListingTab";
+import ListingTabComponent from "../../components/ListingTab";
 
 function EventsPage() {
     const router = useRouter();

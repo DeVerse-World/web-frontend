@@ -1,21 +1,32 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 import StorageService from "../../data/services/StorageService";
 import { useMetaMask } from "metamask-react";
 import AuthService from "../../data/services/AuthService";
 import Footer from "../../components/common/Footer";
 import Sidebar from "../../components/Sidebar";
+import { AppContext } from "../../components/contexts/app_context";
 
-export default function LoginLink(props) {
-    const router = useRouter();
+export async function getServerSideProps(context) {
+    const loginKey = context.query.key;
+    // Fetch data from external API
+
+    // Pass data to the page via props
+    return {
+        props: {
+            loginKey: loginKey
+        }
+    }
+}
+
+export default function LoginLink({ loginKey }) {
+    const { setUser } = useContext(AppContext);
     const { status, connect, account } = useMetaMask();
     const [connectionStatus, setConnectionStatus] = useState('Processing...');
     useEffect(() => {
-        if (!router.isReady)
-            return;
         switch (status) {
             case 'notConnected':
-                if ('key' in router.query) {
+                if (loginKey) {
                     connect();
                     setConnectionStatus('Processing...');
                 } else {
@@ -24,18 +35,17 @@ export default function LoginLink(props) {
                 break;
             case 'connected':
                 setConnectionStatus("Authenticated");
-                AuthService.connectToMetamask(account, null);
+                AuthService.connectToMetamask(account, null, loginKey).then(res => {
+                    if (res.isSuccess()) {
+                        setUser(res.value.user)
+                    }
+                });
                 break;
             default:
                 break;
         }
-    }, [status, router.isReady])
+    }, [status])
 
-    useEffect(() => {
-        if ('key' in router.query) {
-            StorageService.setSessionKey(router.query.key.toString())
-        }
-    }, [router.query])
     return (
         <section id='section-content' className='flex flex-col text-white justify-between '>
             <div className="text-center m-auto">

@@ -3,21 +3,22 @@ import AvatarList, { AvatarViewModel } from "../../components/asset/AvatarList";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import { NFTAsset } from "../../data/model/nft_asset";
-import AccountService from "../../data/services/AccountService";
+import AvatarService from "../../data/services/AvatarService";
 
 function Content() {
-    const { setViewState } = useContext(AppContext);
+    const { setViewState, user } = useContext(AppContext);
     const [nfts, setNfts] = useState<AvatarViewModel[]>([]);
     useEffect(() => {
         setViewState(ViewState.LOADING);
-        AccountService.getUserInfo().then(e => {
-            if (e.isSuccess && e.value) {
-                let convertedData = e.value.avatars.map(item => {
+        AvatarService.getAvatars(user?.id).then(res => {
+            if (res.isSuccess && res.value) {
+                console.log(res.value.avatars)
+                let convertedData = res.value.avatars.map(item => {
                     let asset: AvatarViewModel = {
                         id: item.id.toString(),
                         supply: 5,
                         maxSupply: 15,
-                        name: `Avatar #${item.id}`,
+                        name: item.name || `Avatar #${item.id}`,
                         modelUri: item.preprocess_url,
                         image: item.postprocess_url,
                         deletable: true,
@@ -25,21 +26,6 @@ function Content() {
                     return asset;
                 })
                 setNfts(convertedData)
-
-                // const fetchJobs: Promise<any>[] = [];
-                // convertedData.forEach(e => {
-                //     if (e.modelUri.includes('.glb')) {
-                //         fetchJobs.push(AvatarService.get2DAvatarRPM(e.modelUri))
-                //     }
-                // })
-                // Promise.allSettled(fetchJobs).then(images => {
-                //     convertedData.forEach((e, i) => {
-                //         e.image = images[i].value
-                //     })
-                //     setNfts(convertedData)
-                // }).finally(() => {
-                //     setViewState(ViewState.SUCCESS)
-                // })
             }
         }).catch((e) => {
             console.log(e)

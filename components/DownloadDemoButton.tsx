@@ -1,4 +1,3 @@
-import { CSSProperties } from "react";
 import { AiFillWindows } from "react-icons/ai";
 
 type Props = {

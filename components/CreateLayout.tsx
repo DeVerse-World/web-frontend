@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
-import Footer from "../../components/common/Footer";
-import TabHeader from "../../components/common/TabHeader";
-import CommonLayout from "../../components/common/CommonLayout";
+import Footer from "./common/Footer";
+import TabHeader from "./common/TabHeader";
+import CommonLayout from "./common/CommonLayout";
 
 type Props = {
     children: ReactNode

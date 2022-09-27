@@ -43,15 +43,11 @@ function LoginModal(props: Props) {
             case "connected":
                 // setBoxContent(account);
                 AuthService.connectToMetamask(account, user).then(res => {
-                    if (!res) {
-                        window.alert("some error while creating metamask info")
+                    if (res.isFailure()) {
+                        window.alert(res.error)
                         return;
                     }
-                    if (res.error) {
-                        window.alert(res.error);
-                        return;
-                    }
-                    setUser(res.data.user);
+                    setUser(res.value.user);
                     modalProps.onHide();
                 });
                 break;
@@ -69,20 +65,18 @@ function LoginModal(props: Props) {
     }
 
     const onGoogleLogin = (event: CredentialResponse) => {
-        AuthService.connectToGoogleMail(event.credential, user).then(res => {
-            console.log(res);
-            let googleUser = jwt_decode<GoogleUser>(event.credential);
-            if (!res) {
-                window.alert("some error while creating google mail info")
-                return;
-            }
-            if (res.error) {
-                window.alert(res.error);
-                return;
-            }
-            setUser(res.data.user);
-            modalProps.onHide();
-        });
+        AuthService.authorizeWithLoginLink().then(e => {
+            AuthService.connectToGoogleMail(event.credential, user).then(res => {
+                console.log(res);
+                // let googleUser = jwt_decode<GoogleUser>(event.credential);
+                if (res.isFailure()) {
+                    window.alert(res.error);
+                    return;
+                }
+                setUser(res.value.user);
+                modalProps.onHide();
+            });
+        })
     }
 
     const onGoogleFailure = () => {
