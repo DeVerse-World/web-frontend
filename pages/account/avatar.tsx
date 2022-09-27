@@ -26,25 +26,6 @@ function Content() {
                     return asset;
                 })
                 setNfts(convertedData)
-                const missingImagesData = convertedData.filter(e => !e.image)
-                if (missingImagesData.length == 0) {
-                    setNfts(convertedData)
-                } else {
-                    // const fetchJobs: Promise<any>[] = [];
-                    // missingImagesData.forEach(e => {
-                    //     if (e.modelUri.includes('.glb')) {
-                    //         fetchJobs.push(AvatarService.get2DAvatarRPM(e.modelUri))
-                    //     }
-                    // })
-                    // Promise.allSettled(fetchJobs).then(images => {
-                    //     convertedData.forEach((e, i) => {
-                    //         e.image = images[i].value
-                    //     })
-                    //     setNfts(convertedData)
-                    // }).finally(() => {
-                    //     setViewState(ViewState.SUCCESS)
-                    // })
-                }
             }
         }).catch((e) => {
             console.log(e)

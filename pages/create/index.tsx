@@ -6,7 +6,7 @@ import { getCreateLayout } from "../../data/services/CreateLayout";
 
 
 function Avatar() {
-    const { setViewState } = useContext(AppContext);
+    const { setViewState, user } = useContext(AppContext);
     const [showAvatarForm, setShowAvatarForm] = useState(false);
     const [createdModelUri, setCreatedModelUri] = useState('');
     const [creatingAvatarName, setCreatingAvatarName] = useState('');
@@ -15,22 +15,37 @@ function Avatar() {
             return;
         }
         setCreatedModelUri(e.data)
+        setCreatingAvatarName('');
         setShowAvatarForm(true);
     }
 
-    const onSaveAvatar = async () => {
+    const onSaveAvatar = () => {
         setShowAvatarForm(false);
         setViewState(ViewState.LOADING);
-        AvatarService.get2DAvatarRPM(createdModelUri).then(twoDAvarRes => {
-            console.log(creatingAvatarName, createdModelUri, twoDAvarRes)
-            AvatarService.createAvatar(creatingAvatarName, createdModelUri, twoDAvarRes).then(res => {
 
-            }).finally(() => {
-                setCreatingAvatarName('');
-                setViewState(ViewState.SUCCESS);
-            });
-        }).catch(e => {
-            console.log(e)
+        AvatarService.getAvatars(user?.id).then(avaRes => {
+            if (avaRes.isSuccess()) {
+                const existingAvatar = avaRes.value.avatars.find(e => e.preprocess_url == createdModelUri);
+                AvatarService.get2DAvatarRPM(createdModelUri).then(twoDAvarRes => {
+                    if (existingAvatar) {
+                        AvatarService.updateAvatar(existingAvatar, creatingAvatarName, createdModelUri, twoDAvarRes).finally(() => {
+                            setViewState(ViewState.SUCCESS);
+                        })
+                    } else {
+                        AvatarService.createAvatar(creatingAvatarName, createdModelUri, twoDAvarRes)
+                            .catch((e) => {
+                                console.log(e)
+                            })
+                            .finally(() => {
+                                setViewState(ViewState.SUCCESS);
+                            });
+                    }
+                }).catch(e => {
+                    console.log(e)
+                    setViewState(ViewState.ERROR);
+                });
+            }
+        }).catch((e) => {
             setViewState(ViewState.ERROR);
         });
     }
@@ -50,10 +65,6 @@ function Avatar() {
                 src='https://deverse.readyplayer.me/avatar?frameApi' />
             {showAvatarForm &&
                 <Modal centered show={true}
-                    // onHide={() => {
-                    //     setShowAvatarForm(false)
-                    //     setCreatingAvatarName('')
-                    // }}
                     contentClassName="bg-black" dialogClassName="deverse-dialog">
                     <Modal.Header className="flex flex-row">
                         <h3 className="text-white text-center">Save your Avatar</h3>

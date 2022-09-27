@@ -16,6 +16,17 @@ class AvatarService extends BaseService {
         })
     }
 
+    updateAvatar(existingAvatar: Avatar, name?: string, rpmUrl?: string, avatarUrl?: string) {
+        const payload = {
+            name: name || existingAvatar.name,
+            preprocess_url: rpmUrl || existingAvatar.preprocess_url,
+            postprocess_url: avatarUrl || existingAvatar.postprocess_url
+        }
+        return deverseClient.put<Response<AvatarResponse>>(`avatar/${existingAvatar.id}`, payload, {
+            withCredentials: true
+        })
+    }
+
     async get2DAvatarRPM(glbPath: string): Promise<any> {
         let res = await deverseClient.post('render', {
             model: glbPath,
