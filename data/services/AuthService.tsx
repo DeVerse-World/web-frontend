@@ -12,12 +12,12 @@ class AuthService extends BaseService {
         const googleUser = jwt_decode<GoogleUser>(credential);
         if (!user) {
             let res = await AccountService.getOrCreateByGoogleMail(StorageService.getSessionKey(), googleUser.email, credential)
-            if (res.status != 200 || !res.data?.data?.require_auth) {
+            if (res.status != 200 || !res.data.data.require_auth) {
                 return this.parseResponse(res)
             }
         } else {
             let res = await AccountService.addUserModelWithGoogleMail(user.id, googleUser.email)
-            if (res.status != 200 || !res.data?.data?.require_auth) {
+            if (res.status != 200 || !res.data.data.require_auth) {
                 return this.parseResponse(res)
             }
         }
@@ -57,10 +57,10 @@ class AuthService extends BaseService {
         if (!user) {
             let res = await AccountService.getOrCreateByWallet(loginKey, metamaskAccount);
             let parsedRes = this.parseResponse(res);
-            if (res.status != 200 || !parsedRes.value?.require_auth) {
+            if (res.status != 200 || !parsedRes.value.require_auth) {
                 return parsedRes
             }
-            user = parsedRes.value?.user;
+            user = parsedRes.value.user;
         } else {
             let res = await AccountService.addUserModelWithWallet(user.id, metamaskAccount)
             if (res.status != 200) {
