@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { FormControl, InputGroup, Modal } from "react-bootstrap";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import AvatarService from "../../data/services/AvatarService";
-import { getCreateLayout } from "../../data/services/CreateLayout";
+import { getCreateLayout } from "../../components/CreateLayout";
 
 
 function Avatar() {

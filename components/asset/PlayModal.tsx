@@ -2,6 +2,7 @@ import customProtocolCheck from "custom-protocol-check";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { BsPlayFill } from "react-icons/bs";
+import DownloadDemoButton from "../DownloadDemoButton";
 
 type Props = {
     templateId?: string,
@@ -32,17 +33,8 @@ export default function PlayModal(props: Props) {
         if (showDownload) {
             return (
                 <Modal.Body className="text-white text-lg break-words flex flex-col gap-4 items-center">
-                    <h5 className="text-white text-center w-64">Please download game client to start your journey</h5>
-                    <button className="deverse-play-btn w-32 rounded-3xl" onClick={(e) => {
-                        alert('Add handler')
-                    }}>
-                        Download
-                    </button>
-                    <button className="bg-deverse-gradient rounded-3xl w-32" onClick={(e) => {
-                        setShowDownload(false)
-                    }}>
-                        Cancel
-                    </button>
+                    <h5 className="text-white text-center w-64">Download game client to start your journey</h5>
+                    <DownloadDemoButton />
                 </Modal.Body>
             )
         }

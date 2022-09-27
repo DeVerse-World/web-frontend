@@ -7,7 +7,7 @@ module.exports = {
         GRAPH_URL: "https://api.thegraph.com/subgraphs/name/lth08091998/deverseassets",
         RPC_URL: "https://polygon-mumbai.g.alchemy.com/v2/jA5_H_DQkGlOS4hChUOtyiBO3M1ckUVQ",
     },
-    typescript: { ignoreBuildErrors: true, ignoreDuringBuilds: true, },
+    typescript: { ignoreBuildErrors: true },
     // async redirects() {
     //     return [{
     //         source: '/alpha',

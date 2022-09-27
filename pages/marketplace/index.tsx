@@ -6,7 +6,7 @@ import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from "../../data/enum/asset_type";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import Accordion from 'react-bootstrap/Accordion';
-import ListingTabComponent from "../../data/services/ListingTab";
+import ListingTabComponent from "../../components/ListingTab";
 import Sidebar from "../../components/Sidebar";
 import Footer from "../../components/common/Footer";
 import { MarketplaceTab } from "../../components/marketplace_tab";

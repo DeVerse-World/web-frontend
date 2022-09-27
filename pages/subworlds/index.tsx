@@ -3,7 +3,7 @@ import Footer from "../../components/common/Footer";
 import RootSubworldList, { RootTemplateViewModel } from "../../components/asset/RootSubworldsList";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
-import ListingTabComponent from "../../data/services/ListingTab";
+import ListingTabComponent from "../../components/ListingTab";
 import FilterHeader from "../../components/FilterHeader";
 import Sidebar from "../../components/Sidebar";
 import { Accordion } from "react-bootstrap";

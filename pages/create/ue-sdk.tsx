@@ -1,4 +1,4 @@
-import { getCreateLayout } from "../../data/services/CreateLayout";
+import { getCreateLayout } from "../../components/CreateLayout";
 
 
 function UESdk() {
