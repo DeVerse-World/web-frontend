@@ -6,17 +6,29 @@ import AuthService from "../../data/services/AuthService";
 import Footer from "../../components/common/Footer";
 import Sidebar from "../../components/Sidebar";
 
-export default function LoginLink(props) {
-    const router = useRouter();
+export async function getServerSideProps(context) {
+    const loginKey = context.query.key;
+    // Fetch data from external API
+
+    // Pass data to the page via props
+    return {
+        props: {
+            loginKey: loginKey
+        }
+    }
+}
+
+export default function LoginLink({ loginKey }) {
     const { status, connect, account } = useMetaMask();
     const [connectionStatus, setConnectionStatus] = useState('Processing...');
     useEffect(() => {
-        if (!router.isReady)
-            return;
         switch (status) {
             case 'notConnected':
-                if ('key' in router.query) {
-                    connect();
+                if (loginKey) {
+                    StorageService.setSessionKey(loginKey)
+                    connect().then(res => {
+                        console.log(res)
+                    });
                     setConnectionStatus('Processing...');
                 } else {
                     setConnectionStatus('Please provide a login key');
@@ -29,13 +41,8 @@ export default function LoginLink(props) {
             default:
                 break;
         }
-    }, [status, router.isReady])
+    }, [status])
 
-    useEffect(() => {
-        if ('key' in router.query) {
-            StorageService.setSessionKey(router.query.key.toString())
-        }
-    }, [router.query])
     return (
         <section id='section-content' className='flex flex-col text-white justify-between '>
             <div className="text-center m-auto">

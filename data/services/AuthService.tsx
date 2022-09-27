@@ -48,23 +48,22 @@ class AuthService extends BaseService {
         return loginUrl;
     }
 
-    async connectToMetamask(metamaskAccount: string, user): Promise<any> {
+    async connectToMetamask(metamaskAccount: string, user) {
         const web3 = new ethers.providers.Web3Provider(window.ethereum);
         if (!user) {
             let res = await AccountService.getOrCreateByWallet(StorageService.getSessionKey(), metamaskAccount);
-            if (res.status != 200) {
-                return null
+            let parsedRes = this.parseResponse(res);
+            if (res.status != 200 || !parsedRes.value?.require_auth) {
+                return parsedRes
             }
-            if (!res.data.data.require_auth) {
-                return res.data;
-            }
-            user = res.data.data.user;
+            user = parsedRes.value?.user;
         } else {
             let res = await AccountService.addUserModelWithWallet(user.id, metamaskAccount)
             if (res.status != 200) {
-                return res.data
+                return this.parseResponse(res);
             }
         }
+        console.log(`I am signing my one-time nonce: ${user.wallet_nonce}`)
         let signature = await web3.getSigner().signMessage(`I am signing my one-time nonce: ${user.wallet_nonce}`)
         let resData = await this.authLoginLinkForMetamask(StorageService.getSessionKey(), metamaskAccount, signature)
         StorageService.saveWalletAddress(metamaskAccount);
@@ -79,12 +78,8 @@ class AuthService extends BaseService {
             wallet_signature: signature,
         }, {
             withCredentials: true
-        }
-        )
-        if (res.status != 200) {
-            return null
-        }
-        return res.data
+        })
+        return this.parseResponse(res);
     }
 
     async logout() {
