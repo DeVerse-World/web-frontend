@@ -7,7 +7,9 @@ export type AppDataContext = {
     viewState: ViewState,
     setViewState: (ViewState) => void,
     isMobileSidebarVisible: boolean,
-    setIsMobileSidebarVisible: (boolean) => void
+    setIsMobileSidebarVisible: (boolean) => void,
+    showLogin: boolean,
+    setShowLogin: (boolean) => void
 }
 
 export enum ViewState {
@@ -23,12 +25,15 @@ const AppContext = React.createContext<AppDataContext>({
     viewState: ViewState.IDLE,
     setViewState: () => { },
     isMobileSidebarVisible: false,
-    setIsMobileSidebarVisible: (boolean) => { }
+    setIsMobileSidebarVisible: (boolean) => { },
+    showLogin: false,
+    setShowLogin: () => { }
 })
 
 const AppContextProvider = (props) => {
     const [user, setUser] = useState<User>(null);
     const [viewState, setViewState] = useState(ViewState.IDLE);
+    const [showLogin, setShowLogin] = useState(false);
     const [isMobileSidebarVisible, setIsMobileSidebarVisible] = useState(false);
 
     useEffect(() => {
@@ -47,6 +52,7 @@ const AppContextProvider = (props) => {
             value={{
                 user, setUser, viewState, setViewState,
                 isMobileSidebarVisible, setIsMobileSidebarVisible,
+                showLogin, setShowLogin
             }}>
             {props.children}
         </AppContext.Provider>
