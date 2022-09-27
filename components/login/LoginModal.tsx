@@ -69,20 +69,18 @@ function LoginModal(props: Props) {
     }
 
     const onGoogleLogin = (event: CredentialResponse) => {
-        AuthService.connectToGoogleMail(event.credential, user).then(res => {
-            console.log(res);
-            let googleUser = jwt_decode<GoogleUser>(event.credential);
-            if (!res) {
-                window.alert("some error while creating google mail info")
-                return;
-            }
-            if (res.error) {
-                window.alert(res.error);
-                return;
-            }
-            setUser(res.data.user);
-            modalProps.onHide();
-        });
+        AuthService.authorizeWithLoginLink().then(e => {
+            AuthService.connectToGoogleMail(event.credential, user).then(res => {
+                console.log(res);
+                // let googleUser = jwt_decode<GoogleUser>(event.credential);
+                if (res.isFailure()) {
+                    window.alert(res.error);
+                    return;
+                }
+                setUser(res.value.user);
+                modalProps.onHide();
+            });
+        })
     }
 
     const onGoogleFailure = () => {

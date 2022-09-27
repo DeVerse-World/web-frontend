@@ -17,10 +17,10 @@ export class AvatarResponse {
     avatar: Avatar
 }
 
-export type GetAccountResponse = Readonly<{
+export type GetAccountResponse = {
     user: User,
     require_auth?: boolean,
-}>
+}
 
 export type GetUserProfileResponse = Readonly<{
     avatars: Avatar[],
@@ -44,4 +44,8 @@ export type RootSubworldTemplateResponse = {
 
 export type DerivSubworldTemplateResponse = {
     subworld_templates: DerivSubworldTemplate[];
+}
+
+export type LoginResponse = {
+    login_url: string;
 }
