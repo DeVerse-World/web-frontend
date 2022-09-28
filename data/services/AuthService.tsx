@@ -37,17 +37,6 @@ class AuthService extends BaseService {
         return this.parseResponse(res)
     }
 
-    async authorizeWithLoginLink() {
-        const res = await deverseClient.post<LoginResponse>('user/createLoginLink');
-        if (res.status != 200) {
-            return null;
-        }
-        const loginUrl = new URL(res.data.login_url);
-        const loginKey = loginUrl.searchParams.get('key')
-        StorageService.setSessionKey(loginKey)
-        return loginUrl;
-    }
-
     async connectToMetamask(metamaskAccount: string, user: User, sessionKey?: string) {
         const web3 = new ethers.providers.Web3Provider(window.ethereum);
         if (sessionKey) {
