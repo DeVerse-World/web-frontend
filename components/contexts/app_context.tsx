@@ -9,7 +9,7 @@ export type AppDataContext = {
     isMobileSidebarVisible: boolean,
     setIsMobileSidebarVisible: (boolean) => void,
     showLogin: boolean,
-    setShowLogin: (boolean) => void
+    setShowLogin: (boolean) => void,
 }
 
 export enum ViewState {
@@ -19,16 +19,7 @@ export enum ViewState {
     ERROR
 }
 
-const AppContext = React.createContext<AppDataContext>({
-    user: null,
-    setUser: () => { },
-    viewState: ViewState.IDLE,
-    setViewState: () => { },
-    isMobileSidebarVisible: false,
-    setIsMobileSidebarVisible: (boolean) => { },
-    showLogin: false,
-    setShowLogin: () => { }
-})
+const AppContext = React.createContext<AppDataContext>({})
 
 const AppContextProvider = (props) => {
     const [user, setUser] = useState<User>(null);
@@ -37,10 +28,8 @@ const AppContextProvider = (props) => {
     const [isMobileSidebarVisible, setIsMobileSidebarVisible] = useState(false);
 
     useEffect(() => {
-        let user = StorageService.getUser();
-        if (user != null) {
-            setUser(user);
-        }
+        const cachedUser = StorageService.getUser();
+        setUser(cachedUser || null);
     }, [])
 
     useEffect(() => {

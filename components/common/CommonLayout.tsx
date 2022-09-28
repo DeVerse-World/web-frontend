@@ -1,8 +1,6 @@
-import Link from "next/link";
 import { ReactNode } from "react";
 import Sidebar from "../Sidebar";
 import BaseLayout from "./BaseLayout";
-import HomeNavbar from "./HomeNavbar";
 
 type Props = {
     children: ReactNode

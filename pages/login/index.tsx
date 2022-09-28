@@ -17,9 +17,10 @@ export async function getServerSideProps(context) {
 
 export default function LoginLink({ loginKey }) {
     const [connectionStatus, setConnectionStatus] = useState('Please login');
-    const { user, setShowLogin } = useContext(AppContext);
+    const { setShowLogin } = useContext(AppContext);
     useEffect(() => {
-        if (!user) {
+        const currentUser = StorageService.getUser()
+        if (!currentUser) {
             if (loginKey) {
                 StorageService.setSessionKey(loginKey)
             }
