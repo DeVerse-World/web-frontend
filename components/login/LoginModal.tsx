@@ -66,9 +66,6 @@ function LoginModal(props: Props) {
 
     const onGoogleLogin = (event: CredentialResponse) => {
         AuthService.connectToGoogleMail(event.credential, user).then(res => {
-            console.log(user);
-            console.log("HERE2");
-            console.log(res);
             // let googleUser = jwt_decode<GoogleUser>(event.credential);
             if (res.isFailure()) {
                 window.alert(res.error);

@@ -16,6 +16,12 @@ class AuthService extends BaseService {
                 return this.parseResponse(res)
             }
         } else {
+            if (user.social_email == googleUser.email) {
+                let res = await AccountService.getOrCreateByGoogleMail(StorageService.getSessionKey(), googleUser.email, credential)
+                if (res.status != 200 || !res.data.data.require_auth) {
+                    return this.parseResponse(res)
+                }
+            }
             let res = await AccountService.addUserModelWithGoogleMail(user.id, googleUser.email)
             if (res.status != 200 || !res.data.data.require_auth) {
                 return this.parseResponse(res)
@@ -51,6 +57,13 @@ class AuthService extends BaseService {
             }
             user = parsedRes.value.user;
         } else {
+            if (user.wallet_address == metamaskAccount) {
+                let res = await AccountService.getOrCreateByWallet(loginKey, metamaskAccount);
+                let parsedRes = this.parseResponse(res);
+                if (res.status != 200 || !parsedRes.value.require_auth) {
+                    return parsedRes
+                }
+            }
             let res = await AccountService.addUserModelWithWallet(user.id, metamaskAccount)
             if (res.status != 200) {
                 return this.parseResponse(res);
