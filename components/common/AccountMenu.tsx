@@ -1,15 +1,12 @@
-import { useMetaMask } from "metamask-react";
 import Link from "next/link";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Image } from "react-bootstrap";
 import { AppContext } from "../contexts/app_context";
 import LoginModal from "../login/LoginModal";
 import AuthService from "../../data/services/AuthService";
 
 function AccountMenu() {
-  const { status, account } = useMetaMask();
-  const { user, setUser } = useContext(AppContext);
-  const [showLogin, setShowLogin] = useState(false);
+  const { user, setUser, showLogin, setShowLogin } = useContext(AppContext);
   const [showDropdown, setShowDropdown] = useState(false);
 
   const onToggleMenu = (e) => {
