@@ -31,6 +31,7 @@ function EventsPage() {
             if (res.isSuccess()) {
                 setNfts(res.value.events.map<EventViewModel>(e => ({
                     id: e.id.toString(),
+                    category: e.category,
                     name: e.name,
                     description: "Description of event",
                     eventConfigUri: e.event_config_uri,

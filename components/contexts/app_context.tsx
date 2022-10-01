@@ -19,7 +19,8 @@ export enum ViewState {
     ERROR
 }
 
-const AppContext = React.createContext<AppDataContext>({})
+const AppContext = React.createContext<AppDataContext>({
+})
 
 const AppContextProvider = (props) => {
     const [user, setUser] = useState<User>(null);
