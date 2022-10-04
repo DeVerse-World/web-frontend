@@ -2,7 +2,6 @@ import DownloadDemoButton from "../../components/DownloadDemoButton";
 import { getCreateLayout } from "../../components/CreateLayout";
 import { BsPlayFill } from "react-icons/bs";
 import { useState } from "react";
-import PlayModal from "../../components/asset/PlayModal";
 import customProtocolCheck from "custom-protocol-check";
 import { Modal } from "react-bootstrap";
 

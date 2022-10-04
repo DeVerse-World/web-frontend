@@ -80,14 +80,7 @@ function LoginModal(props: Props) {
         modalProps.onHide();
     }
 
-    const googleLogin = useGoogleLogin({
-        onSuccess: tokenResponse => {
-            console.log(tokenResponse)
-        },
-        onError: errorResponse => {
-            console.log(errorResponse.error_description)
-        }
-    });
+
 
     const googleSecondaryLogin = useGoogleLogin({
         flow: 'auth-code',
