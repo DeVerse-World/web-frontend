@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BsPlayFill } from "react-icons/bs";
-import { Category } from "../../data/enum/asset_type";
+import { EventCategory } from "../../data/enum/asset_type";
 import Paginator from "../Paginator";
 
 type EventListProps = {
@@ -41,7 +41,7 @@ export type EventViewModel = {
     name?: string;
     author?: string;
     description?: string;
-    category?: Category;
+    category?: EventCategory;
     image?: string;
     startDate?: string;
     stage?: string;

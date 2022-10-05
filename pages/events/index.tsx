@@ -10,12 +10,13 @@ import Sidebar from "../../components/Sidebar";
 import EventsService from "../../data/services/EventsService";
 import { getTimeString } from "../../utils/time_util";
 import ListingTabComponent from "../../components/ListingTab";
+import { EventCategory } from "../../data/enum/asset_type";
 
 function EventsPage() {
     const router = useRouter();
     const [visibleTab, setVisibleTab] = useState<MarketplaceTab>(MarketplaceTab.All);
-    const [nfts, setNfts] = useState<EventViewModel[]>([]);
-
+    const [data, setData] = useState<EventViewModel[]>([]);
+    const [filteredData, setFilteredData] = useState<EventViewModel[]>([]);
     const onSelectTab = (tab: MarketplaceTab) => {
         router.push({
             pathname: router.pathname,
@@ -29,7 +30,7 @@ function EventsPage() {
     useEffect(() => {
         EventsService.fetchEvents().then(res => {
             if (res.isSuccess()) {
-                setNfts(res.value.events.map<EventViewModel>(e => ({
+                setData(res.value.events.map<EventViewModel>(e => ({
                     id: e.id.toString(),
                     category: e.category,
                     name: e.name,
@@ -42,6 +43,38 @@ function EventsPage() {
             }
         })
     }, [])
+
+    useEffect(() => {
+        if (data.length == 0) {
+            return;
+        }
+        switch (visibleTab) {
+            case MarketplaceTab.BATTLE:
+                setFilteredData(data.filter(e => e.category == EventCategory.BATTLE))
+                break;
+            case MarketplaceTab.CONCERT:
+                setFilteredData(data.filter(e => e.category == EventCategory.CONCERT))
+                break;
+            case MarketplaceTab.GALLERY:
+                setFilteredData(data.filter(e => e.category == EventCategory.GALLERY))
+                break;
+            case MarketplaceTab.GIVEAWAY:
+                setFilteredData(data.filter(e => e.category == EventCategory.GIVEAWAY))
+                break;
+            case MarketplaceTab.SHOWCASE:
+                setFilteredData(data.filter(e => e.category == EventCategory.SHOWCASE))
+                break;
+            case MarketplaceTab.SIMULATION:
+                setFilteredData(data.filter(e => e.category == EventCategory.SIMULATION))
+                break;
+            case MarketplaceTab.TREASURE_HUNT:
+                setFilteredData(data.filter(e => e.category == EventCategory.TREASURE_HUNT))
+                break;
+            default:
+                setFilteredData(data)
+                break;
+        }
+    }, [data, visibleTab])
 
     return (
         <div className='flex flex-row bg-deverse '>
@@ -72,7 +105,7 @@ function EventsPage() {
             </Sidebar>
 
             <section id='section-content' className='flex flex-col justify-between '>
-                <EventList data={nfts} />
+                <EventList data={filteredData} />
                 <Footer />
             </section>
         </div>

@@ -1,4 +1,4 @@
-import { Category } from "../enum/asset_type";
+import { EventCategory } from "../enum/asset_type";
 
 export type Event = {
     id: number;
@@ -6,7 +6,7 @@ export type Event = {
     allow_temporary_hold: number;
     event_config_uri: string;
     name: string;
-    category: Category;
+    category: EventCategory;
     stage: string;
     created_at: string;
     updated_at: string;

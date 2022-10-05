@@ -9,7 +9,7 @@ export enum AssetType {
     EVENTS = "Events"
 }
 
-export enum Category {
+export enum EventCategory {
     BATTLE = "Battle",
     CONCERT = "Concert",
     GALLERY = "Gallery",
