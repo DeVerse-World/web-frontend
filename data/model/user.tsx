@@ -7,6 +7,8 @@ export type User = {
     updated_at: string;
     wallet_address: string;
     wallet_nonce: string;
+
+    avatar?: string;
 }
 
 export type GoogleUser = {

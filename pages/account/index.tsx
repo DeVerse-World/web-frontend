@@ -24,7 +24,7 @@ import { getTimeString } from "../../utils/time_util";
 // y-axis: filter by activities, minute spent, staking balance, and more
 
 function Account() {
-    const { user } = useContext(AppContext);
+    const { user, setUser } = useContext(AppContext);
 
     const [avatars, setAvatars] = useState<AvatarViewModel[]>([]);
     const [events, setEvents] = useState<EventViewModel[]>([]);
@@ -87,7 +87,11 @@ function Account() {
         // }
     }, [user]);
 
-
+    useEffect(() => {
+        if (avatars.length ==0)
+        return;
+        setUser({...user, avatar: avatars[0].image});
+    },[avatars])
 
     if (!user) {
         return <div className="text-center text-white m-auto"><h1>Please Login first</h1></div>

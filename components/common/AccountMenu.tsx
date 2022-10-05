@@ -39,7 +39,7 @@ function AccountMenu() {
     }
     return (
       <div className="text-white">
-        <Image className="cursor-pointer" src={"/images/placeholder.png"} width={40} height={40} roundedCircle 
+        <Image className="cursor-pointer" src={user.avatar || "/images/placeholder.png"} width={40} height={40} roundedCircle 
         onClick={onToggleMenu}/>
         <div id='account-dropdown' className={showDropdown ? "active" : null} onPointerLeave={() => setShowDropdown(false)}>
           <h5>Welcome {user.name}</h5>
