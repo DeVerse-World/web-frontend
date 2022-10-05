@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import AuthService from "../../data/services/AuthService";
 import StorageService from "../../data/services/StorageService";
 import Footer from "../../components/common/Footer";
 import { AppContext } from "../../components/contexts/app_context";
@@ -20,7 +21,14 @@ export default function LoginLink({ loginKey }) {
     const { setShowLogin, user } = useContext(AppContext);
     useEffect(() => {
         if (user) {
-            setConnectionStatus("Authenticated");
+            console.log("USER EXISTED\n");
+            AuthService.authorizeLoginLinkWithUserToken(loginKey).then(res => {
+                if (res.isFailure()) {
+                    window.alert(res.error);
+                    return;
+                }
+                setConnectionStatus("Authenticated");
+            })
         } else {
             setConnectionStatus("Please login...");
         }

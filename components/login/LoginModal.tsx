@@ -26,6 +26,7 @@ function LoginModal(props: Props) {
     const [currentAction, setCurrentAction] = useState<AuthAction>(AuthAction.Home);
     const { status, connect, account } = useMetaMask();
     const { isAddGoogleOnly, isAddMetamaskOnly, ...modalProps } = props;
+    // TODO: metamask logic only executed when explicitly pressing metamask button
     useEffect(() => {
         switch (status) {
             case "initializing":

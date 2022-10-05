@@ -8,6 +8,16 @@ import { Response, GetAccountResponse, LoginResponse } from "../model/response";
 import { BaseService } from "./BaseService";
 
 class AuthService extends BaseService {
+    async authorizeLoginLinkWithUserToken(session_key: string) {
+        const res = await deverseClient.post<Response<GetAccountResponse>>(`user/authLoginLink`, {
+            session_key: session_key,
+        },
+        {
+            withCredentials: true
+        })
+        return this.parseResponse(res)
+    }
+
     async connectToGoogleMail(credential: string, user: User) {
         const googleUser = jwt_decode<GoogleUser>(credential);
         if (!user) {
@@ -15,19 +25,14 @@ class AuthService extends BaseService {
             if (res.status != 200 || !res.data.data.require_auth) {
                 return this.parseResponse(res)
             }
-        } else {
-            if (user.social_email == googleUser.email) {
-                let res = await AccountService.getOrCreateByGoogleMail(StorageService.getSessionKey(), googleUser.email, credential)
-                if (res.status != 200 || !res.data.data.require_auth) {
-                    return this.parseResponse(res)
-                }
-            }
+        }
+        let resData = await this.authLoginLinkForGoogleMail(StorageService.getSessionKey(), googleUser.email, credential)
+        if (user.social_email == "") {
             let res = await AccountService.addUserModelWithGoogleMail(user.id, googleUser.email)
-            if (res.status != 200 || !res.data.data.require_auth) {
+            if (res.status != 200) {
                 return this.parseResponse(res)
             }
         }
-        let resData = await this.authLoginLinkForGoogleMail(StorageService.getSessionKey(), googleUser.email, credential)
         return resData;
     }
 
@@ -56,23 +61,17 @@ class AuthService extends BaseService {
                 return parsedRes
             }
             user = parsedRes.value.user;
-        } else {
-            if (user.wallet_address == metamaskAccount) {
-                let res = await AccountService.getOrCreateByWallet(loginKey, metamaskAccount);
-                let parsedRes = this.parseResponse(res);
-                if (res.status != 200 || !parsedRes.value.require_auth) {
-                    return parsedRes
-                }
-            }
-            let res = await AccountService.addUserModelWithWallet(user.id, metamaskAccount)
-            if (res.status != 200) {
-                return this.parseResponse(res);
-            }
         }
         console.log(`I am signing my one-time nonce: ${user.wallet_nonce}`)
         let signature = await web3.getSigner().signMessage(`I am signing my one-time nonce: ${user.wallet_nonce}`)
         let resData = await this.authLoginLinkForMetamask(loginKey, metamaskAccount, signature)
         StorageService.saveWalletAddress(metamaskAccount);
+        if (user.wallet_address == "") {
+            let res = await AccountService.addUserModelWithWallet(user.id, metamaskAccount)
+            if (res.status != 200) {
+                return this.parseResponse(res);
+            }
+        }
         return resData;
     }
 
