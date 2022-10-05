@@ -6,6 +6,7 @@ import ModelViewer from "../../components/ModelViewer";
 import EventsService from "../../data/services/EventsService";
 import { getTimeString } from "../../utils/time_util";
 import { getAlphaLayout } from "../../components/AlphaLayout";
+import Link from "next/link";
 
 
 function Info() {
@@ -31,10 +32,12 @@ function Info() {
     }, [])
 
     return (
-        <div className="flex items-center flex-row justify-evenly text-white p-4" >
+        <div className="flex items-center flex-row text-white gap-4 p-4 justify-center" >
             <div className="flex flex-col items-center">
-                <button className="deverse-play-btn p-2 rounded-2xl">Change</button>
-                <div className='md:w-[300px] md:h-[600px] w-[350px] '>
+                <Link href="/create">
+                    <button className="deverse-play-btn p-2 rounded-2xl">Change</button>
+                </Link>
+                <div className='md:w-[300px] md:h-[600px] w-[250px] '>
                     <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 1], fov: 50 }}>
                         <ambientLight intensity={2} />
                         <spotLight position={[1, 6, 1.5]} angle={0.2} penumbra={1} intensity={2.5} castShadow shadow-mapSize={[2048, 2048]} />
@@ -45,7 +48,7 @@ function Info() {
                     </Canvas>
                 </div>
             </div>
-            {ongoingEvent && <EventCard key={0} data={ongoingEvent} />}  
+            {ongoingEvent && <EventCard key={0} data={ongoingEvent} />}
         </div>
     )
 }
