@@ -11,7 +11,7 @@ function Settings() {
     const { user } = useContext(AppContext);
     const [currentWallet, setCurrentWallet] = useState(user?.wallet_address || '');
     const [currentEmail, setCurrentEmail] = useState(user?.social_email || '');
-    const { connect } = useMetaMask();
+    const { status, connect, account: walletAddress } = useMetaMask();
 
     const googleLogin = useGoogleLogin({
         onSuccess: tokenResponse => {
@@ -28,7 +28,9 @@ function Settings() {
     }
 
     const onLinkAccountWithMetamask = () => {
-
+        // if (!walletAddress) {
+        //     connect();
+        // }
     }
 
     if (!user) {
@@ -39,6 +41,15 @@ function Settings() {
         <section className="flex flex-row gap-4 text-white">
             <h3 className="text-blue-300 text-3xl font-bold pl-4">Settings</h3>
             <div className="flex flex-col gap-2 py-4">
+                <h5>Name</h5>
+                <InputGroup>
+                    <FormControl id="name" required
+                        placeholder="Name"
+                        aria-label="User Name"
+                        value={user.name}
+                        readOnly
+                    />
+                </InputGroup>
                 <div className="flex flex-row gap-4">
                     <h5>Wallet Address</h5>
                     {!user?.social_email && user.wallet_address &&
@@ -50,7 +61,7 @@ function Settings() {
                         placeholder="Wallet"
                         aria-label="Asset Name"
                         value={currentWallet}
-                        readOnly={currentWallet.length > 0}
+                        readOnly
                     />
                 </InputGroup>
                 <div className="flex flex-row gap-4">
@@ -64,7 +75,7 @@ function Settings() {
                         placeholder="Email"
                         aria-label="Asset Name"
                         value={currentEmail}
-                        readOnly={currentEmail.length > 0}
+                        readOnly
                     />
                 </InputGroup>
             </div>
