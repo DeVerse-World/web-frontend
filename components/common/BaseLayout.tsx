@@ -1,6 +1,4 @@
-import Link from "next/link";
 import { ReactNode } from "react";
-import Sidebar from "../Sidebar";
 import HomeNavbar from "./HomeNavbar";
 
 type Props = {
@@ -8,7 +6,7 @@ type Props = {
 }
 
 const BaseLayout = (props: Props) => (
-    <div className='flex flex-col'>
+    <div>
         <HomeNavbar />
         {props.children}
     </div>

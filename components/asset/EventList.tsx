@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BsPlayFill } from "react-icons/bs";
+import { EventCategory } from "../../data/enum/asset_type";
 import Paginator from "../Paginator";
 
 type EventListProps = {
@@ -40,6 +41,7 @@ export type EventViewModel = {
     name?: string;
     author?: string;
     description?: string;
+    category?: EventCategory;
     image?: string;
     startDate?: string;
     stage?: string;
@@ -62,6 +64,7 @@ export function EventCard(props: EventCardProps) {
                     overflow: "hidden",
                     textOverflow: "ellipsis"
                 }}>{props.data.name}</span>
+                <span className="text-blue-400">{props.data.category}</span>
                 <div className="flex flex-row justify-between flex-grow items-end">
                     <div className="text-white flex-row flex items-center gap-2">
                         <img src="/images/logo.png" />

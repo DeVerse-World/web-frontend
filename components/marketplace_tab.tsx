@@ -1,11 +1,11 @@
 export enum MarketplaceTab {
-    All = "all",
-    TWO_D_IMAGE = "2d-image",
-    RACE = "character-race",
-    AVATAR = "character-avatar",
-    GAME_MODE = "game-mode",
-    BOT_LOGIC = "bot-logic",
-    WORLDS = "worlds",
+    All = "All",
+    TWO_D_IMAGE = "Image",
+    RACE = "Race",
+    AVATAR = "Avatar",
+    GAME_MODE = "Game mode",
+    BOT_LOGIC = "Bot Logic",
+    WORLDS = "Worlds",
 
     TREASURE_HUNT = "Treasure Hunt",
     CONCERT = "Concert",

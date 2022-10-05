@@ -26,7 +26,7 @@ function ProductSection(props) {
             },
             {
                 icon: "product-decentralised-subworld-hosting.png",
-                name: "Dec subworld hosting",
+                name: "subworld hosting",
                 status: FeatureStatus.IN_PROGRESS,
                 description: "Users can manage and host their interconnected verses using our in-built custom management app, expanding infinitely the decentralized metaverse."
             },

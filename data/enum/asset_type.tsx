@@ -8,3 +8,13 @@ export enum AssetType {
     DERIV_SUBWORLD_TEMPLATE = "Deriv template",
     EVENTS = "Events"
 }
+
+export enum EventCategory {
+    BATTLE = "Battle",
+    CONCERT = "Concert",
+    GALLERY = "Gallery",
+    GIVEAWAY = "Giveaway",
+    SHOWCASE = "Showcase",
+    SIMULATION = "Simulation",
+    TREASURE_HUNT = "Treasure Hunt"
+}
