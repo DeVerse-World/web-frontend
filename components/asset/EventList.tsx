@@ -55,7 +55,9 @@ export function EventCard(props: EventCardProps) {
     return (
         <div className="nft-card md:h-[400px] h-[250px] md:w-[500px] w-[350px] flex flex-col">
             <div className="h-[225px] flex flex-row justify-center rounded-xl overflow-hidden">
-                <img src={props.data.image || "/images/event-placeholder.jpg"} className="w-[100%]" />
+                <img 
+                src={props.data.image || "/images/event-placeholder.jpg"} 
+                className="w-[100%]"  />
             </div>
             <div className="flex flex-col flex-grow p-4">
                 <span className="text-blue-300">Last updated: {props.data.lastUpdate}</span>
