@@ -85,7 +85,7 @@ function Account() {
         //         console.log(e.value);
         //     })
         // }
-    }, [user]);
+    }, []);
 
     useEffect(() => {
         if (avatars.length ==0)
