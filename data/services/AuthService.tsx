@@ -26,7 +26,7 @@ class AuthService extends BaseService {
             }
         }
         let resData = await this.authLoginLinkForGoogleMail(googleUser.email, credential)
-        if (user.social_email == "") {
+        if (user && user.social_email == "") {
             let res = await AccountService.addUserModelWithGoogleMail(googleUser.email)
             if (res.isFailure()) {
                 return res;

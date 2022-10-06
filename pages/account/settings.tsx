@@ -1,39 +1,39 @@
 import { CredentialResponse, GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { useMetaMask } from "metamask-react";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { FormControl, InputGroup } from "react-bootstrap";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import { AppContext } from "../../components/contexts/app_context";
 import AccountService from "../../data/services/AccountService";
 import AuthService from "../../data/services/AuthService";
-import { formatWalletAddress } from "../../utils/wallet_util";
+import { usePrevious } from "../../utils/use_previous";
 
 function Settings() {
     const { user, setUser } = useContext(AppContext);
     const [currentWallet, setCurrentWallet] = useState('');
     const [currentEmail, setCurrentEmail] = useState('');
     const { status, connect, account: walletAddress } = useMetaMask();
-
+    const previousMetamaskState = usePrevious(status);
     useEffect(() => {
         console.log(user)
         setCurrentWallet(user?.wallet_address || '')
         setCurrentEmail(user?.social_email || '')
     }, [user])
 
-    const googleLogin = useGoogleLogin({
-        flow: 'auth-code',
-        onSuccess: tokenResponse => {
-            console.log(tokenResponse)
-        },
-        onError: errorResponse => {
-            console.log(errorResponse.error_description)
-        }
-    });
+    // const googleLogin = useGoogleLogin({
+    //     flow: 'auth-code',
+    //     onSuccess: tokenResponse => {
+    //         console.log(tokenResponse)
+    //     },
+    //     onError: errorResponse => {
+    //         console.log(errorResponse.error_description)
+    //     }
+    // });
 
-    const onLinkAccountWithGoogle = () => {
-        googleLogin();
-        // AccountService.addUserModelWithGoogleMail(user.id, "abc")
-    }
+    // const onLinkAccountWithGoogle = () => {
+    //     googleLogin();
+    //     // AccountService.addUserModelWithGoogleMail(user.id, "abc")
+    // }
 
     const onGoogleLogin = (event: CredentialResponse) => {
         AuthService.connectToGoogleMail(event.credential, user).then(res => {
@@ -47,10 +47,33 @@ function Settings() {
     }
 
 
+    useEffect(() => {
+        if (previousMetamaskState == "connecting" && status == "connected") {
+            AuthService.connectToMetamask(walletAddress, user).then(res => {
+                if (res.isFailure()) {
+                    window.alert(res.error)
+                    return;
+                }
+                setUser(res.value.user);
+            });
+        }
+    }, [status])
+
+
     const onLinkAccountWithMetamask = () => {
-        // if (!walletAddress) {
-        //     connect();
-        // }
+        if (currentWallet.length == 0) {
+            if (walletAddress.length > 0) {
+                AuthService.connectToMetamask(walletAddress, user).then(res => {
+                    if (res.isFailure()) {
+                        window.alert(res.error)
+                        return;
+                    }
+                    setUser(res.value.user);
+                });
+            } else {
+                connect();
+            }
+        }
     }
 
     if (!user) {
