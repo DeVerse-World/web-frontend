@@ -12,6 +12,7 @@ const CreateLayout = (props: Props) => (
         <section id='section-content' className='flex flex-col justify-between '>
             <span className="tab-bar" >
                 <TabHeader href="/create">Avatar</TabHeader>
+                <TabHeader href="/create/mint">Mint</TabHeader>
                 <TabHeader href="/create/ig-editor">Ingame Editor</TabHeader>
                 <TabHeader href="/create/ue-sdk">Unreal Engine SDK</TabHeader>
             </span>
