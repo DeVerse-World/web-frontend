@@ -39,12 +39,13 @@ class AccountService extends BaseService {
     }
 
     // Will reject if there was another google mail tied to this user before
-    async addUserModelWithGoogleMail(user_id: number, google_email: string) {
-        return deverseClient.put<Response<GetAccountResponse>>(`user/${user_id}`, {
+    async addUserModelWithGoogleMail(google_email: string) {
+        const res = await deverseClient.put<Response<GetAccountResponse>>(`user/profile`, {
             google_email: google_email,
         }, {
             withCredentials: true
-        })
+        });
+        return this.parseResponse(res);
     }
 
     async getUserInfo(): Promise<Result<GetUserProfileResponse>> {
