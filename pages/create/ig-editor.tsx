@@ -33,7 +33,7 @@ function Editor() {
                 <BsPlayFill />
                 Play
             </button>
-            <div className="flex flex-row gap-4 flex-wrap">
+            <div className="flex flex-row gap-4 justify-center flex-wrap">
                 <HighlightCard img="/images/ig-editor-1.png"
                     title="Free for all"
                     description="Create awesome worlds, games, races using thousands of free assets made by the community" />
