@@ -46,12 +46,12 @@ export default function PlayModal(props: Props) {
                 }}>
                     Offline
                 </button>
-                <button className="deverse-play-btn w-32 rounded-3xl" onClick={(e) => {
+                {/* <button className="deverse-play-btn w-32 rounded-3xl" onClick={(e) => {
                     e.stopPropagation();
                     openApp(props.templateId, "ONLINE");
                 }}>
                     Online
-                </button>
+                </button> */}
             </Modal.Body>
         )
     }
@@ -61,7 +61,7 @@ export default function PlayModal(props: Props) {
             onHide={props.onClose}
             contentClassName="bg-black" dialogClassName="deverse-dialog">
             {!showDownload && <Modal.Header className="flex flex-row">
-                <h3 className="text-white text-center">Launch Game Instance</h3>
+                <h3 className="text-white text-center">Launch World</h3>
             </Modal.Header>}
             {renderBody()}
         </Modal>
