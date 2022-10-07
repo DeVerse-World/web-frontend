@@ -34,6 +34,7 @@ function EventsPage() {
                     id: e.id.toString(),
                     category: e.category,
                     name: e.name,
+                    image: e.thumbnail_image,
                     description: "Description of event",
                     eventConfigUri: e.event_config_uri,
                     lastUpdate: getTimeString(new Date(e.updated_at)),

@@ -11,8 +11,7 @@ class AuthService extends BaseService {
     async authorizeLoginLinkWithUserToken(session_key: string) {
         const res = await deverseClient.post<Response<GetAccountResponse>>(`user/authLoginLink`, {
             session_key: session_key,
-        },
-        {
+        }, {
             withCredentials: true
         })
         return this.parseResponse(res)
@@ -26,20 +25,20 @@ class AuthService extends BaseService {
                 return this.parseResponse(res)
             }
         }
-        let resData = await this.authLoginLinkForGoogleMail(StorageService.getSessionKey(), googleUser.email, credential)
-        if (user.social_email == "") {
-            let res = await AccountService.addUserModelWithGoogleMail(user.id, googleUser.email)
-            if (res.status != 200) {
-                return this.parseResponse(res)
+        let resData = await this.authLoginLinkForGoogleMail(googleUser.email, credential)
+        if (user && user.social_email == "") {
+            let res = await AccountService.addUserModelWithGoogleMail(googleUser.email)
+            if (res.isFailure()) {
+                return res;
             }
         }
         return resData;
     }
 
-    async authLoginLinkForGoogleMail(session_key: string, google_email: string, google_token: string) {
+    async authLoginLinkForGoogleMail(google_email: string, google_token: string) {
         const res = await deverseClient.post<Response<GetAccountResponse>>(`user/authLoginLink`, {
             login_mode: "GOOGLE",
-            session_key: session_key,
+            session_key: StorageService.getSessionKey(),
             google_token: google_token,
             google_email: google_email,
         }, {

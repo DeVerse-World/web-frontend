@@ -49,3 +49,10 @@ export type DerivSubworldTemplateResponse = {
 export type LoginResponse = {
     login_url: string;
 }
+
+export type EventUriResponse = {
+    duration: string;
+    file_uri: string;
+    file_type: string;
+    thumbnail_image: string;
+}

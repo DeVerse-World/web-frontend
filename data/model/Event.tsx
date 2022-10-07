@@ -11,4 +11,6 @@ export type Event = {
     created_at: string;
     updated_at: string;
     user_id: number;
+    
+    thumbnail_image: string;
 }
