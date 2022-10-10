@@ -65,11 +65,11 @@ function Layout() {
         <div className="flex flex-col relative justify-center text-white p-4" >
             <div >
                 <h3>Root</h3>
-                <RootSubworldList data={rootTemplates} alignStart />
+                <RootSubworldList data={rootTemplates} />
             </div>
             <div>
                 <h3>Deriv</h3>
-                <DerivSubworldList data={derivTemplates} alignStart />
+                <DerivSubworldList data={derivTemplates} />
             </div>
         </div>
     )

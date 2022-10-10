@@ -64,7 +64,7 @@ function SubworldsPage() {
                 </Accordion>
             </Sidebar>
             <section id='section-content' className='flex flex-col justify-between '>
-                <RootSubworldList data={rootTemplates} alignStart/>
+                <RootSubworldList data={rootTemplates}/>
                 <Footer />
             </section >
         </div>

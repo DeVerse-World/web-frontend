@@ -132,7 +132,7 @@ function Account() {
                             <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
                         </Link>
                     </div>
-                    <AvatarList alignStart data={avatars}/>
+                    <AvatarList data={avatars}/>
                 </div>
 
                 <div className="p-4">
@@ -142,7 +142,7 @@ function Account() {
                             <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
                         </Link>
                     </div>
-                    <EventList alignStart data={events}/>
+                    <EventList data={events}/>
                 </div>
 
                 <div className="p-4">
@@ -152,7 +152,7 @@ function Account() {
                             <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
                         </Link>
                     </div>
-                    <RootSubworldList alignStart data={templates}/>
+                    <RootSubworldList data={templates}/>
                 </div>
             </section>  
         </div>

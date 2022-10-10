@@ -91,7 +91,7 @@ function Marketplace() {
             <section id='section-content' className='bg-deverse flex flex-col text-white ' >
                 <div className="flex-grow p-4">
                     <span className="text-blue-300 text-3xl font-bold pl-4">Images</span>
-                    <AvatarList alignStart data={images} />
+                    <AvatarList data={images} />
                 </div>
                 {/* <div className='flex flex-row grow'>
                     {renderContent()}

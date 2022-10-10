@@ -6,16 +6,15 @@ import Paginator from "../Paginator";
 type EventListProps = {
     data: EventViewModel[];
     onDeleted?: (EventViewModel) => void;
-    alignStart?: boolean;
 }
-const itemPerPage = 5;
+const itemPerPage = 4;
 
 export default function EventList(props: EventListProps) {
     const [currentPage, setCurrentPage] = useState(1);
 
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
-            <div className={`flex flex-row flex-wrap gap-2 ${props.alignStart ? "w-full" : "justify-center"}`}>
+            <div className={props.data.length < itemPerPage - 1 ? "flex flex-row flex-wrap gap-2 w-full" : `grid xl:grid-cols-2 grid-cols-1 gap-4`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item: EventViewModel, index: number) =>
                         <EventCard key={index} data={item} />
@@ -55,9 +54,9 @@ export function EventCard(props: EventCardProps) {
     return (
         <div className="nft-card md:h-[400px] h-[250px] md:w-[500px] w-[350px] flex flex-col">
             <div className="h-[225px] flex flex-row justify-center rounded-xl overflow-hidden">
-                <img 
-                src={props.data.image || "/images/event-placeholder.jpg"} 
-                className="w-[100%]"  />
+                <img
+                    src={props.data.image || "/images/event-placeholder.jpg"}
+                    className="w-[100%]" />
             </div>
             <div className="flex flex-col flex-grow p-4">
                 <span className="text-blue-300">Last updated: {props.data.lastUpdate}</span>

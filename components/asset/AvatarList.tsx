@@ -11,14 +11,13 @@ const itemPerPage = 4;
 type AvatarListProps = {
     data: AvatarViewModel[];
     onDeleted?: (AvatarViewModel) => void;
-    alignStart?: boolean;
 }
 
 export default function AvatarList(props: AvatarListProps) {
     const [currentPage, setCurrentPage] = useState(1);
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
-            <div className={`flex flex-row flex-wrap gap-2 ${props.alignStart ? "w-full" : "justify-center"}`}>
+            <div className={props.data.length < itemPerPage - 1 ? "flex flex-row flex-wrap gap-2 w-full" : `grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item: AvatarViewModel, index: number) =>
                         <AvatarCard key={index} data={item} />
@@ -86,9 +85,9 @@ export function AvatarCard(props: AvatarCardProps) {
                                 name='rating' />
                         </div>
                     </div>
-                    <div className="flex flex-col justify-center ">
+                    {/* <div className="flex flex-col justify-center ">
                         <span className="flex flex-row items-center">150 <FaEthereum /></span>
-                    </div>
+                    </div> */}
                 </div>
 
             </div>

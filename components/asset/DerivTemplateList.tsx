@@ -14,7 +14,6 @@ export type DerivTemplateViewModel = {
 
 type ListProps = {
     data: DerivTemplateViewModel[];
-    alignStart?: boolean;
 }
 
 const itemPerPage = 5;
@@ -24,7 +23,7 @@ function DerivSubworldList(props: ListProps) {
 
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
-            <div className={`flex flex-row flex-wrap gap-2 ${props.alignStart ? "w-full" : "justify-center"}`}>
+            <div className={props.data.length < itemPerPage - 1 ? "flex flex-row flex-wrap gap-2 w-full" : `grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item, index) =>
                         <DerivTemplateCard key={index} data={item} />)
@@ -63,9 +62,9 @@ function DerivTemplateCard(props: CardProps) {
                 <TbWorld />15
                 <BsFillPeopleFill className="ml-4" />35/500
             </div>
-            <div className="px-4 flex flex-row items-center">
+            {/* <div className="px-4 flex flex-row items-center">
                 150 <FaEthereum />
-            </div>
+            </div> */}
             <div className="flex flex-row px-4 justify-between">
                 <div className="flex flex-col">
                     <StarRatings
