@@ -34,13 +34,13 @@ function Editor() {
                 Play
             </button>
             <div className="flex flex-row gap-4 justify-center flex-wrap">
-                <HighlightCard img="/images/ig-editor-1.png"
+                <HighlightCard img="/images/ig-free-for-all.png"
                     title="Free for all"
                     description="Create awesome worlds, games, races using thousands of free assets made by the community" />
-                <HighlightCard img="/images/ig-editor-2.png"
+                <HighlightCard img="/images/ig-share-creation.png"
                     title="Share your creation"
                     description="What can be better than having your friends or others players experience your world. Share to everyone with just a button click." />
-                <HighlightCard img="/images/ig-editor-3.png"
+                <HighlightCard img="/images/ig-no-coding.png"
                     title="No Coding needed"
                     description="Easy to use, no coding required. It is simple and intuitive to modify the rules or attributes of your world." />
             </div>
