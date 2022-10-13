@@ -1,19 +1,30 @@
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import EventList, { EventCard, EventViewModel } from "../../components/asset/EventList";
 import ModelViewer from "../../components/ModelViewer";
 import EventsService from "../../data/services/EventsService";
 import { getTimeString } from "../../utils/time_util";
 import { getAlphaLayout } from "../../components/AlphaLayout";
 import Link from "next/link";
+import { AppContext } from "../../components/contexts/app_context";
+import AvatarService from "../../data/services/AvatarService";
 
 
 function Info() {
+    const { setViewState, user } = useContext(AppContext);
     const [modelPath, setModelPath] = useState<string>(null);
     const [ongoingEvent, setOngoingEvents] = useState<EventViewModel>();
 
     useEffect(() => {
+        AvatarService.getAvatars(user?.id).then(res => {
+            if (res.isSuccess && res.value) {
+                console.log(res)
+                if (res.isSuccess() && res.value.avatars.length > 0) {
+                    setModelPath(res.value.avatars[0].preprocess_url)
+                }
+            }
+        })
         EventsService.fetchEvents().then(res => {
             if (res.isSuccess()) {
                 const data = res.value.events.map<EventViewModel>(e => ({
@@ -31,24 +42,39 @@ function Info() {
         })
     }, [])
 
+    const renderAvatar = () => {
+        if (!modelPath) {
+            return <h3>No Avatar Yet, please create one to be shown.</h3>
+        }
+        return (
+            <div className='md:w-[300px] md:h-[600px] w-[250px] '>
+                <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 1], fov: 50 }}>
+                    <ambientLight intensity={2} />
+                    <spotLight position={[1, 6, 1.5]} angle={0.2} penumbra={1} intensity={2.5} castShadow shadow-mapSize={[2048, 2048]} />
+                    <spotLight position={[-5, 5, -1.5]} angle={0.03} penumbra={1} intensity={4} castShadow shadow-mapSize={[1024, 1024]} />
+                    <spotLight position={[5, 5, -5]} angle={0.3} penumbra={1} intensity={4} castShadow={true} shadow-mapSize={[256, 256]} color="#ffffc0" />
+                    <ModelViewer position={[0, -0.8, -1.5]} filePath={modelPath} />
+                    {/* <OrbitControls makeDefault zoomSpeed={2} /> */}
+                </Canvas>
+            </div>
+        )
+    }
+
     return (
-        <div className="flex items-center flex-row text-white gap-4 p-4 justify-center" >
+        <div className="grid grid-cols-3 text-white gap-4 p-4 " >
             <div className="flex flex-col items-center">
                 <Link href="/create">
                     <button className="deverse-play-btn p-2 rounded-2xl">Change</button>
                 </Link>
-                <div className='md:w-[300px] md:h-[600px] w-[250px] '>
-                    <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 1], fov: 50 }}>
-                        <ambientLight intensity={2} />
-                        <spotLight position={[1, 6, 1.5]} angle={0.2} penumbra={1} intensity={2.5} castShadow shadow-mapSize={[2048, 2048]} />
-                        <spotLight position={[-5, 5, -1.5]} angle={0.03} penumbra={1} intensity={4} castShadow shadow-mapSize={[1024, 1024]} />
-                        <spotLight position={[5, 5, -5]} angle={0.3} penumbra={1} intensity={4} castShadow={true} shadow-mapSize={[256, 256]} color="#ffffc0" />
-                        <ModelViewer position={[0, -0.8, -1.5]} filePath={"https://d1a370nemizbjq.cloudfront.net/38661c86-1829-4fc5-b327-56e13f8727f7.glb"} />
-                        {/* <OrbitControls makeDefault zoomSpeed={2} /> */}
-                    </Canvas>
-                </div>
+                {renderAvatar()}
             </div>
-            {ongoingEvent && <EventCard key={0} data={ongoingEvent} />}
+            <div>
+                {ongoingEvent && <EventCard key={0} data={ongoingEvent} />}
+
+            </div>
+            <div>
+
+            </div>
         </div>
     )
 }

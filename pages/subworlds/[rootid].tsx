@@ -102,7 +102,7 @@ export default function Deriv({ rootId }) {
                                     Connected worlds: {derivTemplates.length}
                                 </div>
                             </div>
-                            <DerivSubworldList alignStart data={derivTemplates} />
+                            <DerivSubworldList data={derivTemplates} />
                         </div>
                     </div>
                 }
