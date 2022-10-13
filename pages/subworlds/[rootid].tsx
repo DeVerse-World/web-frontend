@@ -33,10 +33,11 @@ export default function Deriv({ rootId }) {
         setViewState(ViewState.LOADING);
         SubWorldTemplateService.fetchRootTemplate(rootId).then(rootRes => {
             if (rootRes.isSuccess()) {
+                console.log(rootRes.value.subworld_template)
                 setRootTemplate({
                     id: rootRes.value.subworld_template.id.toString(),
                     name: rootRes.value.subworld_template.display_name,
-                    description: rootRes.value.subworld_template.display_name,
+                    description: rootRes.value.subworld_template.derivative_uri,
                     image: rootRes.value.subworld_template.thumbnail_centralized_uri,
                     fileAssetUriFromCentralized: rootRes.value.subworld_template.thumbnail_centralized_uri,
                     file2dUri: rootRes.value.subworld_template.thumbnail_centralized_uri,
@@ -96,7 +97,7 @@ export default function Deriv({ rootId }) {
                                 </div>
                                 <div>
                                     <h5 className="text-blue-200">Description</h5>
-                                    <p>Không còn nhiều cảnh xếp hàng dài trước các cửa hàng thời trang xa xỉ, ăn ở nhà hàng sang trọng dịp cuối tuần và du lịch các đảo nhiệt đớ</p>
+                                    <p>{rootTemplate.description}</p>
                                 </div>
                                 <div className="text-blue-200">
                                     Connected worlds: {derivTemplates.length}
