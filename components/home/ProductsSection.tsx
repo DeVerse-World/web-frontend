@@ -8,7 +8,7 @@ function ProductSection(props) {
         const items: ProductionSectionData[] = [
             {
                 icon: "product-ad.png",
-                name: "ads",
+                name: "Interactive Advertisement",
                 status: FeatureStatus.PENDING,
                 description: "Game as an advertisement platform, utilizing a similar ads system from exisiting social media platforms to determine pricing."
             },
@@ -20,7 +20,7 @@ function ProductSection(props) {
             },
             {
                 icon: "product-decentralised-graphic-sharing.png",
-                name: "UE5 + Graphic Sharing",
+                name: "Graphic Sharing",
                 status: FeatureStatus.PENDING,
                 description: "With Unreal Engine 5 and Pixel Streaming, we leverage the newest game technology to provide the best experience possible and enable a decentralized marketplace where powerful machine owners can share their computing resources in return for token rewards."
             },
@@ -38,7 +38,7 @@ function ProductSection(props) {
             },
             {
                 icon: "product-quest-creator-tool.png",
-                name: "quest creator tool",
+                name: "creator tools",
                 status: FeatureStatus.PLANNING,
                 description: "A custom editor tool that let users design their campaigns/quests. Use various existing templates or build from scratch."
             },
@@ -50,7 +50,7 @@ function ProductSection(props) {
             },
             {
                 icon: "product-smart-nft.png",
-                name: "smart NFT",
+                name: "Smart Creator Economy",
                 status: FeatureStatus.IN_PROGRESS,
                 description: "Support non-fungible & semi-fungible tokens, enabling renting and hierarchical fee sharing structure of NFTs. We also introduce liquidity-backed insurance, where transfer fees are accumulated to provide a guaranteed buy-back scheme at minimum price of an asset, which improves the asset liquidity."
             },

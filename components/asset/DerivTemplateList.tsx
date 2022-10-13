@@ -16,7 +16,7 @@ type ListProps = {
     data: DerivTemplateViewModel[];
 }
 
-const itemPerPage = 5;
+const itemPerPage = 4;
 
 function DerivSubworldList(props: ListProps) {
     const [currentPage, setCurrentPage] = useState(1);

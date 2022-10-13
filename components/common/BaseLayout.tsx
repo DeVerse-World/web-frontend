@@ -6,7 +6,7 @@ type Props = {
 }
 
 const BaseLayout = (props: Props) => (
-    <div>
+    <div className='flex flex-col'>
         <HomeNavbar />
         {props.children}
     </div>
