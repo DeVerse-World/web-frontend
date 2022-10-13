@@ -40,13 +40,13 @@ export default function PlayModal(props: Props) {
         }
         return (
             <Modal.Body className="text-white text-lg break-words flex flex-row gap-4 items-center">
-                <button className="deverse-play-btn w-32 rounded-3xl" onClick={(e) => {
+                <button id="btn-play-offline" className="deverse-play-btn w-32 rounded-3xl" onClick={(e) => {
                     e.stopPropagation();
                     openApp(props.templateId, "OFFLINE");
                 }}>
                     Offline
                 </button>
-                {/* <button className="deverse-play-btn w-32 rounded-3xl" onClick={(e) => {
+                {/* <button id="btn-play-online" className="deverse-play-btn w-32 rounded-3xl" onClick={(e) => {
                     e.stopPropagation();
                     openApp(props.templateId, "ONLINE");
                 }}>

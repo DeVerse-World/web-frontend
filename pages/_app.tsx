@@ -44,10 +44,11 @@ function DeverseApp({ Component, pageProps }) {
               <Head>
                 <title>Deverse World</title>
               </Head>
-              <GoogleTagManager tagId={process.env.NEXT_PUBLIC_GTM} />
               <noscript>
                 <GTMHeader tagId={process.env.NEXT_PUBLIC_GTM} />
               </noscript>
+              <GoogleTagManager tagId={process.env.NEXT_PUBLIC_GTM} />
+
               <LoadingScreen />
               {/* <ScrollToTopButton /> */}
               {getLayout(<Component {...pageProps} />)}
