@@ -34,7 +34,7 @@ function SidebarItem(props: ItemProps) {
 
     return (
         <Link href={props.href} >
-            <div className={`w-[100%] text-sm cursor-pointer deverse-sidebar-item flex flex-col items-center py-2 ${activeClass}`} >
+            <div className={`w-[100%] text-sm cursor-pointer deverse-sidebar-item flex flex-col items-center p-2 ${activeClass}`} >
                 {props.icon}
                 {props.label.toUpperCase()}
             </div>
