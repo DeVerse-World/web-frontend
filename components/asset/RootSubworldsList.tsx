@@ -7,7 +7,7 @@ import StarRatings from 'react-star-ratings';
 import { FaEthereum } from "react-icons/fa";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 
-const itemPerPage = 5;
+const itemPerPage = 4;
 
 export type TemplateViewModel = {
     id?: string;
