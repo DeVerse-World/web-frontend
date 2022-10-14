@@ -11,8 +11,8 @@ function DownloadDemoButton(props: Props) {
             onClick={() => {
                 window.open("https://drive.google.com/uc?export=download&id=1-uMt_0e8WHyMYDmd2lV3x6kxBD7DNVLU", "_blank")
             }} >
-            <span className="me-2">Download</span>
-            <AiFillWindows fontSize="2rem" />
+            <span id="btn-download-app" className="me-2">Download</span>
+            <AiFillWindows id="btn-download-app" fontSize="2rem" />
         </button>
     )
 }
