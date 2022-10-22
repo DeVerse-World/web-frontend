@@ -31,13 +31,18 @@ export default function Deriv({ rootId }) {
     const [derivTemplates, setDerivTemplates] = useState<DerivTemplateViewModel[]>([]);
     useEffect(() => {
         setViewState(ViewState.LOADING);
-        SubWorldTemplateService.fetchRootTemplate(rootId).then(rootRes => {
+        SubWorldTemplateService.fetchRootTemplate(rootId).then(async rootRes => {
             if (rootRes.isSuccess()) {
-                console.log(rootRes.value.subworld_template)
+                console.log(rootRes.value)
+                let worldDescription = ""
+                if (rootRes.value.subworld_template.derivative_uri) {
+                    const descriptionRes = await SubWorldTemplateService.fetchTemplateDescription(rootRes.value.subworld_template.derivative_uri);
+                    worldDescription = descriptionRes.descriptions.join(", ") + "\n" + descriptionRes.helpers.join(", ");
+                }
                 setRootTemplate({
                     id: rootRes.value.subworld_template.id.toString(),
                     name: rootRes.value.subworld_template.display_name,
-                    description: rootRes.value.subworld_template.derivative_uri,
+                    description: worldDescription,
                     image: rootRes.value.subworld_template.thumbnail_centralized_uri,
                     fileAssetUriFromCentralized: rootRes.value.subworld_template.thumbnail_centralized_uri,
                     file2dUri: rootRes.value.subworld_template.thumbnail_centralized_uri,
