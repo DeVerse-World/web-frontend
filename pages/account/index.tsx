@@ -94,7 +94,7 @@ function Account() {
     }
     return (
         <div className="flex flex-col items-center text-white">
-            <section id='cover-picture' className="h-[300px] overflow-hidden flex items-center">
+            <section id='cover-picture' className="h-[350px] w-full overflow-hidden flex items-center">
                 <img title="cover-image" src="images/01.png" />
             </section>
             <section id="avatar-section" className="flex flex-row w-[80%]">

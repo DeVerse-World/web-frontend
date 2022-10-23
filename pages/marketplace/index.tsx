@@ -26,7 +26,6 @@ function Marketplace() {
     }, [])
 
     const loadNFTs = async (query: string) => {
-        setViewState(ViewState.LOADING)
         AssetService.getAll(ApiStrategy.GraphQl).then(assets => {
             const avatars = assets.filter(e => e.assetType == AssetType.IMAGE_2D);
             let convertedData = avatars.map<AvatarViewModel>(item => ({

@@ -37,11 +37,11 @@ function AssetPreviewScreen(props: WithRouterProps) {
 
     return (
         <section id="section-content" className='flex flex-col gap-4'>
-            <div className='m-auto my-4 flex-grow flex flex-row gap-4'>
-                <div className='flex flex-col items-center gap-4'>
+            <div className='m-auto py-4 flex flex-row gap-4 flex-wrap justify-center'>
+                <div className='flex flex-col items-center gap-4 py-4 md:w-[30vw] md:h-[80vh]'>
                     {
                         modelPath &&
-                        <div className='rounded-2xl border-4 bg-white md:w-[300px] md:h-[400px] w-[350px] '>
+                        <div className='rounded-2xl bg-gray-700 md:w-full md:h-full w-[350px]'>
                             <Canvas >
                                 <ModelViewer filePath={modelPath} position={[0, -1, 0]}/>
                                 <ambientLight intensity={0.5} />
@@ -56,7 +56,7 @@ function AssetPreviewScreen(props: WithRouterProps) {
                     }
                     <button className="w-[120px] h-[40px] rounded-3xl flex flex-row justify-center items-center text-white deverse-play-btn font-bold">BUY</button>
                 </div>
-                <div className='flex flex-col text-blue-300 w-[300px]'>
+                <div className='flex flex-col text-blue-300 w-[300px] mx-auto'>
                     <div className='text-3xl'>{avatar?.name || "Avatar Name"}</div>
                     <div>0/10</div>
                     <div className='mt-8 flex flex-row justify-between'>
