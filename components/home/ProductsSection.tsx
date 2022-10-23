@@ -12,12 +12,12 @@ function ProductSection(props) {
                 status: FeatureStatus.PENDING,
                 description: "Game as an advertisement platform, utilizing a similar ads system from exisiting social media platforms to determine pricing."
             },
-            {
-                icon: "product-dao.png",
-                name: "dao",
-                status: FeatureStatus.IN_PROGRESS,
-                description: "Be part of the system & vote on important decisions, dev grants, etc."
-            },
+            // {
+            //     icon: "product-dao.png",
+            //     name: "dao",
+            //     status: FeatureStatus.IN_PROGRESS,
+            //     description: "Be part of the system & vote on important decisions, dev grants, etc."
+            // },
             {
                 icon: "product-decentralised-graphic-sharing.png",
                 name: "Graphic Sharing",
