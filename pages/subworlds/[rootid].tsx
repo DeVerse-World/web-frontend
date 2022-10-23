@@ -34,15 +34,9 @@ export default function Deriv({ rootId }) {
         SubWorldTemplateService.fetchRootTemplate(rootId).then(async rootRes => {
             if (rootRes.isSuccess()) {
                 console.log(rootRes.value)
-                let worldDescription = ""
-                if (rootRes.value.subworld_template.derivative_uri) {
-                    const descriptionRes = await SubWorldTemplateService.fetchTemplateDescription(rootRes.value.subworld_template.derivative_uri);
-                    worldDescription = descriptionRes.descriptions.join(", ") + "\n" + descriptionRes.helpers.join(", ");
-                }
-                setRootTemplate({
+                const rootData: RootTemplateViewModel = {
                     id: rootRes.value.subworld_template.id.toString(),
                     name: rootRes.value.subworld_template.display_name,
-                    description: worldDescription,
                     image: rootRes.value.subworld_template.thumbnail_centralized_uri,
                     fileAssetUriFromCentralized: rootRes.value.subworld_template.thumbnail_centralized_uri,
                     file2dUri: rootRes.value.subworld_template.thumbnail_centralized_uri,
@@ -50,7 +44,12 @@ export default function Deriv({ rootId }) {
                     file3dUri: rootRes.value.subworld_template.level_ipfs_uri,
                     onlineOpenable: true,
                     offlineOpenable: true
-                })
+                }
+                if (rootRes.value.subworld_template.derivative_uri) {
+                    const descriptionRes = await SubWorldTemplateService.fetchTemplateDescription(rootRes.value.subworld_template.derivative_uri);
+                    rootData.description = descriptionRes.descriptions.join(", ");
+                }
+                setRootTemplate(rootData)
             }
         }).finally(() => {
             setViewState(ViewState.SUCCESS)
