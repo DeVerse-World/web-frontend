@@ -48,6 +48,17 @@ function ModelObject(props: ModelObjectProps) {
   let animationMixer: AnimationMixer = new AnimationMixer(props.gltf.scene);
 
   useEffect(() => {
+    // ModelPreviewService.load("3d/cleric_idle_equipped.glb", (gltf) => {
+    //   console.log( "Look Around animation loaded" );
+    //   console.log(`Length is :${gltf.animations.length}`)
+    //   gltf.animations.forEach((animation) => {
+    //     console.log(animation.name)
+    //     animationMixer.clipAction(animation).play();
+    //   })
+    // })
+    // props.animations.forEach(animation => {
+    //   animationMixer.clipAction(animation).play();
+    // })
     props.gltf.animations.forEach((animation) => {
       animationMixer.clipAction(animation).play();
     })

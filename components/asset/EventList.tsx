@@ -14,7 +14,7 @@ export default function EventList(props: EventListProps) {
 
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
-            <div className={props.data.length < itemPerPage - 1 ? "flex flex-row flex-wrap gap-2 w-full" : `grid xl:grid-cols-2 grid-cols-1 gap-4`}>
+            <div className={props.data.length < itemPerPage ? "flex flex-row flex-wrap gap-2 w-full" : `grid xl:grid-cols-2 grid-cols-1 gap-4`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item: EventViewModel, index: number) =>
                         <EventCard key={index} data={item} />

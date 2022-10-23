@@ -16,8 +16,8 @@ type AvatarListProps = {
 export default function AvatarList(props: AvatarListProps) {
     const [currentPage, setCurrentPage] = useState(1);
     return (
-        <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
-            <div className={props.data.length < itemPerPage - 1 ? "flex flex-row flex-wrap gap-2 w-full" : `grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
+        <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-full">
+            <div className={props.data.length < itemPerPage ? "flex flex-row flex-wrap gap-2 w-full" : `grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item: AvatarViewModel, index: number) =>
                         <AvatarCard key={index} data={item} />
@@ -62,18 +62,18 @@ export function AvatarCard(props: AvatarCardProps) {
 
     const renderContent = () => {
         return (
-            <div className="nft-card nft-card-hover w-[250px] h-[350px] rounded-xl">
-                <div className="flex justify-center h-[225px] rounded-tl-xl rounded-tr-xl overflow-hidden">
-                    <img src={props.data.image || "/images/color-image-placeholder.jpg"} />
+            <div className="nft-card nft-card-hover w-[250px] h-[350px] overflow-hidden flex flex-col">
+                <div className="w-full rounded-tl-xl rounded-tr-xl">
+                    <img width={250} height={350} src={props.data.image || "/images/placeholder.jpg"} />
                 </div>
-                <span className="text-2xl px-4 font-semibold text-blue-300" style={{
+                <span className="text-2xl px-4 py-2 font-semibold text-blue-300" style={{
                     whiteSpace: "nowrap",
                     overflow: "hidden",
                     textOverflow: "ellipsis"
                 }}>{props.data.name}</span>
                 <div className="flex flex-row justify-between px-4">
                     <div className="flex flex-col">
-                        <span>{props.data.supply || 0}{props.data.maxSupply && `/${props.data.maxSupply}`}</span>
+                        {/* <span>{props.data.supply || 0}{props.data.maxSupply && `/${props.data.maxSupply}`}</span> */}
                         <div >
                             <StarRatings
                                 rating={5}

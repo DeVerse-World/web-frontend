@@ -78,6 +78,7 @@ function Account() {
                     onlineOpenable: true,
                     offlineOpenable: true
                 }))
+                console.log(roots.concat(derivs).length)
                 setTemplates(roots.concat(derivs));
             }
         })
@@ -94,8 +95,8 @@ function Account() {
     }
     return (
         <div className="flex flex-col items-center text-white">
-            <section id='cover-picture' className="h-[350px] w-full overflow-hidden flex items-center">
-                <img title="cover-image" src="images/01.png" />
+            <section id='cover-picture' className="h-[350px]  overflow-hidden flex items-center">
+                <img title="cover-image" src="images/01.png" className="w-screen" />
             </section>
             <section id="avatar-section" className="flex flex-row w-[80%]">
                 <div className="flex flex-row gap-4">

@@ -38,7 +38,7 @@ function RootSubworldList(props: ListProps) {
 
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-full">
-            <div className={props.data.length < itemPerPage - 1 ? "flex flex-row flex-wrap gap-2 w-full" : `grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
+            <div className={props.data.length < itemPerPage ? "flex flex-row flex-wrap gap-2 w-full" : `grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item, index) =>
                         <RootTemplateCard key={index} data={item} />)
@@ -73,7 +73,7 @@ function RootTemplateCard(props: CardProps) {
             <Link href={`/subworlds/${props.data.id}`}>
                 <div className="nft-card-hover w-[250px] h-[350px] bg-black/[.4] rounded-xl text-white m-2">
                     <div className="flex justify-center h-[225px] rounded-tl-xl rounded-tr-xl overflow-hidden">
-                        <img src={props.data.file2dUri || "/images/placeholder.png"} />
+                        <img src={props.data.file2dUri || "/images/color-image-placeholder.png"} />
                     </div>
                     <p className="px-4 py-2 text-2xl font-semibold h-12">{props.data.name}</p>
                     {/* <div className="px-4 flex flex-row items-center">

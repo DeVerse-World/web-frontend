@@ -68,17 +68,19 @@ type HighlightCardProps = {
 
 function HighlightCard(props: HighlightCardProps) {
     return (
-        <div className="flex flex-col gap-4 items-center md:max-w-[32%] max-w-[450px] h-[450px] bg-black/[.4] rounded-xl text-white p-4">
-            <span className="text-3xl uppercase text-sky-400 font-bold text-center">{props.title}</span>
-            <span className="text-center flex-grow">{props.description}</span>
-            <img height={400} width={400} src={props.img || "/images/placeholder.png"} />
+        <div className="flex flex-col gap-4 items-center md:max-w-[32%] max-w-[450px] h-[450px] bg-black/[.4] rounded-xl text-white overflow-hidden">
+            <div className="flex flex-col justify-between pt-4 gap-2 flex-grow">
+                <span className="text-3xl uppercase text-sky-400 font-bold text-center">{props.title}</span>
+                <span className="text-center flex-grow px-4">{props.description}</span>
+            </div>
+            <img height={400} src={props.img || "/images/placeholder.png"} className="rounded-bl-xl rounded-br-xl w-full" />
         </div>
     )
 }
 
 function SystemRequirement() {
     return (
-        <div className="flex-col flex justify-center deverse-border bg-black/[.4] rounded-xl p-4 gap-4">
+        <div className="flex-col flex justify-center bg-black/[.4] rounded-xl p-4 gap-4">
             <h1 className="text-3xl uppercase text-sky-400 font-bold text-center">System requirement</h1>
             <div className="flex flex-row items-center flex-wrap gap-4 ">
                 <div className="w-[45%] break-words">
