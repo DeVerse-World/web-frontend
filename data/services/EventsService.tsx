@@ -1,5 +1,6 @@
 import deverseClient from "../api/deverse_client";
-import { EventResponse, EventUriResponse, Response } from "../model/response";
+import { EventUriResponse } from "../model/ipfs_response";
+import { EventResponse, Response } from "../model/response";
 import { Result } from "../model/Result";
 import { BaseService } from "./BaseService";
 
