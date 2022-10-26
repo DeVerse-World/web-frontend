@@ -58,10 +58,10 @@ function DerivTemplateCard(props: CardProps) {
                 <img src={props.data.image || "/images/color-image-placeholder.jpg"} />
             </div>
             <p className="px-4 py-2 text-2xl font-semibold h-12">{props.data.name}</p>
-            <div className=" px-4 flex flex-row gap-1 items-center text-lg">
+            {/* <div className=" px-4 flex flex-row gap-1 items-center text-lg">
                 <TbWorld />15
                 <BsFillPeopleFill className="ml-4" />35/500
-            </div>
+            </div> */}
             {/* <div className="px-4 flex flex-row items-center">
                 150 <FaEthereum />
             </div> */}
