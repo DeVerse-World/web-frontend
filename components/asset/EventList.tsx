@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsPlayFill } from "react-icons/bs";
 import { EventCategory } from "../../data/enum/asset_type";
 import Paginator from "../Paginator";
@@ -22,7 +22,7 @@ export default function EventList(props: EventListProps) {
                 }
             </div>
             {props.data.length > itemPerPage &&
-                <div className="flex flex-row gap-2">
+                <div className="flex flex-row gap-2 text-white">
                     <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
                 </div>
             }

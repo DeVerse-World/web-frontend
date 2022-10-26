@@ -57,6 +57,7 @@ export default function Deriv({ rootId }) {
 
         SubWorldTemplateService.fetchDerivTemplates(rootId).then(derivRes => {
             if (derivRes.isSuccess()) {
+                console.log(derivRes.value.subworld_templates)
                 setDerivTemplates(derivRes.value.subworld_templates.map<DerivTemplateViewModel>(e => ({
                     id: e.id.toString(),
                     name: e.display_name,
@@ -86,7 +87,7 @@ export default function Deriv({ rootId }) {
                     <div className="flex flex-row gap-2 ">
                         <div className="flex flex-col items-center">
                             <div className="flex justify-center h-[350px] w-[350px]">
-                                <img alt="Root Template Image" src={rootTemplate.file2dUri || "/images/color-image-placeholder.png"} />
+                                <img alt="Root Template Image" src={rootTemplate.file2dUri || "/images/color-image-placeholder.jpg"} />
                             </div>
                             <button className="w-[120px] h-[40px] rounded-3xl my-4 flex flex-row justify-center items-center text-white deverse-play-btn font-bold" onClick={() => setShowPlayModal(true)}>
                                 <BsPlayFill /></button>

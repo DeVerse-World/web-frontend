@@ -76,6 +76,22 @@ function Settings() {
         }
     }
 
+    const login = useGoogleLogin({
+        onSuccess: tokenResponse => {
+            //TODO: invoke this api, it will return google User
+            //https://www.googleapis.com/oauth2/v2/userinfo?access_token=${tokenResponse.access_token}
+
+            // AuthService.connectToGoogleMail(event.credential, user).then(res => {
+            //     // let googleUser = jwt_decode<GoogleUser>(event.credential);
+            //     if (res.isFailure()) {
+            //         window.alert(res.error);
+            //         return;
+            //     }
+            //     setUser(res.value.user);
+            // });
+        },
+    });
+
     if (!user) {
         return <div>Login First</div>
     }
@@ -97,6 +113,7 @@ function Settings() {
                 <div className="flex flex-row gap-4">
                     <h5>Wallet Address</h5>
                     {!user?.social_email && user.wallet_address &&
+                        // <span className="text-blue-400 cursor-pointer" onClick={() => login()} >(Link with Google)</span>
                         <GoogleLogin width='300' onSuccess={onGoogleLogin} />
                     }
                 </div>

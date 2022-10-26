@@ -39,9 +39,9 @@ function Paginator(props: PaginatorProps) {
         if (!newPage) {
             return;
         }
-        if (newPage === "-2") {
+        if (newPage == "-2") {
             newPage = 1;
-        } else if (newPage === "-1") {
+        } else if (newPage == "-1") {
             newPage = props.totalPage
         }
         setCurrentPage(newPage)

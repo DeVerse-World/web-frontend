@@ -86,22 +86,22 @@ function SystemRequirement() {
                 <div className="w-[45%] break-words">
                     <h3 className="text-green-600">Minimum</h3>
                     Requires a 64-bit processor and operating system<br />
-                    OS: Windows 7 <br />
-                    Processor: Dual Core 2GHz<br />
-                    Memory: 4 GB RAM<br />
-                    Graphics: 512 MB VRAM<br />
+                    OS: Window 10 or above<br />
+                    Processor: Quad core 3.2Ghz<br />
+                    Memory: 8GB<br />
+                    Graphics: GTX 1060 or equivalent<br />
                     DirectX: Version 11<br />
-                    Storage: 2 GB available space
+                    Storage: 6GB available space
                 </div>
                 <div className="w-[45%] break-words">
                     <h3 className="text-green-600">Recommended</h3>
                     Requires a 64-bit processor and operating system<br />
-                    OS: Windows 10<br />
-                    Processor: Quad Core 3GHz<br />
-                    Memory: 8 GB RAM<br />
-                    Graphics: 2 GB VRAM<br />
+                    OS: Window 10 or above<br />
+                    Processor: 8-core 3.8Ghz<br />
+                    Memory: 16GB<br />
+                    Graphics: GTX 2060 or above<br />
                     DirectX: Version 11<br />
-                    Storage: 2 GB available space<br />
+                    Storage: 10GB available space
                 </div>
             </div>
         </div>
