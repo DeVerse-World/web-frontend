@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import NFTList from "../../components/asset/NFTList";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import { AppContext } from "../../components/contexts/app_context";
 import { NFTAsset } from "../../data/model/nft_asset";
@@ -26,7 +25,7 @@ function Inventory() {
     }
     return (
         <div className="flex justify-center items-center text-white p-4" >
-            <NFTList data={data} />
+            {/*<NFTList data={data} />*/}
         </div>
     )
 }

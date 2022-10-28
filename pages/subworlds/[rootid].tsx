@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from "react";
 import { BsFillPeopleFill, BsPlayFill } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
 import { TbWorld } from "react-icons/tb";
-import NFTList from "../../components/asset/NFTList";
 import PlayModal from "../../components/asset/PlayModal";
 import { RootTemplateViewModel } from "../../components/asset/RootSubworldsList";
 import DerivSubworldList, { DerivTemplateViewModel } from "../../components/asset/DerivTemplateList";

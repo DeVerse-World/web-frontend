@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import DerivSubworldList, { DerivTemplateViewModel } from "../../components/asset/DerivTemplateList";
-import NFTList from "../../components/asset/NFTList";
 import RootSubworldList, { RootTemplateViewModel } from "../../components/asset/RootSubworldsList";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import BaseLayout from "../../components/common/BaseLayout";
