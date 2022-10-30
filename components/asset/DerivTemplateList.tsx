@@ -23,17 +23,17 @@ function DerivSubworldList(props: ListProps) {
 
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
-            <div className={props.data.length < itemPerPage ? "flex flex-row flex-wrap gap-2 w-full" : `grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
+            <div className={`grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
                 {
-                    props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item, index) =>
+                    props.data.map((item, index) =>
                         <DerivTemplateCard key={index} data={item} />)
                 }
             </div>
-            {props.data.length > itemPerPage &&
+            {/* {props.data.length > itemPerPage &&
                 <div className="flex flex-row gap-2">
                     <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
                 </div>
-            }
+            } */}
         </section>
     )
 }
@@ -53,9 +53,9 @@ function DerivTemplateCard(props: CardProps) {
         // })
     }
     return (
-        <div className="w-[250px] h-[400px] bg-black/[.4] rounded-xl text-white m-2">
-            <div className="flex justify-center h-[225px] rounded-tl-xl rounded-tr-xl overflow-hidden">
-                <img src={props.data.image || "/images/color-image-placeholder.jpg"} />
+        <div className="w-[250px] h-[350px] bg-black/[.4] rounded-xl text-white m-2 overflow-hidden">
+            <div className="h-[225px]">
+                <img className="h-full w-full" src={props.data.image || "/images/color-image-placeholder.jpg"} />
             </div>
             <p className="px-4 py-2 text-2xl font-semibold h-12">{props.data.name}</p>
             {/* <div className=" px-4 flex flex-row gap-1 items-center text-lg">

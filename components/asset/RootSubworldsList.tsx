@@ -71,9 +71,9 @@ function RootTemplateCard(props: CardProps) {
     return (
         <>
             <Link href={`/subworlds/${props.data.id}`}>
-                <div className="nft-card-hover w-[250px] h-[350px] bg-black/[.4] rounded-xl text-white m-2">
-                    <div className="flex justify-center h-[225px] rounded-tl-xl rounded-tr-xl overflow-hidden">
-                        <img src={props.data.image || "/images/color-image-placeholder.jpg"} />
+                <div className="nft-card-hover w-[250px] h-[350px] bg-black/[.4] rounded-xl text-white m-2 overflow-hidden">
+                    <div className="h-[225px] ">
+                        <img className="h-full w-full" src={props.data.image || "/images/color-image-placeholder.jpg"} />
                     </div>
                     <p className="px-4 py-2 text-2xl font-semibold h-12">{props.data.name}</p>
                     {/* <div className="px-4 flex flex-row items-center">
