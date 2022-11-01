@@ -102,8 +102,6 @@ function Account() {
                 <div className="flex flex-row gap-4">
                     <AvatarContainer style={{
                         position: 'relative',
-                        borderRadius: '50%',
-                        borderWidth: '2px',
                         bottom: '50%'
                     }} />
                     <div className="py-2">

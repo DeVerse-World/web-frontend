@@ -39,18 +39,22 @@ function AccountMenu() {
     }
     return (
       <div className="text-white">
-        <Image className="cursor-pointer" src={user.avatar || "/images/placeholder.png"} width={40} height={40} roundedCircle 
-        onClick={onToggleMenu}/>
+        <Image className="cursor-pointer" src={user.avatar || "/images/placeholder.png"} width={40} height={40} roundedCircle
+          onClick={onToggleMenu} />
         <div id='account-dropdown' className={showDropdown ? "active" : null} onPointerLeave={() => setShowDropdown(false)}>
           <h5>Welcome {user.name}</h5>
           <Link href="/account" >
-            <div className="cursor-pointer">
-              Profile
-            </div>
+            <span className="cursor-pointer">Profile</span>
           </Link>
-          <div className="cursor-pointer" onClick={onClickLogout}>
+          <Link href="/creator-dashboard" >
+            <span className="cursor-pointer">Dashboard</span>
+          </Link>
+          <Link href="/content-manager" >
+            <span className="cursor-pointer">Content manager</span>
+          </Link>
+          <span className="cursor-pointer" onClick={onClickLogout}>
             Logout
-          </div>
+          </span>
         </div>
       </div>
     );

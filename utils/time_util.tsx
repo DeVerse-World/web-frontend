@@ -2,6 +2,11 @@ import { TimeFilter } from "../data/enum/time_filter";
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+export function timeStampToString(timestamp: number) {
+    const day = new Date(timestamp);
+    return getDateString(day);
+}
+
 export function getDateString(date: Date) {
     let month = (date.getMonth() + 1).toString();
     if (month.length == 1) {

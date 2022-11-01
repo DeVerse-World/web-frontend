@@ -54,7 +54,7 @@ function SubworldsPage() {
                 <Accordion defaultActiveKey="nft_type" className="w-[170px] h-[100%] text-white" flush>
                     <FilterHeader eventKey="nft_type" label={'Categories'} />
                     <Accordion.Collapse eventKey="nft_type">
-                        <div className="flex flex-col bg-gray-800 px-3 py-2 ">
+                        <div className="flex flex-col bg-gray-800  ">
                             <ListingTabComponent label="All"
                                 tab={MarketplaceTab.All} isSelected={visibleTab} onSelect={onSelectTab} />
                             {/* <ListingTabComponent label="Test"
