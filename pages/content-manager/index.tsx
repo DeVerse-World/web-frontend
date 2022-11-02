@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
-import ReactHtmlParser from 'react-html-parser';
 import 'react-quill/dist/quill.snow.css';
 import { getCommonLayout } from '../../components/common/CommonLayout';
 import BlogService from '../../data/services/BlogService';
 import { BlogPost } from '../../data/model/blog_post';
 import { timeStampToString } from '../../utils/time_util';
+const getMetaData = require('metadata-scraper')
 
 const EditorModules = {
     toolbar: [
@@ -58,8 +58,7 @@ function ContentManager() {
     }
 
     const getPosts = () => {
-        const cachedPosts = BlogService.getPosts();
-        setPosts(cachedPosts);
+
     }
 
     return (
@@ -76,7 +75,7 @@ function ContentManager() {
                 {posts.map(post =>
                     <div className="h-[350px] w-[400px] nft-card flex flex-col ">
                         <h3 className='text-center bg-gray-500'>{post.title}</h3>
-                        <div className='flex-grow bg-white p-4'> {ReactHtmlParser(post.content)} </div>
+                        <div className='flex-grow bg-white p-4'> {(post.content)} </div>
                         <span className='text-end bg-gray-300 p-2'>Created on {timeStampToString(post.created_at)}</span>
                     </div>
                 )}
