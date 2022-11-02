@@ -114,9 +114,9 @@ export default function Deriv({ rootId }) {
                         </div>
                     </div>
                 }
-                <div className="text-blue-200 text-center">
+                <h3 className="text-blue-200 text-center">
                     Connected worlds: {derivTemplates.length}
-                </div>
+                </h3>
                 <DerivSubworldList data={derivTemplates} />
             </div>
             {showPlayModal && <PlayModal templateId={rootId.toString()} onClose={() => setShowPlayModal(false)} />}

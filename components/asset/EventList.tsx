@@ -52,7 +52,7 @@ export type EventViewModel = {
 
 export function EventCard(props: EventCardProps) {
     return (
-        <div className="nft-card md:h-[500px] h-[250px] md:w-[500px] w-[350px] flex flex-col overflow-hidden">
+        <div className="nft-card md:h-[500px] h-[350px] md:w-[500px] w-[350px] flex flex-col overflow-hidden">
             <div className="h-[300px] flex flex-row justify-center">
                 <img
                     src={props.data.image || "/images/event-placeholder.jpg"}

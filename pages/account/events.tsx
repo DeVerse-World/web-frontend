@@ -6,7 +6,7 @@ import AccountService from "../../data/services/AccountService";
 import { getTimeString } from "../../utils/time_util";
 
 function Layout() {
-    const {setViewState} = useContext(AppContext);
+    const { setViewState } = useContext(AppContext);
     const [nfts, setNfts] = useState<EventViewModel[]>([]);
     useEffect(() => {
         setViewState(ViewState.LOADING);
@@ -38,10 +38,8 @@ function Layout() {
     // }
 
     return (
-        <div className="flex flex-col relativejustify-center items-center text-white p-4" >
-            <div className="flex flex-row gap-2">
-                <EventList data={nfts} />
-            </div>
+        <div className="flex flex-col relative justify-center items-center text-white p-4" >
+            <EventList data={nfts} />
         </div>
     )
 }

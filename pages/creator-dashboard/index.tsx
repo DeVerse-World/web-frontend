@@ -67,7 +67,7 @@ function CreatorDashboard() {
                                 <h5>Total stars</h5>
                                 <h3>1234</h3>
 
-                                <h5>Brief</h5>
+                                <p>Brief</p>
                                 <h5>Total Active worlds</h5>
                                 56
                             </div>
@@ -75,14 +75,8 @@ function CreatorDashboard() {
                         <div className="h-[350px] w-[200px] nft-card flex flex-col items-center p-4">
                             <h3>Revenue</h3>
                             <div className="w-full">
-                                <h5>Total visits</h5>
-                                <h3>6969</h3>
-                                <h5>Total stars</h5>
-                                <h3>1234</h3>
-
-                                <h5>Brief</h5>
-                                <h5>Total Active worlds</h5>
-                                56
+                                <h5>Total income</h5>
+                                <h3>$8000</h3>
                             </div>
                         </div>
                     </div>
