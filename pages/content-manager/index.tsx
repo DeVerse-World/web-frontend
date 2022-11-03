@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import 'react-quill/dist/quill.snow.css';
 import { getCommonLayout } from '../../components/common/CommonLayout';
 import BlogService from '../../data/services/BlogService';
 import { BlogPost } from '../../data/model/blog_post';
 import { timeStampToString } from '../../utils/time_util';
-const getMetaData = require('metadata-scraper')
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+
 
 const EditorModules = {
     toolbar: [
