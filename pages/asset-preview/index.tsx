@@ -6,7 +6,6 @@ import ModelViewer from '../../components/ModelViewer';
 import AssetService from "../../data/services/AssetService";
 import { Avatar } from '../../data/model/avatar';
 import AvatarService from '../../data/services/AvatarService';
-import { FaEthereum } from 'react-icons/fa';
 import { formatWalletAddress } from '../../utils/wallet_util';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
@@ -31,7 +30,7 @@ function AssetPreviewScreen(props: WithRouterProps) {
             });
         }
         const mockWallet = "0x4Fc5Ea43E74B2b20b37F905B7D7f87FA2A5362Dd";
-        setCreatorAddress(formatWalletAddress(mockWallet))
+        setCreatorAddress(mockWallet);
 
     }, [router.isReady])
 
@@ -58,14 +57,18 @@ function AssetPreviewScreen(props: WithRouterProps) {
                 </div>
                 <div className='flex flex-col text-blue-300 w-[300px] mx-auto py-4 '>
                     <div className='text-3xl'>{avatar?.name || "Avatar Name"}</div>
-                    <div>0/10</div>
+                    {/* <div>0/10</div> */}
                     <div className='mt-8 flex flex-row justify-between'>
                         Deverse World
-                        <div aria-label='abc' style={{
+                        <a className='text-sky-400 hover:text-sky-200' style={{
+                            cursor: "pointer",
                             whiteSpace: "nowrap",
                             overflow: "hidden",
-                            textOverflow: "ellipsis"
-                        }}>{creatorAddress}</div>
+                            textOverflow: "ellipsis",
+                            textDecoration: "none"
+                        }} href={`https://etherscan.io/address/${creatorAddress}`} target="_blank">
+                            {formatWalletAddress(creatorAddress)}
+                        </a>
                     </div>
 
                     <span className='w-full border-b-2 border-white'></span>

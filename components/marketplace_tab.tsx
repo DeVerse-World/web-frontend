@@ -14,4 +14,6 @@ export enum MarketplaceTab {
     BATTLE = "Battle",
     GIVEAWAY = "Giveaway",
     SIMULATION = "Simulation",
+
+    CD_HOME = "Home"
 }

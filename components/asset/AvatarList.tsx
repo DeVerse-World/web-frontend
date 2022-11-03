@@ -63,7 +63,7 @@ export function AvatarCard(props: AvatarCardProps) {
     const renderContent = () => {
         return (
             <div className="nft-card nft-card-hover w-[250px] h-[350px] overflow-hidden flex flex-col">
-                <div className="w-full rounded-tl-xl rounded-tr-xl">
+                <div>
                     <img width={250} height={350} src={props.data.image || "/images/placeholder.jpg"} />
                 </div>
                 <span className="text-2xl px-4 py-2 font-semibold text-blue-300" style={{

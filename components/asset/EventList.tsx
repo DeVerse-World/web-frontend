@@ -22,7 +22,7 @@ export default function EventList(props: EventListProps) {
                 }
             </div>
             {props.data.length > itemPerPage &&
-                <div className="flex flex-row gap-2 text-white">
+                <div className="flex flex-row gap-2 ">
                     <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
                 </div>
             }
@@ -52,8 +52,8 @@ export type EventViewModel = {
 
 export function EventCard(props: EventCardProps) {
     return (
-        <div className="nft-card md:h-[500px] h-[250px] md:w-[500px] w-[350px] flex flex-col">
-            <div className="h-[300px] flex flex-row justify-center rounded-tl-xl rounded-tr-xl overflow-hidden">
+        <div className="nft-card md:h-[500px] h-[350px] md:w-[500px] w-[350px] flex flex-col overflow-hidden">
+            <div className="h-[300px] flex flex-row justify-center">
                 <img
                     src={props.data.image || "/images/event-placeholder.jpg"}
                     className="w-[100%]" />

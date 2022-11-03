@@ -17,13 +17,13 @@ function ListingTabComponent(props: ListingTabItemProps) {
     }
 
     return (
-        <div className={bg} onClick={() => {
+        <span className={bg} onClick={() => {
             if (props.isDisable)
                 return
             props.onSelect(props.tab)
         }}>
             {props.label || props.tab}
-        </div>
+        </span>
     )
 }
 

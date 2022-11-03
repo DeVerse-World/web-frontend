@@ -1,3 +1,4 @@
+import { BlogPost } from "../model/blog_post";
 import { User } from "../model/user";
 
 class StorageService {
@@ -28,6 +29,20 @@ class StorageService {
             return JSON.parse(user);
         }
         return null;
+    }
+
+    savePost(post: BlogPost) {
+        const cachedPosts = this.getPosts();
+        cachedPosts.push(post);
+        localStorage.setItem("posts", JSON.stringify(cachedPosts));
+    }
+
+    getPosts(): BlogPost[] {
+        const posts = localStorage.getItem("posts");
+        if (posts) {
+            return JSON.parse(posts);
+        }
+        return [];
     }
 }
 

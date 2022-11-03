@@ -16,7 +16,7 @@ body * {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
     background-color: #F5F5F5;
     border-radius: 10px;
 }
@@ -216,14 +216,26 @@ body * {
     border-bottom: 2px solid white;
 }
 
+.filter-header {
+    cursor: pointer;
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    padding: 0.5rem;
+}
+
 .filter-tab {
     cursor: pointer;
     --tw-text-opacity: 1;
     color: rgb(147 197 253 / var(--tw-text-opacity));
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 .filter-tab.active {
     color: white;
+    background-color: rgb(0, 39, 124);
 }
 
 .filter-tab-disable {
@@ -234,7 +246,7 @@ body * {
 
 .filter-tab:hover {
     cursor: pointer;
-    color: rgb(147 51 234);
+    background-color: rgb(93, 130, 211);
 }
 
 
@@ -257,73 +269,11 @@ body * {
     background: rgb(97 198 208);
 }
 
-.compare table {
-    background-color: #fff;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 13px 21px -5px rgba(0, 0, 0, 0.05);
-    border: 1px solid #eee;
-    font-size: 18px;
-    table-layout: fixed;
-}
 
-.compare table .bg-red {
-    background-color: #ff715b;
-}
+/* Quill */
 
-.compare table .bg-green {
-    background-color: #48cfad;
-}
-
-.compare table .bg-blue {
-    background-color: #0197f6;
-}
-
-.compare table tr>td,
-.compare table tr>th {
-    padding-top: 25px;
-    padding-bottom: 25px;
-    text-align: center;
-}
-
-.compare table th[scope="row"] {
-    font-size: 20px;
-    color: #393c45;
-    font-weight: normal;
-    background-color: #f9f9f9;
-    border: 1px solid #eee;
-    text-align: left;
-    padding-left: 45px;
-}
-
-.compare table tr.condition {
-    color: #fff;
-    font-size: 20px;
-}
-
-.compare table tr.colors span {
-    height: 20px;
-    width: 20px;
-    display: inline-block;
-    margin-right: 5px;
-    border-radius: 100%;
-}
-
-.compare table thead th {
-    font-size: 20px;
-    color: #393c45;
-    font-weight: normal;
-}
-
-.compare .thead-default th {
-    background-color: #fff;
-}
-
-.dot {
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    display: inline-block;
+#content-editor .ql-editor {
+    min-height: 18em;
 }
 
 .App-logo {

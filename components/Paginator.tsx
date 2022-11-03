@@ -81,7 +81,7 @@ function Paginator(props: PaginatorProps) {
         }
         elements.push(<PaginatorButton key={'>'} value={'>'} />)
         return (
-            <ol className="flex flex-row gap-2 " onClick={(e) => onPageChange(e.target)}>
+            <ol className="flex flex-row gap-2 text-white" onClick={(e) => onPageChange(e.target)}>
                 {elements}
             </ol>
         )
