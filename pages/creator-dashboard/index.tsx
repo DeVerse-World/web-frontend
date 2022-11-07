@@ -41,7 +41,7 @@ function CreatorDashboard() {
         <div className='flex flex-row bg-deverse '>
             <Sidebar >
                 <div className="h-[100%] bg-gray-900 ">
-                    <div className="flex flex-col text-white text-center gap-4">
+                    <div className="flex flex-col text-white text-center gap-4 p-4">
                         <AvatarContainer />
                         Deverse Worlds
                     </div>
@@ -56,7 +56,7 @@ function CreatorDashboard() {
             <section id='section-content' className='bg-deverse flex flex-col text-white ' >
                 <div className="flex-grow p-4">
                     <div>
-                        <h1>Overview</h1>
+                        <h1>Home</h1>
                     </div>
                     <div className="flex flex-row gap-8">
                         <div className="h-[350px] w-[200px] nft-card flex flex-col items-center p-4">

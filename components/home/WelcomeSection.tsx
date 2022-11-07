@@ -23,7 +23,7 @@ function WelcomeSection(props) {
       <div className="flex flex-col items-center justify-items-start absolute z-10 w-[100%]">
         <div className=" mx-auto text-center">
           <h6 className="mt-24 text-lg font-bold txt-deverse-gradient" >WELCOME TO DEVERSE WORLD</h6>
-          <h1 className="mt-4 deverse-title uppercase txt-deverse-gradient ">A Sandbox (De)centralized Meta(Verse)</h1>
+          <h1 className="mt-4 deverse-title uppercase txt-deverse-gradient ">Your portal to the endless virtual world experiences, owned by the users</h1>
         </div>
         <DownloadDemoButton className="h-12" />
       </div>
