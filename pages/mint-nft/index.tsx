@@ -8,6 +8,7 @@ import { AppContext, ViewState } from "../../components/contexts/app_context";
 import Footer from "../../components/common/Footer";
 import Link from "next/link";
 import Sidebar from "../../components/Sidebar";
+import UnauthorizedView from "../../components/UnauthorizedView";
 
 export default function MintNFT() {
     const { user, setViewState } = useContext(AppContext);
@@ -129,7 +130,7 @@ export default function MintNFT() {
     return (
         <section id='section-content' className="flex flex-col">
             {!user ?
-                <div className=" flex-grow text-center text-white flex justify-center  flex-col"><h1>Please login first</h1></div> :
+                <UnauthorizedView /> :
                 <div className="flex justify-center flex-grow">
                     <Form className="flex flex-col items-center text-white my-8 space-y-2 min-w-[300px] w-[40vw]"
                         validated={formValidated}
@@ -210,7 +211,7 @@ export default function MintNFT() {
                                         setfileAssetUri(null)
                                     }
                                     setTempInput(e.target.value)
-                                } }
+                                }}
                             />
                             <Button className='bg-deverse-gradient'
                                 onClick={e => {
@@ -255,11 +256,11 @@ export default function MintNFT() {
                         />
                         {
                             (assetType == AssetType.IMAGE_2D) && fileAssetUri && (
-                                <Image className="rounded mt-4 max-w-[80vw]" 
-                                width={250} 
-                                height={250} 
-                                src={fileAssetUri}
-                                alt="Image"/>
+                                <Image className="rounded mt-4 max-w-[80vw]"
+                                    width={250}
+                                    height={250}
+                                    src={fileAssetUri}
+                                    alt="Image" />
                             )
                         }
                         <input

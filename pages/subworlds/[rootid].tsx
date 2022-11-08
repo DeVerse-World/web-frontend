@@ -4,8 +4,8 @@ import { BsFillPeopleFill, BsPlayFill } from "react-icons/bs";
 import { IoIosArrowBack } from "react-icons/io";
 import { TbWorld } from "react-icons/tb";
 import PlayModal from "../../components/asset/PlayModal";
-import { RootTemplateViewModel } from "../../components/asset/RootSubworldsList";
-import DerivSubworldList, { DerivTemplateViewModel } from "../../components/asset/DerivTemplateList";
+import { RootTemplateViewModel } from "../../components/asset/RootWorldList";
+import DerivWorldList, { DerivTemplateViewModel } from "../../components/asset/DerivWorldList";
 import Footer from "../../components/common/Footer";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
@@ -117,7 +117,7 @@ export default function Deriv({ rootId }) {
                 <h3 className="text-blue-200 text-center">
                     Connected worlds: {derivTemplates.length}
                 </h3>
-                <DerivSubworldList data={derivTemplates} />
+                <DerivWorldList data={derivTemplates} />
             </div>
             {showPlayModal && <PlayModal templateId={rootId.toString()} onClose={() => setShowPlayModal(false)} />}
             <Footer />

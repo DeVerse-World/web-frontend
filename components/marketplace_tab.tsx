@@ -1,19 +1,21 @@
 export enum MarketplaceTab {
-    All = "All",
-    TWO_D_IMAGE = "Image",
-    RACE = "Race",
-    AVATAR = "Avatar",
-    GAME_MODE = "Game mode",
-    BOT_LOGIC = "Bot Logic",
-    WORLDS = "Worlds",
+    NFT_ALL = "NFT_ALL",
+    NFT_TWO_D_IMAGE = "NFT_Image",
+    NFT_RACE = "NFT_Race",
+    NFT_AVATAR = "NFT_Avatar",
+    NFT_GAME_MODE = "NFT_Game mode",
+    NFT_BOT_LOGIC = "NFT_Bot Logic",
 
-    TREASURE_HUNT = "Treasure Hunt",
-    CONCERT = "Concert",
-    GALLERY = "Gallery",
-    SHOWCASE = "Showcase",
-    BATTLE = "Battle",
-    GIVEAWAY = "Giveaway",
-    SIMULATION = "Simulation",
+    EVENT_ALL = "EVENT_All Events",
+    EVENT_TREASURE_HUNT = "EVENT_Treasure Hunt",
+    EVENT_CONCERT = "EVENT_Concert",
+    EVENT_GALLERY = "EVENT_Gallery",
+    EVENT_SHOWCASE = "EVENT_Showcase",
+    EVENT_BATTLE = "EVENT_Battle",
+    EVENT_GIVEAWAY = "EVENT_Giveaway",
+    EVENT_SIMULATION = "EVENT_Simulation",
 
-    CD_HOME = "Home"
+    WORLD_ALL = "WORLD_All Worlds",
+
+    CD_HOME = "CD_Home"
 }

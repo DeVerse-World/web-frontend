@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-// import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend } from 'chart.js';
 import AccountService from "../../data/services/AccountService";
 import { AppContext } from "../../components/contexts/app_context";
 import AvatarContainer from "../../components/AvatarContainer";
@@ -8,21 +7,10 @@ import { getAccountWrapperLayout } from "../../components/common/AccountWrapperL
 import { formatWalletAddress } from "../../utils/wallet_util";
 import AvatarList, { AvatarViewModel } from "../../components/asset/AvatarList";
 import EventList, { EventViewModel } from "../../components/asset/EventList";
-import RootSubworldList, { TemplateViewModel } from "../../components/asset/RootSubworldsList";
+import RootWorldList, { TemplateViewModel } from "../../components/asset/RootWorldList";
 import { getTimeString } from "../../utils/time_util";
 import StorageService from "../../data/services/StorageService";
-// ChartJS.register(
-//     CategoryScale,
-//     LinearScale,
-//     PointElement,
-//     LineElement,
-//     Title,
-//     Tooltip,
-//     Legend
-// );
-
-// X-axis: filter by day/week/month/year
-// y-axis: filter by activities, minute spent, staking balance, and more
+import UnauthorizedView from "../../components/UnauthorizedView";
 
 function Account() {
     const { user, setUser } = useContext(AppContext);
@@ -91,7 +79,7 @@ function Account() {
     },[avatars])
 
     if (!user) {
-        return <div className="text-center text-white m-auto"><h1>Please Login first</h1></div>
+        return <UnauthorizedView/>
     }
     return (
         <div className="flex flex-col items-center text-white">
@@ -147,7 +135,7 @@ function Account() {
                             <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
                         </Link>
                     </div>
-                    <RootSubworldList data={templates}/>
+                    <RootWorldList data={templates}/>
                 </div>
             </section>  
         </div>
@@ -157,69 +145,3 @@ function Account() {
 Account.getLayout = getAccountWrapperLayout;
 
 export default Account;
-
-        //         <Line className="p-8 border-2 rounded-sm border-black" options={{
-        //             responsive: true,
-        //             plugins: {
-        //                 legend: {
-        //                     // position: 'top' as const,
-        //                     display: false
-        //                 },
-        //                 // title: {
-        //                 //     display: true,
-        //                 //     text: 'User statistics',
-        //                 // },
-        //             },
-        //         }}
-        //             data={{
-        //                 labels: yLabels,
-        //                 datasets: dataSet
-        //             }} />
-        //     </div>
-        
-    // useEffect(() => {
-    //     switch (timeFilter) {
-    //         case TimeFilter.DAY:
-
-    //             break;
-    //         case TimeFilter.WEEK:
-
-    //             break;
-    //         case TimeFilter.MONTH:
-    //             setYLabel(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }, [timeFilter])
-
-
-       // const today = new Date();
-
-    // useEffect(() => {
-    //     displayData();
-    // }, [timeFilter, dataFilter]);
-
-    // const displayData = async () => {
-
-    //     let res = await AccountService.getStats(dataFilter, timeFilter);
-    //     let convertedData = res.map(item => ({
-    //         y: item.count,
-    //         x: timestampToLabel(item.timestamp, timeFilter)
-    //     }));
-
-    //     const data = [
-    //         {
-    //             data: convertedData,
-    //             borderColor: '#FF0000',
-    //             backgroundColor: '#FF0000',
-    //         }
-    //     ];
-    //     setDataSet(data);
-    // }
-
-    // const [selectedTab, setSelectedTab] = useState<AccountTab>(AccountTab.Profile)
-    // const [dataSet, setDataSet] = useState([]);
-    // const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.MONTH);
-    // const [yLabels, setYLabel] = useState([]);
-    // const [dataFilter, setDataFilter] = useState<DataFilter>(DataFilter.STAKING_BALANCE);

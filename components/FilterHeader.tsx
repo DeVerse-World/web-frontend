@@ -8,7 +8,7 @@ export default function FilterHeader({ label, eventKey }) {
     const isCurrentEventKey = activeEventKey === eventKey;
     return (
         <div
-            className="bg-slate-900 text-blue-300 flex flex-row justify-between items-center filter-header"
+            className="bg-slate-700 text-blue-300 flex flex-row justify-between items-center filter-header"
             onClick={decoratedOnClick}>
             {label}
             {isCurrentEventKey ? <IoIosArrowUp /> : <IoIosArrowDown />}

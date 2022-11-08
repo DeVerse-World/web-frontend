@@ -8,6 +8,7 @@ import { AppContext, ViewState } from "../../components/contexts/app_context";
 import Footer from "../../components/common/Footer";
 import Link from "next/link";
 import { getCreateLayout } from "../../components/CreateLayout";
+import UnauthorizedView from "../../components/UnauthorizedView";
 
 function Mint() {
     const { user, setViewState } = useContext(AppContext);
@@ -125,9 +126,7 @@ function Mint() {
     }
 
     if (!user) {
-        return (
-            <div className=" flex-grow text-center text-white flex justify-center  flex-col"><h1>Please login first</h1></div>
-        )
+        return <UnauthorizedView/>
     }
 
     return (

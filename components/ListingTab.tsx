@@ -10,7 +10,7 @@ type ListingTabItemProps = {
 
 function ListingTabComponent(props: ListingTabItemProps) {
     let bg = "text-lg filter-tab";
-    if (props.isSelected == props.tab) {
+    if (props.isSelected === props.tab) {
         bg += " active"
     } else if (props.isDisable) {
         bg += "-disable"
