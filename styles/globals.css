@@ -186,6 +186,14 @@ body * {
     background-color: rgb(134 239 172 / var(--tw-bg-opacity));
 }
 
+.section-header-lg {
+    --tw-text-opacity: 1;
+    color: rgb(147 197 253 / var(--tw-text-opacity));
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+}
+
 
 /* "flex flex-row justify-evenly text-xl bg-black  py-2 px-8 overflow-x-scroll" */
 

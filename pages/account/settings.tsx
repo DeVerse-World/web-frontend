@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { FormControl, InputGroup } from "react-bootstrap";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import { AppContext } from "../../components/contexts/app_context";
+import UnauthorizedView from "../../components/UnauthorizedView";
 import AccountService from "../../data/services/AccountService";
 import AuthService from "../../data/services/AuthService";
 import { usePrevious } from "../../utils/use_previous";
@@ -93,13 +94,13 @@ function Settings() {
     });
 
     if (!user) {
-        return <div>Login First</div>
+        return <UnauthorizedView/>
     }
     {/* <span className="text-blue-400 cursor-pointer" onClick={onLinkAccountWithGoogle} >(Link with Google)</span> */ }
 
     return (
         <section className="flex flex-row gap-4 text-white">
-            <h3 className="text-blue-300 text-3xl font-bold pl-4">Settings</h3>
+            <h3 className="section-header-lg pl-4">Settings</h3>
             <div className="flex flex-col gap-2 py-4 w-[400px]">
                 <h5>Name</h5>
                 <InputGroup>

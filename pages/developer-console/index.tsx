@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Button, Dropdown, DropdownButton, Form, FormControl, InputGroup } from "react-bootstrap";
 import { AppContext } from "../../components/contexts/app_context";
+import UnauthorizedView from "../../components/UnauthorizedView";
 import deverseClient from "../../data/api/deverse_client";
 
 export default function DC() {
@@ -12,11 +13,7 @@ export default function DC() {
     const [url, setUrl] = useState('');
 
     if (user == null) {
-        return (
-            <div className="text-white">
-                <h1>Login first please</h1>
-            </div>
-        )
+        return <UnauthorizedView/>
     }
 
     const onSendRequest = (e) => {

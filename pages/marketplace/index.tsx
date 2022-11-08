@@ -20,7 +20,7 @@ import RootWorldList, { RootTemplateViewModel } from "../../components/asset/Roo
 
 function Marketplace() {
     const router = useRouter();
-    const { setViewState } = useContext(AppContext);
+    const { setViewState, setIsMobileSidebarVisible } = useContext(AppContext);
     const [images, setImages] = useState<AvatarViewModel[]>([]);
     const [eventData, setEventData] = useState<EventViewModel[]>([]);
     const [rootTemplates, setRootTemplates] = useState<RootTemplateViewModel[]>([]);
@@ -34,6 +34,7 @@ function Marketplace() {
         } else if (visibleTab.startsWith("WORLD")) {
             loadWorlds()
         }
+        setIsMobileSidebarVisible(false);
     }, [visibleTab])
 
     useEffect(() => {
@@ -156,21 +157,21 @@ function Marketplace() {
         if (visibleTab.startsWith("NFT"))
             return (
                 <div className="flex-grow p-4">
-                    <span className="text-blue-300 text-3xl font-bold pl-4">Images</span>
+                    <span className="section-header-lg pl-4">Images</span>
                     <AvatarList data={images} />
                 </div>
             );
         if (visibleTab.startsWith("EVENT"))
             return (
                 <div className="flex-grow p-4">
-                    <span className="text-blue-300 text-3xl font-bold pl-4">Events</span>
+                    <span className="section-header-lg pl-4">Events</span>
                     <EventList data={eventData} />
                 </div>
             )
         if (visibleTab.startsWith("WORLD"))
             return (
                 <div className="flex-grow p-4">
-                    <span className="text-blue-300 text-3xl font-bold pl-4">Worlds</span>
+                    <span className="section-header-lg pl-4">Worlds</span>
                     <RootWorldList data={rootTemplates} />
                 </div>
             )

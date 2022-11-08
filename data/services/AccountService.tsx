@@ -68,7 +68,7 @@ class AccountService extends BaseService {
         let data: StatisticLog[] = [];
 
         switch (dataType) {
-            case DataFilter.ACTIVITIES:
+            case DataFilter.ONLINE:
                 data = [
                     { count: 36, timestamp: 1649065872015 },
                     { count: 120, timestamp: 1651657872015 },
@@ -76,7 +76,7 @@ class AccountService extends BaseService {
                     { count: 65, timestamp: 1656928272015 },
                 ]
                 break;
-            case DataFilter.STAKING_BALANCE:
+            case DataFilter.OFFLINE:
 
                 data = [
                     { count: 128, timestamp: 1649065872015 },
@@ -85,12 +85,39 @@ class AccountService extends BaseService {
                     { count: 156, timestamp: 1656928272015 },
                 ]
                 break;
-            case DataFilter.TIME_SPENT:
+            case DataFilter.REVENUE:
                 data = [
-                    { count: 48, timestamp: 1649065872015 },
-                    { count: 120, timestamp: 1651657872015 },
-                    { count: 16, timestamp: 1654336272015 },
-                    { count: 95, timestamp: 1656928272015 },
+                    { count: 48, timestamp: 1651338000000 },
+                    { count: 120, timestamp: 1651424400000 },
+                    { count: 16, timestamp: 1651510800000 },
+                    { count: 64, timestamp: 1651597200000 },
+                    { count: 32, timestamp: 1651683600000 },
+                    { count: 32, timestamp: 1651770000000 },
+                    { count: 95, timestamp: 1651856400000 },
+                    { count: 58, timestamp: 1651942800000 },
+                    { count: 121, timestamp: 1652029200000 },
+                    { count: 95, timestamp: 1652115600000 },
+                    { count: 12, timestamp: 1652202000000 },
+                    { count: 84, timestamp: 1652288400000 },
+                    { count: 93, timestamp: 1652374800000 },
+                    { count: 46, timestamp: 1652461200000 },
+                    { count: 32, timestamp: 1652547600000 },
+                    { count: 61, timestamp: 1652634000000 },
+                    { count: 95, timestamp: 1652720400000 },
+                    { count: 247, timestamp: 1652806800000 },
+                    { count: 95, timestamp: 1652893200000 },
+                    { count: 23, timestamp: 1652979600000 },
+                    { count: 95, timestamp: 1653066000000 },
+                    { count: 124, timestamp: 1653152400000 },
+                    { count: 6, timestamp: 1653238800000 },
+                    { count: 412, timestamp: 1653325200000 },
+                    { count: 83, timestamp: 1653411600000 },
+                    { count: 53, timestamp: 1653498000000 },
+                    { count: 324, timestamp: 1653584400000 },
+                    { count: 31, timestamp: 1653670800000 },
+                    { count: 51, timestamp: 1653757200000 },
+                    { count: 83, timestamp: 1653843600000 },
+                    { count: 17, timestamp: 1653930000000 },
                 ]
                 break;
             default:

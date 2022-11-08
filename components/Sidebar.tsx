@@ -56,7 +56,7 @@ function Sidebar(props: SidebarProps) {
                 <div className="flex flex-col px-1">
                     <SidebarItem label="Home" href="/" icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Alpha" href="/alpha" icon={<FaGamepad fontSize="1.5rem" color='rgb(97 198 208)' />} />
-                    <SidebarItem label="Market" href="/marketplace" icon={<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />} />
+                    <SidebarItem label="Discovery" href="/marketplace" icon={<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Create" href="/create" icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <a href="https://docs.deverse.world" target="_blank" className="text-gray-600 hover:text-gray-500 font-bold no-underline">
                         <div className="flex flex-col items-center py-2 deverse-sidebar-item">

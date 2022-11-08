@@ -1,5 +1,5 @@
 export enum DataFilter {
-    STAKING_BALANCE = "Staking Balance",
-    ACTIVITIES = "Activities",
-    TIME_SPENT = "Time spent"
+    OFFLINE = "Offline play",
+    ONLINE = "Online play",
+    REVENUE = "Revenue"
 }

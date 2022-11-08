@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import { AppContext } from "../../components/contexts/app_context";
+import UnauthorizedView from "../../components/UnauthorizedView";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AssetService from "../../data/services/AssetService";
 
@@ -17,11 +18,7 @@ function Inventory() {
     }, [user])
 
     if (!user) {
-        return (
-            <div className="flex justify-center items-center text-white p-4" >
-                <h1>Please login first</h1>
-            </div>
-        )
+        return <UnauthorizedView />
     }
     return (
         <div className="flex justify-center items-center text-white p-4" >
