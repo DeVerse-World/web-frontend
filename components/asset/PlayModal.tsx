@@ -1,7 +1,6 @@
 import customProtocolCheck from "custom-protocol-check";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
-import { BsPlayFill } from "react-icons/bs";
 import DownloadDemoButton from "../DownloadDemoButton";
 
 type Props = {
@@ -46,12 +45,12 @@ export default function PlayModal(props: Props) {
                 }}>
                     Offline
                 </button>
-                {/* <button id="btn-play-online" className="deverse-play-btn w-32 rounded-3xl" onClick={(e) => {
+                <button id="btn-play-online" className="deverse-play-btn w-32 rounded-3xl" onClick={(e) => {
                     e.stopPropagation();
                     openApp(props.templateId, "ONLINE");
                 }}>
                     Online
-                </button> */}
+                </button>
             </Modal.Body>
         )
     }
