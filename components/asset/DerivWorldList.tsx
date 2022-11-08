@@ -5,7 +5,7 @@ import StarRatings from 'react-star-ratings';
 import PlayModal from "./PlayModal";
 import { BsFillPeopleFill, BsPlayFill } from "react-icons/bs";
 import { TbWorld } from "react-icons/tb";
-import { TemplateViewModel } from "./RootSubworldsList";
+import { TemplateViewModel } from "./RootWorldList";
 
 export type DerivTemplateViewModel = {
     deletable?: boolean;
@@ -18,7 +18,7 @@ type ListProps = {
 
 const itemPerPage = 4;
 
-function DerivSubworldList(props: ListProps) {
+function DerivWorldList(props: ListProps) {
     const [currentPage, setCurrentPage] = useState(1);
 
     return (
@@ -26,7 +26,7 @@ function DerivSubworldList(props: ListProps) {
             <div className={`grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
                 {
                     props.data.map((item, index) =>
-                        <DerivTemplateCard key={index} data={item} />)
+                        <DerivWorldCard key={index} data={item} />)
                 }
             </div>
             {/* {props.data.length > itemPerPage &&
@@ -42,7 +42,7 @@ type CardProps = {
     data: DerivTemplateViewModel;
 }
 
-function DerivTemplateCard(props: CardProps) {
+function DerivWorldCard(props: CardProps) {
     const [showPlayModal, setShowPlayModal] = useState(false);
     const onDelete = () => { //TODO: to be enabled
         // SubWorldTemplateService.deleteDerivTemplate(props.data.rootId, props.data.id).then(res => {
@@ -90,4 +90,4 @@ function DerivTemplateCard(props: CardProps) {
     )
 }
 
-export default DerivSubworldList;
+export default DerivWorldList;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import DerivSubworldList, { DerivTemplateViewModel } from "../../components/asset/DerivTemplateList";
-import RootSubworldList, { RootTemplateViewModel } from "../../components/asset/RootSubworldsList";
+import DerivWorldList, { DerivTemplateViewModel } from "../../components/asset/DerivWorldList";
+import RootWorldList, { RootTemplateViewModel } from "../../components/asset/RootWorldList";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import BaseLayout from "../../components/common/BaseLayout";
 import Footer from "../../components/common/Footer";
@@ -64,11 +64,11 @@ function Layout() {
         <div className="flex flex-col relative justify-center text-white p-4" >
             <div >
                 <h3>Root</h3>
-                <RootSubworldList data={rootTemplates} />
+                <RootWorldList data={rootTemplates} />
             </div>
             <div>
                 <h3>Deriv</h3>
-                <DerivSubworldList data={derivTemplates} />
+                <DerivWorldList data={derivTemplates} />
             </div>
         </div>
     )

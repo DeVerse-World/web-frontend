@@ -241,6 +241,10 @@ body * {
 .filter-tab-disable {
     cursor: default;
     --tw-text-opacity: 1;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 2px;
+    padding-bottom: 2px;
     color: rgb(71 85 105 / var(--tw-text-opacity));
 }
 

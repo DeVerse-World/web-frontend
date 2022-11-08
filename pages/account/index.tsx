@@ -8,7 +8,7 @@ import { getAccountWrapperLayout } from "../../components/common/AccountWrapperL
 import { formatWalletAddress } from "../../utils/wallet_util";
 import AvatarList, { AvatarViewModel } from "../../components/asset/AvatarList";
 import EventList, { EventViewModel } from "../../components/asset/EventList";
-import RootSubworldList, { TemplateViewModel } from "../../components/asset/RootSubworldsList";
+import RootWorldList, { TemplateViewModel } from "../../components/asset/RootWorldList";
 import { getTimeString } from "../../utils/time_util";
 import StorageService from "../../data/services/StorageService";
 // ChartJS.register(
@@ -147,7 +147,7 @@ function Account() {
                             <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
                         </Link>
                     </div>
-                    <RootSubworldList data={templates}/>
+                    <RootWorldList data={templates}/>
                 </div>
             </section>  
         </div>

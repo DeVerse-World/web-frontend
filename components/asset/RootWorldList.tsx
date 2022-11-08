@@ -33,7 +33,7 @@ type ListProps = {
     data: RootTemplateViewModel[];
 }
 
-function RootSubworldList(props: ListProps) {
+function RootWorldList(props: ListProps) {
     const [currentPage, setCurrentPage] = useState(1);
 
     return (
@@ -41,7 +41,7 @@ function RootSubworldList(props: ListProps) {
             <div className={props.data.length < itemPerPage ? "flex flex-row flex-wrap gap-2 w-full" : `grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item, index) =>
-                        <RootTemplateCard key={index} data={item} />)
+                        <RootWorldCard key={index} data={item} />)
                 }
             </div>
             {props.data.length > itemPerPage &&
@@ -57,7 +57,7 @@ type CardProps = {
     data: RootTemplateViewModel;
 }
 
-function RootTemplateCard(props: CardProps) {
+function RootWorldCard(props: CardProps) {
     const [showPlayModal, setShowPlayModal] = useState(false);
     const onDelete = () => { //TODO: to be enabled
         SubWorldTemplateService.deleteRootTemplate(props.data.id).then(res => {
@@ -108,4 +108,4 @@ function RootTemplateCard(props: CardProps) {
     )
 }
 
-export default RootSubworldList;
+export default RootWorldList;
