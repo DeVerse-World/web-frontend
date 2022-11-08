@@ -43,6 +43,9 @@ function DeverseApp({ Component, pageProps }) {
             <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID}>
               <Head>
                 <title>Deverse World</title>
+                <meta name="title" content="Deverse World"/>
+                <meta name="description" content="Your portal to the endless virtual world experiences, owned by the users"/>
+                <meta name="keywords" content="Deverse, World, NFT, RPG, Openworld"/>
               </Head>
               <noscript>
                 <GTMHeader tagId={process.env.NEXT_PUBLIC_GTM} />
