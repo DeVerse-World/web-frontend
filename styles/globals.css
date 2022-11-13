@@ -166,13 +166,13 @@ body * {
 
 .nft-card {
     /* border: 2px solid rgb(97 198 208); */
-    background-color: rgb(0 0 0 / .4);
+    background-color: rgb(0 0 0 / .7);
     border-radius: 0.75rem;
 }
 
 .nft-card-hover:hover {
     transform: scale(1.03);
-    background-color: rgb(0 0 0 / .2);
+    background-color: rgb(0 0 0 / .5);
     cursor: pointer;
 }
 

@@ -19,16 +19,16 @@ export default function AvatarList(props: AvatarListProps) {
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-full">
             <div className={props.data.length < itemPerPage ? "flex flex-row flex-wrap gap-2 w-full" : `grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
                 {
-                    props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item: AvatarViewModel, index: number) =>
+                    props.data.map((item: AvatarViewModel, index: number) =>
                         <AvatarCard key={index} data={item} />
                     )
                 }
             </div>
-            {props.data.length > itemPerPage &&
+            {/* {props.data.length > itemPerPage &&
                 <div className="flex flex-row gap-2">
                     <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
                 </div>
-            }
+            } */}
         </section>
     )
 }
