@@ -8,7 +8,7 @@ import ListingTabComponent from "../../components/ListingTab";
 import { MarketplaceTab } from "../../components/marketplace_tab";
 import Sidebar from "../../components/Sidebar";
 import { Bar, Chart } from 'react-chartjs-2';
-import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend, BarElement } from 'chart.js';
+import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend, BarElement, LineController } from 'chart.js';
 import { TimeFilter } from "../../data/enum/time_filter";
 import { DataFilter } from "../../data/enum/data_filter";
 import AccountService from "../../data/services/AccountService";
@@ -21,6 +21,7 @@ ChartJS.register(
     BarElement,
     PointElement,
     LineElement,
+    LineController,
     Title,
     Tooltip,
     Legend
