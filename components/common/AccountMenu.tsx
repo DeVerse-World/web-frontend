@@ -49,9 +49,9 @@ function AccountMenu() {
           <Link href="/creator-dashboard" >
             <span className="cursor-pointer">Dashboard</span>
           </Link>
-          <Link href="/content-manager" >
+          {/* <Link href="/content-manager" >
             <span className="cursor-pointer">Content manager</span>
-          </Link>
+          </Link> */}
           <span className="cursor-pointer" onClick={onClickLogout}>
             Logout
           </span>
