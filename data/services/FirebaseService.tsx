@@ -25,7 +25,7 @@ class FirebaseService {
     private async retrieveConfig(): Promise<RemoteConfig> {
         if (this._config == null) {
             this._config = getRemoteConfig(this._app);
-            this._config.settings.minimumFetchIntervalMillis = 10000;
+            this._config.settings.minimumFetchIntervalMillis = 360000;
             await fetchAndActivate(this._config);
         }
         return this._config;
