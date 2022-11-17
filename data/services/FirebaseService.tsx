@@ -1,5 +1,5 @@
 import { FirebaseApp, initializeApp } from "firebase/app";
-import { getRemoteConfig, getValue, RemoteConfig } from "firebase/remote-config";
+import { fetchAndActivate, getBoolean, getRemoteConfig, getValue, RemoteConfig } from "firebase/remote-config";
 import { Firestore, getFirestore, collection, getDocs, Timestamp, doc, setDoc, getDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { BlogPost } from "../model/blog_post";
 
@@ -20,8 +20,15 @@ class FirebaseService {
             measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
         });
         this._firestore = getFirestore(this._app);
-        // this._config = getRemoteConfig(this._app);
-        // this._config.settings.minimumFetchIntervalMillis = 3600000;
+    }
+
+    private async retrieveConfig(): Promise<RemoteConfig> {
+        if (this._config == null) {
+            this._config = getRemoteConfig(this._app);
+            this._config.settings.minimumFetchIntervalMillis = 10000;
+            await fetchAndActivate(this._config);
+        }
+        return this._config;
     }
 
     async getBlogPosts(): Promise<BlogPost[]> {
@@ -71,6 +78,10 @@ class FirebaseService {
             this._whiteListBlogPost = setting.data()['wallets'];
         }
         return this._whiteListBlogPost;
+    }
+
+    async getShouldShowLoading(): Promise<boolean> {
+        return getBoolean(await this.retrieveConfig(), "showLoadingInMarketplace");
     }
 }
 

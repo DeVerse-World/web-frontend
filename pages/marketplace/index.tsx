@@ -17,6 +17,7 @@ import EventList, { EventViewModel } from "../../components/asset/EventList";
 import { getTimeString } from "../../utils/time_util";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 import RootWorldList, { RootTemplateViewModel } from "../../components/asset/RootWorldList";
+import FirebaseService from "../../data/services/FirebaseService";
 
 function Marketplace() {
     const router = useRouter();
@@ -56,7 +57,9 @@ function Marketplace() {
     }
 
     const loadNFTs = async (query: string) => {
-        // setViewState(ViewState.LOADING)
+        const shouldShowLoading = await FirebaseService.getShouldShowLoading();
+        if (shouldShowLoading)
+            setViewState(ViewState.LOADING)
         AssetService.getAll(ApiStrategy.GraphQl).then(assets => {
             const avatars = assets.filter(e => e.assetType == AssetType.IMAGE_2D);
             let convertedData = avatars.map<AvatarViewModel>(item => ({
@@ -78,8 +81,10 @@ function Marketplace() {
         });
     }
 
-    const loadEvents = () => {
-        setViewState(ViewState.LOADING)
+    const loadEvents = async () => {
+        const shouldShowLoading = await FirebaseService.getShouldShowLoading();
+        if (shouldShowLoading)
+            setViewState(ViewState.LOADING)
         EventsService.fetchEvents().then(res => {
             if (res.isSuccess()) {
                 const data = res.value.events.map<EventViewModel>(e => ({
@@ -131,8 +136,10 @@ function Marketplace() {
         });
     }
 
-    const loadWorlds = () => {
-        setViewState(ViewState.LOADING)
+    const loadWorlds = async () => {
+        const shouldShowLoading = await FirebaseService.getShouldShowLoading();
+        if (shouldShowLoading)
+            setViewState(ViewState.LOADING)
         SubWorldTemplateService.fetchRootTemplates().then(res => {
             if (res.isSuccess()) {
                 setRootTemplates(res.value.subworld_templates.map<RootTemplateViewModel>(e => ({
