@@ -1,12 +1,14 @@
 import { FirebaseApp, initializeApp } from "firebase/app";
 import { getRemoteConfig, getValue, RemoteConfig } from "firebase/remote-config";
-import { Firestore, getFirestore, collection, getDocs, Timestamp } from "firebase/firestore";
+import { Firestore, getFirestore, collection, getDocs, Timestamp, doc, setDoc, getDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { BlogPost } from "../model/blog_post";
 
 class FirebaseService {
     private _app: FirebaseApp;
     private _config: RemoteConfig;
     private _firestore: Firestore;
+
+    private _whiteListBlogPost: String[] = [];
     constructor() {
         this._app = initializeApp({
             apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -38,7 +40,37 @@ class FirebaseService {
             }
             blogPosts.push(blogPost);
         });
-        return blogPosts.sort((a, b) => a.created_at.getTime() > b.created_at.getTime() ? 1 : 0);
+        return blogPosts.sort((a, b) => b.created_at.getTime() - a.created_at.getTime());
+    }
+
+    async updateBlogPost(post: BlogPost) {
+        if (post.id != null) {
+            await setDoc(doc(this._firestore, "blog_post", post.id), {
+                title: post.title,
+                uri: post.uri,
+                thumbnail: post.thumbnail,
+                created_at: Timestamp.fromDate(post.created_at)
+            });
+        } else {
+            await addDoc(collection(this._firestore, "blog_post"), {
+                title: post.title,
+                uri: post.uri,
+                thumbnail: post.thumbnail,
+                created_at: Timestamp.fromDate(new Date())
+            });
+        }
+    }
+
+    async deleteBlogPost(post: BlogPost) {
+        await deleteDoc(doc(this._firestore, "blog_post", post.id));
+    }
+
+    async getBlogPostAdmins(): Promise<String[]> {
+        if (this._whiteListBlogPost.length == 0) {
+            const setting = await getDoc(doc(this._firestore, "settings", "blog_post"));
+            this._whiteListBlogPost = setting.data()['wallets'];
+        }
+        return this._whiteListBlogPost;
     }
 }
 

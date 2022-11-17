@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { User } from "../../data/model/user";
+import FirebaseService from "../../data/services/FirebaseService";
 import StorageService from "../../data/services/StorageService"
 export type AppDataContext = {
     user?: User,
@@ -30,7 +31,14 @@ const AppContextProvider = (props) => {
 
     useEffect(() => {
         const cachedUser = StorageService.getUser();
-        setUser(cachedUser || null);
+        if (cachedUser != null) {
+            FirebaseService.getBlogPostAdmins().then(val => {
+                cachedUser.isBlogPostAdmin = val.includes(cachedUser.wallet_address.toUpperCase())
+                setUser(cachedUser || null);
+            })
+        } else {
+            setUser(null);
+        }
     }, [])
 
     useEffect(() => {

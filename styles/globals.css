@@ -88,6 +88,15 @@ body * {
     background-image: linear-gradient(to bottom, rgb(127 198 208), rgb(94 175 217));
 }
 
+.bg-deverse-negative-gradient {
+    background-color: rgb(226, 84, 79);
+    background-image: linear-gradient(to bottom, rgb(226, 84, 79), rgb(224, 50, 44));
+}
+
+.bg-deverse-negative-gradient:hover {
+    background-image: linear-gradient(to bottom, rgb(221, 115, 112), rgb(223, 81, 76));
+}
+
 .txt-deverse-gradient {
     background: -webkit-linear-gradient(-86deg, rgb(65, 117, 230), rgb(18, 54, 173));
     -webkit-background-clip: text;

@@ -1,84 +1,99 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
 import { getCommonLayout } from '../../components/common/CommonLayout';
-import BlogService from '../../data/services/BlogService';
 import { BlogPost } from '../../data/model/blog_post';
-import { timeStampToString } from '../../utils/time_util';
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+import { getDateString } from '../../utils/time_util';
+import FirebaseService from '../../data/services/FirebaseService';
 
 
-const EditorModules = {
-    toolbar: [
-        [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-        [{ size: [] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' },
-        { 'indent': '-1' }, { 'indent': '+1' }],
-        ['link', 'image', 'video'],
-        ['clean']
-    ],
-    clipboard: {
-        // toggle to add extra line breaks when pasting HTML:
-        matchVisual: false,
-    }
+type BlogPostItemProps = {
+    data: BlogPost,
+    onEdit: (BlogPost) => void,
+    onDelete: (BlogPost) => void,
 }
-/* 
- * Quill editor formats
- * See https://quilljs.com/docs/formats/
- */
-const EditorFormats = [
-    'header', 'font', 'size',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image', 'video'
-]
 
-/* 
- * PropType validation
- */
-// const EditorPropTypes = {
-//     placeholder: PropTypes.string,
-//   }
+function BlogPostItem(props: BlogPostItemProps) {
+    return (
+        <div className="nft-card md:w-[500px] w-[350px] md:h-[400px] h-[250px] flex flex-col justify-center no-underline text-gray-600 hover:text-gray-500 "
+        >
+            <div className="md:h-[250px] h-[150px] overflow-hidden flex flex-col justify-center">
+                <img src={props.data.thumbnail || "/images/placeholder.jpg"} />
+            </div>
+            <span className="md:text-2xl text-sm px-4 py-2 font-semibold text-blue-300" style={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis"
+            }}>{props.data.title}</span>
+            <div className='flex flex-row justify-between px-4 gap-4 text-white'>
+                <span className='flex-grow'>{getDateString(props.data.created_at)}</span>
+                <span className='text-green-500 cursor-pointer' onClick={() => props.onEdit(props.data)}>Click to edit</span>
+                <span className='text-red-500 cursor-pointer' onClick={() => props.onDelete(props.data)}>Delete</span>
+            </div>
+        </div>
+    )
+}
 
 function ContentManager() {
     const [postTitle, setPostTitle] = useState('');
-    const [postContent, setPostContent] = useState('');
+    const [postThumbnail, setPostThumbnail] = useState('');
+    const [postUri, setPostUri] = useState('')
+    const [editingPost, setEditingPost] = useState<BlogPost>();
     const [posts, setPosts] = useState<BlogPost[]>([]);
-    const onPost = () => {
-        if (!postTitle || !postContent) {
-            return;
-        }
-        BlogService.createPost(postTitle, postContent);
-        window.alert('Post created successfully')
+
+    const onEdit = (post?: BlogPost) => {
+        setEditingPost(post)
+        setPostTitle(post?.title || "")
+        setPostThumbnail(post?.thumbnail || "")
+        setPostUri(post?.uri || "")
     }
 
-    const onTitleChange = (e) => {
-        setPostTitle(e.target.value)
+    const onDeletePost = (post: BlogPost) => {
+        FirebaseService.deleteBlogPost(post).then((res) => {
+            onEdit(null)
+            getPosts();
+            alert('Delete success')
+        })
     }
 
     const getPosts = () => {
+        FirebaseService.getBlogPosts().then(setPosts)
+    }
 
+    const onPostUpdated = () => {
+        if (!postTitle || !postUri || !postThumbnail) {
+            alert('Invalid values. Every field must have values')
+            return;
+        }
+        const updatingPost = editingPost ?? {} as BlogPost
+        updatingPost.title = postTitle
+        updatingPost.thumbnail = postThumbnail;
+        updatingPost.uri = postUri;
+        FirebaseService.updateBlogPost(updatingPost).then((res) => {
+            onEdit(null)
+            getPosts();
+            alert('Update success');
+        });
     }
 
     return (
         <div id='section-content' className='flex flex-col items-center p-4 gap-2'>
-            <input className='w-[800px] p-2' placeholder='Post title' value={postTitle} onChange={onTitleChange}></input>
-            <div className='w-[800px] bg-white'>
-                <ReactQuill id='content-editor' value={postContent} onChange={setPostContent} modules={EditorModules}
-                    formats={EditorFormats} placeholder="Write something" />
+            <input className='w-[800px] p-2' placeholder='Post title' value={postTitle} onChange={(e) => setPostTitle(e.target.value)}></input>
+            <input className='w-[800px] p-2' placeholder='Thumbnail uri' value={postThumbnail} onChange={(e) => setPostThumbnail(e.target.value)}></input>
+            <input className='w-[800px] p-2' placeholder='Post uri' value={postUri} onChange={(e) => setPostUri(e.target.value)}></input>
+            <div className='flex flex-row gap-4'>
+                <button className='rounded-md px-8 py-1 bg-deverse-gradient text-white' onClick={onPostUpdated}>
+                    {editingPost != null ? "Update post" : "Create new post"}
+                </button>
+                <button className='rounded-md px-8 py-1 bg-deverse-negative-gradient text-white' onClick={() => onEdit(null)}>
+                    Clear
+                </button>
             </div>
-            <button className='rounded-md px-8 py-1 bg-deverse-gradient text-white' onClick={onPost}>Post</button>
-            <button className='rounded-md px-8 py-1 bg-deverse-gradient text-white' onClick={getPosts}>Fetch Posts</button>
 
-            <div className='flex flex-row flex-wrap gap-8'>
-                {posts.map(post =>
-                    <div className="h-[350px] w-[400px] nft-card flex flex-col ">
-                        <h3 className='text-center bg-gray-500'>{post.title}</h3>
-                        <div className='flex-grow bg-white p-4'> {(post.content)} </div>
-                        <span className='text-end bg-gray-300 p-2'>Created on {timeStampToString(post.created_at)}</span>
-                    </div>
-                )}
+            <button className='rounded-md px-8 py-1 my-4 bg-deverse-gradient text-white' onClick={getPosts}>Get Posts from server</button>
+
+            <div className="flex flex-row gap-4 px-4 flex-wrap justify-center">
+                {posts.map(item => <BlogPostItem data={item} key={item.id} onEdit={onEdit} onDelete={onDeletePost} />)}
             </div>
         </div>
     )
