@@ -88,6 +88,10 @@ class FirebaseService {
     async getAlphaDriveLink() : Promise<string> {
         return getString(await this.retrieveConfig(), "alphaDriveLink");
     }
+
+    async getPitchDeckUri() : Promise<string> {
+        return getString(await this.retrieveConfig(), "pitchDeckUri");
+    }
 }
 
 export default new FirebaseService();

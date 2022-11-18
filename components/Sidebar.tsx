@@ -3,11 +3,9 @@ import { ReactNode, useContext, useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
 import { AiFillHome } from 'react-icons/ai';
 import { SiCmake } from 'react-icons/si';
-import { BiWorld } from 'react-icons/bi';
 import { FaGamepad, FaInfoCircle } from 'react-icons/fa';
 import Link from "next/link";
 import { AppContext } from "./contexts/app_context";
-import { BsCalendarEventFill } from "react-icons/bs";
 
 type SidebarProps = {
     children?: ReactNode
@@ -58,14 +56,7 @@ function Sidebar(props: SidebarProps) {
                     <SidebarItem label="Alpha" href="/alpha" icon={<FaGamepad fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Discovery" href="/marketplace" icon={<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Create" href="/create" icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
-                    <a href="https://docs.deverse.world" target="_blank" className="text-gray-600 hover:text-gray-500 font-bold no-underline">
-                        <div className="flex flex-col items-center py-2 deverse-sidebar-item">
-                            <FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />
-                            <span className="text-sm">
-                                DOCS
-                            </span>
-                        </div>
-                    </a>
+                    <SidebarItem label="Docs" href="/docs" icon={<FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />} />
                 </div>
                 {props.children}
             </div>

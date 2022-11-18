@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import 'react-quill/dist/quill.snow.css';
 import { getCommonLayout } from '../../components/common/CommonLayout';
 import { BlogPost } from '../../data/model/blog_post';
 import { getDateString } from '../../utils/time_util';
 import FirebaseService from '../../data/services/FirebaseService';
+import { userInfo } from 'os';
+import { AppContext } from '../../components/contexts/app_context';
+import UnauthorizedView from '../../components/UnauthorizedView';
 
 
 type BlogPostItemProps = {
@@ -35,6 +38,8 @@ function BlogPostItem(props: BlogPostItemProps) {
 }
 
 function ContentManager() {
+    const {user} = useContext(AppContext);
+
     const [postTitle, setPostTitle] = useState('');
     const [postThumbnail, setPostThumbnail] = useState('');
     const [postUri, setPostUri] = useState('')
@@ -74,6 +79,10 @@ function ContentManager() {
             getPosts();
             alert('Update success');
         });
+    }
+
+    if (user == null) {
+        return <UnauthorizedView />
     }
 
     return (
