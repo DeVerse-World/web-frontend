@@ -1,5 +1,5 @@
 import { FirebaseApp, initializeApp } from "firebase/app";
-import { fetchAndActivate, getBoolean, getRemoteConfig, getValue, RemoteConfig } from "firebase/remote-config";
+import { fetchAndActivate, getBoolean, getRemoteConfig, getString, getValue, RemoteConfig } from "firebase/remote-config";
 import { Firestore, getFirestore, collection, getDocs, Timestamp, doc, setDoc, getDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { BlogPost } from "../model/blog_post";
 
@@ -27,6 +27,7 @@ class FirebaseService {
             this._config = getRemoteConfig(this._app);
             this._config.settings.minimumFetchIntervalMillis = 360000;
             await fetchAndActivate(this._config);
+            console.log('remote config activated');
         }
         return this._config;
     }
@@ -82,6 +83,10 @@ class FirebaseService {
 
     async getShouldShowLoading(): Promise<boolean> {
         return getBoolean(await this.retrieveConfig(), "showLoadingInMarketplace");
+    }
+
+    async getAlphaDriveLink() : Promise<string> {
+        return getString(await this.retrieveConfig(), "alphaDriveLink");
     }
 }
 
