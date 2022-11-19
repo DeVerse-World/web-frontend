@@ -8,6 +8,7 @@ export type User = {
     wallet_address: string;
     wallet_nonce: string;
 
+    isBlogPostAdmin: boolean;
     avatar?: string;
 }
 
