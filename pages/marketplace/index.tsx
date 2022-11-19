@@ -25,7 +25,7 @@ function Marketplace() {
     const [images, setImages] = useState<AvatarViewModel[]>([]);
     const [eventData, setEventData] = useState<EventViewModel[]>([]);
     const [rootTemplates, setRootTemplates] = useState<RootTemplateViewModel[]>([]);
-    const [visibleTab, setVisibleTab] = useState<MarketplaceTab>(MarketplaceTab.NFT_ALL);
+    const [visibleTab, setVisibleTab] = useState<MarketplaceTab>(MarketplaceTab.WORLD_ALL);
 
     useEffect(() => {
         if (visibleTab.startsWith("NFT")) {
@@ -42,7 +42,7 @@ function Marketplace() {
         if (!router.isReady) return;
         let query = router.query;
         if (!query['tab']) {
-            onSelectTab(MarketplaceTab.NFT_ALL);
+            onSelectTab(MarketplaceTab.WORLD_ALL);
         }
     }, [router.isReady]);
 
@@ -190,15 +190,11 @@ function Marketplace() {
             <Sidebar >
                 <div className="h-[100%] bg-gray-900 w-[160px]">
                     <Accordion defaultActiveKey="nft_type" className="text-white" flush>
-                        <FilterHeader eventKey="nft_type" label='NFT' />
-                        <Accordion.Collapse eventKey="nft_type">
+                        <FilterHeader eventKey="worlds_type" label={'Worlds'} />
+                        <Accordion.Collapse eventKey="worlds_type">
                             <div className="flex flex-col ">
-                                <ListingTabComponent label="All" tab={MarketplaceTab.NFT_ALL} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Image" tab={MarketplaceTab.NFT_TWO_D_IMAGE} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Avatar" tab={MarketplaceTab.NFT_AVATAR} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Race" isDisable tab={MarketplaceTab.NFT_RACE} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Game" isDisable tab={MarketplaceTab.NFT_GAME_MODE} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Bot Logic" isDisable tab={MarketplaceTab.NFT_BOT_LOGIC} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="All"
+                                                     tab={MarketplaceTab.WORLD_ALL} isSelected={visibleTab} onSelect={onSelectTab} />
                             </div>
                         </Accordion.Collapse>
                         <FilterHeader eventKey="events_type" label='Events' />
@@ -214,11 +210,15 @@ function Marketplace() {
                                 <ListingTabComponent label="Treasure Hunt" tab={MarketplaceTab.EVENT_TREASURE_HUNT} isSelected={visibleTab} onSelect={onSelectTab} />
                             </div>
                         </Accordion.Collapse>
-                        <FilterHeader eventKey="worlds_type" label={'Worlds'} />
-                        <Accordion.Collapse eventKey="worlds_type">
+                        <FilterHeader eventKey="nft_type" label='NFT' />
+                        <Accordion.Collapse eventKey="nft_type">
                             <div className="flex flex-col ">
-                                <ListingTabComponent label="All"
-                                    tab={MarketplaceTab.WORLD_ALL} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="All" tab={MarketplaceTab.NFT_ALL} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Image" tab={MarketplaceTab.NFT_TWO_D_IMAGE} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Avatar" tab={MarketplaceTab.NFT_AVATAR} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Race" isDisable tab={MarketplaceTab.NFT_RACE} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Game" isDisable tab={MarketplaceTab.NFT_GAME_MODE} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Bot Logic" isDisable tab={MarketplaceTab.NFT_BOT_LOGIC} isSelected={visibleTab} onSelect={onSelectTab} />
                             </div>
                         </Accordion.Collapse>
                     </Accordion>

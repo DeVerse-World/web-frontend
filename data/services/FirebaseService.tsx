@@ -7,6 +7,7 @@ class FirebaseService {
     private _app: FirebaseApp;
     private _config: RemoteConfig;
     private _firestore: Firestore;
+    private _env_prefix: String;
 
     private _whiteListBlogPost: String[] = [];
     constructor() {
@@ -20,6 +21,7 @@ class FirebaseService {
             measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
         });
         this._firestore = getFirestore(this._app);
+        this._env_prefix = process.env.ENV_PREFIX;
     }
 
     private async retrieveConfig(): Promise<RemoteConfig> {
@@ -81,16 +83,24 @@ class FirebaseService {
         return this._whiteListBlogPost;
     }
 
-    async getShouldShowLoading(): Promise<boolean> {
-        return getBoolean(await this.retrieveConfig(), "showLoadingInMarketplace");
-    }
-
     async getAlphaDriveLink() : Promise<string> {
         return getString(await this.retrieveConfig(), "alphaDriveLink");
     }
 
     async getPitchDeckUri() : Promise<string> {
         return getString(await this.retrieveConfig(), "pitchDeckUri");
+    }
+
+    async getShouldShowLoading(): Promise<boolean> {
+        return getBoolean(await this.retrieveConfig(), this._env_prefix + "showLoadingInMarketplace");
+    }
+
+    async getShouldShowDashboardToggle(): Promise<boolean> {
+        return getBoolean(await this.retrieveConfig(), this._env_prefix + "showDashboardToggle")
+    }
+
+    async getShouldShowBlogToggle(): Promise<boolean> {
+        return getBoolean(await this.retrieveConfig(), this._env_prefix + "showBlogToggle")
     }
 }
 

@@ -1,13 +1,23 @@
 import Link from "next/link";
-import React, { useContext, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { Image } from "react-bootstrap";
 import { AppContext } from "../contexts/app_context";
 import LoginModal from "../login/LoginModal";
 import AuthService from "../../data/services/AuthService";
+import FirebaseService from "../../data/services/FirebaseService";
 
 function AccountMenu() {
   const { user, setUser, showLogin, setShowLogin } = useContext(AppContext);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showDashboardToggle, setShowDashboardToggle] = useState(false);
+
+  useEffect(() => {
+    loadFeatureToggles()
+  }, [])
+
+  const loadFeatureToggles = async () => {
+    setShowDashboardToggle(await FirebaseService.getShouldShowDashboardToggle());
+  }
 
   const onToggleMenu = (e) => {
     setShowDropdown(!showDropdown);
@@ -46,10 +56,13 @@ function AccountMenu() {
           <Link href="/account" >
             <span className="cursor-pointer">Profile</span>
           </Link>
-          <Link href="/creator-dashboard" >
-            <span className="cursor-pointer">Dashboard</span>
-          </Link>
-          {user?.isBlogPostAdmin ?
+          {showDashboardToggle ?
+            <Link href="/creator-dashboard" >
+              <span className="cursor-pointer">Dashboard</span>
+            </Link>
+            : null
+          }
+          {user != null && user.isBlogPostAdmin == true ?
             <Link href="/content-manager" >
               <span className="cursor-pointer">Content manager</span>
             </Link>
