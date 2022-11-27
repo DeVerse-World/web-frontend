@@ -2,6 +2,7 @@ import { FirebaseApp, initializeApp } from "firebase/app";
 import { fetchAndActivate, getBoolean, getRemoteConfig, getString, getValue, RemoteConfig } from "firebase/remote-config";
 import { Firestore, getFirestore, collection, getDocs, Timestamp, doc, setDoc, getDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { BlogPost } from "../model/blog_post";
+import { Partner } from "../model/partner";
 
 class FirebaseService {
     private _app: FirebaseApp;
@@ -10,6 +11,8 @@ class FirebaseService {
     private _env_prefix: String;
 
     private _whiteListBlogPost: String[] = [];
+    private _partners: Partner[] = [];
+
     constructor() {
         this._app = initializeApp({
             apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -101,6 +104,22 @@ class FirebaseService {
 
     async getShouldShowBlogToggle(): Promise<boolean> {
         return getBoolean(await this.retrieveConfig(), this._env_prefix + "showBlogToggle")
+    }
+
+    async getPartners() : Promise<Partner[]> {
+        if (this._partners.length == 0) {
+            const docs = await getDocs(collection(this._firestore, "partner"));
+            docs.forEach((doc) => {
+                const data = doc.data();
+                const partner: Partner = {
+                    uri: data['uri'],
+                    thumbnail: data['thumbnail'],
+                    id: doc.id,
+                }
+                this._partners.push(partner);
+            });
+        }
+        return this._partners;
     }
 }
 
