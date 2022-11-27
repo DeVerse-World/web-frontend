@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Image } from "react-bootstrap";
 import { AppContext } from "../contexts/app_context";
 import LoginModal from "../login/LoginModal";
@@ -12,12 +12,8 @@ function AccountMenu() {
   const [showDashboardToggle, setShowDashboardToggle] = useState(false);
 
   useEffect(() => {
-    loadFeatureToggles()
+    FirebaseService.getShouldShowDashboardToggle().then(setShowDashboardToggle)
   }, [])
-
-  const loadFeatureToggles = async () => {
-    setShowDashboardToggle(await FirebaseService.getShouldShowDashboardToggle());
-  }
 
   const onToggleMenu = (e) => {
     setShowDropdown(!showDropdown);
