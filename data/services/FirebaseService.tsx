@@ -112,7 +112,7 @@ class FirebaseService {
     }
 
     async getShouldShowBlogToggle(): Promise<boolean> {
-        const showToggle = getBoolean(await this.retrieveConfig(), "staging_" + "showBlogToggle")
+        const showToggle = getBoolean(await this.retrieveConfig(), this._env_prefix + "showBlogToggle")
         return showToggle
     }
 
