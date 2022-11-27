@@ -12,12 +12,8 @@ function Home(props) {
   const [showBlogToggle, setShowBlogToggle] = useState(false);
 
   useEffect(() => {
-    loadFeatureToggles()
+    FirebaseService.getShouldShowBlogToggle().then(setShowBlogToggle)
   }, [])
-
-  const loadFeatureToggles = async () => {
-    setShowBlogToggle(await FirebaseService.getShouldShowBlogToggle());
-  }
 
   return (
     <div id='section-content'>

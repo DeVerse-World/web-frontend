@@ -7,6 +7,7 @@ import { Partner } from "../model/partner";
 class FirebaseService {
     private _app: FirebaseApp;
     private _config: RemoteConfig;
+    private _activatedConfig: boolean = false;
     private _firestore: Firestore;
     private _env_prefix: String;
 
@@ -28,12 +29,20 @@ class FirebaseService {
     }
 
     private async retrieveConfig(): Promise<RemoteConfig> {
+        if (this._activatedConfig) {
+            console.log('invoked')
+
+            return this._config;
+        }
         if (this._config == null) {
             this._config = getRemoteConfig(this._app);
             this._config.settings.minimumFetchIntervalMillis = 360000;
-            await fetchAndActivate(this._config);
-            console.log('remote config activated');
         }
+        await fetchAndActivate(this._config);
+        if (this._config.lastFetchStatus == 'success') {
+            this._activatedConfig = true;
+        }
+        console.log('remote config activated');
         return this._config;
     }
 
@@ -86,11 +95,11 @@ class FirebaseService {
         return this._whiteListBlogPost;
     }
 
-    async getAlphaDriveLink() : Promise<string> {
+    async getAlphaDriveLink(): Promise<string> {
         return getString(await this.retrieveConfig(), "alphaDriveLink");
     }
 
-    async getPitchDeckUri() : Promise<string> {
+    async getPitchDeckUri(): Promise<string> {
         return getString(await this.retrieveConfig(), "pitchDeckUri");
     }
 
@@ -103,10 +112,11 @@ class FirebaseService {
     }
 
     async getShouldShowBlogToggle(): Promise<boolean> {
-        return getBoolean(await this.retrieveConfig(), this._env_prefix + "showBlogToggle")
+        const showToggle = getBoolean(await this.retrieveConfig(), "staging_" + "showBlogToggle")
+        return showToggle
     }
 
-    async getPartners() : Promise<Partner[]> {
+    async getPartners(): Promise<Partner[]> {
         if (this._partners.length == 0) {
             const docs = await getDocs(collection(this._firestore, "partner"));
             docs.forEach((doc) => {
