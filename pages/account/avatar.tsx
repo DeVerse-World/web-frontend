@@ -12,7 +12,6 @@ function Content() {
         setViewState(ViewState.LOADING);
         AvatarService.getAvatars(user?.id).then(res => {
             if (res.isSuccess && res.value) {
-                console.log(res.value.avatars)
                 let convertedData = res.value.avatars.map(item => {
                     let asset: AvatarViewModel = {
                         id: item.id.toString(),

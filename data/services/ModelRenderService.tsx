@@ -11,6 +11,8 @@ class ModelPreviewService {
         }, (e) => {
             if (onLoading)
                 onLoading(e.loaded * 100/e.total )
+        }, (error) => {
+            console.log(error)
         });
     }
 }

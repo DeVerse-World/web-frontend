@@ -6,8 +6,6 @@ import { Partner } from "../model/partner";
 
 class FirebaseService {
     private _app: FirebaseApp;
-    private _config: RemoteConfig;
-    private _activatedConfig: boolean = false;
     private _firestore: Firestore;
     private _env_prefix: String;
 
@@ -28,22 +26,14 @@ class FirebaseService {
         this._env_prefix = process.env.ENV_PREFIX;
     }
 
-    private async retrieveConfig(): Promise<RemoteConfig> {
-        if (this._activatedConfig) {
-            console.log('invoked')
-
-            return this._config;
+    async retrieveConfig(): Promise<RemoteConfig> {
+        const config = getRemoteConfig(this._app);
+        config.settings.minimumFetchIntervalMillis = 3600000;
+        await fetchAndActivate(config);
+        if (config.lastFetchStatus == 'success') {
+            console.log('remote config activated');
         }
-        if (this._config == null) {
-            this._config = getRemoteConfig(this._app);
-            this._config.settings.minimumFetchIntervalMillis = 360000;
-        }
-        await fetchAndActivate(this._config);
-        if (this._config.lastFetchStatus == 'success') {
-            this._activatedConfig = true;
-        }
-        console.log('remote config activated');
-        return this._config;
+        return config;
     }
 
     async getBlogPosts(): Promise<BlogPost[]> {
@@ -95,25 +85,28 @@ class FirebaseService {
         return this._whiteListBlogPost;
     }
 
-    async getAlphaDriveLink(): Promise<string> {
-        return getString(await this.retrieveConfig(), "alphaDriveLink");
+    async getAlphaDriveLink(config: RemoteConfig): Promise<string> {
+        return getString(config, "alphaDriveLink");
     }
 
-    async getPitchDeckUri(): Promise<string> {
-        return getString(await this.retrieveConfig(), "pitchDeckUri");
+    async getPitchDeckUri(config: RemoteConfig): Promise<string> {
+        return getString(config, "pitchDeckUri");
     }
 
-    async getShouldShowLoading(): Promise<boolean> {
-        return getBoolean(await this.retrieveConfig(), this._env_prefix + "showLoadingInMarketplace");
+    async getShouldShowLoading(config: RemoteConfig): Promise<boolean> {
+        return getBoolean(config, this._env_prefix + "showLoadingInMarketplace");
     }
 
-    async getShouldShowDashboardToggle(): Promise<boolean> {
-        return getBoolean(await this.retrieveConfig(), this._env_prefix + "showDashboardToggle")
+    async getShouldShowDashboardToggle(config: RemoteConfig): Promise<boolean> {
+        return getBoolean(config, this._env_prefix + "showDashboardToggle")
     }
 
-    async getShouldShowBlogToggle(): Promise<boolean> {
-        const showToggle = getBoolean(await this.retrieveConfig(), this._env_prefix + "showBlogToggle")
-        return showToggle
+    async getShouldShowBlogToggle(config: RemoteConfig): Promise<boolean> {
+        return getBoolean(config, this._env_prefix + "showBlogToggle");
+    }
+
+    async getShowcaseAnimation(config: RemoteConfig): Promise<string> {
+        return getString(config, this._env_prefix + "animationPath");
     }
 
     async getPartners(): Promise<Partner[]> {

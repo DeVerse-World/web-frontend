@@ -7,13 +7,14 @@ import AuthService from "../../data/services/AuthService";
 import FirebaseService from "../../data/services/FirebaseService";
 
 function AccountMenu() {
-  const { user, setUser, showLogin, setShowLogin } = useContext(AppContext);
+  const { user, setUser, showLogin, setShowLogin, remoteConfig } = useContext(AppContext);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showDashboardToggle, setShowDashboardToggle] = useState(false);
 
   useEffect(() => {
-    FirebaseService.getShouldShowDashboardToggle().then(setShowDashboardToggle)
-  }, [])
+    if (remoteConfig != null)
+      FirebaseService.getShouldShowDashboardToggle(remoteConfig).then(setShowDashboardToggle)
+  }, [remoteConfig])
 
   const onToggleMenu = (e) => {
     setShowDropdown(!showDropdown);

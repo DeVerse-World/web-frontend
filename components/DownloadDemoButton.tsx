@@ -1,16 +1,18 @@
 import { AiFillWindows } from "react-icons/ai";
 import { isDesktop } from 'react-device-detect';
 import FirebaseService from "../data/services/FirebaseService";
+import { useContext } from "react";
+import { AppContext } from "./contexts/app_context";
 
 type Props = {
     className?: string
 }
 
 function DownloadDemoButton(props: Props) {
-
+    const { remoteConfig } = useContext(AppContext)
     const onDownload = () => {
         if (isDesktop) {
-            FirebaseService.getAlphaDriveLink().then(url => {
+            FirebaseService.getAlphaDriveLink(remoteConfig).then(url => {
                 window.open(url, "_blank")
             }).catch(e => {
                 window.alert(e)

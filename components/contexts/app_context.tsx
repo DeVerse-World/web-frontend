@@ -1,3 +1,4 @@
+import { RemoteConfig } from "firebase/remote-config";
 import React, { useEffect, useState } from "react";
 import { User } from "../../data/model/user";
 import FirebaseService from "../../data/services/FirebaseService";
@@ -11,6 +12,7 @@ export type AppDataContext = {
     setIsMobileSidebarVisible: (boolean) => void,
     showLogin: boolean,
     setShowLogin: (boolean) => void,
+    remoteConfig: RemoteConfig
 }
 
 export enum ViewState {
@@ -21,10 +23,13 @@ export enum ViewState {
 }
 
 const AppContext = React.createContext<AppDataContext>({
+
 })
 
 const AppContextProvider = (props) => {
     const [user, setUser] = useState<User>(null);
+    const [remoteConfig, setRemoteConfig] = useState<RemoteConfig>(null);
+    const [test, setTest] = useState(false);
     const [viewState, setViewState] = useState(ViewState.IDLE);
     const [showLogin, setShowLogin] = useState(false);
     const [isMobileSidebarVisible, setIsMobileSidebarVisible] = useState(false);
@@ -39,6 +44,7 @@ const AppContextProvider = (props) => {
         } else {
             setUser(null);
         }
+        FirebaseService.retrieveConfig().then(setRemoteConfig)
     }, [])
 
     useEffect(() => {
@@ -50,7 +56,7 @@ const AppContextProvider = (props) => {
             value={{
                 user, setUser, viewState, setViewState,
                 isMobileSidebarVisible, setIsMobileSidebarVisible,
-                showLogin, setShowLogin
+                showLogin, setShowLogin, remoteConfig
             }}>
             {props.children}
         </AppContext.Provider>

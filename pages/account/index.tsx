@@ -66,7 +66,6 @@ function Account() {
                     onlineOpenable: true,
                     offlineOpenable: true
                 }))
-                console.log(roots.concat(derivs).length)
                 setTemplates(roots.concat(derivs));
             }
         })

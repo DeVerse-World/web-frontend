@@ -1,6 +1,6 @@
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Footer from '../../components/common/Footer';
 import ModelViewer from '../../components/ModelViewer';
 import AssetService from "../../data/services/AssetService";
@@ -9,9 +9,13 @@ import AvatarService from '../../data/services/AvatarService';
 import { formatWalletAddress } from '../../utils/wallet_util';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
+import { AppContext } from '../../components/contexts/app_context';
+import FirebaseService from '../../data/services/FirebaseService';
 
 function AssetPreviewScreen(props: WithRouterProps) {
     const router = useRouter();
+    const { remoteConfig } = useContext(AppContext)
+    const [avatarAnimation, setAvatarAnimation] = useState(null)
     const [avatar, setAvatar] = useState<Avatar>(null);
     const [modelPath, setModelPath] = useState<string>(null);
     const [creatorAddress, setCreatorAddress] = useState<string>();
@@ -34,15 +38,21 @@ function AssetPreviewScreen(props: WithRouterProps) {
 
     }, [router.isReady])
 
+    useEffect(() => {
+        if (remoteConfig != null) {
+            FirebaseService.getShowcaseAnimation(remoteConfig).then(setAvatarAnimation)
+        }
+    }, [remoteConfig])
+
     return (
         <section id="section-content" className='flex flex-col gap-4'>
             <div className='m-auto py-4 flex flex-row gap-4 flex-wrap justify-center'>
                 <div className='flex flex-col items-center gap-4 py-4 md:w-[30vw] md:h-[80vh]'>
                     {
-                        modelPath &&
+                        modelPath && avatarAnimation &&
                         <div className='rounded-2xl bg-gray-700 md:w-full md:h-full w-[350px]'>
                             <Canvas >
-                                <ModelViewer filePath={modelPath} position={[0, -1, 0]} />
+                                <ModelViewer filePath={modelPath} animationPath={avatarAnimation} position={[0, -1, 0]} />
                                 <ambientLight intensity={0.5} />
                                 <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
                                 <spotLight position={[-10, -10, 0]} angle={0.55} penumbra={1} />
