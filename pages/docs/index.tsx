@@ -1,13 +1,16 @@
+import { useContext } from "react";
 import Footer from "../../components/common/Footer";
+import { AppContext } from "../../components/contexts/app_context";
 import FirebaseService from "../../data/services/FirebaseService";
 
 function DocsScreen() {
-
+    const { remoteConfig } = useContext(AppContext)
+    
     return (
         <section id="section-content" className='flex flex-col gap-4 text-white'>
             <div className="flex-grow flex flex-row justify-center gap-4 flex-wrap p-4">
                 <div onClick={() => {
-                    FirebaseService.getPitchDeckUri().then(url => {
+                    FirebaseService.getPitchDeckUri(remoteConfig).then(url => {
                         window.open(url, "_blank")
                     }).catch(e => {
                         console.log(e)

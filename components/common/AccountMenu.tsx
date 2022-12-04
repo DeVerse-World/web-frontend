@@ -1,5 +1,5 @@
 import Link from "next/link";
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Image } from "react-bootstrap";
 import { AppContext } from "../contexts/app_context";
 import LoginModal from "../login/LoginModal";
@@ -7,17 +7,14 @@ import AuthService from "../../data/services/AuthService";
 import FirebaseService from "../../data/services/FirebaseService";
 
 function AccountMenu() {
-  const { user, setUser, showLogin, setShowLogin } = useContext(AppContext);
+  const { user, setUser, showLogin, setShowLogin, remoteConfig } = useContext(AppContext);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showDashboardToggle, setShowDashboardToggle] = useState(false);
 
   useEffect(() => {
-    loadFeatureToggles()
-  }, [])
-
-  const loadFeatureToggles = async () => {
-    setShowDashboardToggle(await FirebaseService.getShouldShowDashboardToggle());
-  }
+    if (remoteConfig != null)
+      FirebaseService.getShouldShowDashboardToggle(remoteConfig).then(setShowDashboardToggle)
+  }, [remoteConfig])
 
   const onToggleMenu = (e) => {
     setShowDropdown(!showDropdown);

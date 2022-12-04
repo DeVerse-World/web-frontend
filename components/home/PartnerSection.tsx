@@ -14,9 +14,9 @@ function PartnerSection(props) {
             <h3 className="text-center text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title">Partners</h3>
             <div className="flex flex-row flex-wrap gap-8 justify-center">
                 {partners.map(partner =>
-                    <div className="w-[300px] mx-4 my-4 flex justify-center items-center">
+                    <a href={partner.uri} target="_blank" key={partner.id} className="w-[300px] mx-4 my-4 flex justify-center items-center">
                         <img className="max-w-[300px] max-h-[100px] w-auto h-auto" src={partner.thumbnail} />
-                    </div>)}
+                    </a>)}
             </div>
 
         </section>

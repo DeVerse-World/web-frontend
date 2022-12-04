@@ -1,16 +1,18 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { TransformControls, OrbitControls } from '@react-three/drei'
-import { Canvas, GroupProps, useFrame } from "@react-three/fiber";
+import { TransformControls } from '@react-three/drei'
+import { GroupProps, useFrame } from "@react-three/fiber";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import ModelPreviewService from "../data/services/ModelRenderService";
 import { AnimationMixer, Event } from "three";
 
 interface ModelViewerProps extends GroupProps {
   filePath: string;
+  animationPath: string;
 }
 
 interface ModelObjectProps extends GroupProps {
   gltf: GLTF;
+  animationPath: string;
 }
 
 export default function ModelViewer(props: ModelViewerProps) {
@@ -36,7 +38,7 @@ export default function ModelViewer(props: ModelViewerProps) {
       </div>
     }>
       <TransformControls showX={false} showY={false} showZ={false}>
-        <ModelObject filePath={props.filePath} {...props} gltf={model} />
+        <ModelObject filePath={props.filePath} animationPath {...props} gltf={model} />
       </TransformControls>
     </Suspense>
   );
@@ -44,24 +46,22 @@ export default function ModelViewer(props: ModelViewerProps) {
 
 //TODO: add default animation to rotate horizontally continously
 function ModelObject(props: ModelObjectProps) {
-
   let animationMixer: AnimationMixer = new AnimationMixer(props.gltf.scene);
 
   useEffect(() => {
-    // ModelPreviewService.load("3d/cleric_idle_equipped.glb", (gltf) => {
-    //   console.log( "Look Around animation loaded" );
-    //   console.log(`Length is :${gltf.animations.length}`)
-    //   gltf.animations.forEach((animation) => {
-    //     console.log(animation.name)
-    //     animationMixer.clipAction(animation).play();
-    //   })
-    // })
+    if (props.animationPath)
+      ModelPreviewService.load(props.animationPath, (gltf) => {
+        gltf.animations.forEach((animation) => {
+          console.log(animation.name)
+          animationMixer.clipAction(animation).play();
+        })
+      })
     // props.animations.forEach(animation => {
     //   animationMixer.clipAction(animation).play();
     // })
-    props.gltf.animations.forEach((animation) => {
-      animationMixer.clipAction(animation).play();
-    })
+    // props.gltf.animations.forEach((animation) => {
+    //   animationMixer.clipAction(animation).play();
+    // })
   }, [])
 
   useFrame((state, delta) => {

@@ -21,7 +21,7 @@ import FirebaseService from "../../data/services/FirebaseService";
 
 function Marketplace() {
     const router = useRouter();
-    const { setViewState, setIsMobileSidebarVisible } = useContext(AppContext);
+    const { setViewState, setIsMobileSidebarVisible, remoteConfig } = useContext(AppContext);
     const [images, setImages] = useState<AvatarViewModel[]>([]);
     const [eventData, setEventData] = useState<EventViewModel[]>([]);
     const [rootTemplates, setRootTemplates] = useState<RootTemplateViewModel[]>([]);
@@ -57,9 +57,9 @@ function Marketplace() {
     }
 
     const loadNFTs = async (query: string) => {
-        const shouldShowLoading = await FirebaseService.getShouldShowLoading();
-        if (shouldShowLoading)
-            setViewState(ViewState.LOADING)
+        // const shouldShowLoading = await FirebaseService.getShouldShowLoading();
+        // if (shouldShowLoading)
+        setViewState(ViewState.LOADING)
         AssetService.getAll(ApiStrategy.GraphQl).then(assets => {
             const avatars = assets.filter(e => e.assetType == AssetType.IMAGE_2D);
             let convertedData = avatars.map<AvatarViewModel>(item => ({
@@ -82,9 +82,9 @@ function Marketplace() {
     }
 
     const loadEvents = async () => {
-        const shouldShowLoading = await FirebaseService.getShouldShowLoading();
-        if (shouldShowLoading)
-            setViewState(ViewState.LOADING)
+        // const shouldShowLoading = await FirebaseService.getShouldShowLoading();
+        // if (shouldShowLoading)
+        setViewState(ViewState.LOADING)
         EventsService.fetchEvents().then(res => {
             if (res.isSuccess()) {
                 const data = res.value.events.map<EventViewModel>(e => ({
@@ -137,9 +137,9 @@ function Marketplace() {
     }
 
     const loadWorlds = async () => {
-        const shouldShowLoading = await FirebaseService.getShouldShowLoading();
-        if (shouldShowLoading)
-            setViewState(ViewState.LOADING)
+        // const shouldShowLoading = await FirebaseService.getShouldShowLoading();
+        // if (shouldShowLoading)
+        setViewState(ViewState.LOADING)
         SubWorldTemplateService.fetchRootTemplates().then(res => {
             if (res.isSuccess()) {
                 setRootTemplates(res.value.subworld_templates.map<RootTemplateViewModel>(e => ({
@@ -194,7 +194,7 @@ function Marketplace() {
                         <Accordion.Collapse eventKey="worlds_type">
                             <div className="flex flex-col ">
                                 <ListingTabComponent label="All"
-                                                     tab={MarketplaceTab.WORLD_ALL} isSelected={visibleTab} onSelect={onSelectTab} />
+                                    tab={MarketplaceTab.WORLD_ALL} isSelected={visibleTab} onSelect={onSelectTab} />
                             </div>
                         </Accordion.Collapse>
                         <FilterHeader eventKey="events_type" label='Events' />
