@@ -50,12 +50,17 @@ function ModelObject(props: ModelObjectProps) {
 
   useEffect(() => {
     if (props.animationPath)
-      ModelPreviewService.load(props.animationPath, (gltf) => {
-        gltf.animations.forEach((animation) => {
-          console.log(animation.name)
-          animationMixer.clipAction(animation).play();
+      try {
+        ModelPreviewService.load(props.animationPath, (gltf) => {
+          gltf.animations.forEach((animation) => {
+            console.log(animation.name)
+            animationMixer.clipAction(animation).play();
+          })
         })
-      })
+      } catch (e) {
+        console.log(e)
+      }
+
     // props.animations.forEach(animation => {
     //   animationMixer.clipAction(animation).play();
     // })
