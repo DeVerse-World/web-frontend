@@ -43,6 +43,8 @@ function Marketplace() {
         let query = router.query;
         if (!query['tab']) {
             onSelectTab(MarketplaceTab.WORLD_ALL);
+        } else {
+            onSelectTab(query['tab'])
         }
     }, [router.isReady]);
 
