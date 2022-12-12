@@ -2,7 +2,7 @@ import { FirebaseApp, initializeApp } from "firebase/app";
 import { fetchAndActivate, getBoolean, getRemoteConfig, getString, getValue, RemoteConfig } from "firebase/remote-config";
 import { Firestore, getFirestore, collection, getDocs, Timestamp, doc, setDoc, getDoc, addDoc, deleteDoc } from "firebase/firestore";
 import { BlogPost } from "../model/blog_post";
-import { Partner } from "../model/partner";
+import { TeamAdvisor, Partner, TeamMember } from "../model/partner";
 
 class FirebaseService {
     private _app: FirebaseApp;
@@ -11,6 +11,8 @@ class FirebaseService {
 
     private _whiteListBlogPost: String[] = [];
     private _partners: Partner[] = [];
+    private _teamMembers: TeamMember[] = [];
+    private _teamAdvisors: TeamAdvisor[] = [];
 
     constructor() {
         this._app = initializeApp({
@@ -23,7 +25,7 @@ class FirebaseService {
             measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
         });
         this._firestore = getFirestore(this._app);
-        this._env_prefix = process.env.ENV_PREFIX;
+        this._env_prefix = process.env.ENV_PREFIX || "staging_";
     }
 
     async retrieveConfig(): Promise<RemoteConfig> {
@@ -123,6 +125,44 @@ class FirebaseService {
             });
         }
         return this._partners;
+    }
+
+    async getTeamMembers(): Promise<TeamMember[]> {
+        if (this._teamMembers.length == 0) {
+            const docs = await getDocs(collection(this._firestore, "team_member"));
+            docs.forEach((doc) => {
+                const data = doc.data();
+                const member: TeamMember = {
+                    thumbnail: data['thumbnail'],
+                    linkedin: data['linkedin'],
+                    name: data['name'],
+                    education: data['education'],
+                    title: data['title'],
+                    id: doc.id,
+                }
+                this._teamMembers.push(member);
+            });
+        }
+        return this._teamMembers;
+    }
+
+    async getAdvisors(): Promise<TeamAdvisor[]> {
+        if (this._teamAdvisors.length == 0) {
+            const docs = await getDocs(collection(this._firestore, "advisor_member"));
+            docs.forEach((doc) => {
+                const data = doc.data();
+                const advisor: TeamAdvisor = {
+                    thumbnail: data['thumbnail'],
+                    linkedin: data['linkedin'],
+                    name: data['name'],
+                    experiences: data['experiences'],
+                    id: doc.id,
+                }
+                this._teamAdvisors.push(advisor);
+            });
+        }
+        console.log(this._teamAdvisors)
+        return this._teamAdvisors;
     }
 }
 

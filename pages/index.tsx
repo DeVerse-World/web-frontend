@@ -8,6 +8,8 @@ import BlogPostSection from '../components/home/BlogPostSection';
 import FirebaseService from "../data/services/FirebaseService";
 import PartnerSection from '../components/home/PartnerSection';
 import { AppContext } from '../components/contexts/app_context';
+import TeamMemberSection from '../components/home/TeamMemberSection';
+import AdvisorSection from '../components/home/AdvisorSection';
 
 function Home(props) {
   const [showBlogToggle, setShowBlogToggle] = useState(false);
@@ -23,11 +25,13 @@ function Home(props) {
       <IntroSection />
       <HighlightFeatureSection />
       <ProductSection />
+      <TeamMemberSection/>
+      <AdvisorSection/>
       <PartnerSection />
-      {showBlogToggle ?
+      {/* {showBlogToggle ?
         <BlogPostSection />
         : null
-      }
+      } */}
       <Footer />
     </div>
   );
