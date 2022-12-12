@@ -1,5 +1,4 @@
 import '../styles/globals.css';
-import '../styles/Styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from "react";
 import { MetaMaskProvider } from "metamask-react";

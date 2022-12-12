@@ -1,10 +1,11 @@
 /* ./styles/globals.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 body * {
-    font-family: 'Sofia Pro', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -68,7 +69,7 @@ body * {
 
 .deverse-title {
     font-size: 2.5rem;
-    font-family: 'Akira Expanded', sans-serif;
+    /* font-family: 'Akira Expanded', sans-serif; */
 }
 
 .bg-deverse {
@@ -204,6 +205,36 @@ body * {
     font-weight: 700;
 }
 
+.advisor-card {
+    /* position: relative; */
+    /* border-bottom: 1px solid blue; */
+    /* width: 650px;
+    height: 80px; */
+}
+
+
+/* .advisor-card::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background-color: white;
+    transition: width .5s linear;
+}
+
+.advisor-card:hover::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    width: 100%;
+    background-color: white;
+} */
+
 
 /* "flex flex-row justify-evenly text-xl bg-black  py-2 px-8 overflow-x-scroll" */
 
@@ -291,18 +322,6 @@ body * {
     background: rgb(97 198 208);
 }
 
-
-/* Quill */
-
-#content-editor .ql-editor {
-    min-height: 18em;
-}
-
-.App-logo {
-    height: 40vmin;
-    pointer-events: none;
-}
-
 iframe.rpo {
     width: 100%;
     height: 100%;
@@ -318,20 +337,5 @@ iframe.rpo {
     }
     .heading {
         font-size: 3rem;
-    }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-        animation: App-logo-spin infinite 20s linear;
-    }
-}
-
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
     }
 }

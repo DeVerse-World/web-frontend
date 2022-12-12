@@ -4,7 +4,6 @@ import FirebaseService from "../../data/services/FirebaseService";
 
 function PartnerSection(props) {
     const [partners, setPartners] = useState<Partner[]>([])
-
     useEffect(() => {
         FirebaseService.getPartners().then(setPartners)
     }, [])
@@ -18,7 +17,6 @@ function PartnerSection(props) {
                         <img className="max-w-[300px] max-h-[100px] w-auto h-auto" src={partner.thumbnail} />
                     </a>)}
             </div>
-
         </section>
     );
 }
