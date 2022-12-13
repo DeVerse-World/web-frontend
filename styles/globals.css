@@ -206,25 +206,21 @@ body * {
 }
 
 .advisor-card {
-    /* position: relative; */
-    /* border-bottom: 1px solid blue; */
-    /* width: 650px;
-    height: 80px; */
+    position: relative;
 }
 
+.advisor-card:hover .thumbnail {
+    display: block;
+}
 
-/* .advisor-card::before {
-    content: "";
+.advisor-card .thumbnail {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background-color: white;
-    transition: width .5s linear;
+    right: 10px;
+    display: none;
 }
 
-.advisor-card:hover::before {
+
+/* .advisor-card:hover::before {
     content: "";
     position: absolute;
     bottom: 0;

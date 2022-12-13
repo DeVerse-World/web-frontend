@@ -11,6 +11,7 @@ class FirebaseService {
 
     private _whiteListBlogPost: String[] = [];
     private _partners: Partner[] = [];
+    private _communityPartners: Partner[] = [];
     private _teamMembers: TeamMember[] = [];
     private _teamAdvisors: TeamAdvisor[] = [];
 
@@ -125,6 +126,22 @@ class FirebaseService {
             });
         }
         return this._partners;
+    }
+
+    async getComunityPartners(): Promise<Partner[]> {
+        if (this._communityPartners.length == 0) {
+            const docs = await getDocs(collection(this._firestore, "community_partner"));
+            docs.forEach((doc) => {
+                const data = doc.data();
+                const partner: Partner = {
+                    uri: data['uri'],
+                    thumbnail: data['thumbnail'],
+                    id: doc.id,
+                }
+                this._communityPartners.push(partner);
+            });
+        }
+        return this._communityPartners;
     }
 
     async getTeamMembers(): Promise<TeamMember[]> {

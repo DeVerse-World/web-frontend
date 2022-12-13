@@ -13,14 +13,14 @@ function TeamMemberCard(props: CardProps) {
             <div className="relative rounded-lg w-[250px] h-[250px]">
                 <img className="w-full h-full absolute " src={props.data.thumbnail} />
                 <div className="flex flex-row items-center gap-2 absolute bottom-1 left-1">
-                    <span className="bg-blue-600 px-2 rounded-lg text-sm">{props.data.title}</span>
+                    <span className="bg-blue-600 px-2 rounded-lg text-sm font-b">{props.data.title}</span>
                     <a href={props.data.linkedin} target="_blank" className="bg-white">
                         <FaLinkedin size={24} />
                     </a>
                 </div>
             </div>
             <div className="py-2 flex flex-col items-start">
-                <h3 className="text-blue-400">{props.data.name}</h3>
+                <h3 className="text-blue-400 font-bold">{props.data.name}</h3>
                 <span className="text-blue-200">{props.data.education}</span>
             </div>
         </div>
