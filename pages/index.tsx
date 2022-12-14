@@ -10,6 +10,7 @@ import PartnerSection from '../components/home/PartnerSection';
 import { AppContext } from '../components/contexts/app_context';
 import TeamMemberSection from '../components/home/TeamMemberSection';
 import AdvisorSection from '../components/home/AdvisorSection';
+import CommunityPartnerSection from '../components/home/CommunityPartnerSection';
 
 function Home(props) {
   const [showBlogToggle, setShowBlogToggle] = useState(false);
@@ -28,10 +29,11 @@ function Home(props) {
       <TeamMemberSection/>
       <AdvisorSection/>
       <PartnerSection />
-      {/* {showBlogToggle ?
+      <CommunityPartnerSection/>
+      {showBlogToggle ?
         <BlogPostSection />
         : null
-      } */}
+      }
       <Footer />
     </div>
   );
