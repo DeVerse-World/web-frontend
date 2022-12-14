@@ -39,7 +39,7 @@ function AdvisorSection() {
 
     return (
         <section id="section-advisor" className="p-4 flex flex-col items-center">
-            <h3 className="text-center text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title py-4">Advisors</h3>
+            <h3 className="text-center text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title py-4">Angels/ Advisors</h3>
             <div className="flex flex-col gap-4 flex-wrap justify-center">
                 {data.map(item => <AdvisorCard data={item} key={item.id} />)}
             </div>
