@@ -99,7 +99,7 @@ function Marketplace() {
                     lastUpdate: getTimeString(new Date(e.updated_at)),
                     stage: e.stage,
                     participants: e.max_num_participants
-                }));
+                })).filter(event => event.stage != "Finished");
                 switch (visibleTab) {
                     case MarketplaceTab.EVENT_BATTLE:
                         setEventData(data.filter(e => e.category == EventCategory.BATTLE))
