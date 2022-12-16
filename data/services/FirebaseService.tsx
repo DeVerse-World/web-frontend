@@ -178,7 +178,6 @@ class FirebaseService {
                 this._teamAdvisors.push(advisor);
             });
         }
-        console.log(this._teamAdvisors)
         return this._teamAdvisors;
     }
 }

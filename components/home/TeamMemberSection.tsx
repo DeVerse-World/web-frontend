@@ -20,8 +20,10 @@ function TeamMemberCard(props: CardProps) {
                 </div>
             </div>
             <div className="py-2 flex flex-col items-start">
-                <h3 className="text-blue-400 font-bold">{props.data.name}</h3>
-                <span className="text-blue-200">{props.data.education}</span>
+                <h3 className="text-blue-400 font-bold ">{props.data.name}</h3>
+                <span className="text-blue-200 text-start">{props.data.education.split('\\n').map((item, index) =>
+                    (index === 0) ? item : [<br key={index} />, item]
+                )}</span>
             </div>
         </div>
     )
