@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Image, Modal, Tooltip } from "react-bootstrap";
+import { Modal, Tooltip } from "react-bootstrap";
 import { FeatureStatus } from "../../data/enum/feature_status";
+import Image from "next/image";
 
 
 function ProductSection(props) {
@@ -118,12 +119,12 @@ function ProductSectionItem(props: ProductionSectionData) {
                 }}>
                     <Tooltip title={props.status} style={{ position: "absolute", width: 36, height: 36 }}></Tooltip>
                     <Image src={getStatusIcon(props.status)}
-                        width={44} height={44} />
+                        width={36} height={36} />
                 </span>
                 <Image
                     className="m-auto"
                     src={`/images/${props.icon}`}
-                    width={300} height={300}
+                    width={300} height={250}
                 />
             </div>
             <div className="rounded-md bg-deverse-gradient

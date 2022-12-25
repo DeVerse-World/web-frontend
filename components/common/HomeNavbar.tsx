@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { Image } from 'react-bootstrap';
 import AccountMenu from "./AccountMenu";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { withRouter } from "next/router";
@@ -7,6 +6,7 @@ import { WithRouterProps } from "next/dist/client/with-router";
 import Link from "next/link";
 import { AppContext } from "../contexts/app_context";
 import { IoMdClose } from "react-icons/io";
+import Image from "next/image";
 
 function Homebar(props: WithRouterProps) {
   const { setIsMobileSidebarVisible, isMobileSidebarVisible } = useContext(AppContext);
@@ -22,12 +22,12 @@ function Homebar(props: WithRouterProps) {
         <span className="flex flex-row gap-2 cursor-pointer">
           <Image
             src={"/images/logo.webp"}
-            className="hidden sm:block"
             height={36}
             width={36}
             alt="Deverse logo" />
           <Image
-            className="h-[32px] sm:h-[40px]"
+            height={36}
+            width={256}
             src={"/images/logo-text.webp"}
             alt="Deverse text logo" />
         </span>
