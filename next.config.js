@@ -1,5 +1,6 @@
 module.exports = {
     reactStrictMode: true,
+    compress: true,
     distDir: 'build',
     env: {
         REACT_APP_SERVER_HOST: "api.staging.deverse.world",
