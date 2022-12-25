@@ -21,7 +21,7 @@ function ProductSection(props) {
             {
                 icon: "product-decentralised-graphic-sharing.png",
                 name: "Graphic Sharing",
-                status: FeatureStatus.PENDING,
+                status: FeatureStatus.IN_PROGRESS,
                 description: "With Unreal Engine 5 and Pixel Streaming, we leverage the newest game technology to provide the best experience possible and enable a decentralized marketplace where powerful machine owners can share their computing resources in return for token rewards."
             },
             {
@@ -39,7 +39,7 @@ function ProductSection(props) {
             {
                 icon: "product-quest-creator-tool.png",
                 name: "creator tools",
-                status: FeatureStatus.PLANNING,
+                status: FeatureStatus.IN_PROGRESS,
                 description: "A custom editor tool that let users design their campaigns/quests. Use various existing templates or build from scratch."
             },
             {
