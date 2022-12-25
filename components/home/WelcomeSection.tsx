@@ -1,16 +1,18 @@
-import { Carousel, Image } from "react-bootstrap";
+import { Carousel } from "react-bootstrap";
 import DownloadDemoButton from "../DownloadDemoButton";
+import Image from "next/image";
 
 
 function renderShowcaseItem(src: String) {
   return (
-    <Carousel.Item>
-      <div className="h-screen w-screen " style={{
+    <Carousel.Item className="h-screen w-screen">
+      {/* <div className="h-screen w-screen " style={{
         background: `url('${src}')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}>
-      </div>
+      </div> */}
+      <Image src={src} layout="fill"/>
     </Carousel.Item>
   )
 }
@@ -28,12 +30,12 @@ function WelcomeSection(props) {
         <DownloadDemoButton className="h-12" />
       </div>
       <Carousel interval={10000}>
-        {renderShowcaseItem('/images/01.png')}
-        {renderShowcaseItem('/images/02.png')}
-        {renderShowcaseItem('/images/03.png')}
-        {renderShowcaseItem('/images/04.png')}
-        {renderShowcaseItem('/images/05.png')}
-        {renderShowcaseItem('/images/06.png')}
+        {renderShowcaseItem('/images/01.webp')}
+        {renderShowcaseItem('/images/02.webp')}
+        {renderShowcaseItem('/images/03.webp')}
+        {renderShowcaseItem('/images/04.webp')}
+        {renderShowcaseItem('/images/05.webp')}
+        {renderShowcaseItem('/images/06.webp')}
       </Carousel>
 
     </section>

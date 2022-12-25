@@ -10,7 +10,7 @@ function AvatarContainer(props: Props) {
     const [avatar, setAvatar] = useState(user?.avatar || null);
 
     useEffect(() => {
-        setAvatar(user?.avatar || "/images/placeholder.png");
+        setAvatar(user?.avatar || "/images/placeholder.webp");
     }, [user])
 
     return (
