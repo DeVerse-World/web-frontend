@@ -73,7 +73,7 @@ body * {
 }
 
 .bg-deverse {
-    background-image: radial-gradient(closest-side, rgb(22, 74, 124), rgba(2, 11, 64, 0.7)), url(/images/bg-highlight.png);
+    background-image: radial-gradient(closest-side, rgb(22, 74, 124), rgba(2, 11, 64, 0.7)), url(/images/bg-highlight.webp);
 }
 
 .deverse-border {

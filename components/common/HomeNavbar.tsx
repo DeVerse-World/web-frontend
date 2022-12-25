@@ -21,14 +21,14 @@ function Homebar(props: WithRouterProps) {
       <Link href="/" >
         <span className="flex flex-row gap-2 cursor-pointer">
           <Image
-            src={"/images/logo.png"}
+            src={"/images/logo.webp"}
             className="hidden sm:block"
             height={36}
             width={36}
             alt="Deverse logo" />
           <Image
             className="h-[32px] sm:h-[40px]"
-            src={"/images/logo-text.png"}
+            src={"/images/logo-text.webp"}
             alt="Deverse text logo" />
         </span>
       </Link>

@@ -6,7 +6,7 @@ import { MdEmail } from 'react-icons/md';
 function Footer(props) {
   return (
     <section id="section-footer"
-      className="flex flex-col bg-[url('/images/bg-highlight.png')] text-center text-white"
+      className="flex flex-col bg-[url('/images/bg-highlight.webp')] text-center text-white"
       style={{
         borderTop: "1px solid rgb(71 85 105)",
       }}>

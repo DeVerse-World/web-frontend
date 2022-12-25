@@ -7,49 +7,49 @@ function ProductSection(props) {
     const renderProductList = () => {
         const items: ProductionSectionData[] = [
             {
-                icon: "product-ad.png",
+                icon: "product-ad.webp",
                 name: "Interactive Advertisement",
                 status: FeatureStatus.PENDING,
                 description: "Game as an advertisement platform, utilizing a similar ads system from exisiting social media platforms to determine pricing."
             },
             // {
-            //     icon: "product-dao.png",
+            //     icon: "product-dao.webp",
             //     name: "dao",
             //     status: FeatureStatus.IN_PROGRESS,
             //     description: "Be part of the system & vote on important decisions, dev grants, etc."
             // },
             {
-                icon: "product-decentralised-graphic-sharing.png",
+                icon: "product-decentralised-graphic-sharing.webp",
                 name: "Graphic Sharing",
                 status: FeatureStatus.IN_PROGRESS,
                 description: "With Unreal Engine 5 and Pixel Streaming, we leverage the newest game technology to provide the best experience possible and enable a decentralized marketplace where powerful machine owners can share their computing resources in return for token rewards."
             },
             {
-                icon: "product-decentralised-subworld-hosting.png",
+                icon: "product-decentralised-subworld-hosting.webp",
                 name: "subworld hosting",
                 status: FeatureStatus.IN_PROGRESS,
                 description: "Users can manage and host their interconnected verses using our in-built custom management app, expanding infinitely the decentralized metaverse."
             },
             {
-                icon: "product-integrity-validation.png",
+                icon: "product-integrity-validation.webp",
                 name: "integrity validation",
                 status: FeatureStatus.PENDING,
                 description: " Using editor action sequence recorder and AI, we can approximately calculate innovation score of the NFT. Along with a Prediction Market mechanism, we will provide the the best possible assessments of the NFT for end-users."
             },
             {
-                icon: "product-quest-creator-tool.png",
+                icon: "product-quest-creator-tool.webp",
                 name: "creator tools",
                 status: FeatureStatus.IN_PROGRESS,
                 description: "A custom editor tool that let users design their campaigns/quests. Use various existing templates or build from scratch."
             },
             {
-                icon: "product-sdk.png",
+                icon: "product-sdk.webp",
                 name: "sdk",
                 status: FeatureStatus.IN_PROGRESS,
                 description: "Deverse SDK, powered by Unreal Engine 5, let users design & introduce avatars/races/verses/gameplays/etc and mint them as NFT with ease."
             },
             {
-                icon: "product-smart-nft.png",
+                icon: "product-smart-nft.webp",
                 name: "Smart Creator Economy",
                 status: FeatureStatus.IN_PROGRESS,
                 description: "Support non-fungible & semi-fungible tokens, enabling renting and hierarchical fee sharing structure of NFTs. We also introduce liquidity-backed insurance, where transfer fees are accumulated to provide a guaranteed buy-back scheme at minimum price of an asset, which improves the asset liquidity."
@@ -95,13 +95,13 @@ function ProductSectionItem(props: ProductionSectionData) {
     const getStatusIcon = (status: FeatureStatus): string => {
         switch (status) {
             case FeatureStatus.IN_PROGRESS:
-                return "/images/ic-inprogress.png";
+                return "/images/ic-inprogress.webp";
                 break;
             case FeatureStatus.PENDING:
-                return "/images/ic-pending.png";
+                return "/images/ic-pending.webp";
                 break;
             default:
-                return "/images/ic-planning.png";
+                return "/images/ic-planning.webp";
                 break;
         }
     }

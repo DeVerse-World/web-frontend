@@ -198,8 +198,8 @@ function Mint() {
                     <FormControl
                         id="input-nft-asset-url"
                         required
-                        placeholder="Asset URL (e.g .png/ .pak) (*)"
-                        aria-label="Asset URL (e.g .png/ .pak)"
+                        placeholder="Asset URL (e.g .webp/ .pak) (*)"
+                        aria-label="Asset URL (e.g .webp/ .pak)"
                         value={fileAssetUri || tempInput}
                         onBlur={(e) => {
                             setfileAssetUri(e.target.value)
@@ -221,8 +221,8 @@ function Mint() {
                     <FormControl
                         id="input-nft-2d-url"
                         className="pointer-events-none"
-                        placeholder="Asset 2D URL (e.g .png)"
-                        aria-label="Asset 2D URL (e.g .png)"
+                        placeholder="Asset 2D URL (e.g .webp)"
+                        aria-label="Asset 2D URL (e.g .webp)"
                         value={file2dUri || ""}
                     />
                     <Button className='bg-deverse-gradient'
@@ -247,7 +247,7 @@ function Mint() {
                 {renderUploadProgress()}
                 <input
                     ref={uploadFileAssetRef}
-                    accept=".png,.pak,.jpg,.jpeg"
+                    accept=".webp,.pak,.jpg,.jpeg"
                     hidden={true}
                     type="file"
                     name="assetUpload"
@@ -265,7 +265,7 @@ function Mint() {
                 <input
                     ref={uploadFile2dRef}
                     hidden={true}
-                    accept=".png,.jpg,.jpeg"
+                    accept=".webp,.jpg,.jpeg"
                     type="file"
                     name="2dUpload"
                     onChange={onUploadAsset}

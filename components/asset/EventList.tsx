@@ -68,7 +68,7 @@ export function EventCard(props: EventCardProps) {
                 <span className="text-blue-400">{props.data.category}</span>
                 <div className="flex flex-row justify-between flex-grow items-end">
                     <div className="text-white flex-row flex items-center gap-2">
-                        <img src="/images/logo.png" />
+                        <img src="/images/logo.webp" />
                         <span className="text-lg">{props.data.author || "Deverse World"} </span>
                     </div>
                     <button className="w-[120px] h-[40px] text-white rounded-3xl flex flex-row justify-center items-center deverse-play-btn"><BsPlayFill /></button>
