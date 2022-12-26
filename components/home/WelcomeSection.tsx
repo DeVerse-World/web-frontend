@@ -12,7 +12,7 @@ function renderShowcaseItem(src: String) {
         backgroundPosition: "center",
       }}>
       </div> */}
-      <Image src={src} layout="fill"/>
+      <Image src={src} layout="fill" priority/>
     </Carousel.Item>
   )
 }
@@ -30,12 +30,12 @@ function WelcomeSection(props) {
         <DownloadDemoButton className="h-12" />
       </div>
       <Carousel interval={10000}>
-        {renderShowcaseItem('/images/01.webp')}
-        {renderShowcaseItem('/images/02.webp')}
-        {renderShowcaseItem('/images/03.webp')}
-        {renderShowcaseItem('/images/04.webp')}
-        {renderShowcaseItem('/images/05.webp')}
-        {renderShowcaseItem('/images/06.webp')}
+        {renderShowcaseItem('https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F01.webp?alt=media&token=ffab7251-7a3d-4875-9dca-383b72f51b8a')}
+        {renderShowcaseItem('https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F02.webp?alt=media&token=4445d32a-932b-40e4-869b-dcac932b6832')}
+        {renderShowcaseItem('https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F03.webp?alt=media&token=72b5a184-0c53-4009-bd0f-334e7ad61f36')}
+        {renderShowcaseItem('https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F04.webp?alt=media&token=4f7ae674-4c82-4c2b-b3b7-a4aa2bdee4b6')}
+        {renderShowcaseItem('https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F05.webp?alt=media&token=f27013fc-92ea-4237-8b2e-5f64bd36e232')}
+        {renderShowcaseItem('https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F06.webp?alt=media&token=34b2d9cf-576d-4f22-9d8c-0a41fcfe9005')}
       </Carousel>
 
     </section>

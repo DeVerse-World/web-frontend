@@ -1,7 +1,15 @@
 module.exports = {
     reactStrictMode: true,
-    compress: true,
     distDir: 'build',
+    images: {
+        formats: ['image/avif', 'image/webp'],
+        remotePatterns: [{
+            protocol: 'https',
+            hostname: 'firebasestorage.googleapis.com',
+            port: '',
+            pathname: '**',
+        }, ],
+    },
     env: {
         REACT_APP_SERVER_HOST: "api.staging.deverse.world",
         REACT_APP_SERVER_PROTOCOL: "https",
