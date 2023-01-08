@@ -18,18 +18,26 @@ export async function getServerSideProps(context) {
 
 export default function LoginLink({ loginKey }) {
     const [connectionStatus, setConnectionStatus] = useState('Please login');
-    const { setShowLogin, user } = useContext(AppContext);
+    const { setShowLogin, user, setUser } = useContext(AppContext);
     useEffect(() => {
         if (user) {
             console.log("USER EXISTED\n");
+            // AuthService.authorizeLoginLinkWithUserToken(loginKey).then(res => {
+            //     if (res.isFailure()) {
+            //         window.alert(res.error);
+            //         return;
+            //     }
+            //     setConnectionStatus("Authenticated");
+            // })
+        } else {
             AuthService.authorizeLoginLinkWithUserToken(loginKey).then(res => {
                 if (res.isFailure()) {
                     window.alert(res.error);
                     return;
                 }
+                setUser(res.value.user);
                 setConnectionStatus("Authenticated");
             })
-        } else {
             setConnectionStatus("Please login...");
         }
     }, [user])

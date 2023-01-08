@@ -25,7 +25,7 @@ function LoginModal(props: Props) {
     const { user, setUser } = useContext(AppContext);
     const [currentAction, setCurrentAction] = useState<AuthAction>(AuthAction.Home);
     const { status, connect, account } = useMetaMask();
-    const { isAddGoogleOnly, isAddMetamaskOnly, ...modalProps } = props;
+    const { isAddGoogleOnly, isAddMetamaskOnly, isAddSteamOnly, ...modalProps } = props;
     // TODO: metamask logic only executed when explicitly pressing metamask button
     useEffect(() => {
         switch (status) {
@@ -81,7 +81,9 @@ function LoginModal(props: Props) {
         modalProps.onHide();
     }
 
-
+    const onSteamConnect = () => {
+        AuthService.connectToSteam();
+    }
 
     const googleSecondaryLogin = useGoogleLogin({
         flow: 'auth-code',
@@ -129,6 +131,11 @@ function LoginModal(props: Props) {
                             Google
                         </button> */}
                         {!isAddMetamaskOnly && <GoogleLogin width='300' onSuccess={onGoogleLogin} onError={onGoogleFailure} />}
+                        {!isAddSteamOnly && <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
+                                                     onClick={onSteamConnect}>
+                            <img title="steam" src="/images/steam_logo.png" />
+                            Steam
+                        </button>}
                         {/* <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                             onClick={() => setCurrentAction(AuthAction.Email_Signin)}>
                             <MdEmail size={30} />
