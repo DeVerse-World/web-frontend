@@ -32,7 +32,8 @@ export default function LoginLink({ loginKey }) {
         } else {
             AuthService.authorizeLoginLinkWithUserToken(loginKey).then(res => {
                 if (res.isFailure()) {
-                    window.alert(res.error);
+                    // window.alert(res.error);
+                    console.log(res.error);
                     return;
                 }
                 setUser(res.value.user);
