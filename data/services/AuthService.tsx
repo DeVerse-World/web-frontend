@@ -86,6 +86,16 @@ class AuthService extends BaseService {
         return this.parseResponse(res);
     }
 
+    async connectToSteam() {
+        window.open(window.location.origin + "/login", "_self")
+        window.open(
+            `${process.env.REACT_APP_SERVER_PROTOCOL}://${process.env.REACT_APP_SERVER_HOST}/pages/user/steam_login?session_key=${StorageService.getSessionKey()}`,
+            "_blank",
+            "width=800, height=600",
+        );
+        window.alert("Refresh this page after signing in Steam");
+    }
+
     async logout() {
         const res = await deverseClient.post<Response<any>>(`user/logout`, null, {
             withCredentials: true

@@ -76,7 +76,7 @@ function AccountMenu() {
   return (
     <>
       {renderAccountButton()}
-      {showLogin && <LoginModal show={true} onHide={() => setShowLogin(false)} isAddMetamaskOnly={false} isAddGoogleOnly={false} fullscreen />}
+      {showLogin && <LoginModal show={true} onHide={() => setShowLogin(false)} isAddMetamaskOnly={false} isAddGoogleOnly={false} isAddSteamOnly={false} fullscreen />}
     </>
 
   );
