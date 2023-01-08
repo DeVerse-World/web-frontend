@@ -87,6 +87,8 @@ class AuthService extends BaseService {
     }
 
     async connectToSteam() {
+        console.log("Connect to Steam");
+        console.log(`${process.env.REACT_APP_SERVER_PROTOCOL}://${process.env.REACT_APP_SERVER_HOST}/pages/user/steam_login?session_key=${StorageService.getSessionKey()}`);
         window.open(window.location.origin + "/login", "_self")
         window.open(
             `${process.env.REACT_APP_SERVER_PROTOCOL}://${process.env.REACT_APP_SERVER_HOST}/pages/user/steam_login?session_key=${StorageService.getSessionKey()}`,
