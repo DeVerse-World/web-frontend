@@ -2,9 +2,14 @@ import React, { useState } from "react";
 import { Modal, Tooltip } from "react-bootstrap";
 import { FeatureStatus } from "../../data/enum/feature_status";
 import Image from "next/image";
+import { useInView } from 'react-intersection-observer';
 
 
 function ProductSection(props) {
+    // const { ref, inView, entry } = useInView({
+    //     triggerOnce: true
+    // });
+
     const renderProductList = () => {
         const items: ProductionSectionData[] = [
             {

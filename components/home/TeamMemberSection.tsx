@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { FaLinkedin } from "react-icons/fa";
 import { TeamMember } from "../../data/model/partner";
 import FirebaseService from "../../data/services/FirebaseService";
+import { useInView } from 'react-intersection-observer';
 
 type CardProps = {
     data: TeamMember
@@ -32,6 +33,11 @@ function TeamMemberCard(props: CardProps) {
 function TeamMemberSection(props) {
     const [teamMember, setTeamMember] = useState<TeamMember[]>([])
     const [isExpanded, setIsExpanded] = useState<boolean>(false);
+
+    const { ref, inView, entry } = useInView({
+        triggerOnce: true
+    });
+
     useEffect(() => {
         FirebaseService.getTeamMembers().then(setTeamMember)
     }, [])
@@ -40,19 +46,22 @@ function TeamMemberSection(props) {
 
 
     return (
-        <section id="team-member" className="p-4 text-center flex flex-col items-center">
-            <h3 className="text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title py-4">Our Team</h3>
-            <div className="flex flex-row flex-wrap gap-8 justify-center ">
+        <section ref={ref} id="team-member" className="p-4 text-center flex flex-col items-center">
+            {inView && <>
+                <h3 className="text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title py-4">Our Team</h3>
+                <div className="flex flex-row flex-wrap gap-8 justify-center ">
 
-                {teamMember.length > 3 && isExpanded
-                    ? teamMember.map(teamMember => <TeamMemberCard data={teamMember} />)
-                    : teamMember.slice(0, teamMember.length > 3 ? 3 : teamMember.length).map(teamMember => <TeamMemberCard key={teamMember.id} data={teamMember} />)
+                    {teamMember.length > 3 && isExpanded
+                        ? teamMember.map(teamMember => <TeamMemberCard data={teamMember} />)
+                        : teamMember.slice(0, teamMember.length > 3 ? 3 : teamMember.length).map(teamMember => <TeamMemberCard key={teamMember.id} data={teamMember} />)
+                    }
+                </div>
+                {
+                    teamMember.length > 3 && !isExpanded &&
+                    <span className="my-4 cursor-pointer text-blue-600" onClick={() => setIsExpanded(true)}>Show all members...</span>
                 }
-            </div>
-            {
-                teamMember.length > 3 && !isExpanded &&
-                <span className="my-4 cursor-pointer text-blue-600" onClick={() => setIsExpanded(true)}>Show all members...</span>
-            }
+            </>}
+
         </section>
     );
 }
