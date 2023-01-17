@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BlogPost } from "../../data/model/blog_post";
 import FirebaseService from "../../data/services/FirebaseService";
+import { useInView } from 'react-intersection-observer';
 
 type BlogPostItemProps = {
     data: BlogPost
@@ -25,16 +26,20 @@ function BlogPostItem(props: BlogPostItemProps) {
 
 export default function BlogPostSection() {
     const [data, setData] = useState<BlogPost[]>([]);
-
+    const { ref, inView, entry } = useInView({
+        triggerOnce: true
+    });
     useEffect(() => {
         FirebaseService.getBlogPosts().then(setData)
     }, [])
 
     return (
-        <section className="p-4">
-            <div className="flex flex-row gap-4 overflow-x-auto overflow-y-hidden px-4 py-2">
-                {data.map(item => <BlogPostItem data={item} key={item.id} />)}
-            </div>
+        <section ref={ref} className="p-4">
+            {inView &&
+                <div className="flex flex-row gap-4 overflow-x-auto overflow-y-hidden px-4 py-2">
+                    {data.map(item => <BlogPostItem data={item} key={item.id} />)}
+                </div>
+            }
         </section>
     )
 }

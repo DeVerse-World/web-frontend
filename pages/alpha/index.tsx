@@ -9,17 +9,20 @@ import { getAlphaLayout } from "../../components/AlphaLayout";
 import Link from "next/link";
 import { AppContext } from "../../components/contexts/app_context";
 import AvatarService from "../../data/services/AvatarService";
+import UnauthorizedView from "../../components/UnauthorizedView";
+import DownloadDemoButton from "../../components/DownloadDemoButton";
 
 
 function Info() {
     const { setViewState, user } = useContext(AppContext);
     const [modelPath, setModelPath] = useState<string>(null);
-    const [ongoingEvent, setOngoingEvents] = useState<EventViewModel>();
+    const [ongoingEvent, setOngoingEvents] = useState<EventViewModel>(null);
 
     useEffect(() => {
+        if (user == null)
+            return;
         AvatarService.getAvatars(user?.id).then(res => {
             if (res.isSuccess && res.value) {
-                console.log(res)
                 if (res.isSuccess() && res.value.avatars.length > 0) {
                     setModelPath(res.value.avatars[0].preprocess_url)
                 }
@@ -40,11 +43,11 @@ function Info() {
                     setOngoingEvents(data[0]);
             }
         })
-    }, [])
+    }, [user])
 
     const renderAvatar = () => {
         if (!modelPath) {
-            return <h3>No Avatar Yet, please create one to be shown.</h3>
+            return <h5>No Avatar Yet, please clogin or create one first</h5>
         }
         return (
             <div className='md:w-[300px] md:h-[600px] w-[250px] '>
@@ -61,21 +64,28 @@ function Info() {
     }
 
     return (
-        <div className="grid grid-cols-3 text-white gap-4 p-4 " >
+        <div className="flex flex-col items-center">
             <div className="flex flex-col items-center">
-                <Link href="/create">
-                    <button className="deverse-play-btn p-2 rounded-2xl">Change</button>
-                </Link>
-                {renderAvatar()}
+                <h2 className="text-white text-3xl font-bold uppercase">Join the verse</h2>
+                <DownloadDemoButton className="h-12" />
             </div>
-            <div>
-                {ongoingEvent && <EventCard key={0} data={ongoingEvent} />}
 
-            </div>
-            <div>
+            <div className="grid grid-cols-3 text-white gap-4 p-4 " >
+                <div className="flex flex-col items-center">
+                    <Link href="/create">
+                        <button className="deverse-play-btn p-2 rounded-2xl">Change</button>
+                    </Link>
+                    {renderAvatar()}
+                </div>
+                <div>
+                    {ongoingEvent && <EventCard key={0} data={ongoingEvent} />}
+                </div>
+                <div>
 
+                </div>
             </div>
         </div>
+
     )
 }
 

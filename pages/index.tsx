@@ -15,6 +15,8 @@ import CommunityPartnerSection from '../components/home/CommunityPartnerSection'
 function Home(props) {
   const [showBlogToggle, setShowBlogToggle] = useState(false);
   const { remoteConfig } = useContext(AppContext);
+
+
   useEffect(() => {
     if (remoteConfig != null)
       FirebaseService.getShouldShowBlogToggle(remoteConfig).then(setShowBlogToggle)
@@ -26,10 +28,10 @@ function Home(props) {
       <IntroSection />
       <HighlightFeatureSection />
       <ProductSection />
-      <TeamMemberSection/>
-      <AdvisorSection/>
+      <TeamMemberSection />
+      <AdvisorSection />
       <PartnerSection />
-      <CommunityPartnerSection/>
+      <CommunityPartnerSection />
       {showBlogToggle ?
         <BlogPostSection />
         : null
