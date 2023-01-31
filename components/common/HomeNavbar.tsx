@@ -22,12 +22,12 @@ function Homebar(props: WithRouterProps) {
         <span className="flex flex-row gap-2 cursor-pointer">
           <Image
             src={"/images/logo.webp"}
-            height={36}
-            width={36}
+            height={24}
+            width={24}
             alt="Deverse logo" />
           <Image
-            height={36}
-            width={256}
+            height={24}
+            width={180}
             src={"/images/logo-text.webp"}
             alt="Deverse text logo" />
         </span>

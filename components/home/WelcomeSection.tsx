@@ -12,7 +12,7 @@ function renderShowcaseItem(src: String) {
         backgroundPosition: "center",
       }}>
       </div> */}
-      <Image src={src} layout="fill" priority/>
+      <Image src={src} layout="fill"/>
     </Carousel.Item>
   )
 }
