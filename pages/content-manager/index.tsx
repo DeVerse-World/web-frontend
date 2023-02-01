@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-
-const ReactQuill = typeof window === 'object' ? require('react-quill') : () => false;
 import 'react-quill/dist/quill.snow.css';
 import { AppContext } from '../../components/contexts/app_context';
 import UnauthorizedView from '../../components/UnauthorizedView';
 import FirebaseService from '../../data/services/FirebaseService';
 import { getLayoutWithFooter } from '../../components/LayoutWithFooter';
+
+const ReactQuill = typeof window === 'object' ? require('react-quill') : () => false;
 
 const modules = {
     toolbar: [
