@@ -180,6 +180,21 @@ class FirebaseService {
         }
         return this._teamAdvisors;
     }
+    async updatePrivacy(content: string) {
+        const today = new Date();
+        await setDoc(doc(this._firestore, "privacy_policies", today.getTime().toString()), {
+            content: content,
+            created_at: Timestamp.fromDate(today)
+        });
+    }
+
+    async getCurrentPrivacyPolicy() {
+        const res = await getDocs(collection(this._firestore, "privacy_policies")) 
+        if (res.size == 0) {
+            return null;
+        }
+        return res.docs.at(0).data()['content'];
+    }
 }
 
 export default new FirebaseService();

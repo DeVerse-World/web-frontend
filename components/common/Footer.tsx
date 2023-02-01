@@ -2,17 +2,34 @@ import React, { useState, useEffect } from "react";
 import { FaTelegramPlane, FaDiscord } from 'react-icons/fa';
 import { AiOutlineTwitter, AiFillFacebook } from 'react-icons/ai';
 import { MdEmail } from 'react-icons/md';
+import Image from "next/image";
+import Link from "next/link";
 
 function Footer(props) {
   return (
     <section id="section-footer"
-      className="flex flex-col bg-[url('/images/bg-highlight.webp')] text-center text-white"
-      style={{
-        borderTop: "1px solid rgb(71 85 105)",
-      }}>
-      <div className="flex flex-row flex-wrap justify-center pt-8 px-4">
-        <h1 className="pr-2">Contact us:</h1>
-        <div className="flex flex-row justify-center items-center">
+      className="flex flex-row text-white justify-evenly px-2 py-4">
+      <div className="flex flex-col gap-2 items-center">
+        <span className="flex flex-row gap-2">
+          <Image
+            src={"/images/logo.webp"}
+            height={36}
+            width={36}
+            alt="Deverse logo" />
+          <Image
+            height={36}
+            width={256}
+            src={"/images/logo-text.webp"}
+            alt="Deverse text logo" />
+        </span>
+        Copyright © Deverse World
+      </div>
+      <div className="flex flex-col">
+        <Link href="privacy-policies"><span className="cursor-pointer">Privacy Policies</span></Link>
+      </div>
+      <div className="flex flex-col">
+        <h3>Contact us</h3>
+        <div className="flex flex-row flex-wrap justify-center items-center">
           <a id="contact-email" title="email" target="_blank" href="mailto:info@cosugames.com" >
             <MdEmail className="mx-2" color="white" fontSize="1.5rem" />
           </a>
@@ -26,9 +43,6 @@ function Footer(props) {
             <AiFillFacebook className="mx-2" color="white" fontSize="1.5rem" />
           </a>
         </div>
-      </div>
-      <div className="my-8">
-        Copyright © Deverse World
       </div>
     </section>
   );

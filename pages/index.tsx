@@ -11,6 +11,7 @@ import { AppContext } from '../components/contexts/app_context';
 import TeamMemberSection from '../components/home/TeamMemberSection';
 import AdvisorSection from '../components/home/AdvisorSection';
 import CommunityPartnerSection from '../components/home/CommunityPartnerSection';
+import { getLayoutWithFooter } from '../components/LayoutWithFooter';
 
 function Home(props) {
   const [showBlogToggle, setShowBlogToggle] = useState(false);
@@ -23,7 +24,7 @@ function Home(props) {
   }, [remoteConfig])
 
   return (
-    <div id='section-content'>
+    <div className='flex flex-col'>
       <WelcomeSection />
       <IntroSection />
       <HighlightFeatureSection />
@@ -36,9 +37,9 @@ function Home(props) {
         <BlogPostSection />
         : null
       }
-      <Footer />
     </div>
   );
 }
 
+Home.getLayout = getLayoutWithFooter;
 export default Home;

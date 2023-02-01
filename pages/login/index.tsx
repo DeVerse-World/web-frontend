@@ -3,6 +3,7 @@ import AuthService from "../../data/services/AuthService";
 import StorageService from "../../data/services/StorageService";
 import Footer from "../../components/common/Footer";
 import { AppContext } from "../../components/contexts/app_context";
+import LayoutWithFooter from "../../components/LayoutWithFooter";
 
 export async function getServerSideProps(context) {
     const loginKey = context.query.key;
@@ -16,7 +17,7 @@ export async function getServerSideProps(context) {
     }
 }
 
-export default function LoginLink({ loginKey }) {
+function LoginLink({ loginKey }) {
     const [connectionStatus, setConnectionStatus] = useState('Please login');
     const { setShowLogin, user, setUser } = useContext(AppContext);
     useEffect(() => {
@@ -54,11 +55,11 @@ export default function LoginLink({ loginKey }) {
     }, [])
 
     return (
-        <section id='section-content' className='flex flex-col text-white justify-between '>
-            <div className="text-center m-auto">
-                <h1>{connectionStatus}</h1>
-            </div>
-            <Footer />
-        </section>
+        <div className="text-center m-auto text-white ">
+            <h1>{connectionStatus}</h1>
+        </div>
     )
 }
+
+LoginLink.getLayout = LayoutWithFooter;
+export default LoginLink;
