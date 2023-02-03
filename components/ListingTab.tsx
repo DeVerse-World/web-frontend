@@ -1,9 +1,9 @@
-import { MarketplaceTab } from "./marketplace_tab";
+import { SecondaryTab } from "./marketplace_tab";
 
 type ListingTabItemProps = {
     label?: string,
-    tab: MarketplaceTab,
-    isSelected: MarketplaceTab,
+    tab: SecondaryTab,
+    isSelected: SecondaryTab,
     isDisable?: boolean,
     onSelect: (MarketplaceTab) => void
 }

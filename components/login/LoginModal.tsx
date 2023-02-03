@@ -2,15 +2,11 @@ import { useMetaMask } from "metamask-react";
 import { useContext, useEffect, useState } from "react";
 import { Modal, ModalProps } from "react-bootstrap";
 import { AiOutlineClose } from "react-icons/ai";
-import { MdEmail } from 'react-icons/md';
 import EmailSignin from "./EmailLogin";
 import EmailSignup from "./EmailSignup";
 import { AppContext } from "../contexts/app_context";
-import { GoogleUser, User, UserType } from "../../data/model/user";
 import { CredentialResponse, GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import AuthService from "../../data/services/AuthService";
-import AccountService from "../../data/services/AccountService";
-import jwt_decode from "jwt-decode";
 
 enum AuthAction {
     Home, Email_Signup, Email_Signin

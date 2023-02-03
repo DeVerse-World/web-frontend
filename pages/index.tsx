@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from "react";
 import ProductSection from '../components/home/ProductsSection';
 import WelcomeSection from '../components/home/WelcomeSection';
 import HighlightFeatureSection from '../components/home/HighlightFeaturesSection';
-import Footer from '../components/common/Footer';
 import BlogPostSection from '../components/home/BlogPostSection';
 import FirebaseService from "../data/services/FirebaseService";
 import PartnerSection from '../components/home/PartnerSection';

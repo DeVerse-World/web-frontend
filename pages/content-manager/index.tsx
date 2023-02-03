@@ -2,42 +2,39 @@ import React, { useContext, useEffect, useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import { AppContext } from '../../components/contexts/app_context';
 import UnauthorizedView from '../../components/UnauthorizedView';
-import FirebaseService from '../../data/services/FirebaseService';
-import { getLayoutWithFooter } from '../../components/LayoutWithFooter';
-
-const ReactQuill = typeof window === 'object' ? require('react-quill') : () => false;
-
-const modules = {
-    toolbar: [
-        [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-        [{ size: [] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' },
-        { 'indent': '-1' }, { 'indent': '+1' }],
-        ['link', 'image', 'video'],
-        [{ 'color': ["#000000", "#ffffff"] }]
-    ],
-    clipboard: {
-        // toggle to add extra line breaks when pasting HTML:
-        matchVisual: false,
-    }
-}
+import BaseLayout from '../../components/common/BaseLayout';
+import Footer from '../../components/common/Footer';
+import Sidebar from '../../components/Sidebar';
+import { Accordion } from 'react-bootstrap';
+import ListingTabComponent from '../../components/ListingTab';
+import { SecondaryTab } from '../../components/marketplace_tab';
+import { useRouter } from 'next/router';
+import PolicyEditor from './policy-editor';
+import TermOfUseEditor from './term-of-use-editor';
 
 function ContentManager() {
     const { user } = useContext(AppContext);
-    const [privacyContent, setPrivacyContent] = useState('');
+    const router = useRouter();
+    const [visibleTab, setVisibleTab] = useState<SecondaryTab>(SecondaryTab.WORLD_ALL);
 
-    useEffect(() => {
-        FirebaseService.getCurrentPrivacyPolicy().then(res => {
-            setPrivacyContent(res)
-        })
-    }, [])
+    const onSelectTab = (tab: SecondaryTab) => {
+        router.push({
+            pathname: router.pathname,
+            query: {
+                tab: tab
+            }
+        }, undefined, { shallow: true });
+        setVisibleTab(tab);
+    }
 
-    const onSaved = () => {
-        console.log(privacyContent)
-        FirebaseService.updatePrivacy(privacyContent).then(res => {
-            alert('Updated successfully')
-        })
+    const renderContent = () => {
+        switch (visibleTab) {
+            case SecondaryTab.CM_PRIVACY:
+                return <PolicyEditor />
+            case SecondaryTab.CM_TERM:
+                return <TermOfUseEditor />
+        }
+        return null;
     }
 
     if (user == null) {
@@ -45,15 +42,29 @@ function ContentManager() {
     }
 
     return (
-        <div className='py-4 px-2 max-w-[800px] w-[80%]'>
-            <ReactQuill theme="snow"
-                modules={modules}
-                value={privacyContent} onChange={setPrivacyContent} />
-            <button onClick={onSaved} className='bg-deverse-gradient my-4 w-32 h-8 rounded-lg'>Save</button>
+        <div className='flex flex-row bg-deverse' >
+            <Sidebar >
+                <div className="h-[100%] bg-gray-900 w-[160px]">
+                    <Accordion defaultActiveKey="nft_type" className="text-white" flush>
+                        <div className="flex flex-col">
+                            <ListingTabComponent label="Privacy" tab={SecondaryTab.CM_PRIVACY} isSelected={visibleTab} onSelect={onSelectTab} />
+                            <ListingTabComponent label="Term" tab={SecondaryTab.CM_TERM} isSelected={visibleTab} onSelect={onSelectTab} />
+                        </div>
+                    </Accordion>
+                </div>
+            </Sidebar>
+            <section id='section-content' className='bg-deverse flex flex-col text-white' >
+                {renderContent()}
+                <Footer />
+            </section>
         </div>
     )
 }
 
-ContentManager.getLayout = getLayoutWithFooter;
+ContentManager.getLayout = page => (
+    <BaseLayout>
+        {page}
+    </BaseLayout>
+);
 
 export default ContentManager;
