@@ -119,7 +119,7 @@ function LoginModal(props: Props) {
             default:
                 element = (
                     <div className="flex flex-col items-center justify-center h-full">
-                        <h1>Log in or Create an account</h1>
+                        <h1>Log in/Register</h1>
                         {!isAddGoogleOnly && <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                             onClick={onMetamaskConnect}>
                             <img title="metamask" src="/images/metamask.webp" />
