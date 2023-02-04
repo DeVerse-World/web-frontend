@@ -26,6 +26,7 @@ function Footer(props) {
       </div>
       <div className="flex flex-col">
         <Link href="privacy-policies"><span className="cursor-pointer">Privacy Policies</span></Link>
+        <Link href="term-of-use"><span className="cursor-pointer">Term of Use</span></Link>
       </div>
       <div className="flex flex-col">
         <h3>Contact us</h3>

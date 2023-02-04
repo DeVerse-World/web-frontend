@@ -6,11 +6,10 @@ type LoadingProps = {
     text?: string;
 }
 
-const LoadingScreen: React.FC<LoadingProps> = (props) => {
-    const { viewState } = useContext(AppContext); 
-    let text = props.text || "Loading...";
+function LoadingScreen(props: LoadingProps) {
+    const { viewState } = useContext(AppContext);
 
-    return  (viewState == ViewState.LOADING ?
+    return (viewState == ViewState.LOADING ?
         <div style={{
             position: 'fixed',
             left: 0,
@@ -25,10 +24,10 @@ const LoadingScreen: React.FC<LoadingProps> = (props) => {
             zIndex: 99
         }}>
             <Spinner animation="border" variant="light" style={{
-                width:'70px',
-                height:'70px'
+                width: '70px',
+                height: '70px'
             }}>
-                
+
             </Spinner>
         </div>
         : null)

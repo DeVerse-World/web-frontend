@@ -2,15 +2,11 @@ import { useMetaMask } from "metamask-react";
 import { useContext, useEffect, useState } from "react";
 import { Modal, ModalProps } from "react-bootstrap";
 import { AiOutlineClose } from "react-icons/ai";
-import { MdEmail } from 'react-icons/md';
 import EmailSignin from "./EmailLogin";
 import EmailSignup from "./EmailSignup";
 import { AppContext } from "../contexts/app_context";
-import { GoogleUser, User, UserType } from "../../data/model/user";
 import { CredentialResponse, GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import AuthService from "../../data/services/AuthService";
-import AccountService from "../../data/services/AccountService";
-import jwt_decode from "jwt-decode";
 
 enum AuthAction {
     Home, Email_Signup, Email_Signin
@@ -119,7 +115,7 @@ function LoginModal(props: Props) {
             default:
                 element = (
                     <div className="flex flex-col items-center justify-center h-full">
-                        <h1>Log in or Create an account</h1>
+                        <h1>Log in/Register</h1>
                         {!isAddGoogleOnly && <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                             onClick={onMetamaskConnect}>
                             <img title="metamask" src="/images/metamask.webp" />

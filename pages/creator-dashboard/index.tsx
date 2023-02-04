@@ -5,7 +5,7 @@ import BaseLayout from "../../components/common/BaseLayout";
 import Footer from "../../components/common/Footer";
 import { AppContext } from "../../components/contexts/app_context";
 import ListingTabComponent from "../../components/ListingTab";
-import { MarketplaceTab } from "../../components/marketplace_tab";
+import { SecondaryTab } from "../../components/marketplace_tab";
 import Sidebar from "../../components/Sidebar";
 import { Bar, Chart } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend, BarElement, LineController } from 'chart.js';
@@ -32,7 +32,7 @@ ChartJS.register(
 function CreatorDashboard() {
     const { user } = useContext(AppContext);
     const router = useRouter();
-    const [visibleTab, setVisibleTab] = useState<MarketplaceTab>(MarketplaceTab.CD_HOME);
+    const [visibleTab, setVisibleTab] = useState<SecondaryTab>(SecondaryTab.CD_HOME);
     const [playDataset, setPlayDataSet] = useState([]);
     const [revDataset, setRevPlayDataSet] = useState([]);
     const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.MONTH);
@@ -59,7 +59,7 @@ function CreatorDashboard() {
         displayData();
     }, []);
 
-    const onSelectTab = (tab: MarketplaceTab) => {
+    const onSelectTab = (tab: SecondaryTab) => {
         router.push({
             pathname: router.pathname,
             query: {
@@ -131,7 +131,7 @@ function CreatorDashboard() {
                         Deverse Worlds
                     </div>
                     <div className="flex flex-col mt-8">
-                        <ListingTabComponent label="Home" tab={MarketplaceTab.CD_HOME} isSelected={visibleTab} onSelect={onSelectTab} />
+                        <ListingTabComponent label="Home" tab={SecondaryTab.CD_HOME} isSelected={visibleTab} onSelect={onSelectTab} />
                     </div>
                 </div>
 

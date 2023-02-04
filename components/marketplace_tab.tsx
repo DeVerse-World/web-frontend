@@ -1,4 +1,4 @@
-export enum MarketplaceTab {
+export enum SecondaryTab {
     NFT_ALL = "NFT_ALL",
     NFT_TWO_D_IMAGE = "NFT_Image",
     NFT_RACE = "NFT_Race",
@@ -17,5 +17,8 @@ export enum MarketplaceTab {
 
     WORLD_ALL = "WORLD_All Worlds",
 
-    CD_HOME = "CD_Home"
+    CD_HOME = "CD_Home",
+
+    CM_PRIVACY = "CM_Privacy",
+    CM_TERM = "CM_Term"
 }

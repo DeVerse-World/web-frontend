@@ -29,27 +29,30 @@ const AppContext = React.createContext<AppDataContext>({
 const AppContextProvider = (props) => {
     const [user, setUser] = useState<User>(null);
     const [remoteConfig, setRemoteConfig] = useState<RemoteConfig>(null);
-    const [test, setTest] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [viewState, setViewState] = useState(ViewState.IDLE);
     const [showLogin, setShowLogin] = useState(false);
     const [isMobileSidebarVisible, setIsMobileSidebarVisible] = useState(false);
 
     useEffect(() => {
         const cachedUser = StorageService.getUser();
-        if (cachedUser != null) {
-            FirebaseService.getBlogPostAdmins().then(val => {
-                cachedUser.isBlogPostAdmin = val.includes(cachedUser.wallet_address.toUpperCase())
-                setUser(cachedUser || null);
-            })
-        } else {
-            setUser(null);
-        }
+        setUser(cachedUser || null)
         FirebaseService.retrieveConfig().then(setRemoteConfig)
     }, [])
 
     useEffect(() => {
         StorageService.saveUser(user);
+        setIsAuthenticated(user != null)
     }, [user])
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            FirebaseService.getBlogPostAdmins().then(val => {
+                user.isBlogPostAdmin = val.includes(user.wallet_address.toUpperCase())
+                setUser(user);
+            })
+        }
+    }, [isAuthenticated])
 
     return (
         <AppContext.Provider

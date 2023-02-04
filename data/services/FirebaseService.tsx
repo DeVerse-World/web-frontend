@@ -182,18 +182,28 @@ class FirebaseService {
     }
     async updatePrivacy(content: string) {
         const today = new Date();
-        await setDoc(doc(this._firestore, "privacy_policies", today.getTime().toString()), {
+        await setDoc(doc(this._firestore, "info_contents", "privacy_policy"), {
             content: content,
             created_at: Timestamp.fromDate(today)
         });
     }
 
     async getCurrentPrivacyPolicy() {
-        const res = await getDocs(collection(this._firestore, "privacy_policies")) 
-        if (res.size == 0) {
-            return null;
-        }
-        return res.docs.at(0).data()['content'];
+        const res = await getDoc(doc(this._firestore, "info_contents", "privacy_policy"))
+        return res.data()['content'];
+    }
+
+    async updateTermOfUse(content: string) {
+        const today = new Date();
+        await setDoc(doc(this._firestore, "info_contents", "term"), {
+            content: content,
+            created_at: Timestamp.fromDate(today)
+        });
+    }
+
+    async getTermOfUse() {
+        const res = await getDoc(doc(this._firestore, "info_contents", "term"))
+        return res.data()['content'];
     }
 }
 

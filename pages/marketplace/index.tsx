@@ -7,7 +7,7 @@ import Accordion from 'react-bootstrap/Accordion';
 import ListingTabComponent from "../../components/ListingTab";
 import Sidebar from "../../components/Sidebar";
 import Footer from "../../components/common/Footer";
-import { MarketplaceTab } from "../../components/marketplace_tab";
+import { SecondaryTab } from "../../components/marketplace_tab";
 import BaseLayout from "../../components/common/BaseLayout";
 import { ApiStrategy } from "../../data/services/ApiStrategy";
 import FilterHeader from "../../components/FilterHeader";
@@ -25,7 +25,7 @@ function Marketplace() {
     const [images, setImages] = useState<AvatarViewModel[]>([]);
     const [eventData, setEventData] = useState<EventViewModel[]>([]);
     const [rootTemplates, setRootTemplates] = useState<RootTemplateViewModel[]>([]);
-    const [visibleTab, setVisibleTab] = useState<MarketplaceTab>(MarketplaceTab.WORLD_ALL);
+    const [visibleTab, setVisibleTab] = useState<SecondaryTab>(SecondaryTab.WORLD_ALL);
 
     useEffect(() => {
         if (visibleTab.startsWith("NFT")) {
@@ -42,13 +42,13 @@ function Marketplace() {
         if (!router.isReady) return;
         let query = router.query;
         if (!query['tab']) {
-            onSelectTab(MarketplaceTab.WORLD_ALL);
+            onSelectTab(SecondaryTab.WORLD_ALL);
         } else {
             onSelectTab(query['tab'])
         }
     }, [router.isReady]);
 
-    const onSelectTab = (tab: MarketplaceTab) => {
+    const onSelectTab = (tab: SecondaryTab) => {
         router.push({
             pathname: router.pathname,
             query: {
@@ -101,25 +101,25 @@ function Marketplace() {
                     participants: e.max_num_participants
                 })).filter(event => event.stage != "Finished");
                 switch (visibleTab) {
-                    case MarketplaceTab.EVENT_BATTLE:
+                    case SecondaryTab.EVENT_BATTLE:
                         setEventData(data.filter(e => e.category == EventCategory.BATTLE))
                         break;
-                    case MarketplaceTab.EVENT_CONCERT:
+                    case SecondaryTab.EVENT_CONCERT:
                         setEventData(data.filter(e => e.category == EventCategory.CONCERT))
                         break;
-                    case MarketplaceTab.EVENT_GALLERY:
+                    case SecondaryTab.EVENT_GALLERY:
                         setEventData(data.filter(e => e.category == EventCategory.GALLERY))
                         break;
-                    case MarketplaceTab.EVENT_GIVEAWAY:
+                    case SecondaryTab.EVENT_GIVEAWAY:
                         setEventData(data.filter(e => e.category == EventCategory.GIVEAWAY))
                         break;
-                    case MarketplaceTab.EVENT_SHOWCASE:
+                    case SecondaryTab.EVENT_SHOWCASE:
                         setEventData(data.filter(e => e.category == EventCategory.SHOWCASE))
                         break;
-                    case MarketplaceTab.EVENT_SIMULATION:
+                    case SecondaryTab.EVENT_SIMULATION:
                         setEventData(data.filter(e => e.category == EventCategory.SIMULATION))
                         break;
-                    case MarketplaceTab.EVENT_TREASURE_HUNT:
+                    case SecondaryTab.EVENT_TREASURE_HUNT:
                         setEventData(data.filter(e => e.category == EventCategory.TREASURE_HUNT))
                         break;
                     default:
@@ -196,31 +196,31 @@ function Marketplace() {
                         <Accordion.Collapse eventKey="worlds_type">
                             <div className="flex flex-col ">
                                 <ListingTabComponent label="All"
-                                    tab={MarketplaceTab.WORLD_ALL} isSelected={visibleTab} onSelect={onSelectTab} />
+                                    tab={SecondaryTab.WORLD_ALL} isSelected={visibleTab} onSelect={onSelectTab} />
                             </div>
                         </Accordion.Collapse>
                         <FilterHeader eventKey="events_type" label='Events' />
                         <Accordion.Collapse eventKey="events_type">
                             <div className="flex flex-col">
-                                <ListingTabComponent label="All" tab={MarketplaceTab.EVENT_ALL} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Battle" tab={MarketplaceTab.EVENT_BATTLE} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Concert" tab={MarketplaceTab.EVENT_CONCERT} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Gallery" tab={MarketplaceTab.EVENT_GALLERY} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Giveaway" tab={MarketplaceTab.EVENT_GIVEAWAY} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Showcase" tab={MarketplaceTab.EVENT_SHOWCASE} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Simluation" tab={MarketplaceTab.EVENT_SIMULATION} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Treasure Hunt" tab={MarketplaceTab.EVENT_TREASURE_HUNT} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="All" tab={SecondaryTab.EVENT_ALL} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Battle" tab={SecondaryTab.EVENT_BATTLE} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Concert" tab={SecondaryTab.EVENT_CONCERT} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Gallery" tab={SecondaryTab.EVENT_GALLERY} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Giveaway" tab={SecondaryTab.EVENT_GIVEAWAY} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Showcase" tab={SecondaryTab.EVENT_SHOWCASE} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Simluation" tab={SecondaryTab.EVENT_SIMULATION} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Treasure Hunt" tab={SecondaryTab.EVENT_TREASURE_HUNT} isSelected={visibleTab} onSelect={onSelectTab} />
                             </div>
                         </Accordion.Collapse>
                         <FilterHeader eventKey="nft_type" label='NFT' />
                         <Accordion.Collapse eventKey="nft_type">
                             <div className="flex flex-col ">
-                                <ListingTabComponent label="All" tab={MarketplaceTab.NFT_ALL} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Image" tab={MarketplaceTab.NFT_TWO_D_IMAGE} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Avatar" tab={MarketplaceTab.NFT_AVATAR} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Race" isDisable tab={MarketplaceTab.NFT_RACE} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Game" isDisable tab={MarketplaceTab.NFT_GAME_MODE} isSelected={visibleTab} onSelect={onSelectTab} />
-                                <ListingTabComponent label="Bot Logic" isDisable tab={MarketplaceTab.NFT_BOT_LOGIC} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="All" tab={SecondaryTab.NFT_ALL} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Image" tab={SecondaryTab.NFT_TWO_D_IMAGE} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Avatar" tab={SecondaryTab.NFT_AVATAR} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Race" isDisable tab={SecondaryTab.NFT_RACE} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Game" isDisable tab={SecondaryTab.NFT_GAME_MODE} isSelected={visibleTab} onSelect={onSelectTab} />
+                                <ListingTabComponent label="Bot Logic" isDisable tab={SecondaryTab.NFT_BOT_LOGIC} isSelected={visibleTab} onSelect={onSelectTab} />
                             </div>
                         </Accordion.Collapse>
                     </Accordion>
