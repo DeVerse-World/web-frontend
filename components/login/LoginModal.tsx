@@ -8,10 +8,6 @@ import { AppContext } from "../contexts/app_context";
 import { CredentialResponse, GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import AuthService from "../../data/services/AuthService";
 
-enum AuthAction {
-    Home, Email_Signup, Email_Signin
-}
-
 type Props = {
     isAddGoogleOnly: boolean;
     isAddMetamaskOnly: boolean;
@@ -19,7 +15,6 @@ type Props = {
 
 function LoginModal(props: Props) {
     const { user, setUser } = useContext(AppContext);
-    const [currentAction, setCurrentAction] = useState<AuthAction>(AuthAction.Home);
     const { status, connect, account } = useMetaMask();
     const { isAddGoogleOnly, isAddMetamaskOnly, isAddSteamOnly, ...modalProps } = props;
     // TODO: metamask logic only executed when explicitly pressing metamask button
@@ -61,93 +56,47 @@ function LoginModal(props: Props) {
         connect();
     }
 
-    const onGoogleLogin = (event: CredentialResponse) => {
-        AuthService.connectToGoogleMail(event.credential, user).then(res => {
-            // let googleUser = jwt_decode<GoogleUser>(event.credential);
-            if (res.isFailure()) {
-                window.alert(res.error);
-                return;
-            }
-            setUser(res.value.user);
-            modalProps.onHide();
-        });
-    }
-
-    const onGoogleFailure = () => {
-        modalProps.onHide();
-    }
-
     const onSteamConnect = () => {
         AuthService.connectToSteam();
     }
 
-    const googleSecondaryLogin = useGoogleLogin({
-        flow: 'auth-code',
-        onSuccess: codeResponse => {
-            console.log(codeResponse)
+    const onGoogleConnect = useGoogleLogin({
+        onSuccess: (codeResponse) => {
+            AuthService.connectToGoogleMail(codeResponse.access_token, user).then(res => {
+                if (res.isFailure()) {
+                    window.alert(res.error);
+                    return;
+                }
+                setUser(res.value.user);
+                modalProps.onHide();
+            })
         },
-        onError: errorResponse => {
-            console.log(errorResponse)
-        }
-    })
-
-    const onGoogleLogout = () => {
-        console.log('logged out')
-    }
+        onError: (error) => console.log('Login Failed:', error)
+    });
 
     const renderContent = () => {
-        let element = null;
-        switch (currentAction) {
-            case AuthAction.Email_Signup:
-                element = (
-                    <div className="flex flex-col items-center h-full justify-center ">
-                        <EmailSignup />
-                    </div>
-                )
-                break;
-            case AuthAction.Email_Signin:
-                element = (
-                    <div className="flex flex-col items-center h-full justify-center ">
-                        <EmailSignin />
-                    </div>
-                );
-                break;
-            default:
-                element = (
-                    <div className="flex flex-col items-center justify-center h-full">
-                        <h1>Log in/Register</h1>
-                        {!isAddGoogleOnly && <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
-                            onClick={onMetamaskConnect}>
-                            <img title="metamask" src="/images/metamask.webp" />
-                            Metamask
-                        </button>}
-                        {/* <button onClick={(e) => googleSecondaryLogin()}
-                            className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2">
-                            <img title="metamask" src="/images/google.webp" />
-                            Google
-                        </button> */}
-                        {!isAddMetamaskOnly && <GoogleLogin width='300' onSuccess={onGoogleLogin} onError={onGoogleFailure} />}
-                        {!isAddSteamOnly && <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
-                                                     onClick={onSteamConnect}>
-                            <img title="steam" src="/images/steam_logo.png" />
-                            Steam
-                        </button>}
-                        {/* <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
-                            onClick={() => setCurrentAction(AuthAction.Email_Signin)}>
-                            <MdEmail size={30} />
-                            Email
-                        </button> */}
-                        {/* Or */}
-                        {/*<button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"*/}
-                        {/*    onClick={() => setCurrentAction(AuthAction.Email_Signup)}>*/}
-                        {/*    <MdEmail size={30} />*/}
-                        {/*    Signup with email*/}
-                        {/*</button>*/}
-                    </div>
-                )
-                break;
-        }
-        return element
+        let element = (
+            <div className="flex flex-col items-center justify-center h-full">
+                <h1>Log in/Register</h1>
+                {!isAddGoogleOnly && <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
+                    onClick={onMetamaskConnect}>
+                    <img title="metamask" src="/images/metamask.webp" />
+                    Metamask
+                </button>}
+                {!isAddMetamaskOnly && <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
+                    onClick={() => onGoogleConnect()}>
+                    <img title="steam" src="/images/google.webp" />
+                    Google
+                </button>}
+                {!isAddSteamOnly && <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
+                    onClick={onSteamConnect}>
+                    <img title="steam" src="/images/steam_logo.png" />
+                    Steam
+                </button>}
+            </div>
+        )
+
+        return element;
     }
 
     return (

@@ -13,20 +13,14 @@ export type User = {
 }
 
 export type GoogleUser = {
+    id: string;
+    locale: string;
     email: string;
-    token_id: string;
-    email_verified: boolean;
+    verified_email: boolean;
     family_name: string;
     given_name: string;
-    hd: string;
     name: string;
     picture: string;
-    sub: string;
-    jti: string;
-    iss: string;
-    exp: number;
-    iat: number;
-    nbf: number;
 }
 
 export enum UserType {
