@@ -23,14 +23,15 @@ function LoginLink({ loginKey }) {
     useEffect(() => {
         if (user) {
             console.log("USER EXISTED\n");
-            // AuthService.authorizeLoginLinkWithUserToken(loginKey).then(res => {
-            //     if (res.isFailure()) {
-            //         window.alert(res.error);
-            //         return;
-            //     }
-            //     setConnectionStatus("Authenticated");
-            // })
+            AuthService.authorizeLoginLinkWithUserToken(loginKey).then(res => {
+                if (res.isFailure()) {
+                    window.alert(res.error);
+                    return;
+                }
+                setConnectionStatus("Authenticated");
+            })
         } else {
+            console.log("USER NOT EXISTED\n");
             AuthService.authorizeLoginLinkWithUserToken(loginKey).then(res => {
                 if (res.isFailure()) {
                     // window.alert(res.error);
@@ -46,10 +47,13 @@ function LoginLink({ loginKey }) {
 
     useEffect(() => {
         const currentUser = StorageService.getUser()
+        console.log("currentUser");
+        console.log(currentUser);
+        console.log(loginKey);
+        if (loginKey) {
+            StorageService.setSessionKey(loginKey)
+        }
         if (!currentUser) {
-            if (loginKey) {
-                StorageService.setSessionKey(loginKey)
-            }
             setShowLogin(true);
         }
     }, [])
