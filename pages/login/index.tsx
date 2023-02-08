@@ -17,7 +17,7 @@ export async function getServerSideProps(context) {
     }
 }
 
-function LoginLink({ loginKey }) {
+export default function LoginLink({ loginKey }) {
     const [connectionStatus, setConnectionStatus] = useState('Please login');
     const { setShowLogin, user, setUser } = useContext(AppContext);
     useEffect(() => {
@@ -65,5 +65,5 @@ function LoginLink({ loginKey }) {
     )
 }
 
-LoginLink.getLayout = LayoutWithFooter;
-export default LoginLink;
+// LoginLink.getLayout = LayoutWithFooter;
+// export default LoginLink;
