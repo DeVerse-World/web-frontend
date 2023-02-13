@@ -12,7 +12,8 @@ const AlphaLayout = (props: Props) => (
         <section id='section-content' className='flex flex-col justify-between '>
             <span className="flex flex-row justify-between bg-black">
                 <span className="tab-bar flex-grow" >
-                    <TabHeader href="/alpha">Play</TabHeader>
+                    <TabHeader href="/alpha">Main</TabHeader>
+                    <TabHeader href="/alpha/streaming">Online</TabHeader>
                     <TabHeader href="/alpha/rewards">Rewards</TabHeader>
                     <TabHeader href="/alpha/leaderboard">Leaderboard</TabHeader>
                 </span>
