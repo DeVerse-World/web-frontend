@@ -11,9 +11,21 @@ body * {
     -moz-osx-font-smoothing: grayscale;
 }
 
+#section-content {
+    flex-grow: 1;
+}
+
 #section-footer {
     border-top: 1px solid rgb(71 85 105);
     background-color: black;
+    display: flex;
+    flex-direction: row;
+    color: white;
+    justify-content: space-evenly;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 ::-webkit-scrollbar-track {
@@ -33,14 +45,6 @@ body * {
     border-radius: 10px;
     background-color: rgb(97 198 208);
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(127 198 208)), color-stop(0.72, rgb(94 175 217)), color-stop(0.86, rgb(112, 238, 255)));
-}
-
-.heading {
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800;
-    font-size: 6rem;
 }
 
 .secondary-text {
@@ -113,15 +117,6 @@ body * {
 
 /* Sidebar */
 
-#deverse-sidebar {
-    color: rgba(253, 253, 253, 0.37);
-    background: black;
-    max-height: calc(100vh - 60px);
-    height: calc(100vh - 60px);
-    padding: 1px;
-    z-index: 10;
-}
-
 .deverse-sidebar-item.active {
     color: white;
     border-radius: 1rem;
@@ -133,27 +128,8 @@ body * {
     border-radius: 1rem;
 }
 
-@media only screen and (max-width: 600px) {
-    #deverse-sidebar {
-        overflow: hidden;
-        z-index: 99;
-        width: 0;
-        position: fixed;
-        transition: 0.3s;
-    }
-    #deverse-sidebar.active {
-        width: 100%;
-    }
-}
-
 
 /* Content */
-
-#section-nav-bar {
-    height: 60px;
-    border-bottom: 1px solid rgb(71 85 105);
-    z-index: 99;
-}
 
 #account-dropdown {
     position: absolute;
@@ -171,13 +147,6 @@ body * {
 
 #account-dropdown.active {
     visibility: visible;
-}
-
-#section-content {
-    overflow: auto;
-    /* min-height: calc(100vh - 60px); */
-    height: calc(100vh - 60px);
-    width: 100%;
 }
 
 .nft-card {
@@ -223,21 +192,6 @@ body * {
     right: 10px;
     display: none;
 }
-
-
-/* .advisor-card:hover::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    width: 100%;
-    background-color: white;
-} */
-
-
-/* "flex flex-row justify-evenly text-xl bg-black  py-2 px-8 overflow-x-scroll" */
 
 .tab-bar {
     display: flex;
@@ -335,9 +289,6 @@ iframe.rpo {
         font-size: 1.7rem;
         line-height: 95%;
         letter-spacing: 0.5%;
-    }
-    .heading {
-        font-size: 3rem;
     }
 }
 

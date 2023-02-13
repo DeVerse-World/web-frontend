@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { FaTelegramPlane, FaDiscord } from 'react-icons/fa';
+import React, {  } from "react";
+import { FaDiscord } from 'react-icons/fa';
 import { AiOutlineTwitter, AiFillFacebook } from 'react-icons/ai';
 import { MdEmail } from 'react-icons/md';
 import Image from "next/image";
@@ -7,8 +7,7 @@ import Link from "next/link";
 
 function Footer(props) {
   return (
-    <section id="section-footer"
-      className="flex flex-row text-white justify-evenly px-2 py-4">
+    <section id="section-footer">
       <div className="flex flex-col gap-2 items-center">
         <span className="flex flex-row gap-2">
           <Image
@@ -25,8 +24,14 @@ function Footer(props) {
         Copyright © Deverse World
       </div>
       <div className="flex flex-col">
-        <Link href="privacy-policies"><span className="cursor-pointer">Privacy Policies</span></Link>
-        <Link href="term-of-use"><span className="cursor-pointer">Term of Use</span></Link>
+        <Link href="privacy-policies" style={{
+          textDecoration: 'none',
+          color: 'white'
+        }}><span className="cursor-pointer">Privacy Policies</span></Link>
+        <Link href="term-of-use" style={{
+          textDecoration: 'none',
+          color: 'white'
+        }}><span className="cursor-pointer">Term of Use</span></Link>
       </div>
       <div className="flex flex-col">
         <h3>Contact us</h3>

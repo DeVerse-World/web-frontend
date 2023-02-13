@@ -10,9 +10,9 @@ import { AppContext } from '../components/contexts/app_context';
 import TeamMemberSection from '../components/home/TeamMemberSection';
 import AdvisorSection from '../components/home/AdvisorSection';
 import CommunityPartnerSection from '../components/home/CommunityPartnerSection';
-import { getLayoutWithFooter } from '../components/LayoutWithFooter';
+import LayoutWraper from '../components/LayoutWrapper';
 
-function Home(props) {
+function Main(props) {
   const [showBlogToggle, setShowBlogToggle] = useState(false);
   const { remoteConfig } = useContext(AppContext);
 
@@ -23,22 +23,23 @@ function Home(props) {
   }, [remoteConfig])
 
   return (
-    <div className='flex flex-col'>
-      <WelcomeSection />
-      <IntroSection />
-      <HighlightFeatureSection />
-      <ProductSection />
-      <TeamMemberSection />
-      <AdvisorSection />
-      <PartnerSection />
-      <CommunityPartnerSection />
-      {showBlogToggle ?
-        <BlogPostSection />
-        : null
-      }
-    </div>
+    <LayoutWraper>
+      <div id="section-content" className='flex flex-col'>
+        <WelcomeSection />
+        {/* <IntroSection />
+        <HighlightFeatureSection />
+        <ProductSection />
+        <TeamMemberSection />
+        <AdvisorSection />
+        <PartnerSection />
+        <CommunityPartnerSection />
+        {showBlogToggle ?
+          <BlogPostSection />
+          : null
+        } */}
+      </div>
+    </LayoutWraper>
   );
 }
 
-Home.getLayout = getLayoutWithFooter;
-export default Home;
+export default Main;
