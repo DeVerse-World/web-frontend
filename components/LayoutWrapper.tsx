@@ -12,32 +12,40 @@ import AccountMenu from "./common/AccountMenu";
 
 const appBarHeight = 80;
 
-type ItemProps = {
-    label: string,
-    href: string,
-    icon: any
-}
-
-function SidebarItem(props: ItemProps) {
-    return (
-        <Link href={props.href} style={{
-            textDecoration: 'none',
-            color: 'white'
-        }} >
-            <div className={`text-sm cursor-pointer deverse-sidebar-item flex flex-col items-center p-1`} >
-                {props.icon}
-                {props.label.toUpperCase()}
-            </div>
-        </Link>
-    );
-}
-
 type SidebarProps = {
     children?: ReactNode;
     tab?: ReactNode;
 }
 
-function LayoutWraper(props: SidebarProps) {
+function SidebatItems() {
+    const router = useRouter();
+
+    return (
+        <div className="flex flex-col px-1">
+            {[
+                { label: "Home", href: "/", icon: (<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />) },
+                { label: "Alpha", href: "/alpha", icon: (<FaGamepad fontSize="1.5rem" color='rgb(97 198 208)' />) },
+                { label: "Discovery", href: "/marketplace", icon: (<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />) },
+                { label: "Create", href: "/create", icon: (<AiFillChrome fontSize="1.5rem" color='rgb(97 198 208)' />) },
+                { label: "Docs", href: "/docs", icon: (<FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />) },
+            ]
+                .map(item => {
+                    const activeClass = router.pathname == item.href ? "active" : "";
+                    return (<Link href={item.href} style={{
+                        textDecoration: 'none',
+                        color: 'white'
+                    }} >
+                        <div className={`text-sm cursor-pointer deverse-sidebar-item flex flex-col items-center p-1 ${activeClass}`} >
+                            {item.icon}
+                            {item.label.toUpperCase()}
+                        </div>
+                    </Link>)
+                })}
+        </div>
+    )
+}
+
+function LayoutWrapper(props: SidebarProps) {
     const [onOpenDrawer, setOpenDrawer] = useState(false);
     const isWindowSize = useWindowWidth(768);
 
@@ -68,13 +76,7 @@ function LayoutWraper(props: SidebarProps) {
                 {isWindowSize && (
                     <Nav className="bg-black">
                         <div className="flex flex-row h-full">
-                            <div className="flex flex-col px-1">
-                                <SidebarItem label="Home" href="/" icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
-                                <SidebarItem label="Alpha" href="/alpha" icon={<FaGamepad fontSize="1.5rem" color='rgb(97 198 208)' />} />
-                                <SidebarItem label="Discovery" href="/marketplace" icon={<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />} />
-                                <SidebarItem label="Create" href="/create" icon={<AiFillChrome fontSize="1.5rem" color='rgb(97 198 208)' />} />
-                                <SidebarItem label="Docs" href="/docs" icon={<FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />} />
-                            </div>
+                            <SidebatItems />
                             {props.tab}
                         </div>
                     </Nav>
@@ -89,4 +91,4 @@ function LayoutWraper(props: SidebarProps) {
     )
 }
 
-export default LayoutWraper
+export default LayoutWrapper

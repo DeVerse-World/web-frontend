@@ -44,7 +44,7 @@ function EmailSignup() {
                 />
             </InputGroup>
 
-            <Button id="btn-mint-nft"
+            <Button id="btn-login"
                 type="submit"
                 className="font-bold bg-deverse-gradient rounded-[16px] py-2">
                 Signup

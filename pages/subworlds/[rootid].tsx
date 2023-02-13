@@ -91,7 +91,7 @@ export default function Deriv({ rootId }) {
                     <div className="flex flex-row gap-2 ">
                         <div className="flex flex-col items-center">
                             <div className="flex justify-center h-[350px] w-[350px] ">
-                                <img className="rounded-lg" alt="Root Template Image" src={rootTemplate.file2dUri || "/images/color-image-placeholder.jpg"} />
+                                <img className="rounded-lg" alt="Root Template Image" src={rootTemplate.file2dUri || "/images/color-image-placeholder.webp"} />
                             </div>
                             <button className="w-[120px] h-[40px] rounded-3xl my-4 flex flex-row justify-center items-center text-white deverse-play-btn font-bold" onClick={() => setShowPlayModal(true)}>
                                 <BsPlayFill /></button>

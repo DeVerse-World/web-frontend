@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { getLayoutWithFooter } from "../../components/LayoutWithFooter";
 import FirebaseService from "../../data/services/FirebaseService";
-
+import LayoutWrapper from "../../components/LayoutWrapper";
 
 function TermOfUse() {
     const [term, setTerm] = useState('');
@@ -13,12 +12,12 @@ function TermOfUse() {
     }, [])
 
     return (
-        <div className="flex justify-center items-center text-white p-4" >
-            {term && <div dangerouslySetInnerHTML={{ __html: term }} />}
-        </div>
+        <LayoutWrapper>
+            <div id="section-content" className="flex justify-center items-center text-white p-4" >
+                {term && <div dangerouslySetInnerHTML={{ __html: term }} />}
+            </div>
+        </LayoutWrapper>
     )
 }
-
-TermOfUse.getLayout = getLayoutWithFooter;
 
 export default TermOfUse;

@@ -1,16 +1,15 @@
-import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { useContext, useEffect, useState } from "react";
-import EventList, { EventCard, EventViewModel } from "../../components/asset/EventList";
+import { EventCard, EventViewModel } from "../../components/asset/EventList";
 import ModelViewer from "../../components/ModelViewer";
 import EventsService from "../../data/services/EventsService";
 import { getTimeString } from "../../utils/time_util";
-import { getAlphaLayout } from "../../components/AlphaLayout";
 import Link from "next/link";
 import { AppContext } from "../../components/contexts/app_context";
 import AvatarService from "../../data/services/AvatarService";
-import UnauthorizedView from "../../components/UnauthorizedView";
 import DownloadDemoButton from "../../components/DownloadDemoButton";
+import LayoutWrapper from "../../components/LayoutWrapper";
+import { TabHeaderBar } from "../../components/common/TabHeader";
 
 
 function Info() {
@@ -64,31 +63,37 @@ function Info() {
     }
 
     return (
-        <div className="flex flex-col items-center">
-            <div className="flex flex-col items-center">
-                <h2 className="text-white text-3xl font-bold uppercase">Join the verse</h2>
-                <DownloadDemoButton className="h-12" />
-            </div>
+        <LayoutWrapper>
+            <TabHeaderBar data={[
+                { href: "/alpha", label: "Play" },
+                { href: "/alpha/rewards", label: "Rewards" },
+                { href: "/alpha/leaderboard", label: "Leaderboard" },
 
-            <div className="grid grid-cols-3 text-white gap-4 p-4 " >
+            ]} />
+            <div id="section-content" className="flex flex-col items-center p-4">
                 <div className="flex flex-col items-center">
-                    <Link href="/create">
-                        <button className="deverse-play-btn p-2 rounded-2xl">Change</button>
-                    </Link>
-                    {renderAvatar()}
+                    <h2 className="text-white text-3xl font-bold uppercase">Join the verse</h2>
+                    <DownloadDemoButton className="h-12" />
                 </div>
-                <div>
-                    {ongoingEvent && <EventCard key={0} data={ongoingEvent} />}
-                </div>
-                <div>
 
+                <div className="grid grid-cols-3 text-white gap-4 p-4 " >
+                    <div className="flex flex-col items-center">
+                        <Link href="/create">
+                            <button className="deverse-play-btn p-2 rounded-2xl">Change</button>
+                        </Link>
+                        {renderAvatar()}
+                    </div>
+                    <div>
+                        {ongoingEvent && <EventCard key={0} data={ongoingEvent} />}
+                    </div>
+                    <div>
+
+                    </div>
                 </div>
             </div>
-        </div>
+        </LayoutWrapper>
 
     )
 }
-
-Info.getLayout = getAlphaLayout
 
 export default Info;

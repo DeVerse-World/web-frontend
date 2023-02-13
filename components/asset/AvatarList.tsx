@@ -64,7 +64,7 @@ export function AvatarCard(props: AvatarCardProps) {
         return (
             <div className="nft-card nft-card-hover w-[250px] h-[350px] overflow-hidden flex flex-col">
                 <div className="h-[250px] flex flex-col justify-center">
-                    <img src={props.data.image || "/images/placeholder.jpg"} />
+                    <img src={props.data.image || "/images/placeholder.webp"} />
                 </div>
                 <span className="text-2xl px-4 py-2 font-semibold text-blue-300" style={{
                     whiteSpace: "nowrap",

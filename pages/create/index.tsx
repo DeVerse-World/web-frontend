@@ -2,7 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { FormControl, InputGroup, Modal } from "react-bootstrap";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import AvatarService from "../../data/services/AvatarService";
-import { getCreateLayout } from "../../components/CreateLayout";
+import LayoutWrapper from "../../components/LayoutWrapper";
+import { TabHeaderBar } from "../../components/common/TabHeader";
 
 
 function Avatar() {
@@ -59,35 +60,41 @@ function Avatar() {
 
     return (
         <>
-            <iframe allow="camera *; microphone *"
-                title="Ready Player Me"
-                className='rpo'
-                src='https://deverse.readyplayer.me/avatar?frameApi' />
-            {showAvatarForm &&
-                <Modal centered show={true}
-                    contentClassName="bg-black" dialogClassName="deverse-dialog">
-                    <Modal.Header className="flex flex-row">
-                        <h3 className="text-white text-center">Save your Avatar</h3>
-                    </Modal.Header>
-                    <Modal.Body className="text-white text-lg break-words flex flex-col gap-4 items-center">
-                        <InputGroup>
-                            <FormControl id="input-user-name"
-                                required
-                                placeholder="A sexy duck"
-                                aria-label="Name"
-                                onChange={(e) => {
-                                    setCreatingAvatarName(e.target.value)
-                                }}
-                            />
-                        </InputGroup>
-                        <button className="bg-deverse-gradient px-4 py-1 rounded-xl" onClick={onSaveAvatar}>Save</button>
-                    </Modal.Body>
-                </Modal>
-            }
+            <LayoutWrapper>
+                <TabHeaderBar data={[
+                    { href: '/create', label: 'Avatar' },
+                    { href: '/create/mint', label: 'Mint' },
+                    { href: '/create/ig-editor', label: 'Ingame Editor' },
+                    { href: '/create/ue-sdk', label: 'Unreal Engine SDK' }
+                ]} />
+                <iframe allow="camera *; microphone *"
+                    title="Ready Player Me"
+                    className='rpo'
+                    src='https://deverse.readyplayer.me/avatar?frameApi' />
+                {showAvatarForm &&
+                    <Modal centered show={true}
+                        contentClassName="bg-black" dialogClassName="deverse-dialog">
+                        <Modal.Header className="flex flex-row">
+                            <h3 className="text-white text-center">Save your Avatar</h3>
+                        </Modal.Header>
+                        <Modal.Body className="text-white text-lg break-words flex flex-col gap-4 items-center">
+                            <InputGroup>
+                                <FormControl id="input-user-name"
+                                    required
+                                    placeholder="A sexy duck"
+                                    aria-label="Name"
+                                    onChange={(e) => {
+                                        setCreatingAvatarName(e.target.value)
+                                    }}
+                                />
+                            </InputGroup>
+                            <button className="bg-deverse-gradient px-4 py-1 rounded-xl" onClick={onSaveAvatar}>Save</button>
+                        </Modal.Body>
+                    </Modal>
+                }
+            </LayoutWrapper>
         </>
     )
 }
-
-Avatar.getLayout = getCreateLayout
 
 export default Avatar;

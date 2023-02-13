@@ -13,7 +13,7 @@ function BlogPostItem(props: BlogPostItemProps) {
             href={props.data.uri}
             target="_blank">
             <div className="md:h-[250px] h-[150px] overflow-hidden flex flex-col justify-center">
-                <img src={props.data.thumbnail || "/images/placeholder.jpg"} />
+                <img src={props.data.thumbnail || "/images/placeholder.webp"} />
             </div>
             <span className="md:text-2xl text-sm px-4 py-2 font-semibold text-blue-300" style={{
                 whiteSpace: "nowrap",

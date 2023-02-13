@@ -10,7 +10,7 @@ import { AppContext } from '../components/contexts/app_context';
 import TeamMemberSection from '../components/home/TeamMemberSection';
 import AdvisorSection from '../components/home/AdvisorSection';
 import CommunityPartnerSection from '../components/home/CommunityPartnerSection';
-import LayoutWraper from '../components/LayoutWrapper';
+import LayoutWrapper from '../components/LayoutWrapper';
 
 function Main(props) {
   const [showBlogToggle, setShowBlogToggle] = useState(false);
@@ -23,7 +23,7 @@ function Main(props) {
   }, [remoteConfig])
 
   return (
-    <LayoutWraper>
+    <LayoutWrapper>
       <div id="section-content" className='flex flex-col'>
         <WelcomeSection />
         {/* <IntroSection />
@@ -38,7 +38,7 @@ function Main(props) {
           : null
         } */}
       </div>
-    </LayoutWraper>
+    </LayoutWrapper>
   );
 }
 
