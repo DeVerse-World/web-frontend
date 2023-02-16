@@ -2,7 +2,6 @@ import Link from "next/link";
 import { ReactNode } from "react";
 import Sidebar from "../Sidebar";
 import BaseLayout from "./BaseLayout";
-import Footer from "./Footer";
 import HomeNavbar from "./HomeNavbar";
 import TabHeader from "./TabHeader";
 
@@ -29,7 +28,6 @@ const AccountWrapperLayout = (props: Props) => (
                 <div className="grow">
                     {props.children}
                 </div>
-                <Footer />
             </section>
         </div>
     </BaseLayout>

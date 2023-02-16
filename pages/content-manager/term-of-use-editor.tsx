@@ -35,7 +35,7 @@ function TermOfUseEditor() {
     }
 
     return (
-        <div className='py-4 px-2 max-w-[800px] w-[80%] flex-grow'>
+        <div className='py-4 px-2 max-w-[800px] w-[80%] text-white'>
             <ReactQuill theme="snow"
                 modules={modules}
                 value={tOU} onChange={setToU} />

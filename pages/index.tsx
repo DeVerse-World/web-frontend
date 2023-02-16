@@ -1,21 +1,22 @@
-import IntroSection from '../components/home/IntroSection';
 import React, { useContext, useEffect, useState } from "react";
-import ProductSection from '../components/home/ProductsSection';
 import WelcomeSection from '../components/home/WelcomeSection';
-import HighlightFeatureSection from '../components/home/HighlightFeaturesSection';
-import BlogPostSection from '../components/home/BlogPostSection';
 import FirebaseService from "../data/services/FirebaseService";
-import PartnerSection from '../components/home/PartnerSection';
 import { AppContext } from '../components/contexts/app_context';
-import TeamMemberSection from '../components/home/TeamMemberSection';
-import AdvisorSection from '../components/home/AdvisorSection';
-import CommunityPartnerSection from '../components/home/CommunityPartnerSection';
 import LayoutWrapper from '../components/LayoutWrapper';
+import dynamic from 'next/dynamic';
 
-function Main(props) {
+const IntroSection = dynamic(() => import('../components/home/IntroSection').then((mod) => mod.default))
+const ProductSection = dynamic(() => import('../components/home/ProductsSection').then((mod) => mod.default))
+const HighlightFeatureSection = dynamic(() => import('../components/home/HighlightFeaturesSection').then((mod) => mod.default))
+const BlogPostSection = dynamic(() => import('../components/home/BlogPostSection').then((mod) => mod.default))
+const PartnerSection = dynamic(() => import('../components/home/PartnerSection').then((mod) => mod.default))
+const TeamMemberSection = dynamic(() => import('../components/home/TeamMemberSection').then((mod) => mod.default))
+const AdvisorSection = dynamic(() => import('../components/home/AdvisorSection').then((mod) => mod.default))
+const CommunityPartnerSection = dynamic(() => import('../components/home/CommunityPartnerSection').then((mod) => mod.default))
+
+function Main() {
   const [showBlogToggle, setShowBlogToggle] = useState(false);
   const { remoteConfig } = useContext(AppContext);
-
 
   useEffect(() => {
     if (remoteConfig != null)
@@ -26,7 +27,7 @@ function Main(props) {
     <LayoutWrapper>
       <div id="section-content" className='flex flex-col'>
         <WelcomeSection />
-        {/* <IntroSection />
+        <IntroSection />
         <HighlightFeatureSection />
         <ProductSection />
         <TeamMemberSection />
@@ -36,7 +37,7 @@ function Main(props) {
         {showBlogToggle ?
           <BlogPostSection />
           : null
-        } */}
+        }
       </div>
     </LayoutWrapper>
   );

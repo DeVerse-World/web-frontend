@@ -1,9 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import AuthService from "../../data/services/AuthService";
 import StorageService from "../../data/services/StorageService";
-import Footer from "../../components/common/Footer";
 import { AppContext } from "../../components/contexts/app_context";
-import LayoutWithFooter from "../../components/LayoutWithFooter";
+import LayoutWrapper from "../../components/LayoutWrapper";
 
 export async function getServerSideProps(context) {
     const loginKey = context.query.key;
@@ -47,8 +46,7 @@ export default function LoginLink({ loginKey }) {
 
     useEffect(() => {
         const currentUser = StorageService.getUser()
-        console.log("currentUser");
-        console.log(currentUser);
+        console.log("currentUser", currentUser);
         console.log(loginKey);
         if (loginKey) {
             StorageService.setSessionKey(loginKey)
@@ -59,11 +57,10 @@ export default function LoginLink({ loginKey }) {
     }, [])
 
     return (
-        <div className="text-center m-auto text-white ">
-            <h1>{connectionStatus}</h1>
-        </div>
+        <LayoutWrapper>
+            <div id="section-content" className="text-center m-auto text-white ">
+                <h1>{connectionStatus}</h1>
+            </div>
+        </LayoutWrapper>
     )
 }
-
-// LoginLink.getLayout = LayoutWithFooter;
-// export default LoginLink;

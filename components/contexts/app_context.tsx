@@ -8,8 +8,6 @@ export type AppDataContext = {
     setUser: (User) => void,
     viewState: ViewState,
     setViewState: (ViewState) => void,
-    isMobileSidebarVisible: boolean,
-    setIsMobileSidebarVisible: (boolean) => void,
     showLogin: boolean,
     setShowLogin: (boolean) => void,
     remoteConfig: RemoteConfig
@@ -32,7 +30,6 @@ const AppContextProvider = (props) => {
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [viewState, setViewState] = useState(ViewState.IDLE);
     const [showLogin, setShowLogin] = useState(false);
-    const [isMobileSidebarVisible, setIsMobileSidebarVisible] = useState(false);
 
     useEffect(() => {
         const cachedUser = StorageService.getUser();
@@ -58,7 +55,6 @@ const AppContextProvider = (props) => {
         <AppContext.Provider
             value={{
                 user, setUser, viewState, setViewState,
-                isMobileSidebarVisible, setIsMobileSidebarVisible,
                 showLogin, setShowLogin, remoteConfig
             }}>
             {props.children}

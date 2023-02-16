@@ -2,11 +2,6 @@ import { useEffect, useState } from "react";
 import DerivWorldList, { DerivTemplateViewModel } from "../../components/asset/DerivWorldList";
 import RootWorldList, { RootTemplateViewModel } from "../../components/asset/RootWorldList";
 import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
-import BaseLayout from "../../components/common/BaseLayout";
-import Footer from "../../components/common/Footer";
-import TabHeader from "../../components/common/TabHeader";
-import Sidebar from "../../components/Sidebar";
-import { AssetType } from "../../data/enum/asset_type";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AccountService from "../../data/services/AccountService";
 

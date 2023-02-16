@@ -1,9 +1,7 @@
-import { getCreateLayout } from "../../components/CreateLayout";
 import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 
-
-function UESdk() {
+export default function UESdk() {
     return (
         <LayoutWrapper>
             <TabHeaderBar data={[
@@ -23,7 +21,3 @@ function UESdk() {
 
     )
 }
-
-UESdk.getLayout = getCreateLayout
-
-export default UESdk;

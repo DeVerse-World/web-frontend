@@ -1,0 +1,10 @@
+.deverse-sidebar-item.active {
+    color: white;
+    border-radius: 1rem;
+    background-color: slategray;
+}
+
+.deverse-sidebar-item:hover {
+    background-color: rgb(43, 79, 146);
+    border-radius: 1rem;
+}

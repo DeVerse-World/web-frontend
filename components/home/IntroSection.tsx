@@ -6,7 +6,7 @@ const iframeWrapper: React.CSSProperties = {
   height: 0,
 }
 
-function IntroSection(props) {
+export default function IntroSection() {
   return (
     <section id="section-demo-video">
       <div style={iframeWrapper}>
@@ -20,5 +20,3 @@ function IntroSection(props) {
     </section>
   );
 }
-
-export default IntroSection;

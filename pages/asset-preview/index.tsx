@@ -9,12 +9,10 @@ import AvatarService from '../../data/services/AvatarService';
 import { formatWalletAddress } from '../../utils/wallet_util';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { AppContext } from '../../components/contexts/app_context';
 import FirebaseService from '../../data/services/FirebaseService';
 
 function AssetPreviewScreen(props: WithRouterProps) {
     const router = useRouter();
-    const { remoteConfig } = useContext(AppContext)
     const [avatar, setAvatar] = useState<Avatar>(null);
     const [modelPath, setModelPath] = useState<string>(null);
     const [creatorAddress, setCreatorAddress] = useState<string>();

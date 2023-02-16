@@ -60,19 +60,7 @@ body * {
 
 /* Modal*/
 
-.modal-header {
-    border-bottom: none !important;
-}
 
-.modal-footer {
-    border-top: none !important;
-}
-
-.deverse-dialog div {
-    border-radius: 12px !important;
-    width: fit-content;
-    margin: auto;
-}
 
 
 /* Tab */
@@ -118,16 +106,7 @@ body * {
 
 /* Sidebar */
 
-.deverse-sidebar-item.active {
-    color: white;
-    border-radius: 1rem;
-    background-color: slategray;
-}
 
-.deverse-sidebar-item:hover {
-    background-color: rgb(43, 79, 146);
-    border-radius: 1rem;
-}
 
 
 /* Content */
@@ -150,17 +129,7 @@ body * {
     visibility: visible;
 }
 
-.nft-card {
-    /* border: 2px solid rgb(97 198 208); */
-    background-color: rgb(0 0 0 / .7);
-    border-radius: 0.75rem;
-}
 
-.nft-card-hover:hover {
-    transform: scale(1.03);
-    background-color: rgb(0 0 0 / .5);
-    cursor: pointer;
-}
 
 .deverse-play-btn {
     --tw-bg-opacity: 1;
@@ -203,52 +172,17 @@ body * {
     min-height: 50px;
 }
 
-.tab-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    color: white;
-    text-align: center;
-    /* max-width: 150px; */
-    cursor: pointer;
-}
 
-.tab-header.active {
-    border-bottom: 2px solid white;
-}
 
-.filter-header {
-    cursor: pointer;
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    padding: 0.5rem;
-}
 
-.filter-tab {
-    cursor: pointer;
-    --tw-text-opacity: 1;
-    color: rgb(147 197 253 / var(--tw-text-opacity));
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    padding-top: 2px;
-    padding-bottom: 2px;
-}
 
 .filter-tab.active {
     color: white;
     background-color: rgb(0, 39, 124);
 }
 
-.filter-tab-disable {
+.filter-tab.disable {
     cursor: default;
-    --tw-text-opacity: 1;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    padding-top: 2px;
-    padding-bottom: 2px;
     color: rgb(71 85 105 / var(--tw-text-opacity));
 }
 
