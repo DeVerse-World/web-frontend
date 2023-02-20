@@ -1,4 +1,3 @@
-import '../styles/globals.css';
 import React from "react";
 import { MetaMaskProvider } from "metamask-react";
 import Head from 'next/head'
@@ -9,7 +8,8 @@ import { Router } from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import Script from 'next/script';
+import '../styles/globals.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Add Loading indicator when change route
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -21,7 +21,7 @@ function DeverseApp({ Component, pageProps }) {
     <SSRProvider>
       <AppContextProvider>
         <MetaMaskProvider>
-          <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID}>
+          <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID || ''}>
             <Head>
               <title>Deverse World</title>
               <meta name="title" content="Deverse World" />
@@ -29,13 +29,7 @@ function DeverseApp({ Component, pageProps }) {
               <meta name="keywords" content="metaverse, sandbox, unreal engine 5, deverse world, deverse, editor, building, simulation, gameplay, build game, develop game, creator, content, assets, nft, the sandbox, decentraland, roblox, multiverse, youtube, social, minecraft" />
               <meta property="og:site_name" content="Deverse World" />
               <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/logo.webp?alt=media&token=67e233e2-fba3-4055-9050-41a2f36f759e" />
-              <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-                crossOrigin="anonymous"
-              />
             </Head>
-            <Script
-              id="bootstrap-cdn"
-              src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" />
             {/* <noscript>
                 <GTMHeader tagId={process.env.NEXT_PUBLIC_GTM} />
               </noscript>

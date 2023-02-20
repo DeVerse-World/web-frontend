@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode, useContext, useState } from "react";
 import useWindowWidth from "../hook/UseWindowWidth";
 import { Nav } from "react-bootstrap";
 import { useRouter } from "next/router";
@@ -9,6 +9,8 @@ import { FaDiscord, FaGamepad, FaInfoCircle } from "react-icons/fa";
 import { SiCmake } from "react-icons/si";
 import AccountMenu from "./common/AccountMenu";
 import { MdEmail } from "react-icons/md";
+import styles from '../styles/sidebar.module.css';
+import { AppContext } from "./contexts/app_context";
 
 const appBarHeight = 60;
 
@@ -30,12 +32,12 @@ function SidebatItems() {
                 { label: "Docs", href: "/docs", icon: (<FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />) },
             ]
                 .map(item => {
-                    const activeClass = router.pathname == item.href ? "active" : "";
+                    const activeClass = router.pathname == item.href ? `${styles.item} ${styles.active}` : `${styles.item}`;
                     return (<Link key={`sidebar-${item.label}`} href={item.href} style={{
                         textDecoration: 'none',
                         color: 'white'
                     }} >
-                        <div className={`text-sm cursor-pointer deverse-sidebar-item flex flex-col items-center px-1 py-2 ${activeClass}`} >
+                        <div className={activeClass} >
                             {item.icon}
                             {item.label.toUpperCase()}
                         </div>
@@ -48,10 +50,11 @@ function SidebatItems() {
 function LayoutWrapper(props: SidebarProps) {
     const [onOpenDrawer, setOpenDrawer] = useState(false);
     const isWindowSize = useWindowWidth(768);
-
+    const { user } = useContext(AppContext);
+    const [showDropdown, setShowDropdown] = useState(false);
     return (
         <>
-            <div className="flex flex-row items-center justify-between px-2 bg-black drop-shadow-sm"
+            <div className="flex flex-row items-center justify-between md:px-8 px-2 bg-black drop-shadow-sm"
                 style={{
                     height: appBarHeight,
                     borderBottom: '1px solid rgb(71 85 105)',
@@ -70,8 +73,17 @@ function LayoutWrapper(props: SidebarProps) {
                             alt="Deverse text logo" />
                     </span>
                 </Link>
-                <AccountMenu />
+                <div>
+                    {user
+                        ? <Image className="cursor-pointer" width={40} height={40} alt="avatar-img"
+                            src={user?.avatar || "/images/placeholder.webp"}
+                            onClick={() => setShowDropdown(true)} />
+                        : <Link href="/login" className="no-underline text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-8 md:h-12">
+                            Login
+                        </Link>}
+                </div>
             </div>
+            {showDropdown && <AccountMenu onPointerLeave={() => setShowDropdown(false)} />}
             <div className="flex flex-row" style={{ height: `calc(100vh - ${appBarHeight}px)` }}>
                 {isWindowSize && (
                     <Nav className="bg-black">

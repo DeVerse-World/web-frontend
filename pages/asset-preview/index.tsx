@@ -1,7 +1,6 @@
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react'
-import Footer from '../../components/common/Footer';
 import ModelViewer from '../../components/ModelViewer';
 import AssetService from "../../data/services/AssetService";
 import { Avatar } from '../../data/model/avatar';
@@ -159,7 +158,6 @@ function AssetPreviewScreen(props: WithRouterProps) {
                     </div>
                 } />
             </div> */}
-            <Footer />
         </section>
     )
 }

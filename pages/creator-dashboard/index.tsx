@@ -1,12 +1,9 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import AvatarContainer from "../../components/AvatarContainer";
-import BaseLayout from "../../components/common/BaseLayout";
-import Footer from "../../components/common/Footer";
 import { AppContext } from "../../components/contexts/app_context";
 import ListingTabComponent from "../../components/ListingTab";
 import { SecondaryTab } from "../../components/marketplace_tab";
-import Sidebar from "../../components/Sidebar";
 import { Bar, Chart } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend, BarElement, LineController } from 'chart.js';
 import { TimeFilter } from "../../data/enum/time_filter";
@@ -14,6 +11,7 @@ import { DataFilter } from "../../data/enum/data_filter";
 import AccountService from "../../data/services/AccountService";
 import { timestampToLabel } from "../../utils/time_util";
 import UnauthorizedView from "../../components/UnauthorizedView";
+import LayoutWrapper from "../../components/LayoutWrapper";
 
 ChartJS.register(
     CategoryScale,
@@ -29,7 +27,7 @@ ChartJS.register(
 
 // X-axis: filter by day/week/month/year
 // y-axis: filter by activities, minute spent, staking balance, and more
-function CreatorDashboard() {
+export default function CreatorDashboard() {
     const { user } = useContext(AppContext);
     const router = useRouter();
     const [visibleTab, setVisibleTab] = useState<SecondaryTab>(SecondaryTab.CD_HOME);
@@ -68,11 +66,6 @@ function CreatorDashboard() {
         }, undefined, { shallow: true });
         setVisibleTab(tab);
     }
-    const renderContent = () => {
-
-    }
-
-    const today = new Date();
 
     const displayData = async () => {
         let offlineRes = await AccountService.getStats(DataFilter.OFFLINE, timeFilter);
@@ -123,21 +116,18 @@ function CreatorDashboard() {
         return <UnauthorizedView />
     }
     return (
-        <div className='flex flex-row bg-deverse '>
-            <Sidebar >
-                <div className="h-[100%] bg-gray-900 ">
-                    <div className="flex flex-col text-white text-center gap-4 p-4">
-                        <AvatarContainer />
-                        Deverse Worlds
-                    </div>
-                    <div className="flex flex-col mt-8">
-                        <ListingTabComponent label="Home" tab={SecondaryTab.CD_HOME} isSelected={visibleTab} onSelect={onSelectTab} />
-                    </div>
+        <LayoutWrapper tab={
+            <div className="h-[100%] bg-gray-900 ">
+                <div className="flex flex-col text-white text-center gap-4 p-4">
+                    <AvatarContainer />
+                    Deverse Worlds
                 </div>
-
-            </Sidebar>
-
-            <section id='section-content' className='bg-deverse flex flex-col text-white ' >
+                <div className="flex flex-col mt-8">
+                    <ListingTabComponent label="Home" tab={SecondaryTab.CD_HOME} isSelected={visibleTab} onSelect={onSelectTab} />
+                </div>
+            </div>
+        }>
+            <section id='section-content' className='flex flex-col' >
                 <div className="flex-grow p-4 flex flex-col gap-4">
                     <h1 className="section-header-lg pl-4">Home</h1>
                     <div className="flex flex-row gap-8">
@@ -198,17 +188,8 @@ function CreatorDashboard() {
                                 }} />
                         </div>
                     </section>
-
-
                 </div>
-                <Footer />
             </section >
-        </div >
+        </LayoutWrapper>
     )
 }
-CreatorDashboard.getLayout = page => (
-    <BaseLayout>
-        {page}
-    </BaseLayout>
-);
-export default CreatorDashboard;

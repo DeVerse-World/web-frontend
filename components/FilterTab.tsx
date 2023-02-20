@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router"
+import styles from '../styles/filter-tab.module.css';
 
 type Props = {
     type: string;
@@ -20,7 +21,7 @@ type SFilterTabITem = {
 function DisabledFilterTabItem(props: SFilterTabITem) {
     return (
         <div key={`disabled-${props.subType}`}
-            className="filter-tab disable">
+            className={`${styles.filterTab} ${styles.filterTabDisabled}`}>
             {props.label}
         </div>
     )
@@ -28,7 +29,7 @@ function DisabledFilterTabItem(props: SFilterTabITem) {
 
 function FilterTabItem(props: SFilterTabITem) {
     return (
-        <Link key={`${props.type}-${props.subType}`} className={`filter-tab ${props.isActive && 'active'}`}
+        <Link key={`${props.type}-${props.subType}`} className={`${styles.filterTab} ${props.isActive && styles.filterTabActive}`}
             href={{
                 query: {
                     type: props.type,

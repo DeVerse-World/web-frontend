@@ -27,7 +27,7 @@ function Main() {
     <LayoutWrapper>
       <div id="section-content" className='flex flex-col'>
         <WelcomeSection />
-        <IntroSection />
+        {/* <IntroSection />
         <HighlightFeatureSection />
         <ProductSection />
         <TeamMemberSection />
@@ -37,7 +37,7 @@ function Main() {
         {showBlogToggle ?
           <BlogPostSection />
           : null
-        }
+        } */}
       </div>
     </LayoutWrapper>
   );
