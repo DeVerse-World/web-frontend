@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+import styles from "../../styles/top-tab.module.css";
 
 export type TabHeaderItems = {
     href: string,
@@ -14,15 +15,11 @@ export function TabHeaderBar(props: Props) {
     const router = useRouter();
 
     return (
-        <div id="tab-bar" >
+        <div className={styles.tabBar} >
             {props.data.map(item => {
-                let className = "tab-header";
-                if (router.pathname == item.href) {
-                    className += " active";
-                }
                 return (
-                    <Link href={item.href} scroll={false} >
-                        <span className={className}>{item.label}</span>
+                    <Link href={item.href} scroll={false} className="no-underline" key={item.href}>
+                        <span className={`${styles.tabHeader} ${router.pathname == item.href && styles.active}`}>{item.label}</span>
                     </Link>
                 )
             })}

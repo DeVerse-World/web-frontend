@@ -1,4 +1,4 @@
-.tab-header {
+.tabHeader {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,6 +11,15 @@
     cursor: pointer;
 }
 
-.tab-header.active {
+.active {
     border-bottom: 2px solid white;
+}
+
+.tabBar {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: black;
+    height: 50px;
+    min-height: 50px;
 }

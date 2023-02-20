@@ -105,21 +105,7 @@ export default function LayoutWrapper(props: SidebarProps) {
                 <div className="flex-grow flex flex-col overflow-y-scroll">
                     {props.children}
                     <section id="section-footer">
-                        <div className="flex flex-col gap-2 items-center">
-                            <span className="flex flex-row gap-2">
-                                <Image
-                                    src={"/images/logo.webp"}
-                                    height={36}
-                                    width={36}
-                                    alt="Deverse logo" />
-                                <Image
-                                    height={36}
-                                    width={256}
-                                    src={"/images/logo-text.webp"}
-                                    alt="Deverse text logo" />
-                            </span>
-                            Copyright © Deverse World
-                        </div>
+
                         <div className="flex flex-col">
                             <Link href="privacy-policies" style={{
                                 textDecoration: 'none',
@@ -141,6 +127,21 @@ export default function LayoutWrapper(props: SidebarProps) {
                                 ].map(item => <a key={item.title} title={item.title} target="_blank" href={item.href} >{item.icon}</a>)
                                 }
                             </div>
+                        </div>
+                        <div className="flex flex-col gap-2 items-center">
+                            <span className="flex flex-row gap-2">
+                                <Image
+                                    src={"/images/logo.webp"}
+                                    height={36}
+                                    width={36}
+                                    alt="Deverse logo" />
+                                <Image
+                                    height={36}
+                                    width={256}
+                                    src={"/images/logo-text.webp"}
+                                    alt="Deverse text logo" />
+                            </span>
+                            Copyright © Deverse World
                         </div>
                     </section>
                 </div>

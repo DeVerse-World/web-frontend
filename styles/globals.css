@@ -38,6 +38,7 @@ body * {
     background-color: black;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     color: white;
     justify-content: space-evenly;
     padding-left: 0.5rem;
@@ -145,14 +146,7 @@ body * {
     display: none;
 }
 
-#tab-bar {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background: black;
-    height: 50px;
-    min-height: 50px;
-}
+
 
 /* Special case */
 
