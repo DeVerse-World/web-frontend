@@ -22,19 +22,19 @@ function Marketplace() {
 
     useEffect(() => {
         if (!router.isReady) return;
-        // switch (router.query['type']) {
-        //     case MarketplaceTabKey.EVENT_TYPE:
-        //         loadEvents();
-        //         break;
-        //     case MarketplaceTabKey.WORLD_TYPE:
-        //         loadWorlds();
-        //         break;
-        //     case MarketplaceTabKey.NFT_TYPE:
-        //         loadNFTs('');
-        //         break;
-        //     default:
-        //         break;
-        // }
+        switch (router.query['type']) {
+            case MarketplaceTabKey.EVENT_TYPE:
+                loadEvents();
+                break;
+            case MarketplaceTabKey.WORLD_TYPE:
+                loadWorlds();
+                break;
+            case MarketplaceTabKey.NFT_TYPE:
+                loadNFTs('');
+                break;
+            default:
+                break;
+        }
     }, [router]);
 
     const loadNFTs = async (query: string) => {

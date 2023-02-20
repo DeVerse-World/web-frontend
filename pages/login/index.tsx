@@ -5,12 +5,13 @@ import Image from "next/image";
 import { useMetaMask } from "metamask-react";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useRouter } from "next/router";
+import StorageService from "../../data/services/StorageService";
 
 export async function getServerSideProps(context) {
     return {
         props: {
             loginKey: context.query.key || '',
-            previousPath: context.req.headers.referer
+            previousPath: context.req.headers.referer || ''
         }
     }
 }
@@ -21,17 +22,46 @@ export default function Login({ loginKey, previousPath }) {
     const { status, connect, account } = useMetaMask();
 
     useEffect(() => {
-        if (user) {
+        if (loginKey) {
+            StorageService.setSessionKey(loginKey)
+            AuthService.authorizeLoginLinkWithUserToken(loginKey).then(res => {
+                if (res.isFailure()) {
+                    window.alert(res.error);
+                    return;
+                }
+                if (!user) {
+                    setUser(res.value.user);
+                }
+                window.alert('Authorized!')
+                router.replace('/')
+            })
+        } else if (user) { //Navigate back to home if user login
             router.replace('/')
         }
     }, [user])
+
+    useEffect(() => {
+        if (account && user) {
+            router.replace('/')
+        }
+    }, [account])
 
     const onMetamaskConnect = () => {
         if (status == "unavailable") {
             window.alert('Metamask is unavailable. Please install/enable metamask extension in your browser and try again.')
             return;
         }
-        connect();
+        if (status == "connected") {
+            AuthService.connectToMetamask(account, user, loginKey).then(res => {
+                if (res.isFailure()) {
+                    window.alert('Unabled to link with Metamask account');
+                    return;
+                }
+                setUser(res.getValue().user)
+            });
+        } else {
+            connect();
+        }
     }
 
     const onGoogleConnect = useGoogleLogin({
@@ -54,17 +84,17 @@ export default function Login({ loginKey, previousPath }) {
     return (
         <div className="bg-black w-screen h-screen flex flex-col items-center justify-center text-white">
             <h1>Signin/Signup</h1>
-            <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
+            <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2"
                 onClick={onMetamaskConnect}>
                 <Image width={32} height={32} alt="metamask-icon" src="/images/metamask.webp" />
                 Metamask
             </button>
-            <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
+            <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2"
                 onClick={() => onGoogleConnect()}>
                 <Image width={32} height={32} alt="google-icon" src="/images/google.webp" />
                 Google
             </button>
-            <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
+            <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2"
                 onClick={onSteamConnect}>
                 <Image width={32} height={32} alt="steam-icon" src="/images/steam_logo.png" />
                 Steam
