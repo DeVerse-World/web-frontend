@@ -1,27 +1,31 @@
 import { useContext, useEffect, useState } from "react";
 import AuthService from "../../data/services/AuthService";
-import StorageService from "../../data/services/StorageService";
 import { AppContext } from "../../components/contexts/app_context";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import Image from "next/image";
 import { useMetaMask } from "metamask-react";
 import { useGoogleLogin } from "@react-oauth/google";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps(context) {
-    const loginKey = context.query.key;
-    // Fetch data from external API
-
-    // Pass data to the page via props
     return {
         props: {
-            loginKey: loginKey || ''
+            loginKey: context.query.key || '',
+            previousPath: context.req.headers.referer
         }
     }
 }
 
-export default function Login({ loginKey }) {
+export default function Login({ loginKey, previousPath }) {
+    const router = useRouter();
     const { user, setUser } = useContext(AppContext);
     const { status, connect, account } = useMetaMask();
+
+    useEffect(() => {
+        if (user) {
+            router.replace('/')
+        }
+    }, [user])
+
     const onMetamaskConnect = () => {
         if (status == "unavailable") {
             window.alert('Metamask is unavailable. Please install/enable metamask extension in your browser and try again.')
@@ -52,20 +56,17 @@ export default function Login({ loginKey }) {
             <h1>Signin/Signup</h1>
             <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                 onClick={onMetamaskConnect}>
-                <Image title="metamask" width={32} height={32}
-                    alt="metamask-icon" src="/images/metamask.webp" />
+                <Image width={32} height={32} alt="metamask-icon" src="/images/metamask.webp" />
                 Metamask
             </button>
             <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                 onClick={() => onGoogleConnect()}>
-                <Image title="steam" width={32} height={32}
-                    alt="google-icon" src="/images/google.webp" />
+                <Image width={32} height={32} alt="google-icon" src="/images/google.webp" />
                 Google
             </button>
             <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
                 onClick={onSteamConnect}>
-                <Image title="steam" width={32} height={32}
-                    alt="steam-icon" src="/images/steam_logo.png" />
+                <Image width={32} height={32} alt="steam-icon" src="/images/steam_logo.png" />
                 Steam
             </button>
         </div>

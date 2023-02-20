@@ -4,11 +4,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body * {
     font-family: 'Montserrat', sans-serif;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .app-logo {
+        animation: App-logo-spin infinite 2s linear;
+    }
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 #section-content {
@@ -64,21 +81,12 @@ body * {
 }
 
 .bg-deverse-gradient {
-    background-color: rgb(97 198 208);
+    background-color: #61c6d0;
     background-image: linear-gradient(to bottom, rgb(97 198 208), rgb(64 175 217));
 }
 
 .bg-deverse-gradient:hover {
     background-image: linear-gradient(to bottom, rgb(127 198 208), rgb(94 175 217));
-}
-
-.bg-deverse-negative-gradient {
-    background-color: rgb(226, 84, 79);
-    background-image: linear-gradient(to bottom, rgb(226, 84, 79), rgb(224, 50, 44));
-}
-
-.bg-deverse-negative-gradient:hover {
-    background-image: linear-gradient(to bottom, rgb(221, 115, 112), rgb(223, 81, 76));
 }
 
 .txt-deverse-gradient {
@@ -101,7 +109,7 @@ body * {
     z-index: 11;
     align-items: flex-start;
     --tw-bg-opacity: 1;
-    color:white;
+    color: white;
     background-color: rgb(55 65 81 / var(--tw-bg-opacity));
 }
 
@@ -178,4 +186,8 @@ iframe.rpo {
         line-height: 95%;
         letter-spacing: 0.5%;
     }
+}
+
+.offcanvas {
+    width: auto !important;
 }

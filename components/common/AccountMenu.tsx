@@ -1,13 +1,13 @@
 import Link from "next/link";
 import React, { DOMAttributes, useContext, useEffect, useState } from "react";
 import { AppContext } from "../contexts/app_context";
-import LoginModal from "../login/LoginModal";
 import AuthService from "../../data/services/AuthService";
 import FirebaseService from "../../data/services/FirebaseService";
+import { useRouter } from "next/router";
 
-function AccountMenu(props: DOMAttributes) {
-  const { user, setUser, showLogin, setShowLogin, remoteConfig } = useContext(AppContext);
-  const [showDropdown, setShowDropdown] = useState(false);
+export default function AccountMenu(props: DOMAttributes) {
+  const { user, setUser, remoteConfig } = useContext(AppContext);
+  const router = useRouter();
   const [showDashboardToggle, setShowDashboardToggle] = useState(false);
 
   useEffect(() => {
@@ -15,19 +15,14 @@ function AccountMenu(props: DOMAttributes) {
       FirebaseService.getShouldShowDashboardToggle(remoteConfig).then(setShowDashboardToggle)
   }, [remoteConfig])
 
-  const onClickLogin = (e) => {
-    setShowLogin(true)
-  }
-
   const onClickLogout = (e) => {
     AuthService.logout().then(res => {
       if (res.isFailure()) {
         window.alert(res.error)
         return
       }
-      window.alert("Logout successfully")
-      setShowLogin(false);
-      setUser(null)
+      setUser(null);
+      router.replace('/');
     })
   }
 
@@ -40,7 +35,7 @@ function AccountMenu(props: DOMAttributes) {
           Dashboard
         </Link>
       }
-      {user != null && user.isBlogPostAdmin == true &&
+      {user != null && user.isBlogPostAdmin &&
         <Link href="/content-manager" className="no-underline text-white">
           Content manager
         </Link>
@@ -49,8 +44,5 @@ function AccountMenu(props: DOMAttributes) {
         Logout
       </span>
     </div>
-    // {showLogin && <LoginModal show={true} onHide={() => setShowLogin(false)} isAddMetamaskOnly={false} isAddGoogleOnly={false} isAddSteamOnly={false} fullscreen />}
   );
 }
-
-export default AccountMenu;

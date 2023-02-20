@@ -21,7 +21,7 @@ export default function WelcomeSection() {
           'https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F05.webp?alt=media&token=f27013fc-92ea-4237-8b2e-5f64bd36e232',
           'https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F06.webp?alt=media&token=34b2d9cf-576d-4f22-9d8c-0a41fcfe9005'
         ].map((src, index) =>
-          <Carousel.Item className="h-screen w-screen">
+          <Carousel.Item className="h-screen w-screen" key={index}>
             <Image alt={`showcase-${index}`} fill src={src} />
           </Carousel.Item>
         )}
