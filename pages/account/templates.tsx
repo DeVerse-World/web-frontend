@@ -4,6 +4,7 @@ import RootWorldList, { RootTemplateViewModel } from "../../components/asset/Roo
 import { NFTAsset } from "../../data/model/nft_asset";
 import AccountService from "../../data/services/AccountService";
 import LayoutWrapper from "../../components/LayoutWrapper";
+import { TabHeaderBar } from "../../components/common/TabHeader";
 
 export default function Layout() {
     const [rootTemplates, setRootTemplates] = useState<NFTAsset[]>([]);
@@ -57,6 +58,15 @@ export default function Layout() {
 
     return (
         <LayoutWrapper>
+            <TabHeaderBar data={[
+                { href: '/account', label: 'Info' },
+                { href: '/account/wallet', label: 'Wallet' },
+                { href: '/account/avatar', label: 'Avatars' },
+                { href: '/account/events', label: 'Events' },
+                { href: '/account/templates', label: 'Worlds' },
+                { href: '/account/items', label: 'Items' },
+                { href: '/account/settings', label: 'Settings' }
+            ]} />
             <div id="section-content" className="flex flex-col relative justify-center p-4" >
                 <div >
                     <h3>Root</h3>

@@ -6,6 +6,7 @@ import PlayModal from "./PlayModal";
 import { BsFillPeopleFill, BsPlayFill } from "react-icons/bs";
 import { TbWorld } from "react-icons/tb";
 import { TemplateViewModel } from "./RootWorldList";
+import styles from "../../styles/card-item.module.css";
 
 export type DerivTemplateViewModel = {
     deletable?: boolean;

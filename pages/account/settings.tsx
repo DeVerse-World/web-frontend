@@ -6,6 +6,7 @@ import { AppContext } from "../../components/contexts/app_context";
 import AuthService from "../../data/services/AuthService";
 import { usePrevious } from "../../utils/use_previous";
 import LayoutWrapper from "../../components/LayoutWrapper";
+import { TabHeaderBar } from "../../components/common/TabHeader";
 
 export default function Settings() {
     const { user, setUser } = useContext(AppContext);
@@ -96,6 +97,15 @@ export default function Settings() {
 
     return (
         <LayoutWrapper>
+            <TabHeaderBar data={[
+                { href: '/account', label: 'Info' },
+                { href: '/account/wallet', label: 'Wallet' },
+                { href: '/account/avatar', label: 'Avatars' },
+                { href: '/account/events', label: 'Events' },
+                { href: '/account/templates', label: 'Worlds' },
+                { href: '/account/items', label: 'Items' },
+                { href: '/account/settings', label: 'Settings' }
+            ]} />
             <section id="section-content" className="flex flex-row gap-4">
                 <h3 className="section-header-lg pl-4">Settings</h3>
                 <div className="flex flex-col gap-2 py-4 w-[400px]">

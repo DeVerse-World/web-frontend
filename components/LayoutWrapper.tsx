@@ -81,16 +81,14 @@ export default function LayoutWrapper(props: SidebarProps) {
                     </Link>
 
                 </span>
-                <div>
-                    {user
-                        ? <Image className="cursor-pointer" width={40} height={40} alt="avatar-img"
-                            src={user?.avatar || "/images/placeholder.webp"}
-                            onClick={() => setShowDropdown(true)} />
-                        : <Link href="/login" className="no-underline text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-8 md:h-12">
-                            Login
-                        </Link>
-                    }
-                </div>
+                {user
+                    ? <Image className="cursor-pointer" width={40} height={40} alt="avatar-img"
+                        src={user?.avatar || "/images/placeholder.webp"}
+                        onClick={() => setShowDropdown(true)} />
+                    : <Link href="/login" className="no-underline text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-8">
+                        Login
+                    </Link>
+                }
             </div>
             {showDropdown && <AccountMenu onPointerLeave={() => setShowDropdown(false)} />}
             <div className="flex flex-row" style={{ height: `calc(100vh - ${appBarHeight}px)` }}>

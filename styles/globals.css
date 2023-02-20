@@ -30,6 +30,7 @@ body * {
 
 #section-content {
     flex-grow: 1;
+    color: white;
     background-image: radial-gradient(closest-side, rgb(22, 74, 124), rgba(2, 11, 64, 0.7)), url(/images/bg-highlight.webp);
 }
 
@@ -156,4 +157,17 @@ body * {
 
 .offcanvas {
     width: auto !important;
+}
+
+.ql-snow.ql-toolbar {
+    display: block;
+    background: #b8b8b8;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+}
+
+.ql-container {
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    background: #6d6a6a;
 }

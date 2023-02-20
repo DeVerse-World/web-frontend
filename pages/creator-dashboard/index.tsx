@@ -2,8 +2,6 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import AvatarContainer from "../../components/AvatarContainer";
 import { AppContext } from "../../components/contexts/app_context";
-import ListingTabComponent from "../../components/ListingTab";
-import { SecondaryTab } from "../../components/marketplace_tab";
 import { Bar, Chart } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend, BarElement, LineController } from 'chart.js';
 import { TimeFilter } from "../../data/enum/time_filter";
@@ -12,6 +10,7 @@ import AccountService from "../../data/services/AccountService";
 import { timestampToLabel } from "../../utils/time_util";
 import UnauthorizedView from "../../components/UnauthorizedView";
 import LayoutWrapper from "../../components/LayoutWrapper";
+import FilterTab from "../../components/FilterTab";
 
 ChartJS.register(
     CategoryScale,
@@ -30,7 +29,6 @@ ChartJS.register(
 export default function CreatorDashboard() {
     const { user } = useContext(AppContext);
     const router = useRouter();
-    const [visibleTab, setVisibleTab] = useState<SecondaryTab>(SecondaryTab.CD_HOME);
     const [playDataset, setPlayDataSet] = useState([]);
     const [revDataset, setRevPlayDataSet] = useState([]);
     const [timeFilter, setTimeFilter] = useState<TimeFilter>(TimeFilter.MONTH);
@@ -56,16 +54,6 @@ export default function CreatorDashboard() {
     useEffect(() => {
         displayData();
     }, []);
-
-    const onSelectTab = (tab: SecondaryTab) => {
-        router.push({
-            pathname: router.pathname,
-            query: {
-                tab: tab
-            }
-        }, undefined, { shallow: true });
-        setVisibleTab(tab);
-    }
 
     const displayData = async () => {
         let offlineRes = await AccountService.getStats(DataFilter.OFFLINE, timeFilter);
@@ -122,9 +110,9 @@ export default function CreatorDashboard() {
                     <AvatarContainer />
                     Deverse Worlds
                 </div>
-                <div className="flex flex-col mt-8">
-                    <ListingTabComponent label="Home" tab={SecondaryTab.CD_HOME} isSelected={visibleTab} onSelect={onSelectTab} />
-                </div>
+                <FilterTab type="dashboard" data={[
+                        { label: "Home"}
+                    ]} />
             </div>
         }>
             <section id='section-content' className='flex flex-col' >
