@@ -1,13 +1,11 @@
-import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
+import LayoutWrapper from "../../components/LayoutWrapper";
 
-function Items(){
+export default function Items(){
     return (
-        <section>
-            
-        </section>
+        <LayoutWrapper>
+            <div id="section-content">
+
+            </div>
+        </LayoutWrapper>
     )
 }
-
-Items.getLayout = getAccountWrapperLayout;
-
-export default Items;

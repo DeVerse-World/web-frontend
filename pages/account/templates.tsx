@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import DerivWorldList, { DerivTemplateViewModel } from "../../components/asset/DerivWorldList";
 import RootWorldList, { RootTemplateViewModel } from "../../components/asset/RootWorldList";
-import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AccountService from "../../data/services/AccountService";
+import LayoutWrapper from "../../components/LayoutWrapper";
 
-function Layout() {
+export default function Layout() {
     const [rootTemplates, setRootTemplates] = useState<NFTAsset[]>([]);
     const [derivTemplates, setDerivTemplates] = useState<NFTAsset[]>([]);
 
@@ -56,19 +56,17 @@ function Layout() {
     }
 
     return (
-        <div className="flex flex-col relative justify-center text-white p-4" >
-            <div >
-                <h3>Root</h3>
-                <RootWorldList data={rootTemplates} />
+        <LayoutWrapper>
+            <div id="section-content" className="flex flex-col relative justify-center p-4" >
+                <div >
+                    <h3>Root</h3>
+                    <RootWorldList data={rootTemplates} />
+                </div>
+                <div>
+                    <h3>Deriv</h3>
+                    <DerivWorldList data={derivTemplates} />
+                </div>
             </div>
-            <div>
-                <h3>Deriv</h3>
-                <DerivWorldList data={derivTemplates} />
-            </div>
-        </div>
+        </LayoutWrapper>
     )
 }
-
-Layout.getLayout = getAccountWrapperLayout;
-
-export default Layout;

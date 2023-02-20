@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import AvatarList, { AvatarViewModel } from "../../components/asset/AvatarList";
-import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AvatarService from "../../data/services/AvatarService";
+import LayoutWrapper from "../../components/LayoutWrapper";
 
-function Content() {
+export default function Content() {
     const { setViewState, user } = useContext(AppContext);
     const [nfts, setNfts] = useState<AvatarViewModel[]>([]);
     useEffect(() => {
@@ -44,14 +44,10 @@ function Content() {
     }
 
     return (
-        <div className="flex flex-col relativejustify-center items-center text-white p-4" >
-            <div className="flex flex-row gap-2">
+        <LayoutWrapper>
+            <div id="section-content">
                 <AvatarList data={nfts} onDeleted={deleteItem} />
             </div>
-        </div>
+        </LayoutWrapper>
     )
 }
-
-Content.getLayout = getAccountWrapperLayout;
-
-export default Content;

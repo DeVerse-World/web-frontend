@@ -1,13 +1,11 @@
-import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
+import LayoutWrapper from "../../components/LayoutWrapper";
 
-function Wallet() {
+export default function Wallet() {
     return (
-        <section>
-            
-        </section>
+        <LayoutWrapper>
+            <div id="section-content" >
+                {/*<NFTList data={data} />*/}
+            </div>
+        </LayoutWrapper>
     )
 }
-
-
-Wallet.getLayout = getAccountWrapperLayout;
-export default Wallet;

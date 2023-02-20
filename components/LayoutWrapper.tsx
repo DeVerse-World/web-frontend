@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import { AiFillChrome, AiFillFacebook, AiFillHome, AiOutlineTwitter } from "react-icons/ai";
 import { FaDiscord, FaGamepad, FaInfoCircle } from "react-icons/fa";
 import { SiCmake } from "react-icons/si";
-import AccountMenu from "./common/AccountMenu";
+import AccountMenu from "./AccountMenu";
 import { MdEmail } from "react-icons/md";
 import styles from '../styles/sidebar.module.css';
 import { AppContext } from "./contexts/app_context";

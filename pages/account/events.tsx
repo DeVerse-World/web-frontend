@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import EventList, { EventViewModel } from "../../components/asset/EventList";
-import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import AccountService from "../../data/services/AccountService";
 import { getTimeString } from "../../utils/time_util";
+import LayoutWrapper from "../../components/LayoutWrapper";
 
-function Layout() {
+export default function Events() {
     const { setViewState } = useContext(AppContext);
     const [nfts, setNfts] = useState<EventViewModel[]>([]);
     useEffect(() => {
@@ -38,12 +38,10 @@ function Layout() {
     // }
 
     return (
-        <div className="flex flex-col relative justify-center items-center text-white p-4" >
-            <EventList data={nfts} />
-        </div>
+        <LayoutWrapper>
+            <div id="section-content">
+                <EventList data={nfts} />
+            </div>
+        </LayoutWrapper>
     )
 }
-
-Layout.getLayout = getAccountWrapperLayout;
-
-export default Layout;

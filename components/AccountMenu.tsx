@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React, { DOMAttributes, useContext, useEffect, useState } from "react";
-import { AppContext } from "../contexts/app_context";
-import AuthService from "../../data/services/AuthService";
-import FirebaseService from "../../data/services/FirebaseService";
+import { AppContext } from "./contexts/app_context";
+import AuthService from "../data/services/AuthService";
+import FirebaseService from "../data/services/FirebaseService";
 import { useRouter } from "next/router";
 
 export default function AccountMenu(props: DOMAttributes) {

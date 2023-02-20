@@ -1,11 +1,9 @@
 import DownloadDemoButton from "../../components/DownloadDemoButton";
-import { getCreateLayout } from "../../components/CreateLayout";
-import { BsPlayFill } from "react-icons/bs";
 import { useState } from "react";
 import customProtocolCheck from "custom-protocol-check";
 import { Modal } from "react-bootstrap";
 import LayoutWrapper from "../../components/LayoutWrapper";
-import TabHeader, { TabHeaderBar, TabHeaderItems } from "../../components/common/TabHeader";
+import { TabHeaderBar } from "../../components/common/TabHeader";
 
 
 function Editor() {
