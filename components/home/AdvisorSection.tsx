@@ -9,7 +9,7 @@ type CardProps = {
 
 function AdvisorCard(props: CardProps) {
     return (
-        <div  className="advisor-card flex flex-row flex-wrap items-center gap-4 text-white border-white border-b-2 py-2">
+        <div  className="flex flex-row flex-wrap items-center gap-4 text-white border-white border-b-2 py-2">
             <span className="text-3xl font-bold text-blue-400 md:w-[300px] w-[200px] flex flex-row gap-2 items-center">
                 <span style={{
                     whiteSpace: "nowrap",

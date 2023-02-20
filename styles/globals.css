@@ -66,8 +66,6 @@ body * {
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(127 198 208)), color-stop(0.72, rgb(94 175 217)), color-stop(0.86, rgb(112, 238, 255)));
 }
 
-/* Tab */
-
 .deverse-title {
     font-size: 2.5rem;
     /* font-family: 'Akira Expanded', sans-serif; */
@@ -75,10 +73,6 @@ body * {
 
 .bg-deverse {
     background-image: radial-gradient(closest-side, rgb(22, 74, 124), rgba(2, 11, 64, 0.7)), url(/images/bg-highlight.webp);
-}
-
-.deverse-border {
-    border: 2px solid rgb(97 198 208)
 }
 
 .bg-deverse-gradient {
@@ -132,22 +126,6 @@ body * {
     font-weight: 700;
 }
 
-.advisor-card {
-    position: relative;
-}
-
-.advisor-card:hover .thumbnail {
-    display: block;
-}
-
-.advisor-card .thumbnail {
-    position: absolute;
-    right: 10px;
-    display: none;
-}
-
-
-
 /* Special case */
 
 .paginator {
@@ -165,12 +143,6 @@ body * {
 
 .paginator.active {
     background: rgb(97 198 208);
-}
-
-iframe.rpo {
-    width: 100%;
-    height: 100%;
-    min-height: 600px;
 }
 
 @media only screen and (max-width: 600px) {

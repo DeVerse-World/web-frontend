@@ -69,7 +69,7 @@ function Avatar() {
                 ]} />
                 <iframe allow="camera *; microphone *"
                     title="Ready Player Me"
-                    className='rpo'
+                    className='w-full h-full min-w-[600px]'
                     src='https://deverse.readyplayer.me/avatar?frameApi' />
                 {showAvatarForm &&
                     <Modal centered show={true}

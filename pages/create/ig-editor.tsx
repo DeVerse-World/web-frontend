@@ -4,7 +4,7 @@ import customProtocolCheck from "custom-protocol-check";
 import { Modal } from "react-bootstrap";
 import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
-
+import { BsPlayFill } from "react-icons/bs";
 
 function Editor() {
     const [showPlayModal, setShowPlayModal] = useState(false);

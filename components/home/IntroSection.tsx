@@ -8,15 +8,13 @@ const iframeWrapper: React.CSSProperties = {
 
 export default function IntroSection() {
   return (
-    <section id="section-demo-video">
-      <div style={iframeWrapper}>
+    <section id="section-demo-video" style={iframeWrapper}>
         <iframe
-          className="rounded-[12px] w-[75%] h-[75%] m-auto absolute inset-0"
+          className="rounded-xl w-[75%] h-[75%] m-auto absolute inset-0"
           src="https://www.youtube.com/embed/VAZodXYykPQ"
           title="Deverse World Alpha"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen />
-      </div>
     </section>
   );
 }

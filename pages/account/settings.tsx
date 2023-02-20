@@ -34,16 +34,18 @@ export default function Settings() {
     //     // AccountService.addUserModelWithGoogleMail(user.id, "abc")
     // }
 
-    const onGoogleLogin = (event: CredentialResponse) => {
-        AuthService.connectToGoogleMail(event.credential, user).then(res => {
-            // let googleUser = jwt_decode<GoogleUser>(event.credential);
-            if (res.isFailure()) {
-                window.alert(res.error);
-                return;
-            }
-            setUser(res.value.user);
-        });
-    }
+    const onGoogleConnect = useGoogleLogin({
+        onSuccess: (codeResponse) => {
+            AuthService.connectToGoogleMail(codeResponse.access_token, user).then(res => {
+                if (res.isFailure()) {
+                    window.alert(res.error);
+                    return;
+                }
+                setUser(res.value.user);
+            })
+        },
+        onError: (error) => window.alert(error)
+    });
 
 
     useEffect(() => {
@@ -61,7 +63,7 @@ export default function Settings() {
 
     const onLinkAccountWithMetamask = () => {
         if (currentWallet.length == 0) {
-            if (walletAddress.length > 0) {
+            if (walletAddress) {
                 AuthService.connectToMetamask(walletAddress, user).then(res => {
                     if (res.isFailure()) {
                         window.alert(res.error)
@@ -102,15 +104,18 @@ export default function Settings() {
                         <FormControl id="name" required
                             placeholder="Name"
                             aria-label="User Name"
-                            value={user.name}
+                            value={user?.name}
                             readOnly
                         />
                     </InputGroup>
                     <div className="flex flex-row gap-4">
                         <h5>Wallet Address</h5>
-                        {!user?.social_email && user.wallet_address &&
+                        {!user?.social_email && user?.wallet_address &&
                             // <span className="text-blue-400 cursor-pointer" onClick={() => login()} >(Link with Google)</span>
-                            <GoogleLogin width='300' onSuccess={onGoogleLogin} />
+                            <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
+                                onClick={() => onGoogleConnect()}>
+                                Link with google
+                            </button>
                         }
                     </div>
                     <InputGroup>
@@ -123,7 +128,7 @@ export default function Settings() {
                     </InputGroup>
                     <div className="flex flex-row gap-4">
                         <h5>Email Address</h5>
-                        {!user?.wallet_address && user.social_email &&
+                        {!user?.wallet_address && user?.social_email &&
                             <span className="text-blue-400 cursor-pointer" onClick={onLinkAccountWithMetamask} >(Link with Metamask)</span>
                         }
                     </div>

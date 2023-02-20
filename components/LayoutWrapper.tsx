@@ -102,10 +102,9 @@ export default function LayoutWrapper(props: SidebarProps) {
                         </div>
                     </Nav>
                 )}
-                <div className="flex-grow flex flex-col overflow-y-scroll">
+                <div className="flex-grow flex flex-col overflow-y-auto overflow-x-clip">
                     {props.children}
                     <section id="section-footer">
-
                         <div className="flex flex-col">
                             <Link href="privacy-policies" style={{
                                 textDecoration: 'none',
