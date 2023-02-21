@@ -11,7 +11,6 @@ export default function RouteGuard({ children }) {
     const [isAuthorized, setIsAuthorized] = useState(false);
 
     const authCheck = () => {
-        console.log(privatePaths, router.pathname.split('/')[1])
         if (!user && privatePaths.includes(router.pathname.split('/')[1])) {
             setIsAuthorized(false);
             router.push({

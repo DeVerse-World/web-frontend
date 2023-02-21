@@ -20,19 +20,28 @@ function Marketplace() {
     const [eventData, setEventData] = useState<EventViewModel[]>([]);
     const [rootTemplates, setRootTemplates] = useState<RootTemplateViewModel[]>([]);
 
+    const [currentType, setCurrentType] = useState<MarketplaceTabKey>(null)
     useEffect(() => {
         if (!router.isReady) return;
         switch (router.query['type']) {
-            case MarketplaceTabKey.EVENT_TYPE:
-                loadEvents();
-                break;
             case MarketplaceTabKey.WORLD_TYPE:
+                setCurrentType(MarketplaceTabKey.WORLD_TYPE)
                 loadWorlds();
                 break;
+            case MarketplaceTabKey.EVENT_TYPE:
+                setCurrentType(MarketplaceTabKey.EVENT_TYPE)
+                loadEvents();
+                break;
             case MarketplaceTabKey.NFT_TYPE:
+                setCurrentType(MarketplaceTabKey.NFT_TYPE)
                 loadNFTs('');
                 break;
             default:
+                router.push({
+                    query: { type: MarketplaceTabKey.WORLD_TYPE }
+                }, undefined, { shallow: true })
+                setCurrentType(MarketplaceTabKey.WORLD_TYPE)
+                loadWorlds();
                 break;
         }
     }, [router]);
@@ -147,9 +156,9 @@ function Marketplace() {
         }>
             <div id="section-content" className="p-4">
                 <span className="section-header-lg pl-4">Events</span>
-                {images && <AvatarList data={images} />}
-                {eventData && <EventList data={eventData} />}
-                {rootTemplates && <RootWorldList data={rootTemplates} />}
+                {currentType == MarketplaceTabKey.NFT_TYPE && <AvatarList data={images} />}
+                {currentType == MarketplaceTabKey.EVENT_TYPE && <EventList data={eventData} />}
+                {currentType == MarketplaceTabKey.WORLD_TYPE && <RootWorldList data={rootTemplates} />}
             </div>
         </LayoutWrapper>
     )

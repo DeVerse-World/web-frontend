@@ -29,7 +29,8 @@ function DisabledFilterTabItem(props: SFilterTabITem) {
 
 function FilterTabItem(props: SFilterTabITem) {
     return (
-        <Link key={`${props.type}-${props.subType}`} className={`${styles.filterTab} ${props.isActive && styles.filterTabActive}`}
+        <Link key={`${props.type}-${props.subType}`}
+            className={`${styles.filterTab} ${props.isActive && styles.filterTabActive}`}
             href={{
                 query: {
                     type: props.type,

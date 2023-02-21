@@ -190,6 +190,8 @@ class AssetService extends BaseService {
                             } else {
                                 resolve(res.getValue())
                             }
+                        }).catch(e => {
+                            reject(e)
                         })
                     }));
                 })
@@ -199,20 +201,17 @@ class AssetService extends BaseService {
                         data.push(assetRes.value)
                     }
                 })
-                 
                 break;
             default:
                 throw new Error("Unrecognized api ")
                 break;
         }
-        // for (let i =0; i< 20; i++) {
-        //     data.push(data);
-        // }
         return data;
     }
 
     async _getAssetFromEther(tokenFullUri: string): Promise<Result<NFTAsset>> {
         const response = await deverseClient.get<NFTAsset>(tokenFullUri);
+        console.log('hey there')
         if (response.status != 200) {
             return new Failure(new Error(response.statusText));
         }
