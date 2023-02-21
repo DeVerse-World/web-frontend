@@ -12,6 +12,7 @@ import { MdEmail } from "react-icons/md";
 import styles from '../styles/sidebar.module.css';
 import { AppContext } from "./contexts/app_context";
 import { GiHamburgerMenu } from "react-icons/gi";
+import RouteGuard from "./RouteGuard";
 
 const appBarHeight = 60;
 
@@ -58,7 +59,7 @@ export default function LayoutWrapper(props: SidebarProps) {
     const { user } = useContext(AppContext);
     const [showDropdown, setShowDropdown] = useState(false);
     return (
-        <>
+        <RouteGuard>
             <div className="flex flex-row items-center justify-between md:px-8 px-2 bg-black drop-shadow-sm"
                 style={{
                     height: appBarHeight,
@@ -154,6 +155,6 @@ export default function LayoutWrapper(props: SidebarProps) {
                 }>
                 </Offcanvas.Body>
             </Offcanvas>
-        </>
+        </RouteGuard>
     )
 }
