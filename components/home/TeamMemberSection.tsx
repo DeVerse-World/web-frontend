@@ -20,12 +20,12 @@ function TeamMemberCard(props: CardProps) {
                     </a>
                 </div>
             </div>
-            <div className="py-2 flex flex-col items-start">
+            {/* <div className="py-2 flex flex-col items-start">
                 <h3 className="text-blue-400 font-bold ">{props.data.name}</h3>
                 <span className="text-blue-200 text-start">{props.data.education.split('\\n').map((item, index) =>
                     (index === 0) ? item : [<br key={index} />, item]
                 )}</span>
-            </div>
+            </div> */}
         </div>
     )
 }
@@ -40,7 +40,7 @@ function TeamMemberSection(props) {
 
     return (
         <section id="team-member" className="p-4 text-center flex flex-col items-center">
-            <h3 className="text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title py-4">Our Team</h3>
+            <h3 className="text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title py-4">Founding Team</h3>
             <div className="flex flex-row flex-wrap gap-8 justify-center ">
 
                 {teamMember.length > 3 && isExpanded

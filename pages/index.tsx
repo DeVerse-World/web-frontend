@@ -6,13 +6,8 @@ import LayoutWrapper from '../components/LayoutWrapper';
 import dynamic from 'next/dynamic';
 
 const IntroSection = dynamic(() => import('../components/home/IntroSection').then((mod) => mod.default))
-const ProductSection = dynamic(() => import('../components/home/ProductsSection').then((mod) => mod.default))
 const HighlightFeatureSection = dynamic(() => import('../components/home/HighlightFeaturesSection').then((mod) => mod.default))
 const BlogPostSection = dynamic(() => import('../components/home/BlogPostSection').then((mod) => mod.default))
-const PartnerSection = dynamic(() => import('../components/home/PartnerSection').then((mod) => mod.default))
-const TeamMemberSection = dynamic(() => import('../components/home/TeamMemberSection').then((mod) => mod.default))
-const AdvisorSection = dynamic(() => import('../components/home/AdvisorSection').then((mod) => mod.default))
-const CommunityPartnerSection = dynamic(() => import('../components/home/CommunityPartnerSection').then((mod) => mod.default))
 
 function Main() {
   const [showBlogToggle, setShowBlogToggle] = useState(false);
@@ -29,11 +24,6 @@ function Main() {
         <WelcomeSection />
         <IntroSection />
         <HighlightFeatureSection />
-        <ProductSection />
-        <TeamMemberSection />
-        <AdvisorSection />
-        <PartnerSection />
-        <CommunityPartnerSection />
         {showBlogToggle ?
           <BlogPostSection />
           : null
