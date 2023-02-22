@@ -46,12 +46,8 @@ export default function Login({ loginKey, previousPath }) {
         }
     }, [account])
 
-    const onMetamaskConnect = () => {
-        if (status == "unavailable") {
-            window.alert('Metamask is unavailable. Please install/enable metamask extension in your browser and try again.')
-            return;
-        }
-        if (status == "connected") {
+    useEffect(() => {
+        if (status == "connected" && account) {
             AuthService.connectToMetamask(account, user, loginKey).then(res => {
                 if (res.isFailure()) {
                     window.alert('Unabled to link with Metamask account');
@@ -59,7 +55,15 @@ export default function Login({ loginKey, previousPath }) {
                 }
                 setUser(res.getValue().user)
             });
-        } else {
+        }
+    }, [account, status])
+
+    const onMetamaskConnect = () => {
+        if (status == "unavailable") {
+            window.alert('Metamask is unavailable. Please install/enable metamask extension in your browser and try again.')
+            return;
+        }
+        if (status == "notConnected") {
             connect();
         }
     }

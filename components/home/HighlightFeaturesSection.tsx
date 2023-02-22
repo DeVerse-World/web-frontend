@@ -11,7 +11,7 @@ function HighlightFeatureSection(props) {
                     <div className="text-lg mt-2">Discover never-ending experiences jointly constructed by the community. You can join music clubs, participate in virtual concerts, play shooting games, become a leader of a country, showcase your digital arts, and many such more.</div>
                 </div>
                 <div className="order-2">
-                    <Image src="/images/highlight-exploration.webp" width={400} height={400} />
+                    <Image src="/images/highlight-exploration.gif" width={400} height={400} />
                 </div>
             </div>
             <div className="flex flex-row items-center justify-center py-4">
