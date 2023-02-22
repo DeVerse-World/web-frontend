@@ -53,7 +53,7 @@ function Sidebar(props: SidebarProps) {
             <div className="flex flex-row h-[100%]">
                 <div className="flex flex-col px-1">
                     <SidebarItem label="Home" href="/" icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
-                    <SidebarItem label="Alpha" href="/alpha" icon={<FaGamepad fontSize="1.5rem" color='rgb(97 198 208)' />} />
+                    <SidebarItem label="Alpha" href="/alpha/streaming" icon={<FaGamepad fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Discovery" href="/marketplace" icon={<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Create" href="/create" icon={<AiFillHome fontSize="1.5rem" color='rgb(97 198 208)' />} />
                     <SidebarItem label="Docs" href="/docs" icon={<FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />} />

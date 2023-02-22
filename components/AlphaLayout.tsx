@@ -12,14 +12,14 @@ const AlphaLayout = (props: Props) => (
         <section id='section-content' className='flex flex-col justify-between '>
             <span className="flex flex-row justify-between bg-black">
                 <span className="tab-bar flex-grow" >
-                    <TabHeader href="/alpha">Main</TabHeader>
-                    <TabHeader href="/alpha/streaming">Online</TabHeader>
-                    <TabHeader href="/alpha/rewards">Rewards</TabHeader>
-                    <TabHeader href="/alpha/leaderboard">Leaderboard</TabHeader>
+                    {/*<TabHeader href="/alpha">Main</TabHeader>*/}
+                    <TabHeader href="/alpha/streaming"> <a target="_blank"> Online </a></TabHeader>
+                    {/*<TabHeader href="/alpha/rewards">Rewards</TabHeader>*/}
+                    {/*<TabHeader href="/alpha/leaderboard">Leaderboard</TabHeader>*/}
                 </span>
             </span>
             {props.children}
-            <Footer />
+            {/*<Footer />*/}
         </section>
     </CommonLayout>
 );
