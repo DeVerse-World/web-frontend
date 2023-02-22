@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import { AppContext } from "../../components/contexts/app_context";
-import UnauthorizedView from "../../components/UnauthorizedView";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AssetService from "../../data/services/AssetService";
+import LayoutWrapper from "../../components/LayoutWrapper";
 
-function Inventory() {
+export default function Inventory() {
     const { user } = useContext(AppContext);
     const [data, setData] = useState<NFTAsset[]>([]);
 
@@ -17,16 +16,11 @@ function Inventory() {
         }
     }, [user])
 
-    if (!user) {
-        return <UnauthorizedView />
-    }
     return (
-        <div className="flex justify-center items-center text-white p-4" >
-            {/*<NFTList data={data} />*/}
-        </div>
+        <LayoutWrapper>
+            <div id="section-content" >
+                {/*<NFTList data={data} />*/}
+            </div>
+        </LayoutWrapper>
     )
 }
-
-Inventory.getLayout = getAccountWrapperLayout;
-
-export default Inventory;

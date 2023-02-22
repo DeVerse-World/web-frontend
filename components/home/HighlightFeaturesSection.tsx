@@ -1,44 +1,37 @@
 import React, { useEffect } from "react";
 import { Image } from "react-bootstrap";
-import { useInView } from 'react-intersection-observer';
 
-function HighlightFeatureSection(props) {
-
-    const { ref, inView, entry } = useInView({
-        triggerOnce: true
-    });
+function HighlightFeatureSection() {
 
     return (
-        <section ref={ref} id="section-highlight" className="text-white px-4">
-            {inView && <>
-                <div className="flex flex-row items-center justify-center py-4 mx-auto w-fit">
-                    <div className="order-1 flex flex-col max-w-[45vw] md:max-w-[450px]">
-                        <div className="text-3xl uppercase text-sky-400 font-bold">Unlimited Exploration</div>
-                        <div className="text-lg mt-2">Discover a list of open worlds jointly constructed by the community: Playing various game modes such as racing / shooting / role-playing, hosting virtual events, showcasing NFT art galleries, and many more.</div>
-                    </div>
-                    <div className="order-2">
-                        <Image src="/images/highlight-exploration.webp" width={400} height={400} />
-                    </div>
+        <section id="section-highlight" className="text-white px-4">
+            <div className="flex flex-row items-center justify-center py-4 gap-4 flex-wrap">
+                <div className="xl:order-1 flex flex-col md:w-[450px]">
+                    <div className="text-3xl uppercase text-sky-400 font-bold">Unlimited Exploration</div>
+                    <div className="text-lg mt-2">Discover never-ending experiences jointly constructed by the community. You can join music clubs, participate in virtual concerts, play shooting games, become a leader of a country, showcase your digital arts, and many such more.</div>
                 </div>
-                <div className="flex flex-row items-center justify-center py-4">
-                    <div className="order-2 flex flex-col max-w-[45vw] md:max-w-[450px]">
-                        <div className="text-3xl uppercase text-sky-400 font-bold" >Unlimited Creation</div>
-                        <div className="text-lg order-1 mt-2" >Design your own avatar / race / gameplay / game mode / events with our Unreal Engine SDK or simply put together quests or levels using our in-game editor.</div>
-                    </div>
-                    <div className="order-1">
-                        <Image src="/images/highlight-creation.webp" width={400} height={400} />
-                    </div>
+                <div className="xl:order-2 md:w-[450px]">
+                    <Image src="/images/highlight-exploration.gif" width={400} height={400} />
                 </div>
-                <div className="flex flex-row items-center justify-center py-4">
-                    <div className="order-1 flex flex-col max-w-[45vw] md:max-w-[450px]">
-                        <div className="text-3xl uppercase text-sky-400 font-bold" >Unlimited Earning</div>
-                        <div className="text-lg mt-2">Earn by creating contents, tackling in-game quests events, serving certain social roles as well as contributing to the decentralised infrastructure.</div>
-                    </div>
-                    <div className="order-2">
-                        <Image src="/images/highlight-earning.webp" width={400} height={400} />
-                    </div>
+            </div>
+            <div className="flex flex-row items-center justify-center py-4 gap-4 flex-wrap">
+                <div className="xl:order-2 flex flex-col md:w-[450px]">
+                    <div className="text-3xl uppercase text-sky-400 font-bold" >BECOME PIONEER IN METAVERSE</div>
+                    <div className="text-lg order-1 mt-2" >Easily contribute and build the interconnected metaverse without programming knowledge using our drag-n-drop Editor, or enhance even beyond with our Unreal Engine SDK.</div>
                 </div>
-            </>}
+                <div className="xl:order-1 md:w-[450px]">
+                    <Image src="/images/highlight-pioneer.gif" width={400} height={400} />
+                </div>
+            </div>
+            <div className="flex flex-row items-center justify-center py-4 gap-4 flex-wrap">
+                <div className="xl:order-1 flex flex-col  md:w-[450px]">
+                    <div className="text-3xl uppercase text-sky-400 font-bold" >TURN YOUR WORK INTO MONEY</div>
+                    <div className="text-lg mt-2">Earn by selling your digital contents, tackling quest events, serving certain social roles and contributing to the metaverse.</div>
+                </div>
+                <div className="xl:order-2 md:w-[450px]">
+                    <Image src="/images/highlight-money.gif" width={400} height={400} />
+                </div>
+            </div>
         </section>
     );
 }

@@ -1,15 +1,14 @@
-import { useContext, useEffect } from "react";
-import { Spinner } from "react-bootstrap";
+import { useContext } from "react";
 import { AppContext, ViewState } from "./contexts/app_context";
 
 type LoadingProps = {
-    text?: string;
+    forceShow?: boolean;
 }
 
 function LoadingScreen(props: LoadingProps) {
     const { viewState } = useContext(AppContext);
 
-    return (viewState == ViewState.LOADING ?
+    return (viewState == ViewState.LOADING || props.forceShow == true) &&
         <div style={{
             position: 'fixed',
             left: 0,
@@ -23,14 +22,8 @@ function LoadingScreen(props: LoadingProps) {
             alignItems: 'center',
             zIndex: 99
         }}>
-            <Spinner animation="border" variant="light" style={{
-                width: '70px',
-                height: '70px'
-            }}>
-
-            </Spinner>
+            <img className="app-logo" alt="App-logo" src="images/logo-text.webp"/>
         </div>
-        : null)
 }
 
 export default LoadingScreen;

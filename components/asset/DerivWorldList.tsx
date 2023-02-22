@@ -6,6 +6,7 @@ import PlayModal from "./PlayModal";
 import { BsFillPeopleFill, BsPlayFill } from "react-icons/bs";
 import { TbWorld } from "react-icons/tb";
 import { TemplateViewModel } from "./RootWorldList";
+import styles from "../../styles/card-item.module.css";
 
 export type DerivTemplateViewModel = {
     deletable?: boolean;
@@ -55,7 +56,7 @@ function DerivWorldCard(props: CardProps) {
     return (
         <div className="w-[250px] h-[350px] bg-black/[.4] rounded-xl text-white m-2 overflow-hidden">
             <div className="h-[225px]">
-                <img className="h-full w-full" src={props.data.image || "/images/color-image-placeholder.jpg"} />
+                <img className="h-full w-full" src={props.data.image || "/images/color-image-placeholder.webp"} />
             </div>
             <p className="px-4 py-2 text-2xl font-semibold h-12">{props.data.name}</p>
             {/* <div className=" px-4 flex flex-row gap-1 items-center text-lg">

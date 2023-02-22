@@ -6,10 +6,9 @@ import { TbWorld } from "react-icons/tb";
 import PlayModal from "../../components/asset/PlayModal";
 import { RootTemplateViewModel } from "../../components/asset/RootWorldList";
 import DerivWorldList, { DerivTemplateViewModel } from "../../components/asset/DerivWorldList";
-import Footer from "../../components/common/Footer";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
-import InfiniteScroll from "react-infinite-scroll-component";
+import LayoutWrapper from "../../components/LayoutWrapper";
 
 export async function getServerSideProps(context) {
     const rootid = context.params.rootid;
@@ -82,45 +81,46 @@ export default function Deriv({ rootId }) {
     }
 
     return (
-        <section id='section-content' className="flex flex-col">
-            <div className='flex-grow p-4 flex flex-col'>
-                <button className="text-white flex flex-row items-center gap-2 py-2 text-xl" onClick={() => {
-                    router.back();
-                }}><IoIosArrowBack />Back</button>
-                {!rootTemplate ? null :
-                    <div className="flex flex-row gap-2 ">
-                        <div className="flex flex-col items-center">
-                            <div className="flex justify-center h-[350px] w-[350px] ">
-                                <img className="rounded-lg" alt="Root Template Image" src={rootTemplate.file2dUri || "/images/color-image-placeholder.jpg"} />
+        <LayoutWrapper>
+            <section id='section-content' className="flex flex-col">
+                <div className='flex-grow p-4 flex flex-col'>
+                    <button className="text-white flex flex-row items-center gap-2 py-2 text-xl" onClick={() => {
+                        router.back();
+                    }}><IoIosArrowBack />Back</button>
+                    {!rootTemplate ? null :
+                        <div className="flex flex-row gap-2 ">
+                            <div className="flex flex-col items-center">
+                                <div className="flex justify-center h-[350px] w-[350px] ">
+                                    <img className="rounded-lg" alt="Root Template Image" src={rootTemplate.file2dUri || "/images/color-image-placeholder.webp"} />
+                                </div>
+                                <button className="w-[120px] h-[40px] rounded-3xl my-4 flex flex-row justify-center items-center text-white deverse-play-btn font-bold" onClick={() => setShowPlayModal(true)}>
+                                    <BsPlayFill /></button>
                             </div>
-                            <button className="w-[120px] h-[40px] rounded-3xl my-4 flex flex-row justify-center items-center text-white deverse-play-btn font-bold" onClick={() => setShowPlayModal(true)}>
-                                <BsPlayFill /></button>
-                        </div>
 
-                        <div className="text-slate-400 ">
-                            <div className="flex flex-col gap-2 px-4">
-                                <h3 className="text-blue-200 text-3xl font-bold">{rootTemplate.name}</h3>
-                                {/* <div className="flex flex-row gap-1 items-center text-lg">
+                            <div className="text-slate-400 ">
+                                <div className="flex flex-col gap-2 px-4">
+                                    <h3 className="text-blue-200 text-3xl font-bold">{rootTemplate.name}</h3>
+                                    {/* <div className="flex flex-row gap-1 items-center text-lg">
                                     <TbWorld />15
                                     <BsFillPeopleFill className="ml-4" />35/500
                                 </div> */}
-                                <div>
-                                    <h5 className="text-blue-200">Description</h5>
-                                    <p>{rootTemplate.description}</p>
+                                    <div>
+                                        <h5 className="text-blue-200">Description</h5>
+                                        <p>{rootTemplate.description}</p>
+                                    </div>
+
                                 </div>
 
                             </div>
-
                         </div>
-                    </div>
-                }
-                <h3 className="text-blue-200 text-center">
-                    Connected worlds: {derivTemplates.length}
-                </h3>
-                <DerivWorldList data={derivTemplates} />
-            </div>
+                    }
+                    <h3 className="text-blue-200 text-center">
+                        Connected worlds: {derivTemplates.length}
+                    </h3>
+                    <DerivWorldList data={derivTemplates} />
+                </div>
+            </section >
             {showPlayModal && <PlayModal templateId={rootId.toString()} onClose={() => setShowPlayModal(false)} />}
-            <Footer />
-        </section >
+        </LayoutWrapper>
     )
 }  

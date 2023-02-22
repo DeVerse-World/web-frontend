@@ -1,21 +1,17 @@
-import IntroSection from '../components/home/IntroSection';
 import React, { useContext, useEffect, useState } from "react";
-import ProductSection from '../components/home/ProductsSection';
 import WelcomeSection from '../components/home/WelcomeSection';
-import HighlightFeatureSection from '../components/home/HighlightFeaturesSection';
-import BlogPostSection from '../components/home/BlogPostSection';
 import FirebaseService from "../data/services/FirebaseService";
-import PartnerSection from '../components/home/PartnerSection';
 import { AppContext } from '../components/contexts/app_context';
-import TeamMemberSection from '../components/home/TeamMemberSection';
-import AdvisorSection from '../components/home/AdvisorSection';
-import CommunityPartnerSection from '../components/home/CommunityPartnerSection';
-import { getLayoutWithFooter } from '../components/LayoutWithFooter';
+import LayoutWrapper from '../components/LayoutWrapper';
+import dynamic from 'next/dynamic';
 
-function Home(props) {
+const IntroSection = dynamic(() => import('../components/home/IntroSection').then((mod) => mod.default))
+const HighlightFeatureSection = dynamic(() => import('../components/home/HighlightFeaturesSection').then((mod) => mod.default))
+const BlogPostSection = dynamic(() => import('../components/home/BlogPostSection').then((mod) => mod.default))
+
+function Main() {
   const [showBlogToggle, setShowBlogToggle] = useState(false);
   const { remoteConfig } = useContext(AppContext);
-
 
   useEffect(() => {
     if (remoteConfig != null)
@@ -23,22 +19,18 @@ function Home(props) {
   }, [remoteConfig])
 
   return (
-    <div className='flex flex-col'>
-      <WelcomeSection />
-      <IntroSection />
-      <HighlightFeatureSection />
-      <ProductSection />
-      <TeamMemberSection />
-      <AdvisorSection />
-      <PartnerSection />
-      <CommunityPartnerSection />
-      {showBlogToggle ?
-        <BlogPostSection />
-        : null
-      }
-    </div>
+    <LayoutWrapper>
+      <div id="section-content" className='flex flex-col'>
+        <WelcomeSection />
+        <IntroSection />
+        <HighlightFeatureSection />
+        {showBlogToggle ?
+          <BlogPostSection />
+          : null
+        }
+      </div>
+    </LayoutWrapper>
   );
 }
 
-Home.getLayout = getLayoutWithFooter;
-export default Home;
+export default Main;

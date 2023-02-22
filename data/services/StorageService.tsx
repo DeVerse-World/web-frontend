@@ -16,10 +16,10 @@ class StorageService {
     }
 
     saveUser(user?: User) {
-        if (user == null) {
-            localStorage.removeItem("user")
-        } else {
+        if (user) {
             localStorage.setItem("user", JSON.stringify(user));
+        } else {
+            localStorage.removeItem("user")
         }
     }
 

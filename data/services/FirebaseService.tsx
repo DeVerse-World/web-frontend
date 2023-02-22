@@ -114,6 +114,7 @@ class FirebaseService {
 
     async getPartners(): Promise<Partner[]> {
         if (this._partners.length == 0) {
+            const partners = [];
             const docs = await getDocs(collection(this._firestore, "partner"));
             docs.forEach((doc) => {
                 const data = doc.data();
@@ -122,14 +123,16 @@ class FirebaseService {
                     thumbnail: data['thumbnail'],
                     id: doc.id,
                 }
-                this._partners.push(partner);
+                partners.push(partner);
             });
+            this._partners = partners;
         }
         return this._partners;
     }
 
     async getComunityPartners(): Promise<Partner[]> {
         if (this._communityPartners.length == 0) {
+            const partners = [];
             const docs = await getDocs(collection(this._firestore, "community_partner"));
             docs.forEach((doc) => {
                 const data = doc.data();
@@ -138,14 +141,16 @@ class FirebaseService {
                     thumbnail: data['thumbnail'],
                     id: doc.id,
                 }
-                this._communityPartners.push(partner);
+                partners.push(partner);
             });
+            this._communityPartners = partners;
         }
         return this._communityPartners;
     }
 
     async getTeamMembers(): Promise<TeamMember[]> {
         if (this._teamMembers.length == 0) {
+            const teamMembers = [];
             const docs = await getDocs(collection(this._firestore, "team_member"));
             docs.forEach((doc) => {
                 const data = doc.data();
@@ -157,14 +162,16 @@ class FirebaseService {
                     title: data['title'],
                     id: doc.id,
                 }
-                this._teamMembers.push(member);
+                teamMembers.push(member);
             });
+            this._teamMembers = teamMembers;
         }
         return this._teamMembers;
     }
 
     async getAdvisors(): Promise<TeamAdvisor[]> {
         if (this._teamAdvisors.length == 0) {
+            const advisors = [];
             const docs = await getDocs(collection(this._firestore, "advisor_member"));
             docs.forEach((doc) => {
                 const data = doc.data();
@@ -175,8 +182,9 @@ class FirebaseService {
                     experiences: data['experiences'],
                     id: doc.id,
                 }
-                this._teamAdvisors.push(advisor);
+                advisors.push(advisor);
             });
+            this._teamAdvisors = advisors;
         }
         return this._teamAdvisors;
     }

@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import EventList, { EventViewModel } from "../../components/asset/EventList";
-import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import AccountService from "../../data/services/AccountService";
 import { getTimeString } from "../../utils/time_util";
+import LayoutWrapper from "../../components/LayoutWrapper";
+import { TabHeaderBar } from "../../components/common/TabHeader";
 
-function Layout() {
+export default function Events() {
     const { setViewState } = useContext(AppContext);
     const [nfts, setNfts] = useState<EventViewModel[]>([]);
     useEffect(() => {
@@ -38,12 +39,19 @@ function Layout() {
     // }
 
     return (
-        <div className="flex flex-col relative justify-center items-center text-white p-4" >
-            <EventList data={nfts} />
-        </div>
+        <LayoutWrapper>
+            <TabHeaderBar data={[
+                { href: '/account', label: 'Info' },
+                { href: '/account/wallet', label: 'Wallet' },
+                { href: '/account/avatar', label: 'Avatars' },
+                { href: '/account/events', label: 'Events' },
+                { href: '/account/templates', label: 'Worlds' },
+                { href: '/account/items', label: 'Items' },
+                { href: '/account/settings', label: 'Settings' }
+            ]} />
+            <div id="section-content">
+                <EventList data={nfts} />
+            </div>
+        </LayoutWrapper>
     )
 }
-
-Layout.getLayout = getAccountWrapperLayout;
-
-export default Layout;

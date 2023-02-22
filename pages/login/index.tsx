@@ -1,69 +1,108 @@
 import { useContext, useEffect, useState } from "react";
 import AuthService from "../../data/services/AuthService";
-import StorageService from "../../data/services/StorageService";
-import Footer from "../../components/common/Footer";
 import { AppContext } from "../../components/contexts/app_context";
-import LayoutWithFooter from "../../components/LayoutWithFooter";
+import Image from "next/image";
+import { useMetaMask } from "metamask-react";
+import { useGoogleLogin } from "@react-oauth/google";
+import { useRouter } from "next/router";
+import StorageService from "../../data/services/StorageService";
 
 export async function getServerSideProps(context) {
-    const loginKey = context.query.key;
-    // Fetch data from external API
-
-    // Pass data to the page via props
     return {
         props: {
-            loginKey: loginKey || ''
+            loginKey: context.query.key || '',
+            previousPath: context.req.headers.referer || ''
         }
     }
 }
 
-export default function LoginLink({ loginKey }) {
-    const [connectionStatus, setConnectionStatus] = useState('Please login');
-    const { setShowLogin, user, setUser } = useContext(AppContext);
+export default function Login({ loginKey, previousPath }) {
+    const router = useRouter();
+    const { user, setUser } = useContext(AppContext);
+    const { status, connect, account } = useMetaMask();
+
     useEffect(() => {
-        if (user) {
-            console.log("USER EXISTED\n");
+        if (loginKey) {
+            StorageService.setSessionKey(loginKey)
             AuthService.authorizeLoginLinkWithUserToken(loginKey).then(res => {
                 if (res.isFailure()) {
                     window.alert(res.error);
                     return;
                 }
-                setConnectionStatus("Authenticated");
-            })
-        } else {
-            console.log("USER NOT EXISTED\n");
-            AuthService.authorizeLoginLinkWithUserToken(loginKey).then(res => {
-                if (res.isFailure()) {
-                    // window.alert(res.error);
-                    console.log(res.error);
-                    return;
+                if (!user) {
+                    setUser(res.value.user);
                 }
-                setUser(res.value.user);
-                setConnectionStatus("Authenticated");
+                window.alert('Authorized!')
+                router.replace('/')
             })
-            setConnectionStatus("Please login...");
+        } else if (user) { //Navigate back to home if user login
+            router.replace('/')
         }
     }, [user])
 
     useEffect(() => {
-        const currentUser = StorageService.getUser()
-        console.log("currentUser");
-        console.log(currentUser);
-        console.log(loginKey);
-        if (loginKey) {
-            StorageService.setSessionKey(loginKey)
+        if (account && user) {
+            router.replace('/')
         }
-        if (!currentUser) {
-            setShowLogin(true);
+    }, [account])
+
+    useEffect(() => {
+        if (status == "connected" && account) {
+            AuthService.connectToMetamask(account, user, loginKey).then(res => {
+                if (res.isFailure()) {
+                    window.alert('Unabled to link with Metamask account');
+                    return;
+                }
+                setUser(res.getValue().user)
+            });
         }
-    }, [])
+    }, [account, status])
+
+    const onMetamaskConnect = () => {
+        if (status == "unavailable") {
+            window.alert('Metamask is unavailable. Please install/enable metamask extension in your browser and try again.')
+            return;
+        }
+        if (status == "notConnected") {
+            connect();
+        }
+    }
+
+    const onGoogleConnect = useGoogleLogin({
+        onSuccess: (codeResponse) => {
+            AuthService.connectToGoogleMail(codeResponse.access_token, user).then(res => {
+                if (res.isFailure()) {
+                    window.alert(res.error);
+                    return;
+                }
+                setUser(res.value.user);
+            })
+        },
+        onError: (error) => window.alert(error)
+    });
+
+    const onSteamConnect = () => {
+        AuthService.connectToSteam();
+    }
 
     return (
-        <div className="text-center m-auto text-white ">
-            <h1>{connectionStatus}</h1>
+        <div className="bg-black w-screen h-screen flex flex-col items-center justify-center text-white">
+            <h1>Signin/Signup</h1>
+            <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2"
+                onClick={onMetamaskConnect}>
+                <Image width={32} height={32} alt="metamask-icon" src="/images/metamask.webp" />
+                Metamask
+            </button>
+            <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2"
+                onClick={() => onGoogleConnect()}>
+                <Image width={32} height={32} alt="google-icon" src="/images/google.webp" />
+                Google
+            </button>
+            <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2"
+                onClick={onSteamConnect}>
+                <Image width={32} height={32} alt="steam-icon" src="/images/steam_logo.png" />
+                Steam
+            </button>
         </div>
     )
 }
-
-// LoginLink.getLayout = LayoutWithFooter;
-// export default LoginLink;

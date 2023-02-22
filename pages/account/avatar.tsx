@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import AvatarList, { AvatarViewModel } from "../../components/asset/AvatarList";
-import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AvatarService from "../../data/services/AvatarService";
+import LayoutWrapper from "../../components/LayoutWrapper";
+import { TabHeaderBar } from "../../components/common/TabHeader";
 
-function Content() {
+export default function Content() {
     const { setViewState, user } = useContext(AppContext);
     const [nfts, setNfts] = useState<AvatarViewModel[]>([]);
     useEffect(() => {
@@ -44,14 +45,19 @@ function Content() {
     }
 
     return (
-        <div className="flex flex-col relativejustify-center items-center text-white p-4" >
-            <div className="flex flex-row gap-2">
+        <LayoutWrapper>
+            <TabHeaderBar data={[
+                { href: '/account', label: 'Info' },
+                { href: '/account/wallet', label: 'Wallet' },
+                { href: '/account/avatar', label: 'Avatars' },
+                { href: '/account/events', label: 'Events' },
+                { href: '/account/templates', label: 'Worlds' },
+                { href: '/account/items', label: 'Items' },
+                { href: '/account/settings', label: 'Settings' }
+            ]} />
+            <div id="section-content">
                 <AvatarList data={nfts} onDeleted={deleteItem} />
             </div>
-        </div>
+        </LayoutWrapper>
     )
 }
-
-Content.getLayout = getAccountWrapperLayout;
-
-export default Content;

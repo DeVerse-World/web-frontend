@@ -18,5 +18,5 @@ module.exports = {
         GRAPH_URL: "https://api.thegraph.com/subgraphs/name/lth08091998/deverseassets",
         ENV_PREFIX: "staging_",
     },
-    typescript: { ignoreBuildErrors: true, ignoreDuringBuilds: true, },
+    typescript: { ignoreBuildErrors: true },
 }
