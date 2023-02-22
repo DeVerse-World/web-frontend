@@ -24,19 +24,22 @@ export default function Login({ loginKey, previousPath }) {
     useEffect(() => {
         if (loginKey) {
             StorageService.setSessionKey(loginKey)
-            AuthService.authorizeLoginLinkWithUserToken(loginKey).then(res => {
-                if (res.isFailure()) {
-                    window.alert(res.error);
-                    return;
-                }
-                if (!user) {
-                    setUser(res.value.user);
-                }
-                window.alert('Authorized!')
+        }
+        if (user) { //Navigate back to home if user login
+            if (loginKey) {
+                AuthService.authorizeLoginLinkWithUserToken(loginKey).then(res => {
+                    if (res.isFailure()) {
+                        window.alert(res.error);
+                        return;
+                    }
+                    window.alert('Authorized!')
+                    router.replace('/')
+                }).catch(err => {
+                    window.alert(err)
+                })
+            } else {
                 router.replace('/')
-            })
-        } else if (user) { //Navigate back to home if user login
-            router.replace('/')
+            }
         }
     }, [user])
 
@@ -46,26 +49,27 @@ export default function Login({ loginKey, previousPath }) {
         }
     }, [account])
 
-    useEffect(() => {
-        if (status == "connected" && account) {
-            AuthService.connectToMetamask(account, user, loginKey).then(res => {
-                if (res.isFailure()) {
-                    window.alert('Unabled to link with Metamask account');
-                    return;
-                }
-                setUser(res.getValue().user)
-            });
-        }
-    }, [account, status])
-
     const onMetamaskConnect = () => {
         if (status == "unavailable") {
             window.alert('Metamask is unavailable. Please install/enable metamask extension in your browser and try again.')
             return;
         }
-        if (status == "notConnected") {
-            connect();
-        }
+        connect().then(res => {
+            if (res && res.length > 0) {
+                AuthService.connectToMetamask(res[0], user, loginKey).then(res => {
+                    if (res.isFailure()) {
+                        window.alert('Unabled to link with Metamask account');
+                        return;
+                    }
+                    setUser(res.getValue().user)
+                });
+            } else {
+                alert('Something wrong happened')
+            }
+
+        }).catch(err => {
+            alert(err)
+        });
     }
 
     const onGoogleConnect = useGoogleLogin({
