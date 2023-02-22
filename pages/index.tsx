@@ -4,6 +4,8 @@ import FirebaseService from "../data/services/FirebaseService";
 import { AppContext } from '../components/contexts/app_context';
 import LayoutWrapper from '../components/LayoutWrapper';
 import dynamic from 'next/dynamic';
+import PartnerSection from "../components/home/PartnerSection";
+import CommunityPartnerSection from "../components/home/CommunityPartnerSection";
 
 const IntroSection = dynamic(() => import('../components/home/IntroSection').then((mod) => mod.default))
 const HighlightFeatureSection = dynamic(() => import('../components/home/HighlightFeaturesSection').then((mod) => mod.default))
@@ -24,6 +26,8 @@ function Main() {
         <WelcomeSection />
         <IntroSection />
         <HighlightFeatureSection />
+        <PartnerSection />
+        <CommunityPartnerSection />
         {showBlogToggle ?
           <BlogPostSection />
           : null

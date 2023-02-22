@@ -38,8 +38,20 @@ function Sidebar(props: SidebarItemProps) {
                 { label: "Explore", href: "/marketplace", icon: (<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />) },
                 { label: "Create", href: "/create", icon: (<AiFillChrome fontSize="1.5rem" color='rgb(97 198 208)' />) },
                 { label: "About", href: "/about", icon: (<RiTeamFill fontSize="1.5rem" color='rgb(97 198 208)' />) },
-                { label: "Docs", href: "/docs", icon: (<FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />) },
+                { label: "Docs", href: "https://docs.deverse.world", isExternal: true, icon: (<FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />) },
             ].map(item => {
+                if (item.isExternal) {
+                    return <a
+                        className="text-white no-underline font-semibold"
+                        target="_blank"
+                        key={`sidebar-${item.label}`}
+                        href={item.href}  >
+                        <div className={styles.item} >
+                            {item.icon}
+                            {item.label.toUpperCase()}
+                        </div>
+                    </a>
+                }
                 const activeClass = router.pathname == item.href ? `${styles.item} ${styles.active}` : `${styles.item}`;
                 return (<Link
                     onClick={props.onClick}

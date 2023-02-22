@@ -3,8 +3,13 @@ import Link from "next/link";
 import { AiFillFacebook, AiOutlineTwitter } from "react-icons/ai";
 import { FaDiscord } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import FirebaseService from "../data/services/FirebaseService";
+import { useContext } from "react";
+import { AppContext } from "./contexts/app_context";
 
 export default function Footer() {
+    const { remoteConfig } = useContext(AppContext)
+
     return (
         <section id="section-footer" className="md:max-h-36">
             <div className="flex flex-col">
@@ -14,10 +19,19 @@ export default function Footer() {
                 <Link className="no-underline text-white" href="/docs">Docs</Link>
             </div>
             <div className="flex flex-col">
+                <Link className="no-underline text-white" href="/roadmap">Roadmap</Link>
+                <span className="cursor-pointer text-white" onClick={() => {
+                    FirebaseService.getPitchDeckUri(remoteConfig).then(url => {
+                        window.open(url, "_blank")
+                    }).catch(e => {
+                        console.log(e)
+                    })
+                }}>Pitch Deck</span>
+            </div>
+            <div className="flex flex-col">
                 <Link className="no-underline text-white" href="/privacy-policies" >Privacy Policies</Link>
                 <Link className="no-underline text-white" href="/term-of-use" >Term of Use</Link>
                 <Link className="no-underline text-white" href="/about">About Us</Link>
-                <Link className="no-underline text-white" href="/roadmap">Roadmap</Link>
             </div>
             <div className="flex flex-col items-center text-2xl">
                 Contact us

@@ -11,7 +11,7 @@ function AdvisorCard(props: CardProps) {
     return (
         <div className="w-[250px] text-white">
             <div className="relative rounded-lg w-[250px] h-[250px]">
-                <img className="w-full h-full absolute " src={props.data.thumbnail} />
+                <img className="w-full h-full absolute" title={props.data.name} alt={props.data.name} src={props.data.thumbnail} />
                 <div className="flex flex-row items-center gap-2 absolute bottom-1 left-1">
                     <span className="bg-blue-600 px-2 rounded-lg text-sm font-b">{props.data.name}</span>
                     <a href={props.data.linkedin} target="_blank" className="bg-white">
