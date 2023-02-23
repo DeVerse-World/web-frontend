@@ -18,8 +18,8 @@ export function TabHeaderBar(props: Props) {
         <div className={styles.tabBar} >
             {props.data.map(item => {
                 return (
-                    <Link href={item.href} scroll={false} className="no-underline" key={item.href}>
-                        <span className={`${styles.tabHeader} ${router.pathname == item.href && styles.active}`}>{item.label}</span>
+                    <Link href={item.href} scroll={false} key={item.href}>
+                        <a className={`${styles.tabHeader} ${router.pathname == item.href && styles.active} no-underline`}>{item.label}</a>
                     </Link>
                 )
             })}

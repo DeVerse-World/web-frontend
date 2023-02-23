@@ -1,8 +1,16 @@
-import DownloadDemoButton from "../DownloadDemoButton";
 import Image from "next/image";
-import Carousel from 'react-bootstrap/Carousel';
+import DownloadDemoButton from "../DownloadDemoButton";
+import { useEffect, useState } from "react";
+import FirebaseService from "../../data/services/FirebaseService";
 
 export default function WelcomeSection() {
+
+  const [placeholder, setPlaceHolder] = useState("https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F01.webp?alt=media&token=ffab7251-7a3d-4875-9dca-383b72f51b8a");
+
+  useEffect(() => {
+    FirebaseService.getWelcomeImage().then(setPlaceHolder)
+  }, [])
+
   return (
     <section className="relative min-h-[500px] h-screen">
       <div className="flex flex-col items-center justify-items-start absolute z-10 w-full">
@@ -12,7 +20,8 @@ export default function WelcomeSection() {
         </div>
         <DownloadDemoButton className="h-12" />
       </div>
-      <Carousel interval={3000} >
+      <Image alt={`showcase`} layout="fill" src={placeholder} />
+      {/* <Carousel interval={3000} >
         {[
           'https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F01.webp?alt=media&token=ffab7251-7a3d-4875-9dca-383b72f51b8a',
           'https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F02.webp?alt=media&token=4445d32a-932b-40e4-869b-dcac932b6832',
@@ -25,7 +34,7 @@ export default function WelcomeSection() {
             <Image alt={`showcase-${index}`} fill src={src} />
           </Carousel.Item>
         )}
-      </Carousel>
+      </Carousel> */}
     </section>
   );
 }

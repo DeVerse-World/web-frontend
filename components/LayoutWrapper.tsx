@@ -101,9 +101,11 @@ export default function LayoutWrapper(props: SidebarProps) {
                     ? <Image className="cursor-pointer" width={40} height={40} alt="avatar-img"
                         src={user?.avatar || "/images/placeholder.webp"}
                         onClick={() => setShowDropdown(true)} />
-                    : <Link href="/login" className="no-underline text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-8">
-                        Login
-                    </Link>
+                    : 
+                        <Link href="/login" ><a className="no-underline text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-8">
+                            Login</a>
+                        </Link>
+                    
                 }
             </div>
             {showDropdown && <AccountMenu onPointerLeave={() => setShowDropdown(false)} />}

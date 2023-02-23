@@ -213,6 +213,11 @@ class FirebaseService {
         const res = await getDoc(doc(this._firestore, "info_contents", "term"))
         return res.data()['content'];
     }
+
+    async getWelcomeImage(): Promise<string> {
+        const res = await getDoc(doc(this._firestore, "settings", "welcome_section"))
+        return res.data()['image'];
+    }
 }
 
 export default new FirebaseService();
