@@ -6,7 +6,6 @@ export default function RoadMap() {
         <LayoutWrapper>
             <div id="section-content">
                 <ProductSection />
-
             </div>
         </LayoutWrapper>
     )

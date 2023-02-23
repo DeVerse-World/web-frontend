@@ -67,7 +67,6 @@ class AuthService extends BaseService {
             }
             user = parsedRes.value.user;
         }
-        console.log(`I am signing my one-time nonce: ${user.wallet_nonce}`)
         let signature = await web3.getSigner().signMessage(`I am signing my one-time nonce: ${user.wallet_nonce}`)
         let resData = await this.authLoginLinkForMetamask(loginKey, metamaskAccount, signature)
         StorageService.saveWalletAddress(metamaskAccount);

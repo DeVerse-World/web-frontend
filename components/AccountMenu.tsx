@@ -28,7 +28,7 @@ export default function AccountMenu(props: DOMAttributes) {
 
   return (
     <div id='account-dropdown' onPointerLeave={props.onPointerLeave}>
-      <h5>Welcome {user?.name}</h5>
+      <h5>Welcome {user.name}</h5>
       <Link href="/account" className="no-underline text-white">Profile</Link>
       {showDashboardToggle &&
         <Link href="/creator-dashboard" className="no-underline text-white">

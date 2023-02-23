@@ -87,7 +87,7 @@ export default function Deriv({ rootId }) {
                     <button className="text-white flex flex-row items-center gap-2 py-2 text-xl" onClick={() => {
                         router.back();
                     }}><IoIosArrowBack />Back</button>
-                    {!rootTemplate ? null :
+                    {rootTemplate &&
                         <div className="flex flex-row gap-2 ">
                             <div className="flex flex-col items-center">
                                 <div className="flex justify-center h-[350px] w-[350px] ">
