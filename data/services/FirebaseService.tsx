@@ -178,10 +178,12 @@ class FirebaseService {
                 const advisor: TeamAdvisor = {
                     thumbnail: data['thumbnail'],
                     linkedin: data['linkedin'],
+                    title: data['title'],
                     name: data['name'],
                     experiences: data['experiences'],
                     id: doc.id,
                 }
+                console.log(data['experiences'])
                 advisors.push(advisor);
             });
             this._teamAdvisors = advisors;

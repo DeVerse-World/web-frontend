@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { FaLinkedin } from "react-icons/fa";
 import { TeamMember } from "../../data/model/partner";
 import FirebaseService from "../../data/services/FirebaseService";
-import { useInView } from 'react-intersection-observer';
+import styles from "../../styles/card-item.module.css";
 
 type CardProps = {
     data: TeamMember
@@ -10,7 +10,7 @@ type CardProps = {
 
 function TeamMemberCard(props: CardProps) {
     return (
-        <div className="w-[250px] text-white">
+        <div className={`w-[250px] text-white ${styles.nftCard}`}>
             <div className="relative rounded-lg w-[250px] h-[250px]">
                 <img className="w-full h-full absolute" title={props.data.name} alt={props.data.name} src={props.data.thumbnail} />
                 <div className="flex flex-row items-center gap-2 absolute bottom-1 left-1">
@@ -20,12 +20,12 @@ function TeamMemberCard(props: CardProps) {
                     </a>
                 </div>
             </div>
-            {/* <div className="py-2 flex flex-col items-start">
-                <h3 className="text-blue-400 font-bold ">{props.data.name}</h3>
+            <div className="py-2 flex flex-col items-start px-2">
+                <h3 className="font-bold ">{props.data.name}</h3>
                 <span className="text-blue-200 text-start">{props.data.education.split('\\n').map((item, index) =>
                     (index === 0) ? item : [<br key={index} />, item]
                 )}</span>
-            </div> */}
+            </div>
         </div>
     )
 }
