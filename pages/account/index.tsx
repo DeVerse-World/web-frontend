@@ -118,7 +118,7 @@ export default function Account() {
                         <div className="flex flex-row justify-between">
                             <h3 className="text-blue-300 text-3xl font-bold pl-4">Avatars ({avatars.length})</h3>
                             <Link href="/account/avatar">
-                                <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
+                                <a className="text-blue-400 text-2xl no-underline" >Show all</a>
                             </Link>
                         </div>
                         <AvatarList data={avatars} />
@@ -128,7 +128,7 @@ export default function Account() {
                         <div className="flex flex-row justify-between">
                             <h3 className="text-blue-300 text-3xl font-bold pl-4">Events ({events.length})</h3>
                             <Link href="/account/events">
-                                <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
+                                <a className="text-blue-400 text-2xl no-underline" >Show all</a>
                             </Link>
                         </div>
                         <EventList data={events} />
@@ -138,7 +138,7 @@ export default function Account() {
                         <div className="flex flex-row justify-between">
                             <h3 className="text-blue-300 text-3xl font-bold pl-4">Templates ({templates.length})</h3>
                             <Link href="/account/templates">
-                                <span className="text-blue-400 text-2xl cursor-pointer" >Show all</span>
+                                <a className="text-blue-400 text-2xl no-underline" >Show all</a>
                             </Link>
                         </div>
                         <RootWorldList data={templates} />

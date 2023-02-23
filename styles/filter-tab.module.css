@@ -3,6 +3,7 @@
     cursor: pointer;
     --tw-text-opacity: 1;
     color: rgb(147 197 253 / var(--tw-text-opacity));
+    text-decoration: none;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
     padding-top: 2px;

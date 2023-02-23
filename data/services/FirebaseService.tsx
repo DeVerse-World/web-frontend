@@ -178,10 +178,12 @@ class FirebaseService {
                 const advisor: TeamAdvisor = {
                     thumbnail: data['thumbnail'],
                     linkedin: data['linkedin'],
+                    title: data['title'],
                     name: data['name'],
                     experiences: data['experiences'],
                     id: doc.id,
                 }
+                console.log(data['experiences'])
                 advisors.push(advisor);
             });
             this._teamAdvisors = advisors;
@@ -212,6 +214,11 @@ class FirebaseService {
     async getTermOfUse() {
         const res = await getDoc(doc(this._firestore, "info_contents", "term"))
         return res.data()['content'];
+    }
+
+    async getWelcomeImage(): Promise<string> {
+        const res = await getDoc(doc(this._firestore, "settings", "welcome_section"))
+        return res.data()['image'];
     }
 }
 

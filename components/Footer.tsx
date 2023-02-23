@@ -7,19 +7,25 @@ import FirebaseService from "../data/services/FirebaseService";
 import { useContext } from "react";
 import { AppContext } from "./contexts/app_context";
 
+function FooterLink({ href, label }) {
+    return <Link href={href}><a className="no-underline text-white" >{label}</a></Link>
+}
+
 export default function Footer() {
     const { remoteConfig } = useContext(AppContext)
 
     return (
         <section id="section-footer" className="md:max-h-36">
             <div className="flex flex-col">
-                <Link className="no-underline text-white" href="/alpha" >Alpha</Link>
-                <Link className="no-underline text-white" href="/expore">Explore</Link>
-                <Link className="no-underline text-white" href="/create">Create</Link>
-                <Link className="no-underline text-white" href="/docs">Docs</Link>
+                {[
+                    { href: "/alpha", label: "Alpha" },
+                    { href: "/expore", label: "Explore" },
+                    { href: "/create", label: "Create" },
+                    { href: "/docs", label: "Docs" }
+                ].map(item => <FooterLink href={item.href} label={item.label} />)}
             </div>
             <div className="flex flex-col">
-                <Link className="no-underline text-white" href="/roadmap">Roadmap</Link>
+                <FooterLink href="/roadmap" label="Roadmap" />
                 <span className="cursor-pointer text-white" onClick={() => {
                     FirebaseService.getPitchDeckUri(remoteConfig).then(url => {
                         window.open(url, "_blank")
@@ -29,9 +35,11 @@ export default function Footer() {
                 }}>Pitch Deck</span>
             </div>
             <div className="flex flex-col">
-                <Link className="no-underline text-white" href="/privacy-policies" >Privacy Policies</Link>
-                <Link className="no-underline text-white" href="/term-of-use" >Term of Use</Link>
-                <Link className="no-underline text-white" href="/about">About Us</Link>
+                {[
+                    { href: "/privacy-policies", label: "Privacy Policies" },
+                    { href: "/term-of-use", label: "Term of Use" },
+                    { href: "/about", label: "About Us" }
+                ].map(item => <FooterLink href={item.href} label={item.label} />)}
             </div>
             <div className="flex flex-col items-center text-2xl">
                 Contact us

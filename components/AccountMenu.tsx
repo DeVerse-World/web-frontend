@@ -29,15 +29,15 @@ export default function AccountMenu(props: DOMAttributes) {
   return (
     <div id='account-dropdown' onPointerLeave={props.onPointerLeave}>
       <h5>Welcome {user.name}</h5>
-      <Link href="/account" className="no-underline text-white">Profile</Link>
+      <Link href="/account" ><a className="no-underline text-white">Profile</a></Link>
       {showDashboardToggle &&
         <Link href="/creator-dashboard" className="no-underline text-white">
           Dashboard
         </Link>
       }
       {user != null && user.isBlogPostAdmin &&
-        <Link href="/content-manager" className="no-underline text-white">
-          Content manager
+        <Link href="/content-manager" ><a className="no-underline text-white">
+          Content manager</a>
         </Link>
       }
       <span className="cursor-pointer" onClick={onClickLogout}>
