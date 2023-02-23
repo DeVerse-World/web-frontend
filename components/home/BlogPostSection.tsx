@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { BlogPost } from "../../data/model/blog_post";
 import FirebaseService from "../../data/services/FirebaseService";
-import { useInView } from 'react-intersection-observer';
 
 type BlogPostItemProps = {
     data: BlogPost
@@ -13,7 +12,7 @@ function BlogPostItem(props: BlogPostItemProps) {
             href={props.data.uri}
             target="_blank">
             <div className="md:h-[250px] h-[150px] overflow-hidden flex flex-col justify-center">
-                <img src={props.data.thumbnail || "/images/placeholder.webp"} />
+                <img src={props.data.thumbnail || "/images/placeholder.webp"} alt={props.data.title} />
             </div>
             <span className="md:text-2xl text-sm px-4 py-2 font-semibold text-blue-300" style={{
                 whiteSpace: "nowrap",
@@ -26,21 +25,13 @@ function BlogPostItem(props: BlogPostItemProps) {
 
 export default function BlogPostSection() {
     const [data, setData] = useState<BlogPost[]>([]);
-    const { ref, inView, entry } = useInView({
-        triggerOnce: true
-    });
     useEffect(() => {
         FirebaseService.getBlogPosts().then(setData)
     }, [])
 
     return (
-        <section ref={ref} className="p-4">
-            {inView &&
-                <div className="flex flex-row gap-4 overflow-x-auto overflow-y-hidden px-4 py-2">
-                    {data.map(item => <BlogPostItem data={item} key={item.id} />)}
-                </div>
-            }
-        </section>
+        <div className="flex flex-row gap-4 overflow-x-auto overflow-y-hidden px-4 py-2 m-4">
+            {data.map(item => <BlogPostItem data={item} key={item.id} />)}
+        </div>
     )
 }
-
