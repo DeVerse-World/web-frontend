@@ -35,19 +35,29 @@ export default function Settings() {
     //     // AccountService.addUserModelWithGoogleMail(user.id, "abc")
     // }
 
-    const onGoogleConnect = useGoogleLogin({
-        onSuccess: (codeResponse) => {
-            AuthService.connectToGoogleMail(codeResponse.access_token, user).then(res => {
-                if (res.isFailure()) {
-                    window.alert(res.error);
-                    return;
-                }
-                setUser(res.value.user);
-            })
-        },
-        onError: (error) => window.alert(error)
-    });
+    // const onGoogleConnect = useGoogleLogin({
+    //     onSuccess: (codeResponse) => {
+    //         AuthService.connectToGoogleMail(codeResponse.access_token, user).then(res => {
+    //             if (res.isFailure()) {
+    //                 window.alert(res.error);
+    //                 return;
+    //             }
+    //             setUser(res.value.user);
+    //         })
+    //     },
+    //     onError: (error) => window.alert(error)
+    // });
 
+    const onGoogleLogin = (event: CredentialResponse) => {
+        AuthService.connectToGoogleMail(event.credential, user).then(res => {
+            // let googleUser = jwt_decode<GoogleUser>(event.credential);
+            if (res.isFailure()) {
+                window.alert(res.error);
+                return;
+            }
+            setUser(res.value.user);
+        });
+    }
 
     useEffect(() => {
         if (previousMetamaskState == "connecting" && status == "connected") {
@@ -122,10 +132,11 @@ export default function Settings() {
                         <h5>Wallet Address</h5>
                         {!user?.social_email && user?.wallet_address &&
                             // <span className="text-blue-400 cursor-pointer" onClick={() => login()} >(Link with Google)</span>
-                            <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
-                                onClick={() => onGoogleConnect()}>
-                                Link with google
-                            </button>
+                            // <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
+                            //     onClick={() => onGoogleConnect()}>
+                            //     Link with google
+                            // </button>
+                            <GoogleLogin width='300' onSuccess={onGoogleLogin} />
                         }
                     </div>
                     <InputGroup>

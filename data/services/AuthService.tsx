@@ -17,21 +17,23 @@ class AuthService extends BaseService {
         return this.parseResponse(res)
     }
 
-    async connectToGoogleMail(googleAccessToken: string, user: User) {
-        const googleRes = await deverseClient.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleAccessToken}`, {
-            headers: {
-                Authorization: `Bearer ${googleAccessToken}`,
-                Accept: 'application/json'
-            }
-        })
-        const googleUser : GoogleUser = googleRes.data;
+    // async connectToGoogleMail(googleAccessToken: string, user: User) {
+    async connectToGoogleMail(credential: string, user: User) {
+        // const googleRes = await deverseClient.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleAccessToken}`, {
+        //     headers: {
+        //         Authorization: `Bearer ${googleAccessToken}`,
+        //         Accept: 'application/json'
+        //     }
+        // })
+        // const googleUser : GoogleUser = googleRes.data;
+        const googleUser = jwt_decode<GoogleUser>(credential);
         if (!user) {
-            let res = await AccountService.getOrCreateByGoogleMail(StorageService.getSessionKey(), googleUser.email, googleAccessToken)
+            let res = await AccountService.getOrCreateByGoogleMail(StorageService.getSessionKey(), googleUser.email, credential)
             if (res.status != 200 || !res.data.data.require_auth) {
                 return this.parseResponse(res)
             }
         }
-        let resData = await this.authLoginLinkForGoogleMail(googleUser.email, googleAccessToken)
+        let resData = await this.authLoginLinkForGoogleMail(googleUser.email, credential)
         if (user && user.social_email == "") {
             let res = await AccountService.addUserModelWithGoogleMail(googleUser.email)
             if (res.isFailure()) {
