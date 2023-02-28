@@ -72,7 +72,7 @@ export default function Account() {
     }, []);
 
     useEffect(() => {
-        if (avatars.length == 0)
+        if (avatars.length == 0 || !user)
             return;
         setUser({ ...user, avatar: avatars[0].image });
     }, [avatars])
@@ -99,13 +99,13 @@ export default function Account() {
                             bottom: '50%'
                         }} />
                         <div className="py-2">
-                            {user.name && <h1>{user.name}</h1>}
-                            {user.wallet_address &&
+                            {user?.name && <h1>{user.name}</h1>}
+                            {user?.wallet_address &&
                                 <div className="flex flex-row gap-2">
                                     <h5 className="text-deverse">{formatWalletAddress(user.wallet_address)}</h5>
                                 </div>
                             }
-                            {user.social_email &&
+                            {user?.social_email &&
                                 <div className="flex flex-row gap-2">
                                     <h5 className="text-deverse">{user.social_email}</h5>
                                 </div>
