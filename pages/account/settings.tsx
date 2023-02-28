@@ -15,9 +15,10 @@ export default function Settings() {
     const { status, connect, account: walletAddress } = useMetaMask();
     const previousMetamaskState = usePrevious(status);
     useEffect(() => {
-        console.log(user)
-        setCurrentWallet(user?.wallet_address || '')
-        setCurrentEmail(user?.social_email || '')
+        if (user) {
+            setCurrentWallet(user.wallet_address || '')
+            setCurrentEmail(user.social_email || '')
+        }
     }, [user])
 
     // const googleLogin = useGoogleLogin({

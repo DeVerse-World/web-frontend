@@ -21,10 +21,12 @@ function Avatar() {
     }
 
     const onSaveAvatar = () => {
+        if (!user) {
+            return;
+        }
         setShowAvatarForm(false);
         setViewState(ViewState.LOADING);
-
-        AvatarService.getAvatars(user?.id).then(avaRes => {
+        AvatarService.getAvatars(user.id).then(avaRes => {
             if (avaRes.isSuccess()) {
                 const existingAvatar = avaRes.value.avatars.find(e => e.preprocess_url == createdModelUri);
                 AvatarService.get2DAvatarRPM(createdModelUri).then(twoDAvarRes => {

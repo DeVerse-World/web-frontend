@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
-import { JSXElementConstructor, ReactElement, useContext, useEffect, useState } from "react";
-import { AppContext, ViewState } from "./contexts/app_context";
-import LoadingScreen from "./LoadingScreen";
+import { useContext, useEffect, useState } from "react";
+import { AppContext } from "./contexts/app_context";
 
 const privatePaths = ['content-manager', 'create', 'account']
 

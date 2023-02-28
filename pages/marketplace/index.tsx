@@ -53,7 +53,7 @@ function Marketplace() {
         AssetService.getAll(ApiStrategy.GraphQl).then(assets => {
             const avatars = assets.filter(e => e.assetType == AssetType.IMAGE_2D);
             let convertedData = avatars.map<AvatarViewModel>(item => ({
-                id: item.id?.toString(),
+                id: item.id.toString(),
                 supply: item.supply,
                 maxSupply: 9999,
                 name: item.name,

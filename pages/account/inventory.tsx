@@ -9,7 +9,10 @@ export default function Inventory() {
     const [data, setData] = useState<NFTAsset[]>([]);
 
     useEffect(() => {
-        if (user?.wallet_address) {
+        if (!user) {
+            return
+        }
+        if (user.wallet_address) {
             AssetService.fetchUserAssets(user.wallet_address).then(e => {
                 setData(e.value);
             })

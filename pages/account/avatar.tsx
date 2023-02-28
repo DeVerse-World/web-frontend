@@ -11,7 +11,7 @@ export default function Content() {
     const [nfts, setNfts] = useState<AvatarViewModel[]>([]);
     useEffect(() => {
         setViewState(ViewState.LOADING);
-        AvatarService.getAvatars(user?.id).then(res => {
+        AvatarService.getAvatars(user.id).then(res => {
             if (res.isSuccess && res.value) {
                 let convertedData = res.value.avatars.map(item => {
                     let asset: AvatarViewModel = {
