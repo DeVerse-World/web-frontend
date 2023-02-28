@@ -10,6 +10,8 @@ import 'nprogress/nprogress.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import '../styles/globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import GTMHeader from "../components/analytics/GTMHeader";
+import GoogleTagManager from "../components/analytics/GoogleTagManager";
 
 // Add Loading indicator when change route
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -30,10 +32,10 @@ function DeverseApp({ Component, pageProps }) {
               <meta property="og:site_name" content="Deverse World" />
               <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/logo.webp?alt=media&token=67e233e2-fba3-4055-9050-41a2f36f759e" />
             </Head>
-            {/* <noscript>
-                <GTMHeader tagId={process.env.NEXT_PUBLIC_GTM} />
-              </noscript>
-              <GoogleTagManager tagId={process.env.NEXT_PUBLIC_GTM} /> */}
+            <noscript>
+              <GTMHeader tagId={process.env.NEXT_PUBLIC_GTM} />
+            </noscript>
+            <GoogleTagManager tagId={process.env.NEXT_PUBLIC_GTM} />
 
             <LoadingScreen />
             {/* <ScrollToTopButton /> */}

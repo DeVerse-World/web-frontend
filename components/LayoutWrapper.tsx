@@ -4,17 +4,17 @@ import React, { ReactNode, useContext, useState } from "react";
 import useWindowWidth from "../hook/UseWindowWidth";
 import { Nav, Offcanvas } from "react-bootstrap";
 import { useRouter } from "next/router";
-import { AiFillChrome, AiFillFacebook, AiFillHome, AiOutlineTwitter } from "react-icons/ai";
-import { FaDiscord, FaGamepad, FaInfoCircle } from "react-icons/fa";
+import { AiFillChrome, AiFillHome } from "react-icons/ai";
+import { FaGamepad, FaInfoCircle } from "react-icons/fa";
 import { RiTeamFill } from "react-icons/ri";
 import { SiCmake } from "react-icons/si";
 import AccountMenu from "./AccountMenu";
-import { MdEmail } from "react-icons/md";
 import styles from '../styles/sidebar.module.css';
 import { AppContext } from "./contexts/app_context";
 import { GiHamburgerMenu } from "react-icons/gi";
 import RouteGuard from "./RouteGuard";
 import Footer from "./Footer";
+import { BsBroadcast } from "react-icons/bs";
 
 const appBarHeight = 60;
 
@@ -38,6 +38,7 @@ function Sidebar(props: SidebarItemProps) {
                 { label: "Explore", href: "/marketplace", icon: (<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />) },
                 { label: "Create", href: "/create", icon: (<AiFillChrome fontSize="1.5rem" color='rgb(97 198 208)' />) },
                 { label: "About", href: "/about", icon: (<RiTeamFill fontSize="1.5rem" color='rgb(97 198 208)' />) },
+                // { label: "Stream", href: "/stream", icon: (<BsBroadcast fontSize="1.5rem" color='rgb(97 198 208)' />) },
                 { label: "Docs", href: "https://docs.deverse.world", isExternal: true, icon: (<FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />) },
             ].map(item => {
                 if (item.isExternal) {
@@ -99,7 +100,7 @@ export default function LayoutWrapper(props: SidebarProps) {
                 </span>
                 {user
                     ? <Image className="cursor-pointer" width={40} height={40} alt="avatar-img"
-                        src={user?.avatar || "/images/placeholder.webp"}
+                        src={user.avatar || "/images/placeholder.webp"}
                         onClick={() => setShowDropdown(true)} />
                     : 
                         <Link href="/login" ><a className="no-underline text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-8">
