@@ -38,7 +38,7 @@ function Sidebar(props: SidebarItemProps) {
                 { label: "Explore", href: "/marketplace", icon: (<SiCmake fontSize="1.5rem" color='rgb(97 198 208)' />) },
                 { label: "Create", href: "/create", icon: (<AiFillChrome fontSize="1.5rem" color='rgb(97 198 208)' />) },
                 { label: "About", href: "/about", icon: (<RiTeamFill fontSize="1.5rem" color='rgb(97 198 208)' />) },
-                { label: "Stream", href: "/stream", icon: (<BsBroadcast fontSize="1.5rem" color='rgb(97 198 208)' />) },
+                // { label: "Stream", href: "/stream", icon: (<BsBroadcast fontSize="1.5rem" color='rgb(97 198 208)' />) },
                 { label: "Docs", href: "https://docs.deverse.world", isExternal: true, icon: (<FaInfoCircle fontSize="1.5rem" color='rgb(97 198 208)' />) },
             ].map(item => {
                 if (item.isExternal) {
@@ -100,7 +100,7 @@ export default function LayoutWrapper(props: SidebarProps) {
                 </span>
                 {user
                     ? <Image className="cursor-pointer" width={40} height={40} alt="avatar-img"
-                        src={user?.avatar || "/images/placeholder.webp"}
+                        src={user.avatar || "/images/placeholder.webp"}
                         onClick={() => setShowDropdown(true)} />
                     : 
                         <Link href="/login" ><a className="no-underline text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-8">
