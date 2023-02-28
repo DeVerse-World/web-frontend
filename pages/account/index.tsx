@@ -26,7 +26,7 @@ export default function Account() {
         AccountService.getUserInfo().then(e => {
             if (e.isSuccess && e.value) {
                 setAvatars(e.value.avatars.map<AvatarViewModel>(item => ({
-                    id: item.id?.toString(),
+                    id: item.id.toString(),
                     supply: 9999,
                     maxSupply: 9999,
                     name: "Avatar #",
@@ -99,15 +99,15 @@ export default function Account() {
                             bottom: '50%'
                         }} />
                         <div className="py-2">
-                            {user?.name && <h1>{user?.name}</h1>}
-                            {user?.wallet_address &&
+                            {user.name && <h1>{user.name}</h1>}
+                            {user.wallet_address &&
                                 <div className="flex flex-row gap-2">
                                     <h5 className="text-deverse">{formatWalletAddress(user.wallet_address)}</h5>
                                 </div>
                             }
-                            {user?.social_email &&
+                            {user.social_email &&
                                 <div className="flex flex-row gap-2">
-                                    <h5 className="text-deverse">{user?.social_email}</h5>
+                                    <h5 className="text-deverse">{user.social_email}</h5>
                                 </div>
                             }
                         </div>

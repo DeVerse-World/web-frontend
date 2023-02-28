@@ -20,7 +20,7 @@ function Info() {
     useEffect(() => {
         if (user == null)
             return;
-        AvatarService.getAvatars(user?.id).then(res => {
+        AvatarService.getAvatars(user.id).then(res => {
             if (res.isSuccess && res.value) {
                 if (res.isSuccess() && res.value.avatars.length > 0) {
                     setModelPath(res.value.avatars[0].preprocess_url)
