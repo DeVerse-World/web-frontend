@@ -1,16 +1,12 @@
 import { useEffect, useState } from "react";
 import DerivWorldList, { DerivTemplateViewModel } from "../../components/asset/DerivWorldList";
 import RootWorldList, { RootTemplateViewModel } from "../../components/asset/RootWorldList";
-import { getAccountWrapperLayout } from "../../components/common/AccountWrapperLayout";
-import BaseLayout from "../../components/common/BaseLayout";
-import Footer from "../../components/common/Footer";
-import TabHeader from "../../components/common/TabHeader";
-import Sidebar from "../../components/Sidebar";
-import { AssetType } from "../../data/enum/asset_type";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AccountService from "../../data/services/AccountService";
+import LayoutWrapper from "../../components/LayoutWrapper";
+import { TabHeaderBar } from "../../components/common/TabHeader";
 
-function Layout() {
+export default function Layout() {
     const [rootTemplates, setRootTemplates] = useState<NFTAsset[]>([]);
     const [derivTemplates, setDerivTemplates] = useState<NFTAsset[]>([]);
 
@@ -61,19 +57,26 @@ function Layout() {
     }
 
     return (
-        <div className="flex flex-col relative justify-center text-white p-4" >
-            <div >
-                <h3>Root</h3>
-                <RootWorldList data={rootTemplates} />
+        <LayoutWrapper>
+            <TabHeaderBar data={[
+                { href: '/account', label: 'Info' },
+                { href: '/account/wallet', label: 'Wallet' },
+                { href: '/account/avatar', label: 'Avatars' },
+                { href: '/account/events', label: 'Events' },
+                { href: '/account/templates', label: 'Worlds' },
+                { href: '/account/items', label: 'Items' },
+                { href: '/account/settings', label: 'Settings' }
+            ]} />
+            <div id="section-content" className="flex flex-col relative justify-center p-4" >
+                <div >
+                    <h3>Root</h3>
+                    <RootWorldList data={rootTemplates} />
+                </div>
+                <div>
+                    <h3>Deriv</h3>
+                    <DerivWorldList data={derivTemplates} />
+                </div>
             </div>
-            <div>
-                <h3>Deriv</h3>
-                <DerivWorldList data={derivTemplates} />
-            </div>
-        </div>
+        </LayoutWrapper>
     )
 }
-
-Layout.getLayout = getAccountWrapperLayout;
-
-export default Layout;

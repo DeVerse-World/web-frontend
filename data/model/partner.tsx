@@ -17,6 +17,7 @@ export type TeamAdvisor = {
     id: string;
     name: string;
     linkedin: string;
+    title: string;
     experiences: string[];
     thumbnail: string;
 }

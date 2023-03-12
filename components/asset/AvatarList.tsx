@@ -6,6 +6,8 @@ import StarRatings from 'react-star-ratings';
 import Link from "next/link";
 import { FaEthereum } from "react-icons/fa";
 import AvatarService from "../../data/services/AvatarService";
+import styles from "../../styles/card-item.module.css";
+
 const itemPerPage = 4;
 
 type AvatarListProps = {
@@ -62,9 +64,9 @@ export function AvatarCard(props: AvatarCardProps) {
 
     const renderContent = () => {
         return (
-            <div className="nft-card nft-card-hover w-[250px] h-[350px] overflow-hidden flex flex-col">
+            <div className={`${styles.nftCard} ${styles.nftCardHover} w-[250px] h-[350px] overflow-hidden flex flex-col`}>
                 <div className="h-[250px] flex flex-col justify-center">
-                    <img src={props.data.image || "/images/placeholder.jpg"} />
+                    <img src={props.data.image || "/images/placeholder.webp"} />
                 </div>
                 <span className="text-2xl px-4 py-2 font-semibold text-blue-300" style={{
                     whiteSpace: "nowrap",
@@ -98,7 +100,7 @@ export function AvatarCard(props: AvatarCardProps) {
         return renderContent()
     }
     return (
-        <Link href={`/asset-preview?avatarId=${props.data.id}`}>
+        <Link href={`/asset-preview?avatarId=${props.data.id}`} className="no-underline">
             {renderContent()}
         </Link>
     )

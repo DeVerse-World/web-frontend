@@ -7,10 +7,14 @@ type Props = {
 
 function AvatarContainer(props: Props) {
     const { user } = useContext(AppContext);
-    const [avatar, setAvatar] = useState(user?.avatar || null);
+    const [avatar, setAvatar] = useState("/images/placeholder.webp");
 
     useEffect(() => {
-        setAvatar(user?.avatar || "/images/placeholder.webp");
+        if (user) {
+            setAvatar(user.avatar || "/images/placeholder.webp");
+        } else {
+            setAvatar("/images/placeholder.webp");
+        }
     }, [user])
 
     return (

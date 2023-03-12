@@ -16,17 +16,21 @@ class StorageService {
     }
 
     saveUser(user?: User) {
-        if (user == null) {
-            localStorage.removeItem("user")
-        } else {
+        if (user) {
             localStorage.setItem("user", JSON.stringify(user));
+        } else {
+            localStorage.removeItem("user")
         }
     }
 
     getUser(): User | null {
-        let user = localStorage.getItem("user");
-        if (user) {
-            return JSON.parse(user);
+        let user = localStorage.getItem("user") || null;
+        try {
+            if (user) {
+                return JSON.parse(user);
+            }
+        } catch (e) {
+            return null;
         }
         return null;
     }

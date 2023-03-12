@@ -17,7 +17,15 @@ class AuthService extends BaseService {
         return this.parseResponse(res)
     }
 
+    // async connectToGoogleMail(googleAccessToken: string, user: User) {
     async connectToGoogleMail(credential: string, user: User) {
+        // const googleRes = await deverseClient.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${googleAccessToken}`, {
+        //     headers: {
+        //         Authorization: `Bearer ${googleAccessToken}`,
+        //         Accept: 'application/json'
+        //     }
+        // })
+        // const googleUser : GoogleUser = googleRes.data;
         const googleUser = jwt_decode<GoogleUser>(credential);
         if (!user) {
             let res = await AccountService.getOrCreateByGoogleMail(StorageService.getSessionKey(), googleUser.email, credential)
@@ -61,7 +69,6 @@ class AuthService extends BaseService {
             }
             user = parsedRes.value.user;
         }
-        console.log(`I am signing my one-time nonce: ${user.wallet_nonce}`)
         let signature = await web3.getSigner().signMessage(`I am signing my one-time nonce: ${user.wallet_nonce}`)
         let resData = await this.authLoginLinkForMetamask(loginKey, metamaskAccount, signature)
         StorageService.saveWalletAddress(metamaskAccount);

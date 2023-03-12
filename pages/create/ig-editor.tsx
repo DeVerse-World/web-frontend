@@ -1,10 +1,10 @@
 import DownloadDemoButton from "../../components/DownloadDemoButton";
-import { getCreateLayout } from "../../components/CreateLayout";
-import { BsPlayFill } from "react-icons/bs";
 import { useState } from "react";
 import customProtocolCheck from "custom-protocol-check";
 import { Modal } from "react-bootstrap";
-
+import LayoutWrapper from "../../components/LayoutWrapper";
+import { TabHeaderBar } from "../../components/common/TabHeader";
+import { BsPlayFill } from "react-icons/bs";
 
 function Editor() {
     const [showPlayModal, setShowPlayModal] = useState(false);
@@ -22,29 +22,37 @@ function Editor() {
     }
 
     return (
-        <div className="flex flex-col gap-4 items-center text-white p-4" >
-            <h1 className="text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title">Build your dream world</h1>
-            <h3 className="text-center px-16 max-w-[800px]">Anyone can be a creator, own part of the metaverse now. No coding required, all you need is imagination.</h3>
-            <button className="w-[120px] h-[50px] text-white text-lg rounded-3xl flex flex-row gap-2 justify-center items-center deverse-play-btn"
-                onClick={(e) => {
-                    e.stopPropagation();
-                    openApp();
-                }}>
-                <BsPlayFill />
-                Play
-            </button>
-            <div className="flex flex-row gap-4 justify-center flex-wrap">
-                <HighlightCard img="/images/ig-free-for-all.webp"
-                    title="Free for all"
-                    description="Create awesome worlds, games, races using thousands of free assets made by the community" />
-                <HighlightCard img="/images/ig-share-creation.webp"
-                    title="Share your creation"
-                    description="What can be better than having your friends or others players experience your world. Share to everyone with just a button click." />
-                <HighlightCard img="/images/ig-no-coding.webp"
-                    title="No Coding needed"
-                    description="Easy to use, no coding required. It is simple and intuitive to modify the rules or attributes of your world." />
+        <LayoutWrapper>
+            <TabHeaderBar data={[
+                { href: '/create', label: 'Avatar' },
+                { href: '/create/mint', label: 'Mint' },
+                { href: '/create/ig-editor', label: 'Ingame Editor' },
+                { href: '/create/ue-sdk', label: 'Unreal Engine SDK' }
+            ]} />
+            <div id="section-content" className="flex flex-col gap-4 items-center text-white p-4" >
+                <h1 className="text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title">Build your dream world</h1>
+                <h3 className="text-center px-16 max-w-[800px]">Anyone can be a creator, own part of the metaverse now. No coding required, all you need is imagination.</h3>
+                <button className="w-[120px] h-[50px] text-white text-lg rounded-3xl flex flex-row gap-2 justify-center items-center deverse-play-btn"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        openApp();
+                    }}>
+                    <BsPlayFill />
+                    Play
+                </button>
+                <div className="flex flex-row gap-4 justify-center flex-wrap">
+                    <HighlightCard img="/images/ig-free-for-all.webp"
+                        title="Free for all"
+                        description="Create awesome worlds, games, races using thousands of free assets made by the community" />
+                    <HighlightCard img="/images/ig-share-creation.webp"
+                        title="Share your creation"
+                        description="What can be better than having your friends or others players experience your world. Share to everyone with just a button click." />
+                    <HighlightCard img="/images/ig-no-coding.webp"
+                        title="No Coding needed"
+                        description="Easy to use, no coding required. It is simple and intuitive to modify the rules or attributes of your world." />
+                </div>
+                <SystemRequirement />
             </div>
-            <SystemRequirement />
             <Modal centered show={showPlayModal}
                 onHide={() => setShowPlayModal(false)}
                 contentClassName="bg-black" dialogClassName="deverse-dialog">
@@ -56,7 +64,7 @@ function Editor() {
                     <DownloadDemoButton className="h-12" />
                 </Modal.Body>
             </Modal>
-        </div>
+        </LayoutWrapper>
     )
 }
 
@@ -107,7 +115,5 @@ function SystemRequirement() {
         </div>
     )
 }
-
-Editor.getLayout = getCreateLayout
 
 export default Editor;

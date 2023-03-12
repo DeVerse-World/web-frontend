@@ -1,27 +1,28 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactNode } from "react";
+import styles from "../../styles/top-tab.module.css";
+
+export type TabHeaderItems = {
+    href: string,
+    label: string
+}
 
 type Props = {
-    children: ReactNode,
-    href: string,
-    className?: string
+    data: TabHeaderItems[]
 }
 
-function TabHeader(props: Props) {
+export function TabHeaderBar(props: Props) {
     const router = useRouter();
 
-    let className = "tab-header";
-    if (router.pathname == props.href) {
-        className += " active";
-    }
     return (
-        <Link href={props.href} scroll={false} >
-            <span className={className}>
-                {props.children}
-            </span>
-        </Link>
+        <div className={styles.tabBar} >
+            {props.data.map(item => {
+                return (
+                    <Link href={item.href} scroll={false} key={item.href}>
+                        <a className={`${styles.tabHeader} ${router.pathname == item.href && styles.active} no-underline`}>{item.label}</a>
+                    </Link>
+                )
+            })}
+        </div>
     )
 }
-
-export default TabHeader;

@@ -5,13 +5,9 @@ import FirebaseService from "../../data/services/FirebaseService";
 import StorageService from "../../data/services/StorageService"
 export type AppDataContext = {
     user?: User,
-    setUser: (User) => void,
+    setUser: (arg: User) => void,
     viewState: ViewState,
-    setViewState: (ViewState) => void,
-    isMobileSidebarVisible: boolean,
-    setIsMobileSidebarVisible: (boolean) => void,
-    showLogin: boolean,
-    setShowLogin: (boolean) => void,
+    setViewState: (arg: ViewState) => void,
     remoteConfig: RemoteConfig
 }
 
@@ -31,8 +27,6 @@ const AppContextProvider = (props) => {
     const [remoteConfig, setRemoteConfig] = useState<RemoteConfig>(null);
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
     const [viewState, setViewState] = useState(ViewState.IDLE);
-    const [showLogin, setShowLogin] = useState(false);
-    const [isMobileSidebarVisible, setIsMobileSidebarVisible] = useState(false);
 
     useEffect(() => {
         const cachedUser = StorageService.getUser();
@@ -57,9 +51,7 @@ const AppContextProvider = (props) => {
     return (
         <AppContext.Provider
             value={{
-                user, setUser, viewState, setViewState,
-                isMobileSidebarVisible, setIsMobileSidebarVisible,
-                showLogin, setShowLogin, remoteConfig
+                user, setUser, viewState, setViewState, remoteConfig
             }}>
             {props.children}
         </AppContext.Provider>

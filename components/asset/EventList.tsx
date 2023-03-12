@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BsPlayFill } from "react-icons/bs";
 import { EventCategory } from "../../data/enum/asset_type";
 import Paginator from "../Paginator";
+import styles from "../../styles/card-item.module.css";
 
 type EventListProps = {
     data: EventViewModel[];
@@ -52,10 +53,10 @@ export type EventViewModel = {
 
 export function EventCard(props: EventCardProps) {
     return (
-        <div className="nft-card md:h-[500px] h-[350px] md:w-[500px] w-[350px] flex flex-col overflow-hidden">
+        <div className={`${styles.nftCard} md:h-[500px] h-[350px] md:w-[500px] w-[350px] flex flex-col overflow-hidden`}>
             <div className="h-[300px] flex flex-row justify-center">
                 <img
-                    src={props.data.image || "/images/color-image-placeholder.jpg"}
+                    src={props.data.image || "/images/color-image-placeholder.webp"}
                     className="w-[100%]" />
             </div>
             <div className="flex flex-col flex-grow p-4">

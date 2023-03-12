@@ -1,7 +1,6 @@
 import { WithRouterProps } from 'next/dist/client/with-router';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect, useState } from 'react'
-import Footer from '../../components/common/Footer';
 import ModelViewer from '../../components/ModelViewer';
 import AssetService from "../../data/services/AssetService";
 import { Avatar } from '../../data/model/avatar';
@@ -9,12 +8,11 @@ import AvatarService from '../../data/services/AvatarService';
 import { formatWalletAddress } from '../../utils/wallet_util';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
-import { AppContext } from '../../components/contexts/app_context';
 import FirebaseService from '../../data/services/FirebaseService';
+import LayoutWrapper from '../../components/LayoutWrapper';
 
 function AssetPreviewScreen(props: WithRouterProps) {
     const router = useRouter();
-    const { remoteConfig } = useContext(AppContext)
     const [avatar, setAvatar] = useState<Avatar>(null);
     const [modelPath, setModelPath] = useState<string>(null);
     const [creatorAddress, setCreatorAddress] = useState<string>();
@@ -38,63 +36,64 @@ function AssetPreviewScreen(props: WithRouterProps) {
     }, [router.isReady])
 
     return (
-        <section id="section-content" className='flex flex-col gap-4'>
-            <div className='m-auto py-4 flex flex-row gap-4 flex-wrap justify-center'>
-                <div className='flex flex-col items-center gap-4 py-4 md:w-[30vw] md:h-[80vh]'>
-                    {
-                        modelPath &&
-                        <div className='rounded-2xl bg-gray-700 md:w-full md:h-full w-[350px]'>
-                            <Canvas >
-                                <ModelViewer filePath={modelPath} animationPath={"3d/StandingRPM.glb"} position={[0, -1, 0]} />
-                                <ambientLight intensity={0.5} />
-                                <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-                                <spotLight position={[-10, -10, 0]} angle={0.55} penumbra={1} />
-                                <pointLight position={[-10, -10, -10]} />
-                                <OrbitControls makeDefault zoomSpeed={2} />
-                                {/* <OrbitControls minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} /> */}
-                                {/* <PresentationControls speed={1.5} global zoom={0.7} polar={[-0.1, Math.PI / 4]}></PresentationControls> */}
-                            </Canvas>
-                        </div>
-                    }
-                    <button className="w-[120px] h-[40px] rounded-3xl flex flex-row justify-center items-center text-white deverse-play-btn font-bold">BUY</button>
-                </div>
-                <div className='flex flex-col text-blue-300 w-[300px] mx-auto py-4 '>
-                    <div className='text-3xl'>{avatar?.name || "Avatar Name"}</div>
-                    {/* <div>0/10</div> */}
-                    <div className='mt-8 flex flex-row justify-between'>
-                        Deverse World
-                        <a className='text-sky-400 hover:text-sky-200' style={{
-                            cursor: "pointer",
-                            whiteSpace: "nowrap",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            textDecoration: "none"
-                        }} href={`https://etherscan.io/address/${creatorAddress}`} target="_blank">
-                            {formatWalletAddress(creatorAddress)}
-                        </a>
+        <LayoutWrapper>
+            <section id="section-content" className='flex flex-col gap-4'>
+                <div className='m-auto py-4 flex flex-row gap-4 flex-wrap justify-center'>
+                    <div className='flex flex-col items-center gap-4 py-4 md:w-[30vw] md:h-[80vh]'>
+                        {
+                            modelPath &&
+                            <div className='rounded-2xl bg-gray-700 md:w-full md:h-full w-[350px]'>
+                                <Canvas >
+                                    <ModelViewer filePath={modelPath} animationPath={"3d/StandingRPM.glb"} position={[0, -1, 0]} />
+                                    <ambientLight intensity={0.5} />
+                                    <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+                                    <spotLight position={[-10, -10, 0]} angle={0.55} penumbra={1} />
+                                    <pointLight position={[-10, -10, -10]} />
+                                    <OrbitControls makeDefault zoomSpeed={2} />
+                                    {/* <OrbitControls minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} /> */}
+                                    {/* <PresentationControls speed={1.5} global zoom={0.7} polar={[-0.1, Math.PI / 4]}></PresentationControls> */}
+                                </Canvas>
+                            </div>
+                        }
+                        <button className="w-[120px] h-[40px] rounded-3xl flex flex-row justify-center items-center text-white deverse-play-btn font-bold">BUY</button>
                     </div>
+                    <div className='flex flex-col text-blue-300 w-[300px] mx-auto py-4 '>
+                        <div className='text-3xl'>{avatar?.name || "Avatar Name"}</div>
+                        {/* <div>0/10</div> */}
+                        <div className='mt-8 flex flex-row justify-between'>
+                            Deverse World
+                            <a className='text-sky-400 hover:text-sky-200' style={{
+                                cursor: "pointer",
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                textDecoration: "none"
+                            }} href={`https://etherscan.io/address/${creatorAddress}`} target="_blank">
+                                {formatWalletAddress(creatorAddress)}
+                            </a>
+                        </div>
 
-                    <span className='w-full border-b-2 border-white'></span>
-                    <div >
-                        {/* <div className='flex flex-row justify-between text-white'>
+                        <span className='w-full border-b-2 border-white'></span>
+                        <div >
+                            {/* <div className='flex flex-row justify-between text-white'>
                             <span>Price</span>
                             <span className='flex-row flex items-center'>150 <FaEthereum /></span>
                         </div> */}
-                        <div className='flex flex-row justify-between text-white'>
-                            <span>Type</span>
-                            <span>Companion</span>
+                            <div className='flex flex-row justify-between text-white'>
+                                <span>Type</span>
+                                <span>Companion</span>
+                            </div>
                         </div>
-                    </div>
-                    {/* <div className='mt-8'>
+                        {/* <div className='mt-8'>
                         <span className='text-3xl'>Description</span>
                         <p className='text-white '>A long description will go here A long description will go here A long description will go here A long description will go here</p>
                     </div> */}
+                    </div>
                 </div>
-            </div>
 
 
 
-            {/* <div className='grid grid-cols-1 md:grid-cols-2 '>
+                {/* <div className='grid grid-cols-1 md:grid-cols-2 '>
                 <div className='flex flex-col align-middle p-8'>
 
 
@@ -161,8 +160,8 @@ function AssetPreviewScreen(props: WithRouterProps) {
                     </div>
                 } />
             </div> */}
-            <Footer />
-        </section>
+            </section>
+        </LayoutWrapper>
     )
 }
 export default AssetPreviewScreen;
