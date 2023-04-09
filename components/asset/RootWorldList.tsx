@@ -21,6 +21,7 @@ export type TemplateViewModel = {
     file2dUri?: string;
     file3dUri?: string;
     image?: string;
+    rating?: number;
     animation_url?: string;
     onlineOpenable?: boolean;
     offlineOpenable?: boolean;
@@ -83,12 +84,12 @@ function RootWorldCard(props: CardProps) {
                     <div className="flex flex-row px-4 justify-between">
                         <div className="flex flex-col">
                             <StarRatings
-                                rating={5}
+                                rating={props.data.rating}
                                 starRatedColor="yellow"
                                 starDimension="20px"
                                 starSpacing="1px"
                                 // changeRating={this.changeRating}
-                                numberOfStars={5}
+                                numberOfStars={props.data.rating}
                                 name='rating' />
                         </div>
 

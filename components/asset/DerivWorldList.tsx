@@ -69,12 +69,12 @@ function DerivWorldCard(props: CardProps) {
             <div className="flex flex-row px-4 justify-between">
                 <div className="flex flex-col">
                     <StarRatings
-                        rating={5}
+                        rating={props.data.rating}
                         starRatedColor="yellow"
                         starDimension="20px"
                         starSpacing="1px"
                         // changeRating={this.changeRating}
-                        numberOfStars={5}
+                        numberOfStars={props.data.rating}
                         name='rating' />
                 </div>
                 <button className="w-[60px] h-[25px] text-white rounded-3xl flex flex-row justify-center items-center deverse-play-btn"

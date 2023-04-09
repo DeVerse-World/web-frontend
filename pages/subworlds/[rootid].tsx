@@ -67,9 +67,10 @@ export default function Deriv({ rootId }) {
                     file2dUri: e.thumbnail_centralized_uri,
                     fileAssetUri: e.level_ipfs_uri,
                     file3dUri: e.level_ipfs_uri,
+                    rating: e.rating,
                     onlineOpenable: true,
                     offlineOpenable: true
-                })))
+                })).sort((a, b) => b.rating - a.rating))
             }
         }).finally(() => {
             setViewState(ViewState.SUCCESS)

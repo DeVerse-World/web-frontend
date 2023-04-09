@@ -5,6 +5,7 @@ export type SubworldTemplate = {
     level_ipfs_uri: string,
     level_centralized_uri: string,
     thumbnail_centralized_uri: string,
+    rating: number,
     creator_id: number,
     created_at: string,
     updated_at: string
