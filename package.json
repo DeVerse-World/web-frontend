@@ -3,6 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@headlessui/react": "^1.7.14",
+        "@heroicons/react": "^2.0.17",
         "@krzyhan/custom-protocol-check": "^1.0.0",
         "@nomiclabs/hardhat-ethers": "^2.0.5",
         "@nomiclabs/hardhat-waffle": "^2.0.2",
@@ -48,6 +50,7 @@
         "react-infinite-scroll-component": "^6.1.0",
         "react-intersection-observer": "^9.4.1",
         "react-minimal-pie-chart": "^8.2.0",
+        "react-photo-sphere-viewer": "^3.3.5-psv5.1.4",
         "react-quill": "^2.0.0",
         "react-scripts": "5.0.0",
         "react-star-ratings": "^2.3.0",
