@@ -45,8 +45,7 @@ const SubworldCard = ({ data }) => {
                     <OverlayImage360Button
                         source={data.image}
                         className="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50 sm:col-start-1"
-                    // className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 sm:col-start-1"
-                    // onClick={() => setOpen(false)}
+                  
                     >
                         Preview
                     </OverlayImage360Button>
