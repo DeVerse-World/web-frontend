@@ -10,6 +10,7 @@ import { AppContext, ViewState } from "../../components/contexts/app_context";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 import LayoutWrapper from "../../components/LayoutWrapper";
 
+
 export async function getServerSideProps(context) {
     const rootid = context.params.rootid;
     // Fetch data from external API
@@ -80,7 +81,8 @@ export default function Deriv({ rootId }) {
     const onLoadMore = () => {
 
     }
-
+    console.log('derivTemplates')
+    console.log(derivTemplates)
     return (
         <LayoutWrapper>
             <section id='section-content' className="flex flex-col">

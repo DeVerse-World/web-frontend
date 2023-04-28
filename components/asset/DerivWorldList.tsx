@@ -7,6 +7,8 @@ import { BsFillPeopleFill, BsPlayFill } from "react-icons/bs";
 import { TbWorld } from "react-icons/tb";
 import { TemplateViewModel } from "./RootWorldList";
 import styles from "../../styles/card-item.module.css";
+import OverlayImage360Button from "../image360/OverlayImage360Button";
+import SubworldCard from "../SubworldCard";
 
 export type DerivTemplateViewModel = {
     deletable?: boolean;
@@ -24,10 +26,10 @@ function DerivWorldList(props: ListProps) {
 
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
-            <div className={`grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
+            <div className={`grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 gap-2`}>
                 {
                     props.data.map((item, index) =>
-                        <DerivWorldCard key={index} data={item} />)
+                        <SubworldCard key={index} data={item} />)
                 }
             </div>
             {/* {props.data.length > itemPerPage &&
@@ -84,6 +86,10 @@ function DerivWorldCard(props: CardProps) {
                     }}>
                     <BsPlayFill />
                 </button>
+
+            </div>
+            <div className="mt-1">
+                <OverlayImage360Button source={props.data.image} />
             </div>
             {showPlayModal && <PlayModal templateId={props.data.id} onClose={() => setShowPlayModal(false)} />}
 
