@@ -81,8 +81,7 @@ export default function Deriv({ rootId }) {
     const onLoadMore = () => {
 
     }
-    console.log('derivTemplates')
-    console.log(derivTemplates)
+ 
     return (
         <LayoutWrapper>
             <section id='section-content' className="flex flex-col">
