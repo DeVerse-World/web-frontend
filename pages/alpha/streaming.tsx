@@ -5,7 +5,7 @@ import LayoutWrapper from "../../components/LayoutWrapper";
 function Streaming() {
     return (
         <LayoutWrapper>
-            <Iframe url="http://113.22.91.61:91"
+            <Iframe url="http://42.117.89.133:91/?hoveringMouse=true"
                     width="100%"
                     height="100%"
                     id=""

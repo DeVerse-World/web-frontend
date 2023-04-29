@@ -3,6 +3,8 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
+        "@epicgames-ps/lib-pixelstreamingfrontend-ue5.2": "^0.5.0",
+        "@epicgames-ps/lib-pixelstreamingfrontend-ui-ue5.2": "^0.4.0",
         "@krzyhan/custom-protocol-check": "^1.0.0",
         "@nomiclabs/hardhat-ethers": "^2.0.5",
         "@nomiclabs/hardhat-waffle": "^2.0.2",
