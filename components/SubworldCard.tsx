@@ -24,7 +24,7 @@ const SubworldCard = ({ data }) => {
                     />
                 </div>
                 <h3 className="mt-4 text-lg font-semibold leading-6 text-white">{data.name}</h3>
-                <span className="text-base leading-7 text-gray-400">Creator name</span>
+                <span className="text-base leading-7 text-gray-400">{data.creator.name}</span>
                 <div className="mt-3 flex flex-col">
                     <p className="sr-only">{data.rating} out of 5 stars</p>
                     <div className="flex items-center">
@@ -45,7 +45,7 @@ const SubworldCard = ({ data }) => {
                     <OverlayImage360Button
                         source={data.image}
                         className="inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50 sm:col-start-1"
-                  
+
                     >
                         Preview
                     </OverlayImage360Button>
