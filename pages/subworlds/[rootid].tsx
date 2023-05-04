@@ -10,6 +10,7 @@ import { AppContext, ViewState } from "../../components/contexts/app_context";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 import LayoutWrapper from "../../components/LayoutWrapper";
 
+
 export async function getServerSideProps(context) {
     const rootid = context.params.rootid;
     // Fetch data from external API
@@ -56,20 +57,23 @@ export default function Deriv({ rootId }) {
 
         SubWorldTemplateService.fetchDerivTemplates(rootId).then(derivRes => {
             if (derivRes.isSuccess()) {
-                console.log(derivRes.value.subworld_templates)
-                setDerivTemplates(derivRes.value.subworld_templates.map<DerivTemplateViewModel>(e => ({
-                    id: e.id.toString(),
-                    name: e.display_name,
-                    description: e.display_name,
-                    image: e.thumbnail_centralized_uri,
+                setDerivTemplates(derivRes.value.enriched_subworld_templates.map<DerivTemplateViewModel>(e => ({
+                    id: e.Template.id.toString(),
+                    name: e.Template.display_name,
+                    description: e.Template.display_name,
+                    image: e.Template.thumbnail_centralized_uri,
                     rootId: rootId.toString(),
-                    fileAssetUriFromCentralized: e.thumbnail_centralized_uri,
-                    file2dUri: e.thumbnail_centralized_uri,
-                    fileAssetUri: e.level_ipfs_uri,
-                    file3dUri: e.level_ipfs_uri,
-                    rating: e.rating,
+                    fileAssetUriFromCentralized: e.Template.thumbnail_centralized_uri,
+                    file2dUri: e.Template.thumbnail_centralized_uri,
+                    fileAssetUri: e.Template.level_ipfs_uri,
+                    file3dUri: e.Template.level_ipfs_uri,
+                    rating: e.Template.rating,
                     onlineOpenable: true,
-                    offlineOpenable: true
+                    offlineOpenable: true,
+                    creator: {
+                        id: e.CreatorInfo.Id,
+                        name: (e.CreatorInfo.Name === "" || e.CreatorInfo.Name === null) ? "Anonymous" : e.CreatorInfo.Name,
+                    },
                 })).sort((a, b) => b.rating - a.rating))
             }
         }).finally(() => {

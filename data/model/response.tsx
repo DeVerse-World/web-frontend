@@ -1,6 +1,6 @@
 import { Avatar } from "./avatar";
 import { Event } from "./Event";
-import { DerivSubworldTemplate, RootSubworldTemplate } from "./SubworldTemplate";
+import { DerivSubworldTemplate, RootSubworldTemplate, RootEnrichedSubworldTemplate } from "./SubworldTemplate";
 import { User } from "./user";
 
 export class Response<T> {
@@ -35,15 +35,12 @@ export type EventResponse = {
 }
 
 export type RootSubworldTemplatesResponse = {
+    enriched_subworld_templates: RootEnrichedSubworldTemplate[];
     subworld_templates: RootSubworldTemplate[];
 }
 
 export type RootSubworldTemplateResponse = {
     subworld_template: RootSubworldTemplate;
-}
-
-export type DerivSubworldTemplateResponse = {
-    subworld_templates: DerivSubworldTemplate[];
 }
 
 export type LoginResponse = {

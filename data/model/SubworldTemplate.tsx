@@ -11,6 +11,11 @@ export type SubworldTemplate = {
     updated_at: string
 }
 
+export type SubworldCreatorInfo = {
+    Id: number,
+    Name: string,
+}
+
 export type DerivSubworldTemplate = {
     parent_subworld_template_id: number,
 } & SubworldTemplate
@@ -18,3 +23,8 @@ export type DerivSubworldTemplate = {
 export type RootSubworldTemplate = {
     derivative_uri: string
 } & SubworldTemplate
+
+export type RootEnrichedSubworldTemplate = {
+    Template: RootSubworldTemplate,
+    CreatorInfo: SubworldCreatorInfo,
+}
