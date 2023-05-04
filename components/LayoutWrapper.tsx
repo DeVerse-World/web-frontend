@@ -74,6 +74,7 @@ export default function LayoutWrapper(props: SidebarProps) {
     const isWindowSize = useWindowWidth(768);
     const { user } = useContext(AppContext);
     const [showDropdown, setShowDropdown] = useState(false);
+
     return (
         <RouteGuard>
             <div className="flex flex-row items-center justify-between md:px-8 px-2 bg-black drop-shadow-sm"
@@ -102,15 +103,17 @@ export default function LayoutWrapper(props: SidebarProps) {
                     ? <Image className="cursor-pointer" width={40} height={40} alt="avatar-img"
                         src={user.avatar || "/images/placeholder.webp"}
                         onClick={() => setShowDropdown(true)} />
-                    : 
-                        <Link href="/login" ><a className="no-underline text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-8">
-                            Login</a>
-                        </Link>
-                    
+                    :
+                    <Link href="/login" ><a className="no-underline text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-8">
+                        Login</a>
+                    </Link>
+
                 }
             </div>
+
+
             {showDropdown && <AccountMenu onPointerLeave={() => setShowDropdown(false)} />}
-            <div className="flex flex-row" style={{ height: `calc(100vh - ${appBarHeight}px)` }}>
+            <div className="flex flex-row min-h-screen" >
                 {isWindowSize && (
                     <Nav className="bg-black">
                         <div className="flex flex-row h-full">

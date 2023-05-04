@@ -26,7 +26,7 @@ function DerivWorldList(props: ListProps) {
 
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
-            <div className={`grid grid-cols-1 xl:grid-cols-3 md:grid-cols-2 gap-2`}>
+            <div className={`grid grid-cols-2 xl:grid-cols-4 md:grid-cols-3 gap-2`}>
                 {
                     props.data.map((item, index) =>
                         <SubworldCard key={index} data={item} />)
