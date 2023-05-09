@@ -15,7 +15,7 @@ export default function Footer() {
     const { remoteConfig } = useContext(AppContext)
 
     return (
-        <section id="section-footer" className="md:max-h-36">
+        <section id="section-footer">
             <div className="flex flex-col">
                 {[
                     { href: "/alpha", label: "Alpha" },

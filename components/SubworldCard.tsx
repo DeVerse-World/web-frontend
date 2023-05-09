@@ -26,11 +26,10 @@ const SubworldCard = ({ data }) => {
                 <h3 className="mt-4 text-lg font-semibold leading-6 text-white">{data.name}</h3>
                 <span className="text-base leading-7 text-gray-400">{data.creator.name}</span>
                 <div className="mt-3 flex flex-col">
-                    <p className="sr-only">{data.rating} out of 5 stars</p>
                     <div className="flex items-center">
                         {[0, 1, 2, 3, 4].map((rating) => (
                             <StarIcon
-                                key={data.rating}
+                                key={rating}
                                 className={classNames(
                                     data.rating > rating ? 'text-yellow-400' : 'text-gray-200',
                                     'h-5 w-5 flex-shrink-0'
@@ -51,7 +50,7 @@ const SubworldCard = ({ data }) => {
                     </OverlayImage360Button>
                     <button
                         type="button"
-                        className="inline-flex justify-center rounded-md py-2 px-3 text-sm font-semibold outline-2 outline-offset-2 transition-colors overflow-hidden bg-cyan-500 text-white active:before:bg-transparent hover:before:bg-white/10 active:bg-cyan-600 active:text-white/80 before:transition-colors"
+                        className="inline-flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold outline-2 outline-offset-2 transition-colors overflow-hidden bg-cyan-500 text-white active:before:bg-transparent hover:before:bg-white/10 active:bg-cyan-600 active:text-white/80 before:transition-colors"
                         onClick={(e) => {
                             e.stopPropagation();
                             setShowPlayModal(true);
