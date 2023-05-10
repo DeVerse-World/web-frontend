@@ -42,8 +42,9 @@ function DerivWorldList(props: ListProps) {
         <InfiniteScroll
             className="grid grid-cols-2 xl:grid-cols-5 md:grid-cols-4 gap-2"
             pageStart={0}
-            loadMore={() => setTimeout(() => fetchDataByPage(), 800)}
+            loadMore={() => setTimeout(() => fetchDataByPage(), 300)}
             hasMore={pageNumber < pages.length - 1}
+            threshold={500}
         >
             {currentData.map(item => <SubworldCard data={item} />)}
         </InfiniteScroll >
