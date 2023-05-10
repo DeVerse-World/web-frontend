@@ -1,7 +1,8 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationTriangleIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import Image360 from './Image360'
+import { Fragment } from 'react';
+import dynamic from 'next/dynamic';
+import { Dialog, Transition } from '@headlessui/react';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+const Image360 = dynamic(() => import('./Image360'));
 
 export default function OverlayImage360({ open, setOpen, source }) {
     return (

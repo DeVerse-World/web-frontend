@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TemplateViewModel } from "./RootWorldList";
 import SubworldCard from "../SubworldCard";
-import ScrollableComponent from "../ScrollableComponent";
+import InfiniteScroll from 'react-infinite-scroller';
 
 export type DerivTemplateViewModel = {
     deletable?: boolean;
@@ -37,18 +37,16 @@ function DerivWorldList(props: ListProps) {
         ]);
         setPageNumber(pageNumber + 1);
     }
+
     return (
-        <div className="grid grid-cols-2 xl:grid-cols-5 md:grid-cols-4 gap-2">
-            {props.data.map((item, index) => (
-                <ScrollableComponent
-                    showNext={() => fetchDataByPage()}
-                    isLast={index === props.data.length - 1}
-                >
-                    <SubworldCard data={item} />
-                </ScrollableComponent>
-            ))
-            }
-        </div >
+        <InfiniteScroll
+            className="grid grid-cols-2 xl:grid-cols-5 md:grid-cols-4 gap-2"
+            pageStart={0}
+            loadMore={() => fetchDataByPage()}
+            hasMore={pageNumber < pages.length - 1}
+        >
+            {currentData.map(item => <SubworldCard data={item} />)}
+        </InfiniteScroll >
     );
 }
 

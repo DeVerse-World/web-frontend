@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { CheckIcon } from '@heroicons/react/24/outline'
+import React from 'react';
+import { useState } from 'react';
 import { StarIcon } from '@heroicons/react/20/solid'
 import OverlayImage360Button from './image360/OverlayImage360Button';
 import PlayModal from './asset/PlayModal';
