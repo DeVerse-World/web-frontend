@@ -25,7 +25,7 @@ function DownloadDemoButton(props: Props) {
 
     return (
         <button id="btn-download-app"
-            className={`flex flex-row text-lg items-center cursor-pointer text-white rounded-md px-8 m-1 bg-deverse-gradient ${props.className}`}
+            className={`flex flex-row text-lg items-center cursor-pointer text-gray-900 rounded-md px-8 m-1 bg-deverse-gradient ${props.className}`}
             onClick={onDownload} >
             <span id="btn-download-app" className="me-2">Download</span>
             <AiFillWindows id="btn-download-app" fontSize="2rem" />

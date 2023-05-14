@@ -34,6 +34,15 @@ module.exports = {
             pink: colors.pink,
             rose: colors.rose,
             dv: '#61c6d0',
+
+            // Color palette
+            brand: '#22D3EE', // Logo color
+            lightest: '#F8FAFC', // White color
+            light: '#9CA3AF', //  Secondary text (gray - 400)
+            lighter: '#9CA3AF', // Input field border # (gray - 500)
+            medium: '#374151',    // Border (gray - 700)
+            dark: '#1F2937', // Alternative background (gray - 800)
+            darkest: '#111827', // (gray - 900)
         }),
         extend: {
             spacing: {
