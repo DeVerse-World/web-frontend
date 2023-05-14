@@ -1,14 +1,7 @@
 import { useState } from "react";
-import { FaEthereum } from "react-icons/fa";
-import Paginator from "../Paginator";
-import StarRatings from 'react-star-ratings';
-import PlayModal from "./PlayModal";
-import { BsFillPeopleFill, BsPlayFill } from "react-icons/bs";
-import { TbWorld } from "react-icons/tb";
 import { TemplateViewModel } from "./RootWorldList";
-import styles from "../../styles/card-item.module.css";
-import OverlayImage360Button from "../image360/OverlayImage360Button";
 import SubworldCard from "../SubworldCard";
+import InfiniteScroll from 'react-infinite-scroller';
 
 export type DerivTemplateViewModel = {
     deletable?: boolean;
@@ -19,26 +12,43 @@ type ListProps = {
     data: DerivTemplateViewModel[];
 }
 
-const itemPerPage = 4;
+const itemPerPage = 10;
+
+function sliceIntoPages(arr, chunkSize) {
+    const res = [];
+    let cursor = 0;
+    for (let i = 0; i < arr.length; i += chunkSize) {
+        const chunk = arr.slice(i, i + chunkSize);
+        res.push(chunk);
+    }
+    return res;
+}
 
 function DerivWorldList(props: ListProps) {
-    const [currentPage, setCurrentPage] = useState(1);
+    // HACK: Slice into smaller pages for infinite scrolling
+    const pages = sliceIntoPages(props.data, itemPerPage);
+    const [currentData, setCurrentData] = useState([]);
+    const [pageNumber, setPageNumber] = useState(0);
+
+    const fetchDataByPage = () => {
+        setCurrentData([
+            ...currentData,
+            ...pages[pageNumber],
+        ]);
+        setPageNumber(pageNumber + 1);
+    }
 
     return (
-        <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
-            <div className={`grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-2`}>
-                {
-                    props.data.map((item, index) =>
-                        <SubworldCard key={index} data={item} />)
-                }
-            </div>
-            {/* {props.data.length > itemPerPage &&
-                <div className="flex flex-row gap-2">
-                    <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
-                </div>
-            } */}
-        </section>
-    )
+        <InfiniteScroll
+            className="grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-2"
+            pageStart={0}
+            loadMore={() => setTimeout(() => fetchDataByPage(), 300)}
+            hasMore={pageNumber < pages.length - 1}
+            threshold={500}
+        >
+            {currentData.map(item => <SubworldCard data={item} />)}
+        </InfiniteScroll >
+    );
 }
 
 export default DerivWorldList;

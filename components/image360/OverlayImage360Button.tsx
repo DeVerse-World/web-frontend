@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import OverlayImage360 from "./OverlayImage360";
+import dynamic from 'next/dynamic';
+const OverlayImage360 = dynamic(() => import('./OverlayImage360'));
 
 const OverlayImage360Button = ({ source, className, children }) => {
     const [open, setOpen] = useState(false);
