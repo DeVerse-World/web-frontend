@@ -40,7 +40,7 @@ function DerivWorldList(props: ListProps) {
 
     return (
         <InfiniteScroll
-            className="grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-2"
+            className="grid grid-cols-2 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 gap-4"
             pageStart={0}
             loadMore={() => setTimeout(() => fetchDataByPage(), 300)}
             hasMore={pageNumber < pages.length - 1}
