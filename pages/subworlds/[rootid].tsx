@@ -87,7 +87,6 @@ export default function Deriv({ rootId }) {
 
     return (
         <LayoutWrapper>
-            {/* <section id='section-content' className="flex flex-col bg-darkest"> */}
             <section className="flex flex-col bg-darkest text-light">
                 <div className='flex-grow p-4 flex flex-col'>
                     <button className="text-white flex flex-row items-center gap-2 py-2 text-xl" onClick={() => {
@@ -104,6 +103,7 @@ export default function Deriv({ rootId }) {
                                         <p className="mt-6 text-xl leading-8 text-lighter">
                                             {rootTemplate.description}
                                         </p>
+                                        {/* (Optional subdescription) */}
                                         {/* <p className="mt-6 text-base leading-7 text-lighter">
                                             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt
                                             amet fugiat veniam occaecat fugiat. Quasi aperiam sit non sit neque reprehenderit.
