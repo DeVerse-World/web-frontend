@@ -94,31 +94,6 @@ export default function Deriv({ rootId }) {
                         router.back();
                     }}><IoIosArrowBack />Back</button>
                     {rootTemplate && (
-                        // <div className="flex flex-row gap-2 ">
-                        //     <div className="flex flex-col items-center">
-                        //         <div className="flex justify-center h-[350px] w-[350px] ">
-                        //             <img className="rounded-lg" alt="Root Template Image" src={rootTemplate.file2dUri || "/images/color-image-placeholder.webp"} />
-                        //         </div>
-                        //         <button className="w-[120px] h-[40px] rounded-3xl my-4 flex flex-row justify-center items-center text-white deverse-play-btn font-bold" onClick={() => setShowPlayModal(true)}>
-                        //             <BsPlayFill /></button>
-                        //     </div>
-
-                        //     <div className="text-slate-400 ">
-                        //         <div className="flex flex-col gap-2 px-4">
-                        //             <h3 className="text-blue-200 text-3xl font-bold">{rootTemplate.name}</h3>
-                        //             {/* <div className="flex flex-row gap-1 items-center text-lg">
-                        //         <TbWorld />15
-                        //         <BsFillPeopleFill className="ml-4" />35/500
-                        //     </div> */}
-                        //             <div>
-                        //                 <h5 className="text-blue-200">Description</h5>
-                        //                 <p>{rootTemplate.description}</p>
-                        //             </div>
-
-                        //         </div>
-
-                        //     </div>
-                        // </div>
                         <div className="mt-16 overflow-hidden mx-auto max-w-7xl px-6 lg:px-8">
                             <div className="lg:flex">
                                 <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
