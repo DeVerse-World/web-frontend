@@ -48,7 +48,7 @@
         "react-icons": "^4.4.0",
         "react-iframe": "^1.8.5",
         "react-infinite-scroll-component": "^6.1.0",
-        "react-intersection-observer": "^9.4.1",
+        "react-infinite-scroller": "^1.2.6",
         "react-minimal-pie-chart": "^8.2.0",
         "react-photo-sphere-viewer": "^3.3.5-psv5.1.4",
         "react-quill": "^2.0.0",
