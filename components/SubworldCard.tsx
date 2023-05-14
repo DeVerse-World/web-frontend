@@ -13,12 +13,12 @@ const SubworldCard = ({ data }) => {
 
     return (
 
-        <div className="overflow-hidden rounded-2xl ring-1 ring-inset ring-zinc-900/7.5 dark:ring-white/10 dark:group-hover:ring-white/20 p-6 px-4 pb-4 pt-4 text-left transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+        <div className="overflow-hidden rounded-2xl ring-1 ring-inset ring-zinc-900/7.5 dark:ring-white/10 dark:group-hover:ring-white/20 p-6 text-left transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
             <div className="group text-sm">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-100">
                     <img
                         src={data.image || "/images/color-image-placeholder.webp"}
-                        className="h-full w-full object-cover object-center"
+                        className="h-full w-full aspect-square object-cover object-center"
                     />
                 </div>
                 <h3 className="mt-4 text-lg font-semibold leading-6 text-white">{data.name}</h3>
