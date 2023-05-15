@@ -36,8 +36,8 @@ module.exports = {
             dv: '#61c6d0',
 
             // Color palette
-            brand: '#22D3EE', // Logo color
-            lightest: '#F8FAFC', // White color
+            brand: '#22D3EE', // Logo color  (cyan-400)
+            lightest: '#F8FAFC', // White color (slate-50)
             light: '#9CA3AF', //  Secondary text (gray - 400)
             lighter: '#9CA3AF', // Input field border # (gray - 500)
             medium: '#374151',    // Border (gray - 700)

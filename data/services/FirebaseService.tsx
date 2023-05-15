@@ -15,6 +15,7 @@ class FirebaseService {
     private _teamMembers: TeamMember[] = [];
     private _teamAdvisors: TeamAdvisor[] = [];
 
+
     constructor() {
         this._app = initializeApp({
             apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -220,6 +221,14 @@ class FirebaseService {
         const res = await getDoc(doc(this._firestore, "settings", "welcome_section"))
         return res.data()['image'];
     }
+
+    async getIntroSectionVideoUrl(): Promise<string> {
+        const res = await getDoc(doc(this._firestore, "homepage", "intro_section"))
+        return res.data().video_url;
+    }
+
 }
+
+
 
 export default new FirebaseService();
