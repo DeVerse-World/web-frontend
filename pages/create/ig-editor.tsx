@@ -26,7 +26,7 @@ function Editor() {
             <TabHeaderBar data={[
                 { href: '/create', label: 'Avatar' },
                 { href: '/create/mint', label: 'Mint' },
-                { href: '/create/ig-editor', label: 'Ingame Editor' },
+                { href: '/create/ig-editor', label: 'World Builder' },
                 { href: '/create/ue-sdk', label: 'Unreal Engine SDK' }
             ]} />
             <div id="section-content" className="flex flex-col gap-4 items-center text-white p-4" >
