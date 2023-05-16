@@ -64,7 +64,7 @@ export function AvatarCard(props: AvatarCardProps) {
 
     const renderContent = () => {
         return (
-            <div className={`${styles.nftCard} ${styles.nftCardHover} w-[250px] h-[350px] overflow-hidden flex flex-col`}>
+            <div className={`${styles.nftCard} ${styles.nftCardHover} w-[250px] h-[310px] overflow-hidden flex flex-col`}>
                 <div className="h-[250px] flex flex-col justify-center">
                     <img src={props.data.image || "/images/placeholder.webp"} />
                 </div>
@@ -73,24 +73,7 @@ export function AvatarCard(props: AvatarCardProps) {
                     overflow: "hidden",
                     textOverflow: "ellipsis"
                 }}>{props.data.name}</span>
-                <div className="flex flex-row justify-between px-4">
-                    <div className="flex flex-col">
-                        {/* <span>{props.data.supply || 0}{props.data.maxSupply && `/${props.data.maxSupply}`}</span> */}
-                        <div >
-                            <StarRatings
-                                rating={5}
-                                starRatedColor="yellow"
-                                starDimension="20px"
-                                starSpacing="1px"
-                                // changeRating={this.changeRating}
-                                numberOfStars={5}
-                                name='rating' />
-                        </div>
-                    </div>
-                    {/* <div className="flex flex-col justify-center ">
-                        <span className="flex flex-row items-center">150 <FaEthereum /></span>
-                    </div> */}
-                </div>
+
 
             </div>
         )
