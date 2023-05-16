@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import AssetService from "../../data/services/AssetService";
 import { AssetType } from "../../data/enum/asset_type";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
@@ -11,7 +12,7 @@ import { getTimeString } from "../../utils/time_util";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 import RootWorldList, { RootTemplateViewModel } from "../../components/asset/RootWorldList";
 import LayoutWrapper from "../../components/LayoutWrapper";
-import MarketplaceFilter, { MarketplaceTabKey } from "../../components/MarketplaceFilterTab";
+import MarketplaceFilter, { MarketplaceTabKey, MarketplaceType } from "../../components/MarketplaceFilterTab";
 
 function Marketplace() {
     const router = useRouter();
@@ -19,8 +20,8 @@ function Marketplace() {
     const [images, setImages] = useState<AvatarViewModel[]>([]);
     const [eventData, setEventData] = useState<EventViewModel[]>([]);
     const [rootTemplates, setRootTemplates] = useState<RootTemplateViewModel[]>([]);
+    const [currentType, setCurrentType] = useState<MarketplaceTabKey>(null);
 
-    const [currentType, setCurrentType] = useState<MarketplaceTabKey>(null)
     useEffect(() => {
         if (!router.isReady) return;
         switch (router.query['type']) {
@@ -149,13 +150,42 @@ function Marketplace() {
             setViewState(ViewState.SUCCESS)
         })
     }
+    const typeHref = new URLSearchParams({ type: router.query['type'], subtype: 'all' });
+    const subtypeHref = new URLSearchParams({ type: router.query['type'], subtype: router.query['subtype'] })
 
     return (
         <LayoutWrapper tab={
             <MarketplaceFilter defaultTab={MarketplaceTabKey.WORLD_TYPE} />
         }>
             <div id="section-content" className="p-4">
-                <span className="section-header-lg pl-4">Events</span>
+                <nav className="flex text-base" aria-label="Breadcrumb">
+                    <ol role="list" className="flex items-center space-x-4">
+                        <li >
+                            <div className="flex items-center">
+                                <a
+                                    href={`/marketplace?${typeHref.toString()}`}
+                                    className="font-medium text-lighter hover:text-light capitalize no-underline"
+                                >
+                                    {router.query['type']}
+                                </a>
+                            </div>
+                        </li>
+                        <li >
+                            <div className="flex items-center">
+                                <ChevronRightIcon className="h-5 w-5 flex-shrink-0 text-lighter capitalize" aria-hidden="true" />
+                                <a
+                                    href={`/marketplace?${subtypeHref.toString()}`}
+                                    className="ml-4 font-medium text-lighter hover:text-light no-underline capitalize"
+                                >
+                                    {router.query['subtype']}
+                                </a>
+                            </div>
+                        </li>
+                    </ol>
+                </nav>
+                <h2 className="text-lightest mt-6 sm:mt-8 ml-8 text-3xl font-bold tracking-tight text-darkest sm:text-4xl capitalize">
+                    {router.query['subtype']}
+                </h2>
                 {currentType == MarketplaceTabKey.NFT_TYPE && <AvatarList data={images} />}
                 {currentType == MarketplaceTabKey.EVENT_TYPE && <EventList data={eventData} />}
                 {currentType == MarketplaceTabKey.WORLD_TYPE && <RootWorldList data={rootTemplates} />}
