@@ -65,7 +65,7 @@ function Avatar() {
             <LayoutWrapper>
                 <TabHeaderBar data={[
                     { href: '/create', label: 'Avatar' },
-                    { href: '/create/mint', label: 'Mint' },
+                    // { href: '/create/mint', label: 'Mint' },
                     { href: '/create/ig-editor', label: 'Ingame Editor' },
                     { href: '/create/ue-sdk', label: 'Unreal Engine SDK' }
                 ]} />
