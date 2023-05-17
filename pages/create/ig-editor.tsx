@@ -27,7 +27,7 @@ function Editor() {
                 { href: '/create', label: 'Avatar' },
                 { href: '/create/mint', label: 'Mint' },
                 { href: '/create/ig-editor', label: 'World Builder' },
-                { href: '/create/ue-sdk', label: 'Unreal Engine SDK' }
+             // { href: '/create/ue-sdk', label: 'Unreal Engine SDK' }
             ]} />
             <div id="section-content" className="flex flex-col gap-4 items-center text-white p-4" >
                 <h1 className="text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title">Build your dream world</h1>
