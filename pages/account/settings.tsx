@@ -110,11 +110,11 @@ export default function Settings() {
         <LayoutWrapper>
             <TabHeaderBar data={[
                 { href: '/account', label: 'Info' },
-                { href: '/account/wallet', label: 'Wallet' },
+                // { href: '/account/wallet', label: 'Wallet' },
                 { href: '/account/avatar', label: 'Avatars' },
-                { href: '/account/events', label: 'Events' },
+                // { href: '/account/events', label: 'Events' },
                 { href: '/account/templates', label: 'Worlds' },
-                { href: '/account/items', label: 'Items' },
+                // { href: '/account/items', label: 'Items' },
                 { href: '/account/settings', label: 'Settings' }
             ]} />
             <section id="section-content" className="flex flex-row gap-4">
