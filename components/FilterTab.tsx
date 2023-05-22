@@ -22,7 +22,7 @@ function DisabledFilterTabItem(props: SFilterTabITem) {
     return (
         <div key={`disabled-${props.subType}`}
             className={`${styles.filterTab} ${styles.filterTabDisabled}`}>
-            {props.label}
+            {props.subType}
         </div>
     )
 }
@@ -37,8 +37,8 @@ function FilterTabItem(props: SFilterTabITem) {
                     ...(props.subType && { subtype: props.subType })
                 }
             }}>
-            <a className={`${styles.filterTab} ${props.isActive && styles.filterTabActive}`}>
-                {props.label}
+            <a className={`capitalize ${styles.filterTab} ${props.isActive && styles.filterTabActive}`}>
+                {props.subType}
             </a>
         </Link>
     )
