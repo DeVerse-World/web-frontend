@@ -15,7 +15,7 @@ export default function WelcomeSection({
         backgroundImage: `
           linear-gradient(to left, rgba(7, 24, 39, 0.3) 50%, rgba(17, 24, 39, 1) 75%),
           linear-gradient(to bottom, rgba(7, 24, 39, 0.3) 60%, rgba(17, 24, 39, 1) 80%),
-          url(https://media.discordapp.net/attachments/1107672343066705960/1108306750517555311/image_headpage.webp?width=1409&height=791)
+          url('/images/image_headpage.webp')
         `,
       }}
     >
