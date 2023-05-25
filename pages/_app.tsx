@@ -1,4 +1,3 @@
-import React from "react";
 import { MetaMaskProvider } from "metamask-react";
 import Head from 'next/head'
 import { AppContextProvider } from '../components/contexts/app_context';
@@ -12,6 +11,7 @@ import '../styles/globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GTMHeader from "../components/analytics/GTMHeader";
 import GoogleTagManager from "../components/analytics/GoogleTagManager";
+import LayoutWrapper from "../components/LayoutWrapper";
 
 // Add Loading indicator when change route
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -39,7 +39,9 @@ function DeverseApp({ Component, pageProps }) {
 
             <LoadingScreen />
             {/* <ScrollToTopButton /> */}
-            <Component {...pageProps} />
+            <LayoutWrapper>
+              <Component {...pageProps} />
+            </LayoutWrapper>
           </GoogleOAuthProvider>
         </MetaMaskProvider>
       </AppContextProvider>

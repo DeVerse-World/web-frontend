@@ -30,7 +30,7 @@ function DisabledFilterTabItem(props: SFilterTabITem) {
 function FilterTabItem(props: SFilterTabITem) {
     return (
         <Link key={`${props.type}-${props.subType}`}
-
+            prefetch={false}
             href={{
                 query: {
                     type: props.type,

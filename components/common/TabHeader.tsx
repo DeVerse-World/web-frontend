@@ -8,17 +8,18 @@ export type TabHeaderItems = {
 }
 
 type Props = {
-    data: TabHeaderItems[]
+    data: TabHeaderItems[],
+    prefetch: boolean,
 }
 
-export function TabHeaderBar(props: Props) {
+export function TabHeaderBar({ data, prefetch=false }: Props) {
     const router = useRouter();
 
     return (
         <div className={styles.tabBar} >
-            {props.data.map(item => {
+            {data.map(item => {
                 return (
-                    <Link href={item.href} scroll={false} key={item.href}>
+                    <Link href={item.href} scroll={false} key={item.href} prefetch={prefetch}>
                         <a className={`${styles.tabHeader} ${router.pathname == item.href && styles.active} no-underline`}>{item.label}</a>
                     </Link>
                 )

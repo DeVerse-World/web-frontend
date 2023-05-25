@@ -3,7 +3,6 @@ import { Button, Dropdown, DropdownButton, Form, FormControl, InputGroup } from 
 import { AppContext } from "../../components/contexts/app_context";
 import UnauthorizedView from "../../components/UnauthorizedView";
 import deverseClient from "../../data/api/deverse_client";
-import LayoutWrapper from "../../components/LayoutWrapper";
 
 export default function DC() {
     const { user } = useContext(AppContext);
@@ -61,8 +60,8 @@ export default function DC() {
     }
 
     return (
-        <LayoutWrapper>
-            <div id='section-content' className="flex flex-col items-center p-4 ">
+        <div>
+            <div id='section-content' className="flex flex-col items-center p-4 h-full">
                 <div>
                     <h3>Your User Id: {user.id}</h3>
                 </div>
@@ -125,6 +124,6 @@ export default function DC() {
                     </InputGroup>
                 </Form>
             </div>
-        </LayoutWrapper>
+        </div>
     )
 }

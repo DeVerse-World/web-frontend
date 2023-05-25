@@ -54,16 +54,20 @@ function Sidebar(props: SidebarItemProps) {
                     </a>
                 }
                 const activeClass = router.pathname == item.href ? `${styles.item} ${styles.active}` : `${styles.item}`;
-                return (<Link
-                    onClick={props.onClick}
-                    className="text-white no-underline font-semibold"
-                    key={`sidebar-${item.label}`}
-                    href={item.href}  >
-                    <div className={activeClass} >
-                        {item.icon}
-                        {item.label.toUpperCase()}
-                    </div>
-                </Link>)
+                return (
+                    <Link
+                        onClick={props.onClick}
+                        className="text-white no-underline font-semibold"
+                        key={`sidebar-${item.label}`}
+                        href={item.href}
+                        prefetch={false}
+                    >
+                        <div className={activeClass} >
+                            {item.icon}
+                            {item.label.toUpperCase()}
+                        </div>
+                    </Link>
+                )
             })}
         </div>
     )
@@ -77,7 +81,7 @@ export default function LayoutWrapper(props: SidebarProps) {
 
     return (
         <RouteGuard>
-            <div className="flex flex-row items-center justify-between md:px-8 px-2 bg-black drop-shadow-sm"
+            <div className="flex flex-row items-center justify-between md:px-8 px-2 bg-darkest drop-shadow-sm"
                 style={{
                     height: appBarHeight,
                     borderBottom: '1px solid rgb(71 85 105)',
@@ -90,7 +94,7 @@ export default function LayoutWrapper(props: SidebarProps) {
                         alt="Deverse logo" /></Link>
                         : <GiHamburgerMenu size={24} color="#61c6d0" onClick={() => setOpenDrawer(true)} />
                     }
-                    <Link href="/">
+                    <Link href="/" prefetch={false}>
                         <Image
                             height={24}
                             width={180}
@@ -102,10 +106,13 @@ export default function LayoutWrapper(props: SidebarProps) {
                 {user
                     ? <Image className="cursor-pointer" width={40} height={40} alt="avatar-img"
                         src={user.avatar || "/images/placeholder.webp"}
+                        loader={() => user.avatar || "/images/placeholder.webp"}
                         onClick={() => setShowDropdown(true)} />
                     :
-                    <Link href="/login" ><a className="no-underline text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-8">
-                        Login</a>
+                    <Link href="/login" prefetch={false}>
+                        <a className="no-underline text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-8">
+                            Login
+                        </a>
                     </Link>
 
                 }
@@ -113,7 +120,7 @@ export default function LayoutWrapper(props: SidebarProps) {
 
 
             {showDropdown && <AccountMenu onPointerLeave={() => setShowDropdown(false)} />}
-            <div className="flex flex-row min-h-screen" >
+            <div className="flex flex-row bg-darkest" style={{ minHeight: `calc(100vh - ${appBarHeight}px)` }}>
                 {isWindowSize && (
                     <Nav className="bg-black">
                         <div className="flex flex-row h-full">

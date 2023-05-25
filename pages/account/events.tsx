@@ -3,7 +3,6 @@ import EventList, { EventViewModel } from "../../components/asset/EventList";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import AccountService from "../../data/services/AccountService";
 import { getTimeString } from "../../utils/time_util";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 
 export default function Events() {
@@ -39,7 +38,7 @@ export default function Events() {
     // }
 
     return (
-        <LayoutWrapper>
+        <div className="h-full">
             <TabHeaderBar data={[
                 { href: '/account', label: 'Info' },
                 // { href: '/account/wallet', label: 'Wallet' },
@@ -52,6 +51,6 @@ export default function Events() {
             <div id="section-content">
                 <EventList data={nfts} />
             </div>
-        </LayoutWrapper>
+        </div>
     )
 }

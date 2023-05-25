@@ -11,7 +11,6 @@ import EventList, { EventViewModel } from "../../components/asset/EventList";
 import { getTimeString } from "../../utils/time_util";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 import RootWorldList, { RootTemplateViewModel } from "../../components/asset/RootWorldList";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import MarketplaceFilter, { MarketplaceTabKey, MarketplaceType } from "../../components/MarketplaceFilterTab";
 
 function Marketplace() {
@@ -154,9 +153,8 @@ function Marketplace() {
     const subtypeHref = new URLSearchParams({ type: router.query['type'], subtype: router.query['subtype'] })
 
     return (
-        <LayoutWrapper tab={
+        <div className="flex flex-row h-full">
             <MarketplaceFilter defaultTab={MarketplaceTabKey.WORLD_TYPE} />
-        }>
             <div id="section-content" className="p-4">
                 <nav className="flex text-base" aria-label="Breadcrumb">
                     <ol role="list" className="flex items-center space-x-4">
@@ -190,7 +188,7 @@ function Marketplace() {
                 {currentType == MarketplaceTabKey.EVENT_TYPE && <EventList data={eventData} />}
                 {currentType == MarketplaceTabKey.WORLD_TYPE && <RootWorldList data={rootTemplates} />}
             </div>
-        </LayoutWrapper>
+        </div>
     )
 }
 

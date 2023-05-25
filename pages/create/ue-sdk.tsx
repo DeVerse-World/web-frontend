@@ -1,9 +1,8 @@
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 
 export default function UESdk() {
     return (
-        <LayoutWrapper>
+        <div className="h-full">
             <TabHeaderBar data={[
                 { href: '/create', label: 'Avatar' },
                 // { href: '/create/mint', label: 'Mint' },
@@ -17,7 +16,6 @@ export default function UESdk() {
                     Coming soon
                 </button>
             </div>
-        </LayoutWrapper>
-
+        </div>
     )
 }

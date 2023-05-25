@@ -9,7 +9,6 @@ import EventList, { EventViewModel } from "../../components/asset/EventList";
 import RootWorldList, { TemplateViewModel } from "../../components/asset/RootWorldList";
 import { getTimeString } from "../../utils/time_util";
 import StorageService from "../../data/services/StorageService";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 
 export default function Account() {
@@ -78,7 +77,7 @@ export default function Account() {
     }, [avatars])
 
     return (
-        <LayoutWrapper>
+        <div className="h-full">
             <TabHeaderBar data={[
                 { href: '/account', label: 'Info' },
                 // { href: '/account/wallet', label: 'Wallet' },
@@ -117,7 +116,7 @@ export default function Account() {
                     <div className="p-4">
                         <div className="flex flex-row justify-between">
                             <h3 className="text-blue-300 text-3xl font-bold pl-4">Avatars ({avatars.length})</h3>
-                            <Link href="/account/avatar">
+                            <Link href="/account/avatar" prefetch={false}>
                                 <a className="text-blue-400 text-2xl no-underline" >Show all</a>
                             </Link>
                         </div>
@@ -127,7 +126,7 @@ export default function Account() {
                     <div className="p-4">
                         <div className="flex flex-row justify-between">
                             <h3 className="text-blue-300 text-3xl font-bold pl-4">Events ({events.length})</h3>
-                            <Link href="/account/events">
+                            <Link href="/account/events" prefetch={false}>
                                 <a className="text-blue-400 text-2xl no-underline" >Show all</a>
                             </Link>
                         </div>
@@ -137,7 +136,7 @@ export default function Account() {
                     <div className="p-4">
                         <div className="flex flex-row justify-between">
                             <h3 className="text-blue-300 text-3xl font-bold pl-4">Templates ({templates.length})</h3>
-                            <Link href="/account/templates">
+                            <Link href="/account/templates" prefetch={false}>
                                 <a className="text-blue-400 text-2xl no-underline" >Show all</a>
                             </Link>
                         </div>
@@ -145,6 +144,6 @@ export default function Account() {
                     </div>
                 </section>
             </div>
-        </LayoutWrapper>
+        </div>
     );
 }

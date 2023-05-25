@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import WelcomeSection from '../components/home/WelcomeSection';
 import FirebaseService from "../data/services/FirebaseService";
 import { AppContext } from '../components/contexts/app_context';
-import LayoutWrapper from '../components/LayoutWrapper';
 import dynamic from 'next/dynamic';
 import PartnerSection from "../components/home/PartnerSection";
 import CommunityPartnerSection from "../components/home/CommunityPartnerSection";
@@ -21,7 +20,6 @@ function Main() {
   }, [remoteConfig])
 
   return (
-    <LayoutWrapper>
       <div id="section-content" className='flex flex-col'>
         <WelcomeSection />
         <IntroSection />
@@ -33,7 +31,6 @@ function Main() {
           : null
         }
       </div>
-    </LayoutWrapper>
   );
 }
 

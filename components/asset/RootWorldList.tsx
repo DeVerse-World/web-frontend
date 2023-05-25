@@ -72,7 +72,7 @@ function RootWorldCard(props: CardProps) {
 
     return (
         <>
-            <Link href={`/subworlds/${props.data.id}`}>
+            <Link href={`/subworlds/${props.data.id}`} prefetch={false}>
                 <div className={`${styles.nftCardHover} w-[250px] h-[350px] bg-black/[.4] rounded-xl text-white m-2 overflow-hidden`}>
                     <div className="h-[225px] ">
                         <img className="h-full w-full" src={props.data.image || "/images/color-image-placeholder.webp"} />

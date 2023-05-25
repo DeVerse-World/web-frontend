@@ -8,7 +8,6 @@ import { RootTemplateViewModel } from "../../components/asset/RootWorldList";
 import DerivWorldList, { DerivTemplateViewModel } from "../../components/asset/DerivWorldList";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
-import LayoutWrapper from "../../components/LayoutWrapper";
 
 
 export async function getServerSideProps(context) {
@@ -86,7 +85,7 @@ export default function Deriv({ rootId }) {
     }
 
     return (
-        <LayoutWrapper>
+        <div className="h-full bg-darkest">
             <section className="flex flex-col bg-darkest text-light">
                 <div className='flex-grow p-4 flex flex-col'>
                     <button className="text-white flex flex-row items-center gap-2 py-2 text-xl" onClick={() => {
@@ -127,6 +126,6 @@ export default function Deriv({ rootId }) {
                 </div>
             </section >
             {showPlayModal && <PlayModal templateId={rootId.toString()} onClose={() => setShowPlayModal(false)} />}
-        </LayoutWrapper>
+        </div>
     )
 }  
