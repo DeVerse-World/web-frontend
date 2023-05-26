@@ -53,7 +53,7 @@ export default function Deriv({ rootId }) {
                 }
                 if (rootRes.value.subworld_template.derivative_uri) {
                     const descriptionRes = await SubWorldTemplateService.fetchTemplateDescription(rootRes.value.subworld_template.derivative_uri);
-                    rootData.description = descriptionRes.descriptions.join(", ");
+                    rootData.description = descriptionRes.descriptions && descriptionRes.descriptions.join(", ");
                 }
                 setRootTemplate(rootData);
                 setRootCreator(rootCreator);
@@ -96,60 +96,21 @@ export default function Deriv({ rootId }) {
     return (
         <LayoutWrapper>
             <section className="flex flex-col bg-darkest text-light">
-                <div className='flex-grow p-4 flex flex-col'>
-                    {/* <button className="text-white flex flex-row items-center gap-2 py-2 text-xl" onClick={() => {
-                        router.back();
-                    }}><IoIosArrowBack />Back</button> */}
-                    
-                    <div className="mx-auto px-4 pb-24 pt-14 sm:px-6 sm:pb-32 sm:pt-16 lg:max-w-7xl lg:px-8">
-                        {rootTemplate && rootCreator && (
-                            <RootTemplate template={rootTemplate} creator={rootCreator} />
-                        )}
-                        {derivTemplates && (
-                            <>
-                                <h2 className="text-white mt-24 sm:mt-40 text-xl font-bold tracking-tight sm:text-2xl">
-                                    {derivTemplates.length} connected worlds
-                                </h2>
-                                <DerivWorldList data={derivTemplates} />
-                            </>
-                        )}
-                    </div>
-                    
-                    {false && (
-                        <div className="mt-16 overflow-hidden mx-auto max-w-7xl px-6 lg:px-8">
-                            <div className="lg:flex">
-                                <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
-                                    <div className="lg:col-end-1 lg:w-full lg:max-w-lg lg:pb-8">
-                                        <h2 className="text-4xl font-bold tracking-tight sm:text-6xl">
-                                            {rootTemplate.name}
-                                        </h2>
-                                        <p className="mt-6 text-xl leading-8 text-lighter">
-                                            {rootTemplate.description}
-                                        </p>
-                                        {/* (Optional subdescription) */}
-                                        {/* <p className="mt-6 text-base leading-7 text-lighter">
-                                            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt
-                                            amet fugiat veniam occaecat fugiat. Quasi aperiam sit non sit neque reprehenderit.
-                                        </p> */}
-                                    </div>
-                                    <div className="w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end">
-                                        <img
-                                            src={rootTemplate.file2dUri || "/images/color-image-placeholder.webp"}
-                                            alt=""
-                                            className="aspect-square w-[26rem] max-w-none rounded-2xl bg-gray-50 object-cover"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                            <h2 className="text-white mt-32 sm:mt-40 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                                {derivTemplates.length} connected worlds
-                            </h2>
-                            <DerivWorldList data={derivTemplates} />
-                        </div>
-                    )}
-                </div>
+              <div className="mx-auto px-6 pb-24 pt-14 sm:px-6 sm:pb-32 sm:pt-16 lg:max-w-7xl lg:px-8">
+                  {rootTemplate && rootCreator && (
+                      <RootTemplate template={rootTemplate} creator={rootCreator} />
+                  )}
+                  {derivTemplates && (
+                      <>
+                          <h2 className="text-white mt-24 sm:mt-32 text-xl font-bold tracking-tight sm:text-2xl">
+                              {derivTemplates.length} connected worlds
+                          </h2>
+                          <DerivWorldList data={derivTemplates} />
+                      </>
+                  )}
+              </div>
             </section >
             {showPlayModal && <PlayModal templateId={rootId.toString()} onClose={() => setShowPlayModal(false)} />}
         </LayoutWrapper>
     )
-}  
+}
