@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { StarIcon } from '@heroicons/react/20/solid'
 import OverlayImage360Button from './image360/OverlayImage360Button';
 import PlayModal from './asset/PlayModal';
+import Image from 'next/image';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -17,7 +18,8 @@ const SubworldCard = ({ data }) => {
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-lg bg-gray-100">
                     <img
                         src={data.image || "/images/color-image-placeholder.webp"}
-                        className="h-full w-full aspect-square object-cover object-center"
+                        className="h-full w-full aspect-square object-cover object-center bg-darkest"
+                        loading="lazy"
                     />
                 </div>
                 <div className="p-6">

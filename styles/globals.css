@@ -1,12 +1,12 @@
 /* ./styles/globals.css */
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://rsms.me/inter/inter.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body * {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Inter var', sans-serif;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -51,7 +51,7 @@ body * {
 
 ::-webkit-scrollbar-track {
     /* border: 1px solid black; */
-    background-color: black;
+    background-color: #111827;
 }
 
 ::-webkit-scrollbar {
@@ -64,8 +64,9 @@ body * {
 ::-webkit-scrollbar-thumb {
     /* background-color: rgb(127 198 208); */
     border-radius: 10px;
-    background-color: rgb(97 198 208);
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(127 198 208)), color-stop(0.72, rgb(94 175 217)), color-stop(0.86, rgb(112, 238, 255)));
+    background-color: #22D3EE;
+    /* background-color: rgb(97 198 208); */
+    /* background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(127 198 208)), color-stop(0.72, rgb(94 175 217)), color-stop(0.86, rgb(112, 238, 255))); */
 }
 
 .deverse-title {

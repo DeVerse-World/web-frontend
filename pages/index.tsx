@@ -10,7 +10,34 @@ const IntroSection = dynamic(() => import('../components/home/IntroSection').the
 const HighlightFeatureSection = dynamic(() => import('../components/home/HighlightFeaturesSection').then((mod) => mod.default))
 const BlogPostSection = dynamic(() => import('../components/home/BlogPostSection').then((mod) => mod.default))
 
-function Main() {
+export const getStaticProps = async () => {
+  const [partners, communityPartners, placeholder, introVideoUrl] = await Promise.all([
+    FirebaseService.getPartners(),
+    FirebaseService.getComunityPartners(),
+    FirebaseService.getWelcomeImage(),
+    FirebaseService.getIntroSectionVideoUrl(),
+  ]);
+
+  return {
+    props: {
+      partners,
+      communityPartners,
+      placeholder,
+      introVideoUrl,
+    },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 10 seconds
+    revalidate: 10, // In seconds
+  };
+};
+
+function Main({
+  introVideoUrl,
+  placeholder = "https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F01.webp?alt=media&token=ffab7251-7a3d-4875-9dca-383b72f51b8a",
+  partners = [],
+  communityPartners = [],
+}) {
   const [showBlogToggle, setShowBlogToggle] = useState(false);
   const { remoteConfig } = useContext(AppContext);
 
@@ -20,16 +47,25 @@ function Main() {
   }, [remoteConfig])
 
   return (
-      <div id="section-content" className='flex flex-col'>
-        <WelcomeSection />
+      <div className='flex flex-col bg-darkest'>
+        <WelcomeSection
+          placeholder={placeholder}
+          partners={partners}
+          communityPartners={communityPartners}
+          introVideoUrl={introVideoUrl}
+        />
         <IntroSection />
-        <HighlightFeatureSection />
-        <PartnerSection />
-        <CommunityPartnerSection />
-        {showBlogToggle ?
-          <BlogPostSection />
-          : null
-        }
+        <div className="px-16 lg:px-20">
+          <HighlightFeatureSection />
+          {/*
+            <PartnerSection />
+            <CommunityPartnerSection />
+            */}
+          {showBlogToggle ?
+            <BlogPostSection />
+            : null
+          }
+        </div>
       </div>
   );
 }
