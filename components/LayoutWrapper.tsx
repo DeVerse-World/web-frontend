@@ -15,6 +15,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import RouteGuard from "./RouteGuard";
 import Footer from "./Footer";
 import { BsBroadcast } from "react-icons/bs";
+import Button from './Button';
 
 const appBarHeight = 60;
 
@@ -104,9 +105,9 @@ export default function LayoutWrapper(props: SidebarProps) {
                         src={user.avatar || "/images/placeholder.webp"}
                         onClick={() => setShowDropdown(true)} />
                     :
-                    <Link href="/login" ><a className="no-underline text-white py-1 px-8 rounded-2xl bg-deverse-gradient text-sm h-8">
-                        Login</a>
-                    </Link>
+                    <Button href="/login" primary>
+                        Login
+                    </Button>
 
                 }
             </div>

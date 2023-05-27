@@ -1,4 +1,7 @@
 /* tailwind.config.js */
+
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
     content: [
         "./pages/**/*.{js,ts,jsx,tsx}",
@@ -72,6 +75,9 @@ module.exports = {
                 '9/12': '75%',
                 '10/12': '83.333333%',
                 '11/12': '91.666667%',
+            },
+            fontFamily: {
+              sans: ['Inter var', ...defaultTheme.fontFamily.sans],
             },
         },
     },

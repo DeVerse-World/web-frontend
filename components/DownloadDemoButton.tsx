@@ -3,6 +3,7 @@ import { isDesktop } from 'react-device-detect';
 import FirebaseService from "../data/services/FirebaseService";
 import { useContext } from "react";
 import { AppContext } from "./contexts/app_context";
+import Button from './Button';
 
 type Props = {
     className?: string
@@ -24,12 +25,14 @@ function DownloadDemoButton(props: Props) {
     }
 
     return (
-        <button id="btn-download-app"
-            className={`flex flex-row text-lg items-center cursor-pointer text-gray-900 rounded-md px-8 m-1 bg-deverse-gradient ${props.className}`}
-            onClick={onDownload} >
-            <span id="btn-download-app" className="me-2">Download</span>
-            <AiFillWindows id="btn-download-app" fontSize="2rem" />
-        </button>
+      <Button
+        className="flex items-center gap-x-1"
+        onClick={onDownload}
+        primary
+      >
+        <AiFillWindows className="-ml-1.5 h-5 w-5" />
+        Download
+      </Button>
     )
 }
 
