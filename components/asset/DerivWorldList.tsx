@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TemplateViewModel } from "./RootWorldList";
 import SubworldCard from "../SubworldCard";
 import InfiniteScroll from 'react-infinite-scroller';
+import { ArrowPathIcon } from '@heroicons/react/24/outline';
 
 export type DerivTemplateViewModel = {
     deletable?: boolean;
@@ -42,9 +43,17 @@ function DerivWorldList(props: ListProps) {
         <InfiniteScroll
             className="grid grid-cols-2 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 gap-4"
             pageStart={0}
-            loadMore={() => setTimeout(() => fetchDataByPage(), 300)}
+            loadMore={() => setTimeout(() => fetchDataByPage(), 800)}
             hasMore={pageNumber <= pages.length - 1}
             threshold={500}
+            loader={
+              <button type="button" class="inline-flex justify-center rounded-md bg-brand px-3 py-2 text-sm font-semibold text-darkest shadow-sm hover:bg-gray-50 sm:col-start-1 mb-2 sm:mb-0" disabled>
+                <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                  <ArrowPathIcon className="h-5 w-5 flex-shrink-0 text-darkest" />
+                </svg>
+                Loading...
+              </button>
+            }
         >
             {currentData.map(item => <SubworldCard data={item} />)}
         </InfiniteScroll >
