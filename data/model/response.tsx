@@ -1,6 +1,7 @@
 import { Avatar } from "./avatar";
 import { Event } from "./Event";
 import { DerivSubworldTemplate, RootSubworldTemplate, RootEnrichedSubworldTemplate } from "./SubworldTemplate";
+import { CreatorViewModel } from "../../components/asset/RootWorldList";
 import { User } from "./user";
 
 export class Response<T> {
@@ -41,6 +42,7 @@ export type RootSubworldTemplatesResponse = {
 
 export type RootSubworldTemplateResponse = {
     subworld_template: RootSubworldTemplate;
+    creator_info: CreatorViewModel;
 }
 
 export type LoginResponse = {
