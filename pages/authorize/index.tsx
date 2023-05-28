@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import AuthService from "../../data/services/AuthService";
 import StorageService from "../../data/services/StorageService";
 import { AppContext } from "../../components/contexts/app_context";
-import LayoutWrapper from "../../components/LayoutWrapper";
 
 export async function getServerSideProps(context) {
     const loginKey = context.query.key;
@@ -57,10 +56,8 @@ export default function Authorize({ loginKey }) {
     }, [])
 
     return (
-        <LayoutWrapper>
-            <div id="section-content" className="text-center m-auto text-white ">
-                <h1>{connectionStatus}</h1>
-            </div>
-        </LayoutWrapper>
+        <div id="section-content" className="text-center m-auto text-white h-full">
+            <h1>{connectionStatus}</h1>
+        </div>
     )
 }

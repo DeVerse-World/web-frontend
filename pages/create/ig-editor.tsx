@@ -1,10 +1,11 @@
 import DownloadDemoButton from "../../components/DownloadDemoButton";
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import customProtocolCheck from "custom-protocol-check";
-import { Modal } from "react-bootstrap";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 import { BsPlayFill } from "react-icons/bs";
+
+const GameLaunchModal = dynamic(() => import("../../components/create/GameLaunchModal"));
 
 function Editor() {
     const [showPlayModal, setShowPlayModal] = useState(false);
@@ -22,7 +23,7 @@ function Editor() {
     }
 
     return (
-        <LayoutWrapper>
+        <div className="h-full">
             <TabHeaderBar data={[
                 { href: '/create', label: 'Avatar' },
                 // { href: '/create/mint', label: 'Mint' },
@@ -53,18 +54,11 @@ function Editor() {
                 </div>
                 <SystemRequirement />
             </div>
-            <Modal centered show={showPlayModal}
-                onHide={() => setShowPlayModal(false)}
-                contentClassName="bg-black" dialogClassName="deverse-dialog">
-                <Modal.Header className="flex flex-row">
-                    <h3 className="text-white text-center">Launch Game Instance</h3>
-                </Modal.Header>
-                <Modal.Body className="text-white text-lg break-words flex flex-col gap-4 items-center">
-                    <h5 className="text-white text-center w-64">Download game client to start your journey</h5>
-                    <DownloadDemoButton className="h-12" />
-                </Modal.Body>
-            </Modal>
-        </LayoutWrapper>
+            <GameLaunchModal
+                show={showPlayModal}
+                setShow={setShowPlayModal}
+            />
+        </div>
     )
 }
 
@@ -81,7 +75,7 @@ function HighlightCard(props: HighlightCardProps) {
                 <span className="text-3xl uppercase text-sky-400 font-bold text-center">{props.title}</span>
                 <span className="text-center flex-grow px-4">{props.description}</span>
             </div>
-            <img height={400} src={props.img || "/images/placeholder.webp"} className="rounded-bl-xl rounded-br-xl w-full" />
+            <img height={400} src={props.img || "/images/placeholder.webp"} className="rounded-bl-xl rounded-br-xl w-full" loading="lazy" />
         </div>
     )
 }

@@ -29,14 +29,14 @@ export default function AccountMenu(props: DOMAttributes) {
   return user &&(
     <div id='account-dropdown' onPointerLeave={props.onPointerLeave}>
       <h5>Welcome {user.name}</h5>
-      <Link href="/account" ><a className="no-underline text-white">Profile</a></Link>
+      <Link href="/account" ><a className="no-underline text-white" prefetch={false}>Profile</a></Link>
       {showDashboardToggle &&
-        <Link href="/creator-dashboard" className="no-underline text-white">
+        <Link href="/creator-dashboard" className="no-underline text-white" prefetch={false}>
           Dashboard
         </Link>
       }
       {user != null && user.isBlogPostAdmin &&
-        <Link href="/content-manager" ><a className="no-underline text-white">
+        <Link href="/content-manager" ><a className="no-underline text-white" prefetch={false}>
           Content manager</a>
         </Link>
       }

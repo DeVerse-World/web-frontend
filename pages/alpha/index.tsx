@@ -8,7 +8,6 @@ import Link from "next/link";
 import { AppContext } from "../../components/contexts/app_context";
 import AvatarService from "../../data/services/AvatarService";
 import DownloadDemoButton from "../../components/DownloadDemoButton";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 
 
@@ -63,22 +62,22 @@ function Info() {
     }
 
     return (
-        <LayoutWrapper>
+        <div className="h-full">
             <TabHeaderBar data={[
                 { href: "/alpha", label: "Play" },
                 { href: "/alpha/rewards", label: "Rewards" },
                 { href: "/alpha/leaderboard", label: "Leaderboard" },
 
             ]} />
-            <div id="section-content" className="flex flex-col items-center p-4">
+            <div id="section-content" className="flex flex-col items-center p-4 h-full">
                 <div className="flex flex-col items-center">
                     <h2 className="text-white text-3xl font-bold uppercase">Join the verse</h2>
                     <DownloadDemoButton className="h-12" />
                 </div>
 
-                <div className="grid grid-cols-3 text-white gap-4 p-4 " >
+                <div className="grid grid-cols-3 text-white gap-4 p-4" >
                     <div className="flex flex-col items-center">
-                        <Link href="/create">
+                        <Link href="/create" prefetch={false}>
                             <button className="deverse-play-btn p-2 rounded-2xl">Change</button>
                         </Link>
                         {renderAvatar()}
@@ -91,7 +90,7 @@ function Info() {
                     </div>
                 </div>
             </div>
-        </LayoutWrapper>
+        </div>
 
     )
 }

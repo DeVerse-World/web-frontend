@@ -83,7 +83,7 @@ export function AvatarCard(props: AvatarCardProps) {
         return renderContent()
     }
     return (
-        <Link href={`/asset-preview?avatarId=${props.data.id}`} className="no-underline">
+        <Link href={`/asset-preview?avatarId=${props.data.id}`} className="no-underline" prefetch={false}>
             {renderContent()}
         </Link>
     )

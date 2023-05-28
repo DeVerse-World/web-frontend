@@ -5,7 +5,6 @@ import { FormControl, InputGroup } from "react-bootstrap";
 import { AppContext } from "../../components/contexts/app_context";
 import AuthService from "../../data/services/AuthService";
 import { usePrevious } from "../../utils/use_previous";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 
 export default function Settings() {
@@ -107,7 +106,7 @@ export default function Settings() {
     {/* <span className="text-blue-400 cursor-pointer" onClick={onLinkAccountWithGoogle} >(Link with Google)</span> */ }
 
     return (
-        <LayoutWrapper>
+        <div className="h-full">
             <TabHeaderBar data={[
                 { href: '/account', label: 'Info' },
                 // { href: '/account/wallet', label: 'Wallet' },
@@ -164,6 +163,6 @@ export default function Settings() {
                     </InputGroup>
                 </div>
             </section>
-        </LayoutWrapper>
+        </div>
     )
 }

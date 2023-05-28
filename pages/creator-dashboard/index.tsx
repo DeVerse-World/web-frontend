@@ -9,7 +9,6 @@ import { DataFilter } from "../../data/enum/data_filter";
 import AccountService from "../../data/services/AccountService";
 import { timestampToLabel } from "../../utils/time_util";
 import UnauthorizedView from "../../components/UnauthorizedView";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import FilterTab from "../../components/FilterTab";
 
 ChartJS.register(
@@ -104,7 +103,7 @@ export default function CreatorDashboard() {
         return <UnauthorizedView />
     }
     return (
-        <LayoutWrapper tab={
+        <div className="flex flex-col sm:flex-row h-full">
             <div className="h-[100%] bg-gray-900 ">
                 <div className="flex flex-col text-white text-center gap-4 p-4">
                     <AvatarContainer />
@@ -114,7 +113,6 @@ export default function CreatorDashboard() {
                         { label: "Home"}
                     ]} />
             </div>
-        }>
             <section id='section-content' className='flex flex-col' >
                 <div className="flex-grow p-4 flex flex-col gap-4">
                     <h1 className="section-header-lg pl-4">Home</h1>
@@ -178,6 +176,6 @@ export default function CreatorDashboard() {
                     </section>
                 </div>
             </section >
-        </LayoutWrapper>
+        </div>
     )
 }

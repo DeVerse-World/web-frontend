@@ -8,7 +8,11 @@ import { useContext } from "react";
 import { AppContext } from "./contexts/app_context";
 
 function FooterLink({ href, label }) {
-    return <Link href={href}><a className="no-underline text-white" >{label}</a></Link>
+    return (
+        <Link href={href} prefetch={false}>
+            <a className="no-underline text-white">{label}</a>
+        </Link>
+    )
 }
 
 export default function Footer() {

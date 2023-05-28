@@ -4,7 +4,6 @@ import { AppContext } from '../../components/contexts/app_context';
 import UnauthorizedView from '../../components/UnauthorizedView';
 import { Accordion } from 'react-bootstrap';
 import { useRouter } from 'next/router';
-import LayoutWrapper from '../../components/LayoutWrapper';
 import FilterTab from '../../components/FilterTab';
 import PolicyEditor from './policy-editor';
 import TermOfUseEditor from './term-of-use-editor';
@@ -35,7 +34,7 @@ export default function ContentManager() {
     // }
 
     return (
-        <LayoutWrapper tab={
+        <div className="flex flex-col sm:flex-row h-full">
             <div className="h-[100%] bg-gray-900 w-[160px]">
                 <Accordion defaultActiveKey={CMTabKey.POLICY} className="text-white" flush>
                     <Accordion.Collapse eventKey={CMTabKey.POLICY}>
@@ -46,10 +45,9 @@ export default function ContentManager() {
                     </Accordion.Collapse>
                 </Accordion>
             </div>
-        }>
             <div id='section-content'>
                 {renderContent()}
             </div>
-        </LayoutWrapper>
+        </div>
     )
 }

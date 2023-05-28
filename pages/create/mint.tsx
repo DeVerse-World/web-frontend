@@ -6,7 +6,6 @@ import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from "../../data/enum/asset_type";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import Link from "next/link";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 
 function Mint() {
@@ -129,7 +128,7 @@ function Mint() {
     // }
 
     return (
-        <LayoutWrapper>
+        <div className="h-full">
             <TabHeaderBar data={[
                 { href: '/create', label: 'Avatar' },
                 { href: '/create/mint', label: 'Mint' },
@@ -309,7 +308,7 @@ function Mint() {
                 contentClassName="bg-deverse-gradient" dialogClassName="deverse-dialog">
                 <Modal.Body className="text-white text-lg break-words">
                     Mint successfully!<br />
-                    Asset generated at: <Link href={AssetService.getFullAssetUrl(assetOnlinePath)}>{AssetService.getFullAssetUrl(assetOnlinePath)}</Link>
+                    Asset generated at: <Link href={AssetService.getFullAssetUrl(assetOnlinePath)} prefetch={false}>{AssetService.getFullAssetUrl(assetOnlinePath)}</Link>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button style={{
@@ -327,7 +326,7 @@ function Mint() {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </LayoutWrapper>
+        </div>
     )
 }
 
