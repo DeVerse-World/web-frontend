@@ -211,7 +211,6 @@ class AssetService extends BaseService {
 
     async _getAssetFromEther(tokenFullUri: string): Promise<Result<NFTAsset>> {
         const response = await deverseClient.get<NFTAsset>(tokenFullUri);
-        console.log('hey there')
         if (response.status != 200) {
             return new Failure(new Error(response.statusText));
         }

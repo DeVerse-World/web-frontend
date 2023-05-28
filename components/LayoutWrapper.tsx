@@ -127,8 +127,11 @@ export default function LayoutWrapper(props: SidebarProps) {
                         </div>
                     </Nav>
                 )}
-                <div className="flex-grow flex flex-col overflow-y-auto overflow-x-clip">
-                    {props.children}
+                <div className="flex-grow flex flex-col overflow-y-auto overflow-x-clip bg-darkest text-lightest">
+                    {/* Scale the content to full height */}
+                    <div className="h-full w-full">
+                        {props.children}
+                    </div>
                     <Footer />
                 </div>
             </div>

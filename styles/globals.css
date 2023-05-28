@@ -28,12 +28,6 @@ body * {
     }
 }
 
-#section-content {
-    flex-grow: 1;
-    color: white;
-    background-image: radial-gradient(closest-side, rgb(22, 74, 124), rgba(2, 11, 64, 0.7)), url(/images/bg-highlight.webp);
-}
-
 #section-footer {
     border-top: 1px solid rgb(71 85 105);
     background-color: black;

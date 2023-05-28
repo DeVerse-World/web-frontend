@@ -61,7 +61,7 @@ function Avatar() {
     }, [])
 
     return (
-        <div className="h-full">
+        <>
             <TabHeaderBar data={[
                 { href: '/create', label: 'Avatar' },
                 // { href: '/create/mint', label: 'Mint' },
@@ -79,7 +79,7 @@ function Avatar() {
                     onSaveAvatar={onSaveAvatar}
                 />
             }
-        </div>
+        </>
     )
 }
 

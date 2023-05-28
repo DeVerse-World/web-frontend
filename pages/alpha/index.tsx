@@ -62,14 +62,13 @@ function Info() {
     }
 
     return (
-        <div className="h-full">
-            <TabHeaderBar data={[
+        <>
+            {/* <TabHeaderBar data={[
                 { href: "/alpha", label: "Play" },
                 { href: "/alpha/rewards", label: "Rewards" },
                 { href: "/alpha/leaderboard", label: "Leaderboard" },
-
-            ]} />
-            <div id="section-content" className="flex flex-col items-center p-4 h-full">
+            ]} /> */}
+            <div className="flex flex-col items-center p-4 h-full">
                 <div className="flex flex-col items-center">
                     <h2 className="text-white text-3xl font-bold uppercase">Join the verse</h2>
                     <DownloadDemoButton className="h-12" />
@@ -90,7 +89,7 @@ function Info() {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
 
     )
 }

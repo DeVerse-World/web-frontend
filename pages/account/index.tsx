@@ -77,7 +77,7 @@ export default function Account() {
     }, [avatars])
 
     return (
-        <div className="h-full">
+        <>
             <TabHeaderBar data={[
                 { href: '/account', label: 'Info' },
                 // { href: '/account/wallet', label: 'Wallet' },
@@ -87,8 +87,8 @@ export default function Account() {
                 // { href: '/account/items', label: 'Items' },
                 { href: '/account/settings', label: 'Settings' }
             ]} />
-            <div id="section-content" className="flex flex-col items-center text-white">
-                <section id='cover-picture' className="h-[350px]  overflow-hidden flex items-center">
+            <div className="flex flex-col items-center">
+                <section id='cover-picture' className="h-[350px] overflow-hidden flex items-center">
                     <img title="cover-image" src="https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F01.webp?alt=media&token=ffab7251-7a3d-4875-9dca-383b72f51b8a" className="w-screen" />
                 </section>
                 <section id="avatar-section" className="flex flex-row w-[80%]">
@@ -144,6 +144,6 @@ export default function Account() {
                     </div>
                 </section>
             </div>
-        </div>
+        </>
     );
 }

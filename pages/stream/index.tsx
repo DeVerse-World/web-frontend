@@ -22,8 +22,8 @@ export default function Stream() {
 
 
     return (
-        <div>
-            <div id="section-content" className="p-4 flex flex-col gap-8 h-full">
+        <>
+            <div className="p-4 flex flex-col gap-8">
                 <h3>Experimental feature</h3>
                 <button className="bg-deverse-gradient rounded-md p-2" onClick={() => setShowSetting(true)}>Launch Setting Panel</button>
                 <button className="bg-deverse-gradient rounded-md p-2" onClick={handle.enter}>Launch Full screen mode</button>
@@ -55,6 +55,6 @@ export default function Stream() {
                 }>
                 </Offcanvas.Body>
             </Offcanvas>
-        </div>
+        </>
     )
 }

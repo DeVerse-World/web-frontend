@@ -56,7 +56,7 @@ export default function Layout() {
     }
 
     return (
-        <div className="h-full">
+        <>
             <TabHeaderBar data={[
                 { href: '/account', label: 'Info' },
                 // { href: '/account/wallet', label: 'Wallet' },
@@ -66,7 +66,7 @@ export default function Layout() {
                 // { href: '/account/items', label: 'Items' },
                 { href: '/account/settings', label: 'Settings' }
             ]} />
-            <div id="section-content" className="flex flex-col relative justify-center p-4" >
+            <div className="flex flex-col relative justify-center p-4" >
                 <div >
                     <h3>Root</h3>
                     <RootWorldList data={rootTemplates} />
@@ -76,6 +76,6 @@ export default function Layout() {
                     <DerivWorldList data={derivTemplates} />
                 </div>
             </div>
-        </div>
+        </>
     )
 }

@@ -11,7 +11,7 @@ export async function getStaticProps() {
 
 function TermOfUse({ tou }) {
     return (
-        <div id="section-content" className="flex justify-center items-center text-white p-4 h-full" >
+        <div className="flex justify-center items-center p-4">
             {tou && <div dangerouslySetInnerHTML={{ __html: tou }} />}
         </div>
     )
