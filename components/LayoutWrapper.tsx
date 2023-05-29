@@ -16,6 +16,7 @@ import RouteGuard from "./RouteGuard";
 import Footer from "./Footer";
 import { BsBroadcast } from "react-icons/bs";
 import Button from './Button';
+import EditNamActionPanel from "./action_panels/EditNameActionPanel";
 
 const appBarHeight = 60;
 
@@ -117,7 +118,7 @@ export default function LayoutWrapper(props: SidebarProps) {
             </div>
 
 
-            {showDropdown && <AccountMenu onPointerLeave={() => setShowDropdown(false)} />}
+            {showDropdown && <AccountMenu onPointerLeave={() => setShowDropdown(false)} showDropdown={showDropdown} />}
             <div className="flex flex-row bg-darkest" style={{ minHeight: `calc(100vh - ${appBarHeight}px)` }}>
                 {isWindowSize && (
                     <Nav className="bg-black">
@@ -128,6 +129,7 @@ export default function LayoutWrapper(props: SidebarProps) {
                     </Nav>
                 )}
                 <div className="flex-grow flex flex-col overflow-y-auto overflow-x-clip bg-darkest text-lightest">
+                    <EditNamActionPanel />
                     {/* Scale the content to full height */}
                     <div className="h-full w-full">
                         {props.children}
