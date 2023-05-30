@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import { AiFillFacebook, AiOutlineTwitter } from "react-icons/ai";
@@ -15,7 +16,7 @@ function FooterLink({ href, label }) {
     )
 }
 
-export default function Footer() {
+const Footer = () => {
     const { remoteConfig } = useContext(AppContext)
 
     return (
@@ -75,3 +76,5 @@ export default function Footer() {
         </section>
     )
 }
+
+export default memo(Footer);
