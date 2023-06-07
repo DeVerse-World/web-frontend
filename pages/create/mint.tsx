@@ -128,14 +128,14 @@ function Mint() {
     // }
 
     return (
-        <div className="h-full">
+        <>
             <TabHeaderBar data={[
                 { href: '/create', label: 'Avatar' },
                 { href: '/create/mint', label: 'Mint' },
                 { href: '/create/ig-editor', label: 'World Builder' },
                 // { href: '/create/ue-sdk', label: 'Unreal Engine SDK' },
             ]} />
-            <div id="section-content" className="flex justify-center">
+            <div className="flex justify-center">
                 <Form className="flex flex-col items-center text-white my-8 space-y-2 min-w-[300px] w-[40vw]"
                     validated={formValidated}
                     onSubmit={createItem}>
@@ -326,7 +326,7 @@ function Mint() {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </>
     )
 }
 

@@ -5,6 +5,9 @@ import RouteGuard from "./RouteGuard";
 import Footer from "./Footer";
 import Sidebar from "./layout/Sidebar";
 import Navbar from "./layout/Navbar";
+import { BsBroadcast } from "react-icons/bs";
+import Button from './Button';
+import EditNamActionPanel from "./action_panels/EditNameActionPanel";
 
 const appBarHeight = 60;
 

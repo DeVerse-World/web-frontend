@@ -73,8 +73,6 @@ export function AvatarCard(props: AvatarCardProps) {
                     overflow: "hidden",
                     textOverflow: "ellipsis"
                 }}>{props.data.name}</span>
-
-
             </div>
         )
     }

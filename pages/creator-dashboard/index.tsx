@@ -103,7 +103,7 @@ export default function CreatorDashboard() {
         return <UnauthorizedView />
     }
     return (
-        <div className="flex flex-col sm:flex-row h-full">
+        <div className="flex flex-col sm:flex-row">
             <div className="h-[100%] bg-gray-900 ">
                 <div className="flex flex-col text-white text-center gap-4 p-4">
                     <AvatarContainer />
@@ -113,7 +113,7 @@ export default function CreatorDashboard() {
                         { label: "Home"}
                     ]} />
             </div>
-            <section id='section-content' className='flex flex-col' >
+            <section className='flex flex-col' >
                 <div className="flex-grow p-4 flex flex-col gap-4">
                     <h1 className="section-header-lg pl-4">Home</h1>
                     <div className="flex flex-row gap-8">

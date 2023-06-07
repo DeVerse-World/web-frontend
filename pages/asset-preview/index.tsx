@@ -34,7 +34,7 @@ function AssetPreviewScreen(props: WithRouterProps) {
     }, [router.isReady])
 
     return (
-        <section id="section-content" className='flex flex-col gap-4 h-full'>
+        <section className='flex flex-col gap-4'>
             <div className='m-auto py-4 flex flex-row gap-4 flex-wrap justify-center'>
                 <div className='flex flex-col items-center gap-4 py-4 md:w-[30vw] md:h-[80vh]'>
                     {
