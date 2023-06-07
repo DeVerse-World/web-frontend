@@ -3,7 +3,7 @@ import TeamMemberSection from "../../components/home/TeamMemberSection";
 
 export default function About() {
     return (
-        <div id="section-content" className='flex flex-col items-center h-full'>
+        <div className='flex flex-col items-center'>
             <div className="py-8 px-16 text-2xl md:max-w-[60vw] xl:max-w-[50vw] text-center">
                 {/* <h3 className="text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title py-4 text-center">Our Mission</h3> */}
                 We are dedicated to bring the best out of content creators, digital artists, provide gamers with a vast and never-ending playground with high quality contents.

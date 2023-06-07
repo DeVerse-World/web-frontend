@@ -34,7 +34,7 @@ export default function ContentManager() {
     // }
 
     return (
-        <div className="flex flex-col sm:flex-row h-full">
+        <div className="flex flex-col sm:flex-row">
             <div className="h-[100%] bg-gray-900 w-[160px]">
                 <Accordion defaultActiveKey={CMTabKey.POLICY} className="text-white" flush>
                     <Accordion.Collapse eventKey={CMTabKey.POLICY}>
@@ -45,9 +45,7 @@ export default function ContentManager() {
                     </Accordion.Collapse>
                 </Accordion>
             </div>
-            <div id='section-content'>
-                {renderContent()}
-            </div>
+            {renderContent()}
         </div>
     )
 }

@@ -44,7 +44,7 @@ export default function Content() {
     }
 
     return (
-        <div className="h-full">
+        <>
             <TabHeaderBar
                 data={[
                     { href: '/account', label: 'Info' },
@@ -56,9 +56,7 @@ export default function Content() {
                     { href: '/account/settings', label: 'Settings' }
                 ]}
             />
-            <div id="section-content">
-                <AvatarList data={nfts} onDeleted={deleteItem} />
-            </div>
-        </div>
+            <AvatarList data={nfts} onDeleted={deleteItem} />
+        </>
     )
 }

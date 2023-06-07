@@ -90,10 +90,9 @@ export default function Deriv({ rootId }) {
     const onLoadMore = () => {
 
     }
-    console.log('meow', derivTemplates)
 
     return (
-        <div className="h-full bg-darkest">
+        <>
             <section className="flex flex-col bg-darkest text-light">
               <div className="mx-auto px-6 pb-24 pt-14 sm:px-6 sm:pb-32 sm:pt-16 lg:max-w-7xl lg:px-8">
                   {rootTemplate && rootCreator && (
@@ -110,6 +109,6 @@ export default function Deriv({ rootId }) {
               </div>
             </section >
             {showPlayModal && <PlayModal templateId={rootId.toString()} onClose={() => setShowPlayModal(false)} />}
-        </div>
+        </>
     )
 }

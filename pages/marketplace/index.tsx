@@ -153,9 +153,9 @@ function Marketplace() {
     const subtypeHref = new URLSearchParams({ type: router.query['type'], subtype: router.query['subtype'] })
 
     return (
-        <div className="flex flex-row h-full">
+        <div className="flex flex-row">
             <MarketplaceFilter defaultTab={MarketplaceTabKey.WORLD_TYPE} />
-            <div id="section-content" className="p-4">
+            <div className="p-4">
                 <nav className="flex text-base" aria-label="Breadcrumb">
                     <ol role="list" className="flex items-center space-x-4">
                         <li >

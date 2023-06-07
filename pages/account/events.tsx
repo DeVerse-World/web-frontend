@@ -38,7 +38,7 @@ export default function Events() {
     // }
 
     return (
-        <div className="h-full">
+        <>
             <TabHeaderBar data={[
                 { href: '/account', label: 'Info' },
                 // { href: '/account/wallet', label: 'Wallet' },
@@ -48,9 +48,7 @@ export default function Events() {
                 // { href: '/account/items', label: 'Items' },
                 { href: '/account/settings', label: 'Settings' }
             ]} />
-            <div id="section-content">
-                <EventList data={nfts} />
-            </div>
-        </div>
+            <EventList data={nfts} />
+        </>
     )
 }

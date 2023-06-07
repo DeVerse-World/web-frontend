@@ -2,7 +2,7 @@ import { TabHeaderBar } from "../../components/common/TabHeader";
 
 export default function Wallet() {
     return (
-        <div className="h-full">
+        <>
             <TabHeaderBar data={[
                 { href: '/account', label: 'Info' },
                 // { href: '/account/wallet', label: 'Wallet' },
@@ -12,9 +12,9 @@ export default function Wallet() {
                 // { href: '/account/items', label: 'Items' },
                 { href: '/account/settings', label: 'Settings' }
             ]} />
-            <div id="section-content" >
+            <div>
                 {/*<NFTList data={data} />*/}
             </div>
-        </div>
+        </>
     )
 }

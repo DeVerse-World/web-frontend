@@ -56,7 +56,7 @@ export default function Authorize({ loginKey }) {
     }, [])
 
     return (
-        <div id="section-content" className="text-center m-auto text-white h-full">
+        <div className="text-center m-auto">
             <h1>{connectionStatus}</h1>
         </div>
     )

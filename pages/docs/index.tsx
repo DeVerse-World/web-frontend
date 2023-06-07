@@ -6,8 +6,7 @@ function DocsScreen() {
     const { remoteConfig } = useContext(AppContext)
 
     return (
-        <div>
-            <div id="section-content" className='flex flex-col gap-4 text-white h-full'>
+        <div className='flex flex-col gap-4'>
                 <div className="flex-grow flex flex-row justify-center gap-4 flex-wrap p-4">
                     <div onClick={() => {
                         FirebaseService.getPitchDeckUri(remoteConfig).then(url => {
@@ -29,7 +28,6 @@ function DocsScreen() {
                     </div>
                 </div>
             </div>
-        </div>
     )
 }
 

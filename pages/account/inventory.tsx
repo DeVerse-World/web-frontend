@@ -19,10 +19,8 @@ export default function Inventory() {
     }, [user])
 
     return (
-        <div className="h-full">
-            <div id="section-content" >
-                {/*<NFTList data={data} />*/}
-            </div>
+        <div>
+            {/*<NFTList data={data} />*/}
         </div>
     )
 }
