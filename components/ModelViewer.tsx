@@ -4,6 +4,7 @@ import { GroupProps, useFrame } from "@react-three/fiber";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 import ModelPreviewService from "../data/services/ModelRenderService";
 import { AnimationMixer, Event } from "three";
+import { OrbitControls, Environment } from "@react-three/drei";
 
 interface ModelViewerProps extends GroupProps {
   filePath: string;
@@ -38,7 +39,7 @@ export default function ModelViewer(props: ModelViewerProps) {
       </div>
     }>
       <TransformControls showX={false} showY={false} showZ={false}>
-        <ModelObject filePath={props.filePath} animationPath {...props} gltf={model} />
+        <ModelObject filePath={props.filePath} animationPath  {...props} gltf={model} />
       </TransformControls>
     </Suspense>
   );
@@ -74,6 +75,11 @@ function ModelObject(props: ModelObjectProps) {
   })
 
   return (
-    <primitive object={props.gltf.scene} position={[0, -1, 0]} {...props} />
+    <>
+    <primitive object={props.gltf.scene} lookAt={[1,1,0]} />
+    <OrbitControls />
+    
+    </>
+    
   )
 }

@@ -48,8 +48,8 @@ function Info() {
             return <h5>No Avatar Yet, please clogin or create one first</h5>
         }
         return (
-            <div className='md:w-[300px] md:h-[600px] w-[250px] '>
-                <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 1], fov: 50 }}>
+            <div className='md:w-[300px] md:h-[600px] w-[250px]'>
+                <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 3.5], fov: 50 }}>
                     <ambientLight intensity={2} />
                     <spotLight position={[1, 6, 1.5]} angle={0.2} penumbra={1} intensity={2.5} castShadow shadow-mapSize={[2048, 2048]} />
                     <spotLight position={[-5, 5, -1.5]} angle={0.03} penumbra={1} intensity={4} castShadow shadow-mapSize={[1024, 1024]} />
