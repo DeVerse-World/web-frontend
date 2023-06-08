@@ -151,7 +151,7 @@ function Marketplace() {
     }
     const typeHref = new URLSearchParams({ type: router.query['type'], subtype: 'all' });
     const subtypeHref = new URLSearchParams({ type: router.query['type'], subtype: router.query['subtype'] })
-
+console.log(rootTemplates)
     return (
         <div className="flex flex-row">
             <MarketplaceFilter defaultTab={MarketplaceTabKey.WORLD_TYPE} />

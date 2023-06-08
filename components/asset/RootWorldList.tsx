@@ -7,6 +7,8 @@ import StarRatings from 'react-star-ratings';
 import { FaEthereum } from "react-icons/fa";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 import styles from "../../styles/card-item.module.css";
+import Card from "../Card";
+import OverlayImage360Button from "../image360/OverlayImage360Button";
 
 const itemPerPage = 4;
 
@@ -49,21 +51,55 @@ type ListProps = {
 
 function RootWorldList(props: ListProps) {
     const [currentPage, setCurrentPage] = useState(1);
+    const [showPlayModal, setShowPlayModal] = useState(false);
+    const [selectedTemplateId, setSelectedTemplateId] = useState(null);
+
+
 
     return (
-        <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-full">
-            <div className={props.data.length < itemPerPage ? "flex flex-row flex-wrap gap-2 w-full" : `grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
+       
+        <section>
+            <div className="mx-auto px-6 pb-24 pt-14 sm:px-6 sm:pb-32 sm:pt-16 lg:max-w-7xl lg:px-">
+                <div className="grid grid-cols-2 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 gap-4">
                 {
                     props.data.slice((currentPage - 1) * itemPerPage, currentPage * itemPerPage).map((item, index) =>
-                        <RootWorldCard key={index} data={item} />)
-                }
+                        <Card key={item.id} thumbnail={item.image} name = {item.name}
+                        
+                        >
+                        <div className="mt-4 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
+                        <button
+                            type="button"
+                            className="inline-flex w-full justify-center rounded-md bg-brand px-3 py-2 text-sm font-semibold text-darkest shadow-sm hover:bg-gray-50 sm:col-start-1 mb-2 sm:mb-0"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setSelectedTemplateId(item.id);
+                                setShowPlayModal(true);
+                            }}>
+
+                            Launch
+                        </button>
+                        <OverlayImage360Button
+                            source={item?.image}
+                            className="inline-flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold overflow-hidden border border-brand text-brand"
+                        >
+                            Preview
+                        </OverlayImage360Button>
+
+                    </div>
+                    </Card>
+                )}
             </div>
             {props.data.length > itemPerPage &&
                 <div className="flex flex-row gap-2">
                     <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
                 </div>
             }
+            </div>
+            
+            {showPlayModal && <PlayModal templateId={selectedTemplateId} onClose={() => setShowPlayModal(false)} />}
+
         </section>
+        
     )
 }
 
@@ -84,6 +120,8 @@ function RootWorldCard(props: CardProps) {
 
     return (
         <>
+       
+            
             <Link href={`/subworlds/${props.data.id}`} prefetch={false}>
                 <div className={`${styles.nftCardHover} w-[250px] h-[350px] bg-black/[.4] rounded-xl text-white m-2 overflow-hidden`}>
                     <div className="h-[225px] ">
@@ -116,6 +154,8 @@ function RootWorldCard(props: CardProps) {
 
                 </div>
             </Link >
+          
+       
             {showPlayModal && <PlayModal templateId={props.data.id} onClose={() => setShowPlayModal(false)} />}
         </>
 
