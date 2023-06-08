@@ -10,6 +10,7 @@ import styles from "../../styles/card-item.module.css";
 import Card from "../Card";
 import OverlayImage360Button from "../image360/OverlayImage360Button";
 import PlayModal from "./PlayModal";
+import InifiniteList from "../marketplace/InfiniteList";
 
 const itemPerPage = 4;
 
@@ -18,7 +19,10 @@ type AvatarListProps = {
     onDeleted?: (AvatarViewModel) => void;
 }
 
-export default function AvatarList(props: AvatarListProps) {
+export default function AvatarList({ data }: AvatarListProps) {
+    return (
+        <InifiniteList items={data} />
+    )
     const [currentPage, setCurrentPage] = useState(1);
     const [showPlayModal, setShowPlayModal] = useState(false);
     const [selectedTemplateId, setSelectedTemplateId] = useState(null);

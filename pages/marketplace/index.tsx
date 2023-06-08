@@ -19,28 +19,29 @@ function Marketplace() {
     const [images, setImages] = useState<AvatarViewModel[]>([]);
     const [eventData, setEventData] = useState<EventViewModel[]>([]);
     const [rootTemplates, setRootTemplates] = useState<RootTemplateViewModel[]>([]);
-    const [currentType, setCurrentType] = useState<MarketplaceTabKey>(null);
+    const [currentType, setCurrentType] = useState<MarketplaceTabKey | undefined>();
+    const [currentSubtype, setCurrentSubtype] = useState<string | undefined>();
 
     useEffect(() => {
         if (!router.isReady) return;
+        
+        setCurrentType(router.query['type'] || MarketplaceTabKey.WORLD_TYPE);
+        setCurrentSubtype(router.query['subtype']);
+
         switch (router.query['type']) {
             case MarketplaceTabKey.WORLD_TYPE:
-                setCurrentType(MarketplaceTabKey.WORLD_TYPE)
                 loadWorlds();
                 break;
             case MarketplaceTabKey.EVENT_TYPE:
-                setCurrentType(MarketplaceTabKey.EVENT_TYPE)
                 loadEvents();
                 break;
             case MarketplaceTabKey.NFT_TYPE:
-                setCurrentType(MarketplaceTabKey.NFT_TYPE)
                 loadNFTs('');
                 break;
             default:
                 router.push({
                     query: { type: MarketplaceTabKey.WORLD_TYPE }
                 }, undefined, { shallow: true })
-                setCurrentType(MarketplaceTabKey.WORLD_TYPE)
                 loadWorlds();
                 break;
         }
@@ -76,6 +77,7 @@ function Marketplace() {
         // if (shouldShowLoading)
         setViewState(ViewState.LOADING)
         EventsService.fetchEvents().then(res => {
+            console.log(res);
             if (res.isSuccess()) {
                 const data = res.value!.events.map<EventViewModel>(e => ({
                     id: e.id.toString(),
@@ -87,7 +89,7 @@ function Marketplace() {
                     lastUpdate: getTimeString(new Date(e.updated_at)),
                     stage: e.stage,
                     participants: e.max_num_participants
-                })).filter(event => event.stage != "Finished");
+                })).filter(event => event.stage !== "Finished");
                 // switch (visibleTab) {
                 //     case SecondaryTab.EVENT_BATTLE:
                 //         setEventData(data.filter(e => e.category == EventCategory.BATTLE))
@@ -114,7 +116,7 @@ function Marketplace() {
                 //         setEventData(data);
                 //         break;
                 // }
-
+                setEventData(data);
             } else {
                 setEventData([]);
             }
@@ -149,12 +151,26 @@ function Marketplace() {
             setViewState(ViewState.SUCCESS)
         })
     }
+
+    const renderList = () => {
+        if (currentType === MarketplaceTabKey.NFT_TYPE)
+            return (<AvatarList data={images} />);
+        if (currentType === MarketplaceTabKey.EVENT_TYPE)
+            return (<EventList data={eventData}/>);
+
+        if (currentType === MarketplaceTabKey.WORLD_TYPE)
+            return (<RootWorldList data={rootTemplates} />);
+
+        return;
+    }
+
     const typeHref = new URLSearchParams({ type: router.query['type'], subtype: 'all' });
     const subtypeHref = new URLSearchParams({ type: router.query['type'], subtype: router.query['subtype'] })
-console.log(rootTemplates)
+
+
     return (
-        <div className="flex flex-row">
-            <MarketplaceFilter defaultTab={MarketplaceTabKey.WORLD_TYPE} />
+        <div className="flex flex-row h-full">
+            {currentType && <MarketplaceFilter defaultTab={currentType} />}
             <div className="p-4">
                 <nav className="flex text-base" aria-label="Breadcrumb">
                     <ol role="list" className="flex items-center space-x-4">
@@ -181,12 +197,14 @@ console.log(rootTemplates)
                         </li>
                     </ol>
                 </nav>
-                <h2 className="text-lightest mt-6 sm:mt-8 ml-8 text-3xl font-bold tracking-tight text-darkest sm:text-4xl capitalize">
-                    {router.query['subtype']}
-                </h2>
-                {currentType == MarketplaceTabKey.NFT_TYPE && <AvatarList data={images} />}
-                {currentType == MarketplaceTabKey.EVENT_TYPE && <EventList data={eventData} />}
-                {currentType == MarketplaceTabKey.WORLD_TYPE && <RootWorldList data={rootTemplates} />}
+
+                {/* TODO: Add empty state if list is empty */}
+                {currentSubtype && (
+                    <h2 className="text-lightest mt-6 sm:mt-8 ml-8 text-3xl font-bold tracking-tight sm:text-4xl capitalize">
+                        {router.query['subtype']}
+                    </h2>
+                )}
+                {renderList()}
             </div>
         </div>
     )

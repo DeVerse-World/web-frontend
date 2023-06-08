@@ -1,14 +1,10 @@
 import React from 'react';
-import { useState } from 'react';
 import { StarIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image';
+import classNames from 'classnames';
 
+const Card = ({ name, creatorName, rating, thumbnail, children, ...props }) => {
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
-const Card = ({ name, creatorName, rating, thumbnail, children }) => {
     return (
         <div className="overflow-hidden rounded-lg bg-dark ring-1 ring-inset ring-medium text-left transition-all sm:my-4 sm:w-full sm:max-w-lg">
             <div className="group text-sm">
@@ -21,7 +17,7 @@ const Card = ({ name, creatorName, rating, thumbnail, children }) => {
                 </div>
                 <div className="p-6">
                     <h3 className="text-lg font-bold text-lightest">{name}</h3>
-                    <span className="mt-2 text-base text-light">{creatorName}</span>
+                    <div className="mt-2 text-base text-light">{creatorName}</div>
                     {rating && rating !== '' && (
                         <div className="mt-2 flex flex-col">
                             <div className="flex items-center">             
