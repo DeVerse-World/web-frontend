@@ -12,6 +12,7 @@ import { getTimeString } from "../../utils/time_util";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 import RootWorldList, { RootTemplateViewModel } from "../../components/asset/RootWorldList";
 import MarketplaceFilter, { MarketplaceTabKey, MarketplaceType } from "../../components/MarketplaceFilterTab";
+import GalleryContainer from "../../components/gallery/GalleryContainer";
 
 function Marketplace() {
     const router = useRouter();
@@ -21,6 +22,7 @@ function Marketplace() {
     const [rootTemplates, setRootTemplates] = useState<RootTemplateViewModel[]>([]);
     const [currentType, setCurrentType] = useState<MarketplaceTabKey | undefined>();
     const [currentSubtype, setCurrentSubtype] = useState<string | undefined>();
+    const [selectedCard, setSelectedCard] = useState<boolean | undefined>();
 
     useEffect(() => {
         if (!router.isReady) return;
@@ -157,7 +159,6 @@ function Marketplace() {
             return (<AvatarList data={images} />);
         if (currentType === MarketplaceTabKey.EVENT_TYPE)
             return (<EventList data={eventData}/>);
-
         if (currentType === MarketplaceTabKey.WORLD_TYPE)
             return (<RootWorldList data={rootTemplates} />);
 
@@ -171,41 +172,43 @@ function Marketplace() {
     return (
         <div className="flex flex-row h-full">
             {currentType && <MarketplaceFilter defaultTab={currentType} />}
-            <div className="p-4">
-                <nav className="flex text-base" aria-label="Breadcrumb">
-                    <ol role="list" className="flex items-center space-x-4">
-                        <li >
-                            <div className="flex items-center">
-                                <a
-                                    href={`/marketplace?${typeHref.toString()}`}
-                                    className="font-medium text-lighter hover:text-light capitalize no-underline"
-                                >
-                                    {router.query['type']}
-                                </a>
-                            </div>
-                        </li>
-                        <li >
-                            <div className="flex items-center">
-                                <ChevronRightIcon className="h-5 w-5 flex-shrink-0 text-lighter capitalize" aria-hidden="true" />
-                                <a
-                                    href={`/marketplace?${subtypeHref.toString()}`}
-                                    className="ml-4 font-medium text-lighter hover:text-light no-underline capitalize"
-                                >
-                                    {router.query['subtype']}
-                                </a>
-                            </div>
-                        </li>
-                    </ol>
-                </nav>
+            <GalleryContainer>
+                <div className="p-4">
+                    <nav className="flex text-base" aria-label="Breadcrumb">
+                        <ol role="list" className="flex items-center space-x-4">
+                            <li >
+                                <div className="flex items-center">
+                                    <a
+                                        href={`/marketplace?${typeHref.toString()}`}
+                                        className="font-medium text-lighter hover:text-light capitalize no-underline"
+                                    >
+                                        {router.query['type']}
+                                    </a>
+                                </div>
+                            </li>
+                            <li >
+                                <div className="flex items-center">
+                                    <ChevronRightIcon className="h-5 w-5 flex-shrink-0 text-lighter capitalize" aria-hidden="true" />
+                                    <a
+                                        href={`/marketplace?${subtypeHref.toString()}`}
+                                        className="ml-4 font-medium text-lighter hover:text-light no-underline capitalize"
+                                    >
+                                        {router.query['subtype']}
+                                    </a>
+                                </div>
+                            </li>
+                        </ol>
+                    </nav>
 
-                {/* TODO: Add empty state if list is empty */}
-                {currentSubtype && (
-                    <h2 className="text-lightest mt-6 sm:mt-8 ml-8 text-3xl font-bold tracking-tight sm:text-4xl capitalize">
-                        {router.query['subtype']}
-                    </h2>
-                )}
-                {renderList()}
-            </div>
+                    {/* TODO: Add empty state if list is empty */}
+                    {currentSubtype && (
+                        <h2 className="text-lightest mt-6 sm:mt-8 ml-8 text-3xl font-bold tracking-tight sm:text-4xl capitalize">
+                            {router.query['subtype']}
+                        </h2>
+                    )}
+                    {renderList()}
+                </div>
+            </GalleryContainer>
         </div>
     )
 }

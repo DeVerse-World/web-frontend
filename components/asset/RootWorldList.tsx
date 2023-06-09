@@ -52,7 +52,7 @@ type ListProps = {
 
 function RootWorldList({ data }: ListProps) {
     return (
-        <InfiniteList items={data} cardType="event" />
+        <InfiniteList items={data} />
     )
 }
 export default RootWorldList;
