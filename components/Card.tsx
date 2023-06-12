@@ -21,11 +21,11 @@ const Card = ({ name, creatorName, rating, thumbnail, children, ...props }) => {
                     {rating && rating !== '' && (
                         <div className="mt-2 flex flex-col">
                             <div className="flex items-center">             
-                                {[0, 1, 2, 3, 4].map((rating) => (
+                                {[0, 1, 2, 3, 4].map((_rating) => (
                                     <StarIcon
                                         key={rating}
                                         className={classNames(
-                                            rating > rating ? 'text-yellow-400' : 'text-gray-200',
+                                            rating > _rating ? 'text-yellow-400' : 'text-gray-200',
                                             'h-5 w-5 flex-shrink-0'
                                         )}
                                         aria-hidden="true"

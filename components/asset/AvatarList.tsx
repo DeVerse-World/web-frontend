@@ -16,12 +16,13 @@ const itemPerPage = 4;
 
 type AvatarListProps = {
     data: AvatarViewModel[];
+    cardType: string;
     onDeleted?: (AvatarViewModel) => void;
 }
 
-export default function AvatarList({ data }: AvatarListProps) {
+export default function AvatarList({ data, ...props }: AvatarListProps) {
     return (
-        <InifiniteList items={data} />
+        <InifiniteList items={data} {...props} />
     )
     const [currentPage, setCurrentPage] = useState(1);
     const [showPlayModal, setShowPlayModal] = useState(false);

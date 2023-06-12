@@ -48,11 +48,12 @@ export type RootTemplateViewModel = {
 
 type ListProps = {
     data: RootTemplateViewModel[];
+    cardType: string;
 }
 
-function RootWorldList({ data }: ListProps) {
+function RootWorldList({ data, ...props }: ListProps) {
     return (
-        <InfiniteList items={data} />
+        <InfiniteList items={data} {...props}  />
     )
 }
 export default RootWorldList;

@@ -5,6 +5,7 @@ import { AppContext } from '../components/contexts/app_context';
 import dynamic from 'next/dynamic';
 import PartnerSection from "../components/home/PartnerSection";
 import CommunityPartnerSection from "../components/home/CommunityPartnerSection";
+import Popup from "../components/Popup";
 
 const IntroSection = dynamic(() => import('../components/home/IntroSection').then((mod) => mod.default))
 const HighlightFeatureSection = dynamic(() => import('../components/home/HighlightFeaturesSection').then((mod) => mod.default))
@@ -47,12 +48,13 @@ function Main({
   }, [remoteConfig])
 
   return (
-      <div className='flex flex-col bg-darkest'>
+      <div className='flex flex-col bg-darkest'>   
+        <Popup />
         <WelcomeSection
           placeholder={placeholder}
           partners={partners}
           communityPartners={communityPartners}
-          introVideoUrl={introVideoUrl}
+          introVideoUrl={introVideoUrl}    
         />
         <IntroSection />
         <div className="px-16 lg:px-20">

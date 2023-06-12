@@ -22,7 +22,15 @@ function Marketplace() {
     const [rootTemplates, setRootTemplates] = useState<RootTemplateViewModel[]>([]);
     const [currentType, setCurrentType] = useState<MarketplaceTabKey | undefined>();
     const [currentSubtype, setCurrentSubtype] = useState<string | undefined>();
-    const [selectedCard, setSelectedCard] = useState<boolean | undefined>();
+    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [sidebarDetails, setSidebarDetails] = useState({
+        name: "",
+        creatorName: "",
+        rating: null,
+        thumbnail: "",
+        description: "",
+        buttons: null,
+    });
 
     useEffect(() => {
         if (!router.isReady) return;
@@ -156,11 +164,11 @@ function Marketplace() {
 
     const renderList = () => {
         if (currentType === MarketplaceTabKey.NFT_TYPE)
-            return (<AvatarList data={images} />);
+            return (<AvatarList data={images} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} />);
         if (currentType === MarketplaceTabKey.EVENT_TYPE)
-            return (<EventList data={eventData}/>);
+            return (<EventList data={eventData} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} />);
         if (currentType === MarketplaceTabKey.WORLD_TYPE)
-            return (<RootWorldList data={rootTemplates} />);
+            return (<RootWorldList data={rootTemplates} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} />);
 
         return;
     }
@@ -172,43 +180,45 @@ function Marketplace() {
     return (
         <div className="flex flex-row h-full">
             {currentType && <MarketplaceFilter defaultTab={currentType} />}
-            <GalleryContainer>
-                <div className="p-4">
-                    <nav className="flex text-base" aria-label="Breadcrumb">
-                        <ol role="list" className="flex items-center space-x-4">
-                            <li >
-                                <div className="flex items-center">
-                                    <a
-                                        href={`/marketplace?${typeHref.toString()}`}
-                                        className="font-medium text-lighter hover:text-light capitalize no-underline"
-                                    >
-                                        {router.query['type']}
-                                    </a>
-                                </div>
-                            </li>
-                            <li >
-                                <div className="flex items-center">
-                                    <ChevronRightIcon className="h-5 w-5 flex-shrink-0 text-lighter capitalize" aria-hidden="true" />
-                                    <a
-                                        href={`/marketplace?${subtypeHref.toString()}`}
-                                        className="ml-4 font-medium text-lighter hover:text-light no-underline capitalize"
-                                    >
-                                        {router.query['subtype']}
-                                    </a>
-                                </div>
-                            </li>
-                        </ol>
-                    </nav>
+            {(images.length > 0 || eventData.length > 0 || rootTemplates.length > 0) ? (
+                <GalleryContainer details={sidebarDetails} type={router.query['type']}>
+                    <div className="px-4 pb-4">
+                        <nav className="flex text-base" aria-label="Breadcrumb">
+                            <ol role="list" className="flex items-center space-x-4">
+                                <li >
+                                    <div className="flex items-center">
+                                        <a
+                                            href={`/marketplace?${typeHref.toString()}`}
+                                            className="font-medium text-lighter hover:text-light capitalize no-underline"
+                                        >
+                                            {router.query['type']}
+                                        </a>
+                                    </div>
+                                </li>
+                                <li >
+                                    <div className="flex items-center">
+                                        <ChevronRightIcon className="h-5 w-5 flex-shrink-0 text-lighter capitalize" aria-hidden="true" />
+                                        <a
+                                            href={`/marketplace?${subtypeHref.toString()}`}
+                                            className="ml-4 font-medium text-lighter hover:text-light no-underline capitalize"
+                                        >
+                                            {router.query['subtype']}
+                                        </a>
+                                    </div>
+                                </li>
+                            </ol>
+                        </nav>
 
-                    {/* TODO: Add empty state if list is empty */}
-                    {currentSubtype && (
-                        <h2 className="text-lightest mt-6 sm:mt-8 ml-8 text-3xl font-bold tracking-tight sm:text-4xl capitalize">
-                            {router.query['subtype']}
-                        </h2>
-                    )}
-                    {renderList()}
-                </div>
-            </GalleryContainer>
+                        {/* TODO: Add empty state if list is empty */}
+                        {currentSubtype && (
+                            <h2 className="text-lightest mt-6 sm:mt-8 ml-8 text-3xl font-bold tracking-tight sm:text-4xl capitalize">
+                                {router.query['subtype']}
+                            </h2>
+                        )}
+                        {renderList()}
+                    </div>
+                </GalleryContainer>
+            ) : null}
         </div>
     )
 }

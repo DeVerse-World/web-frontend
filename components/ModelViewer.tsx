@@ -39,7 +39,7 @@ export default function ModelViewer(props: ModelViewerProps) {
       </div>
     }>
       <TransformControls showX={false} showY={false} showZ={false}>
-        <ModelObject filePath={props.filePath} animationPath  {...props} gltf={model} />
+        <ModelObject filePath={props.filePath} animationPath={"/3d/StandingRPM.glb"}  {...props} gltf={model} />
       </TransformControls>
     </Suspense>
   );

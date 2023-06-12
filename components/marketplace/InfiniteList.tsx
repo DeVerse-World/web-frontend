@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InfiniteScroll from 'react-infinite-scroller';
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
+import classNames from "classnames";
 
 import Card from "../Card";
 import EventCard from "../cards/EventCard";
+import GalleryCard from "../gallery/GalleryCard";
 import PlayModal from "../asset/PlayModal";
 import OverlayImage360Button from "../image360/OverlayImage360Button";
 
@@ -18,12 +20,24 @@ function sliceIntoPages(arr, chunkSize) {
     return res;
 }
 
-const InfiniteList = ({ items, cardType = 'default' }) => {
+const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedIndex, setSidebarDetails }) => {
     const pages = sliceIntoPages(items, itemPerPage);
     const [currentData, setCurrentData] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
     const [showPlayModal, setShowPlayModal] = useState(false);
-    const [selectedTemplateId, setSelectedTemplateId] = useState(null);
+
+    useEffect(() => {
+        const data = items[0];
+        setSelectedIndex(0);
+        setSidebarDetails({
+            name: data.name,
+            creatorName: data.author || data.creator?.name || 'Deverse World',
+            rating: data.rating,
+            description: data.description,
+            thumbnail: data.image,
+            buttons: <ButtonGroup index={0} image360={data.image} />,
+        });
+    }, [items]);
 
     // HACK: Slice the items into smaller pages for infinite scrolling.
     // After the backend API supports pagination, we should refactor this component to remove this logic.
@@ -35,14 +49,14 @@ const InfiniteList = ({ items, cardType = 'default' }) => {
         setPageNumber(pageNumber + 1);
     }
 
-    const ButtonGroup = ({ templateId, image360 }) => (
+    const ButtonGroup = ({ index, image360 }) => (
         <div className="mt-4 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
             <button
                 type="button"
                 className="inline-flex w-full justify-center rounded-md bg-brand px-3 py-2 text-sm font-semibold text-darkest shadow-sm hover:bg-gray-50 sm:col-start-1 mb-2 sm:mb-0"
                 onClick={(e) => {
                     e.stopPropagation();
-                    setSelectedTemplateId(templateId);
+                    setSelectedIndex(index);
                     setShowPlayModal(true);
                 }}>
 
@@ -57,10 +71,62 @@ const InfiniteList = ({ items, cardType = 'default' }) => {
         </div>
     );
 
+    const renderCard = (data, index) => {
+        if (cardType === 'event')
+            return (
+                <EventCard
+                    thumbnail={data.image}
+                    name={data.name}
+                    creatorName={data.author}
+                    lastUpdate={data.lastUpdate}
+                    category={data.category}
+                >
+                    <ButtonGroup index={index} image360={data.image}  />
+                </EventCard>
+            )
+        
+        if (cardType === 'gallery')
+            return (
+                <GalleryCard
+                    current={index === selectedIndex}
+                    index={index}
+                    setSelectedIndex={(index) => {
+                        setSelectedIndex(index);
+                        setSidebarDetails({
+                            name: data.name,
+                            creatorName: data.author || data.creator?.name || 'Deverse World',
+                            rating: data.rating,
+                            description: data.description,
+                            thumbnail: data.image,
+                            buttons: <ButtonGroup index={index} image360={data.image} />,
+                        });
+                    }}
+                    thumbnail={data.image}
+                    name={data.name}
+                    creatorName={data.author || data.creator?.name || 'Deverse World'}
+                    
+                />
+            );
+
+        return (
+            <Card
+                thumbnail={data.image}
+                name={data.name}
+                creatorName={data.creator?.name}
+                rating={data.rating}
+            >
+                <ButtonGroup index={index} image360={data.image} />
+            </Card>
+        );
+    }
+
     return (
         <>
             <InfiniteScroll
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4"
+                className={classNames(
+                    "grid grid-cols-1 gap-4",
+                    cardType === 'gallery' ? "md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4" : "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5",
+                )}
                 pageStart={0}
                 loadMore={() => setTimeout(() => fetchDataByPage(), 800)}
                 hasMore={pageNumber <= pages.length - 1}
@@ -74,34 +140,11 @@ const InfiniteList = ({ items, cardType = 'default' }) => {
                     </button>
                 }
             >
-                {currentData.map(item => (
-                    <>
-                        {cardType === 'event' ? (
-                            <EventCard
-                                thumbnail={item.image}
-                                name={item.name}
-                                creatorName={item.author}
-                                lastUpdate={item.lastUpdate}
-                                category={item.category}
-                            >
-                                <ButtonGroup templateId={item.id} image360={item.image}  />
-                            </EventCard>
-                        ) : (
-                            <Card
-                                thumbnail={item.image}
-                                name={item.name}
-                                creatorName={item.creator?.name}
-                                rating={item.rating}
-                            >
-                                <ButtonGroup templateId={item.id} image360={item.image} />
-                            </Card>
-                        )}
-                    </>
-                ))}
+                {currentData.map((item, index) => renderCard(item, index))}
             </InfiniteScroll>
             {showPlayModal && (
                 <PlayModal
-                    templateId={selectedTemplateId}
+                    templateId={items[selectedIndex].id}
                     onClose={() => setShowPlayModal(false)}
                 />
             )}

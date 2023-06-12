@@ -9,18 +9,19 @@ import InfiniteList from "../marketplace/InfiniteList";
 
 type EventListProps = {
     data: EventViewModel[];
+    cardType: string;
     onDeleted?: (EventViewModel) => void;
 }
 const itemPerPage = 4;
 
-export default function EventList(props: EventListProps) {
+export default function EventList({ data, ...props }: EventListProps) {
     const [currentPage, setCurrentPage] = useState(1);
     const [showPlayModal, setShowPlayModal] = useState(false);
     const [selectedTemplateId, setSelectedTemplateId] = useState(null);
-
     return (
-        <InfiniteList items={props.data} cardType="event" />
+        <InfiniteList items={data} {...props} />
     );
+
     return (
         <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-[100%]">
             <div className={props.data.length < itemPerPage ? "flex flex-row flex-wrap gap-2 w-full" : `grid xl:grid-cols-2 grid-cols-1 gap-4`}>
