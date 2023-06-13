@@ -8,6 +8,7 @@ import EventCard from "../cards/EventCard";
 import GalleryCard from "../gallery/GalleryCard";
 import PlayModal from "../asset/PlayModal";
 import OverlayImage360Button from "../image360/OverlayImage360Button";
+import Button from "../Button";
 
 const itemPerPage = 4;
 
@@ -25,19 +26,23 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
     const [currentData, setCurrentData] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
     const [showPlayModal, setShowPlayModal] = useState(false);
+    const [selectedIndexLocal, setSelectedIndexLocal] = useState(0);
+    let _selectedIndex = selectedIndex === undefined ? selectedIndexLocal : selectedIndex;
+    let _setSelectedIndex = setSelectedIndex === undefined ? setSelectedIndexLocal : setSelectedIndex;
 
     useEffect(() => {
         const data = items[0];
-        setSelectedIndex(0);
-        setSidebarDetails({
+        _setSelectedIndex(0);
+        if (setSidebarDetails) setSidebarDetails({
             name: data.name,
             creatorName: data.author || data.creator?.name || 'Deverse World',
             rating: data.rating,
             description: data.description,
             thumbnail: data.image,
-            buttons: <ButtonGroup index={0} image360={data.image} />,
+            buttons: <ButtonGroup index={0} image360={data.image}  />,
         });
     }, [items]);
+
 
     // HACK: Slice the items into smaller pages for infinite scrolling.
     // After the backend API supports pagination, we should refactor this component to remove this logic.
@@ -56,18 +61,25 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                 className="inline-flex w-full justify-center rounded-md bg-brand px-3 py-2 text-sm font-semibold text-darkest shadow-sm hover:bg-gray-50 sm:col-start-1 mb-2 sm:mb-0"
                 onClick={(e) => {
                     e.stopPropagation();
-                    setSelectedIndex(index);
+                    _setSelectedIndex(index);
                     setShowPlayModal(true);
                 }}>
 
                 Launch
             </button>
+            {cardType == "avatar" ? (
+            <Button secondary href={`/asset-preview?avatarId=${items[index].id}`}>
+                Preview
+            </Button>
+             ) : (
             <OverlayImage360Button
                 source={image360}
                 className="inline-flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold overflow-hidden border border-brand text-brand"
             >
                 Preview
             </OverlayImage360Button>
+)}
+
         </div>
     );
 
@@ -88,7 +100,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
         if (cardType === 'gallery')
             return (
                 <GalleryCard
-                    current={index === selectedIndex}
+                    current={index === _selectedIndex}
                     index={index}
                     setSelectedIndex={(index) => {
                         setSelectedIndex(index);
@@ -144,7 +156,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
             </InfiniteScroll>
             {showPlayModal && (
                 <PlayModal
-                    templateId={items[selectedIndex].id}
+                    templateId={items[_selectedIndex].id}
                     onClose={() => setShowPlayModal(false)}
                 />
             )}

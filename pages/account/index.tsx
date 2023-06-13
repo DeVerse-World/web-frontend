@@ -120,7 +120,7 @@ export default function Account() {
                                 <a className="text-blue-400 text-2xl no-underline" >Show all</a>
                             </Link>
                         </div>
-                        <AvatarList data={avatars} />
+                        <AvatarList cardType="avatar" data={avatars} />
                     </div>
 
                     <div className="p-4">
