@@ -136,7 +136,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
         <>
             <InfiniteScroll
                 className={classNames(
-                    "grid grid-cols-1 gap-4",
+                    "grid grid-cols-2 gap-4",
                     cardType === 'gallery' ? "md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4" : "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5",
                 )}
                 pageStart={0}

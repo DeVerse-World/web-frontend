@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { ChevronRightIcon } from '@heroicons/react/20/solid'
 import AssetService from "../../data/services/AssetService";
 import { AssetType } from "../../data/enum/asset_type";
@@ -13,6 +14,43 @@ import SubWorldTemplateService from "../../data/services/SubWorldTemplateService
 import RootWorldList, { RootTemplateViewModel } from "../../components/asset/RootWorldList";
 import MarketplaceFilter, { MarketplaceTabKey, MarketplaceType } from "../../components/MarketplaceFilterTab";
 import GalleryContainer from "../../components/gallery/GalleryContainer";
+import classNames from "classnames";
+
+const Tabs = ({ tabs, selectedTab, router }) => {
+    return (
+        <div className="py-4 px-4 font-semibold leading-6 sm:px-6 lg:px-8">
+            <div className="border-b border-medium">
+                <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+                    {tabs.map((tab) => (
+                        <Link
+                            key={tab}
+                            href={{
+                                pathname: router.pathname,
+                                query: {
+                                    ...router.query,
+                                    subtype: tab,
+                                }
+                            }}
+                            prefetch={false}
+                        >
+                            <a 
+                                className={classNames(
+                                    tab === selectedTab
+                                        ? 'border-brand text-brand hover:text-brand'
+                                        : 'border-transparent text-lighter hover:border-light hover:text-light',
+                                    'cursor-pointer whitespace-nowrap border-b-2 py-2 px-1 text-md font-medium capitalize no-underline',
+                                )}
+                            >
+                                
+                                {tab}
+                            </a>
+                        </Link>
+                    ))}
+                </nav>
+            </div>
+        </div>
+    );
+}
 
 function Marketplace() {
     const router = useRouter();
@@ -169,6 +207,7 @@ function Marketplace() {
             return (<EventList data={eventData} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} />);
         if (currentType === MarketplaceTabKey.WORLD_TYPE)
             return (<RootWorldList data={rootTemplates} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} />);
+        
 
         return;
     }
@@ -178,43 +217,18 @@ function Marketplace() {
 
 
     return (
-        <div className="flex flex-row h-full">
-            {currentType && <MarketplaceFilter defaultTab={currentType} />}
+        <div className="h-full">
+            {/* {currentType && <MarketplaceFilter defaultTab={currentType} />} */}
+            {MarketplaceType[currentType] && (
+                <Tabs
+                    tabs={MarketplaceType[currentType]}
+                    selectedTab={currentSubtype || MarketplaceType[currentType][0]}
+                    router={router}
+                />
+            )}
             {(images.length > 0 || eventData.length > 0 || rootTemplates.length > 0) ? (
                 <GalleryContainer details={sidebarDetails} type={router.query['type']}>
-                    <div className="px-4 pb-4">
-                        <nav className="flex text-base" aria-label="Breadcrumb">
-                            <ol role="list" className="flex items-center space-x-4">
-                                <li >
-                                    <div className="flex items-center">
-                                        <a
-                                            href={`/marketplace?${typeHref.toString()}`}
-                                            className="font-medium text-lighter hover:text-light capitalize no-underline"
-                                        >
-                                            {router.query['type']}
-                                        </a>
-                                    </div>
-                                </li>
-                                <li >
-                                    <div className="flex items-center">
-                                        <ChevronRightIcon className="h-5 w-5 flex-shrink-0 text-lighter capitalize" aria-hidden="true" />
-                                        <a
-                                            href={`/marketplace?${subtypeHref.toString()}`}
-                                            className="ml-4 font-medium text-lighter hover:text-light no-underline capitalize"
-                                        >
-                                            {router.query['subtype']}
-                                        </a>
-                                    </div>
-                                </li>
-                            </ol>
-                        </nav>
-
-                        {/* TODO: Add empty state if list is empty */}
-                        {currentSubtype && (
-                            <h2 className="text-lightest mt-6 sm:mt-8 ml-8 text-3xl font-bold tracking-tight sm:text-4xl capitalize">
-                                {router.query['subtype']}
-                            </h2>
-                        )}
+                    <div className="px-4 pb-4 mt-8">
                         {renderList()}
                     </div>
                 </GalleryContainer>

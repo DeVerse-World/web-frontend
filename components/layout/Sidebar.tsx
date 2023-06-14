@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog, Transition, Disclosure } from '@headlessui/react';
 import { useRouter } from "next/router";
 import {
   XMarkIcon,
@@ -11,18 +11,105 @@ import {
   WrenchScrewdriverIcon,
   UsersIcon,
   DocumentTextIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
 } from '@heroicons/react/24/outline'
 import classNames from 'classnames';
+import { MarketplaceTabKey } from '../MarketplaceFilterTab';
 
 const navigation = [
     { name: "Home", href: "/", icon: HomeIcon },
     { name: "Alpha", href: "/alpha", icon: PlayCircleIcon },
-    { name: "Explore", href: "/marketplace", icon: RocketLaunchIcon },
+    {
+        name: "Explore",
+        href: "/marketplace",
+        icon: RocketLaunchIcon,
+        options: [
+           {
+                name: "Worlds",
+                href: `/marketplace?type=${MarketplaceTabKey.WORLD_TYPE}`,
+                type: MarketplaceTabKey.WORLD_TYPE,
+           },
+           {
+                name: "Assets",
+                href: `/marketplace?type=${MarketplaceTabKey.NFT_TYPE}`,
+                type: MarketplaceTabKey.NFT_TYPE,
+            },
+        ],
+    },
     { name: "Create", href: "/create", icon: WrenchScrewdriverIcon },
     { name: "About", href: "/about", icon: UsersIcon },
     // { name: "Stream", href: "/stream", icon: (<BsBroadcast fontSize="1.5rem" color='rgb(97 198 208)' />) },
     { name: "Docs", href: "https://docs.deverse.world", icon: DocumentTextIcon },
 ]
+
+const Tab = ({ item, router, setSidebarOpen }) => {
+    return (
+        <div key={item.name}>
+            <Link href={item.href}>
+                <a
+                    className={classNames(
+                        router.pathname === item.href
+                        ? 'bg-gray-800 text-white'
+                        : 'text-gray-400 hover:text-white hover:bg-gray-800',
+                        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold no-underline'
+                    )}
+                    onClick={() => setSidebarOpen(false)}
+                >
+                    <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
+                    {item.name}
+                </a>
+            </Link>
+        </div>
+    );
+};
+
+const TabWithOptions = ({ item, router, setSidebarOpen }) => {
+    console.log('router.pathname', router.pathname)
+    console.log(router.query)
+    return (
+        <Disclosure as="div" key={item.name} className="py-6" defaultOpen={router.pathname === item.href}>
+            {({ open }) => (
+                <>
+                    <h3 className="-my-3 flow-root">
+                        <Disclosure.Button className="flex w-full items-center justify-between rounded-md p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-800">
+                            <div className="group flex gap-x-3">
+                                <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
+                                {item.name}
+                            </div>
+                            <span className="ml-6 flex items-center">
+                                {open ? (
+                                <ChevronUpIcon className="h-5 w-5" aria-hidden="true" />
+                                ) : (
+                                <ChevronDownIcon className="h-5 w-5" aria-hidden="true" />
+                                )}
+                            </span>
+                        </Disclosure.Button>
+                    </h3>
+                    <Disclosure.Panel className="pt-6">
+                        <div className="space-y-4">
+                            {item.options.map((option, optionIdx) => (
+                                <Link href={option.href}>
+                                    <a
+                                        className={classNames(
+                                            router.query.type === option.type
+                                            ? 'bg-gray-800 text-white'
+                                            : 'text-gray-400 hover:text-white hover:bg-gray-800',
+                                            'group flex gap-x-3 rounded-md py-2 pr-2 pl-11 text-sm leading-6 font-semibold no-underline'
+                                        )}
+                                        onClick={() => setSidebarOpen(false)}
+                                    >
+                                        {option.name}
+                                    </a>
+                                </Link>
+                            ))}
+                        </div>
+                    </Disclosure.Panel>
+                </>
+            )}
+            </Disclosure>
+    );
+};
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     const router = useRouter();
@@ -83,24 +170,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             <nav className="flex flex-1 flex-col">
                                 <div className="flex flex-1 flex-col gap-y-7">
                                     <div className="-mx-2 space-y-1">
-                                        {navigation.map((item) => (
-                                        <div key={item.name}>
-                                            <Link href={item.href}>
-                                                <a
-                                                    className={classNames(
-                                                        router.pathname === item.href
-                                                        ? 'bg-gray-800 text-white'
-                                                        : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                                                        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold no-underline'
-                                                    )}
-                                                    onClick={() => setSidebarOpen(false)}
-                                                >
-                                                    <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
-                                                    {item.name}
-                                                </a>
-                                            </Link>
-                                        </div>
-                                        ))}
+                                    {navigation.map((item) => {
+                                        if (item.options) return <TabWithOptions item={item} router={router} setSidebarOpen={setSidebarOpen} />;
+                                        return <Tab item={item} router={router} setSidebarOpen={setSidebarOpen} />;
+                                    })}
                                     </div>
                                 </div>
                             </nav>
@@ -132,24 +205,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     <nav className="flex flex-1 flex-col">
                         <div className="flex flex-1 flex-col gap-y-7">
                             <div className="-mx-2 space-y-1">
-                                {navigation.map((item) => (
-                                <div key={item.name}>
-                                    <Link href={item.href}>
-                                        <a
-                                            className={classNames(
-                                                router.pathname === item.href
-                                                ? 'bg-gray-800 text-white'
-                                                : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                                                'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold no-underline'
-                                            )}
-                                            onClick={() => setSidebarOpen(false)}
-                                        >
-                                            <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
-                                            {item.name}
-                                        </a>
-                                    </Link>
-                                </div>
-                                ))}
+                                {navigation.map((item) => {
+                                    if (item.options) return <TabWithOptions item={item} router={router} setSidebarOpen={setSidebarOpen} />;
+                                    return <Tab item={item} router={router} setSidebarOpen={setSidebarOpen} />;
+                                })}
                             </div>
                         </div>
                     </nav>
