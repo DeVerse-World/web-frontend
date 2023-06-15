@@ -55,7 +55,7 @@ function AssetPreviewScreen(props: WithRouterProps) {
                     <button className="w-[120px] h-[40px] rounded-3xl flex flex-row justify-center items-center text-white deverse-play-btn font-bold">BUY</button>
                 </div>
                 <div className='flex flex-col text-blue-300 w-[300px] mx-auto py-4 '>
-                    <div className='text-3xl'>{avatar?.name || "Avatar Name"}</div>
+                    <div className='text-3xl'>{(avatar && avatar.name) || "Avatar Name"}</div>
                     {/* <div>0/10</div> */}
                     <div className='mt-8 flex flex-row justify-between'>
                         Deverse World

@@ -122,13 +122,15 @@ class AssetService extends BaseService {
             case ApiStrategy.REST:
                 let transaction = await assetContract.mint(creator, packId, hash, supply, rarity, owner, data, 0);
                 let receipt = await transaction.wait()
-                const event = receipt?.events?.filter(
-                    (event: Event) => event.event === 'TransferSingle'
-                )[0];
+                let event;
+                if (receipt && receipt.events)
+                    event = receipt.events.filter(
+                        (evt: Event) => evt.event === 'TransferSingle'
+                    )[0];
                 if (!event) {
                     throw new Error('no TransferSingle event after mint single');
                 }
-                return BigInt(event.args?.id._hex).toString();
+                return BigInt(event.args.id._hex).toString();
                 break;
             case ApiStrategy.GraphQl:
                 throw new Error("Graphql not supported here")

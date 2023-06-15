@@ -71,7 +71,7 @@ function ModelObject(props: ModelObjectProps) {
   }, [])
 
   useFrame((state, delta) => {
-    animationMixer?.update(delta)
+    if (animationMixer) animationMixer.update(delta)
   })
 
   return (
