@@ -36,7 +36,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
         if (setSidebarDetails) setSidebarDetails({
             id: data.id,
             name: data.name,
-            creatorName: data.author || data.creator?.name || 'Deverse World',
+            creatorName: data.author || data && data.creator && data.creator.name || 'Deverse World',
             rating: data.rating,
             description: data.description,
             thumbnail: data.image,
@@ -108,7 +108,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                         setSidebarDetails({
                             id: data.id,
                             name: data.name,
-                            creatorName: data.author || data.creator?.name || 'Deverse World',
+                            creatorName: data.author || data && data.creator && data.creator.name|| 'Deverse World',
                             rating: data.rating,
                             description: data.description,
                             thumbnail: data.image,
@@ -117,7 +117,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                     }}
                     thumbnail={data.image}
                     name={data.name}
-                    creatorName={data.author || data.creator?.name || 'Deverse World'}
+                    creatorName={data.author || data && data.creator && data.creator.name || 'Deverse World'}
                     
                 />
             );
@@ -126,7 +126,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
             <Card
                 thumbnail={data.image}
                 name={data.name}
-                creatorName={data.creator?.name}
+                creatorName={data && data.creator && data.creator.name}
                 rating={data.rating}
             >
                 <ButtonGroup index={index} image360={data.image} />

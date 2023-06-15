@@ -62,7 +62,7 @@ function DerivWorldList(props: ListProps) {
                 {currentData.map(item => (
                     <Card
                         thumbnail={item.image} name={item.name}
-                        creatorName={item?.creator?.name}
+                        creatorName={item && item.creator && item.creator.name}
                     >
                         <div className="mt-4 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                             <button
