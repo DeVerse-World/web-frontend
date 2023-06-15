@@ -3,6 +3,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { TeamAdvisor } from "../../data/model/partner";
 import FirebaseService from "../../data/services/FirebaseService";
 import styles from "../../styles/card-item.module.css";
+import PersonCard from "../about/PersonCard";
 
 type CardProps = {
     data: TeamAdvisor
@@ -57,12 +58,25 @@ function AdvisorSection() {
     }, [])
 
     return (
-        <section id="section-advisor" className="p-4 flex flex-col items-center">
-            <h3 className="text-center text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title py-4">Angels/ Advisors</h3>
-            <div className="flex flex-row flex-wrap gap-8 justify-center">
-                {data.map(item => <AdvisorCard data={item} key={item.id} />)}
+        <div className="mx-auto my-24 max-w-5xl px-6 sm:mt-28 lg:px-8">
+            <div className="max-w-2xl lg:mx-0">     
+                <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl ">Angels and Advisors</h2>
             </div>
-        </section>
+            <div
+                className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-9 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3"
+            >
+                {data.map((person) => (
+                    <PersonCard
+                        key={person.name}
+                        name={person.name}
+                        title={person.title}
+                        thumbnail={person.thumbnail}
+                        education={person.education}
+                        linkedinLink={person.linkedin}
+                    />
+                ))}
+            </div>
+        </div>
     );
 }
 
