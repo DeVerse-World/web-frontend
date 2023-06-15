@@ -77,7 +77,7 @@ function DerivWorldList(props: ListProps) {
                                 Launch
                             </button>
                             <OverlayImage360Button
-                                source={item?.image}
+                                source={item && item.image}
                                 className="inline-flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold overflow-hidden border border-brand text-brand"
                             >
                                 Preview
