@@ -4,6 +4,7 @@ const OverlayImage360 = dynamic(() => import('./OverlayImage360'));
 
 const OverlayImage360Button = ({ source, className, children }) => {
     const [open, setOpen] = useState(false);
+    console.log('source', source)
     return (
         <div>
             <OverlayImage360 source={source} open={open} setOpen={setOpen} />

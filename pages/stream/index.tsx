@@ -1,5 +1,4 @@
 import { Form, Offcanvas } from "react-bootstrap";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { useState } from "react";
 import { FullScreen, useFullScreenHandle } from "react-full-screen";
 
@@ -23,8 +22,8 @@ export default function Stream() {
 
 
     return (
-        <LayoutWrapper>
-            <div id="section-content" className="p-4 flex flex-col gap-8">
+        <>
+            <div className="p-4 flex flex-col gap-8">
                 <h3>Experimental feature</h3>
                 <button className="bg-deverse-gradient rounded-md p-2" onClick={() => setShowSetting(true)}>Launch Setting Panel</button>
                 <button className="bg-deverse-gradient rounded-md p-2" onClick={handle.enter}>Launch Full screen mode</button>
@@ -56,6 +55,6 @@ export default function Stream() {
                 }>
                 </Offcanvas.Body>
             </Offcanvas>
-        </LayoutWrapper>
+        </>
     )
 }

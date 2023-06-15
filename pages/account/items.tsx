@@ -1,10 +1,8 @@
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 
 export default function Items() {
     return (
-
-        <LayoutWrapper>
+        <>
             <TabHeaderBar data={[
                 { href: '/account', label: 'Info' },
                 // { href: '/account/wallet', label: 'Wallet' },
@@ -14,9 +12,9 @@ export default function Items() {
                 // { href: '/account/items', label: 'Items' },
                 { href: '/account/settings', label: 'Settings' }
             ]} />
-            <div id="section-content">
+            <div>
 
             </div>
-        </LayoutWrapper>
+        </>
     )
 }

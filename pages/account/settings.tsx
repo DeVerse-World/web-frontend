@@ -5,11 +5,14 @@ import { FormControl, InputGroup } from "react-bootstrap";
 import { AppContext } from "../../components/contexts/app_context";
 import AuthService from "../../data/services/AuthService";
 import { usePrevious } from "../../utils/use_previous";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
+import AccountService from "../../data/services/AccountService";
+import StorageService from "../../data/services/StorageService";
+import Button from "../../components/Button";
 
 export default function Settings() {
     const { user, setUser } = useContext(AppContext);
+    const [currentName, setCurrentName] = useState('');
     const [currentWallet, setCurrentWallet] = useState('');
     const [currentEmail, setCurrentEmail] = useState('');
     const { status, connect, account: walletAddress } = useMetaMask();
@@ -18,6 +21,7 @@ export default function Settings() {
         if (user) {
             setCurrentWallet(user.wallet_address || '')
             setCurrentEmail(user.social_email || '')
+            setCurrentName(user.name || '')
         }
     }, [user])
 
@@ -104,10 +108,19 @@ export default function Settings() {
             // });
         },
     });
+
+    const onSubmit = async () => {
+        const res = await AccountService.updateUser(currentName);
+        const newUser = {
+            ...user,
+            name: res?.data?.data?.user?.name,
+        };
+        setUser(newUser);
+    }
     {/* <span className="text-blue-400 cursor-pointer" onClick={onLinkAccountWithGoogle} >(Link with Google)</span> */ }
 
     return (
-        <LayoutWrapper>
+        <>
             <TabHeaderBar data={[
                 { href: '/account', label: 'Info' },
                 // { href: '/account/wallet', label: 'Wallet' },
@@ -117,53 +130,77 @@ export default function Settings() {
                 // { href: '/account/items', label: 'Items' },
                 { href: '/account/settings', label: 'Settings' }
             ]} />
-            <section id="section-content" className="flex flex-row gap-4">
-                <h3 className="section-header-lg pl-4">Settings</h3>
-                <div className="flex flex-col gap-2 py-4 w-[400px]">
-                    <h5>Name</h5>
-                    <InputGroup>
-                        <FormControl id="name" required
-                            placeholder="Name"
-                            aria-label="User Name"
-                            value={user?.name}
-                            readOnly
-                        />
-                    </InputGroup>
-                    <div className="flex flex-row gap-4">
-                        <h5>Wallet Address</h5>
-                        {!user?.social_email && user?.wallet_address &&
-                            // <span className="text-blue-400 cursor-pointer" onClick={() => login()} >(Link with Google)</span>
-                            // <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient  rounded-sm p-2 my-2"
-                            //     onClick={() => onGoogleConnect()}>
-                            //     Link with google
-                            // </button>
-                            <GoogleLogin width='300' onSuccess={onGoogleLogin} />
-                        }
+            <div className="max-w-7xl mx-auto h-full bg-darkest">
+                <div className="grid grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
+                    <div>
+                        <h2 className="text-base font-semibold leading-7 text-lightest">Personal Information</h2>
+                        <p className="mt-1 text-sm leading-6 text-lighter">
+                            Use a name which we can call you.
+                        </p>
                     </div>
-                    <InputGroup>
-                        <FormControl id="wallet-address" required
-                            placeholder="Wallet"
-                            aria-label="Asset Name"
-                            value={currentWallet}
-                            readOnly
-                        />
-                    </InputGroup>
-                    <div className="flex flex-row gap-4">
-                        <h5>Email Address</h5>
-                        {!user?.wallet_address && user?.social_email &&
-                            <span className="text-blue-400 cursor-pointer" onClick={onLinkAccountWithMetamask} >(Link with Metamask)</span>
-                        }
-                    </div>
-                    <InputGroup>
-                        <FormControl id="email-address" required
-                            placeholder="Email"
-                            aria-label="Asset Name"
-                            value={currentEmail}
-                            readOnly
-                        />
-                    </InputGroup>
+
+                    <form className="md:col-span-2">
+                        <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
+                            <div className="col-span-full">
+                                <label htmlFor="usernameabc" className="block text-sm font-medium leading-6 text-lightest">
+                                    Name
+                                </label>
+                                <div className="mt-2">
+                                    <div className="mt-2">
+                                        <input
+                                            type="text"
+                                            name="username"
+                                            id="usernameabc"
+                                            autoComplete="username"
+                                            className="block w-full rounded-md border-0 bg-white/5 py-1.5 px-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                                            value={currentName}
+                                            onChange={evt => setCurrentName(evt.target.value)}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-span-full">
+                                <label className="block text-sm font-medium leading-6 text-lightest">
+                                    Wallet
+                                </label>
+                                <div className="mt-2">
+                                    {user?.wallet_address ? (
+                                        <div className="leading-6 text-sm text-lighter">{user?.wallet_address}</div>
+                                    ) : (
+                                        <Button
+                                            size="textOnly"
+                                            tertiary
+                                            onClick={onLinkAccountWithMetamask}
+                                        >
+                                            Link with Metamask
+                                        </Button>
+                                    )}
+                                </div>
+                            </div>
+                            <div className="col-span-full">
+                                <label className="block text-sm font-medium leading-6 text-lightest">
+                                    Email address
+                                </label>
+                                <div className="mt-2">
+                                    {false ? (
+                                        <div className="leading-6 text-sm text-lighter">{user.social_email}</div>
+                                    ) : (
+                                        <GoogleLogin width='300' onSuccess={onGoogleLogin} />
+                                    )}
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="mt-8 flex">
+                            <Button onClick={onSubmit} primary>
+                                Save
+                            </Button>
+                        </div>
+                        
+                    </form>
                 </div>
-            </section>
-        </LayoutWrapper>
-    )
+            </div>  
+        </>
+    );
 }

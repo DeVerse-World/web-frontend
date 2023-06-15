@@ -8,7 +8,6 @@ import Link from "next/link";
 import { AppContext } from "../../components/contexts/app_context";
 import AvatarService from "../../data/services/AvatarService";
 import DownloadDemoButton from "../../components/DownloadDemoButton";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 
 
@@ -49,8 +48,8 @@ function Info() {
             return <h5>No Avatar Yet, please clogin or create one first</h5>
         }
         return (
-            <div className='md:w-[300px] md:h-[600px] w-[250px] '>
-                <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 1], fov: 50 }}>
+            <div className='md:w-[300px] md:h-[600px] w-[250px]'>
+                <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 1, 3.5], fov: 50 }}>
                     <ambientLight intensity={2} />
                     <spotLight position={[1, 6, 1.5]} angle={0.2} penumbra={1} intensity={2.5} castShadow shadow-mapSize={[2048, 2048]} />
                     <spotLight position={[-5, 5, -1.5]} angle={0.03} penumbra={1} intensity={4} castShadow shadow-mapSize={[1024, 1024]} />
@@ -63,22 +62,21 @@ function Info() {
     }
 
     return (
-        <LayoutWrapper>
-            <TabHeaderBar data={[
+        <>
+            {/* <TabHeaderBar data={[
                 { href: "/alpha", label: "Play" },
                 { href: "/alpha/rewards", label: "Rewards" },
                 { href: "/alpha/leaderboard", label: "Leaderboard" },
-
-            ]} />
-            <div id="section-content" className="flex flex-col items-center p-4">
+            ]} /> */}
+            <div className="flex flex-col items-center p-4 h-full">
                 <div className="flex flex-col items-center">
                     <h2 className="text-white text-3xl font-bold uppercase">Join the verse</h2>
                     <DownloadDemoButton className="h-12" />
                 </div>
 
-                <div className="grid grid-cols-3 text-white gap-4 p-4 " >
+                <div className="grid grid-cols-3 text-white gap-4 p-4" >
                     <div className="flex flex-col items-center">
-                        <Link href="/create">
+                        <Link href="/create" prefetch={false}>
                             <button className="deverse-play-btn p-2 rounded-2xl">Change</button>
                         </Link>
                         {renderAvatar()}
@@ -91,7 +89,7 @@ function Info() {
                     </div>
                 </div>
             </div>
-        </LayoutWrapper>
+        </>
 
     )
 }

@@ -6,7 +6,6 @@ import { NFTAsset } from "../../data/model/nft_asset";
 import { AssetType } from "../../data/enum/asset_type";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import Link from "next/link";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 
 function Mint() {
@@ -129,14 +128,14 @@ function Mint() {
     // }
 
     return (
-        <LayoutWrapper>
+        <>
             <TabHeaderBar data={[
                 { href: '/create', label: 'Avatar' },
                 { href: '/create/mint', label: 'Mint' },
                 { href: '/create/ig-editor', label: 'World Builder' },
                 // { href: '/create/ue-sdk', label: 'Unreal Engine SDK' },
             ]} />
-            <div id="section-content" className="flex justify-center">
+            <div className="flex justify-center">
                 <Form className="flex flex-col items-center text-white my-8 space-y-2 min-w-[300px] w-[40vw]"
                     validated={formValidated}
                     onSubmit={createItem}>
@@ -309,7 +308,7 @@ function Mint() {
                 contentClassName="bg-deverse-gradient" dialogClassName="deverse-dialog">
                 <Modal.Body className="text-white text-lg break-words">
                     Mint successfully!<br />
-                    Asset generated at: <Link href={AssetService.getFullAssetUrl(assetOnlinePath)}>{AssetService.getFullAssetUrl(assetOnlinePath)}</Link>
+                    Asset generated at: <Link href={AssetService.getFullAssetUrl(assetOnlinePath)} prefetch={false}>{AssetService.getFullAssetUrl(assetOnlinePath)}</Link>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button style={{
@@ -327,7 +326,7 @@ function Mint() {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </LayoutWrapper>
+        </>
     )
 }
 

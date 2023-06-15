@@ -3,7 +3,6 @@ import DerivWorldList, { DerivTemplateViewModel } from "../../components/asset/D
 import RootWorldList, { RootTemplateViewModel } from "../../components/asset/RootWorldList";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AccountService from "../../data/services/AccountService";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 
 export default function Layout() {
@@ -57,7 +56,7 @@ export default function Layout() {
     }
 
     return (
-        <LayoutWrapper>
+        <>
             <TabHeaderBar data={[
                 { href: '/account', label: 'Info' },
                 // { href: '/account/wallet', label: 'Wallet' },
@@ -67,7 +66,7 @@ export default function Layout() {
                 // { href: '/account/items', label: 'Items' },
                 { href: '/account/settings', label: 'Settings' }
             ]} />
-            <div id="section-content" className="flex flex-col relative justify-center p-4" >
+            <div className="flex flex-col relative justify-center p-4" >
                 <div >
                     <h3>Root</h3>
                     <RootWorldList data={rootTemplates} />
@@ -77,6 +76,6 @@ export default function Layout() {
                     <DerivWorldList data={derivTemplates} />
                 </div>
             </div>
-        </LayoutWrapper>
+        </>
     )
 }

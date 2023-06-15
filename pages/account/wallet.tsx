@@ -1,9 +1,8 @@
-import LayoutWrapper from "../../components/LayoutWrapper";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 
 export default function Wallet() {
     return (
-        <LayoutWrapper>
+        <>
             <TabHeaderBar data={[
                 { href: '/account', label: 'Info' },
                 // { href: '/account/wallet', label: 'Wallet' },
@@ -13,9 +12,9 @@ export default function Wallet() {
                 // { href: '/account/items', label: 'Items' },
                 { href: '/account/settings', label: 'Settings' }
             ]} />
-            <div id="section-content" >
+            <div>
                 {/*<NFTList data={data} />*/}
             </div>
-        </LayoutWrapper>
+        </>
     )
 }

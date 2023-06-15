@@ -1,4 +1,3 @@
-
 server {
 
 	root /root/repos/deploy/web-frontend-staging;

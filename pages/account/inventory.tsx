@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../components/contexts/app_context";
 import { NFTAsset } from "../../data/model/nft_asset";
 import AssetService from "../../data/services/AssetService";
-import LayoutWrapper from "../../components/LayoutWrapper";
 
 export default function Inventory() {
     const { user } = useContext(AppContext);
@@ -20,10 +19,8 @@ export default function Inventory() {
     }, [user])
 
     return (
-        <LayoutWrapper>
-            <div id="section-content" >
-                {/*<NFTList data={data} />*/}
-            </div>
-        </LayoutWrapper>
+        <div>
+            {/*<NFTList data={data} />*/}
+        </div>
     )
 }

@@ -8,8 +8,10 @@ import { RootTemplateViewModel, CreatorViewModel } from "../../components/asset/
 import DerivWorldList, { DerivTemplateViewModel } from "../../components/asset/DerivWorldList";
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
-import LayoutWrapper from "../../components/LayoutWrapper";
 import RootTemplate from "../../components/subworlds/RootTemplate";
+import OverlayImage360Button from "../../components/image360/OverlayImage360Button";
+
+
 
 export async function getServerSideProps(context) {
     const rootid = context.params.rootid;
@@ -91,26 +93,25 @@ export default function Deriv({ rootId }) {
     const onLoadMore = () => {
 
     }
-    console.log('meow', derivTemplates)
 
     return (
-        <LayoutWrapper>
+        <>
             <section className="flex flex-col bg-darkest text-light">
-              <div className="mx-auto px-6 pb-24 pt-14 sm:px-6 sm:pb-32 sm:pt-16 lg:max-w-7xl lg:px-8">
-                  {rootTemplate && rootCreator && (
+                <div className="mx-auto px-6 pb-24 pt-14 sm:px-6 sm:pb-32 sm:pt-16 lg:max-w-7xl lg:px-8">
+                    {rootTemplate && rootCreator && (
                       <RootTemplate template={rootTemplate} creator={rootCreator} />
-                  )}
-                  {derivTemplates && (
-                      <>
-                          <h2 className="text-white mt-24 sm:mt-32 text-xl font-bold tracking-tight sm:text-2xl">
-                              {derivTemplates.length} connected worlds
-                          </h2>
-                          <DerivWorldList data={derivTemplates} />
-                      </>
-                  )}
-              </div>
-            </section >
+                    )}
+                    {derivTemplates && (
+                        <>
+                            <h2 className="text-white mt-24 sm:mt-32 text-xl font-bold tracking-tight sm:text-2xl">
+                                {derivTemplates.length} connected worlds
+                            </h2>
+                            <DerivWorldList data={derivTemplates} />
+                        </>
+                    )}
+                </div>
+            </section>       
             {showPlayModal && <PlayModal templateId={rootId.toString()} onClose={() => setShowPlayModal(false)} />}
-        </LayoutWrapper>
-    )
+        </>
+    );
 }

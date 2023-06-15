@@ -1,14 +1,12 @@
 import { useContext } from "react";
 import { AppContext } from "../../components/contexts/app_context";
 import FirebaseService from "../../data/services/FirebaseService";
-import LayoutWrapper from "../../components/LayoutWrapper";
 
 function DocsScreen() {
     const { remoteConfig } = useContext(AppContext)
 
     return (
-        <LayoutWrapper>
-            <div id="section-content" className='flex flex-col gap-4 text-white'>
+        <div className='flex flex-col gap-4'>
                 <div className="flex-grow flex flex-row justify-center gap-4 flex-wrap p-4">
                     <div onClick={() => {
                         FirebaseService.getPitchDeckUri(remoteConfig).then(url => {
@@ -30,7 +28,6 @@ function DocsScreen() {
                     </div>
                 </div>
             </div>
-        </LayoutWrapper>
     )
 }
 

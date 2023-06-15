@@ -101,7 +101,7 @@ export default function Login({ loginKey, previousPath }) {
     }
 
     return (
-        <div className="bg-black w-screen h-screen flex flex-col items-center justify-center text-white">
+        <div className="flex flex-col items-center justify-center mt-10">
             <h1>Signin/Signup</h1>
             <button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2"
                 onClick={onMetamaskConnect}>
