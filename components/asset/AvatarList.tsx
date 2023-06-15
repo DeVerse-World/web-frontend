@@ -1,15 +1,7 @@
-import { NFTAsset } from "../../data/model/nft_asset";
-import { AssetType } from "../../data/enum/asset_type";
-import Paginator from "../Paginator";
-import { useState } from "react";
-import StarRatings from 'react-star-ratings';
+
 import Link from "next/link";
-import { FaEthereum } from "react-icons/fa";
 import AvatarService from "../../data/services/AvatarService";
 import styles from "../../styles/card-item.module.css";
-import Card from "../Card";
-import OverlayImage360Button from "../image360/OverlayImage360Button";
-import PlayModal from "./PlayModal";
 import InifiniteList from "../marketplace/InfiniteList";
 
 const itemPerPage = 4;
@@ -23,52 +15,7 @@ type AvatarListProps = {
 export default function AvatarList({ data, ...props }: AvatarListProps) {
     return (
         <InifiniteList items={data} {...props} />
-    )
-    const [currentPage, setCurrentPage] = useState(1);
-    const [showPlayModal, setShowPlayModal] = useState(false);
-    const [selectedTemplateId, setSelectedTemplateId] = useState(null);
-
-    return (
-        <section id="nft-list" className="flex flex-col p-2 gap-2 items-center w-full">
-            <div className={props.data.length < itemPerPage ? "flex flex-row flex-wrap gap-2 w-full" : `grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 gap-2`}>
-                {
-                    props.data.map((item: AvatarViewModel, index: number) =>
-                        <Card key={item.id} thumbnail={item.image} name = {item.name} 
-
-                        >
-                         <div className="mt-4 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-                        <button
-                            type="button"
-                            className="inline-flex w-full justify-center rounded-md bg-brand px-3 py-2 text-sm font-semibold text-darkest shadow-sm hover:bg-gray-50 sm:col-start-1 mb-2 sm:mb-0"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setSelectedTemplateId(item.id);
-                                setShowPlayModal(true);
-                            }}>
-
-                            Launch
-                        </button>
-                        <OverlayImage360Button
-                            source={item?.image}
-                            className="inline-flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold overflow-hidden border border-brand text-brand"
-                        >
-                            Preview
-                        </OverlayImage360Button>
-                </div>
-                </Card>
-
-                    )}
-                
-            </div>
-            {/* {props.data.length > itemPerPage &&
-                <div className="flex flex-row gap-2">
-                    <Paginator currentPage={1} totalPage={Math.ceil(props.data.length / itemPerPage)} onChangePage={setCurrentPage} />
-                </div>
-            } */}
-              {showPlayModal && <PlayModal templateId={selectedTemplateId} onClose={() => setShowPlayModal(false)} />}
-
-        </section>
-    )
+    );
 }
 
 type AvatarCardProps = {
