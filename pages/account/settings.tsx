@@ -111,9 +111,13 @@ export default function Settings() {
 
     const onSubmit = async () => {
         const res = await AccountService.updateUser(currentName);
+        let name = user.name;
+        if (res && res.data && res.data.data && res.data.data.user && res.data.data.user.name)
+            name = res.data.data.user.name;
+
         const newUser = {
             ...user,
-            name: res?.data?.data?.user?.name,
+            name,
         };
         setUser(newUser);
     }
@@ -164,8 +168,8 @@ export default function Settings() {
                                     Wallet
                                 </label>
                                 <div className="mt-2">
-                                    {user?.wallet_address ? (
-                                        <div className="leading-6 text-sm text-lighter">{user?.wallet_address}</div>
+                                    {user && user.wallet_address ? (
+                                        <div className="leading-6 text-sm text-lighter">{user && user.wallet_address}</div>
                                     ) : (
                                         <Button
                                             size="textOnly"
