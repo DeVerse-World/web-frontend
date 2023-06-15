@@ -23,6 +23,7 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import { MarketplaceTabKey } from '../MarketplaceFilterTab';
 
 type SidebarDetailsProps = {
+  id: number;
   name: string;
   creatorName: string;
   rating: number;
@@ -107,6 +108,13 @@ const GalleryContainer = ({ children, details, type }: GalleryContainerProps) =>
                     <p className="text-sm italic text-lighter">{details.description}.</p>
                   </div>
                 </div>
+                {type === MarketplaceTabKey.WORLD_TYPE && (
+                  <div className="mt-2 flex">
+                    <a href={`/subworlds/${details.id}`} className="text-sm font-semibold leading-6 text-brand">
+                      More details <span aria-hidden="true">&rarr;</span>
+                    </a>
+                  </div>
+                )}
                 {type === MarketplaceTabKey.WORLD_TYPE && details.buttons}
               </div>
             </aside>

@@ -34,6 +34,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
         const data = items[0];
         _setSelectedIndex(0);
         if (setSidebarDetails) setSidebarDetails({
+            id: data.id,
             name: data.name,
             creatorName: data.author || data.creator?.name || 'Deverse World',
             rating: data.rating,
@@ -105,6 +106,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                     setSelectedIndex={(index) => {
                         setSelectedIndex(index);
                         setSidebarDetails({
+                            id: data.id,
                             name: data.name,
                             creatorName: data.author || data.creator?.name || 'Deverse World',
                             rating: data.rating,
