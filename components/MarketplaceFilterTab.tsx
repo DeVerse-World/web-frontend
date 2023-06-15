@@ -28,9 +28,9 @@ export const MarketplaceType = {
         'all',
         'image',
         'avatar',
-        'race',
-        'game',
-        'bot logic',
+        // 'race',
+        // 'game',
+        // 'bot logic',
     ],
 }
 
@@ -65,9 +65,9 @@ export default function MarketplaceFilter(props: Props) {
                         { label: "All" },
                         { label: "Image", subType: "image" },
                         { label: "Avatar", subType: "avatar" },
-                        { label: "Race", subType: "race", disabled: true },
-                        { label: "Game", subType: "game", disabled: true },
-                        { label: "Bot Logic", subType: "bot-logic", disabled: true },
+                        // { label: "Race", subType: "race", disabled: true },
+                        // { label: "Game", subType: "game", disabled: true },
+                        // { label: "Bot Logic", subType: "bot-logic", disabled: true },
                     ]} />
                 </Accordion.Collapse>
             </Accordion>

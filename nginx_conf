@@ -1,4 +1,3 @@
-
 server {
 
 	root /root/repos/prod/landing-page;

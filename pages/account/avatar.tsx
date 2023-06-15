@@ -56,7 +56,7 @@ export default function Content() {
                     { href: '/account/settings', label: 'Settings' }
                 ]}
             />
-            <AvatarList data={nfts} onDeleted={deleteItem} />
+            <AvatarList cardType="avatar" data={nfts} onDeleted={deleteItem} />
         </>
     )
 }
