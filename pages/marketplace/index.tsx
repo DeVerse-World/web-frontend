@@ -62,6 +62,7 @@ function Marketplace() {
     const [currentSubtype, setCurrentSubtype] = useState<string | undefined>();
     const [selectedIndex, setSelectedIndex] = useState(0);
     const [sidebarDetails, setSidebarDetails] = useState({
+        id: "",
         name: "",
         creatorName: "",
         rating: null,
