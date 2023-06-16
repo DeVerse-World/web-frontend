@@ -1,3 +1,4 @@
+
 const PersonCard = ({ thumbnail, name, title, education, linkedinLink }) => {
     return (
         <div>
@@ -5,9 +6,11 @@ const PersonCard = ({ thumbnail, name, title, education, linkedinLink }) => {
             <div className="mt-4 text-lg font-semibold leading-8 tracking-tight text-white">{name}</div>
             <div  className="text-base leading-7 text-gray-300">{title}</div>
             <div className="text-sm leading-6 text-gray-500">{education}</div>
+            {linkedinLink &&
             <a href={linkedinLink} className="text-sm font-semibold leading-6 text-brand">
                 Profile<span aria-hidden="true">&rarr;</span>
             </a>
+            }
         </div>
     );
 }

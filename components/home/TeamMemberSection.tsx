@@ -47,8 +47,7 @@ function TeamMemberSection(props) {
                 <div className="max-w-2xl lg:mx-0">     
                     <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl ">Founding team</h2>
                     <p className="mt-4 text-lg leading-8 text-gray-300">
-                        Excepturi repudiandae alias ut. Totam aut facilis. Praesentium in neque vel omnis. Eos error odio. Qui
-                        fugit voluptatibus eum culpa.
+                    A dynamic and talented group of individuals driven by passion, innovation, and a shared mission to make a meaningful impact on the world.
                     </p>
                 </div>
                 <div
