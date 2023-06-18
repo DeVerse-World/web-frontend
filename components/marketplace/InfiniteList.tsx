@@ -9,6 +9,7 @@ import GalleryCard from "../gallery/GalleryCard";
 import PlayModal from "../asset/PlayModal";
 import OverlayImage360Button from "../image360/OverlayImage360Button";
 import Button from "../Button";
+import Items from "../../pages/account/items";
 
 const itemPerPage = 4;
 
@@ -43,6 +44,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
             buttons: <ButtonGroup index={0} image360={data.image}  />,
         });
     }, [items]);
+   
 
 
     // HACK: Slice the items into smaller pages for infinite scrolling.
@@ -138,8 +140,8 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
         <>
             <InfiniteScroll
                 className={classNames(
-                    "grid grid-cols-2 gap-4",
-                    cardType === 'gallery' ? "md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4" : "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5",
+                    "mx-auto max-w-6xl grid grid-cols-2 gap-4",
+                    cardType === 'gallery' ? "md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4" : "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
                 )}
                 pageStart={0}
                 loadMore={() => setTimeout(() => fetchDataByPage(), 800)}

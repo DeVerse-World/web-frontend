@@ -76,8 +76,8 @@ function ModelObject(props: ModelObjectProps) {
 
   return (
     <>
-    <primitive object={props.gltf.scene} lookAt={[1,1,0]} />
-    <OrbitControls/>
+    <primitive object={props.gltf.scene} lookAt={[1,-10,0]} />
+    <OrbitControls makeDefault />
     
     </>
     

@@ -10,7 +10,7 @@ const EventCard = ({ thumbnail, lastUpdate, name, creatorName, category, childre
     }
 
     return (
-        <div className="overflow-hidden rounded-lg bg-dark ring-1 ring-inset ring-medium text-left transition-all sm:my-4 sm:w-full sm:max-w-lg">
+        <div className="overflow-hidden rounded-lg bg-dark ring-1 ring-inset ring-medium text-left transition-all sm:w-full sm:max-w-lg">
             <div className="group text-sm">
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-lg bg-gray-100">
                     <img

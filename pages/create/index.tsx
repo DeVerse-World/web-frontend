@@ -71,7 +71,9 @@ function Avatar() {
             <iframe allow="camera *; microphone *"
                 title="Ready Player Me"
                 className='w-full h-full min-w-[600px]'
-                src='https://deverse.readyplayer.me/avatar?frameApi' />
+                src='https://deverse.readyplayer.me/avatar?frameApi'
+                style={{ minHeight: `calc(100vh - 8rem)` }}
+            />
             {showAvatarForm &&
                 <AvatarForm
                     header="Save your Avatar"

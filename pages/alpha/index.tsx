@@ -9,12 +9,13 @@ import { AppContext } from "../../components/contexts/app_context";
 import AvatarService from "../../data/services/AvatarService";
 import DownloadDemoButton from "../../components/DownloadDemoButton";
 import { TabHeaderBar } from "../../components/common/TabHeader";
-
+import EventList from "../../components/asset/EventList";
+import Button from "../../components/Button";
 
 function Info() {
     const { setViewState, user } = useContext(AppContext);
     const [modelPath, setModelPath] = useState<string>(null);
-    const [ongoingEvent, setOngoingEvents] = useState<EventViewModel>(null);
+    const [ongoingEvents, setOngoingEvents] = useState<EventViewModel[]>([]);
 
     useEffect(() => {
         if (user == null)
@@ -37,19 +38,16 @@ function Info() {
                     stage: e.stage,
                     participants: e.max_num_participants
                 }))
-                if (data.length > 0)
-                    setOngoingEvents(data[0]);
+                
+                    setOngoingEvents(data);
             }
         })
     }, [user])
 
     const renderAvatar = () => {
-        if (!modelPath) {
-            return <h5>No Avatar Yet, please clogin or create one first</h5>
-        }
         return (
-            <div className='md:w-[300px] md:h-[600px] w-[250px]'>
-                <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 1, 3.5], fov: 50 }}>
+            <div className='mt-6 sm:w-[300px] sm:h-[600px] w-[250px] h-[250px]'>
+                <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 1, 4.5], fov: 50 }}>
                     <ambientLight intensity={2} />
                     <spotLight position={[1, 6, 1.5]} angle={0.2} penumbra={1} intensity={2.5} castShadow shadow-mapSize={[2048, 2048]} />
                     <spotLight position={[-5, 5, -1.5]} angle={0.03} penumbra={1} intensity={4} castShadow shadow-mapSize={[1024, 1024]} />
@@ -68,27 +66,40 @@ function Info() {
                 { href: "/alpha/rewards", label: "Rewards" },
                 { href: "/alpha/leaderboard", label: "Leaderboard" },
             ]} /> */}
-            <div className="flex flex-col items-center p-4 h-full">
-                <div className="flex flex-col items-center">
-                    <h2 className="text-white text-3xl font-bold uppercase">Join the verse</h2>
-                    <DownloadDemoButton className="h-12" />
-                </div>
+            <div className="mt-6 flex flex-col sm:flex-row p-4 h-full mx-auto max-w-none sm:max-w-4xl">
+                <div className="grow">
+                    <div className="flex flex-col items-start">
+                        <h2 className="text-white text-3xl font-bold mb-10">Join the verse</h2>
+                        <p className="mb-6">
+                            Get ready to immerse yourself in the magical adventure of Deverse World, where you can participate in a digital revolution and explore the limitless possibilities of the virtual realm.                        
+                        </p>
 
-                <div className="grid grid-cols-3 text-white gap-4 p-4" >
-                    <div className="flex flex-col items-center">
-                        <Link href="/create" prefetch={false}>
-                            <button className="deverse-play-btn p-2 rounded-2xl">Change</button>
-                        </Link>
-                        {renderAvatar()}
-                    </div>
-                    <div>
-                        {ongoingEvent && <EventCard key={0} data={ongoingEvent} />}
-                    </div>
-                    <div>
-
+                        <DownloadDemoButton className="h-12" />
                     </div>
                 </div>
+                {modelPath ? (
+                    <div>
+                        <div className="flex flex-col items-center gap-4">
+                            <Button secondary href="/create">
+                                Change avatar
+                            </Button>
+
+                            {renderAvatar()}
+                        </div>
+                    </div>
+                ) : (
+                    <h5>No Avatar Yet, please clogin or create one first</h5>
+                )}
             </div>
+            
+            {ongoingEvents.length > 0 && (
+                <div className="my-12 mx-auto max-w-md md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
+                    <h2 className="text-white text-xl font-bold tracking-tight sm:text-xl">
+                        Events
+                    </h2>
+                    <EventList data={ongoingEvents} cardType="event"  />
+                </div>
+            )}
         </>
 
     )
