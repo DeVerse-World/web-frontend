@@ -193,7 +193,8 @@ function Marketplace() {
                     fileAssetUri: e.level_ipfs_uri,
                     file3dUri: e.level_ipfs_uri,
                     onlineOpenable: true,
-                    offlineOpenable: true
+                    offlineOpenable: true,
+                    rating: e.rating,
                 })));
             }
         }).finally(() => {
@@ -215,7 +216,6 @@ function Marketplace() {
 
     const typeHref = new URLSearchParams({ type: router.query['type'], subtype: 'all' });
     const subtypeHref = new URLSearchParams({ type: router.query['type'], subtype: router.query['subtype'] })
-
 
     return (
         <div className="h-full">
