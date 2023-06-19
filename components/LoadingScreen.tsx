@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AppContext, ViewState } from "./contexts/app_context";
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 type LoadingProps = {
     forceShow?: boolean;
@@ -7,7 +8,7 @@ type LoadingProps = {
 
 function LoadingScreen(props: LoadingProps) {
     const { viewState } = useContext(AppContext);
-
+    return ;
     return (viewState == ViewState.LOADING || props.forceShow == true) &&
         <div style={{
             position: 'fixed',
