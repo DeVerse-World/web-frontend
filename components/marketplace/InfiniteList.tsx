@@ -10,6 +10,7 @@ import PlayModal from "../asset/PlayModal";
 import OverlayImage360Button from "../image360/OverlayImage360Button";
 import Button from "../Button";
 import Items from "../../pages/account/items";
+import { CheckCircleIcon } from '@heroicons/react/20/solid'
 
 const itemPerPage = 4;
 
@@ -69,18 +70,20 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                 }}>
 
                 Launch
+
+                <CheckCircleIcon className="mr-5 h-5 w-5" aria-hidden="true" />
+
             </button>
             {cardType == "avatar" ? (
             <Button secondary href={`/asset-preview?avatarId=${items[index].id}`}>
                 Preview
             </Button>
              ) : (
-            <OverlayImage360Button
-                source={image360}
-                className="inline-flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold overflow-hidden border border-brand text-brand"
-            >
+                <Button secondary href={`/subworlds/{items[index].id}`}>
                 Preview
-            </OverlayImage360Button>
+                
+         
+            </Button>
 )}
 
         </div>
