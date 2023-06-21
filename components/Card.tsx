@@ -11,7 +11,7 @@ const Card = ({ name, creatorName, rating, thumbnail, children, ...props }) => {
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-lg bg-gray-100">
                     <img
                         src={thumbnail || "/images/color-image-placeholder.webp"}
-                        className="h-full w-full aspect-square object-cover object-center bg-darkest"
+                        className="h-full w-full aspect-[12/10] object-cover object-center bg-darkest"
                         loading="lazy"
                     />
                 </div>

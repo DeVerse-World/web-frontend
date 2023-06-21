@@ -11,8 +11,6 @@ import SubWorldTemplateService from "../../data/services/SubWorldTemplateService
 import RootTemplate from "../../components/subworlds/RootTemplate";
 import OverlayImage360Button from "../../components/image360/OverlayImage360Button";
 
-
-
 export async function getServerSideProps(context) {
     const rootid = context.params.rootid;
     // Fetch data from external API
@@ -48,6 +46,9 @@ export default function Deriv({ rootId }) {
                     rating: rootRes.value.subworld_template.rating,
                     onlineOpenable: true,
                     offlineOpenable: true,
+                    numViews: rootRes.value.subworld_template.num_views,
+                    numPlays: rootRes.value.subworld_template.num_plays,
+                    numClicks: rootRes.value.subworld_template.num_clicks,
                 }
                 const rootCreator: CreatorViewModel = {
                     id: rootRes.value.creator_info.id.toString(),

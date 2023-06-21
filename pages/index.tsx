@@ -7,6 +7,7 @@ import PartnerSection from "../components/home/PartnerSection";
 import CommunityPartnerSection from "../components/home/CommunityPartnerSection";
 import Popup from "../components/Popup";
 
+
 const IntroSection = dynamic(() => import('../components/home/IntroSection').then((mod) => mod.default))
 const HighlightFeatureSection = dynamic(() => import('../components/home/HighlightFeaturesSection').then((mod) => mod.default))
 const BlogPostSection = dynamic(() => import('../components/home/BlogPostSection').then((mod) => mod.default))

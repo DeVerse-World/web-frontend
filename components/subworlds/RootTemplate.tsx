@@ -1,6 +1,8 @@
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RootTemplateViewModel } from "../asset/RootWorldList";
 import { CreatorViewModel } from "../asset/RootWorldList";
+import { CursorArrowRaysIcon, EyeIcon } from '@heroicons/react/24/outline'
+import { EventViewModel } from '../asset/EventList';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -9,9 +11,14 @@ function classNames(...classes) {
 type RootTemplateProps = {
     template: RootTemplateViewModel;
     creator: CreatorViewModel;
+    
 }
 
 const RootTemplate = ({ template, creator }: RootTemplateProps) => {
+    const stats = [
+  { name: 'Number of Clicks', value: `${template.numClicks} plays`, icon: <CursorArrowRaysIcon className="h-10 w-10" aria-hidden="true" /> },
+  { name: 'Number of Views', value: `${template.numViews} views`, icon: <EyeIcon className="h-10 w-10" aria-hidden="true" /> },
+]
     return (
       <div className="lg:flex">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
@@ -44,7 +51,15 @@ const RootTemplate = ({ template, creator }: RootTemplateProps) => {
                           <p className="sr-only">{template.rating} out of 5 stars</p>
                       </div>
                   )}
-                  <p className="mt-6 text-xl leading-8 text-lighter">
+            <dl className="mx-auto mt-4 sm:mt-10 border-y border-medium py-6 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 text-white sm:grid-cols-2 sm:gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+                            {stats.map((stat) => (
+            <div key={stat.name} className="flex flex-col items-center gap-y-3">
+                <dt className="text-sm leading-6">{stat.value}</dt>
+                <dd className="order-first text-3xl font-semibold tracking-tight">{stat.icon}</dd>
+            </div>
+            ))}
+            </dl>
+                <p className="mt-6 text-xl leading-8 text-lighter">
                       {template.description}
                   </p>
                   {/* (Optional subdescription) */}
@@ -104,6 +119,16 @@ const RootTemplate = ({ template, creator }: RootTemplateProps) => {
                         <p className="mt-6 text-xl leading-8 text-lighter">
                             {template.description}
                         </p>
+
+                        <p className="my-2 text-xl text-lighter">
+                      {template.numViews} views
+                  </p>
+                  <p className="my-2 text-xl text-lighter">
+                      {template.numClicks} clicks
+                  </p>
+                  <p className="mt-6 text-xl leading-8 text-lighter">
+                      {template.description}
+                  </p>
                         {/* (Optional subdescription) */}
                         {/* <p className="mt-6 text-base leading-7 text-lighter">
                             Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt

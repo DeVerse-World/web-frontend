@@ -9,6 +9,9 @@ import GalleryCard from "../gallery/GalleryCard";
 import PlayModal from "../asset/PlayModal";
 import OverlayImage360Button from "../image360/OverlayImage360Button";
 import Button from "../Button";
+import Items from "../../pages/account/items";
+import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
+import { IoLogoGameControllerB } from "react-icons/io";
 
 const itemPerPage = 4;
 
@@ -36,13 +39,14 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
         if (setSidebarDetails) setSidebarDetails({
             id: data.id,
             name: data.name,
-            creatorName: data.author || data && data.creator && data.creator.name || 'Deverse World',
+            creatorName: data.author || data && data.creator && data.creator.name,
             rating: data.rating,
             description: data.description,
             thumbnail: data.image,
             buttons: <ButtonGroup index={0} image360={data.image}  />,
         });
     }, [items]);
+   
 
 
     // HACK: Slice the items into smaller pages for infinite scrolling.
@@ -56,30 +60,35 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
     }
 
     const ButtonGroup = ({ index, image360 }) => (
-        <div className="mt-4 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
-            <button
-                type="button"
-                className="inline-flex w-full justify-center rounded-md bg-brand px-3 py-2 text-sm font-semibold text-darkest shadow-sm hover:bg-gray-50 sm:col-start-1 mb-2 sm:mb-0"
+        <div className="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-flow-row-dense sm:grid-cols-2 gap-3">
+            {cardType !== "avatar" && items[index].derivable !== 1 && 
+            <Button
+                primary
                 onClick={(e) => {
                     e.stopPropagation();
                     _setSelectedIndex(index);
                     setShowPlayModal(true);
-                }}>
-
-                Launch
-            </button>
-            {cardType == "avatar" ? (
-            <Button secondary href={`/asset-preview?avatarId=${items[index].id}`}>
-                Preview
-            </Button>
-             ) : (
-            <OverlayImage360Button
-                source={image360}
-                className="inline-flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold overflow-hidden border border-brand text-brand"
+                }}
+                size="sm"
             >
-                Preview
-            </OverlayImage360Button>
-)}
+                Play
+            
+                <IoLogoGameControllerB className="ml-2 h-5 w-5 inline-block" aria-hidden="true" />
+            </Button>
+            }                  
+            {cardType === "avatar" && (
+                <Button secondary href={`/asset-preview?avatarId=${items[index].id}`} size="sm">
+                    Preview
+                    <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5 inline-block" aria-hidden="true" />
+                </Button>
+                
+            )}
+            {cardType !== "avatar" && items[index].derivable === 1 && (
+                <Button secondary href={`/subworlds/${items[index].id}`} size="sm">
+                    Explore
+                    <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5 inline-block" aria-hidden="true" />
+                </Button>
+            )}
 
         </div>
     );
@@ -97,7 +106,8 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                     <ButtonGroup index={index} image360={data.image}  />
                 </EventCard>
             )
-        
+            console.log('data',data)
+
         if (cardType === 'gallery')
             return (
                 <GalleryCard
@@ -108,17 +118,21 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                         setSidebarDetails({
                             id: data.id,
                             name: data.name,
-                            creatorName: data.author || data && data.creator && data.creator.name|| 'Deverse World',
+                            creatorName: data.author || data && data.creator && data.creator.name,
                             rating: data.rating,
                             description: data.description,
                             thumbnail: data.image,
                             buttons: <ButtonGroup index={index} image360={data.image} />,
+                            numViews: data.numViews,
+                            numClicks: data.numClicks,
                         });
                     }}
                     thumbnail={data.image}
                     name={data.name}
-                    creatorName={data.author || data && data.creator && data.creator.name || 'Deverse World'}
-                    
+                    creatorName={data.author || data && data.creator && data.creator.name}        
+                    numViews={data.numViews}
+                    numClicks={data.numClicks}  
+                    rating={data.rating}                         
                 />
             );
 
@@ -138,8 +152,8 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
         <>
             <InfiniteScroll
                 className={classNames(
-                    "grid grid-cols-2 gap-4",
-                    cardType === 'gallery' ? "md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4" : "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5",
+                    "mx-auto max-w-screen-xl grid grid-cols-2 gap-4",
+                    cardType === 'gallery' ? "md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4" : "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
                 )}
                 pageStart={0}
                 loadMore={() => setTimeout(() => fetchDataByPage(), 800)}

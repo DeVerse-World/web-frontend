@@ -43,13 +43,13 @@ export default function PlayModal(props: Props) {
                     e.stopPropagation();
                     openApp(props.templateId, "OFFLINE");
                 }}>
-                    Offline
+                    SinglePlay
                 </button>
                 <button id="btn-play-online" className="deverse-play-btn w-32 rounded-3xl" onClick={(e) => {
                     e.stopPropagation();
                     openApp(props.templateId, "ONLINE");
                 }}>
-                    Online
+                    MultiPlay
                 </button>
             </Modal.Body>
         )
