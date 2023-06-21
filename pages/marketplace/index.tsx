@@ -60,7 +60,11 @@ function Marketplace() {
     const [rootTemplates, setRootTemplates] = useState<RootTemplateViewModel[]>([]);
     const [currentType, setCurrentType] = useState<MarketplaceTabKey | undefined>();
     const [currentSubtype, setCurrentSubtype] = useState<string | undefined>();
-    const [selectedIndex, setSelectedIndex] = useState(0);
+    const [selectedIndex, _setSelectedIndex] = useState(0);
+    const setSelectedIndex = (index) => {
+        setSlideOverOpen(true);
+        _setSelectedIndex(index);
+    }
     const [sidebarDetails, setSidebarDetails] = useState({
         id: "",
         name: "",
@@ -70,6 +74,9 @@ function Marketplace() {
         description: "",
         buttons: null,
     });
+    const [slideOverOpen, setSlideOverOpen] = useState(false);
+
+
 
     useEffect(() => {
         if (!router.isReady) return;
@@ -126,7 +133,6 @@ function Marketplace() {
         // if (shouldShowLoading)
         setViewState(ViewState.LOADING)
         EventsService.fetchEvents().then(res => {
-            console.log(res);
             if (res.isSuccess()) {
                 const data = res.value!.events.map<EventViewModel>(e => ({
                     id: e.id.toString(),
@@ -175,13 +181,15 @@ function Marketplace() {
         }).finally(() => {
             setViewState(ViewState.ERROR)
         });
+        
     }
-
+ 
     const loadWorlds = async () => {
         // const shouldShowLoading = await FirebaseService.getShouldShowLoading();
         // if (shouldShowLoading)
         setViewState(ViewState.LOADING)
         SubWorldTemplateService.fetchRootTemplates().then(res => {
+            console.log('res',res)
             if (res.isSuccess()) {
                 setRootTemplates(res.value!.subworld_templates.map<RootTemplateViewModel>(e => ({
                     id: e.id.toString(),
@@ -195,6 +203,9 @@ function Marketplace() {
                     onlineOpenable: true,
                     offlineOpenable: true,
                     rating: e.rating,
+                    numViews: e.num_views,
+                    numClicks: e.num_clicks,
+                    derivable: e.derivable,
                 })));
             }
         }).finally(() => {
@@ -228,7 +239,12 @@ function Marketplace() {
                 />
             )}
             {(images.length > 0 || eventData.length > 0 || rootTemplates.length > 0) ? (
-                <GalleryContainer details={sidebarDetails} type={router.query['type']}>
+                <GalleryContainer
+                    details={sidebarDetails}
+                    type={router.query['type']}
+                    slideOverOpen={slideOverOpen}
+                    setSlideOverOpen={setSlideOverOpen}
+                >
                     <div className="px-4 pb-4 mt-8">
                         {renderList()}
                     </div>

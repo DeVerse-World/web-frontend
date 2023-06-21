@@ -21,6 +21,8 @@ import {
 import classNames from 'classnames'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { MarketplaceTabKey } from '../MarketplaceFilterTab';
+import GallerySlideOver from './GallerySlideOver';
+import OverlayImage360Button from '../image360/OverlayImage360Button'
 
 type SidebarDetailsProps = {
   id: number;
@@ -38,7 +40,77 @@ type GalleryContainerProps = {
   type: MarketplaceTabKey;
 }
 
-const GalleryContainer = ({ children, details, type }: GalleryContainerProps) => {  
+
+// {/* Details sidebar */}
+// <aside className="hidden w-96 overflow-y-auto border-l border-medium p-8 xl:block">
+//   <div className="space-y-6 pb-16">
+//     <div>
+//       <div className="aspect-h-1 aspect-w-1 w-80 overflow-hidden rounded-lg bg-darkest">
+//           <img
+//               src={details.thumbnail || "/images/color-image-placeholder.webp"}
+//               className="h-full w-full aspect-square object-cover object-center"
+//               loading="lazy"
+//           />
+//       </div>
+//       <div className="mt-4 flex items-start justify-between">
+//         <div>
+//           <h2 className="text-xl font-medium text-lightest">
+//             <span className="sr-only">Details for </span>
+//             {details.name}
+//           </h2>
+//           {/* <p className="text-sm font-medium text-light">{details.creatorName}</p> */}
+//         </div>
+//       </div>
+//     </div>
+//     <div>
+//       <div className="font-medium text-lightest">Information</div>
+//       <dl className="mt-2 divide-y divide-medium border-b border-t border-medium">
+//         {/* Add more information for the card */}
+//         <div className="flex justify-between py-3 text-sm font-medium">
+//           <dt className="text-lighter">Creator</dt>
+//           <dd className="whitespace-nowrap text-lightest">
+//             {details.creatorName}
+//           </dd>
+//         </div>
+
+//         <div className="flex justify-between py-3 text-sm font-medium">
+//           <dt className="text-lighter">Rating</dt>
+//           <dd className="whitespace-nowrap text-lightest">
+//             <div className="flex items-center">             
+//                 {[0, 1, 2, 3, 4].map((rating) => (
+//                     <StarIcon
+//                         key={rating}
+//                         className={classNames(
+//                             details.rating > rating ? 'text-yellow-400' : 'text-gray-200',
+//                             'h-5 w-5 flex-shrink-0'
+//                         )}
+//                         aria-hidden="true"
+//                     />
+//                 ))}
+//             </div>
+//           </dd>
+//         </div>
+//       </dl>
+//     </div>
+//     <div>
+//       <div className="font-medium text-lightest">Description</div>
+//       <div className="mt-2 flex items-center justify-between">
+//         <p className="text-sm italic text-lighter">{details.description}.</p>
+//       </div>
+//     </div>
+//     {type === MarketplaceTabKey.WORLD_TYPE && (
+//       <div className="mt-2 flex">
+//         <a href={`/subworlds/${details.id}`} className="text-sm font-semibold leading-6 text-brand">
+//           More details <span aria-hidden="true">&rarr;</span>
+//         </a>
+//       </div>
+//     )}
+//     {type === MarketplaceTabKey.WORLD_TYPE && details.buttons}
+//   </div>
+// </aside>
+
+const GalleryContainer = ({ children, details, type, slideOverOpen, setSlideOverOpen }: GalleryContainerProps) => {
+    
     return (
         <div className="flex flex-1 items-stretch overflow-hidden">
             <main className="flex-1 overflow-y-auto">
@@ -50,74 +122,8 @@ const GalleryContainer = ({ children, details, type }: GalleryContainerProps) =>
                     </section>
                 </div>
             </main>
+            <GallerySlideOver open={slideOverOpen} setOpen={setSlideOverOpen} details={details} type={type} />
 
-            {/* Details sidebar */}
-            <aside className="hidden w-96 overflow-y-auto border-l border-medium p-8 xl:block">
-              <div className="space-y-6 pb-16">
-                <div>
-                  <div className="aspect-h-1 aspect-w-1 w-80 overflow-hidden rounded-lg bg-darkest">
-                      <img
-                          src={details.thumbnail || "/images/color-image-placeholder.webp"}
-                          className="h-full w-full aspect-square object-cover object-center"
-                          loading="lazy"
-                      />
-                  </div>
-                  <div className="mt-4 flex items-start justify-between">
-                    <div>
-                      <h2 className="text-xl font-medium text-lightest">
-                        <span className="sr-only">Details for </span>
-                        {details.name}
-                      </h2>
-                      {/* <p className="text-sm font-medium text-light">{details.creatorName}</p> */}
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div className="font-medium text-lightest">Information</div>
-                  <dl className="mt-2 divide-y divide-medium border-b border-t border-medium">
-                    {/* Add more information for the card */}
-                    <div className="flex justify-between py-3 text-sm font-medium">
-                      <dt className="text-lighter">Creator</dt>
-                      <dd className="whitespace-nowrap text-lightest">
-                        {details.creatorName}
-                      </dd>
-                    </div>
-
-                    <div className="flex justify-between py-3 text-sm font-medium">
-                      <dt className="text-lighter">Rating</dt>
-                      <dd className="whitespace-nowrap text-lightest">
-                        <div className="flex items-center">             
-                            {[0, 1, 2, 3, 4].map((rating) => (
-                                <StarIcon
-                                    key={rating}
-                                    className={classNames(
-                                        details.rating > rating ? 'text-yellow-400' : 'text-gray-200',
-                                        'h-5 w-5 flex-shrink-0'
-                                    )}
-                                    aria-hidden="true"
-                                />
-                            ))}
-                        </div>
-                      </dd>
-                    </div>
-                  </dl>
-                </div>
-                <div>
-                  <div className="font-medium text-lightest">Description</div>
-                  <div className="mt-2 flex items-center justify-between">
-                    <p className="text-sm italic text-lighter">{details.description}.</p>
-                  </div>
-                </div>
-                {type === MarketplaceTabKey.WORLD_TYPE && (
-                  <div className="mt-2 flex">
-                    <a href={`/subworlds/${details.id}`} className="text-sm font-semibold leading-6 text-brand">
-                      More details <span aria-hidden="true">&rarr;</span>
-                    </a>
-                  </div>
-                )}
-                {type === MarketplaceTabKey.WORLD_TYPE && details.buttons}
-              </div>
-            </aside>
         </div>
     );
 }

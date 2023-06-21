@@ -37,7 +37,7 @@ const Button = ({
     <button
       type="button"
       className={classNames(
-        "inline-flex justify-center items-center rounded-md overflow-hidden sm:col-start-1",
+        "inline-flex justify-center items-center rounded-md overflow-hidden",
         sizeClassname,
         primary && "bg-brand text-darkest hover:bg-cyan-200 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 active:bg-cyan-300 active:text-dark focus-visible:outline-brand",
         secondary && "bg-transparent text-brand border border-brand",
