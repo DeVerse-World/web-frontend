@@ -19,23 +19,8 @@ export function TabHeaderBar({ data, prefetch=false }: Props) {
     // TODO: Remove after done
     return (
         <div>
-            <div className="sm:hidden">
-                <label htmlFor="tabs" className="sr-only">
-                Select a tab
-                </label>
-                {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
-                <select
-                id="tabs"
-                name="tabs"
-                className="block w-full rounded-md  focus:border-indigo-500 focus:ring-indigo-500"
-                defaultValue={data.find((item) => item.href === router.pathname).label}
-                >
-                {data.map((item) => (
-                    <option key={item.label}>{item.label}</option>
-                ))}
-                </select>
-            </div>
-            <div className="hidden sm:block">
+           
+            <div>
                 <div className="border-b border-gray-200">
                 <nav className="-mb-px flex" aria-label="Tabs">
                     {data.map((item) => (
@@ -71,4 +56,4 @@ export function TabHeaderBar({ data, prefetch=false }: Props) {
             })}
         </div>
     )
-}
+ }
