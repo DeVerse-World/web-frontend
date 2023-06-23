@@ -12,21 +12,23 @@ import { TabHeaderBar } from "../../components/common/TabHeader";
 import EventList from "../../components/asset/EventList";
 import Button from "../../components/Button";
 
+
 function Info() {
     const { setViewState, user } = useContext(AppContext);
     const [modelPath, setModelPath] = useState<string>(null);
     const [ongoingEvents, setOngoingEvents] = useState<EventViewModel[]>([]);
+    
 
-    useEffect(() => {
-        if (user == null)
-            return;
-        AvatarService.getAvatars(user.id).then(res => {
-            if (res.isSuccess && res.value) {
-                if (res.isSuccess() && res.value.avatars.length > 0) {
-                    setModelPath(res.value.avatars[0].preprocess_url)
-                }
-            }
-        })
+    // useEffect(() => {
+    //     if (user == null)
+    //         return;
+    //     AvatarService.getAvatars(user.id).then(res => {
+    //         if (res.isSuccess && res.value) {
+    //             if (res.isSuccess() && res.value.avatars.length > 0) {
+    //                 setModelPath(res.value.avatars[0].preprocess_url)
+    //             }
+    //         }
+    //     })
         EventsService.fetchEvents().then(res => {
             if (res.isSuccess()) {
                 const data = res.value.events.map<EventViewModel>(e => ({
@@ -42,23 +44,24 @@ function Info() {
                     setOngoingEvents(data);
             }
         })
-    }, [user])
+    // }, [user])
 
-    const renderAvatar = () => {
-        return (
-            <div className='mt-6 sm:w-[300px] sm:h-[600px] w-[250px] h-[250px]'>
-                <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 1, 4.5], fov: 50 }}>
-                    <ambientLight intensity={2} />
-                    <spotLight position={[1, 6, 1.5]} angle={0.2} penumbra={1} intensity={2.5} castShadow shadow-mapSize={[2048, 2048]} />
-                    <spotLight position={[-5, 5, -1.5]} angle={0.03} penumbra={1} intensity={4} castShadow shadow-mapSize={[1024, 1024]} />
-                    <spotLight position={[5, 5, -5]} angle={0.3} penumbra={1} intensity={4} castShadow={true} shadow-mapSize={[256, 256]} color="#ffffc0" />
-                    <ModelViewer position={[0, -0.8, -1.5]} filePath={modelPath} />
-                    {/* <OrbitControls makeDefault zoomSpeed={2} /> */}
-                </Canvas>
-            </div>
-        )
-    }
+    // const renderAvatar = () => {
+    //     return (
+    //         <div className='mt-6 sm:w-[300px] sm:h-[600px] w-[250px] h-[250px]'>
+    //             <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 1, 4.5], fov: 50 }}>
+    //                 <ambientLight intensity={2} />
+    //                 <spotLight position={[1, 6, 1.5]} angle={0.2} penumbra={1} intensity={2.5} castShadow shadow-mapSize={[2048, 2048]} />
+    //                 <spotLight position={[-5, 5, -1.5]} angle={0.03} penumbra={1} intensity={4} castShadow shadow-mapSize={[1024, 1024]} />
+    //                 <spotLight position={[5, 5, -5]} angle={0.3} penumbra={1} intensity={4} castShadow={true} shadow-mapSize={[256, 256]} color="#ffffc0" />
+    //                 <ModelViewer position={[0, -0.8, -1.5]} filePath={modelPath} />
+    //                 {/* <OrbitControls makeDefault zoomSpeed={2} /> */}
+    //             </Canvas>
+    //         </div>
+    //     )
+    // }
 
+   
     return (
         <>
             {/* <TabHeaderBar data={[
@@ -88,7 +91,7 @@ function Info() {
                         </div>
                     </div>
                 ) : (
-                    <h5>No Avatar Yet, please clogin or create one first</h5>
+                    <h5> </h5>
                 )}
             </div>
             

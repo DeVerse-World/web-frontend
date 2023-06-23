@@ -30,7 +30,7 @@ function DownloadDemoButton(props: Props) {
         onClick={onDownload}
         primary
       >
-        <AiFillWindows className="-ml-1.5 h-5 w-5" />
+        <AiFillWindows className="-ml-1.5 h-7 w-5" />
         Download
       </Button>
     )

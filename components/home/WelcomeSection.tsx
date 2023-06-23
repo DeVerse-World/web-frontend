@@ -1,8 +1,9 @@
 import Image from "next/image";
 import DownloadDemoButton from "../DownloadDemoButton";
 import Button from '../Button';
+import EpicDownloadButton from "../EpicDownloadButton";
 import { useEffect, useState } from "react";
-
+// import EpicDownloadButton from "../EpicDownloadButton";
 export default function WelcomeSection({
   placeholder,
   introVideoUrl,
@@ -19,16 +20,17 @@ export default function WelcomeSection({
         `,
       }}
     >
-      <div className="max-w-md pl-6 lg:pl-8 xl:pl-12">
-        <div className="mx-auto max-w-sm pt-48">
+      <div className="pl-6 lg:pl-8 xl:pl-12">
+        <div className="mx-auto pt-48">
           <div className="">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Welcome to Deverse world
+              Welcome To Deverse World
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-300">
               Your portal to the endless virtual world experiences, owned by the users
             </p>
-            <div className="mt-10 flex items-center gap-x-2">
+            <div className="mt-10 flex items-center gap-x-4">
+              <EpicDownloadButton/>
               <DownloadDemoButton />
               <Button className="leading-6 text-light" tertiary href={introVideoUrl} target="_blank">
                 Watch trailer <span aria-hidden="true">→</span>
