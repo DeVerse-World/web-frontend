@@ -3,7 +3,7 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import Image from 'next/image';
 import classNames from 'classnames';
 
-const Card = ({ name, creatorName, rating, thumbnail, children, ...props }) => {
+const Card = ({ name, creatorName, rating, thumbnail, children, numViews, numClicks, ...props }) => {
 
     return (
         <div className="overflow-hidden rounded-lg bg-dark ring-1 ring-inset ring-medium text-left transition-all sm:my-4 sm:w-full sm:max-w-lg">
@@ -22,8 +22,8 @@ const Card = ({ name, creatorName, rating, thumbnail, children, ...props }) => {
                         <div className="mt-2 flex flex-col">
                             <div className="flex items-center">             
                                 {[0, 1, 2, 3, 4].map((_rating) => (
-                                    <StarIcon
-                                        key={rating}
+                                    <StarIcon                                
+                                        key={`${name}-${creatorName}-${_rating}`}
                                         className={classNames(
                                             rating > _rating ? 'text-yellow-400' : 'text-gray-200',
                                             'h-5 w-5 flex-shrink-0'
@@ -32,8 +32,12 @@ const Card = ({ name, creatorName, rating, thumbnail, children, ...props }) => {
                                     />
                                 ))}
                             </div>
+                            
                         </div>
                     )}
+                   {numViews !== undefined && numClicks !== undefined &&
+            <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{numViews || 0} Views • {numClicks || 0} Clicks</div>
+            }
                     {children}
                     
                 </div>

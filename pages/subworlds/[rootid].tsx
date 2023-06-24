@@ -80,6 +80,9 @@ export default function Deriv({ rootId }) {
                     rating: e.Template.rating,
                     onlineOpenable: true,
                     offlineOpenable: true,
+                    numViews: e.Template.num_views,
+                    numPlays: e.Template.num_plays,
+                    numClicks: e.Template.num_clicks,
                     creator: {
                         id: e.CreatorInfo.Id,
                         name: (e.CreatorInfo.Name === "" || e.CreatorInfo.Name === null) ? "Anonymous" : e.CreatorInfo.Name,
