@@ -49,6 +49,7 @@ export default function Deriv({ rootId }) {
                     numViews: rootRes.value.subworld_template.num_views,
                     numPlays: rootRes.value.subworld_template.num_plays,
                     numClicks: rootRes.value.subworld_template.num_clicks,
+                    numClicks: rootRes.value.subworld_template.num_clicks,
                 }
                 const rootCreator: CreatorViewModel = {
                     id: rootRes.value.creator_info.id.toString(),
@@ -65,6 +66,8 @@ export default function Deriv({ rootId }) {
             setViewState(ViewState.SUCCESS)
         });
 
+        console.log('meow', derivTemplates)
+        
         SubWorldTemplateService.fetchDerivTemplates(rootId).then(derivRes => {
             if (derivRes.isSuccess()) {
                 setDerivTemplates(derivRes.value.enriched_subworld_templates.map<DerivTemplateViewModel>(e => ({
@@ -81,8 +84,8 @@ export default function Deriv({ rootId }) {
                     onlineOpenable: true,
                     offlineOpenable: true,
                     numViews: e.Template.num_views,
-                    numPlays: e.Template.num_plays,
                     numClicks: e.Template.num_clicks,
+                    numPlays: e.Template.num_plays,
                     creator: {
                         id: e.CreatorInfo.Id,
                         name: (e.CreatorInfo.Name === "" || e.CreatorInfo.Name === null) ? "Anonymous" : e.CreatorInfo.Name,

@@ -12,6 +12,8 @@ import Button from "../Button";
 import Items from "../../pages/account/items";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 import { IoLogoGameControllerB } from "react-icons/io";
+import StatsService from "../../data/services/StatsService";
+import { IncrementTypes } from "../../data/services/StatsService";
 
 const itemPerPage = 4;
 
@@ -66,10 +68,11 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
             {cardType !== "avatar" && items[index].derivable !== 1 && 
             <Button
                 primary
-                onClick={(e) => {
+                onClick={async(e) => { 
                     e.stopPropagation();
                     _setSelectedIndex(index);
                     setShowPlayModal(true);
+                    await StatsService.incrementStats(items[index].id, IncrementTypes.PLAYS);
                 }}
                 size="sm"
             >

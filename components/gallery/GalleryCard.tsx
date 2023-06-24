@@ -45,8 +45,9 @@ const GalleryCard = ({ current, thumbnail, name, creatorName, index, rating, num
             </div>
         
             <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{creatorName}</div>
-            {numViews && numClicks &&
-            <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{numViews || 0} Views • {numClicks || 0} Plays</div>
+            
+            {numViews !== undefined && numClicks !== undefined &&
+            <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{numViews || 0} Views • {numClicks || 0} Clicks</div>
             }
             <div className="mt-1">
                 <dd className="whitespace-nowrap text-lightest">

@@ -67,7 +67,6 @@ function DerivWorldList(props: ListProps) {
                         numViews={item && item.num_views}
                         numClicks={item && item.num_clicks}
 
-
                     >
                         <div className="mt-4 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
                             <button

@@ -36,10 +36,9 @@ const Card = ({ name, creatorName, rating, thumbnail, children, numViews, numCli
                         </div>
                     )}
                    {numViews !== undefined && numClicks !== undefined &&
-            <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{numViews || 0} Views • {numClicks || 0} Clicks</div>
-            }
+                        <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{numViews || 0} Views • {numClicks || 0} Clicks</div>
+                    }
                     {children}
-                    
                 </div>
 
             </div>

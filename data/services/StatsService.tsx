@@ -1,0 +1,27 @@
+import { string } from "hardhat/internal/core/params/argumentTypes";
+import { URI } from "../../smart-contracts/AssetSubgraph/generated/Asset/Asset";
+import deverseClient from "../api/deverse_client";
+import { TemplateDetailResponse } from "../model/ipfs_response";
+import { IncrementStatsResponse } from "../model/SubworldTemplate";
+import { BaseService } from "./BaseService";
+
+
+export enum IncrementTypes {
+    CLICKS = "num_clicks",
+    VIEWS = "num_views",
+    PLAYS = "num_plays",
+}
+//click play = num play
+//click vào trang detail = num click
+// hiện trên màn hình = num views
+
+class StatsService extends BaseService {
+    async incrementStats (id: string, type: IncrementTypes) {
+        
+        const uri = `subworld/template/${id}/incrementStats?type=${type}`;
+        const res = await deverseClient.post<Response<IncrementStatsResponse>>(uri);        
+        return this.parseResponse(res);
+    }
+    }
+
+export default new StatsService();
