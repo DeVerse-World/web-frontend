@@ -7,13 +7,21 @@ import { MarketplaceTabKey } from '../MarketplaceFilterTab';
 import PlayIcon from '@heroicons/react/20/solid';
 import OverlayImage360Button from '../image360/OverlayImage360Button';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import SubWorldTemplateService from '../../data/services/SubWorldTemplateService';
+
 const OverlayImage360 = dynamic(() => import('../image360/OverlayImage360'));
-
-
 
 const GallerySlideOver = ({ open, setOpen, details, type }) => {
     const [openImage, setOpenImage] = useState(false);
+    const [description, setDescription] = useState();
+    useEffect(()=> {
+
+        if (details.derivativeUri) {SubWorldTemplateService.fetchTemplateDescription(details.derivativeUri).then(res => {
+                          if (res.descriptions)  setDescription(res.descriptions.join(", "));
+        })
+        }
+        }, []);
     return (
         <>
             <OverlayImage360 source={details.thumbnail} open={openImage} setOpen={setOpenImage} />
@@ -119,7 +127,7 @@ const GallerySlideOver = ({ open, setOpen, details, type }) => {
                                                 <div>
                                                 <div className="font-medium text-lightest">Description</div>
                                                 <div className="mt-2 flex items-center justify-between">
-                                                    <p className="text-sm italic text-lighter">{details.description}.</p>
+                                                    <p className="text-sm italic text-lighter">{description}</p>
                                                 </div>
                                                 </div>           
                                                 {type === MarketplaceTabKey.WORLD_TYPE && details.buttons}

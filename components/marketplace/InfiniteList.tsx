@@ -43,7 +43,9 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
             rating: data.rating,
             description: data.description,
             thumbnail: data.image,
-            buttons: <ButtonGroup index={0} image360={data.image}  />,
+            derivativeUri: data.derivative_uri,
+            buttons: <ButtonGroup index={0} image360={data.image}
+              />,
         });
     }, [items]);
    
@@ -125,6 +127,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                             buttons: <ButtonGroup index={index} image360={data.image} />,
                             numViews: data.numViews,
                             numClicks: data.numClicks,
+                            derivativeUri: data.derivative_uri,
                         });
                     }}
                     thumbnail={data.image}

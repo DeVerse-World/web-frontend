@@ -73,6 +73,8 @@ function Marketplace() {
         thumbnail: "",
         description: "",
         buttons: null,
+        derivativeUri: null,
+
     });
     const [slideOverOpen, setSlideOverOpen] = useState(false);
 
@@ -206,6 +208,8 @@ function Marketplace() {
                     numViews: e.num_views,
                     numClicks: e.num_clicks,
                     derivable: e.derivable,
+                    derivative_uri: e.derivative_uri,
+
                 })));
             }
         }).finally(() => {
