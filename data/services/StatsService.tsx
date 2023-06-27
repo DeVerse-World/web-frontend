@@ -12,8 +12,8 @@ export enum IncrementTypes {
     PLAYS = "num_plays",
 }
 // click play = num play
-// click vào trang detail = num click
-// hiện trên màn hình = num views
+// click to details = num click
+// display on screen = num views
 
 class StatsService extends BaseService {
     async incrementStats(id: string, type: IncrementTypes) {
