@@ -12,6 +12,8 @@ import Button from "../Button";
 import Items from "../../pages/account/items";
 import { ArrowTopRightOnSquareIcon } from "@heroicons/react/24/solid";
 import { IoLogoGameControllerB } from "react-icons/io";
+import StatsService from "../../data/services/StatsService";
+import { IncrementTypes } from "../../data/services/StatsService";
 
 const itemPerPage = 4;
 
@@ -35,7 +37,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
 
     useEffect(() => {
         const data = items[0];
-        _setSelectedIndex(0);
+        // _setSelectedIndex(0);
         if (setSidebarDetails) setSidebarDetails({
             id: data.id,
             name: data.name,
@@ -44,6 +46,9 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
             description: data.description,
             thumbnail: data.image,
             derivativeUri: data.derivative_uri,
+            numViews: data.numViews,
+            numClicks: data.numClicks,
+            numPlays: data.numPlays,
             buttons: <ButtonGroup index={0} image360={data.image}
               />,
         });
@@ -66,10 +71,11 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
             {cardType !== "avatar" && items[index].derivable !== 1 && 
             <Button
                 primary
-                onClick={(e) => {
+                onClick={async (e) => { 
                     e.stopPropagation();
                     _setSelectedIndex(index);
                     setShowPlayModal(true);
+                    await StatsService.incrementStats(items[index].id, IncrementTypes.PLAYS);
                 }}
                 size="sm"
             >
@@ -86,7 +92,16 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                 
             )}
             {cardType !== "avatar" && items[index].derivable === 1 && (
-                <Button secondary href={`/subworlds/${items[index].id}`} size="sm">
+                <Button
+                    secondary
+                    href={`/subworlds/${items[index].id}`}
+                    size="sm"
+                    linkInNewTab
+                    onClick={async (e) => {
+                        e.stopPropagation();
+                        await StatsService.incrementStats(items[index].id, IncrementTypes.CLICKS);
+                    }}
+                >
                     Explore
                     <ArrowTopRightOnSquareIcon className="ml-2 h-5 w-5 inline-block" aria-hidden="true" />
                 </Button>
@@ -127,6 +142,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                             buttons: <ButtonGroup index={index} image360={data.image} />,
                             numViews: data.numViews,
                             numClicks: data.numClicks,
+                            numPlays: data.numPlays,
                             derivativeUri: data.derivative_uri,
                         });
                     }}
@@ -156,7 +172,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
             <InfiniteScroll
                 className={classNames(
                     "mx-auto max-w-screen-xl grid grid-cols-2 gap-4",
-                    cardType === 'gallery' ? "md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4" : "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4",
+                    cardType === 'gallery' ? "md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4" : "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3",
                 )}
                 pageStart={0}
                 loadMore={() => setTimeout(() => fetchDataByPage(), 800)}

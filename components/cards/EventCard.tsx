@@ -15,11 +15,11 @@ const EventCard = ({ thumbnail, lastUpdate, name, creatorName, category, childre
                 <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-lg bg-gray-100">
                     <img
                         src={thumbnail || "/images/color-image-placeholder.webp"}
-                        className="h-full w-full aspect-square object-cover object-center bg-darkest"
+                        className="h-full w-full aspect-[4/3] object-cover object-center bg-darkest"
                         loading="lazy"
                     />
                 </div>
-                <div className="min-h-[240px] p-6 flex flex-col justify-between">
+                <div className="min-h-[220px] p-6 flex flex-col justify-between">
                     <div>
                         <h3 className="text-lg font-bold text-lightest">{name}</h3>
                         <div className="mt-2 text-base text-light">{creatorName || "Deverse World"}</div>

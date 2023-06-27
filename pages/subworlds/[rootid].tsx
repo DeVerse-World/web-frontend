@@ -9,7 +9,8 @@ import DerivWorldList, { DerivTemplateViewModel } from "../../components/asset/D
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 import RootTemplate from "../../components/subworlds/RootTemplate";
-import OverlayImage360Button from "../../components/image360/OverlayImage360Button";
+import StatsService from "../../data/services/StatsService";
+import { IncrementTypes } from "../../data/services/StatsService";
 
 export async function getServerSideProps(context) {
     const rootid = context.params.rootid;
@@ -30,6 +31,11 @@ export default function Deriv({ rootId }) {
     const [rootTemplate, setRootTemplate] = useState<RootTemplateViewModel>();
     const [rootCreator, setRootCreator] = useState<CreatorViewModel>();
     const [derivTemplates, setDerivTemplates] = useState<DerivTemplateViewModel[]>([]);
+
+    useEffect(() => {
+        StatsService.incrementStats(rootId, IncrementTypes.VIEWS).then(_res => {});
+    }, []);
+
     useEffect(() => {
         setViewState(ViewState.LOADING);
         SubWorldTemplateService.fetchRootTemplate(rootId).then(async rootRes => {
@@ -49,6 +55,7 @@ export default function Deriv({ rootId }) {
                     numViews: rootRes.value.subworld_template.num_views,
                     numPlays: rootRes.value.subworld_template.num_plays,
                     numClicks: rootRes.value.subworld_template.num_clicks,
+                    numClicks: rootRes.value.subworld_template.num_clicks,
                 }
                 const rootCreator: CreatorViewModel = {
                     id: rootRes.value.creator_info.id.toString(),
@@ -64,7 +71,7 @@ export default function Deriv({ rootId }) {
         }).finally(() => {
             setViewState(ViewState.SUCCESS)
         });
-
+        
         SubWorldTemplateService.fetchDerivTemplates(rootId).then(derivRes => {
             if (derivRes.isSuccess()) {
                 setDerivTemplates(derivRes.value.enriched_subworld_templates.map<DerivTemplateViewModel>(e => ({
@@ -81,8 +88,8 @@ export default function Deriv({ rootId }) {
                     onlineOpenable: true,
                     offlineOpenable: true,
                     numViews: e.Template.num_views,
-                    numPlays: e.Template.num_plays,
                     numClicks: e.Template.num_clicks,
+                    numPlays: e.Template.num_plays,
                     creator: {
                         id: e.CreatorInfo.Id,
                         name: (e.CreatorInfo.Name === "" || e.CreatorInfo.Name === null) ? "Anonymous" : e.CreatorInfo.Name,

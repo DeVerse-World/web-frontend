@@ -2,6 +2,7 @@ import { memo } from "react";
 import classNames from "classnames";
 import { FaCommentsDollar } from "react-icons/fa";
 import { StarIcon } from "@heroicons/react/20/solid";
+import { Wordlist } from "ethers";
 type GalleryCardProps = {
     current?: boolean;
     thumbnail: string;
@@ -39,26 +40,30 @@ const GalleryCard = ({ current, thumbnail, name, creatorName, index, rating, num
                    
                 />
             </div>
-            <p className="pointer-events-none mt-2 mb-0.5 block truncate text-sm font-medium text-lightest">
+            <div className="pointer-events-none mt-3 mb-0.5 block truncate text-sm font-medium text-lightest">
                 {name}
-            </p>
-            <p className="pointer-events-none block text-sm font-medium text-lighter">{creatorName}</p>
-            <p className="pointer-events-none block text-sm font-medium text-lighter">{numViews} Views  {numClicks} Plays</p>
-            <p>
-            <dd className="whitespace-nowrap text-lightest">
-                <div className="flex items-center">             
-                    {[0, 1, 2, 3, 4].map((_rating) => (
-                        <StarIcon
-                            key={rating}
-                            className={classNames(
-                            rating > _rating ? 'text-yellow-400' : 'text-gray-200','h-5 w-5 flex-shrink-0'
-                    )}
-                            aria-hidden="true"
-                    />
-                            ))}
-                </div>
-            </dd>
-            </p>
+            </div>
+        
+            <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{creatorName}</div>
+            
+            {numViews !== undefined && numClicks !== undefined &&
+            <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{numViews || 0} Views • {numClicks || 0} Clicks</div>
+            }
+            <div className="mt-1">
+                <dd className="whitespace-nowrap text-lightest">
+                    <div className="flex items-center">             
+                        {[0, 1, 2, 3, 4].map((_rating) => (
+                            <StarIcon
+                                key={rating}
+                                className={classNames(
+                                rating > _rating ? 'text-yellow-400' : 'text-gray-200','h-3 w-3 sm:h-5 sm:w-5 flex-shrink-0'
+                        )}
+                                aria-hidden="true"
+                        />
+                                ))}
+                    </div>
+                </dd>
+            </div>
 
         </div>
         

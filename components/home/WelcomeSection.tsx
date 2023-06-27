@@ -1,8 +1,9 @@
 import Image from "next/image";
 import DownloadDemoButton from "../DownloadDemoButton";
 import Button from '../Button';
+import EpicDownloadButton from "../EpicDownloadButton";
 import { useEffect, useState } from "react";
-
+// import EpicDownloadButton from "../EpicDownloadButton";
 export default function WelcomeSection({
   placeholder,
   introVideoUrl,
@@ -15,24 +16,27 @@ export default function WelcomeSection({
         backgroundImage: `
           linear-gradient(to left, rgba(7, 24, 39, 0.3) 50%, rgba(17, 24, 39, 1) 75%),
           linear-gradient(to bottom, rgba(7, 24, 39, 0.3) 60%, rgba(17, 24, 39, 1) 80%),
-          url('/images/image_headpage.webp')
+          url('https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fhome%2Fimage_headpage.webp?alt=media&token=e352a403-7c34-4637-a6a7-94cb8044cfd4')
         `,
       }}
     >
-      <div className="max-w-md pl-6 lg:pl-8 xl:pl-12">
-        <div className="mx-auto max-w-sm pt-48">
+      <div className="pl-6 lg:pl-8 xl:pl-12">
+        <div className="mx-auto pt-48">
           <div className="">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Welcome to Deverse world
+              Welcome To Deverse World
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-300">
               Your portal to the endless virtual world experiences, owned by the users
             </p>
-            <div className="mt-10 flex items-center gap-x-2">
+            
+            <a className="leading-6 text-brand underline" href={introVideoUrl} target="_blank">
+              Watch trailer <span aria-hidden="true">→</span>
+            </a>
+
+            <div className="mt-10 flex items-center gap-x-4">
+              <EpicDownloadButton/>
               <DownloadDemoButton />
-              <Button className="leading-6 text-light" tertiary href={introVideoUrl} target="_blank">
-                Watch trailer <span aria-hidden="true">→</span>
-              </Button>
             </div>
           </div>
         </div>

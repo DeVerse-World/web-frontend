@@ -1,3 +1,5 @@
+import { RootSubworldTemplateResponse } from "./response"
+
 export type SubworldTemplate = {
     id: number,
     file_name: string,
@@ -27,4 +29,9 @@ export type RootSubworldTemplate = {
 export type RootEnrichedSubworldTemplate = {
     Template: RootSubworldTemplate,
     CreatorInfo: SubworldCreatorInfo,
+}
+export type IncrementStatsResponse = {
+    message: string;
+    data:
+    RootSubworldTemplateResponse
 }

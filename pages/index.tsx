@@ -6,7 +6,8 @@ import dynamic from 'next/dynamic';
 import PartnerSection from "../components/home/PartnerSection";
 import CommunityPartnerSection from "../components/home/CommunityPartnerSection";
 import Popup from "../components/Popup";
-
+import TrendingSection from "../components/home/TrendingSection";
+import EpicDownloadButton from "../components/EpicDownloadButton";
 
 const IntroSection = dynamic(() => import('../components/home/IntroSection').then((mod) => mod.default))
 const HighlightFeatureSection = dynamic(() => import('../components/home/HighlightFeaturesSection').then((mod) => mod.default))
@@ -57,9 +58,15 @@ function Main({
           communityPartners={communityPartners}
           introVideoUrl={introVideoUrl}    
         />
+        
+        
         <IntroSection />
+       
         <div className="px-16 lg:px-20">
           <HighlightFeatureSection />
+          <div>
+          <TrendingSection/>
+        </div>
           {/*
             <PartnerSection />
             <CommunityPartnerSection />
@@ -68,7 +75,9 @@ function Main({
             <BlogPostSection />
             : null
           }
+       
         </div>
+       
       </div>
   );
 }

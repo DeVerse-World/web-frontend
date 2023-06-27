@@ -41,7 +41,7 @@ class SubWorldTemplateService extends BaseService {
 
     async createRootTemplate(fileName: string, displayName: string, levelIpfsUri: string, levelCentralizedUri: string, thumbnailUri: string) {
         const res = await deverseClient.post<Response<RootSubworldTemplateResponse>>(`subworld/root_template`, {
-            subworld_template: {
+            subworld_template: { 
                 file_name: fileName,
                 display_name: displayName,
                 level_ipfs_uri: levelIpfsUri || "",

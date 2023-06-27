@@ -26,7 +26,7 @@ const Card = ({ name, creatorName, rating, thumbnail, children, numViews, numCli
                                         key={`${name}-${creatorName}-${_rating}`}
                                         className={classNames(
                                             rating > _rating ? 'text-yellow-400' : 'text-gray-200',
-                                            'h-5 w-5 flex-shrink-0'
+                                            'h-3 w-3 sm:h-5 sm:w-5 flex-shrink-0'
                                         )}
                                         aria-hidden="true"
                                     />
@@ -36,10 +36,9 @@ const Card = ({ name, creatorName, rating, thumbnail, children, numViews, numCli
                         </div>
                     )}
                    {numViews !== undefined && numClicks !== undefined &&
-            <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{numViews || 0} Views • {numClicks || 0} Clicks</div>
-            }
+                        <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{numViews || 0} Views • {numClicks || 0} Clicks</div>
+                    }
                     {children}
-                    
                 </div>
 
             </div>
