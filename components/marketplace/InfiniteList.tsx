@@ -171,8 +171,8 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
         <>
             <InfiniteScroll
                 className={classNames(
-                    "mx-auto max-w-screen-xl grid grid-cols-2 gap-4",
-                    cardType === 'gallery' ? "md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4" : "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3",
+                    "mx-auto max-w-7xl grid grid-cols-2 gap-4",
+                    cardType === 'gallery' ? "md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4" : "md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4",
                 )}
                 pageStart={0}
                 loadMore={() => setTimeout(() => fetchDataByPage(), 800)}
