@@ -65,14 +65,12 @@ const Tab = ({ item, router, setSidebarOpen }) => {
 };
 
 const TabWithOptions = ({ item, router, setSidebarOpen }) => {
-    console.log('router.pathname', router.pathname)
-    console.log(router.query)
     return (
         <Disclosure as="div" key={item.name} className="py-6" defaultOpen={router.pathname === item.href}>
             {({ open }) => (
                 <>
                     <h3 className="-my-3 flow-root">
-                        <Disclosure.Button className="flex w-full items-center justify-between rounded-md p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-800">
+                        <Disclosure.Button className="flex w-full items-center justify-between rounded-md p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-800 font-semibold">
                             <div className="group flex gap-x-3">
                                 <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
                                 {item.name}
@@ -188,7 +186,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
             <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-60 lg:flex-col">
                 {/* Sidebar component, swap this element with another sidebar if you like */}
                 <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-black/10 px-6 ring-1 ring-white/5">
-                    <div className="flex h-16 gap-1 shrink-0 items-center">
+                    <a className="flex h-16 gap-1 shrink-0 items-center" href="/">
                         <Image
                             className="h-8 w-auto"
                             src="/images/logo.webp"
@@ -201,7 +199,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                             width={180}
                             src={"/images/logo-text.webp"}
                             alt="Deverse text logo" />
-                    </div>
+                    </a>
                     <nav className="flex flex-1 flex-col">
                         <div className="flex flex-1 flex-col gap-y-7">
                             <div className="-mx-2 space-y-1">

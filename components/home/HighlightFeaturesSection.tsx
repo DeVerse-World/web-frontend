@@ -17,7 +17,7 @@ const FeatureSection = ({ title, description, imgSrc, reverse=false }) => (
       </p>
     </div>
 
-    <div className="shrink-0 rounded-lg xl:order-2 aspect-h-1 aspect-w-1 w-[32rem] sm:w-[40rem] lg:w-7/12 overflow-hidden">
+    <div className="shrink-0 rounded-lg xl:order-2 aspect-h-1 aspect-w-1 w-full sm:w-[40rem] lg:w-7/12 overflow-hidden">
       <Image className="h-full w-full aspect-[12/9] object-cover object-center"
           src={imgSrc} width={undefined} height={undefined} />
     </div>

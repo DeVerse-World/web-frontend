@@ -74,11 +74,11 @@ function Marketplace() {
         description: "",
         buttons: null,
         derivativeUri: null,
-
+        numViews: 0,
+        numClicks: 0,
+        numPlays: 0,
     });
     const [slideOverOpen, setSlideOverOpen] = useState(false);
-
-
 
     useEffect(() => {
         if (!router.isReady) return;
@@ -191,7 +191,6 @@ function Marketplace() {
         // if (shouldShowLoading)
         setViewState(ViewState.LOADING)
         SubWorldTemplateService.fetchRootTemplates().then(res => {
-            console.log('res',res)
             if (res.isSuccess()) {
                 setRootTemplates(res.value!.subworld_templates.map<RootTemplateViewModel>(e => ({
                     id: e.id.toString(),
@@ -207,6 +206,7 @@ function Marketplace() {
                     rating: e.rating,
                     numViews: e.num_views,
                     numClicks: e.num_clicks,
+                    numPlays: e.num_plays,
                     derivable: e.derivable,
                     derivative_uri: e.derivative_uri,
 

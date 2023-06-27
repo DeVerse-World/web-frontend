@@ -34,7 +34,7 @@ export default function Popup() {
               leaveFrom="opacity-100 translate-y-0 md:scale-100"
               leaveTo="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
             >
-              <Dialog.Panel className="flex flex-col items-center transform text-left text-base transition my-20 aspect-[2/1] w-[30rem] md:w-[700px] lg:w-[54rem]">
+              <Dialog.Panel className="z-10 flex flex-col items-center transform text-left text-base transition my-20 aspect-[2/1] w-1/2 md:w-[700px] lg:w-[54rem]">
                 <div className="relative flex items-center cursor-pointer overflow-hidden bg-white bg-cover w-full h-full px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8"
                   style={{
                     backgroundImage: `

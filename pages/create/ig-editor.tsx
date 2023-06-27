@@ -15,7 +15,7 @@ const posts = [
       description:
         'Create awesome worlds, games, races using thousands of free assets made by the community',
       imageUrl:
-        '/images/ig-free-for-all.webp',
+        'https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fcreate%2Fig_editor%2Fig-free-for-all.webp?alt=media&token=9b15b347-d16a-4d3d-8914-bc0cb81facc5',
     },
 
     {
@@ -24,7 +24,7 @@ const posts = [
         description:
           'What can be better than having your friends or others players experience your world. Share to everyone with just a button click.',
         imageUrl:
-          '/images/ig-share-creation.webp',
+          'https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fcreate%2Fig_editor%2Fig-share-creation.webp?alt=media&token=660a9998-d85c-4d7c-b6dc-3e4a99e50ab8',
         },
 
       {
@@ -33,7 +33,7 @@ const posts = [
         description:
           'Easy to use, no coding required. It is simple and intuitive to modify the rules or attributes of your world.',
         imageUrl:
-          '/images/ig-no-coding.webp',
+          'https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fcreate%2Fig_editor%2Fig-no-coding.webp?alt=media&token=b4f55480-163c-4a52-aafe-0ea3c969ee40',
        
         },
       

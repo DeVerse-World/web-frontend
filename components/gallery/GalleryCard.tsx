@@ -56,7 +56,7 @@ const GalleryCard = ({ current, thumbnail, name, creatorName, index, rating, num
                             <StarIcon
                                 key={rating}
                                 className={classNames(
-                                rating > _rating ? 'text-yellow-400' : 'text-gray-200','h-5 w-5 flex-shrink-0'
+                                rating > _rating ? 'text-yellow-400' : 'text-gray-200','h-3 w-3 sm:h-5 sm:w-5 flex-shrink-0'
                         )}
                                 aria-hidden="true"
                         />

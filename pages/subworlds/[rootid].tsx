@@ -9,7 +9,8 @@ import DerivWorldList, { DerivTemplateViewModel } from "../../components/asset/D
 import { AppContext, ViewState } from "../../components/contexts/app_context";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 import RootTemplate from "../../components/subworlds/RootTemplate";
-import OverlayImage360Button from "../../components/image360/OverlayImage360Button";
+import StatsService from "../../data/services/StatsService";
+import { IncrementTypes } from "../../data/services/StatsService";
 
 export async function getServerSideProps(context) {
     const rootid = context.params.rootid;
@@ -30,6 +31,11 @@ export default function Deriv({ rootId }) {
     const [rootTemplate, setRootTemplate] = useState<RootTemplateViewModel>();
     const [rootCreator, setRootCreator] = useState<CreatorViewModel>();
     const [derivTemplates, setDerivTemplates] = useState<DerivTemplateViewModel[]>([]);
+
+    useEffect(() => {
+        StatsService.incrementStats(rootId, IncrementTypes.VIEWS).then(_res => {});
+    }, []);
+
     useEffect(() => {
         setViewState(ViewState.LOADING);
         SubWorldTemplateService.fetchRootTemplate(rootId).then(async rootRes => {

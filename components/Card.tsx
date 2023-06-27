@@ -26,7 +26,7 @@ const Card = ({ name, creatorName, rating, thumbnail, children, numViews, numCli
                                         key={`${name}-${creatorName}-${_rating}`}
                                         className={classNames(
                                             rating > _rating ? 'text-yellow-400' : 'text-gray-200',
-                                            'h-5 w-5 flex-shrink-0'
+                                            'h-3 w-3 sm:h-5 sm:w-5 flex-shrink-0'
                                         )}
                                         aria-hidden="true"
                                     />

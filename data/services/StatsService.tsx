@@ -11,17 +11,21 @@ export enum IncrementTypes {
     VIEWS = "num_views",
     PLAYS = "num_plays",
 }
-//click play = num play
-//click vào trang detail = num click
+// click play = num play
+// click vào trang detail = num click
 // hiện trên màn hình = num views
 
 class StatsService extends BaseService {
-    async incrementStats (id: string, type: IncrementTypes) {
-        
+    async incrementStats(id: string, type: IncrementTypes) {
         const uri = `subworld/template/${id}/incrementStats?type=${type}`;
+        try {
+            
         const res = await deverseClient.post<Response<IncrementStatsResponse>>(uri);        
         return this.parseResponse(res);
+        } catch (err) {
+            console.log(err.message);
+        }
     }
-    }
+}
 
 export default new StatsService();
