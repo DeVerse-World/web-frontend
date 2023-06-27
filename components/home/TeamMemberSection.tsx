@@ -43,7 +43,7 @@ function TeamMemberSection(props) {
 
     return (
         <div>
-            <div className="mx-auto mt-24 max-w-5xl px-6 sm:mt-28 lg:px-8">
+            <div className="mx-auto mt-1 max-w-5xl px-6 sm:mt-28 lg:px-8">
                 <div className="max-w-2xl lg:mx-0">     
                     <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl ">Founding team</h2>
                     <p className="mt-4 text-lg leading-8 text-gray-300">
