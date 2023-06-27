@@ -71,8 +71,6 @@ export default function Deriv({ rootId }) {
         }).finally(() => {
             setViewState(ViewState.SUCCESS)
         });
-
-        console.log('meow', derivTemplates)
         
         SubWorldTemplateService.fetchDerivTemplates(rootId).then(derivRes => {
             if (derivRes.isSuccess()) {
