@@ -25,7 +25,7 @@ const RootTemplate = ({ template, creator }: RootTemplateProps) => {
 
     return (
       <div className="max-w-7xl">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-12 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-32 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
               <div className="lg:col-end-1 w-full lg:max-w-lg lg:pb-8">
                   <h2 className="text-4xl font-bold tracking-tight sm:text-6xl">
                       {template.name}
