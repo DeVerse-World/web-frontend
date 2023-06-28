@@ -55,7 +55,6 @@ export default function Deriv({ rootId }) {
                     numViews: rootRes.value.subworld_template.num_views,
                     numPlays: rootRes.value.subworld_template.num_plays,
                     numClicks: rootRes.value.subworld_template.num_clicks,
-                    numClicks: rootRes.value.subworld_template.num_clicks,
                 }
                 const rootCreator: CreatorViewModel = {
                     id: rootRes.value.creator_info.id.toString(),

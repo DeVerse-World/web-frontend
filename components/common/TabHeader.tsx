@@ -31,8 +31,8 @@ export function TabHeaderBar({ data, prefetch=false }: Props) {
                             <span
                                 className={classNames(
                                     router.pathname === item.href
-                                        ? ' text-brand'
-                                        : 'border-transparent text-lightest hover:border-gray-300 hover:text-lighter',
+                                    ? 'border-brand text-brand hover:text-brand'
+                                        : 'border-transparent text-lightest hover:border-lightest hover:text-brand',
                                     'cursor-pointer w-1/4 border-b-2 py-4 px-1 text-center text-sm font-medium'
                                 )}
                             >                            

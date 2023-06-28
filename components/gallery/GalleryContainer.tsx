@@ -38,11 +38,11 @@ type GalleryContainerProps = {
   children: any;
   details: SidebarDetailsProps;
   type: MarketplaceTabKey;
+  
 }
 
 
 const GalleryContainer = ({ children, details, type, slideOverOpen, setSlideOverOpen }: GalleryContainerProps) => {
-    
     return (
         <div className="flex flex-1 items-stretch overflow-hidden">
             <main className="flex-1 overflow-y-auto">

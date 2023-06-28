@@ -9,8 +9,8 @@ type CardProps = {
     data: TeamMember
 }
 
-
 function TeamMemberCard(props: CardProps) {
+
     return (
         <div className={`w-[250px] text-white ${styles.nftCard}`}>
             <div className="relative rounded-lg w-[250px] h-[250px]">
@@ -24,7 +24,7 @@ function TeamMemberCard(props: CardProps) {
             </div>
             <div className="py-2 flex flex-col items-start px-2">
                 <h3 className="font-bold ">{props.data.name}</h3>
-                <span className="text-blue-200 text-start">{props.data.education.split('\\n').map((item, index) =>
+                <span className="text-blue-200 text-start">{props.data.education.split('\n').map((item, index) =>
                     (index === 0) ? item : [<br key={index} />, item]
                 )}</span>
             </div>
