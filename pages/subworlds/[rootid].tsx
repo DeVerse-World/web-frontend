@@ -11,6 +11,7 @@ import SubWorldTemplateService from "../../data/services/SubWorldTemplateService
 import RootTemplate from "../../components/subworlds/RootTemplate";
 import StatsService from "../../data/services/StatsService";
 import { IncrementTypes } from "../../data/services/StatsService";
+import BreadCrumb from "../../components/BreadCrumb";
 
 export async function getServerSideProps(context) {
     const rootid = context.params.rootid;
@@ -108,6 +109,17 @@ export default function Deriv({ rootId }) {
     return (
         <>
             <section className="flex flex-col bg-darkest text-light">
+            <BreadCrumb pages={[
+            {
+                name: "Worlds",
+                href: "/marketplace? type=world",
+            },
+            {
+                name: rootTemplate && rootTemplate.name,
+                href:  "#",
+            },
+            ]}
+            />
                 <div className="mx-auto px-6 pb-24 pt-14 sm:px-6 sm:pb-32 sm:pt-16 lg:max-w-7xl lg:px-8">
                     {rootTemplate && rootCreator && (
                       <RootTemplate template={rootTemplate} creator={rootCreator} />
