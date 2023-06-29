@@ -10,10 +10,11 @@ import {
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import GalleryCard from '../gallery/GalleryCard';
 import Card from '../Card';
-
+import SubWorldTemplateService from '../../data/services/SubWorldTemplateService';
 
 export default function TrendingSection() {
     const [open, setOpen] = useState(false);
+    const [worlds, setWorlds] = useState([]);
     const trendingCard = [
         {
           id: 2,
@@ -53,6 +54,15 @@ export default function TrendingSection() {
         },
     ]
 
+    useEffect(() => {
+      SubWorldTemplateService.fetchRootTemplates().then(res => {
+        if (res.isSuccess()) {
+          const sortedWorlds = res.value.subworld_templates.sort((a, b) => b.num_plays - a.num_plays);
+    setWorlds(sortedWorlds);
+      }
+      });
+    }, []);
+console.log('mam mam', worlds)
     return (
       <section aria-labelledby="trending-heading">
         <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
@@ -67,7 +77,7 @@ export default function TrendingSection() {
           </div>
 
           <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
-            {trendingCard.map((world) => (
+            {worlds.slice(0,4).map((world) => (
               <div key={world.id} className="group relative">
                 {/* <div className="h-56 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80">
                   <img
@@ -83,8 +93,8 @@ export default function TrendingSection() {
                 <p className="mt-1 text-sm font-medium text-light">{world.description}</p> */}
                 <a href={`/subworlds/${world.id}`} className="no-underline">
                   <Card
-                    thumbnail={world.thumbnail}
-                    name={world.name}
+                    thumbnail={world.thumbnail_centralized_uri                    }
+                    name={world.display_name}
                     creatorName={world.creatorName}        
                     rating={world.rating}  
                   />
