@@ -123,7 +123,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                     <ButtonGroup index={index} image360={data.image}  />
                 </EventCard>
             )
-            console.log('data',data)
+     
 
         if (cardType === 'gallery')
             return (
@@ -151,7 +151,8 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                     creatorName={data.author || data && data.creator && data.creator.name}        
                     numViews={data.numViews}
                     numClicks={data.numClicks}  
-                    rating={data.rating}                         
+                    rating={data.rating}    
+                    numPlays={data.numPlays}                     
                 />
             );
 

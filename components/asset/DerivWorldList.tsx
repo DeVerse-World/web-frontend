@@ -64,8 +64,9 @@ function DerivWorldList(props: ListProps) {
                         thumbnail={item.image} name={item.name}
                         creatorName={item && item.creator && item.creator.name}
                         rating={item && item.rating && item.rating}
-                        numViews={item && item.num_views}
-                        numClicks={item && item.num_clicks}
+                        numViews={item && item.numViews}
+                        numPlays={item && item.numPlays}
+                        numClicks={item && item.numClicks}
 
                     >
                         <div className="mt-4 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">

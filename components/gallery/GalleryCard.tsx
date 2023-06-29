@@ -12,11 +12,12 @@ type GalleryCardProps = {
     rating : string;
     numViews : number;
     numClicks: number;
+    numPlays: number;
     setSelectedIndex: (index: number) => void;
 }
 
 
-const GalleryCard = ({ current, thumbnail, name, creatorName, index, rating, numViews, numClicks, setSelectedIndex }: GalleryCardProps) => {
+const GalleryCard = ({ current, thumbnail, name, creatorName, index, rating, numViews, numPlays, setSelectedIndex }: GalleryCardProps) => {
     return (
         <div className="relative">
             <div
@@ -46,8 +47,8 @@ const GalleryCard = ({ current, thumbnail, name, creatorName, index, rating, num
         
             <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{creatorName}</div>
             
-            {numViews !== undefined && numClicks !== undefined &&
-            <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{numViews || 0} Views • {numClicks || 0} Clicks</div>
+            {numViews !== undefined && numPlays !== undefined &&
+            <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{numViews || 0} Views • {numPlays || 0} Plays</div>
             }
             <div className="mt-1">
                 <dd className="whitespace-nowrap text-lightest">
