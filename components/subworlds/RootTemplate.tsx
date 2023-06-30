@@ -20,13 +20,12 @@ const RootTemplate = ({ template, creator }: RootTemplateProps) => {
         { name: 'Number of Clicks', value: `${template.numClicks} clicks`, icon: <CursorArrowRaysIcon className="h-10 w-10" aria-hidden="true" /> },
         { name: 'Number of Views', value: `${template.numViews} views`, icon: <EyeIcon className="h-10 w-10" aria-hidden="true" /> },
         { name: 'Number of Plays', value: `${template.numPlays} plays`, icon: <IoLogoGameControllerB className="h-10 w-10" aria-hidden="true" /> },
-
     ];
 
     return (
       <div className="max-w-7xl">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-32 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-y-8">
-              <div className="lg:col-end-1 w-full lg:max-w-lg lg:pb-8">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 gap-x-20 gap-y-16 lg:mx-0 lg:min-w-full lg:max-w-none lg:flex-none lg:gap-x-4 lg:gap-y-8 xl:gap-x-32 xl:gap-y-8">
+              <div className="lg:col-end-1 w-full lg:max-w-sm xl:max-w-lg lg:pb-8">
                   <h2 className="text-4xl font-bold tracking-tight sm:text-6xl">
                       {template.name}
                   </h2>
@@ -55,16 +54,16 @@ const RootTemplate = ({ template, creator }: RootTemplateProps) => {
                           <p className="sr-only">{template.rating} out of 5 stars</p>
                       </div>
                   )}
-                    <dl className="mt-4 sm:mt-10 border-y border-medium py-6 grid grid-cols-1 gap-x-8 gap-y-10 text-white sm:grid-cols-3 sm:gap-y-16 lg:grid-cols-3">
+                    <dl className="mt-4 sm:mt-10 border-y border-medium py-6 grid grid-cols-1 gap-x-6 gap-y-10 text-white sm:grid-cols-3 sm:gap-x-10 sm:gap-y-16">
                         {stats.map((stat) => (
                             <div key={stat.name} className="flex flex-col items-center gap-y-3">
                                 <dt className="text-sm leading-6">{stat.value}</dt>
                                     <dd className="order-first text-3xl font-semibold tracking-tight">{stat.icon}</dd>
                             </div>
-                                ))}
+                        ))}
                     </dl>
                     <p className="mt-6 text-xl leading-8 text-lighter">
-                    {template.description}
+                        {template.description}
                     </p>
                     {/* (Optional subdescription) */}
                     {/* <p className="mt-6 text-base leading-7 text-lighter">
@@ -72,11 +71,11 @@ const RootTemplate = ({ template, creator }: RootTemplateProps) => {
                     amet fugiat veniam occaecat fugiat. Quasi aperiam sit non sit neque reprehenderit.
                     </p> */}
                 </div>
-                    <div className="w-0 flex-auto lg:ml-auto lg:w-auto lg:flex-none lg:self-end w-full">
+                <div className="mx-auto w-full">
                     <img
                         src={template.file2dUri || "/images/color-image-placeholder.webp"}
                         alt=""
-                        className="aspect-square w-full sm:w-[26rem] max-w-none rounded-2xl bg-gray-50 object-cover"
+                        className="aspect-square w-full sm:w-3/4 lg:w-full xl:w-[26rem] max-w-none rounded-2xl bg-gray-50 object-cover"
                     />
                 </div>
             </div>

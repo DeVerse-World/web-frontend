@@ -192,24 +192,30 @@ function Marketplace() {
         setViewState(ViewState.LOADING)
         SubWorldTemplateService.fetchRootTemplates().then(res => {
             if (res.isSuccess()) {
-                setRootTemplates(res.value!.subworld_templates.map<RootTemplateViewModel>(e => ({
-                    id: e.id.toString(),
-                    name: e.display_name,
-                    description: e.display_name,
-                    image: e.thumbnail_centralized_uri,
-                    fileAssetUriFromCentralized: e.thumbnail_centralized_uri,
-                    file2dUri: e.thumbnail_centralized_uri,
-                    fileAssetUri: e.level_ipfs_uri,
-                    file3dUri: e.level_ipfs_uri,
+                setRootTemplates(res.value!.enriched_subworld_templates.map<RootTemplateViewModel>(e => ({
+                    id: e.overview.id.toString(),
+                    name: e.overview.display_name,
+                    description: e.overview.display_name,
+                    image: e.overview.thumbnail_centralized_uri,
+                    fileAssetUriFromCentralized: e.overview.thumbnail_centralized_uri,
+                    file2dUri: e.overview.thumbnail_centralized_uri,
+                    fileAssetUri: e.overview.level_ipfs_uri,
+                    file3dUri: e.overview.level_ipfs_uri,
                     onlineOpenable: true,
                     offlineOpenable: true,
-                    rating: e.rating,
-                    numViews: e.num_views,
-                    numClicks: e.num_clicks,
-                    numPlays: e.num_plays,
-                    derivable: e.derivable,
-                    derivative_uri: e.derivative_uri,
-
+                    rating: e.overview.rating,
+                    derivable: e.overview.derivable,
+                    derivative_uri: e.overview.derivative_uri,
+                    // numViews: e.overview.num_views,
+                    // numClicks: e.overview.num_clicks,
+                    // numPlays: e.overview.num_plays,
+                    numViews: e.derived_world_stats.num_views_count,
+                    numClicks: e.derived_world_stats.num_clicks_count,
+                    numPlays: e.derived_world_stats.num_plays_count,
+                    creator: {
+                        id: e.creator_info.id,
+                        name: (e.creator_info.name === "" || e.creator_info.name === null) ? "Deverse World" : e.creator_info.name,
+                    },
                 })));
             }
         }).finally(() => {
