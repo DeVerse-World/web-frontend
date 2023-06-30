@@ -11,11 +11,14 @@ export type SubworldTemplate = {
     creator_id: number,
     created_at: string,
     updated_at: string
+    num_clicks: number,
+    num_views: number,
+    num_plays: number
 }
 
 export type SubworldCreatorInfo = {
-    Id: number,
-    Name: string,
+    id: number,
+    name: string,
 }
 
 export type DerivSubworldTemplate = {
@@ -27,8 +30,8 @@ export type RootSubworldTemplate = {
 } & SubworldTemplate
 
 export type RootEnrichedSubworldTemplate = {
-    Template: RootSubworldTemplate,
-    CreatorInfo: SubworldCreatorInfo,
+    overview: RootSubworldTemplate,
+    creator_info: SubworldCreatorInfo,
 }
 export type IncrementStatsResponse = {
     message: string;

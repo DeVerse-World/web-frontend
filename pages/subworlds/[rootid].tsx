@@ -75,24 +75,24 @@ export default function Deriv({ rootId }) {
         SubWorldTemplateService.fetchDerivTemplates(rootId).then(derivRes => {
             if (derivRes.isSuccess()) {
                 setDerivTemplates(derivRes.value.enriched_subworld_templates.map<DerivTemplateViewModel>(e => ({
-                    id: e.Template.id.toString(),
-                    name: e.Template.display_name,
-                    description: e.Template.display_name,
-                    image: e.Template.thumbnail_centralized_uri,
+                    id: e.overview.id.toString(),
+                    name: e.overview.display_name,
+                    description: e.overview.display_name,
+                    image: e.overview.thumbnail_centralized_uri,
                     rootId: rootId.toString(),
-                    fileAssetUriFromCentralized: e.Template.thumbnail_centralized_uri,
-                    file2dUri: e.Template.thumbnail_centralized_uri,
-                    fileAssetUri: e.Template.level_ipfs_uri,
-                    file3dUri: e.Template.level_ipfs_uri,
-                    rating: e.Template.rating,
+                    fileAssetUriFromCentralized: e.overview.thumbnail_centralized_uri,
+                    file2dUri: e.overview.thumbnail_centralized_uri,
+                    fileAssetUri: e.overview.level_ipfs_uri,
+                    file3dUri: e.overview.level_ipfs_uri,
+                    rating: e.overview.rating,
                     onlineOpenable: true,
                     offlineOpenable: true,
-                    numViews: e.Template.num_views,
-                    numClicks: e.Template.num_clicks,
-                    numPlays: e.Template.num_plays,
+                    numViews: e.overview.num_views,
+                    numClicks: e.overview.num_clicks,
+                    numPlays: e.overview.num_plays,
                     creator: {
-                        id: e.CreatorInfo.Id,
-                        name: (e.CreatorInfo.Name === "" || e.CreatorInfo.Name === null) ? "Anonymous" : e.CreatorInfo.Name,
+                        id: e.creator_info.id,
+                        name: (e.creator_info.name === "" || e.creator_info.name === null) ? "Anonymous" : e.creator_info.name,
                     },
                 })).sort((a, b) => b.rating - a.rating))
             }
