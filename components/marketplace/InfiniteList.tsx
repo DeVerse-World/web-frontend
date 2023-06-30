@@ -55,7 +55,6 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
     }, [items]);
    
 
-
     // HACK: Slice the items into smaller pages for infinite scrolling.
     // After the backend API supports pagination, we should refactor this component to remove this logic.
     const fetchDataByPage = () => {
@@ -135,7 +134,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                         setSidebarDetails({
                             id: data.id,
                             name: data.name,
-                            creatorName: data.author || data && data.creator && data.creator.name,
+                            creatorName: data.author || (data && data.creator && data.creator.name),
                             rating: data.rating,
                             description: data.description,
                             thumbnail: data.image,
@@ -148,7 +147,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                     }}
                     thumbnail={data.image}
                     name={data.name}
-                    creatorName={data.author || data && data.creator && data.creator.name}        
+                    creatorName={data.author || (data && data.creator && data.creator.name)}        
                     numViews={data.numViews}
                     numClicks={data.numClicks}  
                     rating={data.rating}    

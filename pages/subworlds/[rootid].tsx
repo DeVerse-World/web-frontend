@@ -41,28 +41,28 @@ export default function Deriv({ rootId }) {
         setViewState(ViewState.LOADING);
         SubWorldTemplateService.fetchRootTemplate(rootId).then(async rootRes => {
             if (rootRes.isSuccess()) {
-                console.log(rootRes.value)
+                const enrichedData = rootRes.value.enriched_subworld_template;
                 const rootData: RootTemplateViewModel = {
-                    id: rootRes.value.subworld_template.id.toString(),
-                    name: rootRes.value.subworld_template.display_name,
-                    image: rootRes.value.subworld_template.thumbnail_centralized_uri,
-                    fileAssetUriFromCentralized: rootRes.value.subworld_template.thumbnail_centralized_uri,
-                    file2dUri: rootRes.value.subworld_template.thumbnail_centralized_uri,
-                    fileAssetUri: rootRes.value.subworld_template.level_ipfs_uri,
-                    file3dUri: rootRes.value.subworld_template.level_ipfs_uri,
-                    rating: rootRes.value.subworld_template.rating,
+                    id: enrichedData.overview.id.toString(),
+                    name: enrichedData.overview.display_name,
+                    image: enrichedData.overview.thumbnail_centralized_uri,
+                    fileAssetUriFromCentralized: enrichedData.overview.thumbnail_centralized_uri,
+                    file2dUri: enrichedData.overview.thumbnail_centralized_uri,
+                    fileAssetUri: enrichedData.overview.level_ipfs_uri,
+                    file3dUri: enrichedData.overview.level_ipfs_uri,
+                    rating: enrichedData.overview.rating,
                     onlineOpenable: true,
                     offlineOpenable: true,
-                    numViews: rootRes.value.subworld_template.num_views,
-                    numPlays: rootRes.value.subworld_template.num_plays,
-                    numClicks: rootRes.value.subworld_template.num_clicks,
+                    numViews: enrichedData.derived_world_stats.num_views_count,
+                    numPlays: enrichedData.derived_world_stats.num_plays_count,
+                    numClicks: enrichedData.derived_world_stats.num_clicks_count,
                 }
                 const rootCreator: CreatorViewModel = {
-                    id: rootRes.value.creator_info.id.toString(),
-                    name: rootRes.value.creator_info.name,
+                    id: enrichedData.creator_info.id.toString(),
+                    name: enrichedData.creator_info.name,
                 }
-                if (rootRes.value.subworld_template.derivative_uri) {
-                    const descriptionRes = await SubWorldTemplateService.fetchTemplateDescription(rootRes.value.subworld_template.derivative_uri);
+                if (enrichedData.overview.derivative_uri) {
+                    const descriptionRes = await SubWorldTemplateService.fetchTemplateDescription(enrichedData.overview.derivative_uri);
                     rootData.description = descriptionRes.descriptions && descriptionRes.descriptions.join(", ");
                 }
                 setRootTemplate(rootData);
@@ -87,9 +87,12 @@ export default function Deriv({ rootId }) {
                     rating: e.overview.rating,
                     onlineOpenable: true,
                     offlineOpenable: true,
-                    numViews: e.overview.num_views,
-                    numClicks: e.overview.num_clicks,
-                    numPlays: e.overview.num_plays,
+                    // numViews: e.overview.num_views,
+                    // numClicks: e.overview.num_clicks,
+                    // numPlays: e.overview.num_plays,
+                    numViews: e.derived_world_stats.num_views_count,
+                    numPlays: e.derived_world_stats.num_plays_count,
+                    numClicks: e.derived_world_stats.num_clicks_count,
                     creator: {
                         id: e.creator_info.id,
                         name: (e.creator_info.name === "" || e.creator_info.name === null) ? "Anonymous" : e.creator_info.name,
