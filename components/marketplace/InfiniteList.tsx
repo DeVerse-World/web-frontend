@@ -123,10 +123,10 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                 </EventCard>
             )
      
-
         if (cardType === 'gallery')
             return (
                 <GalleryCard
+                    id={data.id}
                     current={index === _selectedIndex}
                     index={index}
                     setSelectedIndex={(index) => {
@@ -151,7 +151,8 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
                     numViews={data.numViews}
                     numClicks={data.numClicks}  
                     rating={data.rating}    
-                    numPlays={data.numPlays}                     
+                    numPlays={data.numPlays}
+                    numWorlds={data.numWorlds}                  
                 />
             );
 

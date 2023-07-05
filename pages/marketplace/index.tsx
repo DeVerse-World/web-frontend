@@ -212,6 +212,7 @@ function Marketplace() {
                     numViews: e.derived_world_stats.num_views_count,
                     numClicks: e.derived_world_stats.num_clicks_count,
                     numPlays: e.derived_world_stats.num_plays_count,
+                    numWorlds: e.derived_world_stats.num_world_count,
                     creator: {
                         id: e.creator_info.id,
                         name: (e.creator_info.name === "" || e.creator_info.name === null) ? "Deverse World" : e.creator_info.name,
@@ -237,6 +238,10 @@ function Marketplace() {
 
     const typeHref = new URLSearchParams({ type: router.query['type'], subtype: 'all' });
     const subtypeHref = new URLSearchParams({ type: router.query['type'], subtype: router.query['subtype'] })
+    let totalWorlds = 0;
+    rootTemplates.forEach(rootWorld => {
+        totalWorlds += rootWorld.numWorlds;
+    })
 
     return (
         <div className="h-full">
@@ -256,6 +261,11 @@ function Marketplace() {
                     setSlideOverOpen={setSlideOverOpen}
                 >
                     <div className="px-4 pb-4 mt-8">
+                        {currentType === MarketplaceTabKey.WORLD_TYPE && (
+                            <h2 className="text-white mb-8 sm:mb-12 text-xl font-bold tracking-tight sm:text-2xl">
+                                {totalWorlds} total worlds
+                            </h2>
+                        )}
                         {renderList()}
                     </div>
                 </GalleryContainer>

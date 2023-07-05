@@ -17,7 +17,7 @@ type GalleryCardProps = {
 }
 
 
-const GalleryCard = ({ current, thumbnail, name, creatorName, index, rating, numViews, numPlays, setSelectedIndex }: GalleryCardProps) => {
+const GalleryCard = ({ current, id, thumbnail, name, creatorName, index, rating, numViews, numPlays, numWorlds, setSelectedIndex }: GalleryCardProps) => {
     return (
         <div className="relative">
             <div
@@ -38,7 +38,6 @@ const GalleryCard = ({ current, thumbnail, name, creatorName, index, rating, num
                         
                     )}
                     loading="lazy"
-                   
                 />
             </div>
             <div className="pointer-events-none mt-3 mb-0.5 block truncate text-sm font-medium text-lightest">
@@ -50,20 +49,28 @@ const GalleryCard = ({ current, thumbnail, name, creatorName, index, rating, num
             {numViews !== undefined && numPlays !== undefined &&
             <div className="pointer-events-none mt-1 block text-sm font-medium text-lighter">{numViews || 0} Views • {numPlays || 0} Plays</div>
             }
+            
             <div className="mt-1">
-                <dd className="whitespace-nowrap text-lightest">
-                    <div className="flex items-center">             
-                        {[0, 1, 2, 3, 4].map((_rating) => (
-                            <StarIcon
-                                key={rating}
-                                className={classNames(
-                                rating > _rating ? 'text-yellow-400' : 'text-gray-200','h-3 w-3 sm:h-5 sm:w-5 flex-shrink-0'
-                        )}
-                                aria-hidden="true"
-                        />
-                                ))}
-                    </div>
-                </dd>
+                <div className="flex flex-col sm:flex-row sm:justify-between">
+                    <dd className="whitespace-nowrap text-lightest">
+                        <div className="flex items-center">             
+                            {[0, 1, 2, 3, 4].map((_rating) => (
+                                <StarIcon
+                                    key={rating}
+                                    className={classNames(
+                                    rating > _rating ? 'text-yellow-400' : 'text-gray-200','h-3 w-3 sm:h-5 sm:w-5 flex-shrink-0'
+                            )}
+                                    aria-hidden="true"
+                            />
+                                    ))}
+                        </div>
+                    </dd>
+                    <div className="mt-1 block text-sm font-medium text-lighter">
+                        <a href={`/subworlds/${id}`} className="text-sm font-semibold leading-6 text-brand">
+                            {numWorlds} worlds<span aria-hidden="true">&rarr;</span>
+                        </a>
+                                    </div>
+                </div>
             </div>
 
         </div>
