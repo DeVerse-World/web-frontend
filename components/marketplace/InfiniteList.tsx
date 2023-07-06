@@ -26,7 +26,7 @@ function sliceIntoPages(arr, chunkSize) {
     return res;
 }
 
-const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedIndex, setSidebarDetails }) => {
+const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedIndex, setSidebarDetails, dataType }) => {
     const pages = sliceIntoPages(items, itemPerPage);
     const [currentData, setCurrentData] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
@@ -57,6 +57,16 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
 
     // HACK: Slice the items into smaller pages for infinite scrolling.
     // After the backend API supports pagination, we should refactor this component to remove this logic.
+
+    const increaseViewStatForWorld = (world) => {
+        StatsService.incrementStats(world.id, IncrementTypes.VIEWS).then(_res => {});
+    }
+
+    useEffect(() => {
+        if (pages && pages[pageNumber] && dataType === "world")
+            Promise.all(pages[pageNumber].map(increaseViewStatForWorld)).then(results => {});
+    }, [pageNumber]);
+
     const fetchDataByPage = () => {
         setCurrentData([
             ...currentData,
@@ -64,7 +74,6 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
         ]);
         setPageNumber(pageNumber + 1);
     }
-
     const ButtonGroup = ({ index, image360 }) => (
         <div className="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-flow-row-dense sm:grid-cols-2 gap-3">
             {cardType !== "avatar" && items[index].derivable !== 1 && 

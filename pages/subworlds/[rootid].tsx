@@ -60,7 +60,6 @@ export default function Deriv({ rootId }) {
                     id: enrichedData.creator_info.id.toString(),
                     name: enrichedData.creator_info.name,
                 }
-                console.log('ne',enrichedData)
                 if (enrichedData.overview.derivative_uri) {
                     const descriptionRes = await SubWorldTemplateService.fetchTemplateDescription(enrichedData.overview.derivative_uri);
                     rootData.description = descriptionRes.descriptions && descriptionRes.descriptions.join(", ");
