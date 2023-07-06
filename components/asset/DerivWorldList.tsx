@@ -38,6 +38,18 @@ function DerivWorldList(props: ListProps) {
     const [showPlayModal, setShowPlayModal] = useState(false);
     const [selectedTemplateId, setSelectedTemplateId] = useState(null);
 
+    const [maxPageNumberStats, setMaxPageNumberStats] = useState(-1);
+
+    const increaseViewStatForWorld = (world) => {
+        StatsService.incrementStats(world.id, IncrementTypes.VIEWS).then(_res => {});
+    }
+    useEffect(() => {
+        if (pages && pages[pageNumber] && pageNumber > maxPageNumberStats) {
+            Promise.all(pages[pageNumber].map(increaseViewStatForWorld)).then(results => {});
+            setMaxPageNumberStats(pageNumber);
+        }
+    }, [pages, pageNumber]);
+
     const fetchDataByPage = () => {
         setCurrentData([
             ...currentData,
@@ -45,6 +57,7 @@ function DerivWorldList(props: ListProps) {
         ]);
         setPageNumber(pageNumber + 1);
     }
+
     return (
         <>
             <InfiniteScroll

@@ -18,7 +18,7 @@ const Card = ({ name, creatorName, rating, thumbnail, children, numViews, numPla
                 <div className="p-6">
                     <h3 className="text-lg font-bold text-lightest">{name}</h3>
                     <div className="mt-2 text-base text-light">{creatorName || "Deverse World"}</div>
-                    {rating && rating !== '' && (
+                    {rating !== undefined && rating !== '' && (
                         <div className="mt-2 flex flex-col">
                             <div className="flex items-center">             
                                 {[0, 1, 2, 3, 4].map((_rating) => (
