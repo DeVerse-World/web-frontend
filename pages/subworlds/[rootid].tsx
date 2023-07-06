@@ -36,7 +36,6 @@ export default function Deriv({ rootId }) {
     useEffect(() => {
         StatsService.incrementStats(rootId, IncrementTypes.VIEWS).then(_res => {});
     }, []);
-
     useEffect(() => {
         setViewState(ViewState.LOADING);
         SubWorldTemplateService.fetchRootTemplate(rootId).then(async rootRes => {
@@ -61,6 +60,7 @@ export default function Deriv({ rootId }) {
                     id: enrichedData.creator_info.id.toString(),
                     name: enrichedData.creator_info.name,
                 }
+                console.log('ne',enrichedData)
                 if (enrichedData.overview.derivative_uri) {
                     const descriptionRes = await SubWorldTemplateService.fetchTemplateDescription(enrichedData.overview.derivative_uri);
                     rootData.description = descriptionRes.descriptions && descriptionRes.descriptions.join(", ");
@@ -71,7 +71,6 @@ export default function Deriv({ rootId }) {
         }).finally(() => {
             setViewState(ViewState.SUCCESS)
         });
-        
         SubWorldTemplateService.fetchDerivTemplates(rootId).then(derivRes => {
             if (derivRes.isSuccess()) {
                 setDerivTemplates(derivRes.value.enriched_subworld_templates.map<DerivTemplateViewModel>(e => ({

@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import { TemplateViewModel } from "./RootWorldList";
 import Card from "../Card";
 import InfiniteScroll from 'react-infinite-scroller';
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import OverlayImage360Button from "../image360/OverlayImage360Button";
 import PlayModal from "./PlayModal";
+import StatsService from "../../data/services/StatsService";
+import { IncrementTypes } from "../../data/services/StatsService";
+
 
 export type DerivTemplateViewModel = {
     deletable?: boolean;
@@ -73,10 +76,11 @@ function DerivWorldList(props: ListProps) {
                             <button
                                 type="button"
                                 className="inline-flex w-full justify-center rounded-md bg-brand px-3 py-2 text-sm font-semibold text-darkest shadow-sm hover:bg-gray-50 sm:col-start-1 mb-2 sm:mb-0"
-                                onClick={(e) => {
+                                onClick={ async (e) => {
                                     e.stopPropagation();
                                     setSelectedTemplateId(item.id);
                                     setShowPlayModal(true);
+                                    await StatsService.incrementStats(item.id, IncrementTypes.PLAYS);
                                 }}>
 
                                 Launch
