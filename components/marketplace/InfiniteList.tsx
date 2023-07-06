@@ -67,8 +67,6 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
             Promise.all(pages[pageNumber].map(increaseViewStatForWorld)).then(results => {});
     }, [pageNumber]);
 
-    // HACK: Slice the items into smaller pages for infinite scrolling.
-    // After the backend API supports pagination, we should refactor this component to remove this logic.
     const fetchDataByPage = () => {
         setCurrentData([
             ...currentData,
