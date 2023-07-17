@@ -226,11 +226,11 @@ function Marketplace() {
 
     const renderList = () => {
         if (currentType === MarketplaceTabKey.NFT_TYPE)
-            return (<AvatarList data={images} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} />);
+            return (<AvatarList data={images} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} dataType={currentType} />);
         if (currentType === MarketplaceTabKey.EVENT_TYPE)
-            return (<EventList data={eventData} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} />);
+            return (<EventList data={eventData} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} dataType={currentType} />);
         if (currentType === MarketplaceTabKey.WORLD_TYPE)
-            return (<RootWorldList data={rootTemplates} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} />);
+            return (<RootWorldList data={rootTemplates} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} dataType={currentType} />);
         
 
         return;

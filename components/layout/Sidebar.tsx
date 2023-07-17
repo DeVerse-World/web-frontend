@@ -13,9 +13,11 @@ import {
   DocumentTextIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  PencilSquareIcon
 } from '@heroicons/react/24/outline'
 import classNames from 'classnames';
 import { MarketplaceTabKey } from '../MarketplaceFilterTab';
+
 
 const navigation = [
     { name: "Home", href: "/", icon: HomeIcon },
@@ -41,6 +43,7 @@ const navigation = [
     { name: "About", href: "/about", icon: UsersIcon },
     // { name: "Stream", href: "/stream", icon: (<BsBroadcast fontSize="1.5rem" color='rgb(97 198 208)' />) },
     { name: "Docs", href: "https://docs.deverse.world", icon: DocumentTextIcon },
+    {name: "Blogs", href: "/blogs", icon: PencilSquareIcon},
 ]
 
 const Tab = ({ item, router, setSidebarOpen }) => {

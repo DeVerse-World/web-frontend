@@ -40,6 +40,16 @@ class FirebaseService {
         return config;
     }
 
+    async getBlog(id) {
+        const docSnap = await getDoc(
+            doc(this._firestore, "blog_post", id),
+        );
+        return {
+            id: docSnap.id,
+            ...docSnap.data(),
+        };
+    }
+
     async getBlogPosts(): Promise<BlogPost[]> {
         const blogPostDocs = await getDocs(collection(this._firestore, "blog_post"));
         const blogPosts: BlogPost[] = [];
@@ -47,9 +57,9 @@ class FirebaseService {
             const data = doc.data();
             const blogPost: BlogPost = {
                 title: data['title'],
-                uri: data['uri'],
                 thumbnail: data['thumbnail'],
                 id: doc.id,
+                content: data['content'],
             }
             if (data['created_at'] != null) {
                 blogPost.created_at = (data['created_at'] as Timestamp).toDate()
@@ -59,22 +69,23 @@ class FirebaseService {
         return blogPosts.sort((a, b) => b.created_at.getTime() - a.created_at.getTime());
     }
 
+    async addBlogPost(post: BlogPost) {
+        await setDoc(doc(this._firestore, "blog_post", post.id), {
+            title: post.title,
+            content: post.content,
+            creator_id: post.creator_id,
+            thumbnail: post.thumbnail,
+            created_at: Timestamp.fromDate(new Date())
+        });
+    }
+
     async updateBlogPost(post: BlogPost) {
-        if (post.id != null) {
-            await setDoc(doc(this._firestore, "blog_post", post.id), {
-                title: post.title,
-                uri: post.uri,
-                thumbnail: post.thumbnail,
-                created_at: Timestamp.fromDate(post.created_at)
-            });
-        } else {
-            await addDoc(collection(this._firestore, "blog_post"), {
-                title: post.title,
-                uri: post.uri,
-                thumbnail: post.thumbnail,
-                created_at: Timestamp.fromDate(new Date())
-            });
-        }
+        await setDoc(doc(this._firestore, "blog_post", post.id), {
+            ...post,
+            title: post.title,
+            content: post.content,
+            thumbnail: post.thumbnail,
+        });
     }
 
     async deleteBlogPost(post: BlogPost) {
@@ -112,6 +123,7 @@ class FirebaseService {
     async getShowcaseAnimation(config: RemoteConfig): Promise<string> {
         return getString(config, this._env_prefix + "animationPath");
     }
+    
 
     async getPartners(): Promise<Partner[]> {
         if (this._partners.length == 0) {
@@ -226,9 +238,16 @@ class FirebaseService {
         const res = await getDoc(doc(this._firestore, "homepage", "intro_section"))
         return res.data().video_url;
     }
+    async getImageHeadPage(): Promise<string> {
+        const res = await getDoc(doc(this._firestore, "images","homepage"))
+        return res.data().iamge_headpage_url;
+    }
+    async getImageContentAbout(): Promise<string> {
+        const res = await getDoc(doc(this._firestore,"images","contentAbout"))
+        return res.data().img_content_about;
+    }
 
 }
-
-
+    
 
 export default new FirebaseService();
