@@ -34,7 +34,7 @@ const ContentAbout = () => {
               </p>
             </div>
             <img
-              src="https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fabout%2Fabout.webp?alt=media&token=f7e7a825-e452-4556-9ddd-1c80e9feb368"
+              src={imageContent}
               alt=""
               className="mt-10 aspect-[3/4] w-full max-w-lg rounded-3xl object-cover sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
             />

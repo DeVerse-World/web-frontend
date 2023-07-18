@@ -37,27 +37,28 @@ export const getStaticProps = async () => {
 
 function Main({
   introVideoUrl,
-  placeholder = {imageHeadPage},
+  placeholder = null,
   partners = [],
   communityPartners = [],
-
 }) {
   const [showBlogToggle, setShowBlogToggle] = useState(false);
   const { remoteConfig } = useContext(AppContext);
   const [imageHeadPage, setImageHeadPage] = useState();
-
+  const imgPlaceHolder = placeholder || imageHeadPage;
 
   useEffect(() => {
     if (remoteConfig != null)
       FirebaseService.getShouldShowBlogToggle(remoteConfig).then(setShowBlogToggle)
-       FirebaseService.getImageHeadPage().then(setImageHeadPage)
+    
+    FirebaseService.getImageHeadPage().then(setImageHeadPage)
   }, [remoteConfig])
 
   return (
       <div className='flex flex-col bg-darkest'>   
         <Popup />
         <WelcomeSection
-          placeholder={placeholder}
+          placeholder={imgPlaceHolder}
+          imageHeadPage={imageHeadPage}
           partners={partners}
           communityPartners={communityPartners}
           introVideoUrl={introVideoUrl}    

@@ -6,16 +6,15 @@ import { TabHeaderBar } from "../../components/common/TabHeader";
 import { BsPlayFill } from "react-icons/bs";
 import Button from "../../components/Button";
 import { PlayIcon } from '@heroicons/react/24/outline'
-
 const GameLaunchModal = dynamic(() => import("../../components/create/GameLaunchModal"));
+
 const posts = [
     {
       id: 1,
       title: 'Free for all',
       description:
         'Create awesome worlds, games, races using thousands of free assets made by the community',
-      imageUrl:
-        'https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fcreate%2Fig_editor%2Fig-free-for-all.webp?alt=media&token=9b15b347-d16a-4d3d-8914-bc0cb81facc5',
+      imageUrl: '/images/ig-free-for-all.webp',
     },
 
     {
@@ -23,19 +22,16 @@ const posts = [
         title: 'Share your creation',
         description:
           'What can be better than having your friends or others players experience your world. Share to everyone with just a button click.',
-        imageUrl:
-          'https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fcreate%2Fig_editor%2Fig-share-creation.webp?alt=media&token=660a9998-d85c-4d7c-b6dc-3e4a99e50ab8',
-        },
+        imageUrl: '/images/ig-share-creation.webp',
+    },
 
-      {
+    {
         id: 3,
         title: 'No Coding needed',
         description:
           'Easy to use, no coding required. It is simple and intuitive to modify the rules or attributes of your world.',
-        imageUrl:
-          'https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fcreate%2Fig_editor%2Fig-no-coding.webp?alt=media&token=b4f55480-163c-4a52-aafe-0ea3c969ee40',
-       
-        },
+        imageUrl: '/images/ig-no-coding.webp',
+    },
       
     // More posts...
   ]
@@ -65,7 +61,9 @@ function Editor() {
             ]} />
             <div className="px-6 pt-14 lg:px-8">
                 <div className="mx-auto max-w-2xl text-center">
-                    <h2 className="text-4xl font-bold tracking-tight text-lightest sm:text-6xl">Build your dream world</h2>
+                    <h2 className="text-4xl font-bold tracking-tight text-lightest sm:text-6xl">
+                        Build your dream world
+                    </h2>
                     <p className="mt-6 text-lg leading-8 text-lighter">
                         Anyone can be a creator, own part of the metaverse now. No coding required, all you need is imagination.
                     </p>
@@ -97,9 +95,9 @@ function Editor() {
                         <article key={post.id} className="flex flex-col items-start justify-between">
                             <div className="relative w-full">
                                 <img
-                                src={post.imageUrl}
-                                alt=""
-                                className="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
+                                    src={post.imageUrl}
+                                    alt=""
+                                    className="aspect-[16/9] w-full rounded-2xl bg-gray-100 object-cover sm:aspect-[2/1] lg:aspect-[3/2]"
                                 />
                                 <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
                             </div>

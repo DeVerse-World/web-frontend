@@ -240,7 +240,7 @@ class FirebaseService {
     }
     async getImageHeadPage(): Promise<string> {
         const res = await getDoc(doc(this._firestore, "images","homepage"))
-        return res.data().iamge_headpage_url;
+        return res.data().image_headpage_url;
     }
     async getImageContentAbout(): Promise<string> {
         const res = await getDoc(doc(this._firestore,"images","contentAbout"))
