@@ -52,7 +52,7 @@ const SubworldCard = ({ data }) => {
                             Launch
                         </button>
                         <OverlayImage360Button
-                            source={data.image}
+                            source={data.image360}
                             className="inline-flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold overflow-hidden border border-brand text-brand"
                         >
                             Preview
