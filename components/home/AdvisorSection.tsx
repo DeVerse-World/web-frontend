@@ -13,6 +13,7 @@ function AdvisorSection() {
     const [data, setData] = useState<TeamAdvisor[]>([])
     useEffect(() => {
         FirebaseService.getAdvisors().then(setData)
+     
     }, [])
     return (
         <div className="mx-auto my-24 max-w-5xl px-6 sm:mt-28 lg:px-8">

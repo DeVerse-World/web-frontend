@@ -1,8 +1,10 @@
-import { Fragment } from 'react'
+import { Fragment, useContext } from 'react'
 import Image from 'next/image';
 import Link from 'next/link';
 import { Dialog, Transition, Disclosure } from '@headlessui/react';
 import { useRouter } from "next/router";
+import { AppContext } from '../contexts/app_context';
+import { isAdminUser } from '../../utils/user_utils';
 import {
   XMarkIcon,
   HomeIcon,
@@ -13,9 +15,11 @@ import {
   DocumentTextIcon,
   ChevronDownIcon,
   ChevronUpIcon,
+  PencilSquareIcon
 } from '@heroicons/react/24/outline'
 import classNames from 'classnames';
 import { MarketplaceTabKey } from '../MarketplaceFilterTab';
+
 
 const navigation = [
     { name: "Home", href: "/", icon: HomeIcon },
@@ -41,6 +45,7 @@ const navigation = [
     { name: "About", href: "/about", icon: UsersIcon },
     // { name: "Stream", href: "/stream", icon: (<BsBroadcast fontSize="1.5rem" color='rgb(97 198 208)' />) },
     { name: "Docs", href: "https://docs.deverse.world", icon: DocumentTextIcon },
+    {name: "Blogs", href: "/blogs", icon: PencilSquareIcon, adminOnly: true},
 ]
 
 const Tab = ({ item, router, setSidebarOpen }) => {
@@ -111,6 +116,8 @@ const TabWithOptions = ({ item, router, setSidebarOpen }) => {
 
 const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
     const router = useRouter();
+    const { user } = useContext(AppContext);
+  
     return (
         <>
             <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -169,8 +176,17 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                                 <div className="flex flex-1 flex-col gap-y-7">
                                     <div className="-mx-2 space-y-1">
                                     {navigation.map((item) => {
-                                        if (item.options) return <TabWithOptions item={item} router={router} setSidebarOpen={setSidebarOpen} />;
-                                        return <Tab item={item} router={router} setSidebarOpen={setSidebarOpen} />;
+                                        if ((
+                                            item.adminOnly === undefined
+                                            || item.adminOnly === false
+                                        ) || (
+                                            item.adminOnly === true
+                                            && isAdminUser(user)
+                                        )) {
+                                            if (item.options) return <TabWithOptions item={item} router={router} setSidebarOpen={setSidebarOpen} />;
+                                            return <Tab item={item} router={router} setSidebarOpen={setSidebarOpen} />;
+                                        }
+                                        return null;
                                     })}
                                     </div>
                                 </div>
@@ -204,8 +220,16 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                         <div className="flex flex-1 flex-col gap-y-7">
                             <div className="-mx-2 space-y-1">
                                 {navigation.map((item) => {
-                                    if (item.options) return <TabWithOptions item={item} router={router} setSidebarOpen={setSidebarOpen} />;
-                                    return <Tab item={item} router={router} setSidebarOpen={setSidebarOpen} />;
+                                    if ((
+                                        item.adminOnly === undefined
+                                        || item.adminOnly === false
+                                    ) || (
+                                        item.adminOnly === true
+                                        && isAdminUser(user)
+                                    )) {
+                                        if (item.options) return <TabWithOptions item={item} router={router} setSidebarOpen={setSidebarOpen} />;
+                                        return <Tab item={item} router={router} setSidebarOpen={setSidebarOpen} />;
+                                    }
                                 })}
                             </div>
                         </div>

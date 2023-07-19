@@ -1,5 +1,15 @@
+import { useState, useEffect } from "react";
+import FirebaseService from "../../data/services/FirebaseService";
+
 const ContentAbout = () => {
+  const [imageContent, setImageContent] = useState();
+
+  useEffect(() => {
+    FirebaseService.getImageContentAbout().then(setImageContent)
+  }, [])
+
     return (
+      
         <div className="overflow-hidden bg-gradient-to-b pt-0">
         <div
           className="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-white shadow-xl shadow-indigo-600/10 ring-1 ring-indigo-50 sm:-mr-80 lg:-mr-96"
@@ -24,7 +34,7 @@ const ContentAbout = () => {
               </p>
             </div>
             <img
-              src="https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fabout%2Fabout.webp?alt=media&token=f7e7a825-e452-4556-9ddd-1c80e9feb368"
+              src={imageContent}
               alt=""
               className="mt-10 aspect-[3/4] w-full max-w-lg rounded-3xl object-cover sm:mt-16 lg:mt-0 lg:max-w-none xl:row-span-2 xl:row-end-2 xl:mt-36"
             />

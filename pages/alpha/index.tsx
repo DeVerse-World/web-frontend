@@ -12,12 +12,14 @@ import { TabHeaderBar } from "../../components/common/TabHeader";
 import EventList from "../../components/asset/EventList";
 import Button from "../../components/Button";
 import EpicDownloadButton from "../../components/EpicDownloadButton";
+import FirebaseService from "../../data/services/FirebaseService";
+
 
 function Info() {
     const { setViewState, user } = useContext(AppContext);
     const [modelPath, setModelPath] = useState<string>(null);
     const [ongoingEvents, setOngoingEvents] = useState<EventViewModel[]>([]);
-    
+    const [imageHeadPage, setImageHeadPage] = useState();
 
     useEffect(() => {
     //     if (user == null)
@@ -29,6 +31,7 @@ function Info() {
     //             }
     //         }
     //     })
+        FirebaseService.getImageHeadPage().then(setImageHeadPage);
         EventsService.fetchEvents().then(res => {
             if (res.isSuccess()) {
                 const data = res.value.events.map<EventViewModel>(e => ({
@@ -73,13 +76,13 @@ function Info() {
                 className="bg-cover h-[24rem]"
                 style={{
                     backgroundImage: `
-                    linear-gradient(to left, rgba(7, 24, 39, 0.3) 40%, rgba(17, 24, 39, 1) 70%),
-                    linear-gradient(to bottom, rgba(7, 24, 39, 0.3) 75%, rgba(17, 24, 39, 1) 90%),
-                    url('https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fhome%2Fimage_headpage.webp?alt=media&token=e352a403-7c34-4637-a6a7-94cb8044cfd4')
+                        linear-gradient(to left, rgba(7, 24, 39, 0.3) 40%, rgba(17, 24, 39, 1) 70%),
+                        linear-gradient(to bottom, rgba(7, 24, 39, 0.3) 75%, rgba(17, 24, 39, 1) 90%),
+                        url('${imageHeadPage}')
                     `,
                 }}
             >
-                <div className="flex flex-col items-start max-w-sm mt-16 sm:mt-20 ml-12 sm:ml-16">
+                <div className="flex flex-col items-start max-w-sm pt-16 sm:pt-20 pl-12 sm:pl-16">
                     <h2 className="text-white text-3xl font-bold mb-8">Join the journey</h2>
                     <p className="mb-6">
                         Get ready to immerse yourself in the magical adventure of Deverse World, where you can participate in a digital revolution and explore the limitless possibilities of the virtual realm.                        

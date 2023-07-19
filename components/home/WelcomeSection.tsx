@@ -6,17 +6,19 @@ import { useEffect, useState } from "react";
 // import EpicDownloadButton from "../EpicDownloadButton";
 export default function WelcomeSection({
   placeholder,
+  imageHeadPage,
   introVideoUrl,
   partners = [],
   communityPartners = [],
 }) {
+  console.log(imageHeadPage);
   return (
     <div className="pb-16 sm:pb-20 bg-cover h-[54rem] "
       style={{
         backgroundImage: `
           linear-gradient(to left, rgba(7, 24, 39, 0.3) 50%, rgba(17, 24, 39, 1) 75%),
           linear-gradient(to bottom, rgba(7, 24, 39, 0.3) 60%, rgba(17, 24, 39, 1) 80%),
-          url('https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fhome%2Fimage_headpage.webp?alt=media&token=e352a403-7c34-4637-a6a7-94cb8044cfd4')
+          url('${imageHeadPage}')
         `,
       }}
     >

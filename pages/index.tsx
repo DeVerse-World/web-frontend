@@ -37,23 +37,28 @@ export const getStaticProps = async () => {
 
 function Main({
   introVideoUrl,
-  placeholder = "https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/static%2F01.webp?alt=media&token=ffab7251-7a3d-4875-9dca-383b72f51b8a",
+  placeholder = null,
   partners = [],
   communityPartners = [],
 }) {
   const [showBlogToggle, setShowBlogToggle] = useState(false);
   const { remoteConfig } = useContext(AppContext);
+  const [imageHeadPage, setImageHeadPage] = useState();
+  const imgPlaceHolder = placeholder || imageHeadPage;
 
   useEffect(() => {
     if (remoteConfig != null)
       FirebaseService.getShouldShowBlogToggle(remoteConfig).then(setShowBlogToggle)
+    
+    FirebaseService.getImageHeadPage().then(setImageHeadPage)
   }, [remoteConfig])
 
   return (
       <div className='flex flex-col bg-darkest'>   
         <Popup />
         <WelcomeSection
-          placeholder={placeholder}
+          placeholder={imgPlaceHolder}
+          imageHeadPage={imageHeadPage}
           partners={partners}
           communityPartners={communityPartners}
           introVideoUrl={introVideoUrl}    

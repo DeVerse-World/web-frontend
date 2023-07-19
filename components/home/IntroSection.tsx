@@ -31,9 +31,9 @@ export default function IntroSection() {
         </p>
       </div>
 
-      <div className="shrink-0 rounded-lg xl:order-2 aspect-h-1 aspect-w-1 w-5/6 sm:w-[40rem] lg:w-7/12 overflow-hidden">
+      <div className="shrink-0 rounded-lg xl:order-2 aspect-[4/3] w-5/6 sm:w-[40rem] lg:w-7/12 overflow-hidden">
           <iframe
-            className="h-full w-full aspect-video object-cover object-center"
+            className="h-full w-full object-cover object-center"
             src={videoUrl}
             title="Deverse World Alpha"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
