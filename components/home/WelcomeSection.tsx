@@ -11,7 +11,6 @@ export default function WelcomeSection({
   partners = [],
   communityPartners = [],
 }) {
-  console.log(imageHeadPage);
   return (
     <div className="pb-16 sm:pb-20 bg-cover h-[54rem] "
       style={{
