@@ -126,39 +126,33 @@ class FirebaseService {
     
 
     async getPartners(): Promise<Partner[]> {
-        if (this._partners.length == 0) {
-            const partners = [];
-            const docs = await getDocs(collection(this._firestore, "partner"));
-            docs.forEach((doc) => {
-                const data = doc.data();
-                const partner: Partner = {
-                    uri: data['uri'],
-                    thumbnail: data['thumbnail'],
-                    id: doc.id,
-                }
-                partners.push(partner);
-            });
-            this._partners = partners;
-        }
-        return this._partners;
+        const partners = [];
+        const docs = await getDocs(collection(this._firestore, "partner"));
+        docs.forEach((doc) => {
+            const data = doc.data();
+            const partner: Partner = {
+                uri: data['uri'],
+                thumbnail: data['thumbnail'],
+                id: doc.id,
+            }
+            partners.push(partner);
+        });
+        return partners;
     }
 
     async getComunityPartners(): Promise<Partner[]> {
-        if (this._communityPartners.length == 0) {
-            const partners = [];
-            const docs = await getDocs(collection(this._firestore, "community_partner"));
-            docs.forEach((doc) => {
-                const data = doc.data();
-                const partner: Partner = {
-                    uri: data['uri'],
-                    thumbnail: data['thumbnail'],
-                    id: doc.id,
-                }
-                partners.push(partner);
-            });
-            this._communityPartners = partners;
-        }
-        return this._communityPartners;
+        const partners = [];
+        const docs = await getDocs(collection(this._firestore, "community_partner"));
+        docs.forEach((doc) => {
+            const data = doc.data();
+            const partner: Partner = {
+                uri: data['uri'],
+                thumbnail: data['thumbnail'],
+                id: doc.id,
+            }
+            partners.push(partner);
+        });
+        return partners;
     }
 
     async getTeamMembers(): Promise<TeamMember[]> {

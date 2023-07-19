@@ -3,7 +3,6 @@ import WelcomeSection from '../components/home/WelcomeSection';
 import FirebaseService from "../data/services/FirebaseService";
 import { AppContext } from '../components/contexts/app_context';
 import dynamic from 'next/dynamic';
-import PartnerSection from "../components/home/PartnerSection";
 import CommunityPartnerSection from "../components/home/CommunityPartnerSection";
 import Popup from "../components/Popup";
 import TrendingSection from "../components/home/TrendingSection";
@@ -30,8 +29,8 @@ export const getStaticProps = async () => {
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
-    // - At most once every 10 seconds
-    revalidate: 10, // In seconds
+    // - At most once every X seconds
+    revalidate: 60 * 60, // In seconds
   };
 };
 
@@ -72,10 +71,6 @@ function Main({
           <div>
           <TrendingSection/>
         </div>
-          {/*
-            <PartnerSection />
-            <CommunityPartnerSection />
-            */}
           {showBlogToggle ?
             <BlogPostSection />
             : null
