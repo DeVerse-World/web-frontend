@@ -10,7 +10,7 @@ const BlogCard = ({thumbnail, title, created_at, id  }) => {
     return (
         <div className="overflow-hidden rounded-lg bg-dark ring-1 ring-inset ring-medium text-left transition-all sm:my-4 sm:w-full sm:max-w-lg">
             <div className="group text-sm">
-                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-lg bg-gray-100">
+                <div className="aspect-h-1  w-full overflow-hidden rounded-t-lg bg-gray-100">
                     <img
                         src={thumbnail}
                         className="h-full w-full aspect-[12/10] object-cover object-center bg-darkest"
@@ -27,9 +27,9 @@ const BlogCard = ({thumbnail, title, created_at, id  }) => {
                   </div>
            
                  <div className="font-semibold">
-                      <Link href={`/blogs/${id}`} className="no-underline text-light">
+                      <Link href={`/blogs/${id}`} className="mt-3 no-underline text-light">
                         <span>
-                          <span className="absolute inset-0" />
+                          <span  />
                           {title}
                         </span>
                       </Link>
@@ -43,3 +43,4 @@ const BlogCard = ({thumbnail, title, created_at, id  }) => {
 
 
 export default BlogCard;
+
