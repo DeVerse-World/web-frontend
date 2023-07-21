@@ -6,39 +6,26 @@ import Link from 'next/link';
 import { getTimeString } from '../utils/time_util';
 
 const BlogCard = ({thumbnail, title, created_at, id  }) => {
+  return (
+    <Link href={`/blogs/${id}`} className="no-underline">
+      <article
+        className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-56"
+      >
+        <img src={thumbnail} alt="" className="absolute inset-0 -z-10 h-full w-full object-cover" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40" />
+        <div className="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
 
-    return (
-        <div className="overflow-hidden rounded-lg bg-dark ring-1 ring-inset ring-medium text-left transition-all sm:my-4 sm:w-full sm:max-w-lg">
-            <div className="group text-sm">
-                <div className="aspect-h-1  w-full overflow-hidden rounded-t-lg bg-gray-100">
-                    <img
-                        src={thumbnail}
-                        className="h-full w-full aspect-[12/10] object-cover object-center bg-darkest"
-                        loading="lazy"
-                    />
-                </div>
-               
-                <div className="max-w-xl">
-             
-                  <div className="mt-4 flex items-center gap-x-4 text-xs">
-                    <time dateTime={created_at} className="text-gray-500">
-                      {getTimeString(created_at)}
-                    </time>
-                  </div>
-           
-                 <div className="font-semibold">
-                      <Link href={`/blogs/${id}`} className="mt-3 no-underline text-light">
-                        <span>
-                          <span  />
-                          {title}
-                        </span>
-                      </Link>
-                    </div>
-               
-                </div>
-            </div>
+        <div className="flex flex-wrap items-center gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">
+          <time dateTime={created_at} className="mr-8">
+            {getTimeString(created_at)}
+          </time>
         </div>
-    )
+        <h3 className="mt-3 text-lg font-semibold leading-6 text-white">
+          {title}
+        </h3>
+      </article>
+    </Link>
+  );
 };
 
 
