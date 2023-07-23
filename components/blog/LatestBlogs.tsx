@@ -19,81 +19,72 @@ export default function LatestBlogs({ blogs }) {
             </div>
 
             <div className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:grid-rows-2 sm:gap-x-6 lg:gap-8">
-              <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-1 sm:row-span-2">
-                <img
-                  src={blogs[0].thumbnail}
-                  alt={blogs[0].title}
-                  className="object-cover object-center group-hover:opacity-75"
-                />
-                <div aria-hidden="true" className="bg-gradient-to-b from-transparent to-black opacity-75" />
-                <div className="flex items-end p-6 sm:absolute sm:inset-0">
-                  <div>
-                    <div className="font-semibold">
-                      <Link href={`/blogs/${blogs[0].id}`} className="no-underline text-light">
-                        <span>
-                          <span className="absolute inset-0" />
-                          {blogs[0].title}
-                        </span>
-                      </Link>
+              <Link href={`/blogs/${blogs[0].id}`}>
+                <div className="cursor-pointer group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-h-1 sm:aspect-w-1 sm:row-span-2">
+                  <img
+                    src={blogs[0].thumbnail}
+                    alt={blogs[0].title}
+                    className="object-cover object-center group-hover:opacity-75"
+                  />
+                  <div aria-hidden="true" className="bg-gradient-to-b from-transparent to-black opacity-75" />
+                  <div className="flex items-end p-6 sm:absolute sm:inset-0">
+                    <div>
+                      <div className="font-semibold">
+                        {blogs[0].title}
+                      </div>
+                      {/* <div aria-hidden="true" className="mt-1 text-sm text-lighter">
+                        Shop now
+                      </div> */}
                     </div>
-                    {/* <div aria-hidden="true" className="mt-1 text-sm text-lighter">
-                      Shop now
-                    </div> */}
                   </div>
                 </div>
-              </div>
-              <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
-                <img
-                  src={blogs[1].thumbnail}
-                  alt={blogs[1].title}
-                  className="object-cover object-center group-hover:opacity-75 sm:absolute sm:inset-0 sm:h-full sm:w-full"
-                />
-                <div
-                  aria-hidden="true"
-                  className="bg-gradient-to-b from-transparent to-black opacity-75 sm:absolute sm:inset-0"
-                />
-                <div className="flex items-end p-6 sm:absolute sm:inset-0">
-                  <div>
-                    <div className="font-semibold">
-                      <Link href={`/blogs/${blogs[1].id}`} className="no-underline text-light">
-                        <span>
-                          <span className="absolute inset-0" />
-                          {blogs[1].title}
-                        </span>
-                      </Link>
+              </Link>
+              <Link href={`/blogs/${blogs[1].id}`}>
+                <div className="cursor-pointer group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
+                  <img
+                    src={blogs[1].thumbnail}
+                    alt={blogs[1].title}
+                    className="object-cover object-center group-hover:opacity-75 sm:absolute sm:inset-0 sm:h-full sm:w-full"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="bg-gradient-to-b from-transparent to-black opacity-75 sm:absolute sm:inset-0"
+                  />
+                  <div className="flex items-end p-6 sm:absolute sm:inset-0">
+                    <div>
+                      <div className="font-semibold">
+                        {blogs[1].title}
+                      </div>
+                      {/* <div aria-hidden="true" className="mt-1 text-sm text-lighter">
+                        Shop now
+                      </div> */}
                     </div>
-                    {/* <div aria-hidden="true" className="mt-1 text-sm text-lighter">
-                      Shop now
-                    </div> */}
                   </div>
                 </div>
-              </div>
-              <div className="group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
-                <img
-                  src={blogs[2].thumbnail}
-                  alt={blogs[2].title}
-                  className="object-cover object-center group-hover:opacity-75 sm:absolute sm:inset-0 sm:h-full sm:w-full"
-                />
-                <div
-                  aria-hidden="true"
-                  className="bg-gradient-to-b from-transparent to-black opacity-75 sm:absolute sm:inset-0"
-                />
-                <div className="flex items-end p-6 sm:absolute sm:inset-0">
-                  <div>
-                    <div className="font-semibold">
-                      <Link href={`/blogs/${blogs[2].id}`} className="no-underline text-light">
-                        <span>
-                          <span className="absolute inset-0" />
-                          {blogs[2].title}
-                        </span>
-                      </Link>
+              </Link>
+              <Link href={`/blogs/${blogs[2].id}`}>
+                <div className="cursor-pointer group aspect-h-1 aspect-w-2 overflow-hidden rounded-lg sm:aspect-none sm:relative sm:h-full">
+                  <img
+                    src={blogs[2].thumbnail}
+                    alt={blogs[2].title}
+                    className="object-cover object-center group-hover:opacity-75 sm:absolute sm:inset-0 sm:h-full sm:w-full"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="bg-gradient-to-b from-transparent to-black opacity-75 sm:absolute sm:inset-0"
+                  />
+                  <div className="flex items-end p-6 sm:absolute sm:inset-0">
+                    <div>
+                      <div className="font-semibold">
+                        {blogs[2].title}
+                      </div>
+                      {/* <div aria-hidden="true" className="mt-1 text-sm text-lighter">
+                        Shop now
+                      </div> */}
                     </div>
-                    {/* <div aria-hidden="true" className="mt-1 text-sm text-lighter">
-                      Shop now
-                    </div> */}
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
         </section>

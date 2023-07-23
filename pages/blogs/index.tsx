@@ -23,7 +23,6 @@ export default function BlogPage() {
     else {
         remainingBlogs = blogs;
     }
-
     return (
         <div className='flex flex-col items'>
             {isAdminUser(user) && (

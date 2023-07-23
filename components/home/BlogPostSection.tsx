@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BlogPost } from "../../data/model/blog_post";
 import FirebaseService from "../../data/services/FirebaseService";
+import LatestBlogs from "../blog/LatestBlogs";
 
 type BlogPostItemProps = {
     data: BlogPost
@@ -20,6 +21,7 @@ function BlogPostItem(props: BlogPostItemProps) {
                 textOverflow: "ellipsis"
             }}>{props.data.title}</span>
         </a>
+        
     )
 }
 
@@ -30,8 +32,10 @@ export default function BlogPostSection() {
     }, [])
 
     return (
-        <div className="flex flex-row gap-4 overflow-x-auto overflow-y-hidden px-4 py-2 m-4">
-            {data.map(item => <BlogPostItem data={item} key={item.id} />)}
+        <div className="px-4 py-2 m-4">
+            {data.length > 0 && (
+                <LatestBlogs blogs={data} />
+            )}
         </div>
     )
 }
