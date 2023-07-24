@@ -27,7 +27,7 @@ const Form = ({ post }) => {
         const newPost = {
             ...(post ? post : {}),
             id: post ? post.id : title.replace(/\s+/g, '-'),
-            creator_id: post ? post.creator_id : user.id,
+            creator_id: post && post.creator_id ? post.creator_id : user.id,
             thumbnail,
             title,
             content: doc,

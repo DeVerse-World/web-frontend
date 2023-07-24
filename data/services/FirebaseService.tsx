@@ -240,6 +240,10 @@ class FirebaseService {
         const res = await getDoc(doc(this._firestore,"images","contentAbout"))
         return res.data().img_content_about;
     }
+    async getImageBanner(): Promise<string> {
+        const res = await getDoc(doc(this._firestore,"images","PopUp"))
+        return res.data().img_banner_popup;
+    }
 
 }
     
