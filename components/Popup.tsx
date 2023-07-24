@@ -1,11 +1,18 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useRouter } from 'next/router'
+import FirebaseService from '../data/services/FirebaseService'
 
 export default function Popup() {
   const [open, setOpen] = useState(true);
   const router = useRouter();
+  const [imageBanner, setImageBanner] = useState();
+
+
+  useEffect(() => {
+    FirebaseService.getImageBanner().then(setImageBanner)
+  }, [])
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -38,7 +45,7 @@ export default function Popup() {
                 <div className="relative flex items-center cursor-pointer overflow-hidden bg-white bg-cover w-full h-full px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8"
                   style={{
                     backgroundImage: `
-                      url('/images/Popup_Banner_Creator_Program.jpg')
+                      url('${imageBanner}')
                     `,
                   }}
                   onClick={() => router.push('/creator_program')}

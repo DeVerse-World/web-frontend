@@ -17,6 +17,7 @@ const useCodeMirror = (props: Props) => {
     const refContainer = useRef(null)
     const [editorView, setEditorView] = useState<EditorView>();
     const { onChange } = props;
+
     useEffect(() => {
         if (!refContainer.current) return;
     
@@ -24,11 +25,11 @@ const useCodeMirror = (props: Props) => {
             doc: props.initialDoc,
             extensions: [
                 basicSetup,
-                keymap.of(defaultKeymap),
+                // keymap.of(defaultKeymap),
                 markdown({
                     base: markdownLanguage,
                     codeLanguages: languages,
-                    addKeymap: true,
+                    // addKeymap: true,
                 }),
                 oneDark,
                 EditorView.lineWrapping,
