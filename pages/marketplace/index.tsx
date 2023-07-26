@@ -16,6 +16,8 @@ import MarketplaceFilter, { MarketplaceTabKey, MarketplaceType } from "../../com
 import GalleryContainer from "../../components/gallery/GalleryContainer";
 import classNames from "classnames";
 
+import SearchWorldSection from "../../components/search/SearchWorldSection";
+
 const Tabs = ({ tabs, selectedTab, router }) => {
     return (
         <div className="py-4 px-4 font-semibold leading-6 sm:px-6 lg:px-8">
@@ -230,8 +232,8 @@ function Marketplace() {
         if (currentType === MarketplaceTabKey.EVENT_TYPE)
             return (<EventList data={eventData} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} dataType={currentType} />);
         if (currentType === MarketplaceTabKey.WORLD_TYPE)
-            return (<RootWorldList data={rootTemplates} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} dataType={currentType} />);
-        
+            // return (<RootWorldList data={rootTemplates} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} dataType={currentType} />);
+            return (<SearchWorldSection data={rootTemplates} cardType="gallery" selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} setSidebarDetails={setSidebarDetails} dataType={currentType} />);
 
         return;
     }
@@ -261,6 +263,9 @@ function Marketplace() {
                     setSlideOverOpen={setSlideOverOpen}
                 >
                     <div className="px-4 pb-4 mt-8">
+                        {/* {currentType === MarketplaceTabKey.WORLD_TYPE && rootTemplates && rootTemplates.length > 0 && (
+                            <SearchWorldSection data={rootTemplates} />
+                        )} */}
                         {currentType === MarketplaceTabKey.WORLD_TYPE && (
                             <h2 className="text-white mb-8 sm:mb-12 text-xl font-bold tracking-tight sm:text-2xl">
                                 {totalWorlds} total worlds

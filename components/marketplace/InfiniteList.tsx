@@ -26,7 +26,7 @@ function sliceIntoPages(arr, chunkSize) {
     return res;
 }
 
-const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedIndex, setSidebarDetails, dataType }) => {
+const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedIndex, setSidebarDetails, dataType, infiniteScroll=true }) => {
     const pages = sliceIntoPages(items, itemPerPage);
     const [currentData, setCurrentData] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
@@ -38,7 +38,7 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
     useEffect(() => {
         const data = items[0];
         // _setSelectedIndex(0);
-        if (setSidebarDetails) setSidebarDetails({
+        if (data && setSidebarDetails) setSidebarDetails({
             id: data.id,
             name: data.name,
             creatorName: data.author || data && data.creator && data.creator.name,
@@ -174,6 +174,18 @@ const InfiniteList = ({ items, cardType = 'default', selectedIndex, setSelectedI
             >
                 <ButtonGroup index={index} image360={data.image} />
             </Card>
+        );
+    }
+
+    if (!infiniteScroll) {
+        return (
+            <div className={classNames(
+                    "mx-auto max-w-7xl grid grid-cols-2 gap-4",
+                    cardType === 'gallery' ? "md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4" : "md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4",
+                )}
+            >
+                {items.map((item, index) => renderCard(item, index))}
+            </div>
         );
     }
 

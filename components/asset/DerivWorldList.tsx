@@ -16,6 +16,7 @@ export type DerivTemplateViewModel = {
 
 type ListProps = {
     data: DerivTemplateViewModel[];
+    infiniteScroll: boolean;
 }
 
 const itemPerPage = 10;
@@ -30,9 +31,9 @@ function sliceIntoPages(arr, chunkSize) {
     return res;
 }
 
-function DerivWorldList(props: ListProps) {
+function DerivWorldList({ data, infiniteScroll=true }: ListProps) {
     // HACK: Slice into smaller pages for infinite scrolling
-    const pages = sliceIntoPages(props.data, itemPerPage);
+    const pages = sliceIntoPages(data, itemPerPage);
     const [currentData, setCurrentData] = useState([]);
     const [pageNumber, setPageNumber] = useState(0);
     const [showPlayModal, setShowPlayModal] = useState(false);
@@ -56,6 +57,45 @@ function DerivWorldList(props: ListProps) {
             ...pages[pageNumber],
         ]);
         setPageNumber(pageNumber + 1);
+    }
+
+    if (!infiniteScroll) {
+        return (
+            <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-3 gap-4">
+                {data.map(item => (
+                    <Card
+                        thumbnail={item.image} name={item.name}
+                        creatorName={item && item.creator && item.creator.name}
+                        rating={item && item.rating && item.rating}
+                        numViews={item && item.numViews}
+                        numPlays={item && item.numPlays}
+                        numClicks={item && item.numClicks}
+                    >
+                        <div className="mt-4 sm:mt-6 sm:grid sm:grid-flow-row-dense sm:grid-cols-2 sm:gap-3">
+                            <button
+                                type="button"
+                                className="inline-flex w-full justify-center rounded-md bg-brand px-3 py-2 text-sm font-semibold text-darkest shadow-sm hover:bg-gray-50 sm:col-start-1 mb-2 sm:mb-0"
+                                onClick={ async (e) => {
+                                    e.stopPropagation();
+                                    setSelectedTemplateId(item.id);
+                                    setShowPlayModal(true);
+                                    await StatsService.incrementStats(item.id, IncrementTypes.PLAYS);
+                                }}>
+
+                                Launch
+                            </button>
+                            <OverlayImage360Button
+                                source={item && item.image360}
+                                className="inline-flex w-full justify-center rounded-md py-2 px-3 text-sm font-semibold overflow-hidden border border-brand text-brand"
+                            >
+                                Preview
+                            </OverlayImage360Button>
+
+                        </div>
+                    </Card>
+                ))}
+            </div>
+        );
     }
 
     return (
