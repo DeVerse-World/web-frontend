@@ -24,14 +24,14 @@ const useCodeMirror = (props: Props) => {
         const startState = EditorState.create({
             doc: props.initialDoc,
             extensions: [
-                basicSetup,
-                // keymap.of(defaultKeymap),
-                markdown({
-                    base: markdownLanguage,
-                    codeLanguages: languages,
-                    // addKeymap: true,
-                }),
-                oneDark,
+                // basicSetup,
+                // // keymap.of(defaultKeymap),
+                // markdown({
+                //     base: markdownLanguage,
+                //     codeLanguages: languages,
+                //     // addKeymap: true,
+                // }),
+                // oneDark,
                 EditorView.lineWrapping,
                 EditorView.updateListener.of(update => {
                     if (update.changes)

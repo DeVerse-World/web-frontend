@@ -25,7 +25,7 @@ const Editor: React.FC<Props> = (props) => {
         }
     }, [editorView]);
 
-    return <div className='h-full flex-grow-0 flex-shrink-0' ref={refContainer}></div>
+    return <div className='h-full flex-grow-0 flex-shrink-0 border' ref={refContainer}></div>
 };
 
 export default Editor;
