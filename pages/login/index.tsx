@@ -3,9 +3,10 @@ import AuthService from "../../data/services/AuthService";
 import { AppContext } from "../../components/contexts/app_context";
 import Image from "next/image";
 import { useMetaMask } from "metamask-react";
-import {CredentialResponse, GoogleLogin, useGoogleLogin} from "@react-oauth/google";
+// import {CredentialResponse, GoogleLogin, useGoogleLogin} from "@react-oauth/google";
 import { useRouter } from "next/router";
 import StorageService from "../../data/services/StorageService";
+import GoogleOAuth from "../../components/oauth";
 
 export async function getServerSideProps(context) {
     return {
@@ -85,17 +86,6 @@ export default function Login({ loginKey, previousPath }) {
     //     onError: (error) => window.alert(error)
     // });
 
-    const onGoogleLogin = (event: CredentialResponse) => {
-        AuthService.connectToGoogleMail(event.credential, user).then(res => {
-            // let googleUser = jwt_decode<GoogleUser>(event.credential);
-            if (res.isFailure()) {
-                window.alert(res.error);
-                return;
-            }
-            setUser(res.value.user);
-        });
-    }
-
     const onSteamConnect = () => {
         AuthService.connectToSteam();
     }
@@ -113,7 +103,7 @@ export default function Login({ loginKey, previousPath }) {
             {/*    <Image width={32} height={32} alt="google-icon" src="/images/google.webp" />*/}
             {/*    Google*/}
             {/*</button>*/}
-            <GoogleLogin width='300' onSuccess={onGoogleLogin} />
+            <GoogleOAuth />
             {/*<button className="flex flex-row gap-2 items-center justify-start w-[300px] bg-deverse-gradient rounded-sm p-2 my-2"*/}
             {/*    onClick={onSteamConnect}>*/}
             {/*    <Image width={32} height={32} alt="steam-icon" src="/images/steam_logo.png" />*/}

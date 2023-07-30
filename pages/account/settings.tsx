@@ -1,14 +1,13 @@
 import { CredentialResponse, GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import { useMetaMask } from "metamask-react";
 import { useContext, useEffect, useState } from "react";
-import { FormControl, InputGroup } from "react-bootstrap";
 import { AppContext } from "../../components/contexts/app_context";
 import AuthService from "../../data/services/AuthService";
 import { usePrevious } from "../../utils/use_previous";
 import { TabHeaderBar } from "../../components/common/TabHeader";
 import AccountService from "../../data/services/AccountService";
-import StorageService from "../../data/services/StorageService";
 import Button from "../../components/Button";
+import GoogleOAuth from "../../components/oauth";
 
 export default function Settings() {
     const { user, setUser } = useContext(AppContext);
@@ -52,17 +51,6 @@ export default function Settings() {
     //     },
     //     onError: (error) => window.alert(error)
     // });
-
-    const onGoogleLogin = (event: CredentialResponse) => {
-        AuthService.connectToGoogleMail(event.credential, user).then(res => {
-            // let googleUser = jwt_decode<GoogleUser>(event.credential);
-            if (res.isFailure()) {
-                window.alert(res.error);
-                return;
-            }
-            setUser(res.value.user);
-        });
-    }
 
     useEffect(() => {
         if (previousMetamaskState == "connecting" && status == "connected") {
@@ -189,7 +177,7 @@ export default function Settings() {
                                     {false ? (
                                         <div className="leading-6 text-sm text-lighter">{user.social_email}</div>
                                     ) : (
-                                        <GoogleLogin width='300' onSuccess={onGoogleLogin} />
+                                        <GoogleOAuth />
                                     )}
                                     
                                 </div>
