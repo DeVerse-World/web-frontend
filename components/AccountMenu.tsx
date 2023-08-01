@@ -9,7 +9,7 @@ import { Menu, Transition } from '@headlessui/react'
 import classNames from "classnames";
 
 export default function AccountMenu(props: DOMAttributes) {
-  const { user, setUser, remoteConfig } = useContext(AppContext);
+  const { user, remoteConfig, logOutUser } = useContext(AppContext);
   const router = useRouter();
   const [showDashboardToggle, setShowDashboardToggle] = useState(false);
 
@@ -21,10 +21,10 @@ export default function AccountMenu(props: DOMAttributes) {
   const onClickLogout = (e) => {
     AuthService.logout().then(res => {
       if (res.isFailure()) {
-        window.alert(res.error)
+        console.error(res.error)
         return
       }
-      setUser(null);
+      logOutUser();
       router.replace('/');
     })
   }
@@ -83,7 +83,7 @@ export default function AccountMenu(props: DOMAttributes) {
         <Menu.Item>
           {({ active }) => (
             <button type="button" className={classNames(active ? 'bg-medium' : '', 'block w-full text-left px-4 py-2 text-sm text-red-400', 'no-underline')} onClick={onClickLogout}>
-              Logout
+              Log out
             </button>
           )}
         </Menu.Item>
