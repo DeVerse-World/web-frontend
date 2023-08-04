@@ -37,7 +37,6 @@ export default function WelcomeSection({
 
             <div className="mt-10 flex items-center gap-x-4">
               <EpicDownloadButton/>
-              <DownloadDemoButton />
             </div>
           </div>
         </div>

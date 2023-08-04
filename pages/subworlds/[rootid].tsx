@@ -97,7 +97,7 @@ export default function Deriv({ rootId }) {
                         id: e.creator_info.id,
                         name: (e.creator_info.name === "" || e.creator_info.name === null) ? "Anonymous" : e.creator_info.name,
                     },
-                })).sort((a, b) => b.rating - a.rating))
+                })).sort((a, b) => b.numPlays - a.numPlays))
             }
         }).finally(() => {
             setViewState(ViewState.SUCCESS)
