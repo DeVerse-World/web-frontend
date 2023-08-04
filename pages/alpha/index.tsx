@@ -34,8 +34,6 @@ function Info() {
 
         FirebaseService.getImageHeadPage().then(setImageHeadPage);
         EventsService.fetchEvents().then(res => {
-            console.log('meow', res.value);
-
             if (res.isSuccess()) {
                 const data = res.value.events.map<EventViewModel>(e => ({
                     id: e.id.toString(),
