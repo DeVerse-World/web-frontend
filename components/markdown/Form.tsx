@@ -6,6 +6,7 @@ import Button from "../Button";
 import FirebaseService from "../../data/services/FirebaseService";
 import { AppContext } from "../contexts/app_context";
 import { isAdminUser } from "../../utils/user_utils";
+import { undoDepth } from "@codemirror/commands";
 
 const Form = ({ post }) => {
     const { user } = useContext(AppContext);
@@ -32,6 +33,12 @@ const Form = ({ post }) => {
             title,
             content: doc,
         };
+
+        if (doc === undefined || doc === null || doc === "") {
+            alert("Markdown content must not be empty")
+            return;
+          }       
+
 
         // Edit
         if (post) {    
