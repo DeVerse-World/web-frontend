@@ -21,32 +21,37 @@ export default function Login({ loginKey, previousPath }) {
     const router = useRouter();
     const { user, setUser } = useContext(AppContext);
     const { status, connect, account } = useMetaMask();
+    const redirectPath = previousPath || '/';
 
+    // Auto-redirect if user already logged in
     useEffect(() => {
         if (loginKey) {
             StorageService.setSessionKey(loginKey)
         }
-        if (user) { //Navigate back to home if user login
+
+        // Navigate back to home if user login
+        if (user) {
             if (loginKey) {
                 AuthService.authorizeLoginLinkWithUserToken(loginKey).then(res => {
                     if (res.isFailure()) {
-                        window.alert(res.error);
+                        console.error(res.error);
                         return;
                     }
-                    window.alert('Authorized!')
-                    router.replace('/')
+                    // window.alert('Authorized!')
+                    router.replace(redirectPath)
                 }).catch(err => {
                     window.alert(err)
                 })
             } else {
-                router.replace('/')
+                router.replace(redirectPath)
             }
         }
     }, [user])
 
+    // Auto-redirect if user is already logged in via Metamask
     useEffect(() => {
         if (account && user) {
-            router.replace('/')
+            router.replace(redirectPath)
         }
     }, [account])
 

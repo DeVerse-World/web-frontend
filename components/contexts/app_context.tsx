@@ -30,13 +30,25 @@ const AppContextProvider = (props) => {
 
     useEffect(() => {
         const cachedUser = StorageService.getUser();
-        setUser(cachedUser || null)
+        if (!user && cachedUser) {
+            setUser(cachedUser);
+            setIsAuthenticated(cachedUser != null);
+        }
         FirebaseService.retrieveConfig().then(setRemoteConfig)
     }, [])
 
+    // When the user changes, we update the local storage accordingly.
     useEffect(() => {
-        StorageService.saveUser(user);
-        setIsAuthenticated(user != null)
+        if (!user) return;
+
+        const cachedUser = StorageService.getUser();
+        if (
+            (!cachedUser) ||
+            (cachedUser && cachedUser.id !== user.id)
+        ){
+            StorageService.saveUser(user);
+            setIsAuthenticated(user != null);
+        }
     }, [user])
 
     useEffect(() => {
@@ -48,10 +60,16 @@ const AppContextProvider = (props) => {
         }
     }, [isAuthenticated])
 
+    const logOutUser = () => {
+        StorageService.saveUser(null);
+        setUser(null);
+        setIsAuthenticated(false);
+    }
+
     return (
         <AppContext.Provider
             value={{
-                user, setUser, viewState, setViewState, remoteConfig
+                user, setUser, logOutUser, viewState, setViewState, remoteConfig
             }}>
             {props.children}
         </AppContext.Provider>

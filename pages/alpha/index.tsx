@@ -31,6 +31,7 @@ function Info() {
     //             }
     //         }
     //     })
+
         FirebaseService.getImageHeadPage().then(setImageHeadPage);
         EventsService.fetchEvents().then(res => {
             if (res.isSuccess()) {
@@ -41,13 +42,15 @@ function Info() {
                     eventConfigUri: e.event_config_uri,
                     lastUpdate: getTimeString(new Date(e.updated_at)),
                     stage: e.stage,
-                    participants: e.max_num_participants
+                    participants: e.max_num_participants,
+                    image: e.thumbnail_image,
                 }))
                 
                     setOngoingEvents(data);
             }
         })
     }, [])
+
 
     // const renderAvatar = () => {
     //     return (
@@ -90,7 +93,6 @@ function Info() {
 
                     <div className="flex items-center gap-x-4">
                         <EpicDownloadButton />
-                        <DownloadDemoButton />
                     </div>
                 </div>
             </div>
