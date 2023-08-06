@@ -67,7 +67,7 @@ const GalleryCard = ({ current, id, thumbnail, name, creatorName, index, rating,
                     </dd>
                     <div className="mt-1 block text-sm font-medium text-lighter">
                         <a href={`/subworlds/${id}`} className="text-sm font-semibold leading-6 text-brand">
-                            {numWorlds} worlds<span aria-hidden="true">&rarr;</span>
+                            {numWorlds -1} worlds<span aria-hidden="true">&rarr;</span>
                         </a>
                                     </div>
                 </div>
