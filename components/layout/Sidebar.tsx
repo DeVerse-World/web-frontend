@@ -45,7 +45,7 @@ const navigation = [
     { name: "About", href: "/about", icon: UsersIcon },
     // { name: "Stream", href: "/stream", icon: (<BsBroadcast fontSize="1.5rem" color='rgb(97 198 208)' />) },
     { name: "Docs", href: "https://docs.deverse.world", icon: DocumentTextIcon },
-    {name: "Blogs", href: "/blogs", icon: PencilSquareIcon, adminOnly: true},
+    {name: "Blogs", href: "/blogs", icon: PencilSquareIcon },
 ]
 
 const Tab = ({ item, router, setSidebarOpen }) => {

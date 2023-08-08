@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import Head from "next/head";
 import BlogsPosts from "../../components/blog/BlogsPosts";
 import LatestBlogs from "../../components/blog/LatestBlogs";
 import { AppContext } from "../../components/contexts/app_context";
@@ -24,21 +25,27 @@ export default function BlogPage() {
         remainingBlogs = blogs;
     }
     return (
-        <div className='flex flex-col items'>
-            {isAdminUser(user) && (
-                <div className="w-18 p-4">
-                    <Button
-                        primary
-                        href="/blogs/new"
-                    >
-                        Create new blog
-                    </Button>
-                </div>
-            )}
-            {latestBlogs.length === 3 && (
-                <LatestBlogs blogs={latestBlogs} />
-            )}
-            <BlogsPosts blogs={remainingBlogs} />
-        </div>
-    );
+        <>
+            <Head>
+                <title>Blogs</title>
+            </Head>
+            <div className='flex flex-col items'>
+                {isAdminUser(user) && (
+                    <div className="w-18 p-4">
+                        <Button
+                            primary
+                            href="/blogs/new"
+                        >
+                            Create new blog
+                        </Button>
+                    </div>
+                )}
+                {latestBlogs.length === 3 && (
+                    <LatestBlogs blogs={latestBlogs} />
+                )}
+                <BlogsPosts blogs={remainingBlogs} />
+            </div>
+    
+        </>
+   );
 }

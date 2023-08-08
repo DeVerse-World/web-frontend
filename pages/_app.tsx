@@ -40,6 +40,7 @@ function DeverseApp({ Component, pageProps }) {
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
                     gtag('config', 'G-XXF38ZMELH');
+                    gtag('config', 'AW-11255567082');
                   `}
                 </Script>
             </Head>
