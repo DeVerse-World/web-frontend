@@ -17,11 +17,9 @@ export default function TrendingSection() {
     const [worlds, setWorlds] = useState([]);
 
     useEffect(() => {
-      SubWorldTemplateService.fetchRootTemplates().then(res => {
-        if (res.isSuccess()) {
-          const sortedWorlds = res.value.enriched_subworld_templates.sort((a, b) => b.derived_world_stats.num_plays_count - a.derived_world_stats.num_plays_count);
+      SubWorldTemplateService.fetchAllDerivTemplates().then(res => {
+        const sortedWorlds = res.sort((a, b) => b.derived_world_stats.num_plays_count - a.derived_world_stats.num_plays_count);
         setWorlds(sortedWorlds);
-      }
       });
     }, []);
 
@@ -51,7 +49,7 @@ export default function TrendingSection() {
                     <span className="absolute inset-0" />
                     {world.name}
                 </h3>
-                <p className="mt-1 text-sm text-light">{world.rating}</p>
+                // <p className="mt-1 text-sm text-light">{world.rating}</p>
                 <p className="mt-1 text-sm font-medium text-light">{world.description}</p> */}
                 <a href={`/subworlds/${world.overview.id}`} className="no-underline">
                   <Card

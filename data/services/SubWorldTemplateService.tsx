@@ -29,6 +29,34 @@ class SubWorldTemplateService extends BaseService {
         return this.parseResponse(res);
     }
 
+    async fetchAllDerivTemplates() {
+        const rootTemplatesResponse = await this.fetchRootTemplates();
+        const derivTemplates = [];
+        if (rootTemplatesResponse.isSuccess()) {
+            const parallelJobs = [];
+            console.log('value', rootTemplatesResponse.value)
+            rootTemplatesResponse.value.enriched_subworld_templates.forEach(rootWorldInfo => {
+                parallelJobs.push(new Promise(async (resolve, reject) => {
+                    let subworldsRes = await this.fetchDerivTemplates(rootWorldInfo.overview.id);
+                    if (subworldsRes.isSuccess()) {
+                        resolve(subworldsRes.value);
+                    } else {
+                        reject(`Failed to fetch subworlds for root world ${rootWorldInfo.overview.id}`)
+                    }
+                }));
+            })
+
+            const res = await Promise.allSettled(parallelJobs);
+            res.forEach(subworldsRes => {
+                if (subworldsRes.status === "fulfilled") {
+                    derivTemplates.push(...subworldsRes.value.enriched_subworld_templates)
+                  }
+            })
+        }
+        console.log('derivTemplates', derivTemplates)
+        return derivTemplates;
+    }
+
     async deleteRootTemplate(rootTemplateId: string) {
         const res = await deverseClient.delete<Response<any>>(`subworld/root_template/${rootTemplateId}`);
         return res;
