@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BlogPost } from "../../data/model/blog_post";
 import FirebaseService from "../../data/services/FirebaseService";
 import LatestBlogs from "../blog/LatestBlogs";
+import BlogsPosts from "../blog/BlogsPosts";
 
 type BlogPostItemProps = {
     data: BlogPost
@@ -33,8 +34,10 @@ export default function BlogPostSection() {
 
     return (
         <div className="px-4 py-2 m-4">
-            {data.length > 0 && (
+            {data.length === 3 ? (
                 <LatestBlogs blogs={data} />
+            ) : (
+                <BlogsPosts blogs={data} />
             )}
         </div>
     )

@@ -13,10 +13,11 @@ type ButtonProps = {
   href?: string;
   prefetchLink?: boolean;
   linkInNewTab?: boolean;
+  disabled?: boolean;
 }
 
 const Button = ({
-  primary=false, secondary=false, tertiary=false, children, onClick, className, size='md',
+  primary=false, secondary=false, tertiary=false, children, onClick, className, size='md', disabled,
   // <Link> props
   href, prefetchLink=false, linkInNewTab=false,
 }: ButtonProps) => {
@@ -65,6 +66,7 @@ const Button = ({
         className,
       )}
       onClick={onClick}
+      disabled={disabled}
     >
       {renderChildren()}
     </button>
