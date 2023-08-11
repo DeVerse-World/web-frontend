@@ -28,11 +28,11 @@ function DeverseApp({ Component, pageProps }) {
           <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID || ''}>
             <Head>
               <title>Deverse World</title>
-              <meta name="title" content="Deverse World Meow" />
-              <meta name="description" content="hello there" />
+              <meta name="title" content="Deverse World" />
+              <meta name="description" content="Your portal to the endless virtual world experiences, owned by the users" />
               <meta name="keywords" content="metaverse, sandbox, unreal engine 5, deverse world, deverse, editor, building, simulation, gameplay, build game, develop game, creator, content, assets, nft, the sandbox, decentraland, roblox, multiverse, youtube, social, minecraft" />
-              <meta property="og:site_name" content="Deverse World Meowing" />
-              <meta property="og:image" content="https://i.cbc.ca/1.5359228.1577206958!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_940/smudge-the-viral-cat.jpg" />
+              <meta property="og:site_name" content="Deverse World" />
+              <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fhome%2FbannerpopupVN.jpg?alt=media&token=0fbd81b6-f26f-4c01-b6f4-dc746de2aa1c" />
               <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXF38ZMELH" />
                 <Script id="google-analytics">
                   {`
