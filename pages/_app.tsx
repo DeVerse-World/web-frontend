@@ -31,7 +31,7 @@ function DeverseApp({ Component, pageProps }) {
               <meta name="title" content="Deverse World Meow" />
               <meta name="description" content="Your portal to the endless virtual world experiences, owned by the users" />
               <meta name="keywords" content="metaverse, sandbox, unreal engine 5, deverse world, deverse, editor, building, simulation, gameplay, build game, develop game, creator, content, assets, nft, the sandbox, decentraland, roblox, multiverse, youtube, social, minecraft" />
-              <meta property="og:site_name" content="Deverse World" />
+              <meta property="og:site_name" content="Deverse World Meowing" />
               <meta property="og:image" content="https://i.cbc.ca/1.5359228.1577206958!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_940/smudge-the-viral-cat.jpg" />
               <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXF38ZMELH" />
                 <Script id="google-analytics">
