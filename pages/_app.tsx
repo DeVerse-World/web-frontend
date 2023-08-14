@@ -27,12 +27,12 @@ function DeverseApp({ Component, pageProps }) {
         <MetaMaskProvider>
           <GoogleOAuthProvider clientId={process.env.NEXT_PUBLIC_GOOGLE_LOGIN_CLIENT_ID || ''}>
             <Head>
-              <title>Deverse World</title>
-              <meta name="title" content="Deverse World" />
-              <meta name="description" content="Your portal to the endless virtual world experiences, owned by the users" />
-              <meta name="keywords" content="metaverse, sandbox, unreal engine 5, deverse world, deverse, editor, building, simulation, gameplay, build game, develop game, creator, content, assets, nft, the sandbox, decentraland, roblox, multiverse, youtube, social, minecraft" />
-              <meta property="og:site_name" content="Deverse World" />
-              <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fhome%2FbannerpopupVN.jpg?alt=media&token=0fbd81b6-f26f-4c01-b6f4-dc746de2aa1c" />
+              <title key="title">Deverse World</title>
+              <meta property="title" content="Deverse World" key="meta_title" />
+              <meta property="description" content="Your portal to the endless virtual world experiences, owned by the users" key = "meta_description" />
+              <meta name="keywords" key="meta_keywords" content="metaverse, sandbox, unreal engine 5, deverse world, deverse, editor, building, simulation, gameplay, build game, develop game, creator, content, assets, nft, the sandbox, decentraland, roblox, multiverse, youtube, social, minecraft" />
+              <meta property="og:site_name" content="Deverse World" key="og:site_name" />
+              <meta property="og:image" key="og:image" content="https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/images%2Fhome%2FbannerpopupVN.jpg?alt=media&token=0fbd81b6-f26f-4c01-b6f4-dc746de2aa1c" />
               <Script src="https://www.googletagmanager.com/gtag/js?id=G-XXF38ZMELH" />
                 <Script id="google-analytics">
                   {`

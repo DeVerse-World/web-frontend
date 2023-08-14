@@ -36,22 +36,26 @@ export default function BlogPage({ blog }) {
   return (
     <>
       <Head>
-        <title>{blog.title}</title>
+        <title key="title">{blog.title}</title>
         <meta
           name="description"
           content={blog.title}
+          key="meta_description"
         />
         <meta
           property="og:description"
-          content="og:desciption"
+          content={blog.title}
+          key="og:description"
         />
         <meta
           property="og:title"
           content={blog.title}
+          key="og:title"
         />
         <meta
           property="og:image"
           content={blog.thumbnail}
+          key="og:image"
         />
       </Head>
       <AlertModal
