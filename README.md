@@ -16,4 +16,5 @@ Then move that file to components/gltf
 *Caution: make sure to edit "useGLTF.prelogit ad" and "useGLTF" of the generated file to refer to the correct path of.gltf file
 
 # Reference:
+- [Developer Guide](./DEVELOPER_GUIDE.MD)
 https://adamwathan.me/2019/10/17/persistent-layout-patterns-in-nextjs/
