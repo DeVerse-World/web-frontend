@@ -28,12 +28,12 @@ export default function WelcomeSection({
               Welcome To Deverse World
             </h1>
             <p className="mt-6 text-lg leading-8 text-gray-300">
-              Your portal to the endless virtual world experiences, owned by the users
+              Where worlds are interconnected
             </p>
             
-            <a className="leading-6 text-brand underline" href={introVideoUrl} target="_blank">
+{/*             <a className="leading-6 text-brand underline" href={introVideoUrl} target="_blank">
               Watch trailer <span aria-hidden="true">→</span>
-            </a>
+            </a> */}
 
             <div className="mt-10 flex items-center gap-x-4">
               <EpicDownloadButton/>

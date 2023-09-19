@@ -30,9 +30,7 @@ function HighlightFeatureSection() {
         <section className="flex flex-col gap-28 lg:gap-64 max-w-7xl mx-auto py-20 lg:py-56">
             <FeatureSection
               title="Unlimited exploration"
-              description="We're committed to responsible, sustainable, and ethical manufacturing. Our small-scale approach allows
-                us to focus on quality and reduce our impact. We're doing our best to delay the inevitable heat-death of
-                the universe."
+              description="Discover never-ending worlds and games constructed by the communities"
               imgSrc="/images/highlight-exploration.webp"
             />
             <FeatureSection
