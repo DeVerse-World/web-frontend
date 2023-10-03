@@ -1,5 +1,5 @@
 import Modal from "react-bootstrap/Modal";
-import DownloadDemoButton from "../DownloadDemoButton";
+import EpicDownloadButton from "../EpicDownloadButton";
 
 const GameLaunchModal = ({ show, setShow }) => {
     return (
@@ -14,7 +14,7 @@ const GameLaunchModal = ({ show, setShow }) => {
             </Modal.Header>
             <Modal.Body className="text-white text-lg break-words flex flex-col gap-4 items-center">
                 <h5 className="text-white text-center w-64">Download game client to start your journey</h5>
-                <DownloadDemoButton className="h-12" />
+                <EpicDownloadButton className="h-12" />
             </Modal.Body>
         </Modal>
     );
