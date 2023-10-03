@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Card from "../cards/Card";
+import { Button } from "react-bootstrap";
 import SubWorldTemplateService from "../../data/services/SubWorldTemplateService";
 
 export default function TrendingSection() {
@@ -27,42 +28,23 @@ export default function TrendingSection() {
           >
             Trending
           </h2>
-          <a
-            href="/marketplace?type=world"
-            className="hidden text-sm font-medium text-brand hover:text-lightests md:block"
-          >
-            View All
-            <span aria-hidden="true"> &rarr;</span>
-          </a>
+          <Button className="action-button" href="/marketplace?type=world">
+            <div className="group flex">View All &rarr;</div>
+          </Button>
         </div>
-
         <div className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 md:grid-cols-4 md:gap-y-0 lg:gap-x-8">
           {worlds.slice(0, 4).map((world) => (
-            <div key={world.overview.id} className="group relative">
-              {/* <div className="h-56 w-full overflow-hidden rounded-md group-hover:opacity-75 lg:h-72 xl:h-80">
-                  <img
-                    src={world.thumbnail}
-                    className="h-full w-full object-cover object-center"
-                  />
-                </div>
-                <h3 className="mt-4 text-sm text-light">
-                    <span className="absolute inset-0" />
-                    {world.name}
-                </h3>
-                // <p className="mt-1 text-sm text-light">{world.rating}</p>
-                <p className="mt-1 text-sm font-medium text-light">{world.description}</p> */}
-              <a
-                href={`/subworlds/${world.overview.id}`}
-                className="no-underline"
-              >
-                <Card
-                  thumbnail={world.overview.thumbnail_centralized_uri}
-                  title={world.overview.display_name}
-                  subtitle={world.creator_info.name}
-                  rating={world.overview.rating}
-                />
-              </a>
-            </div>
+            <a
+              className="bg-dark-d rounded-border no-underline"
+              href={`/subworlds/${world.overview.id}`}
+            >
+              <Card
+                thumbnail={world.overview.thumbnail_centralized_uri}
+                title={world.overview.display_name}
+                subtitle={world.creator_info.name}
+                rating={world.overview.rating}
+              />
+            </a>
           ))}
         </div>
       </div>

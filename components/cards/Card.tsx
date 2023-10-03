@@ -36,8 +36,8 @@ const Card = ({
           />
         </div>
         <div className="p-6">
-          <h3 className="text-lg font-bold text-lightest">{title}</h3>
-          <div className="text-base text-light">{subtitle}</div>
+          <h3 className="text-lg font-bold text-lightest truncate">{title}</h3>
+          <div className="text-base text-light truncate">{subtitle}</div>
           <div className="flex flex-wrap">
             {rating !== undefined && (
               <div className="flex my-3 mr-4">

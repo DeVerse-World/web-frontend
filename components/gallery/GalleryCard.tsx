@@ -57,7 +57,7 @@ const GalleryCard = ({
       <h6 className="mt-3 font-bold text-lightest pointer-events-none truncate">
         {name}
       </h6>
-      <div className="text-base text-light">{creatorName}</div>
+      <div className="text-base text-light truncate">{creatorName}</div>
       <div className="flex flex-wrap">
         {rating !== undefined && (
           <div className="flex my-2 mr-4">
