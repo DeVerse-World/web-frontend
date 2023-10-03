@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 export default function LatestBlogs({ blogs }) {
   const [open, setOpen] = useState(false)
+  if (!blogs) return;
 
   return (
     <div>

@@ -27,7 +27,7 @@ const Form = ({ post }) => {
     const saveToFirebase = async () => {
         const newPost = {
             ...(post ? post : {}),
-            id: post ? post.id : title.replace(/\s+/g, '-'),
+            id: post ? post.id : title.trim().replace(/\s+/g, '-'),
             creator_id: post && post.creator_id ? post.creator_id : user.id,
             thumbnail,
             title,

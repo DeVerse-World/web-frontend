@@ -15,7 +15,7 @@ export default function EditBlogPage() {
   return (
     <div className="w-full h-full p-4">
       {doc && (  
-        <Form post={doc} />  
+        <Form post={doc}/>  
       )}
     </div>
   )

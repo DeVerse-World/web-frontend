@@ -27,7 +27,7 @@ export default function BlogPage() {
     return (
         <>
             <Head>
-                <title>Blogs</title>
+                <title key="title">Blogs</title>
             </Head>
             <div className='flex flex-col items'>
                 {isAdminUser(user) && (
