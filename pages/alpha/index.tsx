@@ -20,6 +20,7 @@ function Info() {
     const [modelPath, setModelPath] = useState<string>(null);
     const [ongoingEvents, setOngoingEvents] = useState<EventViewModel[]>([]);
     const [imageHeadPage, setImageHeadPage] = useState();
+    const [videoHeadPage, setVideoHeadPage] = useState();
 
     useEffect(() => {
     //     if (user == null)

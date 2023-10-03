@@ -38,6 +38,7 @@ const Footer = () => {
                         console.log(e)
                     })
                 }}>Pitch Deck</span>
+                <FooterLink href="https://docs.deverse.world/faq" label="FAQ" />
             </div>
             <div className="flex flex-col">
                 {[

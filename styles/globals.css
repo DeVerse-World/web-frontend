@@ -163,3 +163,7 @@ body * {
     border-bottom-right-radius: 0.5em;
     background: #6d6a6a;
 }
+
+.move-up {
+    animation: move-up 1s ease forwards;
+}
