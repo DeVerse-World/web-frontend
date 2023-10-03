@@ -9,10 +9,11 @@ import EpicDownloadButton from "../../components/EpicDownloadButton";
 import FirebaseService from "../../data/services/FirebaseService";
 
 function Info() {
-  const { setViewState, user } = useContext(AppContext);
-  const [modelPath, setModelPath] = useState<string>(null);
-  const [ongoingEvents, setOngoingEvents] = useState<EventViewModel[]>([]);
-  const [imageHeadPage, setImageHeadPage] = useState();
+    const { setViewState, user } = useContext(AppContext);
+    const [modelPath, setModelPath] = useState<string>(null);
+    const [ongoingEvents, setOngoingEvents] = useState<EventViewModel[]>([]);
+    const [imageHeadPage, setImageHeadPage] = useState();
+    const [videoHeadPage, setVideoHeadPage] = useState();
 
   useEffect(() => {
     //     if (user == null)

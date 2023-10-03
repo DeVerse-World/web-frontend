@@ -4,3 +4,7 @@
 [submodule "conf"]
 	path = conf
 	url = git@github.com:DeVerse-World/conf.git
+[submodule "web-frontend"]
+	path = web-frontend
+	url = https://github.com/DeVerse-World/web-frontend.git
+	branch = main

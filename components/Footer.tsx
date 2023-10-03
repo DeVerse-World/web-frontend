@@ -92,6 +92,7 @@ const Footer = () => {
         </Col>
         <Col md={2}>
           <FooterLink href="/roadmap" label="Roadmap" />
+          <FooterLink href="https://docs.deverse.world/faq" label="FAQ" />
           <span
             className="cursor-pointer text-white"
             onClick={() => {

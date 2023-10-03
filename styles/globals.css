@@ -223,3 +223,7 @@ a.nav-link:hover {
 .rounded-border {
   border-radius: 24px;
 }
+
+.move-up {
+    animation: move-up 1s ease forwards;
+}

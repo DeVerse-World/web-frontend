@@ -236,6 +236,12 @@ class FirebaseService {
         const res = await getDoc(doc(this._firestore, "images","homepage"))
         return res.data().image_headpage_url;
     }
+
+    async getVideoHeadPage(): Promise<string> {
+        const res = await getDoc(doc(this._firestore, "images", "homepage"))
+        return res.data().video_headpage_url;
+    }
+
     async getImageContentAbout(): Promise<string> {
         const res = await getDoc(doc(this._firestore,"images","contentAbout"))
         return res.data().img_content_about;

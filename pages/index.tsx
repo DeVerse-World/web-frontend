@@ -7,6 +7,7 @@ import CommunityPartnerSection from "../components/home/CommunityPartnerSection"
 import Popup from "../components/Popup";
 import TrendingSection from "../components/home/TrendingSection";
 import EpicDownloadButton from "../components/EpicDownloadButton";
+import ContentAbout from "../components/about/ContentAbout";
 
 const IntroSection = dynamic(() => import('../components/home/IntroSection').then((mod) => mod.default))
 const HighlightFeatureSection = dynamic(() => import('../components/home/HighlightFeaturesSection').then((mod) => mod.default))
@@ -43,6 +44,7 @@ function Main({
   const [showBlogToggle, setShowBlogToggle] = useState(false);
   const { remoteConfig } = useContext(AppContext);
   const [imageHeadPage, setImageHeadPage] = useState();
+  const [videoHeadPage, setVideoHeadPage] = useState();
   const imgPlaceHolder = placeholder || imageHeadPage;
 
   useEffect(() => {
@@ -50,6 +52,7 @@ function Main({
       FirebaseService.getShouldShowBlogToggle(remoteConfig).then(setShowBlogToggle)
     
     FirebaseService.getImageHeadPage().then(setImageHeadPage)
+    FirebaseService.getVideoHeadPage().then(setVideoHeadPage)
   }, [remoteConfig])
 
   return (
@@ -57,14 +60,14 @@ function Main({
         <Popup />
         <WelcomeSection
           placeholder={imgPlaceHolder}
-          imageHeadPage={imageHeadPage}
+          imageHeadPage={videoHeadPage}
           partners={partners}
           communityPartners={communityPartners}
           introVideoUrl={introVideoUrl}    
         />
         
         
-        <IntroSection />
+        {/* <IntroSection /> */}
        
         <div className="px-16 lg:px-20">
           <HighlightFeatureSection />

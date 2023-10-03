@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Image } from "react-bootstrap";
 import classNames from 'classnames';
 
-
-const FeatureSection = ({ title, description, imgSrc, reverse=false }) => (
-  <div className={classNames(
-    "flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20",
-    reverse ? "lg:flex-row-reverse" : "lg:flex-row",
-  )}>
+const FeatureSection = ({ title, description, imgSrc, reverse=false, sectionRef }) => (
+  <div
+    ref={sectionRef} // Assign the ref to the individual FeatureSection
+    className={classNames(
+      "flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20 move-up",
+      reverse ? "lg:flex-row-reverse" : "lg:flex-row",
+    )}
+  >
     <div className="mx-auto flex max-w-md flex-col">
       <h2 className="text-3xl font-bold tracking-tight text-lightest sm:text-5xl">
         {title}
@@ -22,30 +24,62 @@ const FeatureSection = ({ title, description, imgSrc, reverse=false }) => (
           src={imgSrc} width={undefined} height={undefined} />
     </div>
   </div>
-)
+);
 
 function HighlightFeatureSection() {
+  const featureSectionRefs = useRef([null, null, null]);
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Add the "move-up" class to the individual FeatureSection components
+          entry.target.classList.add("move-up");
+        }
+      });
+    }, 
+    {
+      threshold: 0.9,
+    });
+    // Observe each FeatureSection
+    featureSectionRefs.current.forEach(ref => {
+      if (ref) {
+        observer.observe(ref);
+      }
+    });
 
-    return (
-        <section className="flex flex-col gap-28 lg:gap-64 max-w-7xl mx-auto py-20 lg:py-56">
-            <FeatureSection
-              title="Unlimited exploration"
-              description="Discover never-ending worlds and games constructed by the communities"
-              imgSrc="/images/highlight-exploration.webp"
-            />
-            <FeatureSection
-              title="Become a pioneer in metaverse"
-              description="Easily contribute and build the interconnected metaverse without programming knowledge using our drag-n-drop Editor, or enhance even beyond with our Unreal Engine SDK."
-              imgSrc="/images/highlight-pioneer.webp"
-              reverse
-            />
-            <FeatureSection
-              title="Turn your work into money"
-              description="Earn by selling your digital contents, tackling quest events, serving certain social roles and contributing to the metaverse."
-              imgSrc="/images/highlight-money.webp"
-            />
-        </section>
-    );
+    // Clean up the observer on component unmount
+    return () => {
+      featureSectionRefs.current.forEach(ref => {
+        if (ref) {
+          observer.unobserve(ref);
+        }
+      });
+    };
+  }, []);
+
+  return (
+    <section className="flex flex-col gap-28 lg:gap-64 max-w-7xl mx-auto py-20 lg:py-56">
+      <FeatureSection
+        title="One for all the fun"
+        description="Discover endless games and experiences constructed by the communities on the islands"
+        imgSrc="/images/island.png"
+        sectionRef={featureSectionRefs.current[0]} // Pass the ref
+      />
+      <FeatureSection
+        title="Seamless experience"
+        description="Easily travel and play games that are personalized to you"
+        imgSrc="/images/highlight-pioneer.webp"
+        reverse
+        sectionRef={featureSectionRefs.current[1]} // Pass the ref
+      />
+      <FeatureSection
+        title="Continuous community collaboration"
+        description="Work together to expand the fun"
+        imgSrc="/images/highlight-money.webp"
+        sectionRef={featureSectionRefs.current[2]} // Pass the ref
+      />
+    </section>
+  );
 }
 
 export default HighlightFeatureSection;
