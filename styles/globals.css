@@ -231,3 +231,15 @@ a.nav-link:hover {
 .move-up {
     animation: move-up 1s ease forwards;
 }
+
+.img-wrapper {
+  overflow: hidden;
+}
+
+img.hover-zoom {
+  transition: all 0.3s ease 0s;
+  width: 100%;
+}
+img.hover-zoom:hover {
+  transform: scale(1.25);
+}

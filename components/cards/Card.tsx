@@ -28,7 +28,7 @@ const Card = ({
           <img
             src={thumbnail || "/images/color-image-placeholder.webp"}
             alt="Thumbnail image"
-            className="h-full w-full aspect-[12/10] object-cover object-center bg-darkest"
+            className="h-full w-full aspect-[12/10] object-cover object-center bg-darkest hover-zoom"
             loading="lazy"
             style={{
               borderRadius: "24px 24px 0 0",

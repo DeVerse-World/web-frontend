@@ -2,13 +2,14 @@ import React, { useEffect, useRef } from "react";
 import { Image } from "react-bootstrap";
 import classNames from 'classnames';
 
-const FeatureSection = ({ title, description, imgSrc, reverse=false, sectionRef }) => (
+const FeatureSection = ({ title, description, imgSrc, bgSrc, reverse=false, sectionRef }) => (
   <div
     ref={sectionRef} // Assign the ref to the individual FeatureSection
     className={classNames(
-      "flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20 move-up",
+      "flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-20 move-up w-full",
       reverse ? "lg:flex-row-reverse" : "lg:flex-row",
     )}
+    style={{ backgroundImage: `url(${bgSrc})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
   >
     <div className="mx-auto flex max-w-md flex-col">
       <h2 className="text-3xl font-bold tracking-tight text-lightest sm:text-5xl">
@@ -20,7 +21,7 @@ const FeatureSection = ({ title, description, imgSrc, reverse=false, sectionRef 
     </div>
 
     <div className="shrink-0 rounded-lg xl:order-2 aspect-[4/3] aspect-w-1 w-full sm:w-[40rem] lg:w-7/12 overflow-hidden">
-      <Image className="h-full w-full aspect-[12/9] object-cover object-center"
+      <Image className="h-full w-full object-contain object-center"
           src={imgSrc} width={undefined} height={undefined} />
     </div>
   </div>
@@ -58,24 +59,27 @@ function HighlightFeatureSection() {
   }, []);
 
   return (
-    <section className="flex flex-col gap-28 lg:gap-64 max-w-7xl mx-auto py-20 lg:py-56">
+    <section className="flex flex-col gap-0 lg:gap-64 mx-auto py-20 lg:py-0 w-full">
       <FeatureSection
         title="One for all the fun"
         description="Discover endless games and experiences constructed by the communities on the islands"
-        imgSrc="/images/island.png"
+        imgSrc="/images/section1.webp"
+        bgSrc="/images/section1-bg.webp"
         sectionRef={featureSectionRefs.current[0]} // Pass the ref
       />
       <FeatureSection
         title="Seamless experience"
         description="Easily travel and play games that are personalized to you"
-        imgSrc="/images/highlight-pioneer.webp"
+        imgSrc="/images/section2.webp"
+        bgSrc="/images/section2-bg.webp"
         reverse
         sectionRef={featureSectionRefs.current[1]} // Pass the ref
       />
       <FeatureSection
-        title="Continuous community collaboration"
+        title="Continuous Community Collaboration"
         description="Work together to expand the fun"
-        imgSrc="/images/highlight-money.webp"
+        imgSrc="/images/section3.webp"
+        bgSrc="/images/section3-bg.webp"
         sectionRef={featureSectionRefs.current[2]} // Pass the ref
       />
     </section>

@@ -69,8 +69,8 @@ function Main({
         
         {/* <IntroSection /> */}
        
-        <div className="px-16 lg:px-20">
-          <HighlightFeatureSection />
+        <div className="px-16 lg:px-0">
+          <HighlightFeatureSection/>
           <div>
           <TrendingSection/>
         </div>
