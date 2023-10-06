@@ -28,7 +28,7 @@ function DeverseApp({ Component, pageProps }) {
             <Head>
               <title>Deverse World</title>
               <meta name="title" content="Deverse World" />
-              <meta name="description" content="Your portal to the endless virtual world experiences, owned by the users" />
+              <meta name="description" content="Where adventure meets opportunities" />
               <meta name="keywords" content="metaverse, sandbox, unreal engine 5, deverse world, deverse, editor, building, simulation, gameplay, build game, develop game, creator, content, assets, nft, the sandbox, decentraland, roblox, multiverse, youtube, social, minecraft" />
               <meta property="og:site_name" content="Deverse World" />
               <meta property="og:image" content="https://firebasestorage.googleapis.com/v0/b/deverse-357506.appspot.com/o/logo.webp?alt=media&token=67e233e2-fba3-4055-9050-41a2f36f759e" />

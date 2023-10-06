@@ -31,6 +31,10 @@ export default function WelcomeSection({
           <source src={"images/Deverse World Introduction Video.webm"} type="video/webm" />
           Your browser does not support the video tag.
         </video>
+        <div
+        className="absolute inset-0 bg-black opacity-60"
+        style={{ zIndex: 1 }}
+      ></div>
       </div>
 
       <div className="relative z-10 pl-6 lg:pl-8 xl:pl-12">

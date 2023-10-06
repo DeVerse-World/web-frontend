@@ -5,7 +5,7 @@ import TeamMemberSection from "../../components/home/TeamMemberSection";
 export default function About() {
     return (
         <div className='flex flex-col items'>
-            <ContentAbout/>
+            {/* <ContentAbout/> */}
             <TeamMemberSection />
             <AdvisorSection />
         </div>

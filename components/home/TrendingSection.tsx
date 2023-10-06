@@ -20,7 +20,15 @@ export default function TrendingSection() {
 
   return (
     <section aria-labelledby="trending-heading">
-      <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
+      <div className="relative"
+      style={{ 
+        background: 'linear-gradient(to right, rgba(0, 0, 0, 0.2), rgba(0, 0, 128, 0.2)), url(your-background-image.jpg)', 
+        backgroundSize: 'cover', 
+        backgroundRepeat: 'no-repeat' 
+      }}
+      >
+      <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8 lg:pt-32"
+      >
         <div className="md:flex md:items-center md:justify-between">
           <h2
             id="favorites-heading"
@@ -47,6 +55,7 @@ export default function TrendingSection() {
             </a>
           ))}
         </div>
+      </div>
       </div>
     </section>
   );

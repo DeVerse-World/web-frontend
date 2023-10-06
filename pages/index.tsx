@@ -8,6 +8,8 @@ import Popup from "../components/Popup";
 import TrendingSection from "../components/home/TrendingSection";
 import EpicDownloadButton from "../components/EpicDownloadButton";
 import ContentAbout from "../components/about/ContentAbout";
+import AdvisorSection from "../components/home/AdvisorSection";
+import TeamMemberSection from "../components/home/TeamMemberSection";
 
 const IntroSection = dynamic(() => import('../components/home/IntroSection').then((mod) => mod.default))
 const HighlightFeatureSection = dynamic(() => import('../components/home/HighlightFeaturesSection').then((mod) => mod.default))
@@ -80,7 +82,11 @@ function Main({
           }
        
         </div>
-       
+        <div className='flex flex-col items'>
+            {/* <ContentAbout/> */}
+            <TeamMemberSection />
+            <AdvisorSection />
+        </div>
       </div>
   );
 }
