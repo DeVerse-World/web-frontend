@@ -33,11 +33,11 @@ const navigation = [
         href: `/marketplace?type=${MarketplaceTabKey.WORLD_TYPE}`,
         type: MarketplaceTabKey.WORLD_TYPE,
       },
-      {
-        name: "Assets",
-        href: `/marketplace?type=${MarketplaceTabKey.NFT_TYPE}`,
-        type: MarketplaceTabKey.NFT_TYPE,
-      },
+      // {
+      //   name: "Assets",
+      //   href: `/marketplace?type=${MarketplaceTabKey.NFT_TYPE}`,
+      //   type: MarketplaceTabKey.NFT_TYPE,
+      // },
     ],
   },
   { name: "Create", href: "/create", icon: WrenchScrewdriverIcon },
@@ -102,7 +102,7 @@ const TabWithOptions = ({ item, router, setSidebarOpen }) => {
                       router.query.type === option.type
                         ? "bg-gray-800 text-white"
                         : "text-gray-400 hover:text-white hover:bg-gray-800",
-                      "group flex gap-x-3 rounded-md py-2 pr-2 pl-11 text-sm leading-6 font-semibold no-underline"
+                      "group flex gap-x-3 rounded-md py-2 pr-2 pl-11 text-sm leading-6 font-semibold no-underline",
                     )}
                     onClick={() => setSidebarOpen(false)}
                   >

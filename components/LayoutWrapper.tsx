@@ -22,10 +22,10 @@ export default function LayoutWrapper(props: SidebarProps) {
         <div className="body-container">
           <Navbar setSidebarOpen={setSidebarOpen} />
           <div
-            className="flex flex-col justify-between"
+            className="flex flex-col justify-between overflow-x-hidden"
             style={{ minHeight: `calc(100vh - 4rem)` }}
           >
-            <div className="h-full">{props.children}</div>
+            <div className="h-full overflow-x-scroll">{props.children}</div>
             <Footer />
           </div>
         </div>

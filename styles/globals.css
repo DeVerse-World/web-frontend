@@ -10,7 +10,10 @@ body * {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
+}
+
+.overflow-visible {
+  overflow: visible;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -194,7 +197,8 @@ body * {
 @media (min-width: 821px) {
   /* CSS rules for bigger screens */
   .body-container {
-    padding: 0rem 0rem 0 12rem;
+    padding: 0.3rem 0rem 0rem 12rem;
+    /* padding: 0rem 0rem 0 12rem; */
   }
 }
 
