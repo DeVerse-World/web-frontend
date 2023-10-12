@@ -78,13 +78,11 @@ function Info() {
         }}
       >
         <div className="flex flex-col items-start max-w-sm pt-16 sm:pt-20 pl-12 sm:pl-16">
-          <h2 className="text-white text-3xl font-bold mb-8">
+          <h2 className="text-white text-20xl font-bold mb-8">
             Join the journey
           </h2>
           <p className="mb-6">
-            Get ready to immerse yourself in the magical adventure of Deverse
-            World, where you can participate in a digital revolution and explore
-            the limitless possibilities of the virtual realm.
+          Get ready to explore, conquere, and claim endless uncharted floating isles
           </p>
 
           <div className="flex items-center gap-x-4">

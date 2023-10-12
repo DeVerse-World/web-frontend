@@ -64,6 +64,10 @@ body * {
   /* font-family: 'Akira Expanded', sans-serif; */
 }
 
+.deverse-header {
+  font-family: 'Orbitron', sans-serif;
+}
+
 .bg-deverse {
   background-image: radial-gradient(
       closest-side,
@@ -197,7 +201,7 @@ body * {
 @media (min-width: 821px) {
   /* CSS rules for bigger screens */
   .body-container {
-    padding: 0.3rem 0rem 0rem 12rem;
+    padding: 0.3rem 0rem 0rem 0rem;
     /* padding: 0rem 0rem 0 12rem; */
   }
 }

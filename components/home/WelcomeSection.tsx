@@ -13,7 +13,7 @@ export default function WelcomeSection({
 }) {
   console.log('imageHeadPage:', imageHeadPage);
   return (
-    <div className="relative pb-16 sm:pb-20 h-[54rem]">
+    <div className="relative pb-16 sm:pb-20 h-[85rem]">
       <div className="absolute inset-0 flex items-center justify-center z-0">
         <video
           autoPlay
@@ -37,22 +37,25 @@ export default function WelcomeSection({
       ></div>
       </div>
 
-      <div className="relative z-10 pl-6 lg:pl-8 xl:pl-12">
-        <div className="mx-auto pt-48">
-          <div className="">
-            <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
-              Deverse World
-            </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-300">
-              Where adventure meets opportunity, where worlds are interconnected
-            </p>
+      <div className="flex justify-center h-screen">
+        <div className="relative z-10 pl-6 lg:pl-8 xl:pl-12">
+          <div className="mx-auto pt-48">
+            <div className="text-center">
+              <h1 className="text-xl font-bold tracking-tight text-white sm:text-5xl deverse-header">
+                Deverse World
+              </h1>
+              <p className="mt-6 text-lg leading-8 text-gray-300">
+                Where adventure meets opportunity, where worlds are interconnected
+              </p>
 
-            <div className="mt-10 flex items-center gap-x-4">
-              <EpicDownloadButton />
+              <div className="mt-10 flex items-center gap-x-4 justify-center">
+                <EpicDownloadButton />
+              </div>
             </div>
           </div>
         </div>
       </div>
+
 
       {/* Logo cloud (positioned below the content) */}
       <div

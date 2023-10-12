@@ -16,10 +16,10 @@ const FeatureSection = ({ title, description, imgSrc, bgSrc, reverse=false, sect
 
     <div className="mx-auto flex max-w-md flex-col"
     style={{ zIndex: 1 }}>
-      <h2 className="text-3xl font-bold tracking-tight text-lightest sm:text-5xl">
+      <h2 className="text-3xl font-bold tracking-tight text-lightest sm:text-5xl deverse-header">
         {title}
       </h2>
-      <p className="mt-3 text-lg text-lighter">
+      <p className="text-xl mt-3 text-lg text-lighter">
         {description}
       </p>
     </div>
@@ -65,23 +65,23 @@ function HighlightFeatureSection() {
   return (
     <section className="flex flex-col gap-0 lg:gap-64 mx-auto py-20 lg:py-0 w-full">
       <FeatureSection
-        title="One for all the fun"
-        description="Discover endless games and experiences constructed by the communities on the islands"
+        title="EXPLORE"
+        description="Be the first to find beautiful, unique floating isles. Fight against monsters for resources and collect hidden rare items."
         imgSrc="/images/section1.webp"
         bgSrc="/images/section1-bg.webp"
         sectionRef={featureSectionRefs.current[0]} // Pass the ref
       />
       <FeatureSection
-        title="Seamless experience"
-        description="Easily travel and play games that are personalized to you"
+        title="BUILD"
+        description="Construct, build, design your games, experiences or events on charted isles."
         imgSrc="/images/section2.webp"
         bgSrc="/images/section2-bg.webp"
         reverse
         sectionRef={featureSectionRefs.current[1]} // Pass the ref
       />
       <FeatureSection
-        title="Continuous Community Collaboration"
-        description="Work together to expand the fun"
+        title="CONTINUOUS COMMUNITY COLLABORATION"
+        description="Work together, earn together, expand the endless boundary adventures."
         imgSrc="/images/section3.webp"
         bgSrc="/images/section3-bg.webp"
         sectionRef={featureSectionRefs.current[2]} // Pass the ref

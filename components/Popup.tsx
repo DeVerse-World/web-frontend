@@ -50,7 +50,7 @@ export default function Popup() {
             >
               <Dialog.Panel className="z-10 flex flex-col items-center transform text-left text-base transition my-20 aspect-[2/1] w-1/2 md:w-[700px] lg:w-[54rem]">
                 <div className="relative flex items-center px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8 bg-center w-full h-full cursor-pointer"
-                      onClick={() => router.push('/creator_program')}
+                      //onClick={() => router.push('/creator_program')}
                       style={{
                         backgroundImage: `url('${imageBanner}')`,
                         backgroundRepeat: 'no-repeat',
