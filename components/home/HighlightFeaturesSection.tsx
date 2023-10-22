@@ -63,7 +63,7 @@ function HighlightFeatureSection() {
   }, []);
 
   return (
-    <section className="flex flex-col gap-0 lg:gap-64 mx-auto py-20 lg:py-0 w-full">
+    <section className="flex flex-col gap-0 lg:gap-64 mx-auto lg:py-0 w-full">
       <FeatureSection
         title="EXPLORE"
         description="Be the first to find beautiful, unique floating isles. Fight against monsters for resources and collect hidden rare items."

@@ -48,9 +48,9 @@ export default function WelcomeSection({
                 Where adventure meets opportunity, where worlds are interconnected
               </p>
 
-              <div className="mt-10 flex items-center gap-x-4 justify-center">
+              {/* <div className="mt-10 flex items-center gap-x-4 justify-center"> // TODO @AH this has wrong Z
                 <EpicDownloadButton />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

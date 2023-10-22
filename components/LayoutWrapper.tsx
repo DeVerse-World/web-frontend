@@ -20,7 +20,6 @@ export default function LayoutWrapper(props: SidebarProps) {
       <div className="bg-darkest text-lightest">
         <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <div className="body-container">
-          <Navbar setSidebarOpen={setSidebarOpen} />
           <div
             className="flex flex-col justify-between overflow-x-hidden"
             style={{ minHeight: `calc(100vh - 4rem)` }}

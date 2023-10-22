@@ -19,10 +19,11 @@ import {
 } from "@heroicons/react/24/outline";
 import classNames from "classnames";
 import { MarketplaceTabKey } from "../MarketplaceFilterTab";
+import Navbar from "../layout/Navbar";
 
 const navigation = [
   { name: "Home", href: "/", icon: HomeIcon },
-  { name: "Alpha", href: "/alpha", icon: PlayCircleIcon },
+  //{ name: "Alpha", href: "/alpha", icon: PlayCircleIcon },
   {
     name: "Explore",
     href: "/marketplace",
@@ -40,7 +41,7 @@ const navigation = [
       // },
     ],
   },
-  { name: "Create", href: "/create", icon: WrenchScrewdriverIcon },
+  // { name: "Create", href: "/create", icon: WrenchScrewdriverIcon },
   //{ name: "About", href: "/about", icon: UsersIcon },
   // { name: "Stream", href: "/stream", icon: (<BsBroadcast fontSize="1.5rem" color='rgb(97 198 208)' />) },
   { name: "Docs", href: "https://docs.deverse.world", icon: DocumentTextIcon },
@@ -49,7 +50,7 @@ const navigation = [
 
 const Tab = ({ item, router, setSidebarOpen }) => {
   return (
-    <div key={item.name}>
+    <div key={item.name} className = "flex items-center">
       <Link href={item.href}>
         <a
           className={classNames(
@@ -73,13 +74,13 @@ const TabWithOptions = ({ item, router, setSidebarOpen }) => {
     <Disclosure
       as="div"
       key={item.name}
-      className="py-3"
+      className="py-3 relative"
       defaultOpen={router.pathname === item.href}
     >
       {({ open }) => (
         <>
           <h3 className="-my-3 flow-root">
-            <Disclosure.Button className="flex w-full items-center justify-between rounded-md p-2 text-sm text-gray-400 hover:text-white hover:bg-gray-800 font-semibold">
+            <Disclosure.Button className="flex p-2 w-full items-center justify-between rounded-md p-1 text-sm text-gray-400 hover:text-white hover:bg-gray-800 font-semibold">
               <div className="group flex gap-x-5">
                 <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
                 {item.name}
@@ -93,10 +94,12 @@ const TabWithOptions = ({ item, router, setSidebarOpen }) => {
               </span>
             </Disclosure.Button>
           </h3>
-          <Disclosure.Panel className="pt-6">
+          <Disclosure.Panel
+            className="absolute right-0 mt-8 w-full bg-gray-900 rounded-md shadow-md z-50" // Added background color and shadow
+          >
             <div className="space-y-4">
               {item.options.map((option, optionIdx) => (
-                <Link href={option.href}>
+                <Link href={option.href} key={option.name}>
                   <a
                     className={classNames(
                       router.query.type === option.type
@@ -225,10 +228,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       </Transition.Root>
 
       {/* Static sidebar for desktop */}
-      <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-55 lg:flex-col">
+      <div className="lg:fixed lg:inset-x-0 lg:z-50 lg:flex lg:flex-row bg-gray-900">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex grow flex-col gap-y-5 overflow-y-auto px-6">
-          <a className="flex h-16 gap-1 shrink-0 items-center" href="/">
+        <div className="flex grow flex-row gap-y-5 px-6 gap-2">
+          <a className="hidden lg:flex flex h-16 gap-1 shrink-0 items-center" href="/">
             <Image
               className="h-8 w-auto"
               src="/images/logo.webp"
@@ -243,9 +246,9 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               alt="Deverse text logo"
             />
           </a>
-          <nav className="flex flex-1 flex-col">
-            <div className="flex flex-1 flex-col gap-y-7">
-              <div className="-mx-2 space-y-1">
+          <nav className="hidden lg:flex flex h-16 gap-1 shrink-0 items-center">
+            <div className="flex space-x-4">
+
                 {navigation.map((item) => {
                   if (
                     item.adminOnly === undefined ||
@@ -269,9 +272,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                     );
                   }
                 })}
-              </div>
+
             </div>
           </nav>
+          <div className="hidden lg:flex flex flex-grow"></div>
+          <Navbar setSidebarOpen={setSidebarOpen} />
         </div>
       </div>
     </>

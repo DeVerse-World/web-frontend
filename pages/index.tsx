@@ -71,7 +71,7 @@ function Main({
         
         {/* <IntroSection /> */}
        
-        <div className="px-16 lg:px-0">
+        <div className="lg:px-0">
           <HighlightFeatureSection/>
           <div>
           <TrendingSection/>
@@ -82,11 +82,11 @@ function Main({
           }
        
         </div>
-        <div className='flex flex-col items'>
+        {/* <div className='flex flex-col items'> */}
             {/* <ContentAbout/> */}
-            <TeamMemberSection />
-            <AdvisorSection />
-        </div>
+            {/* <TeamMemberSection /> */}
+            {/* <AdvisorSection /> */}
+        {/* </div> */}
       </div>
   );
 }

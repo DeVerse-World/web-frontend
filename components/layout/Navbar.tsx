@@ -12,7 +12,7 @@ const Navbar = ({ setSidebarOpen }) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   return (
-    <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center justify-between gap-x-6 bg-gray-900 px-4 shadow-sm sm:px-6 lg:px-8">
+    <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center justify-between bg-gray-900 shadow-sm flex-grow">
       <button
         type="button"
         className="-m-2.5 p-2.5 text-white lg:hidden"
