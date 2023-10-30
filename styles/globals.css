@@ -65,7 +65,7 @@ body * {
 }
 
 .deverse-header {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
 }
 
 .bg-deverse {
@@ -201,7 +201,7 @@ body * {
 @media (min-width: 821px) {
   /* CSS rules for bigger screens */
   .body-container {
-    padding: 0.3rem 0rem 0rem 0rem;
+    padding: 3rem 0rem 0rem 0rem;
     /* padding: 0rem 0rem 0 12rem; */
   }
 }
@@ -234,11 +234,11 @@ a.nav-link:hover {
 }
 
 .move-up {
-    animation: move-up 1s ease forwards;
+  animation: move-up 1s ease forwards;
 }
 
 .move-up {
-    animation: move-up 1s ease forwards;
+  animation: move-up 1s ease forwards;
 }
 
 .img-wrapper {

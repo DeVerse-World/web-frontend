@@ -3,7 +3,7 @@ import { AppContext } from "../contexts/app_context";
 import Image from "next/image";
 import { Bars3Icon } from "@heroicons/react/20/solid";
 import AccountMenu from "../AccountMenu";
-import Button from "../Button";
+import { Button } from "react-bootstrap";
 
 const Navbar = ({ setSidebarOpen }) => {
   // This call is triggered twice on page load.
@@ -53,8 +53,8 @@ const Navbar = ({ setSidebarOpen }) => {
               )}
             </>
           ) : (
-            <Button href="/login" primary>
-              Login
+            <Button className="action-button" href="/login">
+              Sign in
             </Button>
           )}
         </a>

@@ -116,7 +116,7 @@ function DerivWorldList({ data, infiniteScroll = true }: ListProps) {
         loader={
           <button
             type="button"
-            class="inline-flex justify-center rounded-md bg-brand px-3 py-2 text-sm font-semibold text-darkest shadow-sm hover:bg-gray-50 sm:col-start-1 mb-2 sm:mb-0"
+            class="inline-flex justify-center action-button hover:bg-gray-50 sm:col-start-1 mb-2 sm:mb-0"
             disabled
           >
             <svg class="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">

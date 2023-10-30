@@ -9,9 +9,6 @@ import {
   XMarkIcon,
   HomeIcon,
   RocketLaunchIcon,
-  PlayCircleIcon,
-  WrenchScrewdriverIcon,
-  UsersIcon,
   DocumentTextIcon,
   ChevronDownIcon,
   ChevronUpIcon,
@@ -50,14 +47,14 @@ const navigation = [
 
 const Tab = ({ item, router, setSidebarOpen }) => {
   return (
-    <div key={item.name} className = "flex items-center">
+    <div key={item.name} className="flex items-center">
       <Link href={item.href}>
         <a
           className={classNames(
             router.pathname === item.href
               ? "bg-gray-800 text-white"
               : "text-gray-400 hover:text-white hover:bg-gray-800",
-            "group flex gap-x-5 rounded-md p-2 text-sm leading-6 font-semibold no-underline"
+            "group flex gap-x-2 rounded-md p-2 text-sm leading-6 font-semibold no-underline"
           )}
           onClick={() => setSidebarOpen(false)}
         >
@@ -81,11 +78,11 @@ const TabWithOptions = ({ item, router, setSidebarOpen }) => {
         <>
           <h3 className="-my-3 flow-root">
             <Disclosure.Button className="flex p-2 w-full items-center justify-between rounded-md p-1 text-sm text-gray-400 hover:text-white hover:bg-gray-800 font-semibold">
-              <div className="group flex gap-x-5">
+              <div className="group flex gap-x-2">
                 <item.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
                 {item.name}
               </div>
-              <span className="ml-6 flex items-center">
+              <span className="ml-2 flex items-center">
                 {open ? (
                   <ChevronUpIcon className="h-5 w-5" aria-hidden="true" />
                 ) : (
@@ -105,7 +102,7 @@ const TabWithOptions = ({ item, router, setSidebarOpen }) => {
                       router.query.type === option.type
                         ? "bg-gray-800 text-white"
                         : "text-gray-400 hover:text-white hover:bg-gray-800",
-                      "group flex gap-x-3 rounded-md py-2 pr-2 pl-11 text-sm leading-6 font-semibold no-underline",
+                      "group flex gap-x-3 rounded-md py-2 pr-2 pl-11 text-sm leading-6 font-semibold no-underline"
                     )}
                     onClick={() => setSidebarOpen(false)}
                   >
@@ -180,7 +177,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                   </div>
                 </Transition.Child>
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex grow flex-col gap-y-1 overflow-y-auto bg-gray-900 px-6 ring-1 ring-white/10">
+                <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 ring-1 ring-white/10">
                   <div className="flex h-16 shrink-0 items-center">
                     <Image
                       className="h-8 w-auto"
@@ -230,8 +227,11 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* Static sidebar for desktop */}
       <div className="lg:fixed lg:inset-x-0 lg:z-50 lg:flex lg:flex-row bg-gray-900">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex grow flex-row gap-y-5 px-6 gap-2">
-          <a className="hidden lg:flex flex h-16 gap-1 shrink-0 items-center" href="/">
+        <div className="flex grow flex-row gap-y-5 px-6 gap-5">
+          <a
+            className="hidden lg:flex flex h-16 gap-1 shrink-0 items-center"
+            href="/"
+          >
             <Image
               className="h-8 w-auto"
               src="/images/logo.webp"
@@ -248,31 +248,29 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
           </a>
           <nav className="hidden lg:flex flex h-16 gap-1 shrink-0 items-center">
             <div className="flex space-x-4">
-
-                {navigation.map((item) => {
-                  if (
-                    item.adminOnly === undefined ||
-                    item.adminOnly === false ||
-                    (item.adminOnly === true && isAdminUser(user))
-                  ) {
-                    if (item.options)
-                      return (
-                        <TabWithOptions
-                          item={item}
-                          router={router}
-                          setSidebarOpen={setSidebarOpen}
-                        />
-                      );
+              {navigation.map((item) => {
+                if (
+                  item.adminOnly === undefined ||
+                  item.adminOnly === false ||
+                  (item.adminOnly === true && isAdminUser(user))
+                ) {
+                  if (item.options)
                     return (
-                      <Tab
+                      <TabWithOptions
                         item={item}
                         router={router}
                         setSidebarOpen={setSidebarOpen}
                       />
                     );
-                  }
-                })}
-
+                  return (
+                    <Tab
+                      item={item}
+                      router={router}
+                      setSidebarOpen={setSidebarOpen}
+                    />
+                  );
+                }
+              })}
             </div>
           </nav>
           <div className="hidden lg:flex flex flex-grow"></div>
