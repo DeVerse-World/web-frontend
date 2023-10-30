@@ -57,7 +57,7 @@ const Footer = () => {
           fill="url(#a)"
         ></rect>
       </svg>
-      <Row style={{ margin: "50px 0px 40px 0px" }}>
+      <Row style={{ margin: "50px 0px 40px 50px" }}>
         <Col>
           <span
             className="flex gap-1 items-center"
@@ -79,7 +79,7 @@ const Footer = () => {
           <h6>Copyright © Deverse World</h6>
         </Col>
       </Row>
-      <Row style={{ margin: "50px 0px 40px 0px" }}>
+      <Row style={{ margin: "50px 0px 40px 50px" }}>
         <Col md={2}>
           {[
             { href: "/alpha", label: "Alpha" },

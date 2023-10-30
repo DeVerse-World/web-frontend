@@ -1,13 +1,13 @@
 .modal-header {
-    border-bottom: none !important;
+  border-bottom: none !important;
 }
 
 .modal-footer {
-    border-top: none !important;
+  border-top: none !important;
 }
 
 .deverse-dialog div {
-    border-radius: 12px !important;
-    width: fit-content;
-    margin: auto;
+  border-radius: 12px !important;
+  width: fit-content;
+  margin: auto;
 }

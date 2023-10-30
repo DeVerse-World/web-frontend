@@ -166,17 +166,6 @@ const InfiniteList = ({
         </Button>
       );
     }
-    if (cardType === "avatar") {
-      buttons.push(
-        <Button secondary href={`/asset-preview?avatarId=${items[index].id}`}>
-          Preview
-          <ArrowTopRightOnSquareIcon
-            className="ml-2 h-5 w-5 inline-block"
-            aria-hidden="true"
-          />
-        </Button>
-      );
-    }
     if (cardType !== "avatar" && items[index].derivable === 1) {
       buttons.push(
         <Button
@@ -251,12 +240,26 @@ const InfiniteList = ({
           numWorlds={data.numWorlds}
         />
       );
+    if (cardType === "avatar") {
+      return (
+        <a
+          href={`/asset-preview?avatarId=${items[index].id}`}
+          className="no-underline"
+        >
+          <Card
+            thumbnail={data.image}
+            title={data.name}
+            subtitle={data && data.creator && data.creator.name}
+          />
+        </a>
+      );
+    }
 
     return (
       <Card
         thumbnail={data.image}
-        name={data.name}
-        creatorName={data && data.creator && data.creator.name}
+        title={data.name}
+        subtitle={data && data.creator && data.creator.name}
         rating={data.rating}
         buttons={getButtons(index)}
       />
@@ -294,7 +297,7 @@ const InfiniteList = ({
         loader={
           <button
             type="button"
-            className="inline-flex justify-center rounded-md bg-brand px-3 py-2 text-sm font-semibold text-darkest shadow-sm hover:bg-gray-50 sm:col-start-1 mb-2 sm:mb-0"
+            className="inline-flex action-button shadow-sm hover:bg-gray-50 sm:col-start-1 mb-2 sm:mb-0"
             disabled
           >
             <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">

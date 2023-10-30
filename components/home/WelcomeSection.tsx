@@ -1,9 +1,3 @@
-import Image from "next/image";
-import DownloadDemoButton from "../DownloadDemoButton";
-import Button from '../Button';
-import EpicDownloadButton from "../EpicDownloadButton";
-import { useEffect, useState } from "react";
-
 export default function WelcomeSection({
   placeholder,
   imageHeadPage,
@@ -11,11 +5,11 @@ export default function WelcomeSection({
   partners = [],
   communityPartners = [],
 }) {
-  console.log('imageHeadPage:', imageHeadPage);
+  console.log("imageHeadPage:", imageHeadPage);
   return (
-    <div className="relative pb-16 sm:pb-20 h-[85rem]">
-      <div className="absolute inset-0 flex items-center justify-center z-0">
-        <video
+    <div className="relative">
+      <div className="inset-0 flex items-center justify-center z-0">
+        {/* <video
           autoPlay
           loop
           muted
@@ -30,11 +24,21 @@ export default function WelcomeSection({
         >
           <source src={"images/Deverse World Introduction Video.webm"} type="video/webm" />
           Your browser does not support the video tag.
-        </video>
+        </video> */}
+        <img
+          src={"images/homepage-header.webp"}
+          className="absolute w-full h-full inset-0"
+          style={{
+            width: "100vw",
+            height: "100vh",
+            objectFit: "cover",
+          }}
+          alt="banner"
+        />
         <div
-        className="absolute inset-0 bg-black opacity-60"
-        style={{ zIndex: 1 }}
-      ></div>
+          className="absolute inset-0 bg-black opacity-60"
+          style={{ zIndex: 1, width: "100vw", height: "100vh" }}
+        ></div>
       </div>
 
       <div className="flex justify-center h-screen">
@@ -45,7 +49,8 @@ export default function WelcomeSection({
                 Deverse World
               </h1>
               <p className="mt-6 text-lg leading-8 text-gray-300">
-                Where adventure meets opportunity, where worlds are interconnected
+                Where adventure meets opportunity, where worlds are
+                interconnected
               </p>
 
               {/* <div className="mt-10 flex items-center gap-x-4 justify-center"> // TODO @AH this has wrong Z
@@ -56,13 +61,12 @@ export default function WelcomeSection({
         </div>
       </div>
 
-
       {/* Logo cloud (positioned below the content) */}
       <div
-        className="absolute bottom-0 left-0 right-0 p-4 grid max-w-lg grid-cols-3 items-center gap-x-8 gap-y-10 sm:max-w-xl md:grid-cols-3 sm:gap-x-10 lg:mx-0 lg:max-w-none xl:grid-cols-6"
-        style={{ background: 'rgba(0, 0, 0, 0.6)', zIndex: 1 }}
+        className="bottom-0 left-0 right-0 p-4 grid items-center gap-x-8 gap-y-10 sm:gap-x-10 lg:mx-0 xl:grid-cols-6 md:grid-cols-3"
+        style={{ background: "rgba(0, 0, 0, 0.6)", zIndex: 1 }}
       >
-        {[...partners, ...communityPartners].map(partner => (
+        {[...partners, ...communityPartners].map((partner) => (
           <img
             key={partner.id}
             className="max-h-12 w-full object-contain col-span-1"

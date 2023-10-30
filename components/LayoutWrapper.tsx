@@ -2,7 +2,6 @@ import { ReactNode, useState } from "react";
 import RouteGuard from "./RouteGuard";
 import Footer from "./Footer";
 import Sidebar from "./layout/Sidebar";
-import Navbar from "./layout/Navbar";
 
 type SidebarProps = {
   children?: ReactNode;
@@ -24,7 +23,7 @@ export default function LayoutWrapper(props: SidebarProps) {
             className="flex flex-col justify-between overflow-x-hidden"
             style={{ minHeight: `calc(100vh - 4rem)` }}
           >
-            <div className="h-full overflow-x-scroll">{props.children}</div>
+            <div className="h-full">{props.children}</div>
             <Footer />
           </div>
         </div>

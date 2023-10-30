@@ -12,23 +12,15 @@ import {
   UserIcon,
   CalendarDaysIcon,
   ChartBarIcon,
-  CheckBadgeIcon,
-  CursorArrowRaysIcon,
   AdjustmentsHorizontalIcon,
 } from "@heroicons/react/24/outline";
 import StorageService from "../../data/services/StorageService";
 import { TabHeaderPillBar } from "../../components/common/TabHeaderPill";
-import Card from "../../components/cards/Card";
-import CardStatPrimary from "../../components/cards/CardStatPrimary";
-import CardStatSecondary from "../../components/cards/CardStatSecondary";
-import {
-  NumViewsText,
-  TimeAgoText,
-  NumPlaysText,
-  PreviewButton,
-  LaunchButton,
-} from "../../components/cards/CardElements";
 import SettingsSection from "../account/SettingsSection";
+import Worlds from "./worlds";
+import Avatars from "./avatars";
+import Events from "./events";
+import Statistics from "./statistics";
 
 export default function CreatorAbout() {
   const { user, setUser } = useContext(AppContext);
@@ -103,101 +95,6 @@ export default function CreatorAbout() {
     setUser({ ...user, avatar: avatars[0].image });
   }, [avatars]);
 
-  user.name = "John Doe";
-
-  const dummyWorldCards = Array.from({ length: 7 }, () => {
-    return {
-      thumbnail:
-        "https://ipfs.moralis.io:2053/ipfs/QmezYc77waMZcjFAf67SaKGBBAPPoMPEEtyDxArFWprZA8/Snowboarding.png",
-      title: "Snow Mountain",
-      subtitle: "creatonam",
-      rating: 4,
-      buttons: [],
-      extra: [<NumViewsText numViews={39} />, <NumPlaysText numPlays={100} />],
-    };
-  });
-
-  const dummyEventCards = Array.from({ length: 3 }, () => {
-    return {
-      thumbnail: "https://i.imgur.com/XO8upg9.jpg",
-      title: "Goblin Invasion",
-      subtile: "CreatorName",
-      extra: [<TimeAgoText text="11 months ago" />],
-    };
-  });
-
-  const dummyAvatarCards = Array.from({ length: 1 }, () => {
-    return {
-      thumbnail: "https://renderapi.s3.amazonaws.com/Ejtjhej0t.png",
-      title: "IM",
-      subtitle: "CreatorName",
-    };
-  });
-
-  const worldsSection = (
-    <section className="w-full px-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-        {dummyWorldCards.map((card) => (
-          <Card {...card} buttons={[<PreviewButton />, <LaunchButton />]} />
-        ))}
-      </div>
-    </section>
-  );
-
-  const eventSection = (
-    <section className="w-full px-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
-        {dummyEventCards.map((card) => (
-          <Card {...card} />
-        ))}
-      </div>
-    </section>
-  );
-
-  const avatarSection = (
-    <section className="w-full px-4">
-      <div className="grid grid-cols-4 gap-4">
-        {dummyAvatarCards.map((card) => (
-          <Card {...card} />
-        ))}
-      </div>
-    </section>
-  );
-
-  const statisticsSection = (
-    <section className="w-full px-4">
-      <div className="flex flex-wrap">
-        <CardStatPrimary number={49} subtitle={"plays"} />
-        <CardStatSecondary
-          number={324}
-          subtitle="clicks"
-          iconComponent={
-            <CursorArrowRaysIcon
-              className="h-16 w-16 shrink-0"
-              aria-hidden="true"
-              style={{
-                color: "#FEEB00",
-              }}
-            />
-          }
-        />
-        <CardStatSecondary
-          number={500}
-          subtitle="views"
-          iconComponent={
-            <CheckBadgeIcon
-              className="h-14 w-14 shrink-0"
-              aria-hidden="true"
-              style={{
-                color: "#96FEDE",
-              }}
-            />
-          }
-        />
-      </div>
-    </section>
-  );
-
   const settingsSection = (
     <section className="w-full px-4">
       <SettingsSection />
@@ -249,27 +146,27 @@ export default function CreatorAbout() {
             data={[
               {
                 href: "/account",
-                label: `Worlds (${dummyWorldCards.length})`,
+                label: `Worlds`,
                 Icon: MapIcon,
-                Pane: worldsSection,
+                Pane: Worlds(),
               },
               {
                 href: "/account",
-                label: `Avatars (${dummyAvatarCards.length})`,
+                label: `Avatars`,
                 Icon: UserIcon,
-                Pane: avatarSection,
+                Pane: Avatars(),
               },
               {
                 href: "/account",
-                label: `Events (${dummyEventCards.length})`,
+                label: `Events`,
                 Icon: CalendarDaysIcon,
-                Pane: eventSection,
+                Pane: Events(),
               },
               {
                 href: "/account",
                 label: "Statistics",
                 Icon: ChartBarIcon,
-                Pane: statisticsSection,
+                Pane: Statistics(),
               },
               {
                 href: "/account",
