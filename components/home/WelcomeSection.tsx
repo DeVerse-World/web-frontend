@@ -9,7 +9,7 @@ export default function WelcomeSection({
   return (
     <div className="relative">
       <div className="inset-0 flex items-center justify-center z-0">
-        {/* <video
+        <video
           autoPlay
           loop
           muted
@@ -21,11 +21,12 @@ export default function WelcomeSection({
             height: '100%',
             objectFit: 'cover',
           }}
+          alt="banner"
         >
-          <source src={"images/Deverse World Introduction Video.webm"} type="video/webm" />
+          <source src={"images/Header-Video.webm"} type="video/webm" />
           Your browser does not support the video tag.
-        </video> */}
-        <img
+        </video>
+        {/* <img
           src={"images/homepage-header.webp"}
           className="absolute w-full h-full inset-0"
           style={{
@@ -34,7 +35,7 @@ export default function WelcomeSection({
             objectFit: "cover",
           }}
           alt="banner"
-        />
+        /> */}
         <div
           className="absolute inset-0 bg-black opacity-60"
           style={{ zIndex: 1, width: "100vw", height: "100vh" }}
@@ -49,8 +50,8 @@ export default function WelcomeSection({
                 Deverse World
               </h1>
               <p className="mt-6 text-lg leading-8 text-gray-300">
-                Where adventure meets opportunity, where worlds are
-                interconnected
+                {/* Where adventure meets opportunity, where worlds are
+                interconnected */}
               </p>
 
               {/* <div className="mt-10 flex items-center gap-x-4 justify-center"> // TODO @AH this has wrong Z
