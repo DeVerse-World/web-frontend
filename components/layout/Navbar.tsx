@@ -22,13 +22,13 @@ const Navbar = ({ setSidebarOpen }) => {
         <Bars3Icon className="h-5 w-5" aria-hidden="true" />
       </button>
       <div className="flex h-16 shrink-0 items-center lg:hidden">
-        <Image
+        {/* <Image
           className="h-8 w-auto"
           src="/images/logo.webp"
           alt="Deverse logo"
           height={32}
           width={32}
-        />
+        /> */}
       </div>
 
       <div className="flex flex-1 items-center justify-end gap-x-8">

@@ -1,6 +1,7 @@
 import { ChevronRightIcon, HomeIcon } from '@heroicons/react/20/solid'
 import RootTemplate from './subworlds/RootTemplate';
 import classNames from 'classnames'
+import Link from 'next/link';
 
 // const pages = [
 //   { name: 'Projects', href: '#', current: false },
@@ -15,10 +16,10 @@ export default function BreadCrumb({ pages }) {
       <ol role="list" className="flex items-center space-x-6">
         <li>
           <div>
-            <a href="https://www.deverse.world" className="text-lighter hover:text-light no-underline">
+            <Link href="/" className="text-lighter hover:text-light no-underline">
               <HomeIcon className="h-7 w-7 flex-shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
-            </a>
+            </Link>
           </div>
         </li>
         {pages.map((page, index) => (

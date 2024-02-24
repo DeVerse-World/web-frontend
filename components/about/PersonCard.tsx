@@ -2,7 +2,7 @@ import { ReactChild, ReactFragment, ReactPortal, Key } from "react";
 
 const PersonCard = ({ thumbnail, name, title, education, linkedinLink }) => {
     return (
-        <div className="relative">
+        <div className="relative bg-deverse-secondary">
             {linkedinLink &&
             <a href={linkedinLink} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold leading-6 text-brand">
                 <div className="absolute top-0 left-0 w-6 h-6 text-blue-500 m-2">
@@ -17,17 +17,19 @@ const PersonCard = ({ thumbnail, name, title, education, linkedinLink }) => {
                 </div>
             </a>
             }
-            <img className="aspect-[14/13] w-full rounded-2xl object-cover" src={thumbnail} alt="" />
-            <div className="mt-4 text-lg font-semibold leading-8 tracking-tight text-white">{name}</div>
-            <div  className="text-base leading-7 text-gray-300">{title}</div>
-            <div className="text-sm leading-6 text-gray-500">
-                {Array.isArray(education) ? (
-                    education.map((individualEdu, index) => (
-                        <div key={index}>{individualEdu}</div>            
-                    ))
-                ) : 
-                        <div>{education}</div>
-                }
+            <img className="aspect-[14/13] w-full object-cover" src={thumbnail} alt="" />
+            <div className="m-2">
+                <div className="mt-1 text-lg font-semibold leading-8 tracking-tight text-white">{name}</div>
+                <div className="text-base leading-7 text-gray-300">{title}</div>
+                {/* <div className="text-sm leading-6 text-gray-500">
+                    {Array.isArray(education) ? (
+                        education.map((individualEdu, index) => (
+                            <div key={index}>{individualEdu}</div>            
+                        ))
+                    ) : 
+                            <div>{education}</div>
+                    }
+                </div> */}
             </div>
         </div>
     );

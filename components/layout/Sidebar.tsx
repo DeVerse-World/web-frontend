@@ -227,10 +227,10 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       {/* Static sidebar for desktop */}
       <div className="lg:fixed lg:inset-x-0 lg:z-50 lg:flex lg:flex-row bg-gray-900">
         {/* Sidebar component, swap this element with another sidebar if you like */}
-        <div className="flex grow flex-row gap-y-5 px-6 gap-5">
-          <a
-            className="hidden lg:flex flex h-16 gap-1 shrink-0 items-center"
-            href="https://www.deverse.world"
+        <div className="flex grow flex-row gap-y-5 px-6 gap-5 items-center">
+          <Link
+            className="hidden lg:flex flex h-16 gap-1 shrink-0"
+            href="/"
           >
             <svg width="32" height="32" viewBox="0 0 2000 2000" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_223_46)">
@@ -255,7 +255,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
               src={"/images/logo-text.webp"}
               alt="Deverse text logo"
             /> */}
-          </a>
+          </Link>
           <nav className="hidden lg:flex flex h-16 gap-1 shrink-0 items-center">
             <div className="flex space-x-4">
               {navigation.map((item) => {

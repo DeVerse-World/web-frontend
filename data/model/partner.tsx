@@ -11,6 +11,7 @@ export type TeamMember = {
     title: string;
     education: string;
     thumbnail: string;
+    order_id: number;
 }
 
 export type TeamAdvisor = {

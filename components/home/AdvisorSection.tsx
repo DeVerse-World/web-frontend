@@ -16,10 +16,10 @@ function AdvisorSection() {
      
     }, [])
     return (
-        <div className="mx-auto my-24 max-w-5xl px-6 sm:mt-5 lg:px-8">
-            {/* <div className="max-w-2xl lg:mx-0">     
-                <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl ">Angels and Advisors</h2>
-            </div> */}
+        <div className="mx-auto my-24 max-w-5xl px-6 sm:mt-5 lg:px-8 lg:mt-10">
+            <div className="max-w-2xl lg:mx-0">     
+                <h2 className="deverse-header text-3xl font-bold tracking-tight text-white sm:text-4xl ">Angels</h2>
+            </div>
             <div
                 className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-9 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3"
             >

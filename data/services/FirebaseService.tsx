@@ -168,10 +168,12 @@ class FirebaseService {
                     education: data['education'],
                     title: data['title'],
                     id: doc.id,
+                    order_id: data['id'],
                 }
+                console.log(member);
                 teamMembers.push(member);
             });
-            this._teamMembers = teamMembers;
+            this._teamMembers = teamMembers.sort((a, b) => a.order_id - b.order_id);
         }
         return this._teamMembers;
     }

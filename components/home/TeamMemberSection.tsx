@@ -43,13 +43,13 @@ function TeamMemberSection(props) {
 
     return (
         <div>
-            <div className="mx-auto mt-1 max-w-5xl px-6 sm:mt-28 lg:px-8">
-                {/* <div className="max-w-2xl lg:mx-0">     
-                    <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl ">Founding team</h2>
+            <div className="mx-auto mt-10 max-w-5xl px-6 sm:mt-28 lg:px-8">
+                <div className="max-w-2xl lg:mx-0">     
+                    <h2 className="deverse-header text-3xl font-bold tracking-tight text-white sm:text-4xl ">The Crews</h2>
                     <p className="mt-4 text-lg leading-8 text-gray-300">
-                    A dynamic and talented group of individuals driven by passion, innovation, and a shared mission to make a meaningful impact on the world.
+                    A dynamic and talented group of individuals driven by passion, innovation, and a shared mission to onboard millions of players into the virtual realm.
                     </p>
-                </div> */}
+                </div>
                 <div
                     className="mx-auto mt-20 grid max-w-2xl grid-cols-1 gap-x-9 gap-y-16 sm:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3"
                 >
