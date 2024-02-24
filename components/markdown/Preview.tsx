@@ -9,7 +9,7 @@ interface Props {
 const Preview = (props: Props) => {
     return (
         <div className='px-8 mx-auto max-w-xl lg:mx-0 lg:max-w-7xl'>
-            <ReactMarkdown
+            {/* <ReactMarkdown
                 children={props.doc}
                 remarkPlugins={[remarkGfm]}
                 components={{
@@ -17,7 +17,7 @@ const Preview = (props: Props) => {
                     h2: ({node, children, ...props}) => <div className="mt-4 text-2xl font-bold tracking-tight text-light">{children}</div>,
                     p: ({node, children, ...props}) => <div className="mt-2 text-light max-w-2xl">{children}</div>,                    
                 }}
-            />
+            /> */}
         </div>
     );
 }

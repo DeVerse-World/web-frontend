@@ -1,7 +1,5 @@
-/* ./styles/globals.css */
-
 @import url("https://rsms.me/inter/inter.css");
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -61,12 +59,14 @@ body * {
 }
 
 .deverse-title {
-  font-size: 2.5rem;
-  /* font-family: 'Akira Expanded', sans-serif; */
+  font-family: 'Orbitron', sans-serif;
+  font-weight: bold;
+  font-size: 1.8rem;
 }
 
 .deverse-header {
   font-family: 'Orbitron', sans-serif;
+  font-weight: bolder;
 }
 
 .bg-deverse {
@@ -103,7 +103,7 @@ body * {
 }
 
 .action-button {
-  border-radius: 24px !important;
+  border-radius: 1px !important;
   border-width: 0 !important;
   background: #d3e3fd !important;
   color: #133978 !important;
@@ -111,12 +111,68 @@ body * {
   padding: 0.5rem 1.3rem 0.6rem 0.9rem !important;
 }
 
+.important-action-button {
+  border-radius: 1px !important;
+  border-width: 0 !important;
+  background: #d3e3fd !important;
+  color: #133978 !important;
+  font-weight: bold !important;
+  font-size: 1.5rem !important;
+  padding: 0.5rem 1.3rem 0.6rem 0.9rem !important;
+}
+
 .secondary-action-button {
-  border-radius: 24px !important;
+  border-radius: 8px !important;
   border-width: 0 !important;
   color: #d3e3fd !important;
   font-weight: 600 !important;
   background-color: transparent !important;
+}
+
+.download-button {
+  border-radius: 2px !important;
+  border-width: 0 !important;
+  background: #292929 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  padding: 0.5rem 1.3rem 0.6rem 0.9rem !important;
+  transition: background-color 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.scale-down {
+  max-width: 70%;
+  height: auto;
+  object-fit: contain;
+}
+
+.max-button-size {
+  max-width: 200px; /* Set your desired max width */
+  max-height: 80px; /* Set your desired max height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.relative.inline-block:hover .download-button {
+  background-color: #133978 !important; /* Change to the color you want on hover */
+}
+
+/* Apply transitions to the SVGs for movement */
+.svg-hover-move {
+  transition: transform 0.3s ease-in-out;
+}
+
+.relative.inline-block:hover .svg-hover-move {
+  transform: scale(1.5, 1.5); /* Adjust the direction and distance as per your design */
+}
+
+.disabled-button {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Content */
@@ -152,6 +208,42 @@ body * {
   font-size: 1.875rem;
   line-height: 2.25rem;
   font-weight: 700;
+}
+
+.privacy-policy p,
+.privacy-policy h2,
+.privacy-policy h3 {
+    text-align: center;
+    margin: 0 auto;
+    color: #FFFFFF; /* Ensures text color is white */
+}
+
+.privacy-policy-content {
+  text-align: left;
+  color: white;
+}
+
+.privacy-policy {
+  margin-left: 10px;
+  margin-right: 10px;
+  text-align: left;
+}
+
+/* For screens wider than 600px */
+@media (min-width: 600px) {
+  .privacy-policy {
+      margin-left: 20px;
+      margin-right: 20px;
+  }
+}
+
+/* For screens wider than 1000px */
+@media (min-width: 1000px) {
+  .privacy-policy {
+      margin-left: 80px;
+      margin-right: 80px;
+      margin-top: 80px;
+  }
 }
 
 /* Special case */
@@ -257,4 +349,13 @@ img.hover-zoom:hover {
 .text-lighter {
   --tw-text-opacity: 1;
   color: rgb(232, 234, 237 / var(--tw-text-opacity));
+}
+
+.gradient-divider {
+  height: 2px;
+  background: linear-gradient(to right, #004a78, #d3e3fd);
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px #d3e3fd;
 }

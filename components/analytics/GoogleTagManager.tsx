@@ -6,7 +6,7 @@ type GoogleTagManagerProps = {
 
 function GoogleTagManager(props: GoogleTagManagerProps) {
     return (
-        <Script strategy="lazyOnload">
+        <Script strategy="lazyOnload" id="google-tag">
             {`
           (function (w, d, s, l, i) {
             w[l] = w[l] || []; 

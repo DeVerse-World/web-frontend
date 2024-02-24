@@ -21,17 +21,15 @@ const ContentAbout = () => {
                 About Deverse World
             </h1>
             <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
-              <p className="text-lg leading-8 text-lighter">
+              {/* <p className="text-lg leading-8 text-lighter">
               Deverse World platform began its journey in the summer of 2022. It was developed in order to bring the best out of content creators, digital artists, as well as provide gamers with a vast and never-ending playground with high quality contents. Literally anyone can design the world they want to play - This is our motto.
-              </p>
-              <p className="text-lg leading-8 text-lighter">
+              </p> */}
+              {/* <p className="text-lg leading-8 text-lighter">
               Don't know where to start? We've got you covered with our no-code creator tool Deverse World Builder. We developed this tool based on the Unreal Engine 5 and in such a way that anyone using it will never need knowledge of programming or 3D. One hour is all you need to design , fully customize and share your own 3D world online, which can then be accessed by players all over the world on their PCs.
-              </p>
-              <p className="text-lg leading-8 text-lighter">
+              </p> */}
+              {/* <p className="text-lg leading-8 text-lighter">
               Our platform already hosted over 100 unique worlds, all designed and shared by our fast-growing community across the internet. All of those worlds are interconnected, jumping from one to another is just a walk through the portal.
-
-
-              </p>
+              </p> */}
             </div>
             <img
               src={imageContent}

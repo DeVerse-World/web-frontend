@@ -28,7 +28,9 @@ const FeatureSection = ({
         className="mx-auto pl-6 flex max-w-md flex-col ml-4"
         style={{ zIndex: 1 }}
       >
-        <h2 className="pt-16 lg:pt-1 text-3xl font-bold text-lightest sm:text-5xl deverse-header">
+        <h2 
+          className="pt-16 lg:pt-1 text-3xl font-bold text-lightest sm:text-5xl deverse-header text-shadow"
+        >
           {title}
         </h2>
         <p className="text-xl mt-3 text-lg text-lighter">{description}</p>
@@ -103,7 +105,7 @@ function HighlightFeatureSection() {
       </div>
       <FeatureSection
         title="CONTINUOUS COMMUNITY COLLABORATION"
-        description="Work together, earn together, expand the endless boundary adventures."
+        description="Team up, world and earn together, expand the endless boundary adventures."
         imgSrc="/images/section3.png"
         bgSrc="/images/section3-bg.png"
         sectionRef={featureSectionRefs.current[2]} // Pass the ref

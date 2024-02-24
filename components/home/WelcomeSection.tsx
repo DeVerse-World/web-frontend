@@ -1,3 +1,7 @@
+import ActionButton from "../ActionButton";
+import EpicDownloadButton from "../EpicDownloadButton";
+import { Button } from "react-bootstrap";
+
 export default function WelcomeSection({
   placeholder,
   imageHeadPage,
@@ -7,7 +11,7 @@ export default function WelcomeSection({
 }) {
   console.log("imageHeadPage:", imageHeadPage);
   return (
-    <div className="relative">
+    <div style={{ position: 'relative' }}>
       <div className="inset-0 flex items-center justify-center z-0">
         <video
           autoPlay
@@ -20,6 +24,7 @@ export default function WelcomeSection({
             width: '100%',
             height: '100%',
             objectFit: 'cover',
+            zIndex: 1,
           }}
           alt="banner"
         >
@@ -43,29 +48,73 @@ export default function WelcomeSection({
       </div>
 
       <div className="flex justify-center h-screen">
-        <div className="relative z-10 pl-6 lg:pl-8 xl:pl-12">
+        <div className="z-10 pl-6 lg:pl-8 xl:pl-12">
           <div className="mx-auto pt-48">
             <div className="text-center">
               <h1 className="text-xl font-bold tracking-tight text-white sm:text-5xl deverse-header">
                 Deverse World
               </h1>
-              <p className="mt-6 text-lg leading-8 text-gray-300">
-                {/* Where adventure meets opportunity, where worlds are
-                interconnected */}
-              </p>
-
-              {/* <div className="mt-10 flex items-center gap-x-4 justify-center"> // TODO @AH this has wrong Z
-                <EpicDownloadButton />
-              </div> */}
+              <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 p-4">
+                <div className="flex flex-row items-center justify-center gap-x-4 mt-4 mb-4">
+                  <div className="text-center font-bold">
+                    EARLY ACCESS
+                  </div>
+                  <div className="shrink-0">                  
+                    <EpicDownloadButton
+                      href="https://store.epicgames.com/en-US/p/deverse-world-3ccb84"
+                      imgSrc="/images/epicgames-icon.png"
+                      buttonText=""
+                      disabled={false}
+                    />
+                  </div>
+                  <div className="text-center font-bold">
+                    COMING SOON
+                  </div>
+                  <div className="shrink-0">
+                    <EpicDownloadButton
+                        href=""
+                        imgSrc="/images/steam-icon.png"
+                        buttonText=""
+                        disabled={true}
+                    />
+                  </div>
+                </div>
+                <div className="font-bold mb-2">GET YOUR ISLES [COMING SOON]</div>
+                <div className="flex flex-row items-center justify-center gap-x-4">
+                  <ActionButton
+                    href="https://www.sphere.market"
+                    buttonText=""
+                    disabled={true}
+                    imgSrc="/images/SphereMarket.png"
+                  />
+                  <ActionButton
+                    href="https://www.opensea.io"
+                    buttonText=""
+                    disabled={true}
+                    imgSrc="/images/OpenSea.png"
+                  />
+                </div>
+                {/* <Button
+                  className="important-action-button mt-3"
+                  
+                  target="_blank"
+                >
+                  <div className="group flex">Get your Isle</div>
+                </Button> */}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Logo cloud (positioned below the content) */}
-      <div
-        className="bottom-0 left-0 right-0 p-4 grid items-center gap-x-8 gap-y-10 sm:gap-x-10 lg:mx-0 xl:grid-cols-6 md:grid-cols-3"
-        style={{ background: "rgba(0, 0, 0, 0.6)", zIndex: 1 }}
+      {/* <div
+        className="bottom-0 left-0 right-0 p-4 grid items-center gap-x-8 gap-y-10 sm:gap-x-10 lg:mx-0 xl:grid-cols-6 md:grid-cols-3 z-12"
+        style={{
+          position: "relative",
+          background: "rgba(0, 0, 0, 0.6)",
+          zIndex: 5
+        }}
       >
         {[...partners, ...communityPartners].map((partner) => (
           <img
@@ -77,7 +126,7 @@ export default function WelcomeSection({
             height={48}
           />
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }

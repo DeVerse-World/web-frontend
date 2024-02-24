@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../contexts/app_context";
 import AccountService from "../../data/services/AccountService";
+import Link from 'next/link'
 
 const EditNamActionPanel = () => {
     // Conditions to show:
@@ -35,9 +36,9 @@ const EditNamActionPanel = () => {
                 <div className="mt-2 max-w-fit text-sm text-lighter">
                     <p>
                         An account name is required to show as the author of your created worlds. Please add your name in the{' '}
-                        <a href="/account/settings" className="font-semibold text-indigo-400 hover:text-indigo-300">
+                        <Link href="/account/settings" className="font-semibold text-indigo-400 hover:text-indigo-300">
                             Settings page
-                        </a>.
+                        </Link>.
                     </p>
                 </div>
             </div>

@@ -9,8 +9,8 @@ function PartnerSection(props) {
     }, [])
 
     return (
-        <section id="section-partner" className="p-4 ">
-            <h3 className="text-center text-6xl font-bold uppercase bg-deverse-gradient txt-deverse-gradient deverse-title">Partners</h3>
+        <section id="section-partner" className="p-4 bg-deverse-secondary bg-opacity-50">
+            <h3 className="text-center text-6xl font-bold uppercase deverse-title">Our Partners</h3>
             <div className="flex flex-row flex-wrap gap-8 justify-center">
                 {partners.map(partner =>
                     <a href={partner.uri} target="_blank" key={partner.id} className="w-[300px] mx-4 my-4 flex justify-center items-center">

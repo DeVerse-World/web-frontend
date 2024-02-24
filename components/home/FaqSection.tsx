@@ -30,14 +30,15 @@ export default function FaqSection() {
 
   return (
     <section aria-labelledby="faq-heading">
+      <div className="gradient-divider"></div>
       <div
-        className="relative  flex flex-col align-items-center"
+        className="relative  flex flex-col align-items-center mt-8"
         style={{
           backgroundSize: "cover",
           backgroundRepeat: "no-repeat",
         }}
       >
-        <h2 className="text-2xl font-bold tracking-tight text-lightest pb-3  flex flex-col align-items-center">
+        <h2 className="text-2xl font-bold tracking-tight text-lightest pb-3  flex flex-col align-items-center deverse-title">
           FAQ
         </h2>
         {items.map((item) => (

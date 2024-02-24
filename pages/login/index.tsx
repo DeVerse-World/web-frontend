@@ -102,10 +102,10 @@ export default function Login({ loginKey, previousPath }) {
 
   return (
     <div className="flex flex-col items-center justify-center mt-20">
-      <h1>Welcome to Deverse</h1>
-      <p>Adventure meets opportunities</p>
+      <h1 className="deverse-title">Welcome to Deverse</h1>
+      <p>Adventure meets Opportunities</p>
       <button
-        className="flex flex-row gap-2 items-center justify-start w-[210px] bg-deverse-gradient rounded-sm p-2 my-4"
+        className="flex flex-row gap-2 items-center justify-start w-[210px] action-button rounded-sm p-2 my-4"
         onClick={onMetamaskConnect}
       >
         <Image

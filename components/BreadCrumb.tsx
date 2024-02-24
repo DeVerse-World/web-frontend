@@ -15,7 +15,7 @@ export default function BreadCrumb({ pages }) {
       <ol role="list" className="flex items-center space-x-6">
         <li>
           <div>
-            <a href="/" className="text-lighter hover:text-light no-underline">
+            <a href="https://www.deverse.world" className="text-lighter hover:text-light no-underline">
               <HomeIcon className="h-7 w-7 flex-shrink-0" aria-hidden="true" />
               <span className="sr-only">Home</span>
             </a>

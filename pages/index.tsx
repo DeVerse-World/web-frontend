@@ -5,6 +5,7 @@ import { AppContext } from "../components/contexts/app_context";
 import dynamic from "next/dynamic";
 import Popup from "../components/Popup";
 import TrendingSection from "../components/home/TrendingSection";
+import PartnerSection from "../components/home/PartnerSection";
 import FaqSection from "../components/home/FaqSection";
 
 const IntroSection = dynamic(() =>
@@ -66,7 +67,7 @@ function Main({
 
   return (
     <div className="flex flex-col bg-darkest">
-      <Popup />
+      {/* <Popup /> */}
       <WelcomeSection
         placeholder={imgPlaceHolder}
         imageHeadPage={videoHeadPage}
@@ -79,11 +80,12 @@ function Main({
 
       <div className="lg:px-0">
         <HighlightFeatureSection />
+        <PartnerSection/>
         <div>
-          <TrendingSection />
           <FaqSection />
         </div>
-        {showBlogToggle ? <BlogPostSection /> : null}
+        <BlogPostSection/>
+        {/* {showBlogToggle ? <BlogPostSection /> : null} */}
       </div>
       {/* <div className='flex flex-col items'> */}
       {/* <ContentAbout/> */}
